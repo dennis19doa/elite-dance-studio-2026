@@ -1,0 +1,57 @@
+---
+import "../styles/global.css";
+import MobileJoinBar from "../components/MobileJoinBar.astro";
+import MotionController from "../components/MotionController.astro";
+import StructuredData from "../components/StructuredData.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  image = "/media/hero/elite-homepage-poster.jpg",
+  noindex = false,
+  bodyClass
+} = Astro.props;
+const siteUrl = Astro.site ?? new URL("https://elitedancestudio.de");
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+const socialImageUrl = new URL(image, siteUrl);
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Elite Dance Studio" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content="Elite Dance Studio Berlin" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="theme-color" content="#241729" />
+    {!noindex && <StructuredData pageTitle={title} path={Astro.url.pathname} />}
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <slot />
+    <MotionController />
+    <MobileJoinBar />
+  </body>
+</html>

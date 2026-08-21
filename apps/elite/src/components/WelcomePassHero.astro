@@ -1,0 +1,63 @@
+---
+interface WelcomePassHeroData {
+  eyebrow: string;
+  title: string;
+  description: string;
+  price: string;
+  priceNote: string;
+  duration: string;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  videoSrc: string;
+  videoPoster: string;
+}
+
+interface Props {
+  hero: WelcomePassHeroData;
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="welcome-hero panel">
+  <div class="welcome-hero-copy">
+    <div class="eyebrow">{hero.eyebrow}</div>
+    <h1>{hero.title}</h1>
+    <p class="lead">{hero.description}</p>
+
+    <div class="welcome-offer-line" aria-label={`${hero.price} ${hero.priceNote}`}>
+      <strong class="welcome-price">{hero.price}</strong>
+      <div>
+        <strong>{hero.priceNote}</strong>
+        <span>{hero.duration}</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="button welcome-primary" href={hero.primaryCtaHref}>{hero.primaryCtaLabel}</a>
+      <a class="button welcome-secondary" href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</a>
+    </div>
+
+    <div class="welcome-reassurance">
+      <span>Beginner-friendly</span>
+      <span>Kein Partner nötig</span>
+      <span>Keine Membership nötig</span>
+    </div>
+  </div>
+
+  <div class="welcome-video-wrap">
+    <video
+      class="welcome-video"
+      src={hero.videoSrc}
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster={hero.videoPoster}
+      aria-label="Einblicke in das Elite Dance Studio"
+    ></video>
+  </div>
+</section>

@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "./SiteHeader.astro";
+import SiteFooter from "./SiteFooter.astro";
+import site from "../data/site.json";
+
+interface Props {
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  image: string;
+  imageAlt: string;
+  coach: string;
+  accent: "berry" | "slate";
+  reasons: { title: string; text: string }[];
+  lessons: string[];
+  faqs: { question: string; answer: string }[];
+}
+
+const {
+  metaTitle,
+  metaDescription,
+  eyebrow,
+  title,
+  intro,
+  image,
+  imageAlt,
+  coach,
+  accent,
+  reasons,
+  lessons,
+  faqs
+} = Astro.props;
+---
+
+<BaseLayout title={metaTitle} description={metaDescription} image={image}>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main">
+    <section class:list={["service-page-hero", "panel", `seo-style-hero-${accent}`]}>
+      <div class="service-page-copy">
+        <div class="eyebrow">{eyebrow}</div>
+        <h1 class="page-title">{title}</h1>
+        <p class="lead">{intro}</p>
+        <div class="actions">
+          <a class="button primary" href="/stundenplan/#schedule">Beginner-Klasse buchen</a>
+          <a class="button secondary" href="/starter-pass/">Welcome Pass · 20€</a>
+        </div>
+      </div>
+      <figure class="service-page-media seo-style-media">
+        <img src={image} alt={imageAlt} width="490" height="735" />
+        <figcaption>{coach} · Elite Dance Studio Berlin</figcaption>
+      </figure>
+    </section>
+
+    <section class="seo-style-reasons panel">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Für deinen Einstieg</div>
+          <h2>Du brauchst keine Erfahrung, um anzufangen.</h2>
+        </div>
+        <p>Der Unterricht gibt dir eine klare Grundlage, bevor Tempo, Details und persönlicher Ausdruck dazukommen.</p>
+      </div>
+      <div class="seo-style-reason-grid">
+        {reasons.map((reason, index) => (
+          <article>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{reason.title}</h3>
+            <p>{reason.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="seo-style-learning panel">
+      <div>
+        <div class="eyebrow">Was du lernst</div>
+        <h2>Eine Grundlage, auf der du wirklich weiterbauen kannst.</h2>
+      </div>
+      <div class="seo-style-lesson-list">
+        {lessons.map((lesson, index) => (
+          <div><span>{String(index + 1).padStart(2, "0")}</span><strong>{lesson}</strong></div>
+        ))}
+      </div>
+    </section>
+
+    <section class="faq-section panel">
+      <div class="section-head">
+        <div><div class="eyebrow">Vor der ersten Klasse</div><h2>Die wichtigsten Antworten.</h2></div>
+      </div>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item"><summary>{faq.question}</summary><p>{faq.answer}</p></details>
+        ))}
+      </div>
+    </section>
+
+    <section class="cta-banner panel">
+      <div><div class="eyebrow">Jetzt einsteigen</div><h2>Deine erste Klasse ist näher, als sie sich gerade anfühlt.</h2><p>Wähle einen Beginner-Termin oder teste zwei passende Klassen mit dem Welcome Pass.</p></div>
+      <div class="actions"><a class="button primary" href="/stundenplan/#schedule">Termin finden</a><a class="button secondary" href="/kontakt/">Kurz nachfragen</a></div>
+    </section>
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+interface Benefit {
+  number: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  benefits: Benefit[];
+}
+
+const { benefits } = Astro.props;
+---
+
+<section class="welcome-benefits panel">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Warum der Welcome Pass</div>
+      <h2>Ein Angebot, das dir die erste Entscheidung abnimmt.</h2>
+    </div>
+    <p>
+      Du musst noch keinen Style kennen und dich noch nicht langfristig festlegen. Du brauchst nur
+      einen guten ersten Eindruck.
+    </p>
+  </div>
+
+  <div class="welcome-benefit-grid">
+    {benefits.map((benefit) => (
+      <article class="welcome-benefit-card">
+        <span class="welcome-benefit-number">{benefit.number}</span>
+        <strong>{benefit.title}</strong>
+        <p>{benefit.text}</p>
+      </article>
+    ))}
+  </div>
+</section>

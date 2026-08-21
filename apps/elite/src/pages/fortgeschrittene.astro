@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+import site from "../data/site.json";
+
+const advancedClasses = [
+  {
+    title: "Bachata Intermediate",
+    focus: "Partnerwork · Connection · Musikalität",
+    image: "/media/style-posters/19-bachata-intermediate.webp",
+    alt: "Bachata Intermediate Kursmotiv bei Elite Dance Studio"
+  },
+  {
+    title: "High Heels Intermediate",
+    focus: "Technik · Lines · Performance",
+    image: "/media/style-posters/08-high-heels-intermediate.webp",
+    alt: "High Heels Intermediate Kursmotiv bei Elite Dance Studio"
+  },
+  {
+    title: "Commercial Beginner+",
+    focus: "Choreo · Präzision · Stage Presence",
+    image: "/media/style-posters/13-commercial-beginner-plus-dima.webp",
+    alt: "Commercial Beginner Plus Kursmotiv bei Elite Dance Studio"
+  },
+  {
+    title: "Reggaeton Beginner / Intermediate",
+    focus: "Groove · Isolations · Dynamik",
+    image: "/media/style-posters/23-reggaeton-beginner-intermediate.webp",
+    alt: "Reggaeton Beginner Intermediate Kursmotiv bei Elite Dance Studio"
+  }
+];
+---
+
+<BaseLayout
+  title="Tanzkurse für Fortgeschrittene in Berlin | Elite Dance Studio"
+  description="Intermediate und Beginner-Plus Tanzkurse im Elite Dance Studio Berlin: Bachata, Heels, Commercial und Reggaeton mit mehr Technik und Challenge."
+  image="/media/style-posters/19-bachata-intermediate.webp"
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main">
+    <section class="service-page-hero advanced-hero panel">
+      <div class="service-page-copy">
+        <div class="eyebrow">Dein nächstes Level</div>
+        <h1 class="page-title">Du hast die Basics. Jetzt wird es präziser.</h1>
+        <p class="lead">
+          Advanced Training bei Elite bedeutet nicht nur schneller zu tanzen. Es bedeutet sauberer
+          zu arbeiten, bewusster zu hören und Bewegungen mit mehr Kontrolle auszuführen.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#advanced-classes">Kurse entdecken</a>
+          <a class="button secondary" href="/stundenplan/">Aktuellen Stundenplan öffnen</a>
+        </div>
+      </div>
+      <figure class="service-page-media advanced-hero-media">
+        <img
+          src="/media/style-posters/19-bachata-intermediate.webp"
+          alt="Bachata Intermediate Kursmotiv bei Elite Dance Studio"
+          width="1080"
+          height="1350"
+        />
+      </figure>
+    </section>
+
+    <section class="advanced-level-check panel">
+      <div>
+        <div class="eyebrow">Passt das Level?</div>
+        <h2>Fortgeschritten heißt: Grundlagen sind abrufbar.</h2>
+      </div>
+      <div class="advanced-check-list">
+        <span><b>01</b> Du kennst die Basics des Styles und musst sie nicht jedes Mal neu suchen.</span>
+        <span><b>02</b> Du kannst einer längeren Kombination in normalem Tempo folgen.</span>
+        <span><b>03</b> Du möchtest Korrekturen, Details und mehr technische Herausforderung.</span>
+      </div>
+      <p>Wenn du bei einem Punkt unsicher bist, schreib uns. Wir empfehlen dir ehrlich das passende Level.</p>
+    </section>
+
+    <section class="advanced-offer panel" id="advanced-classes">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Advanced & Beginner+</div>
+          <h2>Mehr Challenge in mehreren Styles.</h2>
+        </div>
+        <p>Die konkrete Woche, Uhrzeit und Verfügbarkeit findest du immer im Live-Stundenplan.</p>
+      </div>
+
+      <div class="advanced-card-grid">
+        {advancedClasses.map((course) => (
+          <article class="advanced-card">
+            <a href="/stundenplan/">
+              <img src={course.image} alt={course.alt} width="1080" height="1350" loading="lazy" />
+            </a>
+            <div>
+              <small>{course.focus}</small>
+              <h3>{course.title}</h3>
+              <a class="text-link" href="/stundenplan/">Verfügbarkeit prüfen →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="progression-choice panel">
+      <div>
+        <span>Regelmäßig trainieren</span>
+        <h3>Advanced Classes</h3>
+        <p>Ideal für deinen wöchentlichen Rhythmus und kontinuierlichen Fortschritt im Style.</p>
+        <a class="button secondary" href="/stundenplan/">Class buchen</a>
+      </div>
+      <div>
+        <span>Gezielt vertiefen</span>
+        <h3>Intensives</h3>
+        <p>Ideal, wenn du über mehrere Wochen konzentriert an Technik und Bewegung arbeiten willst.</p>
+        <a class="button primary" href="/intensives/">Intensives ansehen</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

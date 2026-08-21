@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PageIntro from "../components/PageIntro.astro";
+import CourseLevelGuide from "../components/CourseLevelGuide.astro";
+import StyleCompass from "../components/StyleCompass.astro";
+import EversportsSchedule from "../components/EversportsSchedule.astro";
+import FirstVisitSection from "../components/FirstVisitSection.astro";
+
+import courseLevelGuide from "../data/course-level-guide.json";
+import firstVisit from "../data/first-visit.json";
+import site from "../data/site.json";
+---
+
+<BaseLayout
+  title="Tanzkurse für Beginner in Berlin-Moabit | Elite Dance Studio"
+  description="Beginner Tanzkurse in Berlin-Moabit mit Level-Guide, Solo- und Partner-Styles, Live-Stundenplan und Welcome Pass im Elite Dance Studio."
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main">
+    <PageIntro
+      eyebrow="Kurse"
+      title="Finde den Kurs, mit dem dein Start bei Elite wirklich Sinn ergibt."
+      description="Du musst am Anfang keinen Style kennen. Wähle zuerst, wie du dich beim Tanzen fühlen möchtest, verstehe dein Level und öffne dann die echte Live-Woche."
+      actions={[
+        { label: "Kurskompass starten", href: "#kurskompass", variant: "primary" },
+        { label: "Live-Stundenplan", href: "#schedule", variant: "secondary" }
+      ]}
+    />
+
+    <CourseLevelGuide items={courseLevelGuide} />
+    <StyleCompass />
+    <EversportsSchedule
+      eyebrow="Aktuelle Woche"
+      title="Dein Gefühl gewählt? Jetzt den echten Termin finden."
+      description="Der Live-Stundenplan zeigt dir die aktuellen Tage, Coaches, Levels und freien Plätze. So basiert deine Entscheidung nie auf veralteten Kursdaten."
+    />
+    <FirstVisitSection
+      steps={firstVisit}
+      eyebrow="Erster Kurs"
+      title="So gehst du auf der Kursseite am besten vor."
+      description="Die Kursauswahl soll sich leicht anfühlen: den ersten passenden Kurs finden, Platz sichern und dann entspannt in den ersten Besuch gehen."
+    />
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

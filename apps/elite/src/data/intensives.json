@@ -1,0 +1,54 @@
+[
+  {
+    "number": "01",
+    "name": "Fundamentals Intensive",
+    "duration": "4 Wochen · 4 × 3 Stunden",
+    "summary": "Clean Basics, Haltung, Timing und Connection als starke Grundlage.",
+    "standardPrice": "140€",
+    "premiumPrice": "210€",
+    "premiumLabel": "mit Video Reviews & Private Class",
+    "points": [
+      "Technik, Posture und Partnerwork sauber aufbauen",
+      "Mehr Sicherheit durch strukturiertes Feedback"
+    ]
+  },
+  {
+    "number": "02",
+    "name": "Body Movement I",
+    "duration": "4 Wochen · 4 × 2 Stunden",
+    "summary": "Isolation Basics, Flow und Kontrolle für ein klareres Körpergefühl.",
+    "standardPrice": "120€",
+    "premiumPrice": "190€",
+    "premiumLabel": "mit Video Reviews & Private Class",
+    "points": [
+      "Isolations, Waves und Körperkontrolle verstehen",
+      "Hilfreich für Bachata, Zouk, Salsa und Solo Styles"
+    ]
+  },
+  {
+    "number": "03",
+    "name": "Body Movement II",
+    "duration": "4 Wochen · 4 × 2 Stunden",
+    "summary": "Mehr Kontrolle, Strength und Layering für präzisere Bewegungen.",
+    "standardPrice": "120€",
+    "premiumPrice": "190€",
+    "premiumLabel": "mit Video Reviews & Private Class",
+    "points": [
+      "Für Tänzer:innen mit vorhandenen Movement Basics",
+      "Fokus auf Kontrolle, Layering, Flow und Ausdruck"
+    ]
+  },
+  {
+    "number": "04",
+    "name": "Body Movement Combined",
+    "duration": "4 Wochen · 4 × 2 Stunden",
+    "summary": "Ein Full-Body-Training, das Technik, Musikalität und Ausdruck verbindet.",
+    "standardPrice": "120€",
+    "premiumPrice": "190€",
+    "premiumLabel": "mit Video Reviews & Private Class",
+    "points": [
+      "Bewegungsqualität über einzelne Techniken hinaus entwickeln",
+      "Geeignet für Partner Dance, Solo Styles und Performance"
+    ]
+  }
+]

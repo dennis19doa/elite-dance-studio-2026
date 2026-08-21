@@ -1,0 +1,61 @@
+---
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  linkHref?: string;
+  linkLabel?: string;
+}
+
+const {
+  items,
+  eyebrow = "Häufige Fragen",
+  title = "Die Fragen, die vor dem ersten Besuch fast immer kommen.",
+  description = "Damit der Einstieg leicht bleibt, beantworten wir die wichtigsten Unsicherheiten direkt hier.",
+  linkHref,
+  linkLabel = "Alle Fragen ansehen"
+} = Astro.props;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer
+    }
+  }))
+};
+---
+
+<section class="faq-section panel" id="faq">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">{eyebrow}</div>
+      <h2>{title}</h2>
+    </div>
+    <div class="section-head-aside">
+      <p>{description}</p>
+      {linkHref && <a class="section-text-link" href={linkHref}>{linkLabel} <span aria-hidden="true">↗</span></a>}
+    </div>
+  </div>
+
+  <div class="faq-list">
+    {items.map((item) => (
+      <details class="faq-item">
+        <summary>{item.question}</summary>
+        <p>{item.answer}</p>
+      </details>
+    ))}
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

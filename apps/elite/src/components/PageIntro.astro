@@ -1,0 +1,33 @@
+---
+interface Action {
+  label: string;
+  href: string;
+  variant?: "primary" | "secondary";
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  actions?: Action[];
+}
+
+const { eyebrow, title, description, actions = [] } = Astro.props;
+---
+
+<section class="page-intro panel">
+  <div class="page-intro-copy">
+    <div class="eyebrow">{eyebrow}</div>
+    <h1 class="page-title">{title}</h1>
+    <p class="lead">{description}</p>
+    {actions.length > 0 && (
+      <div class="actions">
+        {actions.map((action) => (
+          <a class:list={["button", action.variant === "secondary" ? "secondary" : "primary"]} href={action.href}>
+            {action.label}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

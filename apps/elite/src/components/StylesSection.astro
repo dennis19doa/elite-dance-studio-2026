@@ -1,0 +1,37 @@
+---
+interface StyleItem {
+  name: string;
+  summary: string;
+  mood: string;
+}
+
+interface Props {
+  styles: StyleItem[];
+}
+
+const { styles } = Astro.props;
+---
+
+<section class="style-card panel" id="styles">
+  <div class="eyebrow">Bereiche bei Elite</div>
+  <h2>Mehrere Styles, aber ein klarer Einstieg für Beginner.</h2>
+  <p class="lead">
+    Du musst am Anfang noch nicht genau wissen, wohin du gehörst. Diese Bereiche helfen dir,
+    schneller zu sehen, was sich für deinen Start am besten anfühlt.
+  </p>
+  <div class="style-grid">
+    {styles.map((item, index) => (
+      <article class:list={["style-item", `style-item-${index + 1}`]}>
+        <div class="style-item-topline">
+          <span class="style-number">{String(index + 1).padStart(2, "0")}</span>
+          <span class="style-mood">{item.mood}</span>
+        </div>
+        <div class="style-item-copy">
+          <h3>{item.name}</h3>
+          <p>{item.summary}</p>
+        </div>
+        <a class="style-link" href="/kurse/">Passende Kurse entdecken →</a>
+      </article>
+    ))}
+  </div>
+</section>

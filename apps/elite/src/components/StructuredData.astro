@@ -1,0 +1,98 @@
+---
+interface Props {
+  pageTitle: string;
+  path: string;
+}
+
+const { pageTitle, path } = Astro.props;
+const baseUrl = Astro.site ?? new URL("https://elitedancestudio.de");
+const absolute = (path: string) => new URL(path, baseUrl).toString();
+const pageUrl = absolute(path);
+const pageName = pageTitle.split("|")[0].trim();
+const isHome = path === "/";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "SportsActivityLocation"],
+      "@id": `${baseUrl.toString()}#studio`,
+      name: "Elite Dance Studio",
+      description: "Beginner-friendly Tanzkurse, Socials und Workshops in Berlin-Moabit.",
+      url: baseUrl.toString(),
+      image: [
+        absolute("/media/hero/elite-homepage-poster.jpg"),
+        absolute("/media/current-site/studio-room-a.jpg"),
+        absolute("/media/current-site/current-home-visual.webp")
+      ],
+      logo: absolute("/media/current-site/elite-logo.webp"),
+      telephone: "+49 163 3863548",
+      email: "info@elitedancestudio.de",
+      priceRange: "€€",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Wiclefstraße 16-17",
+        postalCode: "10551",
+        addressLocality: "Berlin",
+        addressCountry: "DE"
+      },
+      areaServed: {
+        "@type": "City",
+        name: "Berlin"
+      },
+      sameAs: ["https://www.instagram.com/elitedanceberlin/"],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Tanzkurse und Welcome Pass",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            name: "Welcome Pass",
+            price: "20",
+            priceCurrency: "EUR",
+            description: "Zwei beginner-friendly Klassen, 14 Tage gültig, für neue Besucher:innen."
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${baseUrl.toString()}#website`,
+      url: baseUrl.toString(),
+      name: "Elite Dance Studio",
+      inLanguage: "de-DE",
+      publisher: { "@id": `${baseUrl.toString()}#studio` }
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: pageName,
+      inLanguage: "de-DE",
+      isPartOf: { "@id": `${baseUrl.toString()}#website` },
+      about: { "@id": `${baseUrl.toString()}#studio` },
+      breadcrumb: { "@id": `${pageUrl}#breadcrumb` }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Elite Dance Studio",
+          item: baseUrl.toString()
+        },
+        ...(!isHome ? [{
+          "@type": "ListItem",
+          position: 2,
+          name: pageName,
+          item: pageUrl
+        }] : [])
+      ]
+    }
+  ]
+};
+---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schema)}></script>

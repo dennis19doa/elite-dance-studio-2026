@@ -1,0 +1,88 @@
+---
+interface FaqItem {
+  category: string;
+  categoryLabel: string;
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+}
+
+const { items } = Astro.props;
+const categories = Array.from(
+  new Map(items.map((item) => [item.category, item.categoryLabel])).entries()
+);
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer }
+  }))
+};
+---
+
+<section class="faq-hub panel" aria-labelledby="faq-hub-title">
+  <aside class="faq-hub-rail">
+    <div class="eyebrow">Schnell zur Antwort</div>
+    <h2 id="faq-hub-title">Was möchtest du wissen?</h2>
+    <p>Wähle ein Thema oder öffne einfach die Frage, die gerade zwischen dir und deinem ersten Kurs steht.</p>
+    <div class="faq-filters" role="group" aria-label="FAQ nach Thema filtern">
+      <button class="faq-filter is-active" type="button" data-faq-filter="all" aria-pressed="true">Alle Fragen</button>
+      {categories.map(([id, label]) => (
+        <button class="faq-filter" type="button" data-faq-filter={id} aria-pressed="false">{label}</button>
+      ))}
+    </div>
+  </aside>
+
+  <div class="faq-hub-content">
+    {categories.map(([id, label], categoryIndex) => (
+      <section class="faq-category" data-faq-category={id} aria-labelledby={`faq-category-${id}`}>
+        <header>
+          <span>{String(categoryIndex + 1).padStart(2, "0")}</span>
+          <h3 id={`faq-category-${id}`}>{label}</h3>
+        </header>
+        <div class="faq-list">
+          {items.filter((item) => item.category === id).map((item) => (
+            <details class="faq-item">
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <div class="faq-contact-card">
+      <div><span>Noch offen?</span><strong>Eine echte Antwort ist nur eine Nachricht entfernt.</strong></div>
+      <div class="actions">
+        <a class="button primary" href="https://wa.me/491633863548">WhatsApp fragen</a>
+        <a class="button secondary" href="/kontakt/">Kontakt öffnen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>("[data-faq-filter]");
+  const categorySections = document.querySelectorAll<HTMLElement>("[data-faq-category]");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selected = button.dataset.faqFilter;
+      filterButtons.forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+      categorySections.forEach((section) => {
+        section.hidden = selected !== "all" && section.dataset.faqCategory !== selected;
+      });
+    });
+  });
+</script>

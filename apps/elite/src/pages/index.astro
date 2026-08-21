@@ -1,0 +1,69 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import HeroSection from "../components/HeroSection.astro";
+import TrustStrip from "../components/TrustStrip.astro";
+import TrialOfferSection from "../components/TrialOfferSection.astro";
+import FaqSection from "../components/FaqSection.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import StudioExperienceSection from "../components/StudioExperienceSection.astro";
+import BeginnerEntrancesSection from "../components/BeginnerEntrancesSection.astro";
+import AboutTeaserSection from "../components/AboutTeaserSection.astro";
+import EversportsSchedule from "../components/EversportsSchedule.astro";
+
+import faqs from "../data/faqs.json";
+import site from "../data/site.json";
+import trialOffer from "../data/trial-offer.json";
+import trustSignals from "../data/trust-signals.json";
+---
+
+<BaseLayout
+  title="Beginner Tanzkurse in Berlin | Elite Dance Studio"
+  description="Beginner-friendly Tanzkurse in Berlin-Moabit: ohne Vorkenntnisse starten, oft ohne festen Partner. Welcome Pass: 2 Klassen für 20 Euro."
+  bodyClass="home-page"
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main home-main">
+    <HeroSection hero={site.hero} />
+    <BeginnerEntrancesSection />
+    <TrustStrip signals={trustSignals} />
+    <EversportsSchedule
+      home
+      eyebrow="Deine Woche bei Elite"
+      title="Dein nächster Kurs ist kein Geheimnis."
+      description="Der komplette aktuelle Stundenplan gehört zu deinem ersten Eindruck. Finde Level 0 oder Beginner, prüfe Coach und Uhrzeit und buche direkt."
+    />
+    <TrialOfferSection offer={trialOffer} />
+    <StudioExperienceSection />
+    <AboutTeaserSection />
+    <FaqSection
+      items={faqs}
+      eyebrow="Gut zu wissen"
+      title="Antworten, bevor dein erster Kurs beginnt."
+      description="Die wichtigsten Fragen zu Level, Partner, Buchung und deinem ersten Besuch direkt auf der Homepage."
+      linkHref="/faq/"
+      linkLabel="Alle Fragen ansehen"
+    />
+
+    <section class="cta-banner panel">
+      <div>
+        <div class="eyebrow">Persönliche Hilfe</div>
+        <h2>Nicht sicher, welcher Kurs für dich der beste Start ist?</h2>
+        <p>
+          Wenn du zwischen Styles, Leveln oder Angeboten schwankst, helfen wir dir lieber kurz
+          persönlich, statt dich allein durch das Studio suchen zu lassen.
+        </p>
+        <span class="prototype-note">
+          Beginner-friendly, offen und auf deinen ersten sinnvollen Schritt fokussiert.
+        </span>
+      </div>
+      <div class="actions">
+        <a class="button primary" href="/kontakt/">Kontakt aufnehmen</a>
+        <a class="button secondary" href="/kurse/">Kurse ansehen</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

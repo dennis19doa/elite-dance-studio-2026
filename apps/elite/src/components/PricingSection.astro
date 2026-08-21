@@ -1,0 +1,67 @@
+---
+interface PricingItem {
+  category: string;
+  label: string;
+  name: string;
+  price: string;
+  text: string;
+  bestFor?: string;
+  ctaLabel?: string;
+  href?: string;
+  featured?: boolean;
+}
+
+interface Props {
+  pricing: PricingItem[];
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+}
+
+const {
+  pricing,
+  eyebrow = "Preise & Mitgliedschaften",
+  title = "Wähle den Einstieg, der zu deinem Rhythmus passt.",
+  description = "Nicht jede Person will sofort eine Membership. Deshalb braucht Elite klare Optionen zwischen vorsichtigem Einstieg, Flexibilität und regelmässigem Training."
+} = Astro.props;
+
+const categories = [...new Set(pricing.map((item) => item.category))];
+---
+
+<section class="pricing panel" id="pricing">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">{eyebrow}</div>
+      <h2>{title}</h2>
+    </div>
+    <p>{description}</p>
+  </div>
+  <div class="pricing-groups">
+    {categories.map((category, categoryIndex) => (
+      <section class="pricing-group">
+        <div class="pricing-group-head">
+          <span>{String(categoryIndex + 1).padStart(2, "0")}</span>
+          <h3>{category}</h3>
+        </div>
+        <div class="price-cards">
+          {pricing.filter((item) => item.category === category).map((item, itemIndex) => (
+            <article class:list={["price-card", item.featured && "featured", `price-card-tone-${(itemIndex % 3) + 1}`]}>
+              <div>
+                <span class="price-label">{item.label}</span>
+                <strong>{item.name}</strong>
+                <div class="price">{item.price}</div>
+                <p>{item.text}</p>
+              </div>
+              <div class="price-card-footer">
+                {item.bestFor && <span class="price-fit">Passt zu dir, wenn: {item.bestFor}</span>}
+                {item.href && (
+                  <a class="text-link" href={item.href}>{item.ctaLabel ?? "Mehr erfahren"} <span aria-hidden="true">→</span></a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</section>

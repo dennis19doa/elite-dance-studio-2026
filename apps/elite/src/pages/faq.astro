@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import FaqHub from "../components/FaqHub.astro";
+
+import faqItems from "../data/faq-hub.json";
+import site from "../data/site.json";
+---
+
+<BaseLayout
+  title="FAQ für deinen ersten Tanzkurs | Elite Dance Studio Berlin"
+  description="Antworten zu Beginner-Level, Tanzpartner, Buchung, Welcome Pass, USC, Intensives und Anfahrt zum Elite Dance Studio Berlin-Moabit."
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main">
+    <section class="faq-page-hero panel">
+      <div>
+        <div class="eyebrow">Keine Frage ist zu klein</div>
+        <h1 class="page-title">Erst verstehen. Dann entspannt lostanzen.</h1>
+      </div>
+      <div class="faq-page-hero-copy">
+        <p class="lead">Die häufigsten Fragen unserer neuen Schüler:innen, klar beantwortet und ohne Studio-Fachbegriffe.</p>
+        <div class="actions">
+          <a class="button primary" href="/stundenplan/#schedule">Stundenplan öffnen</a>
+          <a class="button secondary" href="/starter-pass/">Welcome Pass · 20€</a>
+        </div>
+      </div>
+    </section>
+
+    <FaqHub items={faqItems} />
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

@@ -1,0 +1,125 @@
+---
+const paths = [
+  {
+    value: "partner",
+    number: "01",
+    label: "Gemeinsam & social",
+    title: "Connection spüren",
+    text: "Für alle, die Musik mit anderen erleben und später auch auf Socials tanzen möchten. Du kannst in der Regel allein starten.",
+    styles: "Bachata · Zouk · Lambada",
+    image: "/media/style-posters/20-bachata-beginner.webp",
+    alt: "Bachata Beginner bei Elite Dance Studio"
+  },
+  {
+    value: "energy",
+    number: "02",
+    label: "Power & Choreo",
+    title: "Energie rauslassen",
+    text: "Für alle, die über Groove, Songs und Choreografie einsteigen und sich kraftvoller bewegen möchten.",
+    styles: "Reggaeton · Commercial · Hip-Hop",
+    image: "/media/style-posters/22-reggaeton-beginner.webp",
+    alt: "Reggaeton Beginner bei Elite Dance Studio"
+  },
+  {
+    value: "expression",
+    number: "03",
+    label: "Technik & Ausdruck",
+    title: "Bewegung verstehen",
+    text: "Für alle, die Körpergefühl, Musikalität und eine bewusstere Bewegungsqualität entwickeln möchten.",
+    styles: "House · Contemporary · Heels",
+    image: "/media/style-posters/03-house-beginner.webp",
+    alt: "House Beginner bei Elite Dance Studio"
+  }
+];
+---
+
+<section class="style-compass panel" id="kurskompass" aria-labelledby="style-compass-title" data-style-compass>
+  <div class="style-compass-head">
+    <span class="style-compass-index" aria-hidden="true">01—03</span>
+    <div>
+      <div class="eyebrow">Dein Kurskompass</div>
+      <h2 id="style-compass-title">Was möchtest du beim Tanzen fühlen?</h2>
+    </div>
+    <p>
+      Du musst keinen Fachbegriff kennen. Wähle zuerst die Erfahrung, die du suchst. Die genauen
+      Tage, Coaches und freien Plätze kommen immer aus dem Live-Stundenplan.
+    </p>
+  </div>
+
+  <div class="style-compass-controls" role="group" aria-label="Kurse nach gewünschtem Gefühl filtern">
+    <button class="style-compass-filter is-active" type="button" data-compass-filter="all" aria-pressed="true">
+      <span>00</span> Alle Wege
+    </button>
+    {paths.map((path) => (
+      <button class="style-compass-filter" type="button" data-compass-filter={path.value} aria-pressed="false">
+        <span>{path.number}</span> {path.label}
+      </button>
+    ))}
+  </div>
+
+  <p class="style-compass-status" aria-live="polite" data-compass-status>
+    Drei beginner-friendly Richtungen zur Auswahl
+  </p>
+
+  <div class="style-compass-grid">
+    {paths.map((path) => (
+      <article class="style-compass-card" data-compass-card={path.value}>
+        <div class="style-compass-image">
+          <img src={path.image} alt={path.alt} width="720" height="900" loading="lazy" decoding="async" />
+          <span>{path.number}</span>
+        </div>
+        <div class="style-compass-copy">
+          <small>{path.label}</small>
+          <h3>{path.title}</h3>
+          <p>{path.text}</p>
+          <strong>{path.styles}</strong>
+          <div class="style-compass-actions">
+            <a href="/styles/#style-poster-gallery">Styles ansehen <span aria-hidden="true">↗</span></a>
+            <a href="/stundenplan/#schedule">Live-Termine <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="style-compass-next">
+    <div>
+      <span>Du willst zwei Richtungen vergleichen?</span>
+      <strong>Der Welcome Pass gibt dir zwei Klassen für 20 Euro.</strong>
+    </div>
+    <a class="button primary" href="/starter-pass/">Welcome Pass ansehen</a>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-style-compass]").forEach((compass) => {
+    const buttons = Array.from(compass.querySelectorAll<HTMLButtonElement>("[data-compass-filter]"));
+    const cards = Array.from(compass.querySelectorAll<HTMLElement>("[data-compass-card]"));
+    const status = compass.querySelector<HTMLElement>("[data-compass-status]");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.compassFilter ?? "all";
+
+        buttons.forEach((item) => {
+          const active = item === button;
+          item.classList.toggle("is-active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+
+        let visible = 0;
+        cards.forEach((card) => {
+          const show = filter === "all" || card.dataset.compassCard === filter;
+          card.hidden = !show;
+          if (show) visible += 1;
+        });
+
+        if (status) {
+          status.textContent = filter === "all"
+            ? "Drei beginner-friendly Richtungen zur Auswahl"
+            : "Eine passende Richtung ausgewählt. Öffne jetzt die Styles oder Live-Termine.";
+        }
+      });
+    });
+  });
+</script>

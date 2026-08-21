@@ -1,0 +1,168 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PageIntro from "../components/PageIntro.astro";
+import HeroSection from "../components/HeroSection.astro";
+import TrustStrip from "../components/TrustStrip.astro";
+import TrialOfferSection from "../components/TrialOfferSection.astro";
+import StylesSection from "../components/StylesSection.astro";
+import ClassFinder from "../components/ClassFinder.astro";
+import FirstVisitSection from "../components/FirstVisitSection.astro";
+import PricingSection from "../components/PricingSection.astro";
+import CoachesSection from "../components/CoachesSection.astro";
+import FaqSection from "../components/FaqSection.astro";
+import VisitSection from "../components/VisitSection.astro";
+
+import classes from "../data/classes.json";
+import coaches from "../data/coaches.json";
+import faqs from "../data/faqs.json";
+import firstVisit from "../data/first-visit.json";
+import pricing from "../data/pricing.json";
+import site from "../data/site.json";
+import styles from "../data/styles.json";
+import trialOffer from "../data/trial-offer.json";
+import trustSignals from "../data/trust-signals.json";
+
+const blockLinks = [
+  { label: "Hero", href: "#hero-block" },
+  { label: "Trust", href: "#trust-block" },
+  { label: "Welcome Pass", href: "#trial-block" },
+  { label: "Styles", href: "#styles-block" },
+  { label: "Kurse", href: "#classes-block" },
+  { label: "Erster Besuch", href: "#visit-steps-block" },
+  { label: "Preise", href: "#pricing-block" },
+  { label: "Coaches", href: "#coaches-block" },
+  { label: "FAQ", href: "#faq-block" },
+  { label: "Kontakt", href: "#contact-block" }
+];
+---
+
+<BaseLayout
+  title="Elite Dance Studio | Blocks Review"
+  description="Ein Block-fuer-Block-Review fuer Elite Dance Studio."
+  noindex={true}
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main">
+    <PageIntro
+      eyebrow="Block Review"
+      title="Arbeite wie in Elementor, aber mit einer sauberen Systemstruktur."
+      description="Diese Seite ist nur fuer unseren Review-Prozess gedacht. Hier schauen wir uns jeden Bereich einzeln an, damit du Layout, Reihenfolge und Botschaft blockweise beurteilen kannst."
+      actions={[
+        { label: "Homepage", href: "/", variant: "secondary" },
+        { label: "Kurse", href: "/kurse/", variant: "primary" }
+      ]}
+    />
+
+    <section class="review-nav panel">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Review Navigation</div>
+          <h2>Spring direkt zum Block, den wir verbessern wollen.</h2>
+        </div>
+        <p>
+          So muessen wir nicht immer die ganze Website auf einmal beurteilen.
+        </p>
+      </div>
+      <div class="review-pills">
+        {blockLinks.map((item) => (
+          <a class="pill review-pill" href={item.href}>{item.label}</a>
+        ))}
+      </div>
+    </section>
+
+    <section class="block-shell" id="hero-block">
+      <div class="block-meta">
+        <div class="eyebrow">Block 1</div>
+        <h3>Hero</h3>
+        <p>Hier entscheiden wir ueber den ersten Eindruck, die Hauptbotschaft und die visuelle Richtung.</p>
+      </div>
+      <HeroSection hero={site.hero} />
+    </section>
+
+    <section class="block-shell" id="trust-block">
+      <div class="block-meta">
+        <div class="eyebrow">Block 2</div>
+        <h3>Trust Strip</h3>
+        <p>Dieser Block muss Anfaengerangst abbauen und direkt zeigen, warum Elite leicht zugaenglich ist.</p>
+      </div>
+      <TrustStrip signals={trustSignals} />
+    </section>
+
+    <section class="block-shell" id="trial-block">
+      <div class="block-meta">
+        <div class="eyebrow">Block 3</div>
+        <h3>Welcome Pass</h3>
+        <p>Das ist der erste Conversion-Block. Hier testen wir, ob das Angebot klar und attraktiv genug ist.</p>
+      </div>
+      <TrialOfferSection offer={trialOffer} />
+    </section>
+
+    <section class="block-shell" id="styles-block">
+      <div class="block-meta">
+        <div class="eyebrow">Block 4</div>
+        <h3>Styles</h3>
+        <p>Dieser Bereich sortiert die grosse Angebotsvielfalt in verständliche Kategorien.</p>
+      </div>
+      <StylesSection styles={styles} />
+    </section>
+
+    <section class="block-shell" id="classes-block">
+      <div class="block-meta">
+        <div class="eyebrow">Block 5</div>
+        <h3>Kurs Finder</h3>
+        <p>Funktion vor Deko: neue Besucher sollen hier schnell den ersten sinnvollen Kurs finden.</p>
+      </div>
+      <ClassFinder classes={classes} />
+    </section>
+
+    <section class="block-shell" id="visit-steps-block">
+      <div class="block-meta">
+        <div class="eyebrow">Block 6</div>
+        <h3>Erster Besuch</h3>
+        <p>Dieser Bereich beantwortet die stille Frage: Was passiert, wenn ich wirklich komme?</p>
+      </div>
+      <FirstVisitSection steps={firstVisit} />
+    </section>
+
+    <section class="block-shell" id="pricing-block">
+      <div class="block-meta">
+        <div class="eyebrow">Block 7</div>
+        <h3>Preise</h3>
+        <p>Hier geht es um Verständlichkeit und Einstiegspfade, nicht nur um Zahlen.</p>
+      </div>
+      <PricingSection pricing={pricing} />
+    </section>
+
+    <section class="block-shell" id="coaches-block">
+      <div class="block-meta">
+        <div class="eyebrow">Block 8</div>
+        <h3>Coaches</h3>
+        <p>Dieser Block muss spaeter Persönlichkeit, Stil und Studioenergie transportieren.</p>
+      </div>
+      <CoachesSection coaches={coaches} />
+    </section>
+
+    <section class="block-shell" id="faq-block">
+      <div class="block-meta">
+        <div class="eyebrow">Block 9</div>
+        <h3>FAQ</h3>
+        <p>Gut fuer SEO, gut fuer AI-Crawler und gut fuer echte Menschen mit Unsicherheiten.</p>
+      </div>
+      <FaqSection items={faqs} />
+    </section>
+
+    <section class="block-shell" id="contact-block">
+      <div class="block-meta">
+        <div class="eyebrow">Block 10</div>
+        <h3>Kontakt & Anfahrt</h3>
+        <p>Dieser Bereich hilft aus Interesse einen echten Besuch zu machen.</p>
+      </div>
+      <VisitSection visit={site.visit} />
+    </section>
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

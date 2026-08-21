@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Partner Dance",
+    "summary": "Bachata, Salsa, Kizomba, Zouk und alle Formate, bei denen Verbindung und Social Dance im Mittelpunkt stehen.",
+    "mood": "Connection, Timing und gemeinsames Tanzen"
+  },
+  {
+    "name": "Urban / Performance",
+    "summary": "Reggaeton, Heels, Hip Hop, Commercial und K-Pop mit Energie, Choreo und sichtbarer Attitude.",
+    "mood": "Energetisch, modern und präsent"
+  },
+  {
+    "name": "Technique / Expression",
+    "summary": "Jazz, Contemporary, Body Movement und House für Technik, Körperkontrolle und mehr Bewegungsqualität.",
+    "mood": "Fokussiert, musikalisch und ausdrucksstark"
+  }
+]

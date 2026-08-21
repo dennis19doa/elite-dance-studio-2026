@@ -1,0 +1,202 @@
+---
+import coaches from "../data/coaches.json";
+import InstagramIcon from "./InstagramIcon.astro";
+
+interface Poster {
+  title: string;
+  level: string;
+  world: "partner" | "urban" | "performance" | "expression";
+  worldLabel: string;
+  beginner: boolean;
+  image: string;
+  alt: string;
+  tone: "violet" | "ember" | "aqua" | "electric" | "rose" | "copper";
+}
+
+interface Props {
+  posters: Poster[];
+}
+
+const { posters } = Astro.props;
+const filters = [
+  { value: "all", label: `Alle ${posters.length}` },
+  { value: "beginner", label: "Für Beginner" },
+  { value: "partner", label: "Partner Dance" },
+  { value: "urban", label: "Urban" },
+  { value: "performance", label: "Performance" },
+  { value: "expression", label: "Technique & Expression" }
+];
+
+const coachSlugsByPoster: Record<string, string[]> = {
+  "Bachata Beginner": ["laura"],
+  "Reggaeton Beginner": ["kathy"],
+  "Heels Beginner": ["ari"],
+  "K-Pop Beginner": ["valentina"],
+  "House Beginner": ["notika"],
+  "Zouk Beginner": ["karin", "chirag"],
+  "Breaking": ["minh"],
+  "Hip-Hop Beginner mit Amy": ["amy"],
+  "Reggaeton Fundamentals": ["kathy"],
+  "Hip-Hop Beginner mit Minh": ["minh"],
+  "Lambada Beginner": ["hellen"],
+  "Commercial Level 0": ["marlon"],
+  "Latin Commercial": ["nate"],
+  "High Heels Intermediate": ["nate"],
+  "Salsa Footwork Fusion": ["jessica-julian"],
+  "Kizomba": ["benni", "sarah"],
+  "Commercial Beginner+ mit Dima": ["dima"],
+  "Latin Twerk": ["nate"],
+  "Contemporary Fusion": ["julia"],
+  "Commercial Beginner+ mit Marlon": ["marlon"],
+  "Bachata Intermediate": ["elena-dennis"],
+  "Bachata Footwork": ["elena-dennis"],
+  "Reggaeton Beginner / Intermediate": ["mati"]
+};
+
+const coachBySlug = new Map(coaches.map((coach) => [coach.slug, coach]));
+---
+
+<section class="style-poster-showcase" id="style-poster-gallery" aria-labelledby="style-poster-title" data-style-gallery>
+  <div class="style-poster-head">
+    <div>
+      <div class="eyebrow">Die Styles von Elite</div>
+      <h2 id="style-poster-title">Wähle zuerst, was dich visuell bewegt.</h2>
+    </div>
+    <div class="style-poster-intro">
+      <p>
+        Du musst die Unterschiede noch nicht kennen. Filtere nach deiner Energie, öffne den
+        Stundenplan und finde die Klasse, die sich nach deinem nächsten Schritt anfühlt.
+      </p>
+      <a href="/stundenplan/#schedule">Live-Termine ansehen <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <div class="style-poster-toolbar" role="group" aria-label="Tanzstile filtern">
+    {filters.map((filter, index) => (
+      <button
+        class="style-poster-filter"
+        type="button"
+        data-poster-filter={filter.value}
+        aria-pressed={index === 0 ? "true" : "false"}
+      >
+        <span>{String(index + 1).padStart(2, "0")}</span>
+        {filter.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="style-poster-status" aria-live="polite">
+    <span data-poster-count>{posters.length}</span> Klassenwelten sichtbar
+  </div>
+
+  <div class="style-poster-grid">
+    {posters.map((poster, index) => {
+      const posterCoaches = (coachSlugsByPoster[poster.title] ?? [])
+        .flatMap((slug) => {
+          const coach = coachBySlug.get(slug);
+          return coach ? [coach] : [];
+        });
+
+      return (
+      <article
+        class:list={["style-poster-card", `style-poster-tone-${poster.tone}`]}
+        data-poster-card
+        data-world={poster.world}
+        data-beginner={String(poster.beginner)}
+      >
+        <a
+          class="style-poster-image-link"
+          href="/stundenplan/#schedule"
+          aria-label={`${poster.title} im Stundenplan finden`}
+        >
+          <img
+            src={poster.image}
+            alt={poster.alt}
+            width="720"
+            height="900"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="style-poster-open" aria-hidden="true">Termin finden ↗</span>
+        </a>
+        <div class="style-poster-meta">
+          <span class="style-poster-index">{String(index + 1).padStart(2, "0")}</span>
+          <div>
+            <span>{poster.worldLabel} · {poster.level}</span>
+            <h3>{poster.title}</h3>
+          </div>
+        </div>
+        {posterCoaches.length > 0 && (
+          <div class="style-poster-coaches" aria-label={`Coaches für ${poster.title}`}>
+            {posterCoaches.map((coach) => (
+              <div class="style-poster-coach-unit">
+                <a class="style-poster-coach-profile" href={`/coaches/${coach.slug}/`}>
+                  <img src={coach.image} alt="" loading="lazy" />
+                  <span>Mit {coach.name}</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+                {coach.instagramUrl ? (
+                  <a
+                    class="style-poster-coach-instagram"
+                    href={coach.instagramUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${coach.name} auf Instagram öffnen`}
+                    title={coach.instagramHandle}
+                  >
+                    <InstagramIcon />
+                  </a>
+                ) : (
+                  <span class="style-poster-coach-instagram is-disabled" aria-label={`Instagram von ${coach.name} folgt`} title="Instagram folgt">
+                    <InstagramIcon />
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </article>
+      );
+    })}
+  </div>
+
+  <div class="style-poster-cta">
+    <div>
+      <span>Dein Style ist nur der Anfang.</span>
+      <strong>Finde jetzt den nächsten passenden Termin.</strong>
+    </div>
+    <div class="actions">
+      <a class="button primary" href="/stundenplan/#schedule">Klasse buchen</a>
+      <a class="button secondary" href="/starter-pass/">Zwei Styles testen · 20€</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll("[data-style-gallery]").forEach((gallery) => {
+    const buttons = Array.from(gallery.querySelectorAll("[data-poster-filter]"));
+    const cards = Array.from(gallery.querySelectorAll("[data-poster-card]"));
+    const count = gallery.querySelector("[data-poster-count]");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.posterFilter;
+        let visibleCount = 0;
+
+        buttons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+
+        cards.forEach((card) => {
+          const matches =
+            filter === "all" ||
+            (filter === "beginner" && card.dataset.beginner === "true") ||
+            card.dataset.world === filter;
+
+          card.hidden = !matches;
+          if (matches) visibleCount += 1;
+        });
+
+        if (count) count.textContent = String(visibleCount);
+      });
+    });
+  });
+</script>

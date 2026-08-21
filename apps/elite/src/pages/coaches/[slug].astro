@@ -1,0 +1,124 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import CoachesSection from "../../components/CoachesSection.astro";
+import InstagramIcon from "../../components/InstagramIcon.astro";
+
+import coaches from "../../data/coaches.json";
+import site from "../../data/site.json";
+
+export function getStaticPaths() {
+  return coaches.map((coach) => ({ params: { slug: coach.slug }, props: { coach } }));
+}
+
+const { coach } = Astro.props;
+const relatedCoaches = coaches
+  .filter((item) => item.slug !== coach.slug)
+  .sort((a, b) => {
+    const aMatches = a.focus.split(" · ").some((focus) => coach.focus.includes(focus));
+    const bMatches = b.focus.split(" · ").some((focus) => coach.focus.includes(focus));
+    return Number(bMatches) - Number(aMatches);
+  })
+  .slice(0, 3);
+
+const baseUrl = Astro.site ?? new URL("https://elitedancestudio.de");
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: coach.name,
+  jobTitle: `Dance Coach · ${coach.focus}`,
+  image: new URL(coach.image, baseUrl).toString(),
+  url: new URL(`/coaches/${coach.slug}/`, baseUrl).toString(),
+  worksFor: {
+    "@type": "Organization",
+    name: "Elite Dance Studio"
+  },
+  ...(coach.instagramUrl ? { sameAs: [coach.instagramUrl] } : {})
+};
+---
+
+<BaseLayout
+  title={`${coach.name} · ${coach.focus} Coach | Elite Dance Studio Berlin`}
+  description={`Lerne ${coach.name}, ${coach.focus} Coach im Elite Dance Studio Berlin, kennen und finde die passenden Kurstermine.`}
+  image={coach.image}
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)}></script>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main coach-profile-main">
+    <section class="coach-profile-hero">
+      <div class="coach-profile-copy">
+        <a class="coach-profile-back" href="/coaches/"><span aria-hidden="true">←</span> Alle Coaches</a>
+        <div class="eyebrow">Meet your coach</div>
+        <h1>{coach.name}</h1>
+        <p class="coach-profile-focus">{coach.focus}</p>
+        <p class="lead">{coach.text}</p>
+        <div class="coach-profile-actions">
+          {coach.instagramUrl ? (
+            <a class="coach-profile-instagram" href={coach.instagramUrl} target="_blank" rel="noreferrer">
+              <InstagramIcon />
+              <span>{coach.instagramHandle}</span>
+            </a>
+          ) : (
+            <span class="coach-profile-instagram is-disabled">
+              <InstagramIcon />
+              <span>Instagram folgt</span>
+            </span>
+          )}
+          <a class="button coach-profile-book" href="/stundenplan/#schedule">Kurs finden</a>
+        </div>
+      </div>
+      <figure class="coach-profile-portrait">
+        <img src={coach.image} alt={coach.imageAlt} width="900" height="1125" />
+        <figcaption><span>Elite Dance Studio</span><strong>{coach.focus}</strong></figcaption>
+      </figure>
+    </section>
+
+    <section class="coach-profile-story panel">
+      <div class="coach-profile-story-copy">
+        <div class="eyebrow">Über {coach.name}</div>
+        <h2>Technik, Energie und ein Raum zum Wachsen.</h2>
+        <span class="coach-draft-label">Profiltext · erster Entwurf</span>
+        <p>
+          Im Unterricht geht es nicht darum, vom ersten Moment an perfekt auszusehen. Du bekommst
+          eine klare Struktur, Zeit zum Ausprobieren und konkrete Orientierung für deinen nächsten
+          Schritt. Der endgültige persönliche Text wird gemeinsam mit {coach.name} ergänzt.
+        </p>
+      </div>
+      <div class="coach-profile-facts">
+        <article><span>01 · Fokus</span><strong>{coach.focus}</strong><p>Technik und Stil werden so verbunden, dass du nicht nur Schritte kopierst, sondern Bewegung verstehst.</p></article>
+        <article><span>02 · Regulärer Termin</span><strong>{coach.schedule}</strong><p>Die aktuelle Verfügbarkeit und freie Plätze siehst du immer live im Eversports-Kalender.</p></article>
+        <article><span>03 · Für deinen Start</span><strong>{coach.beginnerSupport}</strong><p>Wenn du unsicher bist, frag uns vorab. Wir helfen dir, das passende Level zu wählen.</p></article>
+      </div>
+    </section>
+
+    <section class="coach-video-section panel" aria-labelledby="coach-video-title">
+      <div class="section-head">
+        <div><div class="eyebrow">In Bewegung</div><h2 id="coach-video-title">Sieh {coach.name} tanzen.</h2></div>
+        <p>Hier entsteht ein kurzer authentischer Dance Clip, damit du Energie, Stil und Teaching-Persönlichkeit vor dem ersten Besuch erleben kannst.</p>
+      </div>
+      <div class="coach-video-placeholder">
+        <img src={coach.image} alt="" loading="lazy" />
+        <span class="coach-video-shade"></span>
+        <div class="coach-video-placeholder-copy">
+          <span class="coach-video-play" aria-hidden="true">▶</span>
+          <strong>Dance Clip folgt</strong>
+          <p>Ein vertikales Class-, Freestyle- oder Performance-Video passt hier am besten.</p>
+          {coach.instagramUrl && (
+            <a href={coach.instagramUrl} target="_blank" rel="noreferrer">Aktuelle Videos auf Instagram ansehen <span aria-hidden="true">↗</span></a>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <CoachesSection
+      coaches={relatedCoaches}
+      eyebrow="Mehr Energie entdecken"
+      title="Weitere Coaches, die zu deinem Style passen könnten."
+      description="Lerne unterschiedliche Teaching-Persönlichkeiten kennen oder öffne direkt den Stundenplan."
+    />
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

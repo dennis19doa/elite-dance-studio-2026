@@ -1,0 +1,40 @@
+---
+interface FirstVisitItem {
+  number: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  steps: FirstVisitItem[];
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+}
+
+const {
+  steps,
+  eyebrow = "Erster Besuch",
+  title = "So läuft dein Einstieg bei Elite ab.",
+  description = "Der erste Besuch sollte sich leicht anfühlen: klarer Start, klare Erwartung, kein unnötiger Druck."
+} = Astro.props;
+---
+
+<section class="steps panel">
+  <div class="section-head section-head-stack">
+    <div>
+      <div class="eyebrow">{eyebrow}</div>
+      <h2>{title}</h2>
+    </div>
+    <p>{description}</p>
+  </div>
+  <div class="steps-list">
+    {steps.map((step) => (
+      <div class="step">
+        <div class="step-number">{step.number}</div>
+        <strong>{step.title}</strong>
+        <span>{step.text}</span>
+      </div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import WelcomePassHero from "../components/WelcomePassHero.astro";
+import WelcomePassBenefits from "../components/WelcomePassBenefits.astro";
+import FirstVisitSection from "../components/FirstVisitSection.astro";
+import FaqSection from "../components/FaqSection.astro";
+import LeadForm from "../components/LeadForm.astro";
+import EversportsSchedule from "../components/EversportsSchedule.astro";
+
+import site from "../data/site.json";
+import welcomePass from "../data/welcome-pass.json";
+---
+
+<BaseLayout
+  title="Welcome Pass | Zwei Beginner-Tanzkurse bei Elite Dance Studio"
+  description="Mit dem Welcome Pass zwei beginner-friendly Tanzkurse bei Elite Dance Studio in Berlin-Moabit testen: 2 Klassen für 20 Euro, 14 Tage gültig."
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main">
+    <WelcomePassHero hero={welcomePass.hero} />
+    <WelcomePassBenefits benefits={welcomePass.benefits} />
+
+    <LeadForm
+      kind="welcome"
+      id="welcome-form"
+      eyebrow="Welcome Pass anfragen"
+      title="Erzähl uns kurz, wie du starten möchtest."
+      description="Das Formular hilft uns, dir zwei passende Beginner-Klassen zu empfehlen. Danach bestätigen wir persönlich deinen Start."
+    />
+
+    <EversportsSchedule
+      id="pass-kurse"
+      eyebrow="Deine zwei Klassen"
+      title="Wähle im aktuellen Stundenplan."
+      description="Der Live-Kalender zeigt dir die echten Termine, Coaches und freien Plätze. Achte für deinen Einstieg auf Level 0 oder Beginner und nenne uns deine Wunschklassen im Formular."
+    />
+
+    <FirstVisitSection
+      steps={welcomePass.steps}
+      eyebrow="So funktioniert es"
+      title="Vom ersten Klick bis zu deiner zweiten Klasse."
+      description="Der Ablauf bleibt bewusst einfach. Wenn du bei der Kurswahl unsicher bist, helfen wir dir persönlich weiter."
+    />
+
+    <FaqSection
+      items={welcomePass.faqs}
+      eyebrow="Welcome Pass FAQ"
+      title="Alles, was du vor der Buchung wissen möchtest."
+      description="Die wichtigsten Antworten stehen direkt hier. Für alles Persönliche kannst du uns jederzeit schreiben."
+    />
+
+    <section class="cta-banner panel welcome-final-cta">
+      <div>
+        <div class="eyebrow">Bereit für deinen ersten Schritt?</div>
+        <h2>Deine ersten zwei Klassen beginnen mit einer kurzen Nachricht.</h2>
+        <p>Wir helfen dir bei der Auswahl und reservieren deinen Platz für den passenden Einstieg.</p>
+      </div>
+      <div class="actions">
+        <a class="button welcome-primary" href="#welcome-form">Welcome Pass anfragen</a>
+        <a class="button welcome-secondary" href="/kurse/">Kurse vergleichen</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

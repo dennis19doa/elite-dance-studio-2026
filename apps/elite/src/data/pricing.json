@@ -1,0 +1,84 @@
+[
+  {
+    "category": "Erst ausprobieren",
+    "label": "Empfohlener erster Schritt",
+    "name": "Welcome Pass",
+    "price": "20€",
+    "text": "Zwei beginner-geeignete Klassen für neue Besucher:innen. Du erlebst das Studio, bevor du dich entscheidest.",
+    "bestFor": "du Elite erst kennenlernen willst",
+    "ctaLabel": "Welcome Pass ansehen",
+    "href": "/starter-pass/",
+    "featured": true
+  },
+  {
+    "category": "Erst ausprobieren",
+    "label": "Ein Kurs",
+    "name": "Drop-in",
+    "price": "13€",
+    "text": "Eine reguläre Klasse deiner Wahl. Gut für spontane Besuche oder wenn du noch keinen festen Rhythmus hast.",
+    "bestFor": "du genau einen Kurs testen möchtest",
+    "ctaLabel": "Kurs finden",
+    "href": "/kurse/"
+  },
+  {
+    "category": "Flexibel trainieren",
+    "label": "Regelmäßig ohne Vertrag",
+    "name": "5er Karte",
+    "price": "60€",
+    "text": "Fünf Klassen für mehr Routine, ohne direkt eine monatliche Membership zu wählen.",
+    "bestFor": "du flexibel, aber öfter tanzen willst",
+    "ctaLabel": "Klassen ansehen",
+    "href": "/kurse/"
+  },
+  {
+    "category": "Flexibel trainieren",
+    "label": "Bester Kartenwert",
+    "name": "10er Karte",
+    "price": "115€",
+    "text": "Der stärkste flexible Deal für häufigeres Training ohne monatliche Bindung.",
+    "bestFor": "Tanzen ein fester Teil deiner Woche wird",
+    "ctaLabel": "Klassen ansehen",
+    "href": "/kurse/"
+  },
+  {
+    "category": "Flexibel trainieren",
+    "label": "Urban Sports Club",
+    "name": "USC Check-in",
+    "price": "0€*",
+    "text": "Reguläre Kurse können je nach USC-Tarif und verfügbarem Kontingent enthalten sein.",
+    "bestFor": "du bereits eine USC-Mitgliedschaft hast",
+    "ctaLabel": "Vorher Kurs wählen",
+    "href": "/kurse/"
+  },
+  {
+    "category": "Routine aufbauen",
+    "label": "Ein Kurs pro Woche",
+    "name": "Bronze Membership",
+    "price": "45€ / Monat",
+    "text": "Ein verlässlicher Wochenrhythmus für einen sauberen und entspannten Einstieg.",
+    "bestFor": "du mit einer Klasse pro Woche starten willst",
+    "ctaLabel": "Frage zur Membership",
+    "href": "/kontakt/"
+  },
+  {
+    "category": "Routine aufbauen",
+    "label": "Beliebt",
+    "name": "Silber Membership",
+    "price": "79€ / Monat",
+    "text": "Zwei Kurse pro Woche, damit Technik, Style und Sicherheit schneller zusammenwachsen.",
+    "bestFor": "du sichtbar Fortschritt machen willst",
+    "ctaLabel": "Frage zur Membership",
+    "href": "/kontakt/",
+    "featured": true
+  },
+  {
+    "category": "Routine aufbauen",
+    "label": "Flatrate",
+    "name": "Gold Membership",
+    "price": "99€ / Monat",
+    "text": "Maximale Freiheit für mehrere Styles und häufiges Training in regulären Klassen.",
+    "bestFor": "du oft und vielseitig tanzen willst",
+    "ctaLabel": "Frage zur Membership",
+    "href": "/kontakt/"
+  }
+]

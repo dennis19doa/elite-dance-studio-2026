@@ -1,0 +1,49 @@
+<script>
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reducedMotion && "IntersectionObserver" in window) {
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("main > section, main > div > section")
+    );
+    const itemSelector = [
+      ".visitor-path-card",
+      ".class-structure-step",
+      ".trust-signal",
+      ".style-poster-card",
+      ".coach-card",
+      ".faq-item",
+      ".schedule-level",
+      ".booking-steps > div",
+      ".price-card",
+      ".step",
+      ".answer-card"
+    ].join(",");
+
+    document.documentElement.classList.add("motion-ready");
+
+    sections.forEach((section, index) => {
+      const mode = section.classList.contains("home-hero")
+        ? "hero"
+        : ["rise", "editorial", "soft"][index % 3];
+
+      section.dataset.reveal = mode;
+      section.querySelectorAll<HTMLElement>(itemSelector).forEach((item, itemIndex) => {
+        item.dataset.revealItem = "";
+        item.style.setProperty("--reveal-index", String(Math.min(itemIndex, 7)));
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -7%", threshold: 0.08 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
+</script>

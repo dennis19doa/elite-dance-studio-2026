@@ -1,0 +1,15 @@
+{
+  "name": "dance-websites",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "scripts": {
+    "dev": "pnpm --filter @dance/elite dev",
+    "build": "pnpm --filter @dance/elite build",
+    "preview": "pnpm --filter @dance/elite preview",
+    "check:site": "pnpm --filter @dance/elite check:site",
+    "dev:explosion": "pnpm --filter @dance/bachata-explosion dev",
+    "build:explosion": "pnpm --filter @dance/bachata-explosion build",
+    "preview:explosion": "pnpm --filter @dance/bachata-explosion preview",
+    "check:explosion": "pnpm --filter @dance/bachata-explosion check:site"
+  }
+}

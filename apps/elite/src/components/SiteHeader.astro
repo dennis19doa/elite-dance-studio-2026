@@ -1,0 +1,96 @@
+---
+interface NavItem {
+  label: string;
+  href: string;
+  description?: string;
+  children?: NavItem[];
+}
+
+interface Props {
+  brand: string;
+  nav: NavItem[];
+}
+
+const { brand, nav } = Astro.props;
+const currentPath = Astro.url.pathname;
+const isWelcomePassPage = currentPath.startsWith("/starter-pass/");
+
+function isActive(href: string) {
+  if (href === "/") {
+    return currentPath === "/";
+  }
+
+  return currentPath === href || currentPath.startsWith(href);
+}
+
+function isGroupActive(item: NavItem) {
+  return isActive(item.href) || item.children?.some((child) => isActive(child.href));
+}
+---
+
+<header class="site-header">
+  <div class="page-shell topbar">
+    <a class="brand" href="/">{brand}</a>
+    <nav class="main-nav desktop-nav" aria-label="Primary">
+      {nav.map((item) => item.children ? (
+        <details class:list={["nav-dropdown", isGroupActive(item) && "is-active"]}>
+          <summary class="nav-link">
+            {item.label}
+            <span class="nav-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="nav-dropdown-menu">
+            {item.children.map((child) => (
+              <a class:list={["nav-dropdown-link", isActive(child.href) && "is-active"]} href={child.href}>
+                <span>{child.label}</span>
+                <small>{child.description}</small>
+              </a>
+            ))}
+          </div>
+        </details>
+      ) : (
+        <a class:list={["nav-link", isActive(item.href) && "is-active"]} href={item.href}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <div class="actions header-actions">
+      <a class="button secondary" href={isWelcomePassPage ? "#welcome-form" : "/starter-pass/"}>
+        {isWelcomePassPage ? "Pass anfragen" : "Neu hier?"}
+      </a>
+      <a class="button primary" href="/stundenplan/">Klasse buchen</a>
+    </div>
+
+    <details class="mobile-nav">
+      <summary>
+        <span class="mobile-nav-icon" aria-hidden="true"><i></i><i></i></span>
+        <span>Menü</span>
+      </summary>
+      <div class="mobile-menu panel">
+        <nav class="mobile-menu-links" aria-label="Mobile Navigation">
+          {nav.map((item) => item.children ? (
+            <details class="mobile-nav-group" open={isGroupActive(item)}>
+              <summary class:list={[isGroupActive(item) && "is-active"]}>{item.label}</summary>
+              <div>
+                {item.children.map((child) => (
+                  <a class:list={["nav-link", isActive(child.href) && "is-active"]} href={child.href}>
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </details>
+          ) : (
+            <a class:list={["nav-link", isActive(item.href) && "is-active"]} href={item.href}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <div class="mobile-menu-actions">
+          <a class="button secondary" href={isWelcomePassPage ? "#welcome-form" : "/starter-pass/"}>
+            {isWelcomePassPage ? "Pass anfragen" : "Neu hier?"}
+          </a>
+          <a class="button primary" href="/stundenplan/">Klasse buchen</a>
+        </div>
+      </div>
+    </details>
+  </div>
+</header>

@@ -1,0 +1,170 @@
+---
+interface ClassItem {
+  title: string;
+  style: string;
+  format: string;
+  day: string;
+  time: string;
+  level: string;
+  coach: string;
+  description: string;
+  goodFor: string;
+  tags: string[];
+}
+
+interface Props {
+  classes: ClassItem[];
+}
+
+const { classes } = Astro.props;
+const styleOptions = [...new Set(classes.map((item) => item.style))].sort();
+const dayOptions = [...new Set(classes.map((item) => item.day))].sort();
+const levelOptions = [...new Set(classes.map((item) => item.level))].sort();
+const beginnerFriendlyCount = classes.filter((item) => item.tags.includes("Beginner-friendly")).length;
+const welcomePassCount = classes.filter((item) => item.tags.includes("Welcome Pass geeignet")).length;
+---
+
+<section class="finder panel" id="classes">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Kurse entdecken</div>
+      <h2>Finde nicht irgendeinen Kurs, sondern deinen richtigen Start.</h2>
+    </div>
+    <p>
+      Diese Kursseite soll sich eher wie eine gute Empfehlung anfühlen als wie ein nackter
+      Stundenplan. Filtere nach Style, Tag oder Level und entscheide dann ruhiger.
+    </p>
+  </div>
+
+  <div class="finder-overview">
+    <div class="finder-callout">
+      <strong>{beginnerFriendlyCount} beginner-friendly Optionen</strong>
+      <span>Der aktuelle Kursmix ist bewusst stark auf neue Tänzer:innen ausgerichtet.</span>
+    </div>
+    <div class="finder-callout">
+      <strong>{welcomePassCount} Kurse passen gut zum Welcome Pass</strong>
+      <span>Ideal, wenn du zwei Richtungen vergleichen willst, bevor du dich festlegst.</span>
+    </div>
+    <div class="finder-callout">
+      <strong>Solo und Partner Dance</strong>
+      <span>Du kannst bei Elite sowohl allein als auch über Verbindung und Social Dance starten.</span>
+    </div>
+  </div>
+
+  <div class="finder-ui">
+    <select class="field" id="style-filter" aria-label="Filter nach Dance Style">
+      <option value="all">Alle Styles</option>
+      {styleOptions.map((value) => <option value={value}>{value}</option>)}
+    </select>
+    <select class="field" id="day-filter" aria-label="Filter nach Tag">
+      <option value="all">Jeder Tag</option>
+      {dayOptions.map((value) => <option value={value}>{value}</option>)}
+    </select>
+    <select class="field" id="level-filter" aria-label="Filter nach Level">
+      <option value="all">Jedes Level</option>
+      {levelOptions.map((value) => <option value={value}>{value}</option>)}
+    </select>
+    <button class="button primary" id="clear-filters" type="button">Zurücksetzen</button>
+  </div>
+
+  <div class="finder-status">
+    <span id="finder-count"><strong>{classes.length} Kurse</strong> sichtbar</span>
+    <span>Tipp: Wenn du ganz neu bist, starte zuerst mit Beginner oder einem lesbaren Open Level.</span>
+  </div>
+
+  <div class="finder-results" id="finder-results">
+    {classes.map((item) => {
+      const isWelcomePassFit = item.tags.includes("Welcome Pass geeignet");
+
+      return (
+      <article
+        class="finder-card"
+        data-style={item.style}
+        data-day={item.day}
+        data-level={item.level}
+      >
+        <div>
+          <div class="course-card-top">
+            <span class="badge">{item.style}</span>
+            <span class="pill">{item.format}</span>
+          </div>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+          <div class="finder-fit">
+            <strong>Gut für dich, wenn ...</strong>
+            <span>{item.goodFor}</span>
+          </div>
+          <div class="meta-row">
+            <span class="pill">{item.day} · {item.time}</span>
+            <span class="pill">{item.level}</span>
+            <span class="pill">{item.coach}</span>
+          </div>
+          <div class="badge-row">
+            {item.tags.map((tag) => <span class="badge">{tag}</span>)}
+          </div>
+        </div>
+        <div class="finder-actions">
+          <a class="button primary" href={isWelcomePassFit ? "/starter-pass/" : "/kontakt/"}>
+            {isWelcomePassFit ? "Mit Welcome Pass starten" : "Zum Kurs fragen"}
+          </a>
+          <a class="pill course-link" href="/preise/">Preise ansehen</a>
+        </div>
+      </article>
+      );
+    })}
+  </div>
+
+  <div class="finder-empty" id="finder-empty" hidden>
+    Für diese Kombination ist gerade nichts sichtbar. Schreib uns kurz, dann empfehlen wir dir
+    lieber direkt den sinnvollsten ersten Kurs.
+  </div>
+</section>
+
+<script>
+  const styleFilter = document.querySelector("#style-filter");
+  const dayFilter = document.querySelector("#day-filter");
+  const levelFilter = document.querySelector("#level-filter");
+  const clearFiltersButton = document.querySelector("#clear-filters");
+  const finderCount = document.querySelector("#finder-count");
+  const emptyState = document.querySelector("#finder-empty");
+  const cards = Array.from(document.querySelectorAll(".finder-card"));
+
+  function matches(cardValue, filterValue) {
+    return filterValue === "all" || cardValue === filterValue;
+  }
+
+  function renderFilters() {
+    const styleValue = styleFilter.value;
+    const dayValue = dayFilter.value;
+    const levelValue = levelFilter.value;
+
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const matchesAll =
+        matches(card.dataset.style, styleValue) &&
+        matches(card.dataset.day, dayValue) &&
+        matches(card.dataset.level, levelValue);
+
+      card.hidden = !matchesAll;
+
+      if (matchesAll) {
+        visibleCount += 1;
+      }
+    });
+
+    finderCount.innerHTML = `<strong>${visibleCount} Kurse</strong> sichtbar`;
+    emptyState.hidden = visibleCount !== 0;
+  }
+
+  styleFilter.addEventListener("change", renderFilters);
+  dayFilter.addEventListener("change", renderFilters);
+  levelFilter.addEventListener("change", renderFilters);
+
+  clearFiltersButton.addEventListener("click", () => {
+    styleFilter.value = "all";
+    dayFilter.value = "all";
+    levelFilter.value = "all";
+    renderFilters();
+  });
+</script>

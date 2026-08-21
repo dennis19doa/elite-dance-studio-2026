@@ -1,0 +1,37 @@
+---
+interface StartPath {
+  title: string;
+  text: string;
+  href: string;
+  ctaLabel: string;
+}
+
+interface Props {
+  paths: StartPath[];
+}
+
+const { paths } = Astro.props;
+---
+
+<section class="start-paths panel">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Dein Start</div>
+      <h2>So findest du bei Elite schneller den richtigen Einstieg.</h2>
+    </div>
+    <p>
+      Gute Tanzschul-Websites zeigen neuen Besucher:innen sofort, wie sie anfangen sollen. Genau
+      das macht dieser Bereich für Elite sichtbar.
+    </p>
+  </div>
+
+  <div class="path-grid">
+    {paths.map((path) => (
+      <article class="path-card">
+        <strong>{path.title}</strong>
+        <span>{path.text}</span>
+        <a class="pill path-link" href={path.href}>{path.ctaLabel}</a>
+      </article>
+    ))}
+  </div>
+</section>

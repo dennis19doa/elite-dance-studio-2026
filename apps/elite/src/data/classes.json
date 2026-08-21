@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Reggaeton Fundamentals",
+    "style": "Reggaeton",
+    "format": "Solo Style",
+    "day": "Donnerstag",
+    "time": "18:00",
+    "level": "Beginner",
+    "coach": "Kathy",
+    "description": "Power, Attitude, Isolations und Latin-Urban Choreos. Ein starker Einstieg, wenn du Energie und Groove suchst.",
+    "goodFor": "du ohne Vorkenntnisse starten willst und Lust auf Energie, Rhythmus und klare Choreo-Struktur hast.",
+    "tags": ["Beginner-friendly", "Kein Partner nötig", "Welcome Pass geeignet"]
+  },
+  {
+    "title": "Bachata Basics",
+    "style": "Bachata",
+    "format": "Partner Dance",
+    "day": "Montag",
+    "time": "19:00",
+    "level": "Beginner",
+    "coach": "Elena & Team",
+    "description": "Verbindung, Technik, Musikalität und Body Movement für alle, die sicher auf Socials tanzen wollen.",
+    "goodFor": "du social tanzen lernen willst und einen geführten Partner-Dance-Einstieg suchst.",
+    "tags": ["Paartanz", "Beginner-friendly", "Social starter"]
+  },
+  {
+    "title": "High Heels",
+    "style": "Heels",
+    "format": "Solo Style",
+    "day": "Dienstag",
+    "time": "19:30",
+    "level": "Open Level",
+    "coach": "Coach Placeholder",
+    "description": "Confidence, Haltung, Lines und feminine Choreografien mit Fokus auf Technik und Ausdruck.",
+    "goodFor": "du Ausdruck, Haltung und Presence suchst und dich auch ohne klassisches Beginner-Label gut herantasten kannst.",
+    "tags": ["Confidence", "Solo Style", "Welcome Pass geeignet"]
+  },
+  {
+    "title": "Commercial Choreo",
+    "style": "Commercial",
+    "format": "Solo Style",
+    "day": "Mittwoch",
+    "time": "20:00",
+    "level": "Open Level",
+    "coach": "Coach Placeholder",
+    "description": "Music-Video-Feeling, Ausdruck und starke Choreos mit einem Einstieg, der auch fuer neue Taenzer:innen lesbar und motivierend bleibt.",
+    "goodFor": "du Performance-Energie magst und einen motivierenden, aber nicht einschüchternden Einstieg suchst.",
+    "tags": ["Performance", "Choreo", "Beginner-friendly"]
+  },
+  {
+    "title": "K-Pop Flow",
+    "style": "K-Pop",
+    "format": "Solo Style",
+    "day": "Donnerstag",
+    "time": "18:00",
+    "level": "Beginner",
+    "coach": "Coach Placeholder",
+    "description": "Sharp Moves, Details und Pop-Performance mit einem Einstieg, der auch für neue Tänzerinnen und Tänzer funktioniert.",
+    "goodFor": "du gerne über Songs und bekannte Choreo-Welten einsteigen möchtest.",
+    "tags": ["Community", "Beginner-friendly", "Solo Style"]
+  },
+  {
+    "title": "Contemporary Foundations",
+    "style": "Contemporary",
+    "format": "Technique / Expression",
+    "day": "Samstag",
+    "time": "12:00",
+    "level": "Beginner",
+    "coach": "Coach Placeholder",
+    "description": "Floorwork, Ausdruck, Technik und mehr Körpergefühl für alle, die einen ruhigeren, tieferen Einstieg suchen.",
+    "goodFor": "du eher Gefühl, Körperbewusstsein und Technik suchst als reine Performance-Energie.",
+    "tags": ["Technik", "Ausdruck", "Welcome Pass geeignet"]
+  }
+]

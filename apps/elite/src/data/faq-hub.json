@@ -1,0 +1,86 @@
+[
+  {
+    "category": "start",
+    "categoryLabel": "Dein erster Besuch",
+    "question": "Kann ich wirklich ohne Tanzerfahrung anfangen?",
+    "answer": "Ja. Elite ist aktuell besonders auf Beginner ausgerichtet. Wähle im Stundenplan Level 0 oder Beginner; dort werden Grundlagen verständlich aufgebaut und du musst vorher keine Schritte kennen."
+  },
+  {
+    "category": "start",
+    "categoryLabel": "Dein erster Besuch",
+    "question": "Brauche ich einen festen Tanzpartner?",
+    "answer": "Nein. Solo Styles funktionieren ohnehin ohne Partner. Du kannst auch allein zu vielen Partner-Dance-Kursen kommen; dort wird in vielen Klassen regelmäßig gewechselt."
+  },
+  {
+    "category": "start",
+    "categoryLabel": "Dein erster Besuch",
+    "question": "Welcher Style passt zu mir, wenn ich noch unsicher bin?",
+    "answer": "Wähle zuerst nach der Energie, die dich anspricht: gemeinsam bei Partner Dance, kraftvoll bei Urban und Performance oder fokussiert bei Technik und Ausdruck. Mit dem Welcome Pass kannst du zwei geeignete Klassen vergleichen."
+  },
+  {
+    "category": "start",
+    "categoryLabel": "Dein erster Besuch",
+    "question": "Was soll ich zum ersten Kurs mitbringen?",
+    "answer": "Bequeme Kleidung, saubere Schuhe und etwas zu trinken reichen für die meisten Klassen. Plane bei deinem ersten Besuch 10 bis 15 Minuten vor Kursbeginn ein."
+  },
+  {
+    "category": "booking",
+    "categoryLabel": "Buchung & Preise",
+    "question": "Muss ich meinen Platz vorher reservieren?",
+    "answer": "Ja, reserviere deine Klasse am besten vorab über Eversports. Dort siehst du die aktuelle Verfügbarkeit und weißt vor der Anfahrt, dass dein Platz gesichert ist."
+  },
+  {
+    "category": "booking",
+    "categoryLabel": "Buchung & Preise",
+    "question": "Was ist der Unterschied zwischen Welcome Pass und Drop-in?",
+    "answer": "Der Welcome Pass kostet 20 Euro und gibt neuen Besucher:innen zwei geeignete Klassen innerhalb von 14 Tagen. Ein Drop-in gilt für eine einzelne reguläre Klasse."
+  },
+  {
+    "category": "booking",
+    "categoryLabel": "Buchung & Preise",
+    "question": "Kann ich Urban Sports Club nutzen?",
+    "answer": "Reguläre Kurse können je nach USC-Tarif und verfügbarem Kontingent enthalten sein. Workshops, Intensives und Specials können separat kostenpflichtig sein."
+  },
+  {
+    "category": "booking",
+    "categoryLabel": "Buchung & Preise",
+    "question": "Wann kann ich mit einem regulären Kurs anfangen?",
+    "answer": "Bei regulären Klassen ist ein Einstieg grundsätzlich jede Woche möglich. Prüfe im Live-Stundenplan das Level und reserviere den Termin, der für dich passt."
+  },
+  {
+    "category": "booking",
+    "categoryLabel": "Buchung & Preise",
+    "question": "Wo sehe ich die Stornierungsbedingungen?",
+    "answer": "Die für deine Buchung geltenden Bedingungen werden dir im Eversports-Buchungsprozess angezeigt. Prüfe sie bitte vor der Bestätigung, besonders wenn du kurzfristig planst."
+  },
+  {
+    "category": "level",
+    "categoryLabel": "Level & Training",
+    "question": "Welches Level ist für mich richtig?",
+    "answer": "Level 0 ist der langsamste Einstieg. Beginner passt ohne oder mit sehr wenig Erfahrung. Beginner+ setzt vertraute Basics voraus; Intermediate ist für Tänzer:innen gedacht, die bereits regelmäßig trainieren."
+  },
+  {
+    "category": "level",
+    "categoryLabel": "Level & Training",
+    "question": "Gibt es bei Elite auch Kurse für Fortgeschrittene?",
+    "answer": "Ja. Der Schwerpunkt liegt aktuell auf Beginner Classes, daneben gibt es ausgewählte Beginner+ und Intermediate-Angebote sowie fokussierte Intensives."
+  },
+  {
+    "category": "level",
+    "categoryLabel": "Level & Training",
+    "question": "Was ist ein Intensive?",
+    "answer": "Ein Intensive ist ein eigener, mehrwöchiger Trainingsblock mit festem Fokus, kleinerer Gruppe und strukturiertem Fortschritt. Intensives werden separat angeboten und gebucht."
+  },
+  {
+    "category": "studio",
+    "categoryLabel": "Studio & Anfahrt",
+    "question": "Wo ist der Eingang zum Studio?",
+    "answer": "Du findest uns in der Wiclefstraße 16-17 in Berlin-Moabit. Gehe durch beide roten Tore; im zweiten Hinterhof liegt das Studio auf der linken Seite."
+  },
+  {
+    "category": "studio",
+    "categoryLabel": "Studio & Anfahrt",
+    "question": "Was mache ich, wenn meine Frage hier nicht beantwortet wird?",
+    "answer": "Schreib uns kurz über WhatsApp oder das Kontaktformular. Nenne am besten den Style, dein bisheriges Level und den Termin, der dich interessiert, dann können wir dir gezielt helfen."
+  }
+]

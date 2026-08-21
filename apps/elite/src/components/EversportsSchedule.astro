@@ -1,0 +1,95 @@
+---
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  home?: boolean;
+}
+
+const {
+  id = "schedule",
+  eyebrow = "Live-Stundenplan",
+  title = "Alle Classes dieser Woche.",
+  description = "Wähle Tag, Style und Level. Eversports zeigt dir die aktuelle Verfügbarkeit und reserviert deinen Platz direkt.",
+  home = false
+} = Astro.props;
+
+const levels = [
+  { label: "Level 0", text: "Dein allererster Einstieg" },
+  { label: "Beginner", text: "Grundlagen ohne Vorkenntnisse" },
+  { label: "Beginner+", text: "Basics sind schon vertraut" },
+  { label: "Intermediate", text: "Mehr Tempo und Erfahrung" }
+];
+---
+
+<section
+  class:list={["eversports-panel", "panel", home && "eversports-home"]}
+  id={id}
+  aria-labelledby={`${id}-title`}
+>
+  <div class="schedule-editorial-head">
+    <div class="schedule-live-mark" aria-label="Aktueller Live-Stundenplan">
+      <span><i aria-hidden="true"></i> Live</span>
+      <strong>Diese Woche</strong>
+    </div>
+    <div class="schedule-editorial-copy">
+      <div class="eyebrow">{eyebrow}</div>
+      <h2 id={`${id}-title`}>{title}</h2>
+      <p>{description}</p>
+    </div>
+    <a class="schedule-help-link" href="/faq/">
+      <span>Nicht sicher?</span>
+      <strong>Ersten Besuch planen <b aria-hidden="true">↗</b></strong>
+    </a>
+  </div>
+
+  <div class="schedule-level-guide" aria-label="Level schnell erklärt">
+    {levels.map((level, index) => (
+      <div class="schedule-level">
+        <span>{String(index + 1).padStart(2, "0")}</span>
+        <div><strong>{level.label}</strong><small>{level.text}</small></div>
+      </div>
+    ))}
+  </div>
+
+  <div class="eversports-frame">
+    <div class="eversports-frame-topline">
+      <span>Elite Dance Studio · Berlin-Moabit</span>
+      <span>Live-Verfügbarkeit</span>
+    </div>
+    <div class="eversports-widget" aria-label="Eversports Stundenplan">
+      <div data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const schedule = document.currentScript?.closest(".eversports-panel");
+      if (!schedule || document.querySelector('script[data-eversports-loader="true"]')) return;
+
+      const loadWidget = () => {
+        if (document.querySelector('script[data-eversports-loader="true"]')) return;
+        const script = document.createElement("script");
+        script.type = "module";
+        script.src = "https://widget-static.eversports.io/loader.js";
+        script.async = true;
+        script.dataset.eversportsLoader = "true";
+        document.head.append(script);
+      };
+
+      if (!("IntersectionObserver" in window)) {
+        loadWidget();
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        loadWidget();
+      }, { rootMargin: "600px 0px" });
+
+      observer.observe(schedule);
+    })();
+  </script>
+</section>

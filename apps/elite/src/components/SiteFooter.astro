@@ -1,0 +1,30 @@
+---
+interface NavItem {
+  label: string;
+  href: string;
+  children?: NavItem[];
+}
+
+interface Props {
+  brand: string;
+  nav: NavItem[];
+}
+
+const { brand, nav } = Astro.props;
+const footerLinks = nav.flatMap((item) => item.children ?? [item]);
+---
+
+<footer class="site-footer">
+  <div class="page-shell footer-shell">
+    <div>
+      <a class="brand footer-brand" href="/">{brand}</a>
+      <p class="footer-copy">
+        Beginner-friendly Tanzkurse in Berlin-Moabit. Offen, persönlich und mit einem klaren
+        Einstieg für neue Tänzer:innen.
+      </p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      {footerLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+</footer>

@@ -1,0 +1,72 @@
+---
+interface VisitData {
+  address: string;
+  entryNote: string;
+  contactPrompt: string;
+  ctaHeading: string;
+  ctaText: string;
+  phone: string;
+  email: string;
+  instagram: string;
+  whatsappHref: string;
+  mapHref: string;
+  instagramHref: string;
+}
+
+interface Props {
+  visit: VisitData;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+}
+
+const {
+  visit,
+  eyebrow = "Kontakt & Anfahrt",
+  title = "So findest du uns in Moabit.",
+  description = "Der Weg ins Studio sollte sich genauso klar anfühlen wie die Kurswahl: Adresse, Eingang und schneller Kontakt auf einen Blick."
+} = Astro.props;
+---
+
+<section class="visit panel" id="visit">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">{eyebrow}</div>
+      <h2>{title}</h2>
+    </div>
+    <p>{description}</p>
+  </div>
+  <div class="arrival-route" aria-label="Weg ins Studio">
+    <div class="arrival-step">
+      <span>01</span>
+      <strong>Wiclefstraße 16–17</strong>
+      <p>Adresse in Berlin-Moabit ansteuern.</p>
+    </div>
+    <div class="arrival-step">
+      <span>02</span>
+      <strong>Durch beide Tore</strong>
+      <p>Gehe durch die roten Tore in den Hof.</p>
+    </div>
+    <div class="arrival-step">
+      <span>03</span>
+      <strong>Zweiter Hof, links</strong>
+      <p>Dort findest du den Studioeingang.</p>
+    </div>
+  </div>
+  <div class="visit-contact-band">
+    <div>
+      <span class="visit-contact-label">Adresse</span>
+      <strong>{visit.address}</strong>
+      <span class="visit-entry-note">{visit.entryNote}</span>
+    </div>
+    <div class="visit-contact-details">
+      <a href={`tel:${visit.phone.replace(/\s/g, "")}`}>{visit.phone}</a>
+      <a href={`mailto:${visit.email}`}>{visit.email}</a>
+      <a href={visit.instagramHref}>{visit.instagram}</a>
+    </div>
+    <div class="visit-contact-actions">
+      <a class="button primary" href={visit.whatsappHref}>WhatsApp schreiben</a>
+      <a class="button secondary" href={visit.mapHref}>Route öffnen</a>
+    </div>
+  </div>
+</section>

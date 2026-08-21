@@ -1,0 +1,34 @@
+---
+interface Signal {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  signals: Signal[];
+}
+
+const { signals } = Astro.props;
+---
+
+<section class="trust-band panel">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Warum Elite</div>
+      <h2>Viele Styles. Ein Studio, das dich beim Einstieg nicht allein lässt.</h2>
+    </div>
+    <p>
+      Elite verbindet die Vielfalt eines großen Kursplans mit der Orientierung eines persönlichen
+      Studios: erst sicher starten, dann ausprobieren, Fortschritt spüren und Menschen finden.
+    </p>
+  </div>
+
+  <div class="trust-strip">
+    {signals.map((signal) => (
+      <div class="stat">
+        <strong>{signal.title}</strong>
+        <span>{signal.text}</span>
+      </div>
+    ))}
+  </div>
+</section>

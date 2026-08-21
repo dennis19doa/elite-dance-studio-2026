@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "eyebrow": "Dein erster Schritt bei Elite",
+    "title": "Zwei Klassen. Kein Druck. Einfach anfangen.",
+    "description": "Der Welcome Pass ist für komplette Beginner, die Elite in Ruhe kennenlernen und zwei passende Klassen ausprobieren möchten, bevor sie sich entscheiden.",
+    "price": "20€",
+    "priceNote": "für 2 Klassen",
+    "duration": "14 Tage gültig · nur für neue Besucher:innen",
+    "primaryCtaLabel": "Welcome Pass anfragen",
+    "primaryCtaHref": "#welcome-form",
+    "secondaryCtaLabel": "Passende Kurse ansehen",
+    "secondaryCtaHref": "#pass-kurse",
+    "videoSrc": "/media/hero/elite-homepage-video.mp4",
+    "videoPoster": "/media/hero/elite-homepage-poster.jpg",
+    "videoLabel": "Echte Momente aus dem Studio",
+    "videoTitle": "Du musst noch nicht tanzen können.",
+    "videoText": "Komm so, wie du bist. Wir helfen dir beim Einstieg und du findest heraus, welcher Style zu dir passt."
+  },
+  "benefits": [
+    {
+      "number": "01",
+      "title": "Für echte Beginner",
+      "text": "Du brauchst weder Erfahrung noch besonderes Talent. Der Pass ist genau dafür da, deinen ersten Schritt leichter zu machen."
+    },
+    {
+      "number": "02",
+      "title": "Zwei Klassen testen",
+      "text": "Probiere zwei passende Klassen aus oder vergleiche zwei Styles, bevor du dich auf eine Richtung festlegst."
+    },
+    {
+      "number": "03",
+      "title": "Ohne langfristige Bindung",
+      "text": "Lerne das Studio, die Coaches und die Atmosphäre kennen. Danach entscheidest du in Ruhe, ob und wie du weitermachst."
+    }
+  ],
+  "steps": [
+    {
+      "number": "1",
+      "title": "Pass reservieren",
+      "text": "Fülle das kurze Formular aus, damit wir dir zwei passende Beginner-Klassen empfehlen können."
+    },
+    {
+      "number": "2",
+      "title": "Klassen auswählen",
+      "text": "Wähle zwei Welcome-Pass-Klassen aus. Wenn du unsicher bist, empfehlen wir dir einen passenden Einstieg."
+    },
+    {
+      "number": "3",
+      "title": "Elite erleben",
+      "text": "Komm 10 bis 15 Minuten früher, tanze ohne Druck mit und entscheide erst danach, was sich richtig anfühlt."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Ist der Welcome Pass auch für absolute Anfänger:innen?",
+      "answer": "Ja. Der Pass richtet sich besonders an Menschen ohne Tanzerfahrung. Wir helfen dir dabei, eine Klasse zu wählen, in der du dich gut aufgehoben fühlst."
+    },
+    {
+      "question": "Brauche ich einen Tanzpartner?",
+      "answer": "Nein. Für unsere Solo-Style-Klassen brauchst du keinen Partner. Wenn du Partner Dance ausprobieren möchtest, erklären wir dir vorher, wie der Einstieg funktioniert."
+    },
+    {
+      "question": "Muss ich beide Klassen im gleichen Style nehmen?",
+      "answer": "Nein. Du kannst zwei passende Styles vergleichen oder denselben Style zweimal besuchen, solange die gewählten Klassen für den Welcome Pass geeignet sind."
+    },
+    {
+      "question": "Wie lange ist der Pass gültig?",
+      "answer": "Der Welcome Pass ist ab deinem ersten Besuch 14 Tage gültig und kann von neuen Besucher:innen einmal genutzt werden."
+    },
+    {
+      "question": "Was passiert nach den zwei Klassen?",
+      "answer": "Du entscheidest selbst. Du kannst mit einem Drop-in, einer 10er Karte oder einer Membership weitermachen. Wenn du noch unsicher bist, beraten wir dich persönlich."
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+---
+import InstagramIcon from "./InstagramIcon.astro";
+
+interface CoachItem {
+  slug: string;
+  name: string;
+  focus: string;
+  text: string;
+  schedule?: string;
+  image?: string;
+  imageAlt?: string;
+  imageNote?: string;
+  beginnerSupport?: string;
+  instagramHandle?: string;
+  instagramUrl?: string;
+}
+
+interface Props {
+  coaches: CoachItem[];
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+}
+
+const {
+  coaches,
+  eyebrow = "Coaches",
+  title = "Menschen machen aus Kursen ein Studio.",
+  description = "Viele melden sich wegen eines Styles an und bleiben wegen Energie, Methodik und Atmosphäre."
+} = Astro.props;
+---
+
+<section class="coach-grid panel" id="coaches">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">{eyebrow}</div>
+      <h2>{title}</h2>
+    </div>
+    <p>{description}</p>
+  </div>
+  <div class="coach-cards">
+    {coaches.map((coach, index) => (
+      <article class:list={["coach", coach.image ? "coach-has-photo" : "coach-text-card", `coach-tone-${(index % 3) + 1}`]}>
+        <a class="coach-photo" href={`/coaches/${coach.slug}/`} aria-label={`${coach.name} kennenlernen`}>
+          {coach.image ? (
+            <img src={coach.image} alt={coach.imageAlt ?? "Konzeptfoto für die Coach-Bildsprache"} loading="lazy" />
+          ) : (
+            <div class="coach-photo-type" aria-hidden="true">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{coach.focus}</strong>
+            </div>
+          )}
+          <span class="coach-image-note">{coach.image ? (coach.imageNote ?? "Elite Coach") : "Originalfoto folgt"}</span>
+        </a>
+        <div class="coach-copy">
+          <span class="coach-focus">{coach.focus}</span>
+          <h3><a href={`/coaches/${coach.slug}/`}>{coach.name}</a></h3>
+          {coach.schedule && <span class="coach-schedule">{coach.schedule}</span>}
+          <p>{coach.text}</p>
+          {coach.beginnerSupport && <span class="coach-support">{coach.beginnerSupport}</span>}
+          <div class="coach-card-actions">
+            <a class="coach-profile-link" href={`/coaches/${coach.slug}/`}>Profil ansehen <span aria-hidden="true">→</span></a>
+            {coach.instagramUrl ? (
+              <a
+                class="coach-instagram-link"
+                href={coach.instagramUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${coach.name} auf Instagram öffnen`}
+                title={coach.instagramHandle}
+              >
+                <InstagramIcon />
+              </a>
+            ) : (
+              <span class="coach-instagram-link is-disabled" aria-label={`Instagram von ${coach.name} folgt`} title="Instagram folgt">
+                <InstagramIcon />
+              </span>
+            )}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,34 @@
+---
+interface QuestionItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: QuestionItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="quick-answers panel">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Schnelle Antworten</div>
+      <h2>Die Fragen, die neue Tänzer:innen meistens sofort haben.</h2>
+    </div>
+    <p>
+      Diese Antworten sollen schon auf der Homepage Unsicherheit abbauen, bevor jemand überhaupt
+      länger suchen muss.
+    </p>
+  </div>
+
+  <div class="answer-grid">
+    {items.map((item) => (
+      <article class="answer-card">
+        <strong>{item.question}</strong>
+        <span>{item.answer}</span>
+      </article>
+    ))}
+  </div>
+</section>

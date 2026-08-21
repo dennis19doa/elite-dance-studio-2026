@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import site from "../data/site.json";
+---
+
+<BaseLayout
+  title="Seite nicht gefunden | Elite Dance Studio"
+  description="Diese Seite ist nicht mehr verfügbar. Finde Beginner-Kurse, Stundenplan und Welcome Pass bei Elite Dance Studio."
+  noindex={true}
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+  <main class="page-shell page-main">
+    <section class="page-intro panel">
+      <div class="page-intro-copy">
+        <div class="eyebrow">404 · Falscher Schritt</div>
+        <h1 class="page-title">Diese Seite tanzt gerade woanders.</h1>
+        <p class="lead">Zurück zum Einstieg: Finde eine beginner-friendly Klasse oder starte mit dem Welcome Pass.</p>
+        <div class="actions">
+          <a class="button primary" href="/stundenplan/">Klasse finden</a>
+          <a class="button secondary" href="/starter-pass/">Welcome Pass · 20€</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

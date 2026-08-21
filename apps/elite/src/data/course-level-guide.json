@@ -1,0 +1,23 @@
+[
+  {
+    "badge": "Beginner",
+    "title": "Für deinen allerersten Kurs",
+    "text": "Wenn du noch nie getanzt hast oder einen klaren, langsamen Einstieg willst, starte hier. Das ist für Elite im Moment die wichtigste Einstiegsebene.",
+    "href": "/starter-pass/",
+    "ctaLabel": "Welcome Pass nutzen"
+  },
+  {
+    "badge": "Open Level",
+    "title": "Wenn du testen willst, ohne dich festzulegen",
+    "text": "Open Level ist sinnvoll, wenn der Kurs lesbar bleibt und du mit Energie, Rhythmus oder Ausdruck einsteigen willst, ohne ein reines Anfängerformat zu brauchen.",
+    "href": "/kurse/#kurskompass",
+    "ctaLabel": "Open-Level Kurse sehen"
+  },
+  {
+    "badge": "Unsicher?",
+    "title": "Dann frag kurz nach",
+    "text": "Wenn du zwischen Solo, Partner Dance, Welcome Pass oder erstem Kurs schwankst, helfen wir dir lieber direkt als dich raten zu lassen.",
+    "href": "/kontakt/",
+    "ctaLabel": "Persönlich fragen"
+  }
+]

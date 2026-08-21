@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Ich bin kompletter Beginner",
+    "text": "Die meisten laufenden Klassen bei Elite sind aktuell beginner-friendly. Du musst nicht vorbereitet sein, sondern nur bereit, anzufangen.",
+    "href": "/kurse/",
+    "ctaLabel": "Beginner Kurse ansehen"
+  },
+  {
+    "title": "Ich habe keinen festen Partner",
+    "text": "Viele Formate funktionieren solo oder mit wechselnden Partner:innen. Der Einstieg soll nicht daran scheitern, dass du niemanden mitbringst.",
+    "href": "/kontakt/",
+    "ctaLabel": "Kurz nachfragen"
+  },
+  {
+    "title": "Ich will erst zwei Dinge testen",
+    "text": "Mit dem Welcome Pass kannst du zwei Klassen vergleichen, Fragen klären und erst danach entscheiden, was sich wirklich gut anfühlt.",
+    "href": "/starter-pass/",
+    "ctaLabel": "Welcome Pass öffnen"
+  }
+]

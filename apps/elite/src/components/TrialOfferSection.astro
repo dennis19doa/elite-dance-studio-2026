@@ -1,0 +1,44 @@
+---
+interface TrialOffer {
+  eyebrow: string;
+  title: string;
+  description: string;
+  label: string;
+  price: string;
+  duration: string;
+  facts: string[];
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+}
+
+interface Props {
+  offer: TrialOffer;
+}
+
+const { offer } = Astro.props;
+---
+
+<section class="trial-offer panel" id="trial">
+  <div class="trial-copy">
+    <div class="eyebrow">{offer.eyebrow}</div>
+    <h2>{offer.title}</h2>
+    <p class="lead">{offer.description}</p>
+    <div class="actions">
+      <a class="button primary" href={offer.primaryCtaHref}>{offer.primaryCtaLabel}</a>
+      <a class="button secondary" href={offer.secondaryCtaHref}>{offer.secondaryCtaLabel}</a>
+    </div>
+  </div>
+
+  <div class="trial-box">
+    <span class="trial-label">{offer.label}</span>
+    <div class="trial-price">{offer.price}</div>
+    <div class="trial-duration">{offer.duration}</div>
+    <div class="trial-facts">
+      {offer.facts.map((fact) => (
+        <div class="trial-fact">{fact}</div>
+      ))}
+    </div>
+  </div>
+</section>

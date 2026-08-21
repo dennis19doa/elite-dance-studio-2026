@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import EversportsSchedule from "../components/EversportsSchedule.astro";
+
+import site from "../data/site.json";
+---
+
+<BaseLayout
+  title="Stundenplan & Buchung | Elite Dance Studio Berlin"
+  description="Aktuelle Tanzkurse im Elite Dance Studio Berlin ansehen und deinen Platz direkt über Eversports reservieren."
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main">
+    <section class="booking-intro panel">
+      <div>
+        <div class="eyebrow">Diese Woche bei Elite</div>
+        <h1 class="page-title">Stundenplan ansehen. Platz reservieren. Tanzen.</h1>
+      </div>
+      <div class="booking-intro-copy">
+        <p class="lead">Viele Klassen sind beginner-friendly, ohne festen Tanzpartner möglich und mit USC buchbar.</p>
+        <a class="button secondary" href="/starter-pass/">Lieber mit Welcome Pass starten</a>
+      </div>
+    </section>
+
+    <section class="booking-steps panel" aria-label="So funktioniert die Buchung">
+      <div><span>01</span><strong>Style & Level wählen</strong><p>Such dir eine Klasse aus, die zu deinem Einstieg passt.</p></div>
+      <div><span>02</span><strong>Spot reservieren</strong><p>Buche online, damit dein Platz im Kurs gesichert ist.</p></div>
+      <div><span>03</span><strong>Etwas früher kommen</strong><p>Plane beim ersten Besuch zehn bis fünfzehn Minuten ein.</p></div>
+      <div><span>04</span><strong>Einchecken & tanzen</strong><p>USC ist bei passenden Kursen über den Check-in möglich.</p></div>
+    </section>
+
+    <EversportsSchedule
+      title="Direkt über Eversports buchen."
+      description="Der Live-Kalender zeigt die aktuellen Classes und verfügbaren Plätze. Nutze die Level-Hilfe, wenn du zum ersten Mal bei uns bist."
+    />
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

@@ -13,32 +13,38 @@ interface TrialOffer {
   secondaryCtaHref: string;
 }
 
-interface Props {
-  offer: TrialOffer;
-}
-
+interface Props { offer: TrialOffer; }
 const { offer } = Astro.props;
 ---
 
-<section class="trial-offer panel" id="trial">
-  <div class="trial-copy">
-    <div class="eyebrow">{offer.eyebrow}</div>
-    <h2>{offer.title}</h2>
-    <p class="lead">{offer.description}</p>
-    <div class="actions">
-      <a class="button primary" href={offer.primaryCtaHref}>{offer.primaryCtaLabel}</a>
-      <a class="button secondary" href={offer.secondaryCtaHref}>{offer.secondaryCtaLabel}</a>
+<section class="trial-offer trial-offer-visual panel" id="trial">
+  <div class="trial-media">
+    <img
+      src="/media/hero/elite-homepage-poster.jpg"
+      alt="Tanzkurs im Elite Dance Studio Berlin"
+      width="1920"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+    />
+    <span class="trial-media-shade"></span>
+    <div class="trial-media-offer">
+      <span>{offer.label}</span>
+      <strong>{offer.price}</strong>
+      <small>{offer.duration}</small>
     </div>
   </div>
 
-  <div class="trial-box">
-    <span class="trial-label">{offer.label}</span>
-    <div class="trial-price">{offer.price}</div>
-    <div class="trial-duration">{offer.duration}</div>
-    <div class="trial-facts">
-      {offer.facts.map((fact) => (
-        <div class="trial-fact">{fact}</div>
-      ))}
+  <div class="trial-copy">
+    <div class="eyebrow">{offer.eyebrow}</div>
+    <h2>Erst testen. Dann entscheiden.</h2>
+    <p class="lead">{offer.description}</p>
+    <div class="trial-facts trial-facts-inline">
+      {offer.facts.slice(0, 3).map((fact) => <span class="trial-fact">✓ {fact}</span>)}
+    </div>
+    <div class="actions">
+      <a class="button primary" href={offer.primaryCtaHref}>{offer.primaryCtaLabel}</a>
+      <a class="button secondary" href={offer.secondaryCtaHref}>{offer.secondaryCtaLabel}</a>
     </div>
   </div>
 </section>

@@ -17,85 +17,43 @@ import site from "../data/site.json";
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main">
-    <section class="pricing-page-hero panel">
+    <section class="pricing-page-hero pricing-page-hero-v3 panel">
       <div class="pricing-page-copy">
-        <div class="eyebrow">Dein Tanzplan</div>
-        <h1 class="page-title">Erst testen. Dann deinen Rhythmus finden.</h1>
-        <p class="lead">
-          Du musst dich nicht sofort festlegen. Starte mit zwei Klassen, bleib flexibel oder
-          baue eine feste Tanzroutine auf.
-        </p>
+        <div class="eyebrow">Preise & Memberships</div>
+        <h1 class="page-title">Finde deinen Rhythmus.</h1>
+        <p class="lead">Erst testen, flexibel bleiben oder regelmäßig trainieren.</p>
         <div class="actions">
-          <a class="button primary" href="#pricing-paths">Option wählen</a>
-          <a class="button secondary" href="/kontakt/">Kurz beraten lassen</a>
-        </div>
-        <div class="hero-signals">
-          <div class="hero-signal"><span>01</span><strong>Keine Anmeldegebühr</strong></div>
-          <div class="hero-signal"><span>02</span><strong>Kein fester Tanzpartner nötig</strong></div>
-          <div class="hero-signal"><span>03</span><strong>USC bei regulären Kursen möglich</strong></div>
+          <a class="button primary" href="#pricing">Preise ansehen</a>
+          <a class="button secondary" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20welches%20Angebot%20passt%20zu%20mir%3F">Kurz fragen</a>
         </div>
       </div>
       <figure class="pricing-page-media">
-        <img
-          src="/media/placeholders/community-beginners.jpg"
-          alt="Konzeptbild einer offenen Beginner-Tanzklasse in einem hellen Studio"
-        />
-        <figcaption>Bildidee · wird später durch echte Elite-Community-Fotografie ersetzt</figcaption>
+        <img src="/media/hero/elite-homepage-poster.jpg" alt="Kursszene im Elite Dance Studio Berlin" width="1920" height="1080" />
       </figure>
-    </section>
-
-    <section class="panel pricing-paths" id="pricing-paths">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">Was passt heute zu dir?</div>
-          <h2>Drei gute Einstiege. Kein falscher.</h2>
-        </div>
-        <p>Die Entscheidung beginnt nicht mit einer Preistabelle, sondern mit deinem Ziel.</p>
-      </div>
-      <div class="pricing-path-grid">
-        <a class="pricing-path-card path-coral" href="/starter-pass/">
-          <span class="path-number">01</span>
-          <div><strong>Ich will Elite erst erleben.</strong><p>Zwei Klassen mit dem Welcome Pass.</p></div>
-          <span class="path-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="pricing-path-card path-blue" href="#pricing">
-          <span class="path-number">02</span>
-          <div><strong>Ich will flexibel tanzen.</strong><p>Drop-in, 5er Karte, 10er Karte oder USC.</p></div>
-          <span class="path-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="pricing-path-card path-gold" href="#pricing">
-          <span class="path-number">03</span>
-          <div><strong>Ich will eine echte Routine.</strong><p>Bronze, Silber oder Gold Membership.</p></div>
-          <span class="path-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
     </section>
 
     <PricingSection
       pricing={pricing}
       eyebrow="Preise im Überblick"
-      title="So viel Flexibilität, wie du gerade brauchst."
-      description="Alle aktuellen Optionen, von deinem ersten Besuch bis zur festen Wochenroutine."
+      title="Start. Flexibel. Membership."
+      description=""
     />
 
     <FaqSection
-      items={pricingFaqs}
+      items={pricingFaqs.slice(0, 4)}
       eyebrow="Preise FAQ"
-      title="Was vor der Buchung noch wichtig ist."
-      description="Welcome Pass, USC, Memberships, Intensives und die Platzreservierung kurz und verständlich erklärt."
+      title="Kurz erklärt."
+      description=""
       linkHref="/faq/"
-      linkLabel="Zum vollständigen FAQ"
+      linkLabel="Alle Fragen ansehen"
     />
 
-    <section class="pricing-assurance panel">
+    <section class="pricing-assurance panel pricing-assurance-v3">
       <div>
         <div class="eyebrow">Noch unsicher?</div>
-        <h2>Wir empfehlen lieber ehrlich, statt dir zu viel zu verkaufen.</h2>
+        <h2>Wir helfen dir bei der Auswahl.</h2>
       </div>
-      <div>
-        <p>Schreib uns, welche Styles dich interessieren und ob du schon einmal getanzt hast. Wir nennen dir den einfachsten Start.</p>
-        <a class="button primary" href="https://wa.me/491633863548">Auf WhatsApp fragen</a>
-      </div>
+      <a class="button primary" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20bin%20bei%20den%20Preisen%20noch%20unsicher.">WhatsApp schreiben</a>
     </section>
   </main>
 

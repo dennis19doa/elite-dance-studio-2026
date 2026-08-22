@@ -1,22 +1,52 @@
 <script>
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const header = document.querySelector<HTMLElement>(".site-header");
+
+  const updateHeader = () => {
+    if (!header) return;
+    header.classList.toggle("is-scrolled", window.scrollY > 12);
+  };
+
+  updateHeader();
+  window.addEventListener("scroll", updateHeader, { passive: true });
 
   if (!reducedMotion && "IntersectionObserver" in window) {
     const sections = Array.from(
       document.querySelectorAll<HTMLElement>("main > section, main > div > section")
     );
+
     const itemSelector = [
       ".visitor-path-card",
       ".class-structure-step",
       ".trust-signal",
+      ".home-style-card",
       ".style-poster-card",
+      ".studio-world-card",
       ".coach-card",
       ".faq-item",
       ".schedule-level",
       ".booking-steps > div",
       ".price-card",
+      ".level-step",
+      ".training-format-card",
+      ".intensive-roadmap-step",
+      ".rental-room-card",
+      ".advanced-card",
       ".step",
-      ".answer-card"
+      ".answer-card",
+      ".trial-fact"
+    ].join(",");
+
+    const imageSelector = [
+      ".hero-video",
+      ".visitor-path-guided img",
+      ".home-style-card img",
+      ".trial-media img",
+      ".studio-world-card img",
+      ".service-page-media img",
+      ".pricing-page-media img",
+      ".rental-room-card img",
+      ".advanced-card img"
     ].join(",");
 
     document.documentElement.classList.add("motion-ready");
@@ -27,9 +57,14 @@
         : ["rise", "editorial", "soft"][index % 3];
 
       section.dataset.reveal = mode;
+
       section.querySelectorAll<HTMLElement>(itemSelector).forEach((item, itemIndex) => {
         item.dataset.revealItem = "";
-        item.style.setProperty("--reveal-index", String(Math.min(itemIndex, 7)));
+        item.style.setProperty("--reveal-index", String(Math.min(itemIndex, 8)));
+      });
+
+      section.querySelectorAll<HTMLElement>(imageSelector).forEach((media) => {
+        media.dataset.motionImage = "";
       });
     });
 
@@ -41,7 +76,7 @@
           observer.unobserve(entry.target);
         });
       },
-      { rootMargin: "0px 0px -7%", threshold: 0.08 }
+      { rootMargin: "0px 0px -6%", threshold: 0.08 }
     );
 
     sections.forEach((section) => observer.observe(section));

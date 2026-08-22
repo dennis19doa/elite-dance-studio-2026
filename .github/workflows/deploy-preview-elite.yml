@@ -1,0 +1,103 @@
+name: Deploy Elite Preview
+
+on:
+  workflow_run:
+    workflows: ["Preview Elite Dance Studio"]
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy-preview:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/preview/
+
+    steps:
+      - name: Checkout live main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install live dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build live site
+        run: pnpm --filter @dance/elite build
+        env:
+          GITHUB_PAGES_BASE: ${{ github.event.repository.name }}
+          PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+
+      - name: Download pull request preview
+        uses: actions/download-artifact@v4
+        with:
+          name: elite-pr-preview
+          path: preview-dist
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Assemble live site and preview
+        shell: bash
+        run: |
+          PR_NUMBER="$(cat preview-dist/preview-pr-number.txt)"
+          rm preview-dist/preview-pr-number.txt
+          mkdir -p "site/preview/pr-${PR_NUMBER}"
+          cp -a apps/elite/dist/. site/
+          cp -a preview-dist/. "site/preview/pr-${PR_NUMBER}/"
+
+          python - "$PR_NUMBER" <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          pr = sys.argv[1]
+          repo = "${{ github.event.repository.name }}"
+          preview = Path(f"site/preview/pr-{pr}")
+          base = f"/{repo}/preview/pr-{pr}/"
+          already = f"/{repo}/"
+
+          for path in preview.rglob("*"):
+              if path.suffix.lower() not in {".html", ".css", ".js", ".json", ".xml", ".txt"}:
+                  continue
+              try:
+                  text = path.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  continue
+
+              # Public assets and internal absolute links need the preview prefix.
+              for attr in ("href", "src", "poster", "action"):
+                  pattern = rf'{attr}="/(?!{re.escape(repo)}/)([^"#]+)"'
+                  text = re.sub(pattern, lambda m: f'{attr}="{base}{m.group(1)}"', text)
+
+              text = text.replace("/media/", f"{base}media/")
+              path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy preview alongside live site
+        id: deployment
+        uses: actions/deploy-pages@v4

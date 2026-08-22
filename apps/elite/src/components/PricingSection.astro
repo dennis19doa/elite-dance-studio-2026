@@ -7,7 +7,10 @@ const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-
 const isExternal = (href?: string) => Boolean(href?.startsWith("http"));
 ---
 <section class="pricing panel pricing-v2" id="pricing">
-  <div class="section-head compact-section-head"><div><div class="eyebrow">{eyebrow}</div><h2>{title}</h2></div><p>{description}</p></div>
+  <div class="section-head compact-section-head">
+    <div><div class="eyebrow">{eyebrow}</div><h2>{title}</h2></div>
+    {description && <p>{description}</p>}
+  </div>
   <div class="pricing-groups">
     {categories.map((category, categoryIndex) => (
       <section class="pricing-group" data-category={slugify(category)}>

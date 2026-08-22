@@ -2,13 +2,8 @@
 interface HeroData {
   eyebrow: string;
   title: string;
-  description: string;
-  primaryCtaLabel: string;
   primaryCtaHref: string;
-  secondaryCtaLabel: string;
   secondaryCtaHref: string;
-  beginnerNoteTitle: string;
-  beginnerNoteText: string;
   videoSrc: string;
   videoMobileSrc?: string;
   videoPoster: string;
@@ -51,21 +46,17 @@ const { hero } = Astro.props;
     <div class="hero-copy-main">
       <div class="eyebrow">{hero.eyebrow}</div>
       <h1>{hero.title}</h1>
-      <p class="lead">{hero.description}</p>
+      <p class="lead">Tanzkurse für Beginner in Berlin-Moabit – 25+ Styles, persönliche Coaches und klare Levels.</p>
       <div class="actions">
-        <a class="button primary" href={hero.primaryCtaHref}>{hero.primaryCtaLabel}</a>
-        <a class="button secondary" href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</a>
+        <a class="button primary" href={hero.primaryCtaHref}>Stundenplan ansehen</a>
+        <a class="button secondary" href={hero.secondaryCtaHref}>Neu hier?</a>
       </div>
     </div>
 
     <aside class="hero-copy-support">
-      <span class="hero-note-kicker">Neu im Tanzen?</span>
-      <div class="hero-note">
-        <strong>{hero.beginnerNoteTitle}</strong>
-        <span>{hero.beginnerNoteText}</span>
-      </div>
+      <span class="hero-note-kicker">Neu hier?</span>
       <a class="hero-guided-link" href="/kurse/#kurskompass">
-        Geführten Einstieg ansehen <span aria-hidden="true">↘</span>
+        Passenden Kurs finden <span aria-hidden="true">↘</span>
       </a>
     </aside>
   </div>

@@ -8,7 +8,6 @@ import SiteFooter from "../components/SiteFooter.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import StudioExperienceSection from "../components/StudioExperienceSection.astro";
 import BeginnerEntrancesSection from "../components/BeginnerEntrancesSection.astro";
-import AboutTeaserSection from "../components/AboutTeaserSection.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
 
 import faqs from "../data/faqs.json";
@@ -31,17 +30,16 @@ import trustSignals from "../data/trust-signals.json";
     <EversportsSchedule
       home
       eyebrow="Deine Woche bei Elite"
-      title="Dein nächster Kurs ist kein Geheimnis."
-      description="Der komplette aktuelle Stundenplan gehört zu deinem ersten Eindruck. Finde Level 0 oder Beginner, prüfe Coach und Uhrzeit und buche direkt."
+      title="Finde deinen nächsten Kurs."
+      description="Filtere nach Tag, Style oder Level und buche direkt."
     />
     <TrialOfferSection offer={trialOffer} />
     <StudioExperienceSection />
-    <AboutTeaserSection />
     <FaqSection
-      items={faqs}
+      items={faqs.slice(0, 4)}
       eyebrow="Gut zu wissen"
-      title="Antworten, bevor dein erster Kurs beginnt."
-      description="Die wichtigsten Fragen zu Level, Partner, Buchung und deinem ersten Besuch direkt auf der Homepage."
+      title="Noch Fragen vor deinem ersten Kurs?"
+      description=""
       linkHref="/faq/"
       linkLabel="Alle Fragen ansehen"
     />
@@ -49,18 +47,11 @@ import trustSignals from "../data/trust-signals.json";
     <section class="cta-banner panel">
       <div>
         <div class="eyebrow">Persönliche Hilfe</div>
-        <h2>Nicht sicher, welcher Kurs für dich der beste Start ist?</h2>
-        <p>
-          Wenn du zwischen Styles, Leveln oder Angeboten schwankst, helfen wir dir lieber kurz
-          persönlich, statt dich allein durch das Studio suchen zu lassen.
-        </p>
-        <span class="prototype-note">
-          Beginner-friendly, offen und auf deinen ersten sinnvollen Schritt fokussiert.
-        </span>
+        <h2>Nicht sicher, welcher Kurs zu dir passt?</h2>
+        <p>Wir helfen dir.</p>
       </div>
       <div class="actions">
-        <a class="button primary" href="/kontakt/">Kontakt aufnehmen</a>
-        <a class="button secondary" href="/kurse/">Kurse ansehen</a>
+        <a class="button primary" href={site.visit.whatsappHref}>WhatsApp schreiben</a>
       </div>
     </section>
   </main>

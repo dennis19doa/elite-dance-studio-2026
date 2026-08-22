@@ -1,0 +1,98 @@
+name: Preview Elite Dance Studio
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/preview/pr-${{ github.event.number }}/
+
+    steps:
+      - name: Checkout live main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: live-source
+
+      - name: Checkout pull request
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: preview-source
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build current live site
+        working-directory: live-source
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm --filter @dance/elite build
+        env:
+          GITHUB_PAGES_BASE: ${{ github.event.repository.name }}
+          PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+
+      - name: Build pull request preview
+        working-directory: preview-source
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm --filter @dance/elite build
+        env:
+          GITHUB_PAGES_BASE: ${{ github.event.repository.name }}/preview/pr-${{ github.event.number }}
+          PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+
+      - name: Assemble live site and preview
+        shell: bash
+        run: |
+          mkdir -p site/preview/pr-${{ github.event.number }}
+          cp -a live-source/apps/elite/dist/. site/
+          cp -a preview-source/apps/elite/dist/. site/preview/pr-${{ github.event.number }}/
+
+          # Public media paths in the source are root-absolute. Point preview pages
+          # back to the live copy of those assets so videos/images render correctly.
+          python - <<'PY'
+          from pathlib import Path
+          preview = Path("site/preview/pr-${{ github.event.number }}")
+          old = "/media/"
+          new = "/${{ github.event.repository.name }}/media/"
+          for path in preview.rglob("*"):
+              if path.suffix.lower() not in {".html", ".css", ".js", ".json", ".xml", ".txt"}:
+                  continue
+              try:
+                  text = path.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  continue
+              if old in text:
+                  path.write_text(text.replace(old, new), encoding="utf-8")
+          PY
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy preview alongside live site
+        id: deployment
+        uses: actions/deploy-pages@v4

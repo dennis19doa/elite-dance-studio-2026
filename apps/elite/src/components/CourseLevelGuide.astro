@@ -6,13 +6,31 @@ const levels = items.filter((item) => item.kind === "level");
 const formats = items.filter((item) => item.kind === "format");
 ---
 <section class="course-guide level-guide-v2 panel" id="levels">
-  <div class="section-head compact-section-head"><div><div class="eyebrow">Dein Level</div><h2>Von Level 0 bis Advanced.</h2></div><p>Wähle nach Erfahrung – nicht danach, wie mutig du dich heute fühlst.</p></div>
+  <div class="section-head compact-section-head">
+    <div><div class="eyebrow">Dein Level</div><h2>Level 0 → Advanced.</h2></div>
+  </div>
+
   <div class="level-roadmap" aria-label="Level im Elite Dance Studio">
     {levels.map((item, index) => (
-      <a class="level-step" href={item.href}><span class="level-step-index">{String(index + 1).padStart(2, "0")}</span><span class="level-step-badge">{item.badge}</span><strong>{item.title}</strong><span>{item.text}</span><b>{item.ctaLabel} →</b></a>
+      <a class="level-step" href={item.href}>
+        <span class="level-step-index">{String(index + 1).padStart(2, "0")}</span>
+        <span class="level-step-badge">{item.badge}</span>
+        <strong>{item.title}</strong>
+        <span>{item.text}</span>
+        <b>{item.ctaLabel} →</b>
+      </a>
     ))}
   </div>
-  <div class="training-formats"><div class="training-formats-label"><span>Trainingsformate</span><strong>Mehr Fokus als eine einzelne Class.</strong></div>{formats.map((item) => (
-    <a class="training-format-card" href={item.href}><span>{item.badge}</span><strong>{item.title}</strong><small>{item.text}</small><b>{item.ctaLabel} →</b></a>
-  ))}</div>
+
+  <div class="training-formats">
+    <div class="training-formats-label"><span>Trainingsformate</span><strong>Mehr Fokus.</strong></div>
+    {formats.map((item) => (
+      <a class="training-format-card" href={item.href}>
+        <span>{item.badge}</span>
+        <strong>{item.title}</strong>
+        <small>{item.text}</small>
+        <b>{item.ctaLabel} →</b>
+      </a>
+    ))}
+  </div>
 </section>

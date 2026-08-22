@@ -4,165 +4,86 @@
   "nav": [
     { "label": "Stundenplan", "href": "/stundenplan/" },
     { "label": "Kurse", "href": "/kurse/" },
-    { "label": "Styles", "href": "/styles/" },
+    { "label": "Intensives", "href": "/intensives/" },
     { "label": "Preise", "href": "/preise/" },
-    { "label": "Coaches", "href": "/coaches/" },
+    { "label": "Raummiete", "href": "/raummiete/" },
+    { "label": "Über uns", "href": "/ueber-uns/" },
     {
       "label": "Mehr",
-      "href": "/ueber-uns/",
+      "href": "/styles/",
       "children": [
-        { "label": "Über uns", "href": "/ueber-uns/", "description": "Werte, Studio und Community kennenlernen" },
-        { "label": "Intensives", "href": "/intensives/", "description": "Fokussierte Trainingsblöcke in kleinen Gruppen" },
-        { "label": "Fortgeschrittene", "href": "/fortgeschrittene/", "description": "Mehr Technik, Challenge und Präzision" },
+        { "label": "Styles", "href": "/styles/", "description": "Alle Tanzrichtungen im Überblick" },
+        { "label": "Coaches", "href": "/coaches/", "description": "Unser Team und Teaching-Styles" },
+        { "label": "Fortgeschrittene", "href": "/fortgeschrittene/", "description": "Intermediate, Advanced und Closed Groups" },
         { "label": "Events", "href": "/events/", "description": "Socials, Workshops und besondere Termine" },
-        { "label": "FAQ", "href": "/faq/", "description": "Antworten für Buchung und ersten Besuch" },
-        { "label": "Raummiete", "href": "/raummiete/", "description": "Studioräume für Training und Produktion" },
-        { "label": "Kontakt", "href": "/kontakt/", "description": "Anfahrt, Nachricht und persönliche Hilfe" }
+        { "label": "FAQ", "href": "/faq/", "description": "Antworten rund um Buchung und Besuch" },
+        { "label": "Kontakt", "href": "/kontakt/", "description": "WhatsApp, E-Mail, Anfahrt und Formular" }
       ]
     }
   ],
   "pathways": [
-    {
-      "title": "Welcome Pass",
-      "href": "/starter-pass/",
-      "text": "Eigene Seite für dein erstes Angebot, damit der Einstieg klar und hochwertig wirkt."
-    },
-    {
-      "title": "Kurse",
-      "href": "/kurse/",
-      "text": "Hier sitzt später Stundenplan, Filterlogik, Level und der erste sinnvolle Klick."
-    },
-    {
-      "title": "Styles",
-      "href": "/styles/",
-      "text": "Diese Seite gruppiert die Vielfalt des Studios in verständliche Bereiche."
-    },
-    {
-      "title": "Preise",
-      "href": "/preise/",
-      "text": "Preisstruktur nach Besuchertyp statt als unübersichtliche Liste von Optionen."
-    },
-    {
-      "title": "Coaches",
-      "href": "/coaches/",
-      "text": "Ein eigener Bereich für Menschen, Energie, Fotos und Teaching-Persönlichkeit."
-    },
-    {
-      "title": "Intensives",
-      "href": "/intensives/",
-      "text": "Fokussierte Trainingsblöcke für schnelleren technischen Fortschritt."
-    },
-    {
-      "title": "Fortgeschrittene",
-      "href": "/fortgeschrittene/",
-      "text": "Ein klarer Weg für Tänzer:innen, die mehr Herausforderung suchen."
-    },
-    {
-      "title": "Über uns",
-      "href": "/ueber-uns/",
-      "text": "Identität, Werte und Community hinter Elite Dance Studio."
-    },
-    {
-      "title": "Kontakt",
-      "href": "/kontakt/",
-      "text": "Anfahrt, FAQ, WhatsApp und alles, was den ersten Besuch sicherer macht."
-    },
-    {
-      "title": "Blocks Review",
-      "href": "/blocks/",
-      "text": "Interne Review-Seite, auf der wir jeden Bereich einzeln prüfen und anpassen können."
-    }
+    { "title": "Welcome Pass", "href": "/starter-pass/", "text": "Zwei Klassen testen und Elite kennenlernen." },
+    { "title": "Kurse", "href": "/kurse/", "text": "Levels, Styles und Live-Stundenplan." },
+    { "title": "Styles", "href": "/styles/", "text": "Alle Tanzrichtungen im Überblick." },
+    { "title": "Preise", "href": "/preise/", "text": "Drop-ins, Karten, USC und Memberships." },
+    { "title": "Coaches", "href": "/coaches/", "text": "Menschen, Energie und Teaching-Persönlichkeit." },
+    { "title": "Intensives", "href": "/intensives/", "text": "Strukturierte Trainingswege für gezielten Fortschritt." },
+    { "title": "Fortgeschrittene", "href": "/fortgeschrittene/", "text": "Intermediate, Advanced und Closed Groups." },
+    { "title": "Über uns", "href": "/ueber-uns/", "text": "Studio, Werte und Community." },
+    { "title": "Raummiete", "href": "/raummiete/", "text": "Drei Räume für Training, Workshops und Produktionen." },
+    { "title": "Kontakt", "href": "/kontakt/", "text": "WhatsApp, E-Mail, Anfahrt und persönliche Hilfe." }
   ],
   "hero": {
     "eyebrow": "Elite Dance Studio · Berlin-Moabit",
     "title": "Du musst nicht tanzen können. Du musst nur anfangen.",
-    "description": "Beginner Tanzkurse in Berlin-Moabit, bei denen du nicht schon gut sein musst: klare Levels, persönliche Coaches und 25+ Styles, die du in deinem Tempo entdecken kannst.",
-    "primaryCtaLabel": "Klasse buchen",
+    "description": "25+ Styles. Klare Levels. Persönliche Coaches. Von Level 0 bis Advanced.",
+    "primaryCtaLabel": "Stundenplan ansehen",
     "primaryCtaHref": "/stundenplan/",
-    "secondaryCtaLabel": "Neu hier? Starte hier",
+    "secondaryCtaLabel": "Neu hier?",
     "secondaryCtaHref": "/#start-options",
-    "beginnerNoteTitle": "Du darfst allein und ohne Erfahrung kommen.",
-    "beginnerNoteText": "Starte mit Level 0 oder Beginner, lass dir einen Style empfehlen oder teste mit dem Welcome Pass zwei Richtungen.",
+    "beginnerNoteTitle": "Ohne Erfahrung starten.",
+    "beginnerNoteText": "Level 0, Beginner oder Welcome Pass.",
     "videoLabel": "Studio Video",
     "videoSrc": "/media/hero/elite-homepage-video-540.mp4",
     "videoMobileSrc": "/media/hero/elite-homepage-video-medium.mp4",
     "videoPoster": "/media/hero/elite-homepage-poster.jpg",
-    "videoOverlayBadge": "Beginner-friendly",
+    "videoOverlayBadge": "Berlin-Moabit",
     "searchLinks": [
-      {
-        "label": "Beginner Tanzkurse",
-        "href": "/kurse/"
-      },
-      {
-        "label": "Bachata in Berlin",
-        "href": "/styles/"
-      },
-      {
-        "label": "Reggaeton & Heels",
-        "href": "/styles/"
-      },
-      {
-        "label": "Preise & Welcome Pass",
-        "href": "/preise/"
-      }
+      { "label": "Beginner Tanzkurse", "href": "/kurse/" },
+      { "label": "Advanced & Closed Groups", "href": "/fortgeschrittene/" },
+      { "label": "Intensives", "href": "/intensives/" },
+      { "label": "Preise & Welcome Pass", "href": "/preise/" }
     ],
     "highlights": [
-      {
-        "title": "Ohne Erfahrung starten",
-        "text": "Klare Einstiege für neue Tänzer:innen statt nur für Fortgeschrittene."
-      },
-      {
-        "title": "Oft ohne festen Partner",
-        "text": "Viele Formate funktionieren allein oder ohne festen Tanzpartner."
-      },
-      {
-        "title": "Welcome Pass",
-        "text": "Socials, Workshops und Studioleben helfen dabei, wirklich dranzubleiben."
-      }
+      { "title": "Level 0 bis Advanced", "text": "Klare Einstiege und echte Progression." },
+      { "title": "Solo & Partner Dance", "text": "Viele Formate funktionieren auch ohne festen Partner." },
+      { "title": "Mehr als Classes", "text": "Intensives, Closed Groups, Events und Community." }
     ],
-    "visualBadge": "Berlin-Moabit · Premium Studio Gefühl",
-    "visualTitle": "Das zeigt Elite",
-    "visualHeadline": "Ein erster Eindruck, der Lust auf den Einstieg macht.",
-    "visualNote": "Glückliche Menschen, echte Kursszenen und eine Atmosphäre, die sich offen, warm und hochwertig anfühlt.",
+    "visualBadge": "Elite Dance Studio Berlin",
+    "visualTitle": "Dance · Feel · Belong",
+    "visualHeadline": "Ein Studio für Einstieg, Progression und Community.",
+    "visualNote": "Kurse, Intensives, Socials und Räume in Berlin-Moabit.",
     "videoSteps": [],
     "featureList": [
-      {
-        "title": "Welcome Pass",
-        "text": "Zwei Klassen testen, bevor du dich festlegst."
-      },
-      {
-        "title": "Meistens Beginner-Klassen",
-        "text": "Die aktuellen Kurse sind bewusst stark auf neue Tänzer:innen und leichte Einstiege ausgerichtet."
-      },
-      {
-        "title": "Fragen direkt geklärt",
-        "text": "Partner, Reservierung, Level und erster Besuch sollen sofort verständlich sein."
-      },
-      {
-        "title": "Mehr als Unterricht",
-        "text": "Socials, Workshops und Studioenergie in Berlin-Moabit."
-      }
+      { "title": "Welcome Pass", "text": "Zwei Klassen testen." },
+      { "title": "Alle Levels", "text": "Von Level 0 bis Advanced." },
+      { "title": "Direkte Buchung", "text": "Stundenplan öffnen und Platz sichern." },
+      { "title": "Raummiete", "text": "Drei Studios für Training und Produktion." }
     ],
-    "visualFacts": [
-      "Für Beginner",
-      "Welcome Pass",
-      "Bachata",
-      "Reggaeton",
-      "Heels"
-    ]
+    "visualFacts": ["Level 0", "Beginner", "Intermediate", "Advanced", "Intensives"]
   },
-  "communityQuote": "Ein gutes Studio muss dich nicht einschüchtern. Es muss dir Lust machen, wiederzukommen.",
+  "communityQuote": "Dance. Feel. Belong.",
   "communityPoints": [
-    "Viele Styles unter einem Dach, ohne dass sich die Seite chaotisch anfühlen muss.",
-    "Socials, Workshops und Community-Momente machen Elite menschlicher als einen reinen Stundenplan.",
-    "Der erste Einstieg darf leicht sein, auch wenn du später technisch oder performativ wachsen willst."
+    "Viele Styles unter einem Dach.",
+    "Reguläre Classes, Closed Groups und Intensives.",
+    "Community, Events und Räume in Berlin-Moabit."
   ],
   "visit": {
     "address": "Wiclefstrasse 16-17, 10551 Berlin",
     "entryNote": "Durch beide roten Tore, im zweiten Hinterhof links.",
-    "contactPrompt": "WhatsApp, Instagram oder kurze Nachricht für eine persönliche Kurs-Empfehlung.",
-    "ctaHeading": "Nicht sicher, welcher Kurs zu dir passt? Wir helfen dir beim Einstieg.",
-    "ctaText": "Wenn du zwischen Styles, Leveln oder Angeboten schwankst, empfehlen wir dir lieber kurz den richtigen Start, statt dich allein suchen zu lassen.",
+    "contactPrompt": "WhatsApp, Instagram oder E-Mail.",
+    "ctaHeading": "Frage zu Kurs, Level oder Raummiete?",
+    "ctaText": "Schreib uns direkt auf WhatsApp.",
     "phone": "+49 163 3863548",
     "email": "info@elitedancestudio.de",
     "instagram": "@elitedanceberlin",

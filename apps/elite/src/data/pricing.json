@@ -1,84 +1,10 @@
 [
-  {
-    "category": "Erst ausprobieren",
-    "label": "Empfohlener erster Schritt",
-    "name": "Welcome Pass",
-    "price": "20€",
-    "text": "Zwei beginner-geeignete Klassen für neue Besucher:innen. Du erlebst das Studio, bevor du dich entscheidest.",
-    "bestFor": "du Elite erst kennenlernen willst",
-    "ctaLabel": "Welcome Pass ansehen",
-    "href": "/starter-pass/",
-    "featured": true
-  },
-  {
-    "category": "Erst ausprobieren",
-    "label": "Ein Kurs",
-    "name": "Drop-in",
-    "price": "13€",
-    "text": "Eine reguläre Klasse deiner Wahl. Gut für spontane Besuche oder wenn du noch keinen festen Rhythmus hast.",
-    "bestFor": "du genau einen Kurs testen möchtest",
-    "ctaLabel": "Kurs finden",
-    "href": "/kurse/"
-  },
-  {
-    "category": "Flexibel trainieren",
-    "label": "Regelmäßig ohne Vertrag",
-    "name": "5er Karte",
-    "price": "60€",
-    "text": "Fünf Klassen für mehr Routine, ohne direkt eine monatliche Membership zu wählen.",
-    "bestFor": "du flexibel, aber öfter tanzen willst",
-    "ctaLabel": "Klassen ansehen",
-    "href": "/kurse/"
-  },
-  {
-    "category": "Flexibel trainieren",
-    "label": "Bester Kartenwert",
-    "name": "10er Karte",
-    "price": "115€",
-    "text": "Der stärkste flexible Deal für häufigeres Training ohne monatliche Bindung.",
-    "bestFor": "Tanzen ein fester Teil deiner Woche wird",
-    "ctaLabel": "Klassen ansehen",
-    "href": "/kurse/"
-  },
-  {
-    "category": "Flexibel trainieren",
-    "label": "Urban Sports Club",
-    "name": "USC Check-in",
-    "price": "0€*",
-    "text": "Reguläre Kurse können je nach USC-Tarif und verfügbarem Kontingent enthalten sein.",
-    "bestFor": "du bereits eine USC-Mitgliedschaft hast",
-    "ctaLabel": "Vorher Kurs wählen",
-    "href": "/kurse/"
-  },
-  {
-    "category": "Routine aufbauen",
-    "label": "Ein Kurs pro Woche",
-    "name": "Bronze Membership",
-    "price": "45€ / Monat",
-    "text": "Ein verlässlicher Wochenrhythmus für einen sauberen und entspannten Einstieg.",
-    "bestFor": "du mit einer Klasse pro Woche starten willst",
-    "ctaLabel": "Frage zur Membership",
-    "href": "/kontakt/"
-  },
-  {
-    "category": "Routine aufbauen",
-    "label": "Beliebt",
-    "name": "Silber Membership",
-    "price": "79€ / Monat",
-    "text": "Zwei Kurse pro Woche, damit Technik, Style und Sicherheit schneller zusammenwachsen.",
-    "bestFor": "du sichtbar Fortschritt machen willst",
-    "ctaLabel": "Frage zur Membership",
-    "href": "/kontakt/",
-    "featured": true
-  },
-  {
-    "category": "Routine aufbauen",
-    "label": "Flatrate",
-    "name": "Gold Membership",
-    "price": "99€ / Monat",
-    "text": "Maximale Freiheit für mehrere Styles und häufiges Training in regulären Klassen.",
-    "bestFor": "du oft und vielseitig tanzen willst",
-    "ctaLabel": "Frage zur Membership",
-    "href": "/kontakt/"
-  }
+  { "category": "Start", "label": "Empfohlener Einstieg", "name": "Welcome Pass", "price": "20€", "text": "Zwei Classes testen und Elite kennenlernen.", "bestFor": "du neu bei Elite bist", "ctaLabel": "Welcome Pass ansehen", "href": "/starter-pass/", "featured": true },
+  { "category": "Start", "label": "Eine Class", "name": "Drop-in", "price": "13€", "text": "Eine reguläre 60-Minuten-Class deiner Wahl.", "bestFor": "du spontan oder einmalig tanzen willst", "ctaLabel": "Kurs finden", "href": "/stundenplan/" },
+  { "category": "Flexibel", "label": "5 Classes", "name": "5er Karte", "price": "60€", "text": "Flexibel trainieren, ohne monatliche Membership.", "bestFor": "du regelmäßig, aber frei bleiben willst", "ctaLabel": "Stundenplan öffnen", "href": "/stundenplan/" },
+  { "category": "Flexibel", "label": "Bester Kartenwert", "name": "10er Karte", "price": "115€", "text": "Mehr Classes, weniger Preis pro Besuch.", "bestFor": "du häufig trainierst, ohne Membership", "ctaLabel": "Stundenplan öffnen", "href": "/stundenplan/" },
+  { "category": "Flexibel", "label": "Urban Sports Club", "name": "USC Membership", "price": "Über USC", "text": "Buchung und Check-in über dein Urban Sports Club Konto. Besuchslimits hängen von deinem Tarif ab.", "bestFor": "du bereits USC Mitglied bist", "ctaLabel": "USC Kalender öffnen", "href": "https://urbansportsclub.com/de/venues/elite-dance-studio-1" },
+  { "category": "Memberships", "label": "1× pro Woche", "name": "Bronze", "price": "45€ / Monat", "text": "Ein fester Wochenrhythmus.", "bestFor": "du einmal pro Woche trainieren willst", "ctaLabel": "Membership anfragen", "href": "/kontakt/" },
+  { "category": "Memberships", "label": "2× pro Woche", "name": "Silber", "price": "79€ / Monat", "text": "Mehr Routine und schnellerer Fortschritt.", "bestFor": "du zweimal pro Woche trainieren willst", "ctaLabel": "Membership anfragen", "href": "/kontakt/", "featured": true },
+  { "category": "Memberships", "label": "Flatrate", "name": "Gold", "price": "99€ / Monat", "text": "Mehrere Styles und häufiges Training.", "bestFor": "du maximale Freiheit willst", "ctaLabel": "Membership anfragen", "href": "/kontakt/" }
 ]

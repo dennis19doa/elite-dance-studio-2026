@@ -1,96 +1,43 @@
 ---
-interface NavItem {
-  label: string;
-  href: string;
-  description?: string;
-  children?: NavItem[];
-}
-
-interface Props {
-  brand: string;
-  nav: NavItem[];
-}
-
+interface NavItem { label: string; href: string; description?: string; children?: NavItem[]; }
+interface Props { brand: string; nav: NavItem[]; }
 const { brand, nav } = Astro.props;
 const currentPath = Astro.url.pathname;
 const isWelcomePassPage = currentPath.startsWith("/starter-pass/");
-
-function isActive(href: string) {
-  if (href === "/") {
-    return currentPath === "/";
-  }
-
-  return currentPath === href || currentPath.startsWith(href);
-}
-
-function isGroupActive(item: NavItem) {
-  return isActive(item.href) || item.children?.some((child) => isActive(child.href));
-}
+const contactHref = "https://wa.me/491633863548?text=Hallo%20Elite%20Dance%20Studio%2C%20ich%20habe%20eine%20Frage.";
+function isActive(href: string) { if (href === "/") return currentPath === "/"; return currentPath === href || currentPath.startsWith(href); }
+function isGroupActive(item: NavItem) { return isActive(item.href) || item.children?.some((child) => isActive(child.href)); }
 ---
-
-<header class="site-header">
+<header class="site-header site-header-v2">
   <div class="page-shell topbar">
     <a class="brand" href="/">{brand}</a>
     <nav class="main-nav desktop-nav" aria-label="Primary">
       {nav.map((item) => item.children ? (
         <details class:list={["nav-dropdown", isGroupActive(item) && "is-active"]}>
-          <summary class="nav-link">
-            {item.label}
-            <span class="nav-chevron" aria-hidden="true">⌄</span>
-          </summary>
+          <summary class="nav-link">{item.label}<span class="nav-chevron" aria-hidden="true">⌄</span></summary>
           <div class="nav-dropdown-menu">
             {item.children.map((child) => (
               <a class:list={["nav-dropdown-link", isActive(child.href) && "is-active"]} href={child.href}>
-                <span>{child.label}</span>
-                <small>{child.description}</small>
+                <span>{child.label}</span>{child.description && <small>{child.description}</small>}
               </a>
             ))}
           </div>
         </details>
-      ) : (
-        <a class:list={["nav-link", isActive(item.href) && "is-active"]} href={item.href}>
-          {item.label}
-        </a>
-      ))}
+      ) : <a class:list={["nav-link", isActive(item.href) && "is-active"]} href={item.href}>{item.label}</a>)}
     </nav>
     <div class="actions header-actions">
-      <a class="button secondary" href={isWelcomePassPage ? "#welcome-form" : "/starter-pass/"}>
-        {isWelcomePassPage ? "Pass anfragen" : "Neu hier?"}
+      <a class="header-contact" href={contactHref} aria-label="Elite auf WhatsApp kontaktieren">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 20.3 3.5 21l.8-3.7a8.8 8.8 0 1 1 3.1 3Zm4.7-15a6.9 6.9 0 0 0-5.9 10.5l.3.5-.5 2.2 2.3-.4.5.3a6.9 6.9 0 1 0 3.3-13.1Zm3.9 9.6c-.2.6-1.2 1.2-1.7 1.3-.4.1-1 .2-1.7 0-.4-.1-1-.3-1.7-.6-3-1.3-5-4.4-5.1-4.6-.1-.2-1.2-1.6-1.2-3 0-1.5.8-2.2 1-2.5.3-.3.6-.4.9-.4h.6c.2 0 .4 0 .6.5l.8 1.9c.1.4.1.6 0 .8l-.4.7c-.2.2-.4.4-.2.7.2.4.7 1.2 1.6 1.9 1.1.9 2 1.2 2.4 1.3.3.1.5.1.7-.2l.9-1.1c.2-.3.5-.3.8-.2l2 .9c.4.2.6.3.7.5.1.2.1.7-.1 1.3Z"/></svg><span>Kontakt</span>
       </a>
+      <a class="button secondary" href={isWelcomePassPage ? "#welcome-form" : "/starter-pass/"}>{isWelcomePassPage ? "Pass anfragen" : "Neu hier?"}</a>
       <a class="button primary" href="/stundenplan/">Klasse buchen</a>
     </div>
-
-    <details class="mobile-nav">
-      <summary>
-        <span class="mobile-nav-icon" aria-hidden="true"><i></i><i></i></span>
-        <span>Menü</span>
-      </summary>
-      <div class="mobile-menu panel">
-        <nav class="mobile-menu-links" aria-label="Mobile Navigation">
-          {nav.map((item) => item.children ? (
-            <details class="mobile-nav-group" open={isGroupActive(item)}>
-              <summary class:list={[isGroupActive(item) && "is-active"]}>{item.label}</summary>
-              <div>
-                {item.children.map((child) => (
-                  <a class:list={["nav-link", isActive(child.href) && "is-active"]} href={child.href}>
-                    {child.label}
-                  </a>
-                ))}
-              </div>
-            </details>
-          ) : (
-            <a class:list={["nav-link", isActive(item.href) && "is-active"]} href={item.href}>
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        <div class="mobile-menu-actions">
-          <a class="button secondary" href={isWelcomePassPage ? "#welcome-form" : "/starter-pass/"}>
-            {isWelcomePassPage ? "Pass anfragen" : "Neu hier?"}
-          </a>
-          <a class="button primary" href="/stundenplan/">Klasse buchen</a>
-        </div>
-      </div>
+    <details class="mobile-nav"><summary><span class="mobile-nav-icon" aria-hidden="true"><i></i><i></i></span><span>Menü</span></summary>
+      <div class="mobile-menu panel"><nav class="mobile-menu-links" aria-label="Mobile Navigation">
+        {nav.map((item) => item.children ? (
+          <details class="mobile-nav-group" open={isGroupActive(item)}><summary class:list={[isGroupActive(item) && "is-active"]}>{item.label}</summary><div>{item.children.map((child) => <a class:list={["nav-link", isActive(child.href) && "is-active"]} href={child.href}>{child.label}</a>)}</div></details>
+        ) : <a class:list={["nav-link", isActive(item.href) && "is-active"]} href={item.href}>{item.label}</a>)}
+      </nav><div class="mobile-menu-actions"><a class="header-contact mobile-contact" href={contactHref}><span>WhatsApp / Kontakt</span></a><a class="button secondary" href={isWelcomePassPage ? "#welcome-form" : "/starter-pass/"}>{isWelcomePassPage ? "Pass anfragen" : "Neu hier?"}</a><a class="button primary" href="/stundenplan/">Klasse buchen</a></div></div>
     </details>
   </div>
 </header>

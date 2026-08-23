@@ -4,6 +4,7 @@ interface Props { brand: string; nav: NavItem[]; }
 const { brand, nav } = Astro.props;
 const currentPath = Astro.url.pathname;
 const contactHref = "https://wa.me/491633863548?text=Hallo%20Elite%20Dance%20Studio%2C%20ich%20habe%20eine%20Frage.";
+const bookingHref = "/#schedule";
 const isExternal = (href: string) => href.startsWith("http");
 function isActive(href: string) {
   if (isExternal(href)) return false;
@@ -47,7 +48,7 @@ function isGroupActive(item: NavItem) { return isActive(item.href) || item.child
           <path d="m13 12.7.8-1 2 1-.5 1.3" />
         </svg>
       </a>
-      <a class="button primary" href="/stundenplan/">Buchen</a>
+      <a class="button primary" href={bookingHref}>Buchen</a>
     </div>
 
     <details class="mobile-nav">
@@ -74,7 +75,7 @@ function isGroupActive(item: NavItem) { return isActive(item.href) || item.child
         </nav>
         <div class="mobile-menu-actions">
           <a class="button secondary" href={contactHref}>WhatsApp</a>
-          <a class="button primary" href="/stundenplan/">Buchen</a>
+          <a class="button primary" href={bookingHref}>Buchen</a>
         </div>
       </div>
     </details>

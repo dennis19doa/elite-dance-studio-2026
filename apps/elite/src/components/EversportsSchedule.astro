@@ -11,7 +11,7 @@ const {
   id = "schedule",
   eyebrow = "Live-Stundenplan",
   title = "Finde deine nächste Class.",
-  description = "Live-Verfügbarkeit sehen und direkt über Eversports buchen.",
+  description = "Aktuelle Classes, freie Plätze und Buchung direkt im Eversports-Kalender.",
   home = false
 } = Astro.props;
 
@@ -20,7 +20,7 @@ const uscHref = "https://urbansportsclub.com/de/venues/elite-dance-studio-1";
 ---
 
 <section
-  class:list={["eversports-panel", "schedule-v3", home && "eversports-home"]}
+  class:list={["eversports-panel", "schedule-v3", "schedule-v7", home && "eversports-home"]}
   id={id}
   aria-labelledby={`${id}-title`}
 >
@@ -32,16 +32,15 @@ const uscHref = "https://urbansportsclub.com/de/venues/elite-dance-studio-1";
       <p>{description}</p>
     </div>
 
-    <nav class="schedule-shortcuts" aria-label="Schnellzugriff rund um den Stundenplan">
-      <a href={`#${id}`} class="is-active">Alle Classes</a>
-      <a href="/kurse/#levels">Beginner</a>
-      <a href="/fortgeschrittene/">Intermediate+</a>
-      <a href="/intensives/">Intensives</a>
-      <a href={uscHref} target="_blank" rel="noreferrer">USC</a>
-    </nav>
+    <div class="schedule-info-grid" aria-label="Wichtige Informationen zur Buchung">
+      <div><span>Reservierung</span><strong>Platz direkt im Kalender sichern.</strong></div>
+      <div><span>Open Classes</span><strong>Reguläre Classes sind direkt buchbar.</strong></div>
+      <a href={uscHref} target="_blank" rel="noreferrer"><span>Urban Sports Club</span><strong>USC-Verfügbarkeit separat prüfen ↗</strong></a>
+      <a href="/kurse/#levels"><span>Level unsicher?</span><strong>Level 0 bis Advanced kurz erklärt →</strong></a>
+    </div>
 
     <div class="schedule-command-actions">
-      <a class="button primary" href={venueHref} target="_blank" rel="noreferrer">In Eversports öffnen ↗</a>
+      <a class="button primary" href={venueHref} target="_blank" rel="noreferrer">Eversports öffnen ↗</a>
       <a class="schedule-help-link" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20welcher%20Kurs%20passt%20zu%20mir%3F">Kurswahl fragen</a>
     </div>
   </div>

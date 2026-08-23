@@ -16,6 +16,7 @@ const {
 } = Astro.props;
 
 const venueHref = "https://www.eversports.de/s/elite-dance-studio";
+const uscHref = "https://urbansportsclub.com/de/venues/elite-dance-studio-1";
 ---
 
 <section
@@ -32,10 +33,11 @@ const venueHref = "https://www.eversports.de/s/elite-dance-studio";
     </div>
 
     <nav class="schedule-shortcuts" aria-label="Schnellzugriff rund um den Stundenplan">
-      <a href="#schedule" class="is-active">Alle Classes</a>
-      <a href="/kurse/#levels">Neu hier?</a>
+      <a href={`#${id}`} class="is-active">Alle Classes</a>
+      <a href="/kurse/#levels">Beginner</a>
       <a href="/fortgeschrittene/">Intermediate+</a>
       <a href="/intensives/">Intensives</a>
+      <a href={uscHref} target="_blank" rel="noreferrer">USC</a>
     </nav>
 
     <div class="schedule-command-actions">

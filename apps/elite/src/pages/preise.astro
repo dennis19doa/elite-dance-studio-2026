@@ -13,6 +13,7 @@ import site from "../data/site.json";
 <BaseLayout
   title="Preise & Memberships | Elite Dance Studio Berlin"
   description="Welcome Pass, Drop-in, Karten, USC und Memberships für beginner-friendly Tanzkurse im Elite Dance Studio Berlin-Moabit."
+  bodyClass="pricing-page-v3"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
@@ -32,27 +33,12 @@ import site from "../data/site.json";
       </figure>
     </section>
 
-    <PricingSection
-      pricing={pricing}
-      eyebrow="Preise im Überblick"
-      title="Start. Flexibel. Membership."
-      description=""
-    />
+    <PricingSection pricing={pricing} eyebrow="Preise im Überblick" title="Start. Flexibel. Membership." description="" />
 
-    <FaqSection
-      items={pricingFaqs.slice(0, 4)}
-      eyebrow="Preise FAQ"
-      title="Kurz erklärt."
-      description=""
-      linkHref="/faq/"
-      linkLabel="Alle Fragen ansehen"
-    />
+    <FaqSection items={pricingFaqs.slice(0, 4)} eyebrow="Preise FAQ" title="Kurz erklärt." description="" linkHref="/faq/" linkLabel="Alle Fragen ansehen" />
 
     <section class="pricing-assurance panel pricing-assurance-v3">
-      <div>
-        <div class="eyebrow">Noch unsicher?</div>
-        <h2>Wir helfen dir bei der Auswahl.</h2>
-      </div>
+      <div><div class="eyebrow">Noch unsicher?</div><h2>Wir helfen dir bei der Auswahl.</h2></div>
       <a class="button primary" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20bin%20bei%20den%20Preisen%20noch%20unsicher.">WhatsApp schreiben</a>
     </section>
   </main>

@@ -74,7 +74,6 @@ jobs:
           repo = "${{ github.event.repository.name }}"
           preview = Path(f"site/preview/pr-{pr}")
           base = f"/{repo}/preview/pr-{pr}/"
-          already = f"/{repo}/"
 
           for path in preview.rglob("*"):
               if path.suffix.lower() not in {".html", ".css", ".js", ".json", ".xml", ".txt"}:
@@ -84,12 +83,17 @@ jobs:
               except UnicodeDecodeError:
                   continue
 
-              # Public assets and internal absolute links need the preview prefix.
+              # Rewrite root-absolute HTML attributes exactly once.
               for attr in ("href", "src", "poster", "action"):
                   pattern = rf'{attr}="/(?!{re.escape(repo)}/)([^"#]+)"'
                   text = re.sub(pattern, lambda m: f'{attr}="{base}{m.group(1)}"', text)
 
-              text = text.replace("/media/", f"{base}media/")
+              # CSS url(/media/...) references are not HTML attributes, so handle
+              # only those explicit forms. Avoid a global /media/ replacement,
+              # which previously double-prefixed image and video paths.
+              text = text.replace('url("/media/', f'url("{base}media/')
+              text = text.replace("url('/media/", f"url('{base}media/")
+              text = text.replace('url(/media/', f'url({base}media/')
               path.write_text(text, encoding="utf-8")
           PY
 

@@ -18,46 +18,44 @@ const images = [
   title="Tanz-Intensives in Berlin | Elite Dance Studio"
   description="Strukturierte Tanz-Intensives in Berlin-Moabit: Fundamentals, Body Movement I & II und Combined Training mit klarer Progression."
   image="/media/hero/elite-homepage-poster.jpg"
-  bodyClass="intensives-page-v7"
+  bodyClass="intensives-page-v8"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main intensive-main-v7">
-    <section class="intensive-hero-v7">
-      <div class="intensive-hero-copy-v7">
+  <main class="page-shell page-main intensives-main-v8">
+    <section class="intensives-hero-v8">
+      <div class="intensives-hero-copy-v8">
         <div class="eyebrow">Elite Intensives</div>
         <h1 class="page-title">Train deeper.</h1>
-        <p>Mehrere Wochen. Ein Fokus. Klarer Fortschritt.</p>
+        <p>Mehrere Wochen, ein klarer Fokus und genug Zeit, damit Technik wirklich hängen bleibt.</p>
         <div class="actions">
-          <a class="button primary" href="#roadmap">Roadmap ansehen</a>
+          <a class="button primary" href="#intensive-modules">Module ansehen</a>
           <a class="button secondary" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Intensive.">Starttermin fragen</a>
         </div>
       </div>
-      <figure class="intensive-hero-media-v7">
-        <img src="/media/hero/elite-homepage-poster.jpg" alt="Training im Elite Dance Studio" width="1920" height="1080" />
-        <figcaption>Fundamentals → Body Movement → Integration</figcaption>
+      <figure class="intensives-hero-image-v8">
+        <img src="/media/hero/elite-homepage-poster.jpg" alt="Training im Elite Dance Studio" />
       </figure>
     </section>
 
-    <section class="intensive-roadmap-v7" id="roadmap" aria-labelledby="intensive-roadmap-title">
-      <header class="intensive-roadmap-head-v7">
-        <div class="eyebrow">Deine Progression</div>
-        <h2 id="intensive-roadmap-title">Vier Module. Ein Trainingsweg.</h2>
-        <p>Jedes Intensive funktioniert als eigener Block. Zusammen bilden sie eine klare Progression.</p>
+    <section class="intensive-modules-section-v8" id="intensive-modules">
+      <header class="intensives-section-head-v8">
+        <div><div class="eyebrow">Deine Progression</div><h2>Vier Module. Ein Trainingsweg.</h2></div>
+        <p>Jeder Block funktioniert einzeln. Zusammen bauen sie Technik, Kontrolle und Ausdruck Schritt für Schritt auf.</p>
       </header>
 
-      <div class="intensive-modules-v7">
+      <div class="intensive-cards-v8">
         {intensives.map((intensive, index) => (
-          <article class:list={["intensive-module-v7", `is-${index % 3 === 0 ? "rose" : index % 3 === 1 ? "blue" : "lime"}`]}>
+          <article class:list={["intensive-card-v8", `accent-${(index % 3) + 1}`]}>
             <figure>
-              <img src={images[index]} alt={`${intensive.name} im Elite Dance Studio`} width="720" height="900" loading="lazy" decoding="async" />
+              <img src={images[index]} alt={`${intensive.name} im Elite Dance Studio`} loading="lazy" decoding="async" />
               <span>{intensive.number}</span>
             </figure>
-            <div class="intensive-module-copy-v7">
-              <div class="roadmap-meta"><span>{phases[index]}</span><small>{intensive.duration}</small></div>
+            <div class="intensive-card-copy-v8">
+              <div class="intensive-meta-v8"><span>{phases[index]}</span><small>{intensive.duration}</small></div>
               <h3>{intensive.name}</h3>
               <p>{intensive.summary}</p>
-              <div class="intensive-module-prices-v7">
+              <div class="intensive-prices-v8">
                 <span><small>Training</small><strong>{intensive.standardPrice}</strong></span>
                 <span><small>Premium</small><strong>{intensive.premiumPrice}</strong></span>
               </div>
@@ -72,10 +70,10 @@ const images = [
       </div>
     </section>
 
-    <section class="training-choice-v7">
-      <a href="/#schedule"><span>Flexibel jede Woche</span><strong>Regular Classes</strong><b>Stundenplan →</b></a>
-      <a href="/fortgeschrittene/"><span>Kontinuierlich</span><strong>Closed Groups</strong><b>Advanced Training →</b></a>
-      <a href="#roadmap"><span>Fokussierter Block</span><strong>Intensives</strong><b>Module ansehen ↑</b></a>
+    <section class="training-options-v8">
+      <a href="/#schedule"><small>Flexibel</small><strong>Regular Classes</strong><span>Stundenplan →</span></a>
+      <a href="/fortgeschrittene/"><small>Kontinuierlich</small><strong>Closed Groups</strong><span>Advanced Training →</span></a>
+      <a href="#intensive-modules"><small>Fokussiert</small><strong>Intensives</strong><span>Module ansehen ↑</span></a>
     </section>
   </main>
 

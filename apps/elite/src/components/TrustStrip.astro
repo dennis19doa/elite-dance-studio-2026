@@ -9,22 +9,33 @@ interface Props {
 }
 
 const { signals } = Astro.props;
+const proof = signals.slice(0, 4);
 ---
 
-<section class="trust-band panel trust-band-v4">
-  <div class="section-head">
-    <div>
-      <div class="eyebrow">Warum Elite</div>
-      <h2>25+ Styles. Alle Levels. Ein Studio.</h2>
-    </div>
-  </div>
+<section class="trust-band trust-band-v7" aria-labelledby="why-elite-title">
+  <figure class="trust-visual-v7">
+    <img src="/media/hero/elite-homepage-poster.jpg" alt="Tanzkurs im Elite Dance Studio Berlin" width="1920" height="1080" loading="lazy" decoding="async" />
+    <span class="trust-visual-shade"></span>
+    <figcaption>
+      <span>Berlin-Moabit</span>
+      <strong>Train. Connect. Belong.</strong>
+    </figcaption>
+  </figure>
 
-  <div class="trust-strip">
-    {signals.map((signal) => (
-      <div class="stat">
-        <strong>{signal.title}</strong>
-        <span>{signal.text}</span>
-      </div>
-    ))}
+  <div class="trust-copy-v7">
+    <div class="eyebrow">Warum Elite</div>
+    <h2 id="why-elite-title">Viele Styles. Klare Levels. Ein Studio, das persönlich bleibt.</h2>
+    <p>Du kannst niedrigschwellig starten und trotzdem einen echten Trainingsweg bis Advanced, Closed Groups und Intensives finden.</p>
+
+    <div class="trust-proof-v7">
+      {proof.map((signal) => (
+        <div>
+          <strong>{signal.title}</strong>
+          <span>{signal.text}</span>
+        </div>
+      ))}
+    </div>
+
+    <a class="text-link" href="/ueber-uns/">Mehr über Elite erfahren ↗</a>
   </div>
 </section>

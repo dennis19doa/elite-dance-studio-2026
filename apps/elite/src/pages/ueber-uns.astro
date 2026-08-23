@@ -10,85 +10,55 @@ import site from "../data/site.json";
   title="Über uns | Elite Dance Studio Berlin"
   description="Lerne Elite Dance Studio Berlin kennen: beginner-friendly Tanzkurse, starke Coaches, Socials, Community und persönlicher Fortschritt in Berlin-Moabit."
   image="/media/placeholders/community-beginners.jpg"
+  bodyClass="about-page-v3"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main">
-    <section class="service-page-hero about-hero panel">
-      <div class="service-page-copy">
-        <div class="eyebrow">Warum Elite Dance Studio?</div>
-        <h1 class="page-title">Dein Ort zum Tanzen in Berlin.</h1>
-        <p class="lead">
-          Beginner-friendly Kurse, starke Coaches, Socials und Community in Berlin-Moabit. Du
-          brauchst keinen festen Tanzpartner. Du brauchst nur den ersten Schritt.
-        </p>
-        <div class="actions">
-          <a class="button primary" href="/starter-pass/">Welcome Pass · 20€</a>
-          <a class="button secondary" href="/coaches/">Coaches kennenlernen</a>
-        </div>
-      </div>
-      <figure class="service-page-media about-hero-media">
-        <img
-          src="/media/placeholders/community-beginners.jpg"
-          alt="Offene Tanzgruppe in einer freundlichen Studioatmosphäre"
-          width="1536"
-          height="1024"
-        />
+  <main class="page-shell page-main about-main-v3">
+    <section class="about-cinematic-v3">
+      <figure>
+        <img src="/media/placeholders/community-beginners.jpg" alt="Community im Elite Dance Studio Berlin" width="1536" height="1024" />
       </figure>
-    </section>
-
-    <section class="about-value-grid" aria-label="Was Elite Dance Studio ausmacht">
-      <article><span>01</span><h3>Einfach starten</h3><p>Wir helfen dir, den passenden Kurs und das richtige Level zu finden.</p></article>
-      <article><span>02</span><h3>Kein Partner nötig</h3><p>Du kannst allein kommen. In vielen Partner-Dance-Kursen wird gewechselt.</p></article>
-      <article><span>03</span><h3>Viele Styles</h3><p>Von Bachata und Zouk bis Reggaeton, Heels, K-Pop und Contemporary.</p></article>
-      <article><span>04</span><h3>Community</h3><p>Kurse, Socials, Partys und Workshops machen Elite zu mehr als einem Studio.</p></article>
-    </section>
-
-    <section class="about-story panel">
-      <div class="about-story-copy">
-        <div class="eyebrow">Wenn du noch zögerst</div>
-        <h2>Du musst nicht perfekt sein, um anzufangen.</h2>
-        <p>
-          Viele starten mit Unsicherheit. Nach ein paar Stunden merken sie: Tanzen fühlt sich
-          leichter an, wenn Raum, Musik und Menschen stimmen.
-        </p>
-        <p>
-          Bei Elite bekommst du klare Orientierung, verständliche Technik und eine Atmosphäre,
-          in der du dich bewegen darfst, ohne dich beweisen zu müssen.
-        </p>
-      </div>
-      <div class="about-story-images">
-        <img src="/media/current-site/elena-dennis-bachata.png" alt="Elena und Dennis, Bachata Coaches bei Elite Dance Studio" loading="lazy" />
-        <img src="/media/current-site/studio-room-a.jpg" alt="Großer Trainingsraum im Elite Dance Studio Berlin" loading="lazy" />
-      </div>
-    </section>
-
-    <section class="about-journey panel">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">Dein Weg bei uns</div>
-          <h2>Reinkommen, mitmachen, sicherer werden.</h2>
+      <div class="about-cinematic-copy">
+        <div class="eyebrow">Elite Dance Studio · Berlin-Moabit</div>
+        <h1 class="page-title">Come to dance. Stay for the feeling.</h1>
+        <p>25+ Styles, starke Coaches und eine Community, in der du auch allein anfangen kannst.</p>
+        <div class="actions">
+          <a class="button primary" href="/stundenplan/">Class finden</a>
+          <a class="button secondary" href="/coaches/">Coaches ansehen</a>
         </div>
-        <p>Fortschritt soll sich persönlich und lebendig anfühlen, nicht steif oder anonym.</p>
-      </div>
-      <div class="about-journey-grid">
-        <div><span>01</span><strong>Ankommen</strong><p>Wir zeigen dir den Ablauf und helfen dir beim Einstieg.</p></div>
-        <div><span>02</span><strong>Mitmachen</strong><p>Klare Erklärungen, gute Musik und eine offene Gruppe.</p></div>
-        <div><span>03</span><strong>Fortschritt spüren</strong><p>Technik, kleine Korrekturen und mehr Vertrauen in deinen Körper.</p></div>
-        <div><span>04</span><strong>Community werden</strong><p>Socials, Partys und Workshops machen Tanzen zu deiner Woche.</p></div>
       </div>
     </section>
 
-    <section class="cta-banner panel">
-      <div>
-        <div class="eyebrow">Dein nächster Schritt</div>
-        <h2>Komm vorbei. Wir helfen dir beim Einstieg.</h2>
-        <p>Elite ist modern, herzlich und mitten in Moabit.</p>
+    <section class="about-manifesto-v3">
+      <span>Wofür wir stehen</span>
+      <h2>Gutes Training soll sich persönlich, lebendig und nie einschüchternd anfühlen.</h2>
+    </section>
+
+    <section class="about-editorial-v3">
+      <div class="about-editorial-images">
+        <img src="/media/current-site/elena-dennis-bachata.png" alt="Elena und Dennis bei Elite Dance Studio" loading="lazy" />
+        <img src="/media/current-site/studio-room-a.jpg" alt="Großer Trainingsraum im Elite Dance Studio" loading="lazy" />
       </div>
-      <div class="actions">
-        <a class="button primary" href="/stundenplan/">Klasse finden</a>
-        <a class="button secondary" href="/kontakt/">Frage stellen</a>
+      <div class="about-editorial-copy">
+        <div class="eyebrow">Learn · Move · Belong</div>
+        <h2>Mehr als nur eine Class.</h2>
+        <p>Du kommst wegen eines Styles. Mit der Zeit entstehen Technik, Sicherheit und echte Verbindung zur Community.</p>
+        <a class="text-link" href="/events/">Events & Socials entdecken ↗</a>
       </div>
+    </section>
+
+    <section class="about-values-band-v3" aria-label="Elite Dance Studio Eigenschaften">
+      <strong>Beginner-friendly</strong>
+      <span>25+ Styles</span>
+      <strong>Berlin-Moabit</strong>
+      <span>Partner & Solo</span>
+      <strong>Community</strong>
+    </section>
+
+    <section class="cta-banner home-final-cta">
+      <div><div class="eyebrow">Dein nächster Schritt</div><h2>Komm vorbei und erlebe Elite selbst.</h2></div>
+      <div class="actions"><a class="button primary" href="/starter-pass/">2 Classes · 20€</a></div>
     </section>
   </main>
 

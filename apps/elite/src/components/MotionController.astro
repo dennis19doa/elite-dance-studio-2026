@@ -18,24 +18,23 @@
     const itemSelector = [
       ".visitor-path-card",
       ".home-new-strip-card",
-      ".trust-proof-v7 > div",
       ".home-style-card",
       ".home-coach-card",
       ".style-poster-card",
       ".studio-world-card",
       ".coach-card",
-      ".coach-mosaic-card-v7",
+      ".coach-card-v8",
       ".faq-item",
       ".price-card",
       ".level-line-item",
       ".training-format-wide",
       ".intensive-roadmap-step",
-      ".intensive-module-v7",
+      ".intensive-card-v8",
       ".rental-room-card",
       ".advanced-card",
-      ".advanced-card-v7",
-      ".advanced-format-band-v7 a",
-      ".event-feature-v7",
+      ".advanced-card-v8",
+      ".advanced-formats-v8 a",
+      ".events-types-grid-v8 > a",
       ".contact-choice-v3 a",
       ".trial-fact"
     ].join(",");
@@ -47,24 +46,24 @@
       ".home-coach-card img",
       ".trial-media img",
       ".studio-world-card img",
-      ".trust-visual-v7 img",
       ".service-page-media img",
       ".pricing-page-media img",
       ".rental-room-card img",
       ".rental-hero-v3 img",
       ".advanced-card img",
-      ".advanced-card-v7 img",
-      ".advanced-hero-mosaic-v7 img",
-      ".about-hero-v7 img",
-      ".about-story-mosaic-v7 img",
-      ".about-team-v7 img",
-      ".about-community-v7 img",
-      ".intensive-module-v7 img",
-      ".intensive-hero-media-v7 img",
-      ".events-hero-v7 img",
-      ".event-feature-v7 img",
-      ".coach-feature-v7 img",
-      ".coach-mosaic-card-v7 img",
+      ".advanced-card-v8 img",
+      ".advanced-hero-poster-v8 img",
+      ".about-cinematic-v3 img",
+      ".about-story-images-v4 img",
+      ".about-team-v4 img",
+      ".about-community-v4 img",
+      ".intensive-card-v8 img",
+      ".intensives-hero-image-v8 img",
+      ".events-hero-image-v8 img",
+      ".events-feature-v8 img",
+      ".events-types-grid-v8 img",
+      ".coaches-hero-image-v8 img",
+      ".coach-card-v8 img",
       ".contact-hero-v3 img"
     ].join(",");
 
@@ -73,10 +72,10 @@
     sections.forEach((section, index) => {
       let mode = ["rise", "editorial", "soft"][index % 3];
       if (section.classList.contains("home-hero")) mode = "hero";
-      if (section.matches(".home-style-showcase, .rental-gallery-v3, .advanced-offer-v3, .advanced-offer-v7, .coach-wall-v7, .events-grid-v7")) mode = "gallery";
-      if (section.matches(".about-hero-v7, .about-story-v7, .about-team-v7, .about-community-v7, .contact-hero-v3, .rental-hero-v3, .advanced-hero-v7, .events-hero-v7, .coaches-hero-v7, .intensive-hero-v7")) mode = "cinematic";
+      if (section.matches(".home-style-showcase, .rental-gallery-v3, .advanced-offer-v8, .coaches-all-v8, .events-types-v8")) mode = "gallery";
+      if (section.matches(".about-cinematic-v3, .about-story-grid-v4, .about-team-v4, .about-community-v4, .contact-hero-v3, .rental-hero-v3, .advanced-hero-v8, .events-hero-v8, .coaches-hero-v8, .intensives-hero-v8")) mode = "cinematic";
       if (section.matches(".schedule-v3, .schedule-page-hero-v3")) mode = "schedule";
-      if (section.matches(".intensive-roadmap-panel, .intensive-roadmap-v7")) mode = "timeline";
+      if (section.matches(".intensive-modules-section-v8")) mode = "timeline";
 
       section.dataset.reveal = mode;
 

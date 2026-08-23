@@ -10,31 +10,29 @@ import site from "../data/site.json";
 <BaseLayout
   title="Stundenplan & Buchung | Elite Dance Studio Berlin"
   description="Aktuelle Tanzkurse im Elite Dance Studio Berlin ansehen und deinen Platz direkt über Eversports reservieren."
+  bodyClass="schedule-page-v3"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main">
-    <section class="booking-intro panel">
+  <main class="page-shell page-main schedule-main-v3">
+    <section class="schedule-page-hero-v3">
       <div>
-        <div class="eyebrow">Diese Woche bei Elite</div>
-        <h1 class="page-title">Stundenplan ansehen. Platz reservieren. Tanzen.</h1>
+        <div class="eyebrow">Stundenplan · Berlin-Moabit</div>
+        <h1 class="page-title">Wähle. Buche. Tanz.</h1>
       </div>
-      <div class="booking-intro-copy">
-        <p class="lead">Viele Klassen sind beginner-friendly, ohne festen Tanzpartner möglich und mit USC buchbar.</p>
-        <a class="button secondary" href="/starter-pass/">Lieber mit Welcome Pass starten</a>
+      <div class="schedule-page-hero-side">
+        <p class="lead">Alle aktuellen Classes und freien Plätze an einem Ort.</p>
+        <div class="schedule-utility-links">
+          <a href="/starter-pass/">Neu? 2 Classes · 20€</a>
+          <a href="https://urbansportsclub.com/de/venues/elite-dance-studio-1" target="_blank" rel="noreferrer">Mit USC kommen ↗</a>
+          <a href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20welcher%20Kurs%20passt%20zu%20mir%3F">Kurswahl fragen</a>
+        </div>
       </div>
-    </section>
-
-    <section class="booking-steps panel" aria-label="So funktioniert die Buchung">
-      <div><span>01</span><strong>Style & Level wählen</strong><p>Such dir eine Klasse aus, die zu deinem Einstieg passt.</p></div>
-      <div><span>02</span><strong>Spot reservieren</strong><p>Buche online, damit dein Platz im Kurs gesichert ist.</p></div>
-      <div><span>03</span><strong>Etwas früher kommen</strong><p>Plane beim ersten Besuch zehn bis fünfzehn Minuten ein.</p></div>
-      <div><span>04</span><strong>Einchecken & tanzen</strong><p>USC ist bei passenden Kursen über den Check-in möglich.</p></div>
     </section>
 
     <EversportsSchedule
-      title="Direkt über Eversports buchen."
-      description="Der Live-Kalender zeigt die aktuellen Classes und verfügbaren Plätze. Nutze die Level-Hilfe, wenn du zum ersten Mal bei uns bist."
+      title="Was möchtest du diese Woche tanzen?"
+      description="Klasse auswählen, Verfügbarkeit prüfen und direkt reservieren."
     />
   </main>
 

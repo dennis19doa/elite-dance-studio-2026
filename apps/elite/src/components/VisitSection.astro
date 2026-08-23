@@ -24,38 +24,30 @@ const {
   visit,
   eyebrow = "Kontakt & Anfahrt",
   title = "So findest du uns in Moabit.",
-  description = "Der Weg ins Studio sollte sich genauso klar anfühlen wie die Kurswahl: Adresse, Eingang und schneller Kontakt auf einen Blick."
+  description = "Wiclefstraße 16–17 · durch beide Tore · zweiter Hof links."
 } = Astro.props;
 ---
 
-<section class="visit panel" id="visit">
-  <div class="section-head">
+<section class="visit visit-v3" id="visit">
+  <div class="visit-v3-head">
     <div>
       <div class="eyebrow">{eyebrow}</div>
       <h2>{title}</h2>
     </div>
     <p>{description}</p>
   </div>
-  <div class="arrival-route" aria-label="Weg ins Studio">
-    <div class="arrival-step">
-      <span>01</span>
-      <strong>Wiclefstraße 16–17</strong>
-      <p>Adresse in Berlin-Moabit ansteuern.</p>
-    </div>
-    <div class="arrival-step">
-      <span>02</span>
-      <strong>Durch beide Tore</strong>
-      <p>Gehe durch die roten Tore in den Hof.</p>
-    </div>
-    <div class="arrival-step">
-      <span>03</span>
-      <strong>Zweiter Hof, links</strong>
-      <p>Dort findest du den Studioeingang.</p>
-    </div>
+
+  <div class="arrival-flow" aria-label="Weg ins Studio">
+    <span>Wiclefstraße 16–17</span>
+    <i aria-hidden="true">→</i>
+    <span>Durch beide Tore</span>
+    <i aria-hidden="true">→</i>
+    <span>Zweiter Hof · links</span>
   </div>
+
   <div class="visit-contact-band">
     <div>
-      <span class="visit-contact-label">Adresse</span>
+      <span class="visit-contact-label">Elite Dance Studio Berlin</span>
       <strong>{visit.address}</strong>
       <span class="visit-entry-note">{visit.entryNote}</span>
     </div>
@@ -65,8 +57,8 @@ const {
       <a href={visit.instagramHref}>{visit.instagram}</a>
     </div>
     <div class="visit-contact-actions">
-      <a class="button primary" href={visit.whatsappHref}>WhatsApp schreiben</a>
-      <a class="button secondary" href={visit.mapHref}>Route öffnen</a>
+      <a class="button primary" href={visit.whatsappHref}>WhatsApp</a>
+      <a class="button secondary" href={visit.mapHref}>Route öffnen ↗</a>
     </div>
   </div>
 </section>

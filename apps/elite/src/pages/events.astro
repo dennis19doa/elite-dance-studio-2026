@@ -9,60 +9,55 @@ import site from "../data/site.json";
 <BaseLayout
   title="Events & Elite Dance Party | Elite Dance Studio Berlin"
   description="Elite Dance Party, Socials, Workshops und Community-Events im Elite Dance Studio in Berlin-Moabit."
+  bodyClass="events-page-v7"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main">
-    <section class="service-page-hero panel">
-      <div class="service-page-copy">
-        <div class="eyebrow">Community in Bewegung</div>
-        <h1 class="page-title">Kurse bringen dich rein. Events lassen dich bleiben.</h1>
-        <p class="lead">
-          Elite ist nicht nur Unterricht. Partys, Socials und Workshops geben dir Raum, Menschen
-          kennenzulernen und das Gelernte ohne Druck zu erleben.
-        </p>
+  <main class="page-shell page-main events-main-v7">
+    <section class="events-hero-v7">
+      <figure class="events-hero-poster-v7">
+        <img src="/media/current-site/elite-party.jpg" alt="Elite Dance Party Eventmotiv" width="1080" height="1350" />
+      </figure>
+      <div class="events-hero-copy-v7">
+        <div class="eyebrow">Events · Socials · Workshops</div>
+        <h1 class="page-title">The class ends. The night starts.</h1>
+        <p>Elite ist mehr als Unterricht. Unsere Events bringen Musik, Training und Community in denselben Raum.</p>
         <div class="actions">
-          <a class="button primary" href="https://www.instagram.com/elitedanceberlin/">Aktuelle Events auf Instagram</a>
-          <a class="button secondary" href="/stundenplan/">Klasse buchen</a>
+          <a class="button primary" href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">Aktuelle Events ↗</a>
+          <a class="button secondary" href="/#schedule">Vorher eine Class buchen</a>
         </div>
       </div>
-      <figure class="service-page-media">
-        <img src="/media/placeholders/community-beginners.jpg" alt="Tanz-Community in einer hellen, offenen Studioatmosphäre" />
-      </figure>
     </section>
 
-    <section class="event-story panel">
-      <div class="event-story-copy">
-        <div class="eyebrow">Elite Dance Party</div>
-        <h2>Dein erster Social muss sich nicht wie eine Prüfung anfühlen.</h2>
-        <p>
-          Unsere Partys verbinden Musik, Community und echte Tanzmomente. Auch wenn du gerade erst
-          angefangen hast, kannst du vorbeikommen, zuschauen, Menschen treffen und in deinem Tempo
-          mittanzen.
-        </p>
-        <div class="event-facts">
-          <span>Beginner willkommen</span>
-          <span>Social Dance & Community</span>
-          <span>Termine über Instagram</span>
-        </div>
-        <a class="text-link" href="https://www.instagram.com/elitedanceberlin/">Nächsten Termin prüfen →</a>
+    <section class="events-marquee-v7" aria-label="Eventformate">
+      <span>Dance Parties</span><b>•</b><span>Socials</span><b>•</b><span>Workshops</span><b>•</b><span>Guest Coaches</span><b>•</b><span>Community Nights</span>
+    </section>
+
+    <section class="events-grid-v7">
+      <a class="event-feature-v7 is-large" href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">
+        <img src="/media/hero/elite-homepage-poster.jpg" alt="Tanzmoment bei Elite Dance Studio" loading="lazy" />
+        <span class="event-feature-shade-v7"></span>
+        <div><small>Elite Dance Party</small><strong>Tanzen, ausprobieren, Leute treffen.</strong><b>Nächsten Termin ansehen ↗</b></div>
+      </a>
+      <a class="event-feature-v7 is-blue" href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">
+        <img src="/media/current-site/elena-dennis-bachata.png" alt="Workshop bei Elite Dance Studio" loading="lazy" />
+        <span class="event-feature-shade-v7"></span>
+        <div><small>Workshops</small><strong>Mehr Fokus. Neue Impulse.</strong><b>Aktuelle Workshops ↗</b></div>
+      </a>
+      <a class="event-feature-v7 is-lime" href="/ueber-uns/">
+        <img src="/media/current-site/studio-room-a.jpg" alt="Elite Dance Studio Raum" loading="lazy" />
+        <span class="event-feature-shade-v7"></span>
+        <div><small>Community</small><strong>Ein Studio, das auch nach der Class weiterlebt.</strong><b>Über Elite →</b></div>
+      </a>
+    </section>
+
+    <section class="events-info-v7">
+      <div>
+        <div class="eyebrow">Auch neu dabei?</div>
+        <h2>Du musst niemanden kennen, um zu kommen.</h2>
       </div>
-      <figure class="event-poster-frame">
-        <img src="/media/current-site/elite-party.jpg" alt="Bisheriges Elite Dance Party Jubiläumsplakat" loading="lazy" />
-        <figcaption>Bestehendes Elite-Eventmotiv · aktuelle Poster werden hier später automatisch ergänzt.</figcaption>
-      </figure>
-    </section>
-
-    <section class="event-type-grid" aria-label="Eventformate bei Elite">
-      <article class="event-type-card event-type-plum">
-        <span>01</span><strong>Dance Parties</strong><p>Gemeinsam tanzen, üben und die Community außerhalb des Kursformats erleben.</p>
-      </article>
-      <article class="event-type-card event-type-slate">
-        <span>02</span><strong>Workshops</strong><p>Neue Styles, Gast-Coaches und fokussierte Themen für einen intensiveren Einblick.</p>
-      </article>
-      <article class="event-type-card event-type-gold">
-        <span>03</span><strong>Studio Specials</strong><p>Open Classes, Community-Treffen und besondere Formate rund um Elite.</p>
-      </article>
+      <p>Unsere Socials und Partys sind kein Test. Komm zum Tanzen, Zuschauen oder Leute kennenlernen. Aktuelle Termine veröffentlichen wir über Instagram.</p>
+      <a class="button primary" href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">@elitedanceberlin ↗</a>
     </section>
   </main>
 

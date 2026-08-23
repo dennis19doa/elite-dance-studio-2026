@@ -1,31 +1,34 @@
 ---
 const styles = [
-  { title: "Bachata", level: "Beginner → Advanced", image: "/media/style-posters/20-bachata-beginner.webp", href: "/kurse/#style-poster-gallery" },
-  { title: "Reggaeton", level: "Fundamentals → Intermediate", image: "/media/style-posters/09-reggaeton-fundamentals.webp", href: "/kurse/#style-poster-gallery" },
-  { title: "Hip-Hop", level: "Beginner", image: "/media/style-posters/06-hip-hop-beginner-amy.webp", href: "/kurse/#style-poster-gallery" },
-  { title: "Heels", level: "Beginner → Intermediate", image: "/media/style-posters/08-high-heels-intermediate.webp", href: "/kurse/#style-poster-gallery" },
-  { title: "K-Pop", level: "Open / Beginner", image: "/media/style-posters/02-kpop-beginner.webp", href: "/kurse/#style-poster-gallery" }
+  { title: "Bachata", level: "Beginner → Advanced", image: "/media/style-posters/20-bachata-beginner.webp", href: "/kurse/#style-poster-gallery", accent: "rose" },
+  { title: "Reggaeton", level: "Fundamentals → Intermediate", image: "/media/style-posters/09-reggaeton-fundamentals.webp", href: "/kurse/#style-poster-gallery", accent: "blue" },
+  { title: "Hip-Hop", level: "Beginner", image: "/media/style-posters/06-hip-hop-beginner-amy.webp", href: "/kurse/#style-poster-gallery", accent: "lime" },
+  { title: "Heels", level: "Beginner → Intermediate", image: "/media/style-posters/08-high-heels-intermediate.webp", href: "/kurse/#style-poster-gallery", accent: "rose" },
+  { title: "K-Pop", level: "Open / Beginner", image: "/media/style-posters/02-kpop-beginner.webp", href: "/kurse/#style-poster-gallery", accent: "blue" }
 ];
 ---
 
-<section class="home-style-showcase" aria-labelledby="home-style-title">
-  <header class="home-style-head">
+<section class="home-style-showcase home-style-showcase-v6" aria-labelledby="home-style-title">
+  <header class="home-style-head home-style-head-v6">
     <div>
       <div class="eyebrow">25+ Styles</div>
       <h2 id="home-style-title">Finde deinen Vibe.</h2>
+      <p>Swipe durch unsere beliebtesten Styles – den Rest findest du im Kursfinder.</p>
     </div>
     <a class="text-link" href="/kurse/#style-poster-gallery">Alle Kurse & Styles ↗</a>
   </header>
 
-  <div class="home-style-grid">
-    {styles.map((style, index) => (
-      <a class:list={["home-style-card", index === 0 && "home-style-card-featured"]} href={style.href}>
-        <img src={style.image} alt={`${style.title} bei Elite Dance Studio`} width="720" height="900" loading="lazy" decoding="async" />
-        <span class="home-style-overlay"></span>
-        <div class="home-style-copy">
+  <div class="home-style-rail" aria-label="Beliebte Tanzstyles">
+    {styles.map((style) => (
+      <a class:list={["home-style-card", "home-style-card-v6", `is-${style.accent}`]} href={style.href}>
+        <div class="home-style-media-v6">
+          <img src={style.image} alt={`${style.title} bei Elite Dance Studio`} width="720" height="900" loading="lazy" decoding="async" />
+          <span class="home-style-overlay"></span>
+        </div>
+        <div class="home-style-copy home-style-copy-v6">
           <small>{style.level}</small>
           <strong>{style.title}</strong>
-          <span>Alle Kurse ↗</span>
+          <span>Termine ansehen ↗</span>
         </div>
       </a>
     ))}

@@ -1,0 +1,479 @@
+/* Elite homepage v5 — booking first, video led, less explanatory UI. */
+
+.home-page-v5 .home-main {
+  padding-top: 18px;
+}
+
+.home-page-v5 .home-main > section {
+  margin-bottom: 28px;
+}
+
+/* HERO — the studio footage is the hero, not a text card. */
+.home-hero-v5 {
+  display: block !important;
+  min-height: 0;
+}
+
+.home-hero-v5 .hero-stage {
+  position: relative;
+  min-height: clamp(620px, 78vh, 820px);
+  overflow: hidden;
+  border-radius: 22px;
+  background: #0c0c10;
+  box-shadow: 0 30px 80px rgba(8, 7, 12, .28);
+  isolation: isolate;
+}
+
+.home-hero-v5 .hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(1.08) contrast(1.03);
+}
+
+.home-hero-v5 .hero-stage-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(10, 8, 14, .84) 0%, rgba(10, 8, 14, .56) 42%, rgba(10, 8, 14, .16) 72%, rgba(10, 8, 14, .34) 100%),
+    linear-gradient(0deg, rgba(10, 8, 14, .66) 0%, transparent 40%);
+}
+
+.home-hero-v5 .hero-stage-color {
+  position: absolute;
+  z-index: 2;
+  border-radius: 999px;
+  filter: blur(6px);
+  opacity: .74;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.home-hero-v5 .hero-stage-color-rose {
+  top: -90px;
+  right: 13%;
+  width: 330px;
+  height: 330px;
+  background: rgba(255, 79, 123, .34);
+}
+
+.home-hero-v5 .hero-stage-color-blue {
+  right: -90px;
+  bottom: -110px;
+  width: 390px;
+  height: 390px;
+  background: rgba(64, 88, 255, .32);
+}
+
+.home-hero-v5 .hero-stage-copy {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: clamp(28px, 6vw, 78px);
+  width: min(650px, calc(100% - 56px));
+  transform: translateY(-48%);
+  color: #fff;
+}
+
+.home-hero-v5 .hero-stage-copy .eyebrow {
+  margin-bottom: 18px;
+  color: var(--accent-lime);
+  font-size: .78rem;
+  font-weight: 750;
+}
+
+.home-hero-v5 .hero-stage-copy h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(4.7rem, 9vw, 8.5rem);
+  line-height: .78 !important;
+  letter-spacing: -.075em !important;
+  text-transform: uppercase;
+}
+
+.home-hero-v5 .hero-stage-copy p {
+  max-width: 38rem;
+  margin: 28px 0 0;
+  color: rgba(255, 255, 255, .8);
+  font-size: clamp(.95rem, 1.4vw, 1.12rem);
+  font-weight: 550;
+}
+
+.home-hero-v5 .hero-stage-copy .actions {
+  margin-top: 26px;
+}
+
+.home-hero-v5 .hero-stage-copy .button.primary {
+  background: var(--accent-lime);
+  color: #101014;
+}
+
+.home-hero-v5 .hero-stage-copy .button.secondary {
+  border-color: rgba(255, 255, 255, .42);
+  background: rgba(12, 12, 16, .24);
+  color: #fff;
+  backdrop-filter: blur(12px);
+}
+
+.home-hero-v5 .hero-stage-meta {
+  position: absolute;
+  z-index: 4;
+  right: clamp(24px, 4vw, 56px);
+  bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 7px;
+  max-width: 560px;
+}
+
+.home-hero-v5 .hero-stage-meta span {
+  padding: 8px 11px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  background: rgba(12, 12, 16, .34);
+  color: rgba(255, 255, 255, .82);
+  font-size: .7rem;
+  font-weight: 650;
+  backdrop-filter: blur(12px);
+}
+
+.home-hero-v5 .hero-scroll-cue {
+  position: absolute;
+  z-index: 5;
+  right: clamp(24px, 4vw, 56px);
+  top: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-hero-v5 .hero-scroll-cue b {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-rose);
+  color: #fff;
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+
+.home-hero-v5 .hero-scroll-cue:hover b {
+  transform: translateY(4px);
+}
+
+/* SCHEDULE — this is the homepage product, not a secondary embedded block. */
+.home-page-v5 .eversports-home {
+  position: relative;
+  padding: clamp(24px, 4vw, 48px);
+  border: 0;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(16, 16, 20, .10);
+}
+
+.home-page-v5 .eversports-home::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 8px;
+  border-radius: 22px 22px 0 0;
+  background: linear-gradient(90deg, var(--accent-blue) 0 48%, var(--accent-rose) 48% 75%, var(--accent-lime) 75% 100%);
+  content: "";
+}
+
+.home-page-v5 .eversports-home .schedule-command {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .9fr);
+  gap: 22px 42px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.home-page-v5 .eversports-home .schedule-command-copy {
+  grid-column: 1;
+}
+
+.home-page-v5 .eversports-home .schedule-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: var(--accent-blue);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.home-page-v5 .eversports-home .schedule-live-pill i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-rose);
+  box-shadow: 0 0 0 5px rgba(255, 79, 123, .12);
+}
+
+.home-page-v5 .eversports-home h2 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(2.8rem, 5.8vw, 5.4rem);
+  line-height: .92 !important;
+}
+
+.home-page-v5 .eversports-home .schedule-command-copy > p {
+  max-width: 34rem;
+  margin: 14px 0 0;
+  color: #5f5d66;
+  font-size: .95rem;
+}
+
+.home-page-v5 .eversports-home .schedule-shortcuts {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  align-self: center;
+}
+
+.home-page-v5 .eversports-home .schedule-shortcuts a {
+  padding: 9px 12px;
+  border: 1px solid rgba(16, 16, 20, .11);
+  border-radius: 999px;
+  background: #f7f5f1;
+  color: #242329;
+  font-size: .76rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-page-v5 .eversports-home .schedule-shortcuts a.is-active {
+  border-color: var(--accent-blue);
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+.home-page-v5 .eversports-home .schedule-command-actions {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.home-page-v5 .eversports-home .schedule-command-actions .button.primary {
+  background: var(--accent-lime);
+  color: #101014;
+}
+
+.home-page-v5 .eversports-home .eversports-frame-v3 {
+  overflow: hidden;
+  border: 1px solid rgba(16, 16, 20, .1);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.home-page-v5 .eversports-home .eversports-frame-topline {
+  background: #101014;
+  color: rgba(255, 255, 255, .72);
+}
+
+/* NEW VISITOR HELP — compact, colorful, below the calendar. */
+.home-new-strip {
+  padding: 6px 0 2px;
+}
+
+.home-new-strip-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 14px;
+  padding: 0 4px;
+}
+
+.home-new-strip-head h2 {
+  margin: 2px 0 0;
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+}
+
+.home-new-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.home-new-strip-card {
+  position: relative;
+  display: grid;
+  min-height: 215px;
+  align-content: start;
+  gap: 8px;
+  padding: 24px;
+  overflow: hidden;
+  border-radius: 16px;
+  color: #fff;
+  text-decoration: none;
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+}
+
+.home-new-strip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 44px rgba(16,16,20,.14);
+}
+
+.home-new-strip-card.is-rose { background: var(--accent-rose); }
+.home-new-strip-card.is-blue { background: var(--accent-blue); }
+.home-new-strip-card.is-lime { background: var(--accent-lime); color: #101014; }
+
+.home-new-strip-card > span {
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  opacity: .72;
+}
+
+.home-new-strip-card > strong {
+  max-width: 11ch;
+  margin-top: 7px;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 3vw, 2.45rem);
+  line-height: .98;
+  letter-spacing: -.04em;
+}
+
+.home-new-strip-card > small {
+  max-width: 28rem;
+  color: currentColor;
+  font-size: .8rem;
+  line-height: 1.45;
+  opacity: .74;
+}
+
+.home-new-strip-card > b {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid currentColor;
+  font-size: .76rem;
+  opacity: .9;
+}
+
+/* The next visual section starts tighter after booking. */
+.home-page-v5 .home-style-showcase {
+  margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+  .home-hero-v5 .hero-stage {
+    min-height: 670px;
+  }
+
+  .home-page-v5 .eversports-home .schedule-command {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page-v5 .eversports-home .schedule-command-copy,
+  .home-page-v5 .eversports-home .schedule-shortcuts,
+  .home-page-v5 .eversports-home .schedule-command-actions {
+    grid-column: 1;
+    grid-row: auto;
+    justify-content: flex-start;
+  }
+
+  .home-new-strip-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-new-strip-card {
+    min-height: 180px;
+  }
+}
+
+@media (max-width: 620px) {
+  .home-page-v5 .home-main {
+    padding-top: 10px;
+  }
+
+  .home-hero-v5 .hero-stage {
+    min-height: 650px;
+    border-radius: 16px;
+  }
+
+  .home-hero-v5 .hero-stage-shade {
+    background:
+      linear-gradient(0deg, rgba(10, 8, 14, .90) 0%, rgba(10, 8, 14, .46) 64%, rgba(10, 8, 14, .18) 100%);
+  }
+
+  .home-hero-v5 .hero-stage-copy {
+    top: auto;
+    right: 22px;
+    bottom: 94px;
+    left: 22px;
+    width: auto;
+    transform: none;
+  }
+
+  .home-hero-v5 .hero-stage-copy h1 {
+    font-size: clamp(4rem, 21vw, 6.1rem);
+  }
+
+  .home-hero-v5 .hero-stage-copy p {
+    margin-top: 20px;
+  }
+
+  .home-hero-v5 .hero-stage-meta {
+    display: none;
+  }
+
+  .home-hero-v5 .hero-scroll-cue {
+    top: 18px;
+    right: 18px;
+  }
+
+  .home-page-v5 .eversports-home {
+    padding: 28px 16px 18px;
+    border-radius: 16px;
+  }
+
+  .home-page-v5 .eversports-home h2 {
+    font-size: clamp(2.55rem, 14vw, 4rem);
+  }
+
+  .home-page-v5 .eversports-home .schedule-shortcuts {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 3px;
+    scrollbar-width: none;
+  }
+
+  .home-page-v5 .eversports-home .schedule-shortcuts::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-page-v5 .eversports-home .schedule-shortcuts a {
+    flex: 0 0 auto;
+  }
+
+  .home-page-v5 .eversports-home .schedule-command-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .home-new-strip-head {
+    display: block;
+  }
+}

@@ -13,13 +13,13 @@ function isActive(href: string) {
 }
 function isGroupActive(item: NavItem) { return isActive(item.href) || item.children?.some((child) => isActive(child.href)); }
 ---
-<header class="site-header site-header-v2">
+<header class="site-header site-header-v2" data-site-header>
   <div class="page-shell topbar">
     <a class="brand" href="/">{brand}</a>
 
-    <nav class="main-nav desktop-nav" aria-label="Primary">
+    <nav class="main-nav desktop-nav" aria-label="Primary" data-desktop-nav>
       {nav.map((item) => item.children ? (
-        <details class:list={["nav-dropdown", isGroupActive(item) && "is-active"]}>
+        <details class:list={["nav-dropdown", isGroupActive(item) && "is-active"]} data-nav-dropdown>
           <summary class="nav-link">{item.label}<span class="nav-chevron" aria-hidden="true">⌄</span></summary>
           <div class="nav-dropdown-menu">
             {item.children.map((child) => (
@@ -51,12 +51,12 @@ function isGroupActive(item: NavItem) { return isActive(item.href) || item.child
       <a class="button primary" href={bookingHref}>Buchen</a>
     </div>
 
-    <details class="mobile-nav">
+    <details class="mobile-nav" data-mobile-nav>
       <summary><span class="mobile-nav-icon" aria-hidden="true"><i></i><i></i></span><span>Menü</span></summary>
       <div class="mobile-menu panel">
         <nav class="mobile-menu-links" aria-label="Mobile Navigation">
           {nav.map((item) => item.children ? (
-            <details class="mobile-nav-group" open={isGroupActive(item)}>
+            <details class="mobile-nav-group" open={isGroupActive(item)} data-mobile-nav-group>
               <summary class:list={[isGroupActive(item) && "is-active"]}>{item.label}</summary>
               <div>
                 {item.children.map((child) => (
@@ -81,3 +81,44 @@ function isGroupActive(item: NavItem) { return isActive(item.href) || item.child
     </details>
   </div>
 </header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-site-header]");
+  if (header) {
+    const desktopDropdowns = Array.from(header.querySelectorAll<HTMLDetailsElement>("[data-nav-dropdown]"));
+    const mobileGroups = Array.from(header.querySelectorAll<HTMLDetailsElement>("[data-mobile-nav-group]"));
+    const mobileNav = header.querySelector<HTMLDetailsElement>("[data-mobile-nav]");
+
+    const closeExcept = (items: HTMLDetailsElement[], keep?: HTMLDetailsElement) => {
+      items.forEach((item) => {
+        if (item !== keep) item.open = false;
+      });
+    };
+
+    desktopDropdowns.forEach((dropdown) => {
+      dropdown.addEventListener("toggle", () => {
+        if (dropdown.open) closeExcept(desktopDropdowns, dropdown);
+      });
+    });
+
+    mobileGroups.forEach((group) => {
+      group.addEventListener("toggle", () => {
+        if (group.open) closeExcept(mobileGroups, group);
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!header.contains(event.target as Node)) {
+        closeExcept(desktopDropdowns);
+        if (mobileNav) mobileNav.open = false;
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      closeExcept(desktopDropdowns);
+      closeExcept(mobileGroups);
+      if (mobileNav) mobileNav.open = false;
+    });
+  }
+</script>

@@ -2,71 +2,70 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import CoachesSection from "../components/CoachesSection.astro";
 
 import coaches from "../data/coaches.json";
 import site from "../data/site.json";
+
+const featured = coaches.slice(0, 3);
 ---
 
 <BaseLayout
   title="Coaches & Tanzlehrer:innen | Elite Dance Studio Berlin"
-  description="Lerne die Coaches für Bachata, Reggaeton, Heels, Hip Hop, Commercial und K-Pop im Elite Dance Studio Berlin kennen."
+  description="Lerne die Coaches für Bachata, Reggaeton, Heels, Hip Hop, Commercial, K-Pop und weitere Styles im Elite Dance Studio Berlin kennen."
+  bodyClass="coaches-page-v7"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main">
-    <section class="coaches-page-hero panel">
-      <div class="coaches-page-copy">
-        <div class="eyebrow">Menschen vor Perfektion</div>
-        <h1 class="page-title">Ein guter Coach lässt deinen ersten Schritt leicht wirken.</h1>
-        <p class="lead">
-          Unsere Coaches geben dir Technik, Energie und Orientierung, ohne dass du dich schon
-          wie ein:e Tänzer:in fühlen musst.
-        </p>
+  <main class="page-shell page-main coaches-main-v7">
+    <section class="coaches-hero-v7">
+      <div class="coaches-hero-copy-v7">
+        <div class="eyebrow">22 Coaches · viele Perspektiven</div>
+        <h1 class="page-title">Meet the people behind the movement.</h1>
+        <p>Technik, Persönlichkeit und unterschiedliche Teaching-Styles. Finde die Energie, bei der du gern wiederkommst.</p>
         <div class="actions">
-          <a class="button primary" href="#coach-list">Coaches kennenlernen</a>
-          <a class="button secondary" href="/kurse/">Beginner-Kurs finden</a>
+          <a class="button primary" href="#coach-wall">Team entdecken</a>
+          <a class="button secondary" href="/#schedule">Class buchen</a>
         </div>
       </div>
-      <figure class="coaches-page-media">
-        <img
-          src="/media/placeholders/community-beginners.jpg"
-          alt="Konzeptbild einer freundlichen Beginner-Gruppe im Tanzstudio"
-        />
-        <figcaption>Bildidee · echte Kursmomente ersetzen dieses Konzept</figcaption>
-      </figure>
+      <div class="coaches-hero-stack-v7">
+        {featured.map((coach, index) => (
+          <a class:list={["coach-feature-v7", `is-${index + 1}`]} href={`/coaches/${coach.slug}/`}>
+            <img src={coach.image} alt={coach.imageAlt} />
+            <span>{coach.focus}</span>
+            <strong>{coach.name}</strong>
+          </a>
+        ))}
+      </div>
     </section>
 
-    <section class="coach-values panel">
-      <div class="coach-value value-coral"><span>01</span><strong>Verständlich</strong><p>Klare Erklärungen und Fundamentals, die du wirklich anwenden kannst.</p></div>
-      <div class="coach-value value-blue"><span>02</span><strong>Aufmerksam</strong><p>Du wirst gesehen, auch wenn du zum allerersten Mal im Raum stehst.</p></div>
-      <div class="coach-value value-gold"><span>03</span><strong>Motivierend</strong><p>Fortschritt darf sich leicht, persönlich und nach dir anfühlen.</p></div>
+    <section class="coach-style-ticker-v7" aria-label="Styles unserer Coaches">
+      <span>Bachata</span><b>•</b><span>Reggaeton</span><b>•</b><span>Heels</span><b>•</b><span>Hip-Hop</span><b>•</b><span>Commercial</span><b>•</b><span>K-Pop</span><b>•</b><span>Zouk</span><b>•</b><span>Breaking</span><b>•</b><span>House</span><b>•</b><span>Contemporary</span>
     </section>
 
-    <div id="coach-list">
-      <CoachesSection
-      coaches={coaches}
-      eyebrow="Unser Team"
-      title="Finde die Energie, bei der du bleiben willst."
-      description="Öffne ein Profil, lerne den Teaching-Fokus kennen und springe über das Instagram-Icon direkt zu aktuellen Videos und Eindrücken."
-      />
-    </div>
+    <section class="coach-wall-v7" id="coach-wall" aria-labelledby="coach-wall-title">
+      <header>
+        <div><div class="eyebrow">Unser Team</div><h2 id="coach-wall-title">Different styles. One studio.</h2></div>
+        <p>Öffne ein Profil für Teaching-Fokus, aktuelle Classes und Instagram.</p>
+      </header>
 
-    <section class="quote-panel panel">
-      <div>
-        <div class="eyebrow">Unser Anspruch</div>
-        <blockquote>{site.communityQuote}</blockquote>
+      <div class="coach-mosaic-v7">
+        {coaches.map((coach, index) => (
+          <a class:list={["coach-mosaic-card-v7", `shape-${(index % 5) + 1}`, `tone-${(index % 3) + 1}`]} href={`/coaches/${coach.slug}/`}>
+            <img src={coach.image} alt={coach.imageAlt} loading="lazy" decoding="async" />
+            <span class="coach-mosaic-shade-v7"></span>
+            <div>
+              <small>{coach.focus}</small>
+              <strong>{coach.name}</strong>
+              <span>Profil ansehen ↗</span>
+            </div>
+          </a>
+        ))}
       </div>
-      <div class="coach-callout">
-        <strong>Du musst keinen Coach vorher kennen.</strong>
-        <p>Wähle zuerst den Style, der dich neugierig macht. Beim ersten Besuch helfen wir dir dabei, das richtige Level und die passende Atmosphäre zu finden.</p>
-        <div class="point-list">
-          <span>Die meisten laufenden Klassen sind beginner-friendly.</span>
-          <span>Allein kommen ist bei Elite vollkommen normal.</span>
-          <span>Fragen vor dem Kurs beantworten wir direkt.</span>
-        </div>
-        <a class="text-link" href="/kontakt/">Persönliche Empfehlung bekommen <span aria-hidden="true">→</span></a>
-      </div>
+    </section>
+
+    <section class="coaches-cta-v7">
+      <div><div class="eyebrow">Noch keinen Favoriten?</div><h2>Wähle zuerst die Class. Der richtige Coach kommt oft danach.</h2></div>
+      <a class="button primary" href="/#schedule">Live-Stundenplan</a>
     </section>
   </main>
 

@@ -11,9 +11,11 @@ permissions:
   pages: write
   id-token: write
 
+# Only the newest Pages deployment should survive. This prevents an older PR
+# artifact from overwriting a newer preview after a burst of commits.
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy-preview:
@@ -24,30 +26,6 @@ jobs:
       url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/preview/
 
     steps:
-      - name: Checkout live main
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.14.0
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install live dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build live site
-        run: pnpm --filter @dance/elite build
-        env:
-          GITHUB_PAGES_BASE: ${{ github.event.repository.name }}
-          PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
-
       - name: Download pull request preview
         uses: actions/download-artifact@v4
         with:
@@ -56,10 +34,61 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
 
-      - name: Assemble live site and preview
+      - name: Verify preview is still the latest PR commit
+        id: freshness
         shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          BUILD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           PR_NUMBER="$(cat preview-dist/preview-pr-number.txt)"
+          CURRENT_SHA="$(gh api "repos/${REPOSITORY}/pulls/${PR_NUMBER}" --jq '.head.sha')"
+          echo "pr_number=${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+
+          if [ "$CURRENT_SHA" = "$BUILD_SHA" ]; then
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+            echo "Preview is current: PR #${PR_NUMBER} at ${BUILD_SHA}"
+          else
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping stale preview ${BUILD_SHA}; current PR head is ${CURRENT_SHA}."
+          fi
+
+      - name: Checkout live main
+        if: steps.freshness.outputs.fresh == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up pnpm
+        if: steps.freshness.outputs.fresh == 'true'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+
+      - name: Set up Node
+        if: steps.freshness.outputs.fresh == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install live dependencies
+        if: steps.freshness.outputs.fresh == 'true'
+        run: pnpm install --frozen-lockfile
+
+      - name: Build live site
+        if: steps.freshness.outputs.fresh == 'true'
+        run: pnpm --filter @dance/elite build
+        env:
+          GITHUB_PAGES_BASE: ${{ github.event.repository.name }}
+          PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+
+      - name: Assemble live site and preview
+        if: steps.freshness.outputs.fresh == 'true'
+        shell: bash
+        env:
+          PR_NUMBER: ${{ steps.freshness.outputs.pr_number }}
+        run: |
           rm preview-dist/preview-pr-number.txt
           mkdir -p "site/preview/pr-${PR_NUMBER}"
           cp -a apps/elite/dist/. site/
@@ -83,14 +112,10 @@ jobs:
               except UnicodeDecodeError:
                   continue
 
-              # Rewrite root-absolute HTML attributes exactly once.
               for attr in ("href", "src", "poster", "action"):
                   pattern = rf'{attr}="/(?!{re.escape(repo)}/)([^"#]+)"'
                   text = re.sub(pattern, lambda m: f'{attr}="{base}{m.group(1)}"', text)
 
-              # CSS url(/media/...) references are not HTML attributes, so handle
-              # only those explicit forms. Avoid a global /media/ replacement,
-              # which previously double-prefixed image and video paths.
               text = text.replace('url("/media/', f'url("{base}media/')
               text = text.replace("url('/media/", f"url('{base}media/")
               text = text.replace('url(/media/', f'url({base}media/')
@@ -98,10 +123,12 @@ jobs:
           PY
 
       - name: Upload Pages artifact
+        if: steps.freshness.outputs.fresh == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
 
       - name: Deploy preview alongside live site
+        if: steps.freshness.outputs.fresh == 'true'
         id: deployment
         uses: actions/deploy-pages@v4

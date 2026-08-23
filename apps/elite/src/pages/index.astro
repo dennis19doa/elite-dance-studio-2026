@@ -7,7 +7,7 @@ import FaqSection from "../components/FaqSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import StudioExperienceSection from "../components/StudioExperienceSection.astro";
-import BeginnerEntrancesSection from "../components/BeginnerEntrancesSection.astro";
+import HomeNewVisitorStrip from "../components/HomeNewVisitorStrip.astro";
 import HomeStyleShowcase from "../components/HomeStyleShowcase.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
 
@@ -18,25 +18,28 @@ import trustSignals from "../data/trust-signals.json";
 ---
 
 <BaseLayout
-  title="Beginner Tanzkurse in Berlin | Elite Dance Studio"
-  description="Beginner-friendly Tanzkurse in Berlin-Moabit: ohne Vorkenntnisse starten, oft ohne festen Partner. Welcome Pass: 2 Klassen für 20 Euro."
-  bodyClass="home-page"
+  title="Tanzkurse in Berlin-Moabit | Elite Dance Studio"
+  description="25+ Tanzstyles in Berlin-Moabit: von Level 0 und Beginner bis Intermediate und Advanced. Live-Stundenplan ansehen und direkt buchen."
+  bodyClass="home-page home-page-v5"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main home-main">
     <HeroSection hero={site.hero} />
-    <BeginnerEntrancesSection />
-    <TrustStrip signals={trustSignals} />
-    <HomeStyleShowcase />
+
     <EversportsSchedule
       home
-      eyebrow="Diese Woche"
-      title="Finde deinen nächsten Kurs."
-      description="Tag, Style oder Level wählen. Direkt buchen."
+      eyebrow="Live · diese Woche"
+      title="Dein Stundenplan. Direkt buchen."
+      description="Aktuelle Classes, freie Plätze und Buchung an einem Ort."
     />
+
+    <HomeNewVisitorStrip />
+    <HomeStyleShowcase />
+    <TrustStrip signals={trustSignals} />
     <TrialOfferSection offer={trialOffer} />
     <StudioExperienceSection />
+
     <FaqSection
       items={faqs.slice(0, 3)}
       eyebrow="Gut zu wissen"

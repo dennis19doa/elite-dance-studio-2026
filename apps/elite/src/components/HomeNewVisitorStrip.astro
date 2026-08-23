@@ -1,0 +1,52 @@
+---
+const items = [
+  {
+    kicker: "Neu bei Elite?",
+    title: "2 Classes · 20€",
+    text: "Mit dem Welcome Pass zwei Styles testen.",
+    href: "/starter-pass/",
+    cta: "Welcome Pass",
+    tone: "rose"
+  },
+  {
+    kicker: "Noch unsicher?",
+    title: "Finde deinen Kurs.",
+    text: "Styles, Levels und passende Einstiege entdecken.",
+    href: "/kurse/",
+    cta: "Kurse entdecken",
+    tone: "blue"
+  },
+  {
+    kicker: "USC Mitglied?",
+    title: "Direkt über USC.",
+    text: "Verfügbarkeit prüfen und deinen Check-in vorbereiten.",
+    href: "https://urbansportsclub.com/de/venues/elite-dance-studio-1",
+    cta: "USC öffnen",
+    tone: "lime",
+    external: true
+  }
+];
+---
+
+<section class="home-new-strip" aria-labelledby="home-new-strip-title">
+  <header class="home-new-strip-head">
+    <div class="eyebrow">Neu hier?</div>
+    <h2 id="home-new-strip-title">Dein Einstieg, ohne Umwege.</h2>
+  </header>
+
+  <div class="home-new-strip-grid">
+    {items.map((item) => (
+      <a
+        class:list={["home-new-strip-card", `is-${item.tone}`]}
+        href={item.href}
+        target={item.external ? "_blank" : undefined}
+        rel={item.external ? "noreferrer" : undefined}
+      >
+        <span>{item.kicker}</span>
+        <strong>{item.title}</strong>
+        <small>{item.text}</small>
+        <b>{item.cta} <span aria-hidden="true">↗</span></b>
+      </a>
+    ))}
+  </div>
+</section>

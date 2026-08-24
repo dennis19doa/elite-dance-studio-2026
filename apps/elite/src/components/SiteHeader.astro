@@ -13,7 +13,7 @@ function isGroupActive(item: NavItem) { return isActive(item.href) || item.child
 ---
 <header class="site-header site-header-v2" data-site-header>
   <div class="page-shell topbar">
-    <a class="brand" href="/">{brand}</a>
+    <a class="brand" href={baseUrl}>{brand}</a>
     <nav class="main-nav desktop-nav" aria-label="Primary">
       {nav.map((item) => item.children ? (
         <details class:list={["nav-dropdown", isGroupActive(item) && "is-active"]}>

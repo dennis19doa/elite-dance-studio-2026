@@ -63,5 +63,6 @@ const previewLabel = previewSha ? previewSha.slice(0, 8) : "";
     <MotionController />
     <MobileJoinBar />
     {previewLabel && <div class="preview-build-badge" aria-hidden="true">Preview {previewLabel}</div>}
+    <!-- Preview builds expose their exact commit above so stale deployments are obvious. -->
   </body>
 </html>

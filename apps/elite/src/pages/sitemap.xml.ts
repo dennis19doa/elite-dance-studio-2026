@@ -4,6 +4,7 @@ import coaches from "../data/coaches.json";
 const publicRoutes = [
   "/",
   "/kurse/",
+  "/styles/",
   "/preise/",
   "/events/",
   "/coaches/",

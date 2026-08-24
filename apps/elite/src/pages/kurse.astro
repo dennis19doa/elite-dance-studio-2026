@@ -4,40 +4,21 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import PageIntro from "../components/PageIntro.astro";
 import CourseLevelGuide from "../components/CourseLevelGuide.astro";
-import StylePosterGallery from "../components/StylePosterGallery.astro";
+import StyleCompass from "../components/StyleCompass.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
+import FirstVisitSection from "../components/FirstVisitSection.astro";
 import courseLevelGuide from "../data/course-level-guide.json";
-import stylePosters from "../data/style-posters.json";
+import firstVisit from "../data/first-visit.json";
 import site from "../data/site.json";
 ---
-<BaseLayout
-  title="Tanzkurse & Styles in Berlin | Elite Dance Studio"
-  description="Entdecke 25+ Tanzstyles im Elite Dance Studio Berlin-Moabit, finde dein Level von Level 0 bis Advanced und buche direkt im Live-Stundenplan."
-  bodyClass="courses-page-v4"
->
+<BaseLayout title="Tanzkurse in Berlin-Moabit | Level 0 bis Advanced | Elite Dance Studio" description="Tanzkurse in Berlin-Moabit von Level 0 und Beginner bis Intermediate und Advanced. Solo- und Partner-Styles, Closed Groups, Intensives und Live-Stundenplan.">
   <SiteHeader brand={site.brand} nav={site.nav} />
-
-  <main class="page-shell page-main courses-main-v4">
-    <PageIntro
-      eyebrow="Tanzkurse bei Elite"
-      title="Finde den Style, der dich bewegt."
-      description="25+ Styles, Level 0 bis Advanced und direkte Buchung an einem Ort."
-      actions={[
-        { label: "Styles entdecken", href: "#style-poster-gallery", variant: "primary" },
-        { label: "Diese Woche buchen", href: "#schedule", variant: "secondary" }
-      ]}
-    />
-
-    <StylePosterGallery posters={stylePosters} />
-
+  <main class="page-shell page-main">
+    <PageIntro eyebrow="Kurse" title="Finde dein Level. Wähle deinen Style. Buch deinen Kurs." description="Reguläre Classes, Closed Groups und Intensives – mit klaren Levels von Level 0 bis Advanced." actions={[{ label: "Level finden", href: "#levels", variant: "primary" }, { label: "Live-Stundenplan", href: "#schedule", variant: "secondary" }]} />
     <CourseLevelGuide items={courseLevelGuide} />
-
-    <EversportsSchedule
-      eyebrow="Diese Woche"
-      title="Deinen nächsten Kurs direkt buchen."
-      description="Tag, Coach, Level und freie Plätze live prüfen."
-    />
+    <StyleCompass />
+    <EversportsSchedule eyebrow="Aktuelle Woche" title="Jetzt Termin finden." description="Tag, Coach, Level und freie Plätze direkt im Live-Stundenplan prüfen." />
+    <FirstVisitSection steps={firstVisit} eyebrow="Erster Besuch" title="Drei Schritte bis zur ersten Class." description="Kurs wählen, Platz sichern, vorbeikommen." />
   </main>
-
   <SiteFooter brand={site.brand} nav={site.nav} />
 </BaseLayout>

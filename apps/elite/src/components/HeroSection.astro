@@ -16,8 +16,8 @@ interface Props {
 const { hero } = Astro.props;
 ---
 
-<section class="home-hero home-hero-v5">
-  <div class="hero-stage">
+<section class="home-hero">
+  <div class="hero-visual hero-video-only panel">
     <video
       class="hero-video"
       autoplay
@@ -35,31 +35,29 @@ const { hero } = Astro.props;
       )}
       <source src={hero.videoSrc} type="video/mp4" />
     </video>
+  </div>
 
-    <div class="hero-stage-shade"></div>
-    <div class="hero-stage-color hero-stage-color-rose" aria-hidden="true"></div>
-    <div class="hero-stage-color hero-stage-color-blue" aria-hidden="true"></div>
+  <div class="hero-copy panel">
+    <div class="hero-copy-index" aria-hidden="true">
+      <span>Berlin · Moabit</span>
+      <strong>Dance<br />Feel<br />Belong</strong>
+    </div>
 
-    <div class="hero-stage-copy">
-      <div class="eyebrow">Elite Dance Studio · Berlin-Moabit</div>
-      <h1>Dance.<br />Feel.<br />Belong.</h1>
-      <p>25+ Styles · Level 0 bis Advanced · Solo & Partner Dance.</p>
+    <div class="hero-copy-main">
+      <div class="eyebrow">{hero.eyebrow}</div>
+      <h1>{hero.title}</h1>
+      <p class="lead">Tanzkurse für Beginner in Berlin-Moabit – 25+ Styles, persönliche Coaches und klare Levels.</p>
       <div class="actions">
-        <a class="button primary" href="#schedule">Stundenplan ansehen</a>
-        <a class="button secondary" href="/kurse/">Kurse entdecken</a>
+        <a class="button primary" href={hero.primaryCtaHref}>Stundenplan ansehen</a>
+        <a class="button secondary" href={hero.secondaryCtaHref}>Neu hier?</a>
       </div>
     </div>
 
-    <div class="hero-stage-meta" aria-label="Elite Dance Studio Highlights">
-      <span>Beginner-friendly</span>
-      <span>Intermediate & Advanced</span>
-      <span>Intensives</span>
-      <span>Berlin-Moabit</span>
-    </div>
-
-    <a class="hero-scroll-cue" href="#schedule">
-      <span>Live Stundenplan</span>
-      <b aria-hidden="true">↓</b>
-    </a>
+    <aside class="hero-copy-support">
+      <span class="hero-note-kicker">Neu hier?</span>
+      <a class="hero-guided-link" href="/kurse/#kurskompass">
+        Passenden Kurs finden <span aria-hidden="true">↘</span>
+      </a>
+    </aside>
   </div>
 </section>

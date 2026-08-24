@@ -1,18 +1,36 @@
 ---
-const target = "/kurse/#style-poster-gallery";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PageIntro from "../components/PageIntro.astro";
+import StylesSection from "../components/StylesSection.astro";
+import StylePosterGallery from "../components/StylePosterGallery.astro";
+
+import site from "../data/site.json";
+import stylePosters from "../data/style-posters.json";
+import styles from "../data/styles.json";
 ---
-<!doctype html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="refresh" content={`0; url=${target}`} />
-    <meta name="robots" content="noindex, follow" />
-    <link rel="canonical" href="https://elitedancestudio.de/kurse/" />
-    <title>Kurse & Styles | Elite Dance Studio</title>
-  </head>
-  <body>
-    <p>Die Tanzstyles findest du jetzt gemeinsam mit allen Kursen. <a href={target}>Kurse & Styles öffnen</a>.</p>
-    <script is:inline define:vars={{ target }}>window.location.replace(target);</script>
-  </body>
-</html>
+
+<BaseLayout
+  title="Tanzstile für Beginner | Elite Dance Studio Berlin"
+  description="Entdecke Partner Dance, Urban, Performance und Technique bei Elite Dance Studio in Berlin-Moabit und finde deinen beginner-friendly Einstieg."
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main">
+    <PageIntro
+      eyebrow="Finde deinen Style"
+      title="Du musst deinen Lieblingsstyle noch nicht kennen."
+      description="Starte mit der Energie, die zu dir passt: gemeinsam im Partner Dance, kraftvoll in Urban und Performance oder fokussiert mit Technik und Ausdruck. Fast jeder Weg beginnt beginner-friendly."
+      actions={[
+        { label: "Alle Styles ansehen", href: "#style-poster-gallery", variant: "primary" },
+        { label: "Live-Stundenplan", href: "/stundenplan/#schedule", variant: "secondary" }
+      ]}
+    />
+
+    <StylesSection styles={styles} />
+    <StylePosterGallery posters={stylePosters} />
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

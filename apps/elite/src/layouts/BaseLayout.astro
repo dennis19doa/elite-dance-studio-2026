@@ -1,11 +1,6 @@
 ---
 import "../styles/global.css";
 import "../styles/v2.css";
-import "../styles/polish.css";
-import "../styles/modern-v3.css";
-import "../styles/color-v4.css";
-import "../styles/home-booking-v5.css";
-import "../styles/experience-v6.css";
 import MobileJoinBar from "../components/MobileJoinBar.astro";
 import MotionController from "../components/MotionController.astro";
 import StructuredData from "../components/StructuredData.astro";
@@ -51,12 +46,10 @@ const socialImageUrl = new URL(image, siteUrl);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
-    <meta name="theme-color" content="#101012" />
+    <meta name="theme-color" content="#211724" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://widget-static.eversports.io" />
-    <link rel="dns-prefetch" href="https://widget-static.eversports.io" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
     {!noindex && <StructuredData pageTitle={title} path={Astro.url.pathname} />}
     <slot name="head" />
   </head>

@@ -7,9 +7,7 @@ import FaqSection from "../components/FaqSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import StudioExperienceSection from "../components/StudioExperienceSection.astro";
-import HomeNewVisitorStrip from "../components/HomeNewVisitorStrip.astro";
-import HomeStyleShowcase from "../components/HomeStyleShowcase.astro";
-import HomeCoachRail from "../components/HomeCoachRail.astro";
+import BeginnerEntrancesSection from "../components/BeginnerEntrancesSection.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
 
 import faqs from "../data/faqs.json";
@@ -19,42 +17,38 @@ import trustSignals from "../data/trust-signals.json";
 ---
 
 <BaseLayout
-  title="Tanzkurse in Berlin-Moabit | Elite Dance Studio"
-  description="25+ Tanzstyles in Berlin-Moabit: von Level 0 und Beginner bis Intermediate und Advanced. Live-Stundenplan ansehen und direkt buchen."
-  bodyClass="home-page home-page-v5"
+  title="Beginner Tanzkurse in Berlin | Elite Dance Studio"
+  description="Beginner-friendly Tanzkurse in Berlin-Moabit: ohne Vorkenntnisse starten, oft ohne festen Partner. Welcome Pass: 2 Klassen für 20 Euro."
+  bodyClass="home-page"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main home-main">
     <HeroSection hero={site.hero} />
-
+    <BeginnerEntrancesSection />
+    <TrustStrip signals={trustSignals} />
     <EversportsSchedule
       home
-      eyebrow="Live · diese Woche"
-      title="Dein Stundenplan. Direkt buchen."
-      description="Aktuelle Classes, freie Plätze und Buchung an einem Ort."
+      eyebrow="Deine Woche bei Elite"
+      title="Finde deinen nächsten Kurs."
+      description="Filtere nach Tag, Style oder Level und buche direkt."
     />
-
-    <HomeNewVisitorStrip />
-    <HomeStyleShowcase />
-    <HomeCoachRail />
-    <TrustStrip signals={trustSignals} />
     <TrialOfferSection offer={trialOffer} />
     <StudioExperienceSection />
-
     <FaqSection
-      items={faqs.slice(0, 3)}
+      items={faqs.slice(0, 4)}
       eyebrow="Gut zu wissen"
-      title="Vor deinem ersten Kurs."
+      title="Noch Fragen vor deinem ersten Kurs?"
       description=""
       linkHref="/faq/"
       linkLabel="Alle Fragen ansehen"
     />
 
-    <section class="cta-banner panel home-final-cta">
+    <section class="cta-banner panel">
       <div>
         <div class="eyebrow">Persönliche Hilfe</div>
-        <h2>Nicht sicher, welcher Kurs passt?</h2>
+        <h2>Nicht sicher, welcher Kurs zu dir passt?</h2>
+        <p>Wir helfen dir.</p>
       </div>
       <div class="actions">
         <a class="button primary" href={site.visit.whatsappHref}>WhatsApp schreiben</a>

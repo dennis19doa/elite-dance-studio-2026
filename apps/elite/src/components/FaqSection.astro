@@ -42,12 +42,10 @@ const faqSchema = {
       <div class="eyebrow">{eyebrow}</div>
       <h2>{title}</h2>
     </div>
-    {(description || linkHref) && (
-      <div class="section-head-aside">
-        {description && <p>{description}</p>}
-        {linkHref && <a class="section-text-link" href={linkHref}>{linkLabel} <span aria-hidden="true">↗</span></a>}
-      </div>
-    )}
+    <div class="section-head-aside">
+      <p>{description}</p>
+      {linkHref && <a class="section-text-link" href={linkHref}>{linkLabel} <span aria-hidden="true">↗</span></a>}
+    </div>
   </div>
 
   <div class="faq-list">

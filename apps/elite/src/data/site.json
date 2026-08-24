@@ -2,34 +2,29 @@
   "brand": "Elite Dance Studio",
   "city": "Berlin",
   "nav": [
+    { "label": "Stundenplan", "href": "/stundenplan/" },
+    { "label": "Kurse", "href": "/kurse/" },
+    { "label": "Intensives", "href": "/intensives/" },
+    { "label": "Preise", "href": "/preise/" },
+    { "label": "Raummiete", "href": "/raummiete/" },
     { "label": "Über uns", "href": "/ueber-uns/" },
     {
-      "label": "Kurse",
-      "href": "/kurse/",
+      "label": "Mehr",
+      "href": "/styles/",
       "children": [
-        { "label": "Alle Kurse & Styles", "href": "/kurse/", "description": "Styles, Levels und direkte Buchung" },
-        { "label": "Stundenplan", "href": "/stundenplan/", "description": "Diese Woche live buchen" },
-        { "label": "Intensives", "href": "/intensives/", "description": "Mehrwöchige Trainings-Roadmap" },
-        { "label": "Closed Groups & Advanced", "href": "/fortgeschrittene/", "description": "Intermediate, Advanced und feste Gruppen" }
+        { "label": "Styles", "href": "/styles/", "description": "Alle Tanzrichtungen im Überblick" },
+        { "label": "Coaches", "href": "/coaches/", "description": "Unser Team und Teaching-Styles" },
+        { "label": "Fortgeschrittene", "href": "/fortgeschrittene/", "description": "Intermediate, Advanced und Closed Groups" },
+        { "label": "Events", "href": "/events/", "description": "Socials, Workshops und besondere Termine" },
+        { "label": "FAQ", "href": "/faq/", "description": "Antworten rund um Buchung und Besuch" },
+        { "label": "Kontakt", "href": "/kontakt/", "description": "WhatsApp, E-Mail, Anfahrt und Formular" }
       ]
-    },
-    {
-      "label": "Preise",
-      "href": "/preise/",
-      "children": [
-        { "label": "Preise & Memberships", "href": "/preise/", "description": "Drop-in, Karten und Memberships" },
-        { "label": "Welcome Pass", "href": "/starter-pass/", "description": "2 Classes für 20€" },
-        { "label": "Urban Sports Club", "href": "https://urbansportsclub.com/de/venues/elite-dance-studio-1", "description": "Elite direkt in USC öffnen" }
-      ]
-    },
-    { "label": "Events", "href": "/events/" },
-    { "label": "Coaches", "href": "/coaches/" },
-    { "label": "Raummiete", "href": "/raummiete/" },
-    { "label": "Kontakt", "href": "/kontakt/" }
+    }
   ],
   "pathways": [
     { "title": "Welcome Pass", "href": "/starter-pass/", "text": "Zwei Klassen testen und Elite kennenlernen." },
-    { "title": "Kurse", "href": "/kurse/", "text": "Styles, Levels und Live-Stundenplan an einem Ort." },
+    { "title": "Kurse", "href": "/kurse/", "text": "Levels, Styles und Live-Stundenplan." },
+    { "title": "Styles", "href": "/styles/", "text": "Alle Tanzrichtungen im Überblick." },
     { "title": "Preise", "href": "/preise/", "text": "Drop-ins, Karten, USC und Memberships." },
     { "title": "Coaches", "href": "/coaches/", "text": "Menschen, Energie und Teaching-Persönlichkeit." },
     { "title": "Intensives", "href": "/intensives/", "text": "Strukturierte Trainingswege für gezielten Fortschritt." },

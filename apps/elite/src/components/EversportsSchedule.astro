@@ -10,46 +10,53 @@ interface Props {
 const {
   id = "schedule",
   eyebrow = "Live-Stundenplan",
-  title = "Finde deine nächste Class.",
-  description = "Live-Verfügbarkeit sehen und direkt über Eversports buchen.",
+  title = "Alle Classes dieser Woche.",
+  description = "Wähle Tag, Style und Level. Eversports zeigt dir die aktuelle Verfügbarkeit und reserviert deinen Platz direkt.",
   home = false
 } = Astro.props;
 
-const venueHref = "https://www.eversports.de/s/elite-dance-studio";
-const uscHref = "https://urbansportsclub.com/de/venues/elite-dance-studio-1";
+const levels = [
+  { label: "Level 0", text: "Dein allererster Einstieg" },
+  { label: "Beginner", text: "Grundlagen ohne Vorkenntnisse" },
+  { label: "Beginner+", text: "Basics sind schon vertraut" },
+  { label: "Intermediate", text: "Mehr Tempo und Erfahrung" }
+];
 ---
 
 <section
-  class:list={["eversports-panel", "schedule-v3", home && "eversports-home"]}
+  class:list={["eversports-panel", "panel", home && "eversports-home"]}
   id={id}
   aria-labelledby={`${id}-title`}
 >
-  <div class="schedule-command">
-    <div class="schedule-command-copy">
-      <div class="schedule-live-pill"><i aria-hidden="true"></i> Live · diese Woche</div>
+  <div class="schedule-editorial-head">
+    <div class="schedule-live-mark" aria-label="Aktueller Live-Stundenplan">
+      <span><i aria-hidden="true"></i> Live</span>
+      <strong>Diese Woche</strong>
+    </div>
+    <div class="schedule-editorial-copy">
       <div class="eyebrow">{eyebrow}</div>
       <h2 id={`${id}-title`}>{title}</h2>
       <p>{description}</p>
     </div>
-
-    <nav class="schedule-shortcuts" aria-label="Schnellzugriff rund um den Stundenplan">
-      <a href={`#${id}`} class="is-active">Alle Classes</a>
-      <a href="/kurse/#levels">Beginner</a>
-      <a href="/fortgeschrittene/">Intermediate+</a>
-      <a href="/intensives/">Intensives</a>
-      <a href={uscHref} target="_blank" rel="noreferrer">USC</a>
-    </nav>
-
-    <div class="schedule-command-actions">
-      <a class="button primary" href={venueHref} target="_blank" rel="noreferrer">In Eversports öffnen ↗</a>
-      <a class="schedule-help-link" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20welcher%20Kurs%20passt%20zu%20mir%3F">Kurswahl fragen</a>
-    </div>
+    <a class="schedule-help-link" href="/faq/">
+      <span>Nicht sicher?</span>
+      <strong>Ersten Besuch planen <b aria-hidden="true">↗</b></strong>
+    </a>
   </div>
 
-  <div class="eversports-frame eversports-frame-v3">
+  <div class="schedule-level-guide" aria-label="Level schnell erklärt">
+    {levels.map((level, index) => (
+      <div class="schedule-level">
+        <span>{String(index + 1).padStart(2, "0")}</span>
+        <div><strong>{level.label}</strong><small>{level.text}</small></div>
+      </div>
+    ))}
+  </div>
+
+  <div class="eversports-frame">
     <div class="eversports-frame-topline">
       <span>Elite Dance Studio · Berlin-Moabit</span>
-      <span>Aktuelle Plätze & Buchung</span>
+      <span>Live-Verfügbarkeit</span>
     </div>
     <div class="eversports-widget" aria-label="Eversports Stundenplan">
       <div data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div>
@@ -58,13 +65,31 @@ const uscHref = "https://urbansportsclub.com/de/venues/elite-dance-studio-1";
 
   <script is:inline>
     (() => {
-      if (document.querySelector('script[data-eversports-loader="true"]')) return;
-      const script = document.createElement("script");
-      script.type = "module";
-      script.src = "https://widget-static.eversports.io/loader.js";
-      script.async = true;
-      script.dataset.eversportsLoader = "true";
-      document.head.append(script);
+      const schedule = document.currentScript?.closest(".eversports-panel");
+      if (!schedule || document.querySelector('script[data-eversports-loader="true"]')) return;
+
+      const loadWidget = () => {
+        if (document.querySelector('script[data-eversports-loader="true"]')) return;
+        const script = document.createElement("script");
+        script.type = "module";
+        script.src = "https://widget-static.eversports.io/loader.js";
+        script.async = true;
+        script.dataset.eversportsLoader = "true";
+        document.head.append(script);
+      };
+
+      if (!("IntersectionObserver" in window)) {
+        loadWidget();
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        loadWidget();
+      }, { rootMargin: "600px 0px" });
+
+      observer.observe(schedule);
     })();
   </script>
 </section>

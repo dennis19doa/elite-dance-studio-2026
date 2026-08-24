@@ -1,9 +1,9 @@
 [
-  { "kind": "level", "badge": "Level 0", "title": "Komplett neu", "text": "Keine Vorkenntnisse.", "href": "/stundenplan/", "ctaLabel": "Level 0 finden" },
-  { "kind": "level", "badge": "Beginner", "title": "Basics aufbauen", "text": "Schritt für Schritt.", "href": "/stundenplan/", "ctaLabel": "Beginner finden" },
-  { "kind": "level", "badge": "Beginner+", "title": "Mehr Tempo", "text": "Basics sitzen bereits.", "href": "/stundenplan/", "ctaLabel": "Beginner+ finden" },
-  { "kind": "level", "badge": "Intermediate", "title": "Mehr Details", "text": "Technik und Kombis.", "href": "/fortgeschrittene/", "ctaLabel": "Intermediate" },
-  { "kind": "level", "badge": "Advanced", "title": "Mehr Challenge", "text": "Präzision und Progression.", "href": "/fortgeschrittene/", "ctaLabel": "Advanced" },
-  { "kind": "format", "badge": "Closed Group", "title": "Feste Gruppe", "text": "Mehrere Wochen gemeinsam aufbauen.", "href": "/fortgeschrittene/", "ctaLabel": "Closed Groups" },
-  { "kind": "format", "badge": "Intensive", "title": "Fokustraining", "text": "Ein Thema gezielt vertiefen.", "href": "/intensives/", "ctaLabel": "Roadmap ansehen" }
+  { "kind": "level", "badge": "Level 0", "title": "Dein erster Einstieg", "text": "Für komplette Anfänger:innen. Langsam, klar und ohne vorausgesetzte Basics.", "href": "/stundenplan/", "ctaLabel": "Level 0 finden" },
+  { "kind": "level", "badge": "Beginner", "title": "Basics aufbauen", "text": "Grundschritte, Groove, Technik und Sicherheit im jeweiligen Style.", "href": "/stundenplan/", "ctaLabel": "Beginner finden" },
+  { "kind": "level", "badge": "Beginner+", "title": "Mehr Flow & Challenge", "text": "Für vorhandene Basics und längere Kombinationen mit mehr Tempo.", "href": "/stundenplan/", "ctaLabel": "Beginner+ finden" },
+  { "kind": "level", "badge": "Intermediate", "title": "Technik vertiefen", "text": "Mehr Präzision, Musikalität, Details und anspruchsvollere Kombinationen.", "href": "/fortgeschrittene/", "ctaLabel": "Intermediate ansehen" },
+  { "kind": "level", "badge": "Advanced", "title": "Gezielt weitergehen", "text": "Für erfahrene Tänzer:innen mit stabilen Grundlagen und hoher Trainingsintensität.", "href": "/fortgeschrittene/", "ctaLabel": "Advanced ansehen" },
+  { "kind": "format", "badge": "Closed Groups", "title": "Feste Gruppe. Kontinuierlicher Aufbau.", "text": "Mehrwöchige oder fortlaufende Trainingsgruppen mit verbindlicher Progression.", "href": "/fortgeschrittene/", "ctaLabel": "Closed Groups" },
+  { "kind": "format", "badge": "Intensives", "title": "Ein Thema. Mehrere Wochen Fokus.", "text": "Strukturierte Trainingsblöcke für Technik, Body Movement und gezieltes Feedback.", "href": "/intensives/", "ctaLabel": "Roadmap ansehen" }
 ]

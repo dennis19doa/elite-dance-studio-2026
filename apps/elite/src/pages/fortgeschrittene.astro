@@ -10,21 +10,13 @@ const advancedClasses = [
   { title: "Reggaeton Beginner / Intermediate", focus: "Beginner+ / Intermediate · Groove · Dynamik", image: "/media/style-posters/23-reggaeton-beginner-intermediate.webp", alt: "Reggaeton Beginner Intermediate Kursmotiv bei Elite Dance Studio" }
 ];
 ---
-<BaseLayout title="Intermediate, Advanced & Closed Groups | Elite Dance Studio Berlin" description="Intermediate- und Advanced-Tanztraining, Closed Groups und Intensives im Elite Dance Studio Berlin-Moabit." image="/media/style-posters/19-bachata-intermediate.webp" bodyClass="advanced-page-v3">
+<BaseLayout title="Intermediate, Advanced & Closed Groups | Elite Dance Studio Berlin" description="Intermediate- und Advanced-Tanztraining, Closed Groups und Intensives im Elite Dance Studio Berlin-Moabit." image="/media/style-posters/19-bachata-intermediate.webp">
   <SiteHeader brand={site.brand} nav={site.nav} />
-  <main class="page-shell page-main advanced-main-v3">
-    <section class="advanced-hero-v3">
-      <figure><img src="/media/style-posters/19-bachata-intermediate.webp" alt="Bachata Intermediate Kursmotiv bei Elite Dance Studio" width="1080" height="1350" /></figure>
-      <div><div class="eyebrow">Intermediate · Advanced · Closed Groups</div><h1 class="page-title">Train deeper.</h1><p class="lead">Mehr Technik, mehr Challenge und Formate für kontinuierliche Progression.</p><div class="actions"><a class="button primary" href="#advanced-classes">Training ansehen</a><a class="button secondary" href="/intensives/">Intensives</a></div></div>
-    </section>
-
-    <section class="advanced-format-band-v3" aria-label="Trainingsformate">
-      <a href="/stundenplan/"><span>Flexibel</span><strong>Regular Classes</strong><small>Im Wochenplan trainieren.</small></a>
-      <a href="/kontakt/"><span>Kontinuierlich</span><strong>Closed Groups</strong><small>Feste Gruppe, klarer Aufbau.</small></a>
-      <a href="/intensives/"><span>Fokussiert</span><strong>Intensives</strong><small>Mehrere Wochen, ein Thema.</small></a>
-    </section>
-
-    <section class="advanced-offer advanced-offer-v3" id="advanced-classes"><div class="section-head compact-section-head"><div><div class="eyebrow">Aktuelles Training</div><h2>Intermediate bis Advanced.</h2></div><a class="text-link" href="/stundenplan/">Live-Stundenplan ↗</a></div><div class="advanced-card-grid">{advancedClasses.map((course) => <article class="advanced-card"><a href="/stundenplan/"><img src={course.image} alt={course.alt} width="1080" height="1350" loading="lazy" /></a><div><small>{course.focus}</small><h3>{course.title}</h3><a class="text-link" href="/stundenplan/">Termin finden ↗</a></div></article>)}</div></section>
+  <main class="page-shell page-main">
+    <section class="service-page-hero advanced-hero panel"><div class="service-page-copy"><div class="eyebrow">Intermediate · Advanced · Closed Groups</div><h1 class="page-title">Mehr Technik. Mehr Challenge. Mehr Progression.</h1><p class="lead">Für Tänzer:innen mit stabilen Basics: reguläre Classes, Advanced Training und feste Closed Groups.</p><div class="actions"><a class="button primary" href="#advanced-classes">Training ansehen</a><a class="button secondary" href="/intensives/">Intensives Roadmap</a></div></div><figure class="service-page-media advanced-hero-media"><img src="/media/style-posters/19-bachata-intermediate.webp" alt="Bachata Intermediate Kursmotiv bei Elite Dance Studio" width="1080" height="1350" /></figure></section>
+    <section class="advanced-level-check panel"><div><div class="eyebrow">Welches Format?</div><h2>Class, Closed Group oder Intensive.</h2></div><div class="advanced-check-list"><span><b>01</b> <strong>Regular Class:</strong> flexibel im Wochenplan trainieren.</span><span><b>02</b> <strong>Closed Group:</strong> feste Gruppe und kontinuierlicher Aufbau.</span><span><b>03</b> <strong>Intensive:</strong> mehrere Wochen Fokus auf ein konkretes Thema.</span></div><p>Unsicher beim Level? Schreib uns kurz auf WhatsApp.</p></section>
+    <section class="advanced-offer panel" id="advanced-classes"><div class="section-head compact-section-head"><div><div class="eyebrow">Aktuelles Training</div><h2>Intermediate bis Advanced.</h2></div><p>Termine und freie Plätze immer im Live-Stundenplan prüfen.</p></div><div class="advanced-card-grid">{advancedClasses.map((course) => <article class="advanced-card"><a href="/stundenplan/"><img src={course.image} alt={course.alt} width="1080" height="1350" loading="lazy" /></a><div><small>{course.focus}</small><h3>{course.title}</h3><a class="text-link" href="/stundenplan/">Verfügbarkeit prüfen →</a></div></article>)}</div></section>
+    <section class="progression-choice panel"><div><span>Regelmäßig</span><h3>Advanced Classes</h3><p>Kontinuierliches Training im Wochenplan.</p><a class="button secondary" href="/stundenplan/">Class buchen</a></div><div><span>Feste Gruppe</span><h3>Closed Groups</h3><p>Verbindlicher Aufbau mit derselben Trainingsgruppe.</p><a class="button secondary" href="/kontakt/">Gruppe anfragen</a></div><div><span>Roadmap</span><h3>Intensives</h3><p>Mehrere Wochen fokussiert an Technik und Movement arbeiten.</p><a class="button primary" href="/intensives/">Intensives ansehen</a></div></section>
   </main>
   <SiteFooter brand={site.brand} nav={site.nav} />
 </BaseLayout>

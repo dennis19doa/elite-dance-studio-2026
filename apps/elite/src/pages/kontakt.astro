@@ -13,50 +13,63 @@ import site from "../data/site.json";
 <BaseLayout
   title="Kontakt & Anfahrt | Elite Dance Studio Berlin-Moabit"
   description="Adresse, Anfahrt, WhatsApp, E-Mail und Antworten für deinen ersten Besuch im Elite Dance Studio in Berlin-Moabit."
-  bodyClass="contact-page-v3"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main contact-main-v3">
-    <section class="contact-page-hero contact-hero-v3">
+  <main class="page-shell page-main">
+    <section class="contact-page-hero panel">
       <div class="contact-page-copy">
-        <div class="eyebrow">Kontakt · Berlin-Moabit</div>
-        <h1 class="page-title">Eine Frage? Schreib uns einfach.</h1>
-        <p class="lead">Für Kurswahl, Membership, USC, Raummiete oder deinen ersten Besuch.</p>
+        <div class="eyebrow">Dein erster Besuch</div>
+        <h1 class="page-title">Frag uns alles. Komm genau so, wie du bist.</h1>
+        <p class="lead">
+          Du brauchst keinen Partner und keine Erfahrung. Wenn du beim Kurs, Level oder bei der
+          Buchung unsicher bist, helfen wir dir direkt.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="https://wa.me/491633863548">WhatsApp schreiben</a>
+          <a class="button secondary" href="#visit">Anfahrt ansehen</a>
+        </div>
       </div>
       <figure class="contact-page-media">
-        <img src="/media/current-site/current-home-visual.webp" alt="Elite Dance Studio Berlin" />
+        <img
+          src="/media/placeholders/first-visit-concept.jpg"
+          alt="Konzeptbild eines warmen Empfangs beim ersten Besuch im Tanzstudio"
+        />
+        <figcaption>Bildidee · die echte Eingangssituation fotografieren wir später nach</figcaption>
       </figure>
     </section>
 
-    <section class="contact-choice-v3">
-      <a class="contact-choice-primary" href="https://wa.me/491633863548">
-        <span>Am schnellsten</span>
-        <strong>WhatsApp</strong>
-        <b>Nachricht starten ↗</b>
-      </a>
-      <a href="#contact-form">
-        <span>Etwas ausführlicher</span>
-        <strong>Kontaktformular</strong>
-        <b>Formular öffnen ↓</b>
-      </a>
-      <a href="mailto:info@elitedancestudio.de">
-        <span>Direkt</span>
-        <strong>E-Mail</strong>
-        <b>info@elitedancestudio.de ↗</b>
-      </a>
+    <section class="contact-entrances panel">
+      <div class="section-head">
+        <div><div class="eyebrow">Was brauchst du?</div><h2>Der schnellste Weg zu deiner Antwort.</h2></div>
+        <p>Keine allgemeine Kontaktwand: Wähle einfach, weshalb du gerade hier bist.</p>
+      </div>
+      <div class="contact-entrance-grid">
+        <a class="contact-entrance entrance-coral" href="/starter-pass/">
+          <span>01 · Ausprobieren</span><strong>Ich will Elite erst erleben.</strong><p>Zwei Klassen, 14 Tage, ein leichter Start.</p><b>Welcome Pass ansehen →</b>
+        </a>
+        <a class="contact-entrance entrance-blue" href="/kurse/">
+          <span>02 · Kurswahl</span><strong>Ich weiß noch nicht, welcher Style passt.</strong><p>Beginner-Kurse nach Energie und Format finden.</p><b>Kurse entdecken →</b>
+        </a>
+        <a class="contact-entrance entrance-gold" href="https://wa.me/491633863548">
+          <span>03 · Persönlich</span><strong>Ich möchte kurz jemanden fragen.</strong><p>Schreib uns auf WhatsApp für eine ehrliche Empfehlung.</p><b>Nachricht starten →</b>
+        </a>
+      </div>
     </section>
 
     <LeadForm
       kind="contact"
       id="contact-form"
       eyebrow="Nachricht senden"
-      title="Wie können wir helfen?"
-      description=""
+      title="Schreib uns, was du gerade wissen möchtest."
+      description="Für Kurswahl, Membership, USC oder alles, was vor deinem ersten Besuch noch unklar ist."
     />
 
-    <VisitSection visit={site.visit} description="Wiclefstraße 16–17 · durch beide Tore · zweiter Hof links." />
-    <div id="faq"><FaqSection items={faqs.slice(0, 4)} /></div>
+    <VisitSection
+      visit={site.visit}
+      description="Der Eingang liegt etwas versteckt. Mit diesen drei Schritten findest du ohne Suchen zu uns."
+    />
+    <div id="faq"><FaqSection items={faqs} /></div>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />

@@ -1,0 +1,488 @@
+/* Elite V13 — consistency + contained coach profiles
+   Loaded last. Keeps the dark Elite canvas consistent while allowing light
+   task surfaces (booking, pricing cards, forms) where they improve clarity. */
+
+:root {
+  --elite-canvas-v13: #0d0d10;
+  --elite-surface-v13: #17171d;
+  --elite-surface-2-v13: #1e1e25;
+  --elite-line-v13: rgba(255, 255, 255, .11);
+  --elite-text-v13: #f8f7f5;
+  --elite-muted-v13: rgba(248, 247, 245, .62);
+  --elite-rose: #ff4f7b;
+  --elite-blue: #4058ff;
+  --elite-lime: #d2f85a;
+  --elite-ink: #101014;
+}
+
+html,
+body,
+body.home-page,
+body.site-subpage {
+  max-width: 100%;
+  overflow-x: clip;
+  background: var(--elite-canvas-v13) !important;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(circle at 8% 3%, rgba(255, 79, 123, .10), transparent 31rem),
+    radial-gradient(circle at 94% 9%, rgba(64, 88, 255, .10), transparent 32rem),
+    var(--elite-canvas-v13);
+  content: "";
+  pointer-events: none;
+}
+
+.page-main,
+.site-subpage .page-main,
+.home-page .page-main {
+  min-width: 0;
+  background: transparent !important;
+}
+
+.page-main > *,
+.page-main section,
+.page-main article,
+.page-main figure,
+.page-main div {
+  min-width: 0;
+}
+
+.page-main img,
+.site-footer img {
+  max-width: 100%;
+}
+
+/* A page can use a light functional surface, but the page itself never turns white. */
+.site-subpage .panel {
+  max-width: 100%;
+}
+
+.site-subpage .eversports-panel,
+.site-subpage .price-card,
+.site-subpage input,
+.site-subpage textarea,
+.site-subpage select {
+  color-scheme: light;
+}
+
+/* Consistent brand roles: rose = discovery, blue = information, lime = action. */
+.site-header-v2 .button.primary,
+.site-subpage .button.primary,
+.home-page .button.primary {
+  background: var(--elite-lime) !important;
+  color: var(--elite-ink) !important;
+}
+
+.site-header-v2 .button.primary:hover,
+.site-subpage .button.primary:hover,
+.home-page .button.primary:hover {
+  background: #defd79 !important;
+}
+
+.site-header-v2 .nav-link.is-active,
+.site-header-v2 .nav-dropdown.is-active > summary,
+.site-header-v2 .nav-dropdown[open] > summary {
+  color: var(--elite-lime) !important;
+}
+
+/* Footer belongs to the same canvas instead of reverting to a light theme. */
+.site-footer {
+  border-top: 1px solid var(--elite-line-v13);
+  background: #0a0a0d !important;
+  color: var(--elite-text-v13);
+}
+
+.site-footer .footer-copy,
+.site-footer .footer-nav a {
+  color: rgba(255, 255, 255, .58);
+}
+
+.site-footer .footer-brand {
+  color: #fff;
+}
+
+/* ---------------- COACHES V13 ---------------- */
+.coaches-page-v13,
+.coaches-main-v13 {
+  color: var(--elite-text-v13);
+}
+
+.coaches-main-v13 {
+  padding-top: clamp(42px, 6vw, 78px);
+}
+
+.coaches-head-v13 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+  gap: clamp(30px, 6vw, 78px);
+  align-items: end;
+  padding: 0 0 clamp(30px, 4vw, 48px);
+  border-bottom: 1px solid var(--elite-line-v13);
+}
+
+.coaches-head-v13 .eyebrow {
+  color: var(--elite-rose);
+}
+
+.coaches-head-v13 h1 {
+  max-width: 10ch;
+  margin: 12px 0 0;
+  color: #fff;
+  font-size: clamp(3rem, 6vw, 6.2rem);
+  line-height: .92 !important;
+  letter-spacing: -.055em !important;
+}
+
+.coaches-head-copy-v13 {
+  display: grid;
+  gap: 22px;
+  justify-items: start;
+  padding-bottom: 4px;
+}
+
+.coaches-head-copy-v13 p {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--elite-muted-v13);
+  line-height: 1.68;
+}
+
+.coaches-directory-v13 {
+  padding: clamp(28px, 4vw, 46px) 0 clamp(48px, 6vw, 80px);
+}
+
+.coach-filters-v13 {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.coach-filters-v13 button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--elite-line-v13);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .04);
+  color: rgba(255, 255, 255, .68);
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.coach-filters-v13 button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(210, 248, 90, .45);
+  color: #fff;
+}
+
+.coach-filters-v13 button.is-active {
+  border-color: var(--elite-lime);
+  background: var(--elite-lime);
+  color: var(--elite-ink);
+}
+
+.coach-grid-v13 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.2vw, 26px);
+  align-items: stretch;
+}
+
+.coach-card-v13 {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--elite-line-v13);
+  border-radius: 20px;
+  background: var(--elite-surface-v13);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .22);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.coach-card-v13:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, .20);
+  box-shadow: 0 28px 66px rgba(0, 0, 0, .30);
+}
+
+.coach-photo-v13 {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #202028;
+  text-decoration: none;
+}
+
+.coach-photo-v13::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 38%;
+  background: linear-gradient(180deg, transparent, rgba(7, 7, 10, .72));
+  content: "";
+  pointer-events: none;
+}
+
+.coach-photo-v13 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform .45s cubic-bezier(.22, 1, .36, 1), filter .25s ease;
+}
+
+.coach-card-v13:hover .coach-photo-v13 img {
+  transform: scale(1.025);
+  filter: saturate(1.05);
+}
+
+.coach-photo-v13 > span {
+  position: absolute;
+  right: 15px;
+  bottom: 14px;
+  left: 15px;
+  z-index: 2;
+  color: var(--elite-lime);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.coach-card-content-v13 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 17px;
+  padding: 20px 20px 18px;
+}
+
+.coach-card-title-v13 {
+  display: grid;
+  gap: 6px;
+}
+
+.coach-card-title-v13 h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.5rem, 2.2vw, 2.15rem);
+  line-height: 1 !important;
+  letter-spacing: -.035em !important;
+}
+
+.coach-card-title-v13 p {
+  margin: 0;
+  color: var(--elite-rose);
+  font-size: .74rem;
+  font-weight: 750;
+  letter-spacing: .02em;
+}
+
+.coach-card-text-v13 {
+  margin: 0;
+  color: rgba(255, 255, 255, .64);
+  font-size: .88rem;
+  line-height: 1.62;
+}
+
+.coach-card-note-v13 {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 12px 13px;
+  border-left: 3px solid var(--elite-blue);
+  background: rgba(64, 88, 255, .10);
+  color: rgba(255, 255, 255, .78);
+  font-size: .78rem;
+  line-height: 1.45;
+}
+
+.coach-card-note-v13 span {
+  color: #9ba7ff;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.coach-card-links-v13 {
+  display: grid;
+  gap: 9px;
+  margin-top: auto;
+  padding-top: 3px;
+}
+
+.coach-card-links-v13 > a:first-child {
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.coach-card-links-v13 > a:first-child:hover {
+  color: var(--elite-lime);
+}
+
+.coach-instagram-v13 {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 8px;
+  color: var(--elite-rose);
+  font-size: .77rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.coach-instagram-v13 svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+}
+
+.coach-instagram-v13 span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coach-instagram-v13:hover {
+  color: #ff7b9c;
+}
+
+.coach-instagram-v13.is-muted {
+  color: rgba(255, 255, 255, .34);
+}
+
+.coaches-help-v13 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, .78fr);
+  gap: 36px;
+  align-items: end;
+  margin-bottom: clamp(38px, 6vw, 76px);
+  padding: clamp(26px, 4vw, 40px) 0;
+  border-top: 1px solid var(--elite-line-v13);
+  border-bottom: 1px solid var(--elite-line-v13);
+}
+
+.coaches-help-v13 .eyebrow {
+  color: var(--elite-blue);
+}
+
+.coaches-help-v13 h2 {
+  max-width: 18ch;
+  margin: 8px 0 0;
+  color: #fff;
+  font-size: clamp(2rem, 3.7vw, 3.7rem);
+}
+
+.coaches-help-v13 p {
+  margin: 0 0 14px;
+  color: var(--elite-muted-v13);
+  line-height: 1.6;
+}
+
+.coaches-help-v13 a {
+  color: var(--elite-lime);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* ---------------- SITE-WIDE LAYOUT HARDENING ---------------- */
+.events-main-v12,
+.about-main-v12,
+.schedule-page-v9 .page-main,
+.rental-page-v9 .page-main,
+.pricing-page-v9 .page-main,
+.site-subpage .page-main {
+  width: min(calc(100% - 32px), var(--max));
+  max-width: var(--max);
+  overflow: visible;
+}
+
+.events-main-v12 > *,
+.about-main-v12 > *,
+.schedule-page-v9 .page-main > *,
+.rental-page-v9 .page-main > *,
+.site-subpage .page-main > * {
+  max-width: 100%;
+}
+
+/* Pricing keeps light decision cards, but the surrounding page belongs to the dark canvas. */
+.site-subpage .pricing-v2,
+.site-subpage .pricing-page-hero,
+.site-subpage .pricing-paths,
+.site-subpage .pricing-assurance,
+.site-subpage .booking-intro,
+.site-subpage .service-page-hero,
+.site-subpage .rental-request {
+  border-color: rgba(255, 255, 255, .08);
+}
+
+/* Give dark-background headings a predictable readable color without changing light cards. */
+.site-subpage .page-main > .section-head h2,
+.site-subpage .page-main > header h1,
+.site-subpage .page-main > header h2 {
+  color: #fff;
+}
+
+@media (max-width: 980px) {
+  .coach-grid-v13 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .coaches-head-v13,
+  .coaches-help-v13 {
+    grid-template-columns: 1fr;
+  }
+
+  .coaches-head-v13 h1 {
+    max-width: 12ch;
+  }
+}
+
+@media (max-width: 640px) {
+  .coaches-main-v13 {
+    padding-top: 32px;
+  }
+
+  .coaches-head-v13 h1 {
+    font-size: clamp(2.75rem, 14vw, 4.4rem);
+  }
+
+  .coach-grid-v13 {
+    grid-template-columns: 1fr;
+  }
+
+  .coach-card-v13 {
+    border-radius: 16px;
+  }
+
+  .coach-card-content-v13 {
+    padding: 18px;
+  }
+
+  .coach-filters-v13 {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .coach-filters-v13::-webkit-scrollbar {
+    display: none;
+  }
+
+  .coach-filters-v13 button {
+    flex: 0 0 auto;
+  }
+}

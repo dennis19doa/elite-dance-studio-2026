@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import "../styles/v2.css";
 import "../styles/redesign-v9.css";
+import "../styles/stability-v10.css";
 import MobileJoinBar from "../components/MobileJoinBar.astro";
 import MotionController from "../components/MotionController.astro";
 import StructuredData from "../components/StructuredData.astro";
@@ -24,6 +25,8 @@ const {
 const siteUrl = Astro.site ?? new URL("https://elitedancestudio.de");
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 const socialImageUrl = new URL(image, siteUrl);
+const previewSha = import.meta.env.PUBLIC_PREVIEW_SHA as string | undefined;
+const previewLabel = previewSha ? previewSha.slice(0, 8) : "";
 ---
 
 <!doctype html>
@@ -47,7 +50,8 @@ const socialImageUrl = new URL(image, siteUrl);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
-    <meta name="theme-color" content="#211724" />
+    <meta name="theme-color" content="#101014" />
+    {previewSha && <meta name="elite-preview-build" content={previewSha} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -58,5 +62,6 @@ const socialImageUrl = new URL(image, siteUrl);
     <slot />
     <MotionController />
     <MobileJoinBar />
+    {previewLabel && <div class="preview-build-badge" aria-hidden="true">Preview {previewLabel}</div>}
   </body>
 </html>

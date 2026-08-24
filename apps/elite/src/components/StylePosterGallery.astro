@@ -19,8 +19,8 @@ interface Props {
 
 const { posters } = Astro.props;
 const filters = [
-  { value: "all", label: `Alle ${posters.length}` },
-  { value: "beginner", label: "Für Beginner" },
+  { value: "all", label: "Alle Classes" },
+  { value: "beginner", label: "Beginner" },
   { value: "partner", label: "Partner Dance" },
   { value: "urban", label: "Urban" },
   { value: "performance", label: "Performance" },
@@ -59,15 +59,12 @@ const coachBySlug = new Map(coaches.map((coach) => [coach.slug, coach]));
 <section class="style-poster-showcase" id="style-poster-gallery" aria-labelledby="style-poster-title" data-style-gallery>
   <div class="style-poster-head">
     <div>
-      <div class="eyebrow">Die Styles von Elite</div>
-      <h2 id="style-poster-title">Wähle zuerst, was dich visuell bewegt.</h2>
+      <div class="eyebrow">Kurse & Styles</div>
+      <h2 id="style-poster-title">Finde deine Class.</h2>
     </div>
     <div class="style-poster-intro">
-      <p>
-        Du musst die Unterschiede noch nicht kennen. Filtere nach deiner Energie, öffne den
-        Stundenplan und finde die Klasse, die sich nach deinem nächsten Schritt anfühlt.
-      </p>
-      <a href="/stundenplan/#schedule">Live-Termine ansehen <span aria-hidden="true">→</span></a>
+      <p>Filtere nach Style-Welt oder Beginner-Level und öffne anschließend direkt den Stundenplan.</p>
+      <a href="/#schedule">Live-Termine ansehen <span aria-hidden="true">→</span></a>
     </div>
   </div>
 
@@ -79,18 +76,17 @@ const coachBySlug = new Map(coaches.map((coach) => [coach.slug, coach]));
         data-poster-filter={filter.value}
         aria-pressed={index === 0 ? "true" : "false"}
       >
-        <span>{String(index + 1).padStart(2, "0")}</span>
         {filter.label}
       </button>
     ))}
   </div>
 
   <div class="style-poster-status" aria-live="polite">
-    <span data-poster-count>{posters.length}</span> Klassenwelten sichtbar
+    <span data-poster-count>{posters.length}</span> Classes sichtbar
   </div>
 
   <div class="style-poster-grid">
-    {posters.map((poster, index) => {
+    {posters.map((poster) => {
       const posterCoaches = (coachSlugsByPoster[poster.title] ?? [])
         .flatMap((slug) => {
           const coach = coachBySlug.get(slug);
@@ -106,7 +102,7 @@ const coachBySlug = new Map(coaches.map((coach) => [coach.slug, coach]));
       >
         <a
           class="style-poster-image-link"
-          href="/stundenplan/#schedule"
+          href="/#schedule"
           aria-label={`${poster.title} im Stundenplan finden`}
         >
           <img
@@ -120,7 +116,6 @@ const coachBySlug = new Map(coaches.map((coach) => [coach.slug, coach]));
           <span class="style-poster-open" aria-hidden="true">Termin finden ↗</span>
         </a>
         <div class="style-poster-meta">
-          <span class="style-poster-index">{String(index + 1).padStart(2, "0")}</span>
           <div>
             <span>{poster.worldLabel} · {poster.level}</span>
             <h3>{poster.title}</h3>
@@ -166,7 +161,7 @@ const coachBySlug = new Map(coaches.map((coach) => [coach.slug, coach]));
       <strong>Finde jetzt den nächsten passenden Termin.</strong>
     </div>
     <div class="actions">
-      <a class="button primary" href="/stundenplan/#schedule">Klasse buchen</a>
+      <a class="button primary" href="/#schedule">Klasse buchen</a>
       <a class="button secondary" href="/starter-pass/">Zwei Styles testen · 20€</a>
     </div>
   </div>

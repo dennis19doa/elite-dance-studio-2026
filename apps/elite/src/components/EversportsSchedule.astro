@@ -15,6 +15,12 @@ const {
   home = false
 } = Astro.props;
 
+const facts = [
+  { label: "Direkt reservieren", text: "Dein Platz wird im Live-Kalender von Eversports gebucht." },
+  { label: "USC", text: "Urban Sports Club gilt für unsere regulären Open Classes." },
+  { label: "Neu bei Elite", text: "Welcome Pass: 2 Classes für 20€ zum Ausprobieren." }
+];
+
 const levels = [
   { label: "Level 0", text: "allererster Einstieg" },
   { label: "Beginner", text: "Basics ohne Vorwissen" },
@@ -45,14 +51,14 @@ const levels = [
     </a>
   </div>
 
-  <nav class="schedule-actions-v9" aria-label="Schnellzugriff rund um den Stundenplan">
-    <span>Direkt zu</span>
-    <a href={`#${id}`}>Alle Classes</a>
-    <a href="/kurse/#levels">Beginner</a>
-    <a href="/fortgeschrittene/">Intermediate+</a>
-    <a href="/intensives/">Intensives</a>
-    <a href="https://urbansportsclub.com/de/venues/elite-dance-studio-1" target="_blank" rel="noreferrer">USC</a>
-  </nav>
+  <div class="schedule-facts-v10" aria-label="Wichtige Informationen zur Buchung">
+    {facts.map((fact) => (
+      <div class="schedule-fact-v10">
+        <strong>{fact.label}</strong>
+        <span>{fact.text}</span>
+      </div>
+    ))}
+  </div>
 
   <div class="schedule-level-inline-v9" aria-label="Level schnell erklärt">
     {levels.map((level) => (

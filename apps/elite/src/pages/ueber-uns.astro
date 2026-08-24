@@ -13,71 +13,64 @@ const scheduleHref = `${baseUrl}#schedule`;
   title="Über uns | Elite Dance Studio Berlin"
   description="Lerne Elite Dance Studio Berlin kennen: starke Coaches, viele Styles, Socials, Community und persönlicher Fortschritt in Berlin-Moabit."
   image="/media/current-site/current-home-visual.webp"
-  bodyClass="site-subpage about-page-v11"
+  bodyClass="about-page-v12"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main">
-    <section class="about-hero-v11">
+  <main class="page-shell page-main about-main-v12">
+    <section class="about-opening-v12">
       <img src="/media/current-site/current-home-visual.webp" alt="Tanzmoment im Elite Dance Studio Berlin" />
-      <div class="about-hero-copy-v11">
-        <div class="v11-kicker">Elite Dance Studio · Berlin-Moabit</div>
-        <h1 class="v11-display">Come to dance. Stay for the feeling.</h1>
-        <p class="v11-copy">
-          Ein Studio für Menschen, die ausprobieren, trainieren, besser werden und trotzdem sie selbst bleiben wollen.
-        </p>
-        <div class="about-hero-actions-v11">
-          <a class="button primary" href={scheduleHref}>Class finden</a>
-          <a class="button secondary" href="/coaches/">Team kennenlernen</a>
-        </div>
+      <div class="about-opening-shade-v12"></div>
+      <div class="about-opening-copy-v12">
+        <span>Elite Dance Studio · Berlin-Moabit</span>
+        <h1>Come to dance.<br />Stay for the feeling.</h1>
+        <p>Ein Ort zum Ausprobieren, Trainieren, Wachsen und Dazugehören.</p>
       </div>
     </section>
 
-    <section class="about-story-v11">
-      <figure>
-        <img src="/media/current-site/elena-dennis-bachata.png" alt="Elena und Dennis vom Elite Dance Studio Berlin" loading="lazy" />
-      </figure>
-      <div class="about-story-copy-v11">
-        <div class="v11-kicker">Warum es Elite gibt</div>
-        <h2>Wir wollten mehr bauen als einen Raum mit Kursplan.</h2>
+    <section class="about-founders-v12">
+      <div class="about-founders-quote-v12">
+        <span>Warum es Elite gibt</span>
+        <h2>Wir wollten keinen Ort bauen, an dem Menschen nur eine Stunde konsumieren und wieder gehen.</h2>
         <p>
           Elite ist aus der Idee entstanden, dass gutes Training und echte Community zusammengehören.
-          Ein Studio darf professionell sein, ohne anonym zu werden – und offen, ohne beliebig zu sein.
+          Professionell, ohne anonym zu werden. Offen, ohne beliebig zu sein.
         </p>
-        <p>
-          Deshalb findest du bei uns unterschiedliche Styles, Coaches und Levels an einem Ort. Du kannst
-          etwas Neues testen, tiefer trainieren oder deine Richtung ändern, ohne jedes Mal wieder ganz von vorne anzufangen.
-        </p>
+      </div>
+      <figure>
+        <img src="/media/current-site/elena-dennis-bachata.png" alt="Elena und Dennis vom Elite Dance Studio Berlin" loading="lazy" />
+        <figcaption>Elena & Dennis · Founders</figcaption>
+      </figure>
+    </section>
+
+    <section class="about-path-v12" aria-label="Dein Weg bei Elite">
+      <header>
+        <span>Dein Weg muss nicht gerade sein</span>
+        <h2>Probieren. Bleiben. Wechseln. Tiefer gehen.</h2>
+      </header>
+
+      <div class="about-path-row-v12">
+        <strong>Entdecken</strong>
+        <p>Du kannst Styles, Coaches und Musikwelten testen, bevor du dich irgendwo festlegst.</p>
+      </div>
+      <div class="about-path-row-v12">
+        <strong>Wachsen</strong>
+        <p>Level 0, Beginner, Intermediate, Advanced, Closed Groups und Intensives geben dir echte nächste Schritte.</p>
+      </div>
+      <div class="about-path-row-v12">
+        <strong>Dazugehören</strong>
+        <p>Classes, Events, Socials und das Team gehören zu demselben Studioleben – nicht zu getrennten Produkten.</p>
       </div>
     </section>
 
-    <section class="about-values-v11" aria-label="Was Elite ausmacht">
-      <article class="about-value-v11">
-        <small>Explore</small>
-        <h3>Du darfst deinen Style erst finden.</h3>
-        <p>Probier Coaches, Musik und Bewegungswelten aus, bevor du entscheidest, was wirklich zu dir passt.</p>
-      </article>
-      <article class="about-value-v11">
-        <small>Grow</small>
-        <h3>Dein Training kann mit dir wachsen.</h3>
-        <p>Von Level 0 über Beginner bis zu Intermediate, Advanced, Closed Groups und Intensives.</p>
-      </article>
-      <article class="about-value-v11">
-        <small>Belong</small>
-        <h3>Du bist mehr als eine Buchung im Kalender.</h3>
-        <p>Classes, Events und ein Team, das Menschen kennt und Entwicklung ernst nimmt.</p>
-      </article>
-    </section>
-
-    <section class="about-community-v11">
+    <section class="about-closing-v12">
       <img src="/media/current-site/studio-room-a.jpg" alt="Trainingsraum im Elite Dance Studio Berlin" loading="lazy" />
-      <div class="about-community-copy-v11">
-        <div class="v11-kicker">Unser Anspruch</div>
-        <h2>Du sollst dich sicher genug fühlen, Neues zu probieren – und gut genug trainiert werden, um Fortschritt zu merken.</h2>
-        <p>Genau diese Mischung aus Atmosphäre, Technik und persönlicher Entwicklung soll sich durch Elite ziehen.</p>
-        <div class="about-hero-actions-v11">
-          <a class="button primary" href="/starter-pass/">Welcome Pass · 20€</a>
-          <a class="button secondary" href="/events/">Events ansehen</a>
+      <div class="about-closing-copy-v12">
+        <span>Unser Anspruch</span>
+        <h2>Sicher genug, Neues zu probieren. Anspruchsvoll genug, wirklich besser zu werden.</h2>
+        <div>
+          <a class="button primary" href={scheduleHref}>Class finden</a>
+          <a class="button secondary" href="/coaches/">Team kennenlernen</a>
         </div>
       </div>
     </section>

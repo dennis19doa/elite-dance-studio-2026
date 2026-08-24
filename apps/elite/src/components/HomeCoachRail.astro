@@ -1,0 +1,53 @@
+---
+import coaches from "../data/coaches.json";
+
+const rail = [...coaches, ...coaches];
+---
+
+<section class="home-coach-rail-v9" aria-labelledby="home-coach-title" data-coach-rail>
+  <header class="home-coach-head-v9">
+    <div>
+      <div class="eyebrow">Unser Team</div>
+      <h2 id="home-coach-title">Meet your coaches.</h2>
+    </div>
+    <div class="home-coach-actions-v9">
+      <button class="coach-rail-toggle-v9" type="button" data-coach-toggle aria-pressed="false">Pause</button>
+      <a class="home-coach-link-v9" href="/coaches/">Alle Coaches ↗</a>
+    </div>
+  </header>
+
+  <div class="home-coach-window-v9" aria-label="Coaches im Elite Dance Studio">
+    <div class="home-coach-track-v9">
+      {rail.map((coach, index) => (
+        <a
+          class="home-coach-card-v9"
+          href={`/coaches/${coach.slug}/`}
+          aria-hidden={index >= coaches.length ? "true" : undefined}
+          tabindex={index >= coaches.length ? -1 : undefined}
+        >
+          <figure>
+            <img src={coach.image} alt={index < coaches.length ? coach.imageAlt : ""} loading="lazy" decoding="async" />
+          </figure>
+          <div class="home-coach-card-copy-v9">
+            <small>{coach.focus}</small>
+            <strong>{coach.name}</strong>
+            <span>{coach.instagramHandle ?? coach.schedule ?? "Coach-Profil ansehen"}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const root = document.currentScript?.closest('[data-coach-rail]');
+      const toggle = root?.querySelector('[data-coach-toggle]');
+      if (!root || !toggle) return;
+      toggle.addEventListener('click', () => {
+        const paused = root.classList.toggle('is-paused');
+        toggle.setAttribute('aria-pressed', String(paused));
+        toggle.textContent = paused ? 'Weiter' : 'Pause';
+      });
+    })();
+  </script>
+</section>

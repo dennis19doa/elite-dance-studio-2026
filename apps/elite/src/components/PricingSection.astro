@@ -1,40 +1,57 @@
 ---
 interface PricingItem { category: string; label: string; name: string; price: string; text: string; ctaLabel?: string; href?: string; featured?: boolean; }
 interface Props { pricing: PricingItem[]; eyebrow?: string; title?: string; description?: string; }
-const { pricing, eyebrow = "Preise", title = "Einfach wählen. Einfach tanzen.", description = "Starten, flexibel bleiben oder regelmäßig trainieren." } = Astro.props;
+const { pricing, eyebrow = "Preise", title = "Wähle, wie du trainieren möchtest.", description = "" } = Astro.props;
 const categories = [...new Set(pricing.map((item) => item.category))];
+const categoryCopy: Record<string, { title: string; text: string }> = {
+  Start: { title: "Erst testen", text: "Ideal für deinen ersten Besuch oder eine einzelne Class." },
+  Flexibel: { title: "Flexibel trainieren", text: "Ohne monatliche Membership — komm, wenn es für dich passt." },
+  Memberships: { title: "Regelmäßig trainieren", text: "Monatlich, jederzeit kündbar. Wähle die Frequenz, die zu dir passt." }
+};
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 const isExternal = (href?: string) => Boolean(href?.startsWith("http"));
 ---
-<section class="pricing pricing-v3" id="pricing">
-  <div class="section-head compact-section-head pricing-v3-head">
-    <div><div class="eyebrow">{eyebrow}</div><h2>{title}</h2></div>
+<section class="pricing pricing-v8" id="pricing">
+  <header class="pricing-v8-head">
+    <div class="eyebrow">{eyebrow}</div>
+    <h2>{title}</h2>
     {description && <p>{description}</p>}
-  </div>
-  <div class="pricing-groups">
-    {categories.map((category) => (
-      <section class="pricing-group" data-category={slugify(category)}>
-        <div class="pricing-group-head"><h3>{category}</h3></div>
-        <div class="price-cards">
-          {pricing.filter((item) => item.category === category).map((item) => (
-            <article class:list={["price-card", item.featured && "featured"]} data-plan={slugify(item.name)}>
-              <div class="price-card-main">
-                <span class="price-label">{item.label}</span>
-                <strong>{item.name}</strong>
-                <div class="price">{item.price}</div>
+  </header>
+
+  <div class="pricing-groups-v8">
+    {categories.map((category) => {
+      const copy = categoryCopy[category] ?? { title: category, text: "" };
+      const items = pricing.filter((item) => item.category === category);
+      return (
+        <section class="pricing-group-v8" data-category={slugify(category)}>
+          <header class="pricing-group-head-v8">
+            <div>
+              <span>{copy.title}</span>
+              <p>{copy.text}</p>
+            </div>
+            {category === "Memberships" && <strong>1 Monat Laufzeit · jederzeit kündbar</strong>}
+          </header>
+
+          <div class:list={["price-cards-v8", `count-${items.length}`]}>
+            {items.map((item) => (
+              <article class:list={["price-card-v8", item.featured && "is-featured"]} data-plan={slugify(item.name)}>
+                <div class="price-card-top-v8">
+                  <span class="price-label-v8">{item.label}</span>
+                  {item.featured && <span class="price-recommend-v8">Empfohlen</span>}
+                </div>
+                <h3>{item.name}</h3>
+                <div class="price-value-v8">{item.price}</div>
                 <p>{item.text}</p>
-              </div>
-              {item.href && (
-                <div class="price-card-footer price-card-footer-simple">
-                  <a class="text-link" href={item.href} target={isExternal(item.href) ? "_blank" : undefined} rel={isExternal(item.href) ? "noreferrer" : undefined}>
+                {item.href && (
+                  <a class="price-cta-v8" href={item.href} target={isExternal(item.href) ? "_blank" : undefined} rel={isExternal(item.href) ? "noreferrer" : undefined}>
                     {item.ctaLabel ?? "Mehr erfahren"} <span aria-hidden="true">↗</span>
                   </a>
-                </div>
-              )}
-            </article>
-          ))}
-        </div>
-      </section>
-    ))}
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+      );
+    })}
   </div>
 </section>

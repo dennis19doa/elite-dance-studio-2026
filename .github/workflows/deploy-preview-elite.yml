@@ -40,9 +40,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: ${{ github.repository }}
-          BUILD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           PR_NUMBER="$(cat preview-dist/preview-pr-number.txt)"
+          BUILD_SHA="$(cat preview-dist/preview-build-sha.txt)"
           CURRENT_SHA="$(gh api "repos/${REPOSITORY}/pulls/${PR_NUMBER}" --jq '.head.sha')"
           echo "pr_number=${PR_NUMBER}" >> "$GITHUB_OUTPUT"
 
@@ -89,7 +89,7 @@ jobs:
         env:
           PR_NUMBER: ${{ steps.freshness.outputs.pr_number }}
         run: |
-          rm preview-dist/preview-pr-number.txt
+          rm preview-dist/preview-pr-number.txt preview-dist/preview-build-sha.txt
           mkdir -p "site/preview/pr-${PR_NUMBER}"
           cp -a apps/elite/dist/. site/
           cp -a preview-dist/. "site/preview/pr-${PR_NUMBER}/"

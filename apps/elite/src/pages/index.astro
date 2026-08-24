@@ -7,13 +7,12 @@ import FaqSection from "../components/FaqSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import StudioExperienceSection from "../components/StudioExperienceSection.astro";
-import BeginnerEntrancesSection from "../components/BeginnerEntrancesSection.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
+import HomeCoachRail from "../components/HomeCoachRail.astro";
 
 import faqs from "../data/faqs.json";
 import site from "../data/site.json";
 import trialOffer from "../data/trial-offer.json";
-import trustSignals from "../data/trust-signals.json";
 ---
 
 <BaseLayout
@@ -25,16 +24,19 @@ import trustSignals from "../data/trust-signals.json";
 
   <main class="page-shell page-main home-main">
     <HeroSection hero={site.hero} />
-    <BeginnerEntrancesSection />
-    <TrustStrip signals={trustSignals} />
+
     <EversportsSchedule
       home
       eyebrow="Deine Woche bei Elite"
-      title="Finde deinen nächsten Kurs."
-      description="Filtere nach Tag, Style oder Level und buche direkt."
+      title="Was tanzt du diese Woche?"
+      description="Der aktuelle Stundenplan steht direkt hier: Class auswählen, Platz reservieren, vorbeikommen. Bei der Kurswahl helfen wir dir oben rechts."
     />
+
+    <HomeCoachRail />
+    <TrustStrip />
     <TrialOfferSection offer={trialOffer} />
     <StudioExperienceSection />
+
     <FaqSection
       items={faqs.slice(0, 4)}
       eyebrow="Gut zu wissen"
@@ -48,7 +50,7 @@ import trustSignals from "../data/trust-signals.json";
       <div>
         <div class="eyebrow">Persönliche Hilfe</div>
         <h2>Nicht sicher, welcher Kurs zu dir passt?</h2>
-        <p>Wir helfen dir.</p>
+        <p>Schreib uns kurz, was du suchst. Wir empfehlen dir eine konkrete Class.</p>
       </div>
       <div class="actions">
         <a class="button primary" href={site.visit.whatsappHref}>WhatsApp schreiben</a>

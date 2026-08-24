@@ -402,7 +402,6 @@ body::before {
 .about-main-v12,
 .schedule-page-v9 .page-main,
 .rental-page-v9 .page-main,
-.pricing-page-v9 .page-main,
 .site-subpage .page-main {
   width: min(calc(100% - 32px), var(--max));
   max-width: var(--max);
@@ -417,15 +416,93 @@ body::before {
   max-width: 100%;
 }
 
-/* Pricing keeps light decision cards, but the surrounding page belongs to the dark canvas. */
-.site-subpage .pricing-v2,
+/* Older subpages now use the same dark outer surfaces. Light is reserved for
+   actual task cards / booking widgets, not the whole page. */
 .site-subpage .pricing-page-hero,
 .site-subpage .pricing-paths,
+.site-subpage .pricing-v2,
 .site-subpage .pricing-assurance,
 .site-subpage .booking-intro,
 .site-subpage .service-page-hero,
-.site-subpage .rental-request {
-  border-color: rgba(255, 255, 255, .08);
+.site-subpage .rental-request,
+.site-subpage .faq-section,
+.site-subpage .page-intro.panel,
+.site-subpage .page-links.panel {
+  border-color: var(--elite-line-v13) !important;
+  background: var(--elite-surface-v13) !important;
+  color: var(--elite-text-v13);
+  box-shadow: 0 20px 52px rgba(0, 0, 0, .20) !important;
+}
+
+.site-subpage .pricing-page-hero h1,
+.site-subpage .pricing-page-hero h2,
+.site-subpage .pricing-paths h2,
+.site-subpage .pricing-v2 > .section-head h2,
+.site-subpage .pricing-assurance h2,
+.site-subpage .booking-intro h1,
+.site-subpage .booking-intro h2,
+.site-subpage .service-page-hero h1,
+.site-subpage .service-page-hero h2,
+.site-subpage .rental-request h2,
+.site-subpage .faq-section > .section-head h2,
+.site-subpage .page-intro.panel h1,
+.site-subpage .page-intro.panel h2,
+.site-subpage .page-links.panel h2 {
+  color: #fff !important;
+}
+
+.site-subpage .pricing-page-hero .lead,
+.site-subpage .pricing-page-hero p,
+.site-subpage .pricing-paths > .section-head p,
+.site-subpage .pricing-v2 > .section-head p,
+.site-subpage .pricing-assurance p,
+.site-subpage .booking-intro p,
+.site-subpage .service-page-hero .lead,
+.site-subpage .service-page-hero p,
+.site-subpage .rental-request p,
+.site-subpage .faq-section > .section-head p,
+.site-subpage .page-intro.panel p,
+.site-subpage .page-links.panel p {
+  color: var(--elite-muted-v13) !important;
+}
+
+.site-subpage .pricing-page-hero .eyebrow,
+.site-subpage .pricing-paths .eyebrow,
+.site-subpage .pricing-v2 > .section-head .eyebrow,
+.site-subpage .pricing-assurance .eyebrow,
+.site-subpage .booking-intro .eyebrow,
+.site-subpage .service-page-hero .eyebrow,
+.site-subpage .rental-request .eyebrow,
+.site-subpage .faq-section > .section-head .eyebrow {
+  color: var(--elite-rose) !important;
+}
+
+/* Functional cards remain light and readable inside dark sections. */
+.site-subpage .pricing-v2 .price-card,
+.site-subpage .pricing-path-card,
+.site-subpage .booking-quick-v9,
+.site-subpage .rental-quickfacts,
+.site-subpage .faq-item {
+  color: var(--elite-ink);
+}
+
+.site-subpage .pricing-v2 .price-card {
+  background: #f7f4ef;
+  border-color: rgba(16, 16, 20, .10);
+}
+
+.site-subpage .faq-item {
+  border-color: var(--elite-line-v13);
+  background: var(--elite-surface-2-v13);
+  color: #fff;
+}
+
+.site-subpage .faq-item summary {
+  color: #fff;
+}
+
+.site-subpage .faq-item p {
+  color: var(--elite-muted-v13);
 }
 
 /* Give dark-background headings a predictable readable color without changing light cards. */

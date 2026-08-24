@@ -1,35 +1,29 @@
 ---
 const styles = [
-  { title: "Bachata", teacher: "Elena & Dennis", level: "Beginner → Advanced", image: "/media/style-posters/20-bachata-beginner.webp", accent: "rose" },
-  { title: "Reggaeton", teacher: "Kathy", level: "Fundamentals → Intermediate", image: "/media/style-posters/09-reggaeton-fundamentals.webp", accent: "blue" },
-  { title: "Hip-Hop", teacher: "Amy", level: "Beginner", image: "/media/style-posters/06-hip-hop-beginner-amy.webp", accent: "lime" },
-  { title: "Heels", teacher: "Nate", level: "Beginner → Intermediate", image: "/media/style-posters/08-high-heels-intermediate.webp", accent: "rose" },
-  { title: "K-Pop", teacher: "Valentina", level: "Open / Beginner", image: "/media/style-posters/02-kpop-beginner.webp", accent: "blue" },
-  { title: "House", teacher: "Notika", level: "Beginner", image: "/media/style-posters/03-house-beginner.webp", accent: "lime" },
-  { title: "Zouk", teacher: "Karin & Chirag", level: "Beginner", image: "/media/style-posters/04-zouk-beginner.webp", accent: "blue" },
-  { title: "Breaking", teacher: "Minh", level: "Beginner → Advanced", image: "/media/style-posters/05-breaking.webp", accent: "rose" },
-  { title: "Latin Commercial", teacher: "Nate", level: "Beginner", image: "/media/style-posters/07-latin-commercial.webp", accent: "lime" },
-  { title: "Salsa Footwork", teacher: "Jessica & Julian", level: "Open / Beginner", image: "/media/style-posters/10-salsa-footwork-fusion-cali-style.webp", accent: "blue" }
+  { title: "Bachata", level: "Beginner → Advanced", image: "/media/style-posters/20-bachata-beginner.webp", href: "/kurse/#style-poster-gallery", accent: "rose" },
+  { title: "Reggaeton", level: "Fundamentals → Intermediate", image: "/media/style-posters/09-reggaeton-fundamentals.webp", href: "/kurse/#style-poster-gallery", accent: "blue" },
+  { title: "Hip-Hop", level: "Beginner", image: "/media/style-posters/06-hip-hop-beginner-amy.webp", href: "/kurse/#style-poster-gallery", accent: "lime" },
+  { title: "Heels", level: "Beginner → Intermediate", image: "/media/style-posters/08-high-heels-intermediate.webp", href: "/kurse/#style-poster-gallery", accent: "rose" },
+  { title: "K-Pop", level: "Open / Beginner", image: "/media/style-posters/02-kpop-beginner.webp", href: "/kurse/#style-poster-gallery", accent: "blue" }
 ];
 ---
 
-<section class="home-style-showcase home-style-showcase-v6" aria-labelledby="home-style-title" data-home-style-showcase>
+<section class="home-style-showcase home-style-showcase-v6" aria-labelledby="home-style-title">
   <header class="home-style-head home-style-head-v6">
     <div>
       <div class="eyebrow">25+ Styles</div>
       <h2 id="home-style-title">Finde deinen Vibe.</h2>
-      <p>Ein wechselnder Mix aus Styles, Levels und Coaches – hover oder fokussiere, um kurz anzuhalten.</p>
+      <p>Swipe durch unsere beliebtesten Styles – den Rest findest du im Kursfinder.</p>
     </div>
     <a class="text-link" href="/kurse/#style-poster-gallery">Alle Kurse & Styles ↗</a>
   </header>
 
-  <div class="home-style-rail" aria-label="Tanzstyles und Coaches" data-style-rail tabindex="0">
+  <div class="home-style-rail" aria-label="Beliebte Tanzstyles">
     {styles.map((style) => (
-      <a class:list={["home-style-card", "home-style-card-v6", `is-${style.accent}`]} href="/kurse/#style-poster-gallery" data-style-card>
+      <a class:list={["home-style-card", "home-style-card-v6", `is-${style.accent}`]} href={style.href}>
         <div class="home-style-media-v6">
-          <img src={style.image} alt={`${style.title} mit ${style.teacher} bei Elite Dance Studio`} width="720" height="900" loading="lazy" decoding="async" />
+          <img src={style.image} alt={`${style.title} bei Elite Dance Studio`} width="720" height="900" loading="lazy" decoding="async" />
           <span class="home-style-overlay"></span>
-          <span class="home-style-teacher">mit {style.teacher}</span>
         </div>
         <div class="home-style-copy home-style-copy-v6">
           <small>{style.level}</small>
@@ -40,47 +34,3 @@ const styles = [
     ))}
   </div>
 </section>
-
-<script>
-  document.querySelectorAll<HTMLElement>("[data-home-style-showcase]").forEach((section) => {
-    const rail = section.querySelector<HTMLElement>("[data-style-rail]");
-    if (!rail) return;
-
-    const cards = Array.from(rail.querySelectorAll<HTMLElement>("[data-style-card]"));
-    for (let i = cards.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [cards[i], cards[j]] = [cards[j], cards[i]];
-    }
-    cards.forEach((card) => rail.append(card));
-    rail.scrollLeft = 0;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let paused = false;
-    let raf = 0;
-    const speed = 0.45;
-
-    const tick = () => {
-      if (!paused && rail.scrollWidth > rail.clientWidth) {
-        rail.scrollLeft += speed;
-        if (rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 1) rail.scrollLeft = 0;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-
-    const pause = () => { paused = true; };
-    const resume = () => { paused = false; };
-
-    rail.addEventListener("mouseenter", pause);
-    rail.addEventListener("mouseleave", resume);
-    rail.addEventListener("focusin", pause);
-    rail.addEventListener("focusout", resume);
-    rail.addEventListener("pointerdown", pause);
-    rail.addEventListener("pointerup", resume);
-    rail.addEventListener("touchstart", pause, { passive: true });
-    rail.addEventListener("touchend", resume, { passive: true });
-
-    raf = requestAnimationFrame(tick);
-    window.addEventListener("pagehide", () => cancelAnimationFrame(raf), { once: true });
-  });
-</script>

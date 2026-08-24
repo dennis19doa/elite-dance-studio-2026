@@ -1,13 +1,5 @@
 [
   {
-    "question": "Wann kann ich meine Membership kündigen?",
-    "answer": "Unsere Memberships laufen jeweils einen Monat und können jederzeit gekündigt werden. Nach der Kündigung läuft dein aktueller Monatszeitraum normal weiter und verlängert sich anschließend nicht erneut."
-  },
-  {
-    "question": "Muss ich mich langfristig binden?",
-    "answer": "Nein. Bronze, Silber und Gold sind monatliche Memberships. Du entscheidest von Monat zu Monat, ob du weitertrainieren möchtest."
-  },
-  {
     "question": "Wann kann ich anfangen?",
     "answer": "Bei regulären Klassen ist ein Einstieg grundsätzlich jede Woche möglich. Prüfe im Stundenplan das Level und reserviere deinen Platz vorab über Eversports."
   },
@@ -17,7 +9,7 @@
   },
   {
     "question": "Kann ich Urban Sports Club nutzen?",
-    "answer": "Reguläre offene Kurse können je nach USC-Tarif und verfügbarem Kontingent enthalten sein. Closed Groups, Workshops, Intensives und Specials können separat kostenpflichtig sein."
+    "answer": "Reguläre Kurse können je nach USC-Tarif und verfügbarem Kontingent enthalten sein. Workshops, Intensives und Specials können separat kostenpflichtig sein."
   },
   {
     "question": "Sind Intensives in Karten oder Memberships enthalten?",

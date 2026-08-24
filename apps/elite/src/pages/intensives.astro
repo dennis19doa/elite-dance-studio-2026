@@ -4,64 +4,59 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import intensives from "../data/intensives.json";
 import site from "../data/site.json";
-
 const phases = ["Foundation", "Control", "Layering", "Integration"];
-const images = [
-  "/media/style-posters/20-bachata-beginner.webp",
-  "/media/style-posters/01-heels-beginner.webp",
-  "/media/style-posters/03-house-beginner.webp",
-  "/media/style-posters/08-high-heels-intermediate.webp"
-];
 ---
 
 <BaseLayout
   title="Tanz-Intensives in Berlin | Elite Dance Studio"
   description="Strukturierte Tanz-Intensives in Berlin-Moabit: Fundamentals, Body Movement I & II und Combined Training mit klarer Progression."
   image="/media/hero/elite-homepage-poster.jpg"
-  bodyClass="intensives-page-v8"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main intensives-main-v8">
-    <section class="intensives-hero-v8">
-      <div class="intensives-hero-copy-v8">
+  <main class="page-shell page-main">
+    <section class="service-page-hero intensive-hero panel">
+      <div class="service-page-copy">
         <div class="eyebrow">Elite Intensives</div>
-        <h1 class="page-title">Train deeper.</h1>
-        <p>Mehrere Wochen, ein klarer Fokus und genug Zeit, damit Technik wirklich hängen bleibt.</p>
+        <h1 class="page-title">Gezielter trainieren.</h1>
+        <p class="lead">Vier Trainingsblöcke. Ein klarer Weg.</p>
         <div class="actions">
-          <a class="button primary" href="#intensive-modules">Intensives ansehen</a>
+          <a class="button primary" href="#roadmap">Roadmap ansehen</a>
           <a class="button secondary" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Intensive.">Starttermin fragen</a>
         </div>
       </div>
-      <figure class="intensives-hero-image-v8">
-        <img src="/media/hero/elite-homepage-poster.jpg" alt="Training im Elite Dance Studio" />
+      <figure class="service-page-media intensive-hero-media">
+        <img src="/media/hero/elite-homepage-poster.jpg" alt="Tanzmoment im Elite Dance Studio in Berlin-Moabit" width="1920" height="1080" />
       </figure>
     </section>
 
-    <section class="intensive-modules-section-v8" id="intensive-modules">
-      <header class="intensives-section-head-v8">
-        <div><div class="eyebrow">Intensives</div><h2>Wähle deinen Trainingsfokus.</h2></div>
-        <p>Jeder Block funktioniert einzeln. Wenn du weitertrainieren möchtest, bauen die Themen sinnvoll aufeinander auf.</p>
-      </header>
+    <section class="intensive-roadmap-panel panel" id="roadmap">
+      <div class="section-head compact-section-head">
+        <div>
+          <div class="eyebrow">Deine Progression</div>
+          <h2>Vier Schritte. Ein Trainingsweg.</h2>
+        </div>
+      </div>
 
-      <div class="intensive-cards-v8">
+      <div class="intensive-roadmap">
         {intensives.map((intensive, index) => (
-          <article class:list={["intensive-card-v8", `accent-${(index % 3) + 1}`]}>
-            <figure>
-              <img src={images[index]} alt={`${intensive.name} im Elite Dance Studio`} loading="lazy" decoding="async" />
-            </figure>
-            <div class="intensive-card-copy-v8">
-              <div class="intensive-meta-v8"><span>{phases[index]}</span><small>{intensive.duration}</small></div>
+          <article class="intensive-roadmap-step">
+            <div class="roadmap-marker"><span>{intensive.number}</span><i aria-hidden="true"></i></div>
+            <div class="roadmap-card">
+              <div class="roadmap-meta"><span>{phases[index]}</span><small>{intensive.duration}</small></div>
               <h3>{intensive.name}</h3>
               <p>{intensive.summary}</p>
-              <div class="intensive-prices-v8">
-                <span><small>Training</small><strong>{intensive.standardPrice}</strong></span>
-                <span><small>Premium</small><strong>{intensive.premiumPrice}</strong></span>
-              </div>
-              <details>
+
+              <details class="roadmap-details">
                 <summary>Was du trainierst</summary>
                 <ul>{intensive.points.map((point) => <li>{point}</li>)}</ul>
               </details>
+
+              <div class="roadmap-pricing">
+                <div><small>Training</small><strong>{intensive.standardPrice}</strong></div>
+                <div><small>Premium</small><strong>{intensive.premiumPrice}</strong></div>
+              </div>
+
               <a class="text-link" href={`https://wa.me/491633863548?text=${encodeURIComponent(`Hallo Elite, ich interessiere mich für ${intensive.name}.`)}`}>Verfügbarkeit anfragen →</a>
             </div>
           </article>
@@ -69,10 +64,10 @@ const images = [
       </div>
     </section>
 
-    <section class="training-options-v8">
-      <a href="/#schedule"><small>Flexibel</small><strong>Regular Classes</strong><span>Stundenplan →</span></a>
-      <a href="/fortgeschrittene/"><small>Kontinuierlich</small><strong>Closed Groups</strong><span>Advanced Training →</span></a>
-      <a href="#intensive-modules"><small>Fokussiert</small><strong>Intensives</strong><span>Trainings ansehen ↑</span></a>
+    <section class="progression-choice panel intensive-choice-v2">
+      <div><span>Wöchentlich</span><h3>Classes</h3><a class="button secondary" href="/stundenplan/">Stundenplan</a></div>
+      <div><span>Feste Gruppe</span><h3>Closed Groups</h3><a class="button secondary" href="/fortgeschrittene/">Mehr erfahren</a></div>
+      <div><span>Fokus</span><h3>Intensives</h3><a class="button primary" href="#roadmap">Roadmap</a></div>
     </section>
   </main>
 

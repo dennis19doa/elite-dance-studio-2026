@@ -12,19 +12,19 @@ import site from "../data/site.json";
 
 <BaseLayout
   title="Preise & Memberships | Elite Dance Studio Berlin"
-  description="Welcome Pass, Drop-in, Karten, USC und monatlich kündbare Memberships im Elite Dance Studio Berlin-Moabit."
+  description="Welcome Pass, Drop-in, Karten, USC und Memberships für beginner-friendly Tanzkurse im Elite Dance Studio Berlin-Moabit."
   bodyClass="pricing-page-v3"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main pricing-main-v8">
-    <section class="pricing-page-hero pricing-page-hero-v3">
+  <main class="page-shell page-main">
+    <section class="pricing-page-hero pricing-page-hero-v3 panel">
       <div class="pricing-page-copy">
         <div class="eyebrow">Preise & Memberships</div>
-        <h1 class="page-title">Wie möchtest du trainieren?</h1>
-        <p class="lead">Einmal testen, flexibel bleiben oder regelmäßig kommen — ohne langfristige Membership-Bindung.</p>
+        <h1 class="page-title">Finde deinen Rhythmus.</h1>
+        <p class="lead">Erst testen, flexibel bleiben oder regelmäßig trainieren.</p>
         <div class="actions">
-          <a class="button primary" href="#pricing">Optionen vergleichen</a>
+          <a class="button primary" href="#pricing">Preise ansehen</a>
           <a class="button secondary" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20welches%20Angebot%20passt%20zu%20mir%3F">Kurz fragen</a>
         </div>
       </div>
@@ -33,17 +33,11 @@ import site from "../data/site.json";
       </figure>
     </section>
 
-    <section class="pricing-paths-v8" aria-label="Schnellauswahl Preise">
-      <a href="#pricing"><span>Neu bei Elite</span><strong>2 Classes · 20€</strong><small>Welcome Pass</small></a>
-      <a href="#pricing"><span>Flexibel</span><strong>Ab 13€</strong><small>Drop-in & Karten</small></a>
-      <a href="#pricing"><span>Regelmäßig</span><strong>Ab 45€ / Monat</strong><small>Jederzeit kündbar</small></a>
-    </section>
+    <PricingSection pricing={pricing} eyebrow="Preise im Überblick" title="Start. Flexibel. Membership." description="" />
 
-    <PricingSection pricing={pricing} eyebrow="Deine Optionen" title="Einfach vergleichen." />
+    <FaqSection items={pricingFaqs.slice(0, 4)} eyebrow="Preise FAQ" title="Kurz erklärt." description="" linkHref="/faq/" linkLabel="Alle Fragen ansehen" />
 
-    <FaqSection items={pricingFaqs.slice(0, 5)} eyebrow="Preise FAQ" title="Wichtig vor der Buchung." description="" linkHref="/faq/" linkLabel="Alle Fragen ansehen" />
-
-    <section class="pricing-assurance pricing-assurance-v3">
+    <section class="pricing-assurance panel pricing-assurance-v3">
       <div><div class="eyebrow">Noch unsicher?</div><h2>Wir helfen dir bei der Auswahl.</h2></div>
       <a class="button primary" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20bin%20bei%20den%20Preisen%20noch%20unsicher.">WhatsApp schreiben</a>
     </section>

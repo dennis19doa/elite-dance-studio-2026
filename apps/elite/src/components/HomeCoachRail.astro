@@ -4,18 +4,17 @@ import coaches from "../data/coaches.json";
 const rail = [...coaches, ...coaches];
 ---
 
-<section class="home-coach-rail" aria-labelledby="home-coach-title" data-home-coach-rail>
+<section class="home-coach-rail" aria-labelledby="home-coach-title">
   <header class="home-coach-head">
     <div>
       <div class="eyebrow">Unser Team</div>
       <h2 id="home-coach-title">Meet your coaches.</h2>
-      <p>Der Mix startet bei jedem Besuch an einer anderen Stelle.</p>
     </div>
     <a class="text-link" href="/coaches/">Alle Coaches ansehen ↗</a>
   </header>
 
   <div class="home-coach-window" aria-label="Coaches im Elite Dance Studio">
-    <div class="home-coach-track" data-coach-track>
+    <div class="home-coach-track">
       {rail.map((coach, index) => (
         <a
           class="home-coach-card"
@@ -36,13 +35,3 @@ const rail = [...coaches, ...coaches];
     </div>
   </div>
 </section>
-
-<script>
-  document.querySelectorAll<HTMLElement>("[data-home-coach-rail]").forEach((rail) => {
-    const track = rail.querySelector<HTMLElement>("[data-coach-track]");
-    if (!track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const duration = 58;
-    const randomOffset = Math.random() * duration;
-    track.style.animationDelay = `-${randomOffset.toFixed(2)}s`;
-  });
-</script>

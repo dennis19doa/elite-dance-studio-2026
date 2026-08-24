@@ -7,143 +7,152 @@ import InstagramIcon from "../components/InstagramIcon.astro";
 import coaches from "../data/coaches.json";
 import site from "../data/site.json";
 
-const categoryFor = (focus: string) => {
-  const value = focus.toLowerCase();
-  if (/bachata|zouk|kizomba|salsa|lambada/.test(value)) return "partner";
-  if (/hip hop|breaking|house/.test(value)) return "urban";
-  if (/heels|commercial|k-pop|reggaeton|jazz|twerk/.test(value)) return "performance";
-  return "movement";
-};
-
-const featured = coaches.slice(0, 3);
+const firstCoach = coaches[0];
 const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-const scheduleHref = `${baseUrl}#schedule`;
+const bookingHref = `${baseUrl}#schedule`;
 ---
 
 <BaseLayout
   title="Coaches & Tanzlehrer:innen | Elite Dance Studio Berlin"
   description="Lerne die Coaches für Bachata, Reggaeton, Heels, Hip Hop, Commercial, K-Pop und weitere Styles im Elite Dance Studio Berlin kennen."
-  bodyClass="site-subpage coaches-page-v11"
+  bodyClass="coaches-page-v12"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main">
-    <section class="coaches-hero-v11">
-      <div class="coaches-hero-copy-v11">
-        <div class="v11-kicker">22 Coaches · viele Handschriften</div>
-        <h1 class="v11-display">Finde die Energie, bei der du bleiben willst.</h1>
-        <p class="v11-copy">
-          Ein guter Kurs ist mehr als ein Style-Name. Entdecke, wer bei Elite unterrichtet, wie sich
-          die Class anfühlt und welcher Coach zu deinem nächsten Schritt passt.
-        </p>
-        <div class="coaches-hero-actions-v11">
-          <a class="button primary" href="#coach-directory">Coaches entdecken</a>
-          <a class="button secondary" href={scheduleHref}>Classes ansehen</a>
-        </div>
+  <main class="page-shell page-main coaches-main-v12">
+    <header class="coaches-intro-v12">
+      <div>
+        <div class="eyebrow">22 Coaches · viele Handschriften</div>
+        <h1 class="page-title">Nicht jeder Coach passt zu jedem Menschen. Genau das ist gut.</h1>
       </div>
-
-      <div class="coaches-hero-gallery-v11" aria-label="Auswahl unserer Coaches">
-        {featured.map((coach) => (
-          <a href={`/coaches/${coach.slug}/`}>
-            <img src={coach.image} alt={coach.imageAlt} loading="eager" />
-            <span>
-              <strong>{coach.name}</strong>
-              <small>{coach.focus}</small>
-            </span>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <section class="coach-directory-v11" id="coach-directory" data-coach-directory>
-      <header class="coach-directory-head-v11">
-        <div>
-          <div class="v11-kicker">Unser Team</div>
-          <h2>Persönlichkeiten statt austauschbarer Kurskarten.</h2>
-        </div>
+      <div class="coaches-intro-side-v12">
         <p>
-          Filtere nach Richtung oder scroll einfach durch das Team. Termine, Teaching-Fokus,
-          Einstiegshinweise und Instagram findest du direkt auf der Karte.
+          Klick dich durch unser Team und finde die Person, deren Energie, Style und Art zu unterrichten
+          zu dir passt. Instagram, Class-Zeit und Profil sind direkt dabei.
         </p>
-      </header>
-
-      <div class="coach-filters-v11" role="group" aria-label="Coaches nach Richtung filtern">
-        <button class="coach-filter-v11 is-active" type="button" data-filter="all">Alle Coaches</button>
-        <button class="coach-filter-v11" type="button" data-filter="partner">Partner Dance</button>
-        <button class="coach-filter-v11" type="button" data-filter="urban">Urban</button>
-        <button class="coach-filter-v11" type="button" data-filter="performance">Performance</button>
-        <button class="coach-filter-v11" type="button" data-filter="movement">Movement</button>
+        <a href={bookingHref}>Class buchen ↗</a>
       </div>
+    </header>
 
-      <div class="coach-grid-v11">
-        {coaches.map((coach) => (
-          <article class="coach-card-v11" data-coach-card data-category={categoryFor(coach.focus)}>
-            <a class="coach-card-image-v11" href={`/coaches/${coach.slug}/`} aria-label={`${coach.name} Profil öffnen`}>
-              <img src={coach.image} alt={coach.imageAlt} loading="lazy" decoding="async" />
-              <span class="coach-card-style-v11">{coach.focus}</span>
-            </a>
-
-            <div class="coach-card-body-v11">
-              <div class="coach-card-meta-v11">
-                <h3>{coach.name}</h3>
-                {coach.schedule && <time>{coach.schedule}</time>}
-              </div>
-
-              <p>{coach.text}</p>
-              {coach.beginnerSupport && <span class="coach-card-support-v11">{coach.beginnerSupport}</span>}
-
-              <div class="coach-card-actions-v11">
-                <a class="coach-profile-v11" href={`/coaches/${coach.slug}/`}>Profil ansehen ↗</a>
-                {coach.instagramUrl ? (
-                  <a
-                    class="coach-instagram-v11"
-                    href={coach.instagramUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`${coach.name} auf Instagram öffnen`}
-                  >
-                    <InstagramIcon />
-                    <span>{coach.instagramHandle}</span>
-                  </a>
-                ) : (
-                  <span class="coach-instagram-v11" aria-label="Instagram folgt">
-                    <InstagramIcon />
-                    <span>Instagram folgt</span>
-                  </span>
-                )}
-              </div>
-            </div>
-          </article>
+    <section class="coach-browser-v12" data-coach-browser aria-label="Elite Coaches entdecken">
+      <div class="coach-browser-list-v12" role="listbox" aria-label="Coach auswählen">
+        {coaches.map((coach, index) => (
+          <button
+            type="button"
+            class:list={["coach-browser-item-v12", index === 0 && "is-active"]}
+            role="option"
+            aria-selected={index === 0 ? "true" : "false"}
+            data-coach-button
+            data-name={coach.name}
+            data-focus={coach.focus}
+            data-schedule={coach.schedule ?? ""}
+            data-text={coach.text}
+            data-support={coach.beginnerSupport ?? ""}
+            data-image={coach.image}
+            data-image-alt={coach.imageAlt}
+            data-profile={`/coaches/${coach.slug}/`}
+            data-instagram-handle={coach.instagramHandle ?? ""}
+            data-instagram-url={coach.instagramUrl ?? ""}
+          >
+            <span>{coach.name}</span>
+            <small>{coach.focus}</small>
+          </button>
         ))}
       </div>
+
+      <article class="coach-browser-stage-v12" data-coach-stage>
+        <figure class="coach-browser-photo-v12">
+          <img data-coach-image src={firstCoach.image} alt={firstCoach.imageAlt} />
+          <figcaption>
+            <span data-coach-focus>{firstCoach.focus}</span>
+            <strong data-coach-name>{firstCoach.name}</strong>
+          </figcaption>
+        </figure>
+
+        <div class="coach-browser-copy-v12">
+          <div class="coach-browser-meta-v12">
+            <span>Aktuelle Class</span>
+            <strong data-coach-schedule>{firstCoach.schedule}</strong>
+          </div>
+
+          <p data-coach-text>{firstCoach.text}</p>
+          <p class="coach-browser-support-v12" data-coach-support>{firstCoach.beginnerSupport}</p>
+
+          <div class="coach-browser-actions-v12">
+            <a class="button primary" data-coach-profile href={`/coaches/${firstCoach.slug}/`}>Profil ansehen</a>
+            <a
+              class="coach-browser-instagram-v12"
+              data-coach-instagram
+              href={firstCoach.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <InstagramIcon />
+              <span data-coach-instagram-handle>{firstCoach.instagramHandle}</span>
+            </a>
+          </div>
+        </div>
+      </article>
 
       <script is:inline>
         (() => {
-          const root = document.currentScript?.closest('[data-coach-directory]');
+          const root = document.currentScript?.closest('[data-coach-browser]');
           if (!root) return;
-          const buttons = [...root.querySelectorAll('[data-filter]')];
-          const cards = [...root.querySelectorAll('[data-coach-card]')];
+
+          const buttons = [...root.querySelectorAll('[data-coach-button]')];
+          const image = root.querySelector('[data-coach-image]');
+          const name = root.querySelector('[data-coach-name]');
+          const focus = root.querySelector('[data-coach-focus]');
+          const schedule = root.querySelector('[data-coach-schedule]');
+          const text = root.querySelector('[data-coach-text]');
+          const support = root.querySelector('[data-coach-support]');
+          const profile = root.querySelector('[data-coach-profile]');
+          const instagram = root.querySelector('[data-coach-instagram]');
+          const instagramHandle = root.querySelector('[data-coach-instagram-handle]');
+
+          const selectCoach = (button) => {
+            buttons.forEach((item) => {
+              const active = item === button;
+              item.classList.toggle('is-active', active);
+              item.setAttribute('aria-selected', String(active));
+            });
+
+            const d = button.dataset;
+            image.classList.add('is-changing');
+            window.setTimeout(() => {
+              image.src = d.image || '';
+              image.alt = d.imageAlt || d.name || '';
+              image.classList.remove('is-changing');
+            }, 120);
+
+            name.textContent = d.name || '';
+            focus.textContent = d.focus || '';
+            schedule.textContent = d.schedule || 'Aktuelle Termine im Stundenplan';
+            text.textContent = d.text || '';
+            support.textContent = d.support || '';
+            support.hidden = !d.support;
+            profile.href = d.profile || '#';
+
+            if (d.instagramUrl) {
+              instagram.hidden = false;
+              instagram.href = d.instagramUrl;
+              instagramHandle.textContent = d.instagramHandle || 'Instagram';
+            } else {
+              instagram.hidden = true;
+            }
+          };
 
           buttons.forEach((button) => {
-            button.addEventListener('click', () => {
-              const filter = button.dataset.filter;
-              buttons.forEach((item) => item.classList.toggle('is-active', item === button));
-              cards.forEach((card) => {
-                card.hidden = filter !== 'all' && card.dataset.category !== filter;
-              });
-            });
+            button.addEventListener('click', () => selectCoach(button));
+            button.addEventListener('mouseenter', () => selectCoach(button));
           });
         })();
       </script>
     </section>
 
-    <section class="coaches-cta-v11">
-      <div>
-        <div class="v11-kicker">Noch unsicher?</div>
-        <h2>Du musst den perfekten Coach nicht vorher kennen.</h2>
-        <p>Schreib uns, was du suchst – wir empfehlen dir eine konkrete Class und einen passenden Einstieg.</p>
-      </div>
-      <a class="button" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20suche%20einen%20passenden%20Kurs%20und%20Coach.">Empfehlung bekommen</a>
+    <section class="coaches-outro-v12">
+      <p>Du musst nicht wissen, wer zu dir passt.</p>
+      <a href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20suche%20einen%20passenden%20Kurs%20und%20Coach.">Sag uns, was du tanzen möchtest →</a>
     </section>
   </main>
 

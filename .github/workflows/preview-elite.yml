@@ -37,8 +37,10 @@ jobs:
           GITHUB_PAGES_BASE: ${{ github.event.repository.name }}/preview/pr-${{ github.event.number }}
           PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
 
-      - name: Store preview number
-        run: echo "${{ github.event.number }}" > apps/elite/dist/preview-pr-number.txt
+      - name: Store preview metadata
+        run: |
+          echo "${{ github.event.number }}" > apps/elite/dist/preview-pr-number.txt
+          echo "${{ github.event.pull_request.head.sha }}" > apps/elite/dist/preview-build-sha.txt
 
       - name: Upload preview artifact
         uses: actions/upload-artifact@v4

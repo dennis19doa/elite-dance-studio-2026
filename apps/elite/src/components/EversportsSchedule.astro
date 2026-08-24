@@ -11,45 +11,52 @@ const {
   id = "schedule",
   eyebrow = "Live-Stundenplan",
   title = "Alle Classes dieser Woche.",
-  description = "Wähle Tag, Style und Level. Eversports zeigt dir die aktuelle Verfügbarkeit und reserviert deinen Platz direkt.",
+  description = "Wähle deine Class und reserviere deinen Platz direkt über Eversports.",
   home = false
 } = Astro.props;
 
 const levels = [
-  { label: "Level 0", text: "Dein allererster Einstieg" },
-  { label: "Beginner", text: "Grundlagen ohne Vorkenntnisse" },
-  { label: "Beginner+", text: "Basics sind schon vertraut" },
-  { label: "Intermediate", text: "Mehr Tempo und Erfahrung" }
+  { label: "Level 0", text: "allererster Einstieg" },
+  { label: "Beginner", text: "Basics ohne Vorwissen" },
+  { label: "Beginner+", text: "Basics sind vertraut" },
+  { label: "Intermediate", text: "mehr Tempo & Erfahrung" }
 ];
 ---
 
 <section
-  class:list={["eversports-panel", "panel", home && "eversports-home"]}
+  class:list={["eversports-panel", "panel", "schedule-v9", home && "eversports-home"]}
   id={id}
   aria-labelledby={`${id}-title`}
 >
-  <div class="schedule-editorial-head">
-    <div class="schedule-live-mark" aria-label="Aktueller Live-Stundenplan">
-      <span><i aria-hidden="true"></i> Live</span>
-      <strong>Diese Woche</strong>
-    </div>
-    <div class="schedule-editorial-copy">
+  <div class="schedule-head-v9">
+    <div class="schedule-title-v9">
+      <div class="schedule-live-v9"><i aria-hidden="true"></i> Live · aktueller Kursplan</div>
       <div class="eyebrow">{eyebrow}</div>
       <h2 id={`${id}-title`}>{title}</h2>
       <p>{description}</p>
     </div>
-    <a class="schedule-help-link" href="/faq/">
-      <span>Nicht sicher?</span>
-      <strong>Ersten Besuch planen <b aria-hidden="true">↗</b></strong>
+
+    <a
+      class="schedule-question-v9"
+      href="https://wa.me/491633863548?text=Hallo%20Elite%20Dance%20Studio%2C%20ich%20bin%20mir%20bei%20der%20Kurswahl%20noch%20unsicher."
+    >
+      <span>Kurswahl noch offen?</span>
+      <strong>Frag uns auf WhatsApp ↗</strong>
     </a>
   </div>
 
-  <div class="schedule-level-guide" aria-label="Level schnell erklärt">
-    {levels.map((level, index) => (
-      <div class="schedule-level">
-        <span>{String(index + 1).padStart(2, "0")}</span>
-        <div><strong>{level.label}</strong><small>{level.text}</small></div>
-      </div>
+  <nav class="schedule-actions-v9" aria-label="Schnellzugriff rund um den Stundenplan">
+    <span>Direkt zu</span>
+    <a href={`#${id}`}>Alle Classes</a>
+    <a href="/kurse/#levels">Beginner</a>
+    <a href="/fortgeschrittene/">Intermediate+</a>
+    <a href="/intensives/">Intensives</a>
+    <a href="https://urbansportsclub.com/de/venues/elite-dance-studio-1" target="_blank" rel="noreferrer">USC</a>
+  </nav>
+
+  <div class="schedule-level-inline-v9" aria-label="Level schnell erklärt">
+    {levels.map((level) => (
+      <span><strong>{level.label}</strong>{level.text}</span>
     ))}
   </div>
 
@@ -87,7 +94,7 @@ const levels = [
         if (!entries.some((entry) => entry.isIntersecting)) return;
         observer.disconnect();
         loadWidget();
-      }, { rootMargin: "600px 0px" });
+      }, { rootMargin: "750px 0px" });
 
       observer.observe(schedule);
     })();

@@ -29,7 +29,7 @@ const images = [
         <h1 class="page-title">Train deeper.</h1>
         <p>Mehrere Wochen, ein klarer Fokus und genug Zeit, damit Technik wirklich hängen bleibt.</p>
         <div class="actions">
-          <a class="button primary" href="#intensive-modules">Module ansehen</a>
+          <a class="button primary" href="#intensive-modules">Intensives ansehen</a>
           <a class="button secondary" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Intensive.">Starttermin fragen</a>
         </div>
       </div>
@@ -40,8 +40,8 @@ const images = [
 
     <section class="intensive-modules-section-v8" id="intensive-modules">
       <header class="intensives-section-head-v8">
-        <div><div class="eyebrow">Deine Progression</div><h2>Vier Module. Ein Trainingsweg.</h2></div>
-        <p>Jeder Block funktioniert einzeln. Zusammen bauen sie Technik, Kontrolle und Ausdruck Schritt für Schritt auf.</p>
+        <div><div class="eyebrow">Intensives</div><h2>Wähle deinen Trainingsfokus.</h2></div>
+        <p>Jeder Block funktioniert einzeln. Wenn du weitertrainieren möchtest, bauen die Themen sinnvoll aufeinander auf.</p>
       </header>
 
       <div class="intensive-cards-v8">
@@ -49,7 +49,6 @@ const images = [
           <article class:list={["intensive-card-v8", `accent-${(index % 3) + 1}`]}>
             <figure>
               <img src={images[index]} alt={`${intensive.name} im Elite Dance Studio`} loading="lazy" decoding="async" />
-              <span>{intensive.number}</span>
             </figure>
             <div class="intensive-card-copy-v8">
               <div class="intensive-meta-v8"><span>{phases[index]}</span><small>{intensive.duration}</small></div>
@@ -73,7 +72,7 @@ const images = [
     <section class="training-options-v8">
       <a href="/#schedule"><small>Flexibel</small><strong>Regular Classes</strong><span>Stundenplan →</span></a>
       <a href="/fortgeschrittene/"><small>Kontinuierlich</small><strong>Closed Groups</strong><span>Advanced Training →</span></a>
-      <a href="#intensive-modules"><small>Fokussiert</small><strong>Intensives</strong><span>Module ansehen ↑</span></a>
+      <a href="#intensive-modules"><small>Fokussiert</small><strong>Intensives</strong><span>Trainings ansehen ↑</span></a>
     </section>
   </main>
 

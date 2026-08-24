@@ -16,82 +16,87 @@ const categoryFor = (focus: string) => {
 };
 
 const featured = coaches.slice(0, 3);
+const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const scheduleHref = `${baseUrl}#schedule`;
 ---
 
 <BaseLayout
   title="Coaches & Tanzlehrer:innen | Elite Dance Studio Berlin"
   description="Lerne die Coaches für Bachata, Reggaeton, Heels, Hip Hop, Commercial, K-Pop und weitere Styles im Elite Dance Studio Berlin kennen."
-  bodyClass="site-subpage coaches-page-v9"
+  bodyClass="site-subpage coaches-page-v11"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main">
-    <section class="coaches-v9-hero">
-      <div class="coaches-v9-hero-copy">
-        <div class="eyebrow">Meet the people behind the classes</div>
-        <h1 class="page-title">Finde nicht nur deinen Style. Finde deinen Coach.</h1>
-        <p class="lead">
-          Jede Class hat eine andere Energie. Hier siehst du, wer unterrichtet, worauf der Fokus
-          liegt, wann die Class stattfindet und was du auf Instagram erwarten kannst.
+    <section class="coaches-hero-v11">
+      <div class="coaches-hero-copy-v11">
+        <div class="v11-kicker">22 Coaches · viele Handschriften</div>
+        <h1 class="v11-display">Finde die Energie, bei der du bleiben willst.</h1>
+        <p class="v11-copy">
+          Ein guter Kurs ist mehr als ein Style-Name. Entdecke, wer bei Elite unterrichtet, wie sich
+          die Class anfühlt und welcher Coach zu deinem nächsten Schritt passt.
         </p>
-        <div class="actions">
-          <a class="button primary" href="#coach-directory">Team entdecken</a>
-          <a class="button secondary" href="/#schedule">Class buchen</a>
+        <div class="coaches-hero-actions-v11">
+          <a class="button primary" href="#coach-directory">Coaches entdecken</a>
+          <a class="button secondary" href={scheduleHref}>Classes ansehen</a>
         </div>
       </div>
 
-      <div class="coaches-v9-hero-portraits" aria-label="Auswahl unserer Coaches">
+      <div class="coaches-hero-gallery-v11" aria-label="Auswahl unserer Coaches">
         {featured.map((coach) => (
           <a href={`/coaches/${coach.slug}/`}>
             <img src={coach.image} alt={coach.imageAlt} loading="eager" />
-            <span><strong>{coach.name}</strong><small>{coach.focus}</small></span>
+            <span>
+              <strong>{coach.name}</strong>
+              <small>{coach.focus}</small>
+            </span>
           </a>
         ))}
       </div>
     </section>
 
-    <section class="coach-directory-v9" id="coach-directory" data-coach-directory>
-      <header class="coach-directory-head-v9">
+    <section class="coach-directory-v11" id="coach-directory" data-coach-directory>
+      <header class="coach-directory-head-v11">
         <div>
-          <div class="eyebrow">Unser Team</div>
-          <h2>Menschen, nicht austauschbare Kursnamen.</h2>
+          <div class="v11-kicker">Unser Team</div>
+          <h2>Persönlichkeiten statt austauschbarer Kurskarten.</h2>
         </div>
         <p>
-          Filtere nach Richtung. Jede Karte zeigt dir Teaching-Fokus, aktuellen Termin,
-          Beginner-Hinweis, Profil und – wenn vorhanden – den direkten Instagram-Account.
+          Filtere nach Richtung oder scroll einfach durch das Team. Termine, Teaching-Fokus,
+          Einstiegshinweise und Instagram findest du direkt auf der Karte.
         </p>
       </header>
 
-      <div class="coach-filters-v9" role="group" aria-label="Coaches nach Richtung filtern">
-        <button class="coach-filter-v9 is-active" type="button" data-filter="all">Alle Coaches</button>
-        <button class="coach-filter-v9" type="button" data-filter="partner">Partner Dance</button>
-        <button class="coach-filter-v9" type="button" data-filter="urban">Urban</button>
-        <button class="coach-filter-v9" type="button" data-filter="performance">Performance</button>
-        <button class="coach-filter-v9" type="button" data-filter="movement">Movement</button>
+      <div class="coach-filters-v11" role="group" aria-label="Coaches nach Richtung filtern">
+        <button class="coach-filter-v11 is-active" type="button" data-filter="all">Alle Coaches</button>
+        <button class="coach-filter-v11" type="button" data-filter="partner">Partner Dance</button>
+        <button class="coach-filter-v11" type="button" data-filter="urban">Urban</button>
+        <button class="coach-filter-v11" type="button" data-filter="performance">Performance</button>
+        <button class="coach-filter-v11" type="button" data-filter="movement">Movement</button>
       </div>
 
-      <div class="coach-grid-v9">
+      <div class="coach-grid-v11">
         {coaches.map((coach) => (
-          <article class="coach-card-v9" data-coach-card data-category={categoryFor(coach.focus)}>
-            <a class="coach-card-image-v9" href={`/coaches/${coach.slug}/`} aria-label={`${coach.name} Profil öffnen`}>
+          <article class="coach-card-v11" data-coach-card data-category={categoryFor(coach.focus)}>
+            <a class="coach-card-image-v11" href={`/coaches/${coach.slug}/`} aria-label={`${coach.name} Profil öffnen`}>
               <img src={coach.image} alt={coach.imageAlt} loading="lazy" decoding="async" />
-              <span class="coach-style-v9">{coach.focus}</span>
+              <span class="coach-card-style-v11">{coach.focus}</span>
             </a>
 
-            <div class="coach-card-body-v9">
-              <div class="coach-card-top-v9">
+            <div class="coach-card-body-v11">
+              <div class="coach-card-meta-v11">
                 <h3>{coach.name}</h3>
                 {coach.schedule && <time>{coach.schedule}</time>}
               </div>
 
               <p>{coach.text}</p>
-              {coach.beginnerSupport && <span class="coach-support-v9">{coach.beginnerSupport}</span>}
+              {coach.beginnerSupport && <span class="coach-card-support-v11">{coach.beginnerSupport}</span>}
 
-              <div class="coach-card-actions-v9">
-                <a class="coach-profile-v9" href={`/coaches/${coach.slug}/`}>Profil ansehen →</a>
+              <div class="coach-card-actions-v11">
+                <a class="coach-profile-v11" href={`/coaches/${coach.slug}/`}>Profil ansehen ↗</a>
                 {coach.instagramUrl ? (
                   <a
-                    class="coach-instagram-v9"
+                    class="coach-instagram-v11"
                     href={coach.instagramUrl}
                     target="_blank"
                     rel="noreferrer"
@@ -101,7 +106,7 @@ const featured = coaches.slice(0, 3);
                     <span>{coach.instagramHandle}</span>
                   </a>
                 ) : (
-                  <span class="coach-instagram-v9" aria-label="Instagram folgt">
+                  <span class="coach-instagram-v11" aria-label="Instagram folgt">
                     <InstagramIcon />
                     <span>Instagram folgt</span>
                   </span>
@@ -132,15 +137,13 @@ const featured = coaches.slice(0, 3);
       </script>
     </section>
 
-    <section class="cta-banner panel">
+    <section class="coaches-cta-v11">
       <div>
-        <div class="eyebrow">Noch unsicher?</div>
-        <h2>Beschreib uns kurz, was du tanzen möchtest.</h2>
-        <p>Wir empfehlen dir einen passenden Style, Level und Coach.</p>
+        <div class="v11-kicker">Noch unsicher?</div>
+        <h2>Du musst den perfekten Coach nicht vorher kennen.</h2>
+        <p>Schreib uns, was du suchst – wir empfehlen dir eine konkrete Class und einen passenden Einstieg.</p>
       </div>
-      <div class="actions">
-        <a class="button primary" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20suche%20einen%20passenden%20Kurs%20und%20Coach.">Coach empfehlen lassen</a>
-      </div>
+      <a class="button" href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20suche%20einen%20passenden%20Kurs%20und%20Coach.">Empfehlung bekommen</a>
     </section>
   </main>
 

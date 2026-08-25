@@ -4,7 +4,7 @@ import coaches from "../data/coaches.json";
 const rail = [...coaches, ...coaches];
 ---
 
-<section class="home-coach-film-v12" aria-labelledby="home-coach-title" data-coach-rail>
+<section class="home-coach-film-v12 home-coach-film-v16" aria-labelledby="home-coach-title" data-coach-rail>
   <header class="home-coach-film-head-v12">
     <div>
       <div class="eyebrow">Unser Team</div>
@@ -16,7 +16,7 @@ const rail = [...coaches, ...coaches];
     </div>
   </header>
 
-  <div class="home-coach-film-window-v12">
+  <div class="home-coach-film-window-v12" data-coach-window>
     <div class="home-coach-film-track-v12">
       {rail.map((coach, index) => (
         <a
@@ -26,10 +26,16 @@ const rail = [...coaches, ...coaches];
           tabindex={index >= coaches.length ? -1 : undefined}
         >
           <img src={coach.image} alt={index < coaches.length ? coach.imageAlt : ""} loading="lazy" decoding="async" />
-          <span>
+          <span class="home-coach-film-basic-v16">
             <small>{coach.focus}</small>
             <strong>{coach.name}</strong>
           </span>
+          <div class="home-coach-film-details-v16">
+            <small>{coach.schedule}</small>
+            <p>{coach.text}</p>
+            <b>{coach.instagramHandle}</b>
+            <em>Profil öffnen ↗</em>
+          </div>
         </a>
       ))}
     </div>

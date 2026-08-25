@@ -15,31 +15,27 @@ import site from "../data/site.json";
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main">
-    <section class="booking-intro panel">
+    <section class="booking-intro panel booking-intro-v16">
       <div>
-        <div class="eyebrow">Diese Woche bei Elite</div>
-        <h1 class="page-title">Stundenplan ansehen. Platz reservieren. Tanzen.</h1>
+        <div class="eyebrow">Stundenplan</div>
+        <h1 class="page-title">Deine nächste Class beginnt hier.</h1>
       </div>
       <div class="booking-intro-copy">
-        <p class="lead">Der Live-Kalender ist das Zentrum: aktuelle Classes, Plätze und Buchung direkt an einem Ort.</p>
+        <p class="lead">Class wählen. Platz sichern. Tanzen.</p>
         <div class="actions">
-          <a class="button primary" href="#schedule">Zum Live-Kalender</a>
+          <a class="button primary" href="#schedule">Zum Kalender</a>
           <a class="button secondary" href="/starter-pass/">Welcome Pass · 20€</a>
         </div>
       </div>
     </section>
 
-    <div class="booking-quick-v9" aria-label="Wichtige Hinweise zur Buchung">
-      <span>Viele Classes beginner-friendly</span>
-      <span>Oft ohne festen Partner</span>
-      <span>USC bei regulären Open Classes</span>
+    <div class="booking-quick-v9 booking-quick-v16" aria-label="Kurz vor deinem Besuch">
+      <span>USC bei Open Classes</span>
+      <span>Viele Classes ohne festen Partner</span>
       <span>Erster Besuch: 10–15 Min. früher</span>
     </div>
 
-    <EversportsSchedule
-      title="Deine nächste Class beginnt hier."
-      description="Wähle eine Class im Live-Kalender und buche deinen Platz direkt. Wenn du beim Level unsicher bist, findest du die Kurswahl-Hilfe oben rechts."
-    />
+    <EversportsSchedule title="Live-Kalender" />
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />

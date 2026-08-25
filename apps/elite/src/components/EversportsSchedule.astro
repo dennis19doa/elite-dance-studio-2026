@@ -9,61 +9,39 @@ interface Props {
 
 const {
   id = "schedule",
-  eyebrow = "Live-Stundenplan",
-  title = "Alle Classes dieser Woche.",
-  description = "Wähle deine Class und reserviere deinen Platz direkt über Eversports.",
+  eyebrow = "",
+  title = "Live-Stundenplan",
+  description = "",
   home = false
 } = Astro.props;
 
-const facts = [
-  { label: "Direkt reservieren", text: "Dein Platz wird im Live-Kalender von Eversports gebucht." },
-  { label: "USC", text: "Urban Sports Club gilt für unsere regulären Open Classes." },
-  { label: "Neu bei Elite", text: "Welcome Pass: 2 Classes für 20€ zum Ausprobieren." }
-];
-
-const levels = [
-  { label: "Level 0", text: "allererster Einstieg" },
-  { label: "Beginner", text: "Basics ohne Vorwissen" },
-  { label: "Beginner+", text: "Basics sind vertraut" },
-  { label: "Intermediate", text: "mehr Tempo & Erfahrung" }
-];
+const levels = ["Level 0", "Beginner", "Beginner+", "Intermediate", "Advanced", "Intensives"];
 ---
 
 <section
-  class:list={["eversports-panel", "panel", "schedule-v9", home && "eversports-home"]}
+  class:list={["eversports-panel", "panel", "schedule-v9", "schedule-v16", home && "eversports-home"]}
   id={id}
   aria-labelledby={`${id}-title`}
 >
-  <div class="schedule-head-v9">
-    <div class="schedule-title-v9">
+  <div class="schedule-head-v16">
+    <div class="schedule-title-v16">
       <div class="schedule-live-v9"><i aria-hidden="true"></i> Live · aktueller Kursplan</div>
-      <div class="eyebrow">{eyebrow}</div>
+      {eyebrow && <div class="eyebrow">{eyebrow}</div>}
       <h2 id={`${id}-title`}>{title}</h2>
-      <p>{description}</p>
+      {description && <p>{description}</p>}
     </div>
 
     <a
-      class="schedule-question-v9"
+      class="schedule-question-v9 schedule-question-v16"
       href="https://wa.me/491633863548?text=Hallo%20Elite%20Dance%20Studio%2C%20ich%20bin%20mir%20bei%20der%20Kurswahl%20noch%20unsicher."
     >
-      <span>Kurswahl noch offen?</span>
-      <strong>Frag uns auf WhatsApp ↗</strong>
+      <span>Kurswahl offen?</span>
+      <strong>Frag uns ↗</strong>
     </a>
   </div>
 
-  <div class="schedule-facts-v10" aria-label="Wichtige Informationen zur Buchung">
-    {facts.map((fact) => (
-      <div class="schedule-fact-v10">
-        <strong>{fact.label}</strong>
-        <span>{fact.text}</span>
-      </div>
-    ))}
-  </div>
-
-  <div class="schedule-level-inline-v9" aria-label="Level schnell erklärt">
-    {levels.map((level) => (
-      <span><strong>{level.label}</strong>{level.text}</span>
-    ))}
+  <div class="schedule-levels-v16" aria-label="Level und Formate im Stundenplan">
+    {levels.map((level) => <span>{level}</span>)}
   </div>
 
   <div class="eversports-frame">

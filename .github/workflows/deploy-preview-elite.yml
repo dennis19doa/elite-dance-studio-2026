@@ -11,11 +11,11 @@ permissions:
   pages: write
   id-token: write
 
-# Only the newest Pages deployment should survive. This prevents an older PR
-# artifact from overwriting a newer preview after a burst of commits.
+# Pages is a single shared deployment target. Queue deployments instead of
+# cancelling an active deployment; stale builds are rejected by SHA checks.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy-preview:
@@ -45,6 +45,7 @@ jobs:
           BUILD_SHA="$(cat preview-dist/preview-build-sha.txt)"
           CURRENT_SHA="$(gh api "repos/${REPOSITORY}/pulls/${PR_NUMBER}" --jq '.head.sha')"
           echo "pr_number=${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+          echo "build_sha=${BUILD_SHA}" >> "$GITHUB_OUTPUT"
 
           if [ "$CURRENT_SHA" = "$BUILD_SHA" ]; then
             echo "fresh=true" >> "$GITHUB_OUTPUT"
@@ -122,13 +123,32 @@ jobs:
               path.write_text(text, encoding="utf-8")
           PY
 
-      - name: Upload Pages artifact
+      - name: Re-check freshness before publishing
+        id: final_freshness
         if: steps.freshness.outputs.fresh == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.freshness.outputs.pr_number }}
+          BUILD_SHA: ${{ steps.freshness.outputs.build_sha }}
+        run: |
+          CURRENT_SHA="$(gh api "repos/${REPOSITORY}/pulls/${PR_NUMBER}" --jq '.head.sha')"
+          if [ "$CURRENT_SHA" = "$BUILD_SHA" ]; then
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+            echo "Final freshness check passed for ${BUILD_SHA}."
+          else
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+            echo "Preview became stale while preparing Pages; not publishing ${BUILD_SHA}."
+          fi
+
+      - name: Upload Pages artifact
+        if: steps.final_freshness.outputs.fresh == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
 
       - name: Deploy preview alongside live site
-        if: steps.freshness.outputs.fresh == 'true'
+        if: steps.final_freshness.outputs.fresh == 'true'
         id: deployment
         uses: actions/deploy-pages@v4

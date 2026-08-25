@@ -3,21 +3,19 @@
   "city": "Berlin",
   "nav": [
     { "label": "Stundenplan", "href": "/stundenplan/" },
-    { "label": "Kurse", "href": "/kurse/" },
+    { "label": "Kurse & Styles", "href": "/kurse/" },
     { "label": "Intensives", "href": "/intensives/" },
     { "label": "Preise", "href": "/preise/" },
-    { "label": "Raummiete", "href": "/raummiete/" },
-    { "label": "Über uns", "href": "/ueber-uns/" },
+    { "label": "FAQ", "href": "/faq/" },
     {
       "label": "Mehr",
-      "href": "/styles/",
+      "href": "/coaches/",
       "children": [
-        { "label": "Styles", "href": "/styles/", "description": "Alle Tanzrichtungen im Überblick" },
         { "label": "Coaches", "href": "/coaches/", "description": "Unser Team und Teaching-Styles" },
-        { "label": "Fortgeschrittene", "href": "/fortgeschrittene/", "description": "Intermediate, Advanced und Closed Groups" },
+        { "label": "Advanced & Closed Groups", "href": "/fortgeschrittene/", "description": "Für erfahrene Tänzer:innen und feste Trainingsgruppen" },
         { "label": "Events", "href": "/events/", "description": "Socials, Workshops und besondere Termine" },
-        { "label": "FAQ", "href": "/faq/", "description": "Antworten rund um Buchung und Besuch" },
-        { "label": "Kontakt", "href": "/kontakt/", "description": "WhatsApp, E-Mail, Anfahrt und Formular" }
+        { "label": "Raummiete", "href": "/raummiete/", "description": "Drei Räume für Training, Workshops und Produktionen" },
+        { "label": "Über uns", "href": "/ueber-uns/", "description": "Studio, Community und unsere Geschichte" }
       ]
     }
   ],

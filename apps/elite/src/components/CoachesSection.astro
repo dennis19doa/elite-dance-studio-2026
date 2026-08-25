@@ -9,7 +9,6 @@ interface CoachItem {
   schedule?: string;
   image?: string;
   imageAlt?: string;
-  imageNote?: string;
   beginnerSupport?: string;
   instagramHandle?: string;
   instagramUrl?: string;
@@ -30,7 +29,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="coach-grid panel" id="coaches">
+<section class="coach-grid panel related-coaches-v15" id="coaches">
   <div class="section-head">
     <div>
       <div class="eyebrow">{eyebrow}</div>
@@ -43,14 +42,10 @@ const {
       <article class:list={["coach", coach.image ? "coach-has-photo" : "coach-text-card", `coach-tone-${(index % 3) + 1}`]}>
         <a class="coach-photo" href={`/coaches/${coach.slug}/`} aria-label={`${coach.name} kennenlernen`}>
           {coach.image ? (
-            <img src={coach.image} alt={coach.imageAlt ?? "Konzeptfoto für die Coach-Bildsprache"} loading="lazy" />
+            <img src={coach.image} alt={coach.imageAlt ?? `${coach.name}, Coach bei Elite Dance Studio`} loading="lazy" />
           ) : (
-            <div class="coach-photo-type" aria-hidden="true">
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{coach.focus}</strong>
-            </div>
+            <div class="coach-photo-type" aria-hidden="true"><strong>{coach.focus}</strong></div>
           )}
-          <span class="coach-image-note">{coach.image ? (coach.imageNote ?? "Elite Coach") : "Originalfoto folgt"}</span>
         </a>
         <div class="coach-copy">
           <span class="coach-focus">{coach.focus}</span>
@@ -67,13 +62,14 @@ const {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`${coach.name} auf Instagram öffnen`}
-                title={coach.instagramHandle}
               >
                 <InstagramIcon />
+                <span>{coach.instagramHandle}</span>
               </a>
             ) : (
-              <span class="coach-instagram-link is-disabled" aria-label={`Instagram von ${coach.name} folgt`} title="Instagram folgt">
+              <span class="coach-instagram-link is-disabled" aria-label={`Instagram von ${coach.name} folgt`}>
                 <InstagramIcon />
+                <span>Instagram folgt</span>
               </span>
             )}
           </div>

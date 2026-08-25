@@ -2,7 +2,10 @@
 interface HeroData {
   eyebrow: string;
   title: string;
+  description: string;
+  primaryCtaLabel: string;
   primaryCtaHref: string;
+  secondaryCtaLabel: string;
   secondaryCtaHref: string;
   videoSrc: string;
   videoMobileSrc?: string;
@@ -18,7 +21,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_UR
 const scheduleHref = `${baseUrl}#schedule`;
 ---
 
-<section class="home-hero">
+<section class="home-hero home-hero-v16">
   <div class="hero-visual hero-video-only panel">
     <video
       class="hero-video"
@@ -40,26 +43,20 @@ const scheduleHref = `${baseUrl}#schedule`;
   </div>
 
   <div class="hero-copy panel">
-    <div class="hero-copy-index" aria-hidden="true">
-      <span>Berlin · Moabit</span>
-      <strong>Dance<br />Feel<br />Belong</strong>
-    </div>
-
     <div class="hero-copy-main">
       <div class="eyebrow">{hero.eyebrow}</div>
       <h1>{hero.title}</h1>
-      <p class="lead">Tanzkurse für Beginner in Berlin-Moabit – 25+ Styles, persönliche Coaches und klare Levels.</p>
+      <p class="lead">{hero.description}</p>
       <div class="actions">
-        <a class="button primary" href={scheduleHref}>Stundenplan ansehen</a>
-        <a class="button secondary" href={hero.secondaryCtaHref}>Neu hier?</a>
+        <a class="button primary" href={scheduleHref}>{hero.primaryCtaLabel}</a>
+        <a class="button secondary" href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</a>
       </div>
     </div>
 
-    <aside class="hero-copy-support">
-      <span class="hero-note-kicker">Neu hier?</span>
-      <a class="hero-guided-link" href="/kurse/#kurskompass">
-        Passenden Kurs finden <span aria-hidden="true">↘</span>
-      </a>
-    </aside>
+    <div class="hero-proof-v16" aria-label="Elite Dance Studio auf einen Blick">
+      <span>25+ Styles</span>
+      <span>Level 0 → Advanced</span>
+      <span>Berlin-Moabit</span>
+    </div>
   </div>
 </section>

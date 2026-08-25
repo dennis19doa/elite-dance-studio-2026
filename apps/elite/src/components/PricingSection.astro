@@ -9,9 +9,9 @@ const isExternal = (href?: string) => Boolean(href?.startsWith("http"));
 <section class="pricing panel pricing-v2" id="pricing">
   <div class="section-head compact-section-head"><div><div class="eyebrow">{eyebrow}</div><h2>{title}</h2></div><p>{description}</p></div>
   <div class="pricing-groups">
-    {categories.map((category, categoryIndex) => (
+    {categories.map((category) => (
       <section class="pricing-group" data-category={slugify(category)}>
-        <div class="pricing-group-head"><span>{String(categoryIndex + 1).padStart(2, "0")}</span><h3>{category}</h3></div>
+        <div class="pricing-group-head"><h3>{category}</h3></div>
         <div class="price-cards">
           {pricing.filter((item) => item.category === category).map((item) => (
             <article class:list={["price-card", item.featured && "featured"]} data-plan={slugify(item.name)}>

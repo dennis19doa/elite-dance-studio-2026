@@ -26,6 +26,11 @@ jobs:
       url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/preview/
 
     steps:
+      - name: Checkout live main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
       - name: Download pull request preview
         uses: actions/download-artifact@v4
         with:
@@ -54,12 +59,6 @@ jobs:
             echo "fresh=false" >> "$GITHUB_OUTPUT"
             echo "Skipping stale preview ${BUILD_SHA}; current PR head is ${CURRENT_SHA}."
           fi
-
-      - name: Checkout live main
-        if: steps.freshness.outputs.fresh == 'true'
-        uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Set up pnpm
         if: steps.freshness.outputs.fresh == 'true'
@@ -90,7 +89,8 @@ jobs:
         env:
           PR_NUMBER: ${{ steps.freshness.outputs.pr_number }}
         run: |
-          rm preview-dist/preview-pr-number.txt preview-dist/preview-build-sha.txt
+          rm -f preview-dist/preview-pr-number.txt preview-dist/preview-build-sha.txt
+          rm -rf site
           mkdir -p "site/preview/pr-${PR_NUMBER}"
           cp -a apps/elite/dist/. site/
           cp -a preview-dist/. "site/preview/pr-${PR_NUMBER}/"

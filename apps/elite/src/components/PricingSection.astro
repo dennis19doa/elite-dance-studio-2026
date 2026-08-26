@@ -1,26 +1,103 @@
 ---
-interface PricingItem { category: string; label: string; name: string; price: string; text: string; bestFor?: string; ctaLabel?: string; href?: string; featured?: boolean; }
+interface PricingItem {
+  category: string;
+  label: string;
+  name: string;
+  price: string;
+  text: string;
+  bestFor?: string;
+  features?: string[];
+  ctaLabel?: string;
+  href?: string;
+  featured?: boolean;
+}
 interface Props { pricing: PricingItem[]; eyebrow?: string; title?: string; description?: string; }
-const { pricing, eyebrow = "Preise", title = "Einfach wählen. Einfach tanzen.", description = "Starten, flexibel bleiben oder regelmäßig trainieren." } = Astro.props;
-const categories = [...new Set(pricing.map((item) => item.category))];
-const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+const { pricing, eyebrow = "Preise", title = "Finde den Rhythmus, der zu deinem Alltag passt.", description = "Teste Elite, trainiere regelmäßig oder bleib flexibel." } = Astro.props;
 const isExternal = (href?: string) => Boolean(href?.startsWith("http"));
+const byCategory = (category: string) => pricing.filter((item) => item.category === category);
+const start = byCategory("Start");
+const memberships = byCategory("Memberships");
+const flexible = byCategory("Flexibel");
+const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 ---
-<section class="pricing panel pricing-v2" id="pricing">
-  <div class="section-head compact-section-head"><div><div class="eyebrow">{eyebrow}</div><h2>{title}</h2></div><p>{description}</p></div>
-  <div class="pricing-groups">
-    {categories.map((category) => (
-      <section class="pricing-group" data-category={slugify(category)}>
-        <div class="pricing-group-head"><h3>{category}</h3></div>
-        <div class="price-cards">
-          {pricing.filter((item) => item.category === category).map((item) => (
-            <article class:list={["price-card", item.featured && "featured"]} data-plan={slugify(item.name)}>
-              <div class="price-card-main"><span class="price-label">{item.label}</span><strong>{item.name}</strong><div class="price">{item.price}</div><p>{item.text}</p></div>
-              <div class="price-card-footer">{item.bestFor && <span class="price-fit">{item.bestFor}</span>}{item.href && <a class="text-link" href={item.href} target={isExternal(item.href) ? "_blank" : undefined} rel={isExternal(item.href) ? "noreferrer" : undefined}>{item.ctaLabel ?? "Mehr erfahren"} <span aria-hidden="true">→</span></a>}</div>
-            </article>
-          ))}
-        </div>
-      </section>
-    ))}
-  </div>
+
+<section class="pricing panel pricing-v20" id="pricing">
+  <header class="pricing-intro-v20">
+    <div>
+      <div class="eyebrow">{eyebrow}</div>
+      <h2>{title}</h2>
+    </div>
+    <p>{description}</p>
+  </header>
+
+  <section class="pricing-start-v20" aria-labelledby="pricing-start-title">
+    <div class="pricing-chapter-v20">
+      <span>Neu bei Elite</span>
+      <h3 id="pricing-start-title">Erst ausprobieren. Dann entscheiden.</h3>
+      <p>Du brauchst keine Membership, um herauszufinden, ob Elite zu dir passt.</p>
+    </div>
+    <div class="pricing-start-grid-v20">
+      {start.map((item) => (
+        <article class:list={["price-option-v20", "price-start-v20", item.featured && "is-featured"]} data-plan={slugify(item.name)}>
+          <div class="price-option-head-v20">
+            <span class="price-kicker-v20">{item.label}</span>
+            <h4>{item.name}</h4>
+            <div class="price-value-v20">{item.price}</div>
+            <p>{item.text}</p>
+          </div>
+          {item.features && <ul class="price-features-v20">{item.features.map((feature) => <li>{feature}</li>)}</ul>}
+          {item.bestFor && <p class="price-fit-v20"><span>Passt zu dir, wenn</span>{item.bestFor}</p>}
+          {item.href && <a class="button primary price-cta-v20" href={item.href} target={isExternal(item.href) ? "_blank" : undefined} rel={isExternal(item.href) ? "noreferrer" : undefined}>{item.ctaLabel ?? "Mehr erfahren"}</a>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="pricing-memberships-v20" aria-labelledby="pricing-membership-title">
+    <div class="pricing-chapter-v20 pricing-chapter-light-v20">
+      <span>Wenn Tanzen Teil deiner Woche wird</span>
+      <h3 id="pricing-membership-title">Memberships für echte Routine.</h3>
+      <p>Alle Memberships laufen jeweils einen Monat und sind danach jederzeit kündbar.</p>
+    </div>
+    <div class="membership-grid-v20">
+      {memberships.map((item) => (
+        <article class:list={["membership-card-v20", `membership-${slugify(item.name)}-v20`, item.featured && "is-featured"]}>
+          <div class="membership-top-v20">
+            <span>{item.label}</span>
+            {item.featured && <em>Beliebteste Wahl</em>}
+          </div>
+          <h4>{item.name}</h4>
+          <div class="membership-price-v20">{item.price}</div>
+          <p>{item.text}</p>
+          {item.features && <ul class="price-features-v20">{item.features.map((feature) => <li>{feature}</li>)}</ul>}
+          {item.bestFor && <p class="price-fit-v20"><span>Ideal, wenn</span>{item.bestFor}</p>}
+          {item.href && <a class="membership-cta-v20" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "Membership wählen"} <span aria-hidden="true">→</span></a>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="pricing-flex-v20" aria-labelledby="pricing-flex-title">
+    <div class="pricing-chapter-v20">
+      <span>Ohne Monatsrhythmus</span>
+      <h3 id="pricing-flex-title">Flexibel bleiben.</h3>
+      <p>Für unregelmäßige Wochen, Karten-Fans oder wenn du bereits USC nutzt.</p>
+    </div>
+    <div class="flex-price-list-v20">
+      {flexible.map((item) => (
+        <article class="flex-price-row-v20" data-plan={slugify(item.name)}>
+          <div class="flex-price-name-v20">
+            <span>{item.label}</span>
+            <h4>{item.name}</h4>
+          </div>
+          <div class="flex-price-value-v20">{item.price}</div>
+          <div class="flex-price-copy-v20">
+            <p>{item.text}</p>
+            {item.features && <ul>{item.features.map((feature) => <li>{feature}</li>)}</ul>}
+          </div>
+          {item.href && <a class="text-link" href={item.href} target={isExternal(item.href) ? "_blank" : undefined} rel={isExternal(item.href) ? "noreferrer" : undefined}>{item.ctaLabel ?? "Mehr erfahren"} →</a>}
+        </article>
+      ))}
+    </div>
+  </section>
 </section>

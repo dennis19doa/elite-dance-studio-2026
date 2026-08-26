@@ -5,12 +5,35 @@ import SiteFooter from "../components/SiteFooter.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
 
 import site from "../data/site.json";
+
+const classFaqs = [
+  {
+    question: "Wie buche ich eine Class?",
+    answer: "Wähle deine Class direkt im Live-Kalender und reserviere dort deinen Platz. So siehst du auch kurzfristige Änderungen und freie Plätze."
+  },
+  {
+    question: "Brauche ich einen Tanzpartner?",
+    answer: "Für viele Classes nicht. Auch bei vielen Partner-Dance-Kursen kannst du allein kommen. Wenn eine Class besondere Voraussetzungen hat, steht es direkt bei der Buchung."
+  },
+  {
+    question: "Welches Level passt zu mir?",
+    answer: "Level 0 ist für komplette Neueinsteiger:innen. Beginner baut Grundlagen auf, Beginner+ setzt sichere Basics voraus. Intermediate und Advanced sind für Tänzer:innen mit mehr Erfahrung."
+  },
+  {
+    question: "Kann ich mit Urban Sports Club kommen?",
+    answer: "USC ist bei regulären Open Classes möglich. Closed Groups und Intensives sind davon ausgenommen. Bitte reserviere deinen Platz und checke vor Ort mit der USC App ein."
+  },
+  {
+    question: "Wie finde ich den Eingang?",
+    answer: "Elite Dance Studio ist in der Wiclefstraße 16–17, 10551 Berlin. Geh durch beide roten Tore bis in den zweiten Hinterhof. Der Studioeingang ist dort auf der linken Seite."
+  }
+];
 ---
 
 <BaseLayout
   title="Stundenplan & Buchung | Elite Dance Studio Berlin"
   description="Aktuelle Tanzkurse im Elite Dance Studio Berlin ansehen und deinen Platz direkt über Eversports reservieren."
-  bodyClass="site-subpage schedule-page-v9"
+  bodyClass="site-subpage schedule-page-v9 schedule-page-v19"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
@@ -36,6 +59,34 @@ import site from "../data/site.json";
     </div>
 
     <EversportsSchedule title="Live-Kalender" />
+
+    <section class="schedule-faq-v19" aria-labelledby="schedule-faq-title">
+      <div class="schedule-faq-head-v19">
+        <div>
+          <div class="eyebrow">Vor deiner Class</div>
+          <h2 id="schedule-faq-title">Kurz geklärt.</h2>
+        </div>
+        <p>Die wichtigsten Fragen zu Buchung, Level, USC und dem etwas versteckten Studioeingang.</p>
+      </div>
+
+      <div class="schedule-faq-list-v19">
+        {classFaqs.map((item) => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+
+      <div class="schedule-entry-v19">
+        <div>
+          <span>Anfahrt</span>
+          <strong>Wiclefstraße 16–17 · 10551 Berlin</strong>
+          <p>Durch beide roten Tore → zweiter Hinterhof → links.</p>
+        </div>
+        <a class="button secondary" href="https://www.google.com/maps/search/?api=1&query=Wiclefstra%C3%9Fe+16-17%2C+10551+Berlin" target="_blank" rel="noreferrer">Route öffnen ↗</a>
+      </div>
+    </section>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />

@@ -11,6 +11,7 @@ const rooms = [
     key: "black",
     name: "Schwarzer Raum",
     label: "Größter Raum",
+    size: "115 m²",
     image: "/media/current-site/studio-room-a.jpg",
     alt: "Schwarzer Raum im Elite Dance Studio",
     text: "Viel Fläche für größere Gruppen, Workshops, Proben und intensive Trainingsformate.",
@@ -20,6 +21,7 @@ const rooms = [
     key: "yellow",
     name: "Gelber Raum",
     label: "Flexibler Raum",
+    size: "100 m²",
     image: "/media/current-site/studio-room-yellow.jpg",
     alt: "Gelber Raum im Elite Dance Studio",
     text: "Ein flexibler Trainingsraum für Kurse, Gruppenproben, Privatstunden und Workshops.",
@@ -29,6 +31,7 @@ const rooms = [
     key: "blue",
     name: "Blauer Raum",
     label: "Kompakter Raum",
+    size: "75 m²",
     image: "/media/current-site/studio-room-blue.jpg",
     alt: "Blauer Raum im Elite Dance Studio",
     text: "Für kleinere Gruppen, Solo-Training, Coachings und Content mit ruhigerer Atmosphäre.",
@@ -40,7 +43,7 @@ const rooms = [
 <BaseLayout
   title="Tanzstudio & Räume mieten | Elite Dance Studio Berlin"
   description="Drei Tanzräume in Berlin-Moabit für Proben, Workshops, Privatstunden, Castings und Content mieten."
-  bodyClass="site-subpage rental-page-v9 rental-page-v18"
+  bodyClass="site-subpage rental-page-v9 rental-page-v18 rental-page-v19"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
@@ -62,6 +65,7 @@ const rooms = [
 
     <section class="rental-quickfacts rental-quickfacts-v18" aria-label="Raummiete bei Elite Dance Studio">
       <span>Berlin-Moabit</span>
+      <span>75–115 m²</span>
       <span>Proben & Trainings</span>
       <span>Workshops & Castings</span>
       <span>Content & Produktionen</span>
@@ -80,6 +84,7 @@ const rooms = [
         <article class:list={["rental-room-card-v18", `rental-room-${room.key}-v18`]}>
           <figure>
             <img src={room.image} alt={room.alt} loading="lazy" decoding="async" />
+            <span class="rental-room-size-v19">{room.size}</span>
           </figure>
           <div class="rental-room-copy-v18">
             <span class="rental-room-label-v18">{room.label}</span>

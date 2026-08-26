@@ -12,6 +12,8 @@ import "../styles/unified-v15.css";
 import "../styles/home-v16.css";
 import "../styles/courses-v16.css";
 import "../styles/color-v17.css";
+import "../styles/warm-v18.css";
+import "../styles/pages-v18.css";
 import MobileJoinBar from "../components/MobileJoinBar.astro";
 import MotionController from "../components/MotionController.astro";
 import StructuredData from "../components/StructuredData.astro";
@@ -65,7 +67,7 @@ const isPreviewBuild = import.meta.env.BASE_URL.includes("/preview/");
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
-    <meta name="theme-color" content="#0d0d10" />
+    <meta name="theme-color" content="#17120f" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -76,6 +78,6 @@ const isPreviewBuild = import.meta.env.BASE_URL.includes("/preview/");
     <slot />
     <MotionController />
     <MobileJoinBar />
-    {isPreviewBuild && <div class="preview-build-badge" aria-hidden="true">Preview V17</div>}
+    {isPreviewBuild && <div class="preview-build-badge" aria-hidden="true">Preview V18</div>}
   </body>
 </html>

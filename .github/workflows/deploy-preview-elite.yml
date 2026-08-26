@@ -1,0 +1,154 @@
+name: Deploy Elite Preview
+
+on:
+  workflow_run:
+    workflows: ["Preview Elite Dance Studio"]
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: read
+  pages: write
+  id-token: write
+
+# Pages is a single shared deployment target. Queue deployments instead of
+# cancelling an active deployment; stale builds are rejected by SHA checks.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy-preview:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/preview/
+
+    steps:
+      - name: Checkout live main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Download pull request preview
+        uses: actions/download-artifact@v4
+        with:
+          name: elite-pr-preview
+          path: preview-dist
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Verify preview is still the latest PR commit
+        id: freshness
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          PR_NUMBER="$(cat preview-dist/preview-pr-number.txt)"
+          BUILD_SHA="$(cat preview-dist/preview-build-sha.txt)"
+          CURRENT_SHA="$(gh api "repos/${REPOSITORY}/pulls/${PR_NUMBER}" --jq '.head.sha')"
+          echo "pr_number=${PR_NUMBER}" >> "$GITHUB_OUTPUT"
+          echo "build_sha=${BUILD_SHA}" >> "$GITHUB_OUTPUT"
+
+          if [ "$CURRENT_SHA" = "$BUILD_SHA" ]; then
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+            echo "Preview is current: PR #${PR_NUMBER} at ${BUILD_SHA}"
+          else
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping stale preview ${BUILD_SHA}; current PR head is ${CURRENT_SHA}."
+          fi
+
+      - name: Set up pnpm
+        if: steps.freshness.outputs.fresh == 'true'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+
+      - name: Set up Node
+        if: steps.freshness.outputs.fresh == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install live dependencies
+        if: steps.freshness.outputs.fresh == 'true'
+        run: pnpm install --frozen-lockfile
+
+      - name: Build live site
+        if: steps.freshness.outputs.fresh == 'true'
+        run: pnpm --filter @dance/elite build
+        env:
+          GITHUB_PAGES_BASE: ${{ github.event.repository.name }}
+          PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+
+      - name: Assemble live site and preview
+        if: steps.freshness.outputs.fresh == 'true'
+        shell: bash
+        env:
+          PR_NUMBER: ${{ steps.freshness.outputs.pr_number }}
+        run: |
+          rm -f preview-dist/preview-pr-number.txt preview-dist/preview-build-sha.txt
+          rm -rf site
+          mkdir -p "site/preview/pr-${PR_NUMBER}"
+          cp -a apps/elite/dist/. site/
+          cp -a preview-dist/. "site/preview/pr-${PR_NUMBER}/"
+
+          python - "$PR_NUMBER" <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+
+          pr = sys.argv[1]
+          repo = "${{ github.event.repository.name }}"
+          preview = Path(f"site/preview/pr-{pr}")
+          base = f"/{repo}/preview/pr-{pr}/"
+
+          for path in preview.rglob("*"):
+              if path.suffix.lower() not in {".html", ".css", ".js", ".json", ".xml", ".txt"}:
+                  continue
+              try:
+                  text = path.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  continue
+
+              for attr in ("href", "src", "poster", "action"):
+                  pattern = rf'{attr}="/(?!{re.escape(repo)}/)([^"#]+)"'
+                  text = re.sub(pattern, lambda m: f'{attr}="{base}{m.group(1)}"', text)
+
+              text = text.replace('url("/media/', f'url("{base}media/')
+              text = text.replace("url('/media/", f"url('{base}media/")
+              text = text.replace('url(/media/', f'url({base}media/')
+              path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Re-check freshness before publishing
+        id: final_freshness
+        if: steps.freshness.outputs.fresh == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.freshness.outputs.pr_number }}
+          BUILD_SHA: ${{ steps.freshness.outputs.build_sha }}
+        run: |
+          CURRENT_SHA="$(gh api "repos/${REPOSITORY}/pulls/${PR_NUMBER}" --jq '.head.sha')"
+          if [ "$CURRENT_SHA" = "$BUILD_SHA" ]; then
+            echo "fresh=true" >> "$GITHUB_OUTPUT"
+            echo "Final freshness check passed for ${BUILD_SHA}."
+          else
+            echo "fresh=false" >> "$GITHUB_OUTPUT"
+            echo "Preview became stale while preparing Pages; not publishing ${BUILD_SHA}."
+          fi
+
+      - name: Upload Pages artifact
+        if: steps.final_freshness.outputs.fresh == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy preview alongside live site
+        if: steps.final_freshness.outputs.fresh == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4

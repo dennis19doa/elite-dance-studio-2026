@@ -1,0 +1,50 @@
+name: Preview Elite Dance Studio
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  build-preview:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build pull request preview
+        run: pnpm --filter @dance/elite build
+        env:
+          GITHUB_PAGES_BASE: ${{ github.event.repository.name }}/preview/pr-${{ github.event.number }}
+          PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+
+      - name: Store preview metadata
+        run: |
+          echo "${{ github.event.number }}" > apps/elite/dist/preview-pr-number.txt
+          echo "${{ github.event.pull_request.head.sha }}" > apps/elite/dist/preview-build-sha.txt
+
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: elite-pr-preview
+          path: apps/elite/dist
+          retention-days: 7

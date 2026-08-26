@@ -1,10 +1,92 @@
 [
-  { "category": "Start", "label": "Empfohlener Einstieg", "name": "Welcome Pass", "price": "20€", "text": "Zwei Classes testen und Elite kennenlernen.", "bestFor": "du neu bei Elite bist", "ctaLabel": "Welcome Pass ansehen", "href": "/starter-pass/", "featured": true },
-  { "category": "Start", "label": "Eine Class", "name": "Drop-in", "price": "13€", "text": "Eine reguläre 60-Minuten-Class deiner Wahl.", "bestFor": "du spontan oder einmalig tanzen willst", "ctaLabel": "Kurs finden", "href": "/stundenplan/" },
-  { "category": "Flexibel", "label": "5 Classes", "name": "5er Karte", "price": "60€", "text": "Flexibel trainieren, ohne monatliche Membership.", "bestFor": "du regelmäßig, aber frei bleiben willst", "ctaLabel": "Stundenplan öffnen", "href": "/stundenplan/" },
-  { "category": "Flexibel", "label": "Bester Kartenwert", "name": "10er Karte", "price": "115€", "text": "Mehr Classes, weniger Preis pro Besuch.", "bestFor": "du häufig trainierst, ohne Membership", "ctaLabel": "Stundenplan öffnen", "href": "/stundenplan/" },
-  { "category": "Flexibel", "label": "Urban Sports Club", "name": "USC Membership", "price": "Über USC", "text": "Buchung und Check-in über dein Urban Sports Club Konto. Besuchslimits hängen von deinem Tarif ab.", "bestFor": "du bereits USC Mitglied bist", "ctaLabel": "USC Kalender öffnen", "href": "https://urbansportsclub.com/de/venues/elite-dance-studio-1" },
-  { "category": "Memberships", "label": "1× pro Woche", "name": "Bronze", "price": "45€ / Monat", "text": "Ein fester Wochenrhythmus.", "bestFor": "du einmal pro Woche trainieren willst", "ctaLabel": "Membership anfragen", "href": "/kontakt/" },
-  { "category": "Memberships", "label": "2× pro Woche", "name": "Silber", "price": "79€ / Monat", "text": "Mehr Routine und schnellerer Fortschritt.", "bestFor": "du zweimal pro Woche trainieren willst", "ctaLabel": "Membership anfragen", "href": "/kontakt/", "featured": true },
-  { "category": "Memberships", "label": "Flatrate", "name": "Gold", "price": "99€ / Monat", "text": "Mehrere Styles und häufiges Training.", "bestFor": "du maximale Freiheit willst", "ctaLabel": "Membership anfragen", "href": "/kontakt/" }
+  {
+    "category": "Start",
+    "label": "Für deinen ersten Besuch",
+    "name": "Welcome Pass",
+    "price": "20€",
+    "text": "Zwei Classes testen und Elite ohne große Entscheidung kennenlernen.",
+    "bestFor": "du Elite erst einmal erleben möchtest",
+    "features": ["2 reguläre Classes", "14 Tage gültig", "Nur für neue Besucher:innen"],
+    "ctaLabel": "Welcome Pass ansehen",
+    "href": "/starter-pass/",
+    "featured": true
+  },
+  {
+    "category": "Start",
+    "label": "Eine Class",
+    "name": "Drop-in",
+    "price": "13€",
+    "text": "Komm spontan zu einer regulären 60-Minuten-Class.",
+    "bestFor": "du dich nicht festlegen möchtest",
+    "features": ["60 Min: 13€", "90 Min: 16€", "Keine Membership nötig"],
+    "ctaLabel": "Kurs finden",
+    "href": "/stundenplan/"
+  },
+  {
+    "category": "Memberships",
+    "label": "1× pro Woche",
+    "name": "Bronze",
+    "price": "45€ / Monat",
+    "text": "Ein klarer Wochenrhythmus, ohne dich langfristig zu binden.",
+    "bestFor": "du einmal pro Woche trainieren willst",
+    "features": ["1 Class pro Woche", "Freie Wahl regulärer Classes", "Monatlich kündbar"],
+    "ctaLabel": "Bronze wählen",
+    "href": "https://www.eversports.de/s/elite-dance-studio/519919"
+  },
+  {
+    "category": "Memberships",
+    "label": "2× pro Woche",
+    "name": "Silber",
+    "price": "79€ / Monat",
+    "text": "Mehr Routine, mehr Wiederholung und schneller spürbarer Fortschritt.",
+    "bestFor": "du zweimal pro Woche trainieren willst",
+    "features": ["8 Credits pro Monat", "Freie Wahl regulärer Classes", "Monatlich kündbar"],
+    "ctaLabel": "Silber wählen",
+    "href": "https://www.eversports.de/s/elite-dance-studio/519923",
+    "featured": true
+  },
+  {
+    "category": "Memberships",
+    "label": "Flatrate",
+    "name": "Gold",
+    "price": "99€ / Monat",
+    "text": "Trainiere verschiedene Styles so oft du möchtest und mach Elite zu deiner Routine.",
+    "bestFor": "du maximale Freiheit willst",
+    "features": ["Unbegrenzte reguläre Classes", "Mehrere Styles kombinieren", "Monatlich kündbar"],
+    "ctaLabel": "Gold wählen",
+    "href": "https://www.eversports.de/s/elite-dance-studio/519927"
+  },
+  {
+    "category": "Flexibel",
+    "label": "5 Classes",
+    "name": "5er Karte",
+    "price": "60€",
+    "text": "Regelmäßig trainieren, aber ohne monatliche Membership.",
+    "bestFor": "du flexibel bleiben willst",
+    "features": ["12€ pro Class", "4 Monate gültig", "Für reguläre Classes"],
+    "ctaLabel": "Stundenplan öffnen",
+    "href": "/stundenplan/"
+  },
+  {
+    "category": "Flexibel",
+    "label": "Bester Kartenwert",
+    "name": "10er Karte",
+    "price": "115€",
+    "text": "Mehr Classes im Paket und der niedrigste Preis pro Besuch ohne Membership.",
+    "bestFor": "du häufig trainierst, aber frei bleiben willst",
+    "features": ["11,50€ pro Class", "10 flexible Besuche", "Für reguläre Classes"],
+    "ctaLabel": "Stundenplan öffnen",
+    "href": "/stundenplan/"
+  },
+  {
+    "category": "Flexibel",
+    "label": "Urban Sports Club",
+    "name": "USC",
+    "price": "Über USC",
+    "text": "Buche und checke über dein Urban Sports Club Konto ein.",
+    "bestFor": "du bereits USC Mitglied bist",
+    "features": ["Reguläre Open Classes", "Check-in über USC", "Keine Closed Groups oder Intensives"],
+    "ctaLabel": "USC Kalender öffnen",
+    "href": "https://urbansportsclub.com/de/venues/elite-dance-studio-1"
+  }
 ]

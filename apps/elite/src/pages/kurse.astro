@@ -4,21 +4,22 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import PageIntro from "../components/PageIntro.astro";
 import CourseLevelGuide from "../components/CourseLevelGuide.astro";
-import StyleCompass from "../components/StyleCompass.astro";
+import StylePosterGallery from "../components/StylePosterGallery.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
 import FirstVisitSection from "../components/FirstVisitSection.astro";
 import courseLevelGuide from "../data/course-level-guide.json";
 import firstVisit from "../data/first-visit.json";
+import stylePosters from "../data/style-posters.json";
 import site from "../data/site.json";
 ---
 <BaseLayout title="Tanzkurse in Berlin-Moabit | Level 0 bis Advanced | Elite Dance Studio" description="Tanzkurse in Berlin-Moabit von Level 0 und Beginner bis Intermediate und Advanced. Solo- und Partner-Styles, Closed Groups, Intensives und Live-Stundenplan.">
   <SiteHeader brand={site.brand} nav={site.nav} />
-  <main class="page-shell page-main">
-    <PageIntro eyebrow="Kurse" title="Finde dein Level. Wähle deinen Style. Buch deinen Kurs." description="Reguläre Classes, Closed Groups und Intensives – mit klaren Levels von Level 0 bis Advanced." actions={[{ label: "Level finden", href: "#levels", variant: "primary" }, { label: "Live-Stundenplan", href: "#schedule", variant: "secondary" }]} />
+  <main class="page-shell page-main courses-main-v18">
+    <PageIntro eyebrow="Kurse" title="Finde dein Level. Entdecke deinen Style." description="Von Level 0 bis Advanced – mit Social Dance, Urban, Performance und Technik unter einem Dach." actions={[{ label: "Alle Styles", href: "#style-poster-gallery", variant: "primary" }, { label: "Live-Stundenplan", href: "#schedule", variant: "secondary" }]} />
     <CourseLevelGuide items={courseLevelGuide} />
-    <StyleCompass />
+    <StylePosterGallery posters={stylePosters} />
     <EversportsSchedule eyebrow="Aktuelle Woche" title="Jetzt Termin finden." description="Tag, Coach, Level und freie Plätze direkt im Live-Stundenplan prüfen." />
-    <FirstVisitSection steps={firstVisit} eyebrow="Erster Besuch" title="Drei Schritte bis zur ersten Class." description="Kurs wählen, Platz sichern, vorbeikommen." />
+    <FirstVisitSection steps={firstVisit} eyebrow="Erster Besuch" title="Deine erste Class bei Elite." description="Kurs wählen, Platz sichern, vorbeikommen." />
   </main>
   <SiteFooter brand={site.brand} nav={site.nav} />
 </BaseLayout>

@@ -3,19 +3,19 @@
   "city": "Berlin",
   "nav": [
     { "label": "Stundenplan", "href": "/stundenplan/" },
-    { "label": "Kurse & Styles", "href": "/kurse/" },
-    { "label": "Intensives", "href": "/intensives/" },
+    { "label": "Kurse", "href": "/kurse/" },
+    { "label": "Coaches", "href": "/coaches/" },
     { "label": "Preise", "href": "/preise/" },
-    { "label": "FAQ", "href": "/faq/" },
+    { "label": "Raummiete", "href": "/raummiete/" },
+    { "label": "Über uns", "href": "/ueber-uns/" },
     {
       "label": "Mehr",
-      "href": "/coaches/",
+      "href": "/intensives/",
       "children": [
-        { "label": "Coaches", "href": "/coaches/", "description": "Unser Team und Teaching-Styles" },
+        { "label": "Intensives", "href": "/intensives/", "description": "Mehrwöchige Trainingswege mit klarem Fokus" },
         { "label": "Advanced & Closed Groups", "href": "/fortgeschrittene/", "description": "Für erfahrene Tänzer:innen und feste Trainingsgruppen" },
         { "label": "Events", "href": "/events/", "description": "Socials, Workshops und besondere Termine" },
-        { "label": "Raummiete", "href": "/raummiete/", "description": "Drei Räume für Training, Workshops und Produktionen" },
-        { "label": "Über uns", "href": "/ueber-uns/", "description": "Studio, Community und unsere Geschichte" }
+        { "label": "FAQ", "href": "/faq/", "description": "Antworten zu Kursen, Buchung und deinem ersten Besuch" }
       ]
     }
   ],

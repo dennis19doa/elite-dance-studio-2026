@@ -29,7 +29,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="coach-grid panel related-coaches-v15" id="coaches">
+<section class="coach-grid panel related-coaches-v15 related-coaches-v19" id="coaches">
   <div class="section-head">
     <div>
       <div class="eyebrow">{eyebrow}</div>
@@ -55,6 +55,8 @@ const {
           {coach.beginnerSupport && <span class="coach-support">{coach.beginnerSupport}</span>}
           <div class="coach-card-actions">
             <a class="coach-profile-link" href={`/coaches/${coach.slug}/`}>Profil ansehen <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="coach-instagram-footer-v19">
             {coach.instagramUrl ? (
               <a
                 class="coach-instagram-link"

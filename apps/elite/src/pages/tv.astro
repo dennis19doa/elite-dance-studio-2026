@@ -1,9 +1,11 @@
 ---
 import tvMedia from "../data/tv-media.json";
 const base = import.meta.env.BASE_URL ?? "/";
-const media = (path: string) => `${base}media/${path}`;
-const posters = tvMedia.posters.map((item) => ({ ...item, src: media(item.file) }));
-const videos = tvMedia.videos.map(media);
+const localMedia = (path: string) => `${base}media/${path}`;
+const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv").replace(/\/+$/, "");
+const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
+const posters = tvMedia.posters.map((item) => ({ ...item, src: localMedia(item.file) }));
+const videos = tvMedia.videos.map(remoteMedia);
 ---
 <!doctype html>
 <html lang="en">

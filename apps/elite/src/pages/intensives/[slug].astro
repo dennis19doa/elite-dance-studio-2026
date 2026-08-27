@@ -1,0 +1,125 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import intensives from "../../data/intensives.json";
+import site from "../../data/site.json";
+
+export function getStaticPaths() {
+  return intensives.map((intensive) => ({
+    params: { slug: intensive.slug },
+    props: { intensive }
+  }));
+}
+
+const { intensive } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const whatsappHref = `https://wa.me/491633863548?text=${encodeURIComponent(`Hallo Elite, ich interessiere mich für ${intensive.name}.`)}`;
+---
+
+<BaseLayout
+  title={`${intensive.name} | Elite Dance Berlin`}
+  description={`${intensive.summary} ${intensive.duration} in Berlin-Moabit.`}
+  image={intensive.image}
+  bodyClass="intensive-detail-page-v19"
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main intensive-detail-main-v19">
+    <section class="intensive-detail-hero-v19 panel">
+      <div class="intensive-detail-hero-copy-v19">
+        <a class="intensive-back-v19" href={`${baseUrl}intensives/`}>← Alle Intensives</a>
+        <div class="eyebrow">{intensive.phase} · Elite Intensive</div>
+        <h1 class="page-title">{intensive.name}</h1>
+        <p class="lead">{intensive.tagline}</p>
+        <div class="intensive-detail-meta-v19">
+          <div><span>Dauer</span><strong>{intensive.duration}</strong></div>
+          <div><span>Training</span><strong>{intensive.standardPrice}</strong></div>
+          <div><span>Mit Reviews</span><strong>{intensive.premiumPrice}</strong></div>
+        </div>
+        <div class="actions">
+          <a class="button primary" href={whatsappHref}>Platz anfragen</a>
+          <a class="button secondary" href="#details">Mehr erfahren</a>
+        </div>
+      </div>
+      <figure class="intensive-detail-hero-media-v19">
+        <img src={intensive.image} alt={intensive.imageAlt} width="1600" height="1200" />
+      </figure>
+    </section>
+
+    <section class="intensive-story-v19 panel" id="details">
+      <div class="intensive-story-title-v19">
+        <div class="eyebrow">Warum dieses Intensive?</div>
+        <h2>{intensive.tagline}</h2>
+      </div>
+      <div class="intensive-story-copy-v19">
+        <p class="intensive-story-lead-v19">{intensive.intro}</p>
+        {intensive.detailParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </section>
+
+    <section class="intensive-takeaways-v19 panel">
+      <header>
+        <div class="eyebrow">Im Training</div>
+        <h2>Woran du konkret arbeitest.</h2>
+      </header>
+      <div class="intensive-takeaway-grid-v19">
+        {intensive.points.map((point, index) => (
+          <article>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <p>{point}</p>
+          </article>
+        ))}
+      </div>
+      <div class="intensive-fit-grid-v19">
+        <div>
+          <small>Für wen</small>
+          <p>{intensive.audience}</p>
+        </div>
+        <div>
+          <small>Dein Ziel</small>
+          <p>{intensive.outcome}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="intensive-options-v19 panel">
+      <div class="intensive-options-head-v19">
+        <div>
+          <div class="eyebrow">Deine Option</div>
+          <h2>Trainieren – oder mit Feedback tiefer gehen.</h2>
+        </div>
+        <p>Beide Optionen enthalten das komplette mehrwöchige Intensive. Die erweiterte Variante ergänzt persönliche Video Reviews und eine Private Class.</p>
+      </div>
+      <div class="intensive-option-grid-v19">
+        <article>
+          <span>Intensive</span>
+          <h3>{intensive.name}</h3>
+          <strong>{intensive.standardPrice}</strong>
+          <p>{intensive.duration}</p>
+          <a class="button secondary" href={whatsappHref}>Verfügbarkeit fragen</a>
+        </article>
+        <article class="is-featured">
+          <span>Mit Feedback</span>
+          <h3>{intensive.name} + Reviews</h3>
+          <strong>{intensive.premiumPrice}</strong>
+          <p>{intensive.premiumLabel}</p>
+          <a class="button primary" href={whatsappHref}>Verfügbarkeit fragen</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="intensive-detail-cta-v19 panel">
+      <div>
+        <div class="eyebrow">Noch unsicher?</div>
+        <h2>Schreib uns kurz, was du gerade trainieren möchtest.</h2>
+      </div>
+      <div>
+        <p>Wir sagen dir ehrlich, welches Intensive gerade zu deinem Level und deinem Ziel passt.</p>
+        <a class="button primary" href={whatsappHref}>Auf WhatsApp fragen</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

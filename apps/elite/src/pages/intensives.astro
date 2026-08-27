@@ -38,7 +38,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_UR
           <div class="eyebrow">Deine Progression</div>
           <h2>Vier Intensives. Unterschiedliche Ziele.</h2>
         </div>
-        <p>Wähle das Thema, das gerade zu deinem Training passt. Auf jeder Detailseite findest du alle Inhalte und Optionen.</p>
+        <p>Jedes Intensive gibt es als Training mit Book / Workbook oder mit zusätzlichem persönlichem Feedback. Auf der Detailseite siehst du genau, was enthalten ist.</p>
       </div>
 
       <div class="intensive-roadmap intensive-roadmap-review-v19">
@@ -67,8 +67,8 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_UR
                 </div>
 
                 <div class="roadmap-pricing">
-                  <div><small>Training</small><strong>{intensive.standardPrice}</strong></div>
-                  <div><small>{intensive.premiumLabel}</small><strong>{intensive.premiumPrice}</strong></div>
+                  <div><small>Intensive + Book</small><strong>{intensive.standardPrice}</strong></div>
+                  <div><small>Intensive + Feedback</small><strong>{intensive.premiumPrice}</strong></div>
                 </div>
 
                 <a class="text-link intensive-more-link-v19" href={`${baseUrl}intensives/${intensive.slug}/`}>

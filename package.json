@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "pnpm --filter @dance/elite dev",
     "build": "pnpm --filter @dance/elite build",
+    "build:cloudflare": "pnpm --filter @dance/elite build:cloudflare",
     "preview": "pnpm --filter @dance/elite preview",
     "check:site": "pnpm --filter @dance/elite check:site",
     "dev:explosion": "pnpm --filter @dance/bachata-explosion dev",

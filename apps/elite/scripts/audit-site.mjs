@@ -25,7 +25,12 @@ function routeFor(file) {
 }
 
 function attribute(tag, name) {
-  return tag.match(new RegExp(`\\b${name}=["']([^"']*)["']`, "i"))?.[1] ?? null;
+  const quotedValue = tag.match(new RegExp(`\\b${name}=["']([^"']*)["']`, "i"))?.[1];
+  if (quotedValue !== undefined) return quotedValue;
+
+  // Astro's HTML compression serializes an intentionally empty value such as
+  // alt="" as a bare `alt` attribute. That is still an explicit empty value.
+  return new RegExp(`\\b${name}(?=\\s|/?>)`, "i").test(tag) ? "" : null;
 }
 
 function textContent(value) {

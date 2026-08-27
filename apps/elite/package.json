@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1 --port 4321",
     "build": "astro build && node scripts/prepare-github-pages.mjs",
+    "build:cloudflare": "astro build && node scripts/prepare-cloudflare-pages.mjs",
     "preview": "astro preview --host 127.0.0.1 --port 4321",
     "check:site": "node scripts/audit-site.mjs"
   },

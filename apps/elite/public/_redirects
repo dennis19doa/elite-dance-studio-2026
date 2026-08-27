@@ -1,0 +1,28 @@
+# WordPress URL compatibility. Domain-to-domain redirects belong in Cloudflare
+# Bulk Redirects; this file handles paths that existed on elitedancestudio.de.
+/uber-uns/ /ueber-uns/ 301
+/uber-uns /ueber-uns/ 301
+/raum-miete/ /raummiete/ 301
+/raum-miete /raummiete/ 301
+/advanced-gruppen/ /fortgeschrittene/ 301
+/advanced-gruppen /fortgeschrittene/ 301
+/preise-2/ /preise/ 301
+/preise-2 /preise/ 301
+/kurs-angebot/ /kurse/ 301
+/kurs-angebot /kurse/ 301
+/fundamentals/ /intensives/ 301
+/fundamentals /intensives/ 301
+/intensiv-kurse/ /intensives/ 301
+/intensiv-kurse /intensives/ 301
+/body-movement-i/ /intensives/ 301
+/body-movement-i /intensives/ 301
+/body-movement-ii/ /intensives/ 301
+/body-movement-ii /intensives/ 301
+/body-movement-combined/ /intensives/ 301
+/body-movement-combined /intensives/ 301
+/elite-dance-party/ /events/ 301
+/elite-dance-party /events/ 301
+/privatstunden/ /kontakt/ 301
+/privatstunden /kontakt/ 301
+/newsletter/ /events/ 301
+/newsletter /events/ 301

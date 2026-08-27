@@ -15,6 +15,15 @@ export function getStaticPaths() {
 const { intensive } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const whatsappHref = `https://wa.me/491633863548?text=${encodeURIComponent(`Hallo Elite, ich interessiere mich für ${intensive.name}.`)}`;
+const standardIncludes = [
+  `Das komplette ${intensive.name}`,
+  "Dein begleitendes Book / Workbook nach dem Intensive"
+];
+const feedbackIncludes = [
+  ...standardIncludes,
+  "Eine Private Class mit Elena & Dennis zu einem gemeinsam gewählten Termin",
+  "Persönliche Video Reviews zu deinen eigenen Tanzvideos und Fragen"
+];
 ---
 
 <BaseLayout
@@ -34,8 +43,8 @@ const whatsappHref = `https://wa.me/491633863548?text=${encodeURIComponent(`Hall
         <p class="lead">{intensive.tagline}</p>
         <div class="intensive-detail-meta-v19">
           <div><span>Dauer</span><strong>{intensive.duration}</strong></div>
-          <div><span>Training</span><strong>{intensive.standardPrice}</strong></div>
-          <div><span>Mit Reviews</span><strong>{intensive.premiumPrice}</strong></div>
+          <div><span>Intensive + Book</span><strong>{intensive.standardPrice}</strong></div>
+          <div><span>Mit Feedback</span><strong>{intensive.premiumPrice}</strong></div>
         </div>
         <div class="actions">
           <a class="button primary" href={whatsappHref}>Platz anfragen</a>
@@ -86,27 +95,49 @@ const whatsappHref = `https://wa.me/491633863548?text=${encodeURIComponent(`Hall
     <section class="intensive-options-v19 panel">
       <div class="intensive-options-head-v19">
         <div>
-          <div class="eyebrow">Deine Option</div>
-          <h2>Trainieren – oder mit Feedback tiefer gehen.</h2>
+          <div class="eyebrow">Zwei Möglichkeiten</div>
+          <h2>Das Intensive – oder persönliches Feedback dazu.</h2>
         </div>
-        <p>Beide Optionen enthalten das komplette mehrwöchige Intensive. Die erweiterte Variante ergänzt persönliche Video Reviews und eine Private Class.</p>
+        <p>
+          Das reguläre Paket enthält das komplette Intensive und dein Book / Workbook danach.
+          Mit dem Feedback-Paket bekommst du zusätzlich eine Private Class mit Elena & Dennis und persönliche Video Reviews.
+        </p>
       </div>
+
       <div class="intensive-option-grid-v19">
-        <article>
-          <span>Intensive</span>
+        <article class="intensive-package-v19">
+          <span>Intensive + Book</span>
           <h3>{intensive.name}</h3>
           <strong>{intensive.standardPrice}</strong>
-          <p>{intensive.duration}</p>
+          <p class="intensive-package-summary-v19">Für alle, die das komplette Training mit den Unterlagen danach möchten.</p>
+          <ul class="intensive-package-list-v19">
+            {standardIncludes.map((item) => <li>{item}</li>)}
+          </ul>
           <a class="button secondary" href={whatsappHref}>Verfügbarkeit fragen</a>
         </article>
-        <article class="is-featured">
-          <span>Mit Feedback</span>
-          <h3>{intensive.name} + Reviews</h3>
+
+        <article class="is-featured intensive-package-v19">
+          <span>Intensive + Feedback</span>
+          <h3>{intensive.name} + persönliches Feedback</h3>
           <strong>{intensive.premiumPrice}</strong>
-          <p>{intensive.premiumLabel}</p>
+          <p class="intensive-package-summary-v19">Für alle, die zwischen den Trainings gezielt Fragen stellen und individuell korrigiert werden möchten.</p>
+          <ul class="intensive-package-list-v19">
+            {feedbackIncludes.map((item) => <li>{item}</li>)}
+          </ul>
           <a class="button primary" href={whatsappHref}>Verfügbarkeit fragen</a>
         </article>
       </div>
+
+      <aside class="video-review-explainer-v19">
+        <div>
+          <span>So funktionieren Video Reviews</span>
+          <h3>Du filmst. Du fragst. Wir antworten per Video.</h3>
+        </div>
+        <p>
+          Du kannst zum Beispiel deinen Basic Step aufnehmen und uns schicken mit der Frage, was du bereits gut machst und was du verbessern solltest.
+          Wir schauen uns dein Video an und schicken dir persönliches Feedback als Antwortvideo zurück – meistens innerhalb weniger Stunden.
+        </p>
+      </aside>
     </section>
 
     <section class="intensive-detail-cta-v19 panel">

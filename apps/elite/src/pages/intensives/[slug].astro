@@ -64,9 +64,9 @@ const whatsappHref = `https://wa.me/491633863548?text=${encodeURIComponent(`Hall
         <h2>Woran du konkret arbeitest.</h2>
       </header>
       <div class="intensive-takeaway-grid-v19">
-        {intensive.points.map((point, index) => (
+        {intensive.points.map((point) => (
           <article>
-            <span>{String(index + 1).padStart(2, "0")}</span>
+            <i aria-hidden="true"></i>
             <p>{point}</p>
           </article>
         ))}

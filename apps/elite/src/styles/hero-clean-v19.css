@@ -29,11 +29,12 @@
   max-width: none;
   margin: 0;
   color: #f3e5d4 !important;
-  font-family: "Permanent Marker", "Sora", sans-serif !important;
+  font-family: "Marker Felt", "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive !important;
   font-size: clamp(3.5rem, 7.3vw, 7.6rem);
-  font-weight: 400 !important;
+  font-weight: 700 !important;
   line-height: .92;
-  letter-spacing: -.035em;
+  letter-spacing: -.045em;
+  -webkit-text-stroke: 1px rgba(255,246,235,.12);
   text-shadow:
     3px 4px 0 rgba(180, 82, 54, .24),
     0 0 34px rgba(244, 212, 177, .06);

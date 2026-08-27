@@ -88,9 +88,11 @@ const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-
         <article class="flex-price-row-v20" data-plan={slugify(item.name)}>
           <div class="flex-price-name-v20">
             <span>{item.label}</span>
-            <h4>{item.name}</h4>
+            <div class="flex-price-title-line-v19">
+              <h4>{item.name}</h4>
+              <small class="flex-price-tag-v19">{item.price}</small>
+            </div>
           </div>
-          <div class="flex-price-value-v20">{item.price}</div>
           <div class="flex-price-copy-v20">
             <p>{item.text}</p>
             {item.features && <ul>{item.features.map((feature) => <li>{feature}</li>)}</ul>}

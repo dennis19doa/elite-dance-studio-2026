@@ -1,8 +1,8 @@
-/* V19 homepage hero alternative — headline above, unobstructed video, compact actions below. */
+/* V19 homepage hero alternative — expressive headline, unobstructed contained video, compact actions below. */
 .home-page .home-hero-clean-v19 {
   display: grid !important;
   min-height: 0 !important;
-  gap: 18px;
+  gap: clamp(15px, 2vw, 24px);
   overflow: visible !important;
   margin-top: clamp(22px, 3vw, 34px);
   border: 0 !important;
@@ -11,39 +11,86 @@
   box-shadow: none !important;
 }
 
+.home-page .home-hero-clean-v19 .hero-statement-v19,
+.home-page .home-hero-clean-v19 .hero-visual,
+.home-page .home-hero-clean-v19 .hero-actions-v19 {
+  width: min(92%, 1180px) !important;
+  margin-inline: auto !important;
+}
+
 .home-page .home-hero-clean-v19 .hero-statement-v19 {
-  padding: 0 clamp(2px, .5vw, 8px);
+  position: relative;
+  padding: clamp(10px, 1.4vw, 18px) 2px 2px;
 }
 
 .home-page .home-hero-clean-v19 .hero-statement-v19 h1 {
+  position: relative;
+  display: inline-block;
   max-width: none;
   margin: 0;
-  color: var(--v15-ink, #17120f);
-  font-size: clamp(3rem, 7vw, 7.4rem);
-  line-height: .9;
-  letter-spacing: -.06em;
+  color: #f3e5d4 !important;
+  font-family: "Permanent Marker", "Sora", sans-serif !important;
+  font-size: clamp(3.5rem, 7.3vw, 7.6rem);
+  font-weight: 400 !important;
+  line-height: .92;
+  letter-spacing: -.035em;
+  text-shadow:
+    3px 4px 0 rgba(180, 82, 54, .24),
+    0 0 34px rgba(244, 212, 177, .06);
+  clip-path: inset(0 100% 0 0);
+  animation: graffitiRevealV19 1.35s cubic-bezier(.2,.8,.2,1) .12s forwards;
+}
+
+.home-page .home-hero-clean-v19 .hero-statement-v19 h1::after {
+  position: absolute;
+  right: 1%;
+  bottom: -.06em;
+  left: 1%;
+  height: .12em;
+  border-radius: 999px 45% 999px 55%;
+  background: linear-gradient(90deg, #b95f40, #efb56f 58%, rgba(239,181,111,.15));
+  content: "";
+  opacity: .9;
+  transform: scaleX(0) rotate(-1.2deg);
+  transform-origin: left center;
+  animation: graffitiStrokeV19 .85s cubic-bezier(.2,.8,.2,1) 1.05s forwards;
+}
+
+.home-page .home-hero-clean-v19 .hero-statement-v19::after {
+  position: absolute;
+  right: 5%;
+  bottom: -5px;
+  width: clamp(54px, 8vw, 110px);
+  height: clamp(12px, 1.5vw, 20px);
+  background:
+    radial-gradient(circle at 8% 45%, rgba(238,181,111,.72) 0 2px, transparent 3px),
+    radial-gradient(circle at 30% 75%, rgba(185,95,64,.62) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 55% 20%, rgba(238,181,111,.52) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 80% 60%, rgba(185,95,64,.55) 0 1px, transparent 2px);
+  content: "";
+  opacity: 0;
+  animation: graffitiSprayV19 .35s ease 1.55s forwards;
 }
 
 .home-page .home-hero-clean-v19 .hero-visual {
   position: relative !important;
   inset: auto !important;
-  width: 100% !important;
   height: auto !important;
   min-height: 0 !important;
-  aspect-ratio: 16 / 9;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.08) !important;
-  border-radius: 24px !important;
-  background: #0b0b0e !important;
-  box-shadow: 0 30px 76px rgba(0,0,0,.28) !important;
+  border: 1px solid rgba(239,181,111,.14) !important;
+  border-radius: 22px !important;
+  background: #0d0b0a !important;
+  box-shadow: 0 26px 68px rgba(0,0,0,.26) !important;
 }
 
 .home-page .home-hero-clean-v19 .hero-video {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto !important;
+  object-fit: contain !important;
   object-position: center;
+  background: #0d0b0a;
   transform: none !important;
   animation: none !important;
 }
@@ -53,7 +100,7 @@
   gap: 24px;
   align-items: center;
   justify-content: space-between;
-  padding: 2px 4px 0;
+  padding: 0 2px;
 }
 
 .home-page .home-hero-clean-v19 .hero-actions-v19 .actions {
@@ -69,15 +116,52 @@
 
 .home-page .home-hero-clean-v19 .hero-proof-v19 span {
   padding: 8px 11px;
-  border: 1px solid rgba(24,18,15,.1);
+  border: 1px solid rgba(239,181,111,.14);
   border-radius: 999px;
-  background: rgba(255,255,255,.62);
-  color: rgba(35,29,26,.72);
+  background: rgba(38,29,24,.56);
+  color: rgba(247,232,214,.72);
   font-size: .68rem;
   font-weight: 750;
 }
 
+@keyframes graffitiRevealV19 {
+  0% { clip-path: inset(0 100% 0 0); transform: translateX(-10px) skewX(-2deg); }
+  72% { clip-path: inset(0 0 0 0); transform: translateX(0) skewX(-1deg); }
+  100% { clip-path: inset(0 0 0 0); transform: translateX(0) skewX(0); }
+}
+
+@keyframes graffitiStrokeV19 {
+  from { transform: scaleX(0) rotate(-1.2deg); }
+  to { transform: scaleX(1) rotate(-1.2deg); }
+}
+
+@keyframes graffitiSprayV19 {
+  from { opacity: 0; transform: translateX(-8px) scale(.85); }
+  to { opacity: .75; transform: translateX(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .home-hero-clean-v19 .hero-statement-v19 h1 {
+    clip-path: none;
+    animation: none;
+  }
+  .home-page .home-hero-clean-v19 .hero-statement-v19 h1::after {
+    transform: scaleX(1) rotate(-1.2deg);
+    animation: none;
+  }
+  .home-page .home-hero-clean-v19 .hero-statement-v19::after {
+    opacity: .75;
+    animation: none;
+  }
+}
+
 @media (max-width: 900px) {
+  .home-page .home-hero-clean-v19 .hero-statement-v19,
+  .home-page .home-hero-clean-v19 .hero-visual,
+  .home-page .home-hero-clean-v19 .hero-actions-v19 {
+    width: min(96%, 1180px) !important;
+  }
+
   .home-page .home-hero-clean-v19 .hero-actions-v19 {
     align-items: flex-start;
     flex-direction: column;
@@ -94,22 +178,19 @@
     margin-top: 16px;
   }
 
+  .home-page .home-hero-clean-v19 .hero-statement-v19,
+  .home-page .home-hero-clean-v19 .hero-visual,
+  .home-page .home-hero-clean-v19 .hero-actions-v19 {
+    width: 100% !important;
+  }
+
   .home-page .home-hero-clean-v19 .hero-statement-v19 h1 {
-    font-size: clamp(2.8rem, 14vw, 4.5rem);
-    line-height: .92;
+    font-size: clamp(3rem, 14.5vw, 4.8rem);
+    line-height: .94;
   }
 
   .home-page .home-hero-clean-v19 .hero-visual {
-    aspect-ratio: auto;
-    min-height: 0 !important;
-    border-radius: 18px !important;
-  }
-
-  .home-page .home-hero-clean-v19 .hero-video {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    background: #0b0b0e;
+    border-radius: 17px !important;
   }
 
   .home-page .home-hero-clean-v19 .hero-actions-v19 {

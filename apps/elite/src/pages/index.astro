@@ -9,10 +9,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StudioExperienceSection from "../components/StudioExperienceSection.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
 import HomeCoachRail from "../components/HomeCoachRail.astro";
+import { mediaUrl } from "../lib/media";
 
 import faqs from "../data/faqs.json";
 import site from "../data/site.json";
 import trialOffer from "../data/trial-offer.json";
+
+const hero = {
+  ...site.hero,
+  videoSrc: mediaUrl(site.hero.videoSrc),
+  videoMobileSrc: site.hero.videoMobileSrc ? mediaUrl(site.hero.videoMobileSrc) : undefined,
+  videoPoster: mediaUrl(site.hero.videoPoster)
+};
 ---
 
 <BaseLayout
@@ -23,7 +31,7 @@ import trialOffer from "../data/trial-offer.json";
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main home-main">
-    <HeroSection hero={site.hero} />
+    <HeroSection hero={hero} />
 
     <EversportsSchedule
       home

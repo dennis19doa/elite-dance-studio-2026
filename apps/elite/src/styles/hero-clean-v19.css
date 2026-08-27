@@ -1,4 +1,4 @@
-/* V19 homepage hero alternative — editorial headline, unobstructed contained video, compact actions below. */
+/* V19 homepage hero — premium two-line headline, unobstructed contained video, compact actions below. */
 .home-page .home-hero-clean-v19 {
   display: grid !important;
   min-height: 0 !important;
@@ -19,36 +19,21 @@
 }
 
 .home-page .home-hero-clean-v19 .hero-statement-v19 {
-  position: relative;
-  display: grid;
-  grid-template-columns: 5px minmax(0,1fr);
-  gap: clamp(18px,2.4vw,34px);
-  align-items: stretch;
-  padding: clamp(8px,1.1vw,14px) 2px 0;
-}
-
-.home-page .home-hero-clean-v19 .hero-statement-rule-v19 {
-  width: 5px;
-  min-height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(180deg,#f0a26d 0%,#c96847 100%);
-  transform: scaleY(0);
-  transform-origin: top;
-  animation: heroRuleV19 .65s cubic-bezier(.2,.8,.2,1) .08s forwards;
+  padding: clamp(8px, 1vw, 14px) 2px 0;
 }
 
 .home-page .home-hero-clean-v19 .hero-statement-v19 h1 {
   display: grid;
-  gap: .08em;
+  gap: .02em;
   max-width: none;
   margin: 0;
-  color: #f6ede5 !important;
+  color: #f4ebe3 !important;
   font-family: "Sora", Inter, system-ui, sans-serif !important;
-  font-size: clamp(4rem,8.5vw,9.3rem);
+  font-size: clamp(4rem, 8vw, 8.7rem);
   font-weight: 800 !important;
-  line-height: .78;
-  letter-spacing: -.075em;
-  text-transform: uppercase;
+  line-height: .83;
+  letter-spacing: -.065em;
+  text-transform: none;
 }
 
 .home-page .home-hero-clean-v19 .hero-line-v19 {
@@ -58,47 +43,31 @@
 
 .home-page .home-hero-clean-v19 .hero-line-v19 > span {
   display: block;
-  transform: translateY(115%);
-  animation: heroTypeRiseV19 .82s cubic-bezier(.16,1,.3,1) forwards;
+  opacity: 0;
+  transform: translateY(44px);
+  animation: heroEditorialRiseV19 .72s cubic-bezier(.16,1,.3,1) forwards;
 }
 
 .home-page .home-hero-clean-v19 .hero-line-small-v19 {
-  padding-left: .08em;
-  font-size: .36em;
+  padding-left: .03em;
+  font-size: .52em;
   line-height: 1;
-  letter-spacing: .12em;
-  color: rgba(246,237,229,.58);
+  letter-spacing: -.04em;
+  color: rgba(244,235,227,.72);
 }
 
 .home-page .home-hero-clean-v19 .hero-line-small-v19 > span {
-  animation-delay: .18s;
+  animation-delay: .08s;
 }
 
 .home-page .home-hero-clean-v19 .hero-line-main-v19 > span {
-  animation-delay: .28s;
+  animation-delay: .16s;
 }
 
 .home-page .home-hero-clean-v19 .hero-line-main-v19 em {
-  position: relative;
-  display: inline-block;
-  margin-right: .07em;
-  color: transparent;
+  color: #d89469;
   font-style: normal;
-  -webkit-text-stroke: clamp(1.5px,.12vw,2.2px) #f2a06c;
-  text-shadow: 0 0 30px rgba(240,126,82,.08);
-}
-
-.home-page .home-hero-clean-v19 .hero-line-main-v19 em::after {
-  position: absolute;
-  right: .03em;
-  bottom: -.08em;
-  left: .03em;
-  height: .045em;
-  background: #f2a06c;
-  content: "";
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: heroBerlinLineV19 .72s cubic-bezier(.2,.8,.2,1) .88s forwards;
+  font-weight: inherit;
 }
 
 .home-page .home-hero-clean-v19 .hero-visual {
@@ -153,25 +122,16 @@
   font-weight: 750;
 }
 
-@keyframes heroRuleV19 {
-  to { transform: scaleY(1); }
-}
-
-@keyframes heroTypeRiseV19 {
-  from { transform: translateY(115%); }
-  to { transform: translateY(0); }
-}
-
-@keyframes heroBerlinLineV19 {
-  to { transform: scaleX(1); }
+@keyframes heroEditorialRiseV19 {
+  from { opacity: 0; transform: translateY(44px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-page .home-hero-clean-v19 .hero-statement-rule-v19,
-  .home-page .home-hero-clean-v19 .hero-line-v19 > span,
-  .home-page .home-hero-clean-v19 .hero-line-main-v19 em::after {
-    animation: none;
+  .home-page .home-hero-clean-v19 .hero-line-v19 > span {
+    opacity: 1;
     transform: none;
+    animation: none;
   }
 }
 
@@ -204,18 +164,13 @@
     width: 100% !important;
   }
 
-  .home-page .home-hero-clean-v19 .hero-statement-v19 {
-    grid-template-columns: 3px minmax(0,1fr);
-    gap: 13px;
-  }
-
   .home-page .home-hero-clean-v19 .hero-statement-v19 h1 {
-    font-size: clamp(3.5rem,15.5vw,5.2rem);
-    line-height: .8;
+    font-size: clamp(3.5rem, 15vw, 5rem);
+    line-height: .84;
   }
 
   .home-page .home-hero-clean-v19 .hero-line-small-v19 {
-    font-size: .33em;
+    font-size: .5em;
   }
 
   .home-page .home-hero-clean-v19 .hero-visual {

@@ -7,10 +7,10 @@ import site from "../data/site.json";
 
 const phases = ["Foundation", "Control", "Layering", "Integration"];
 const intensiveImages = [
-  { src: "/media/current-site/elena-dennis-bachata.png", alt: "Fundamentals Training im Elite Dance Studio" },
-  { src: "/media/current-site/current-home-visual.webp", alt: "Body Movement Training im Elite Dance Studio" },
-  { src: "/media/current-site/kathy-reggaeton.png", alt: "Bewegungs- und Techniktraining im Elite Dance Studio" },
-  { src: "/media/current-site/studio-room-a.jpg", alt: "Intensive Training im Elite Dance Studio Berlin" }
+  { src: "https://elitedancestudio.de/wp-content/uploads/2025/11/IMG_0260-scaled.jpg", alt: "Fundamentals Intensive bei Elite Dance" },
+  { src: "https://elitedancestudio.de/wp-content/uploads/2025/11/IMG_9824-scaled.jpg", alt: "Body Movement I Intensive bei Elite Dance" },
+  { src: "https://elitedancestudio.de/wp-content/uploads/2025/11/IMG_0249-scaled.jpg", alt: "Body Movement II Intensive bei Elite Dance" },
+  { src: "https://elitedancestudio.de/wp-content/uploads/2025/11/20230501_210214-scaled.jpg", alt: "Combined Intensive bei Elite Dance" }
 ];
 ---
 
@@ -18,7 +18,7 @@ const intensiveImages = [
   title="Tanz-Intensives in Berlin | Elite Dance Studio"
   description="Strukturierte Tanz-Intensives in Berlin-Moabit: Fundamentals, Body Movement I & II und Combined Training mit klarer Progression."
   image="/media/hero/elite-homepage-poster.jpg"
-  bodyClass="intensives-page-v15"
+  bodyClass="intensives-page-v15 intensives-page-review-v19"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
@@ -34,7 +34,7 @@ const intensiveImages = [
         </div>
       </div>
       <figure class="service-page-media intensive-hero-media">
-        <img src="/media/hero/elite-homepage-poster.jpg" alt="Tanzmoment im Elite Dance Studio in Berlin-Moabit" width="1920" height="1080" />
+        <img src={intensiveImages[0].src} alt={intensiveImages[0].alt} width="1920" height="1080" />
       </figure>
     </section>
 
@@ -47,10 +47,9 @@ const intensiveImages = [
         <p>Wähle das Thema, das gerade zu deinem Training passt – oder gehe die Roadmap Schritt für Schritt.</p>
       </div>
 
-      <div class="intensive-roadmap">
+      <div class="intensive-roadmap intensive-roadmap-review-v19">
         {intensives.map((intensive, index) => (
-          <article class="intensive-roadmap-step intensive-roadmap-step-v15 intensive-roadmap-step-v16">
-            <div class="roadmap-marker"><span>{intensive.number}</span><i aria-hidden="true"></i></div>
+          <article class="intensive-roadmap-step intensive-roadmap-step-v15 intensive-roadmap-step-v16 intensive-card-review-v19">
             <div class="roadmap-card roadmap-card-v15 roadmap-card-v16">
               <figure class="intensive-card-image-v15">
                 <img src={intensiveImages[index]?.src ?? intensiveImages[0].src} alt={intensiveImages[index]?.alt ?? intensive.name} loading="lazy" decoding="async" />

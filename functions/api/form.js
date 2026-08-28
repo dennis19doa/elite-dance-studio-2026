@@ -74,8 +74,9 @@ export async function onRequestPost({ request, env }) {
       "ZOHO_FROM_EMAIL",
     ];
 
-    if (requiredEnv.some((key) => !env[key])) {
-      console.error("Zoho form configuration is incomplete");
+    const missingEnv = requiredEnv.filter((key) => !env[key]);
+    if (missingEnv.length) {
+      console.error("Zoho form configuration is incomplete. Missing:", missingEnv.join(", "));
       return json({ ok: false, error: "configuration_error" }, 500);
     }
 

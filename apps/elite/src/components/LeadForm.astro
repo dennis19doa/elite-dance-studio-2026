@@ -1,32 +1,60 @@
 ---
 interface Props { kind: "welcome" | "contact"; id: string; eyebrow: string; title: string; description: string; }
 const { kind, id, eyebrow, title, description } = Astro.props;
-const endpoint = kind === "welcome" ? import.meta.env.PUBLIC_TRIAL_FORM_ENDPOINT : import.meta.env.PUBLIC_CONTACT_FORM_ENDPOINT;
-const isConfigured = Boolean(endpoint);
+const endpoint = "/api/form";
 const isWelcome = kind === "welcome";
 ---
 <section class:list={["lead-form-section", "panel", isWelcome ? "welcome-lead-form" : "contact-lead-form"]} id={id}>
   <div class="lead-form-intro"><div><div class="eyebrow">{eyebrow}</div><h2>{title}</h2></div><p>{description}</p></div>
-  <form class="lead-form" action={endpoint || "#"} method="post" data-lead-form data-configured={String(isConfigured)}>
-    <input type="hidden" name="request_type" value={isWelcome ? "Welcome Pass" : "Allgemeine Anfrage"} /><input type="hidden" name="_subject" value={isWelcome ? "Neue Welcome-Pass-Anfrage" : "Neue Website-Anfrage"} /><input class="form-honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <form class="lead-form" action={endpoint} method="post" data-lead-form>
+    <input type="hidden" name="form_kind" value={kind} />
+    <input class="form-honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
     <div class="form-grid"><label class="form-field"><span>Name *</span><input type="text" name="name" autocomplete="name" required placeholder="Wie dürfen wir dich nennen?" /></label><label class="form-field"><span>E-Mail *</span><input type="email" name="email" autocomplete="email" required placeholder="du@beispiel.de" /></label><label class="form-field"><span>Telefon</span><input type="tel" name="phone" autocomplete="tel" placeholder="Optional für Rückfragen" /></label>
       {isWelcome ? (<><label class="form-field"><span>Tanzerfahrung *</span><select name="experience" required><option value="">Bitte auswählen</option><option>Komplette:r Beginner:in</option><option>Ich habe einzelne Klassen besucht</option><option>Ich tanze seit weniger als 6 Monaten</option><option>Ich bin unsicher</option></select></label><label class="form-field"><span>Welcher Style interessiert dich? *</span><select name="style_interest" required><option value="">Bitte auswählen</option><option>Bachata</option><option>Reggaeton</option><option>Heels</option><option>Hip Hop / Commercial</option><option>K-Pop</option><option>Contemporary / Technique</option><option>Ich möchte eine Empfehlung</option></select></label><label class="form-field"><span>Kommst du allein?</span><select name="partner_status"><option>Ja, ich komme allein</option><option>Nein, wir kommen zu zweit</option><option>Noch nicht sicher</option></select></label><label class="form-field form-field-wide"><span>Wunschklasse oder mögliche Tage</span><textarea name="availability" rows="4" placeholder="Zum Beispiel: Bachata am Dienstag oder generell abends"></textarea></label></>) : (<><label class="form-field"><span>Worum geht es? *</span><select name="topic" required><option value="">Bitte auswählen</option><option>Kurse und Level</option><option>Welcome Pass</option><option>Preise oder Membership</option><option>Urban Sports Club</option><option>Intensives / Closed Groups</option><option>Raummiete / Studio</option><option>Privatstunde</option><option>Events / Kooperation</option><option>Andere Frage</option></select></label><label class="form-field form-field-wide"><span>Deine Nachricht *</span><textarea name="message" rows="6" required placeholder="Wie können wir dir helfen?"></textarea></label></>)}
     </div>
     <label class="form-consent"><input type="checkbox" name="privacy_consent" value="accepted" required /><span>Ich stimme zu, dass Elite Dance Studio meine Angaben zur Bearbeitung dieser Anfrage verwendet. *</span></label>
     <div class="form-submit-row"><button class="button primary" type="submit">{isWelcome ? "Welcome Pass für 20€ anfragen" : "Anfrage senden"}</button><span class="form-required">* Pflichtfelder</span></div>
-    <p class="form-status" role="status" aria-live="polite" data-form-status>{isConfigured ? "Nach dem Absenden erhält das Elite-Team deine Anfrage." : "Vorschau: Das Formular ist gestaltet. Der sichere Versand wird beim Hosting-Wechsel verbunden."}</p>
+    <p class="form-status" role="status" aria-live="polite" data-form-status>Nach dem Absenden erhält das Elite-Team deine Anfrage.</p>
   </form>
-  <details class="form-privacy-note"><summary>Was passiert mit meinen Angaben?</summary><p>Die Angaben werden nur zur Bearbeitung deiner Anfrage verwendet. Vor dem Livegang ergänzen wir den finalen Formulardienst in der Datenschutzerklärung und definieren die Löschfrist.</p></details>
+  <details class="form-privacy-note"><summary>Was passiert mit meinen Angaben?</summary><p>Die Angaben werden serverseitig über Cloudflare verarbeitet und als Anfrage an unser Zoho-Mailpostfach übermittelt. Wir verwenden sie nur zur Bearbeitung deiner Anfrage.</p></details>
 </section>
 <script>
   document.querySelectorAll<HTMLFormElement>("[data-lead-form]").forEach((form) => {
-    const status = form.querySelector<HTMLElement>("[data-form-status]"); const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-    form.addEventListener("submit", async (event) => { event.preventDefault();
-      if (form.dataset.configured !== "true") { if (status) { status.textContent = "Das Formular ist noch im Preview-Modus. Bitte nutze bis zum Hosting-Wechsel WhatsApp oder E-Mail."; status.dataset.state = "preview"; } return; }
-      if (!form.reportValidity()) return; if (button) button.disabled = true; if (status) { status.textContent = "Deine Anfrage wird gesendet …"; status.dataset.state = "loading"; }
-      try { const response = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } }); if (!response.ok) throw new Error("Submission failed"); form.reset(); if (status) { status.textContent = "Danke! Deine Anfrage ist angekommen. Wir melden uns so schnell wie möglich."; status.dataset.state = "success"; } }
-      catch { if (status) { status.textContent = "Das hat gerade nicht funktioniert. Bitte versuche es erneut oder schreibe uns auf WhatsApp."; status.dataset.state = "error"; } }
-      finally { if (button) button.disabled = false; }
+    const status = form.querySelector<HTMLElement>("[data-form-status]");
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      if (button) button.disabled = true;
+      if (status) {
+        status.textContent = "Deine Anfrage wird gesendet …";
+        status.dataset.state = "loading";
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (!response.ok) throw new Error("Submission failed");
+
+        form.reset();
+        if (status) {
+          status.textContent = "Danke! Deine Anfrage ist angekommen. Wir melden uns so schnell wie möglich.";
+          status.dataset.state = "success";
+        }
+      } catch {
+        if (status) {
+          status.textContent = "Das hat gerade nicht funktioniert. Bitte versuche es erneut oder schreibe uns auf WhatsApp.";
+          status.dataset.state = "error";
+        }
+      } finally {
+        if (button) button.disabled = false;
+      }
     });
   });
 </script>

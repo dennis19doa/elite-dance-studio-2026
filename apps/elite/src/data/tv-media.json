@@ -1,0 +1,31 @@
+{
+  "videos": [
+    "videos/video updated.mp4"
+  ],
+  "posters": [
+    {"title":"Zouk Beginner","file":"classes/ChatGPT Image Aug 20, 2026, 01_21_34 PM.png","aliases":["zouk","zouk beginner"]},
+    {"title":"Commercial Open","file":"classes/ChatGPT Image Aug 20, 2026, 01_26_04 PM.png","aliases":["commercial open","commercial beginner+ dima","commercial beginner plus dima"]},
+    {"title":"Commercial Beginner+","file":"classes/ChatGPT Image Aug 20, 2026, 01_31_36 PM.png","aliases":["commercial beginner+","commercial beginner plus","commercial beginner+ marlon","commercial beginner plus marlon"]},
+    {"title":"Commercial Level 0","file":"classes/ChatGPT Image Aug 20, 2026, 01_37_21 PM.png","aliases":["commercial level 0","commercial l0","commercial level zero"]},
+    {"title":"Contemporary Fusion","file":"classes/ChatGPT Image Aug 20, 2026, 01_44_04 PM.png","aliases":["contemporary fusion","contemporary"]},
+    {"title":"Heels Beginner","file":"classes/ChatGPT Image Aug 20, 2026, 01_54_14 PM.png","aliases":["heels beginner","high heels beginner","heels beginner technik","heels beginner technique"]},
+    {"title":"Hip Hop Beginner","file":"classes/ChatGPT Image Aug 20, 2026, 02_00_02 PM.png","aliases":["hip hop","hip-hop","hip hop beginner","hip-hop beginner","hip hop open","hip hop open level"]},
+    {"title":"Hip Hop Beginner Minh","file":"classes/ChatGPT Image Aug 20, 2026, 02_03_35 PM.png","aliases":["hip hop beginner minh","hip-hop beginner minh","hip hop minh"]},
+    {"title":"House Beginner","file":"classes/ChatGPT Image Aug 20, 2026, 02_10_29 PM.png","aliases":["house","house beginner"]},
+    {"title":"K-Pop Beginner","file":"classes/ChatGPT Image Aug 20, 2026, 02_15_59 PM.png","aliases":["k-pop","kpop","k-pop beginner","kpop beginner","k-pop open","kpop open"]},
+    {"title":"Lambada Beginner","file":"classes/ChatGPT Image Aug 20, 2026, 02_20_54 PM.png","aliases":["lambada","lambada beginner","lambada open"]},
+    {"title":"Latin Commercial","file":"classes/ChatGPT Image Aug 20, 2026, 02_24_46 PM.png","aliases":["latin commercial"]},
+    {"title":"Reggaeton Fundamentals","file":"classes/ChatGPT Image Aug 20, 2026, 02_29_22 PM.png","aliases":["reggaeton fundamentals","reggaeton fundamental"]},
+    {"title":"Salsa Footwork Fusion","file":"classes/ChatGPT Image Aug 20, 2026, 02_36_02 PM.png","aliases":["salsa footwork fusion","salsa footwork","cali style"]},
+    {"title":"Waving Beginner","file":"classes/ChatGPT Image Aug 23, 2026, 06_04_55 PM.png","aliases":["waving","waving beginner"]},
+    {"title":"Breaking","file":"classes/ChatGPT Image Aug 19, 2026, 07_42_33 PM.png","aliases":["breaking","breakdance","breaking beginner","breaking intermediate","breaking advanced","breaking inter adv","breaking closed group"]},
+    {"title":"Bachata Beginner","file":"classes/ChatGPT Image Aug 19, 2026, 08_11_10 PM.png","aliases":["bachata beginner","bachata basic","bachata basics"]},
+    {"title":"Bachata Footwork","file":"classes/ChatGPT Image Aug 19, 2026, 08_16_52 PM.png","aliases":["bachata footwork","bachata footwork partnerwork","footwork partnerwork"]},
+    {"title":"Bachata Intermediate","file":"classes/ChatGPT Image Aug 19, 2026, 08_21_49 PM.png","aliases":["bachata intermediate"]},
+    {"title":"Heels Intermediate","file":"classes/ChatGPT Image Aug 19, 2026, 08_25_39 PM.png","aliases":["heels intermediate","high heels intermediate","heels closed group"]},
+    {"title":"Kizomba","file":"classes/ChatGPT Image Aug 19, 2026, 08_30_29 PM.png","aliases":["kizomba","kizomba open"]},
+    {"title":"Reggaeton Beginner","file":"classes/ChatGPT Image Aug 19, 2026, 08_36_39 PM.png","aliases":["reggaeton beginner"]},
+    {"title":"Reggaeton Beg/Int","file":"classes/ChatGPT Image Aug 19, 2026, 08_41_35 PM.png","aliases":["reggaeton beg/int","reggaeton beg int","reggaeton beginner intermediate","reggaeton intermediate"]},
+    {"title":"Latin Twerk","file":"classes/ChatGPT Image Aug 19, 2026, 08_47_20 PM.png","aliases":["latin twerk","twerk"]}
+  ]
+}

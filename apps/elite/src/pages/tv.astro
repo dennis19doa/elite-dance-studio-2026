@@ -3,7 +3,7 @@ import tvMedia from "../data/tv-media.json";
 const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv").replace(/\/+$/, "");
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
-const videos = tvMedia.videos.map(remoteMedia);
+const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260828-2125`);
 ---
 <!doctype html>
 <html lang="en">

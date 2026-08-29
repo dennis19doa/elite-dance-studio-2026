@@ -12,7 +12,7 @@ interface PricingItem {
   featured?: boolean;
 }
 interface Props { pricing: PricingItem[]; eyebrow?: string; title?: string; description?: string; }
-const { pricing, eyebrow = "Preise", title = "Finde den Rhythmus, der zu deinem Alltag passt.", description = "Teste Elite, trainiere regelmäßig oder bleib flexibel." } = Astro.props;
+const { pricing, eyebrow = "Preise", title = "Einfach. Flexibel. So wie du.", description = "Teste Elite, trainiere regelmäßig oder bleib flexibel." } = Astro.props;
 const isExternal = (href?: string) => Boolean(href?.startsWith("http"));
 const byCategory = (category: string) => pricing.filter((item) => item.category === category);
 const start = byCategory("Start");

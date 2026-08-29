@@ -10,8 +10,8 @@
     "Beginner-friendly",
     "Keine Membership nötig"
   ],
-  "primaryCtaLabel": "Welcome Pass holen",
-  "primaryCtaHref": "/starter-pass/",
+  "primaryCtaLabel": "Welcome Pass kaufen",
+  "primaryCtaHref": "https://www.eversports.de/org/product/eaed6a11-d4bb-44ff-8b0d-ab8acf6828f3?venueId=403f5ec1-2e5b-489c-b5d1-c424903a26c5",
   "secondaryCtaLabel": "Klassen ansehen",
   "secondaryCtaHref": "/kurse/"
 }

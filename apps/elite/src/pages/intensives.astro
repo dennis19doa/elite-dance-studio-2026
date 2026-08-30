@@ -6,6 +6,12 @@ import intensives from "../data/intensives.json";
 import site from "../data/site.json";
 
 const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const intensiveImages = [
+  { src: `${baseUrl}media/current-site/elena-dennis-bachata.png`, alt: "Fundamentals Training im Elite Dance Studio" },
+  { src: `${baseUrl}media/current-site/current-home-visual.webp`, alt: "Body Movement Training im Elite Dance Studio" },
+  { src: `${baseUrl}media/current-site/kathy-reggaeton.png`, alt: "Bewegungs- und Techniktraining im Elite Dance Studio" },
+  { src: `${baseUrl}media/current-site/studio-room-a.jpg`, alt: "Intensive Training im Elite Dance Studio Berlin" }
+];
 ---
 
 <BaseLayout
@@ -42,11 +48,11 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_UR
       </div>
 
       <div class="intensive-roadmap intensive-roadmap-review-v19">
-        {intensives.map((intensive) => (
+        {intensives.map((intensive, index) => (
           <article class="intensive-roadmap-step intensive-roadmap-step-v15 intensive-roadmap-step-v16 intensive-card-review-v19">
             <div class="roadmap-card roadmap-card-v15 roadmap-card-v16">
               <figure class="intensive-card-image-v15">
-                <img src={intensive.image} alt={intensive.imageAlt} loading="lazy" decoding="async" />
+                <img src={intensiveImages[index]?.src ?? intensive.image} alt={intensiveImages[index]?.alt ?? intensive.imageAlt} loading="lazy" decoding="async" />
                 <span>{intensive.phase}</span>
               </figure>
 

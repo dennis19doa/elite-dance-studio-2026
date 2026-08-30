@@ -79,9 +79,9 @@ const currentAssignments = [
   },
   {
     page: "Über uns · founders",
-    src: "/media/current-site/elena-dennis-bachata.png",
-    current: "Elena & Dennis Bachata image",
-    intended: "Replace with the originally specified DSC_6145.jpg once it is uploaded again."
+    src: "/media/current-site/elena-dennis-founders.jpg",
+    current: "Confirmed Elena & Dennis founder portrait",
+    intended: "The previously missing DSC_6145.jpg has now been uploaded and assigned correctly."
   },
   ...intensives.map((intensive, index) => {
     const intendedFiles = [
@@ -95,7 +95,7 @@ const currentAssignments = [
       page: `Intensives · ${intensive.name}`,
       src: intensive.image,
       current: intensive.image.replace("/media/", ""),
-      intended: `Original migration image: ${intendedFiles[index]} — not currently uploaded.`
+      intended: `Confirmed shared Intensive visual. The original individual course photo ${intendedFiles[index]} is not currently uploaded.`
     };
   })
 ];
@@ -134,8 +134,7 @@ const remoteAssets: MediaAsset[] = [
         <h2 id="media-review-current-title">These are the images that need reviewing.</h2>
       </div>
       <p>
-        The original WordPress image files for Intensives and the intended founder photo are no longer in the new site’s uploads.
-        The cards below show the temporary replacements that are currently visible.
+        The founder portrait has now been restored. The Intensives use one confirmed shared photo until the four original individual course photos are uploaded again.
       </p>
     </section>
 

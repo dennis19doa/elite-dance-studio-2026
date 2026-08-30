@@ -28,6 +28,10 @@ function attribute(tag, name) {
   return tag.match(new RegExp(`\\b${name}=["']([^"']*)["']`, "i"))?.[1] ?? null;
 }
 
+function hasAttribute(tag, name) {
+  return new RegExp(`(?:^|\\s)${name}(?:\\s*=|\\s|/?>)`, "i").test(tag);
+}
+
 function textContent(value) {
   return value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
@@ -78,7 +82,7 @@ for (const file of htmlFiles) {
 
   const imageTags = [...html.matchAll(/<img\b[^>]*>/gi)].map((match) => match[0]);
   for (const image of imageTags) {
-    if (attribute(image, "alt") === null) errors.push(`${route}: image is missing an alt attribute`);
+    if (!hasAttribute(image, "alt")) errors.push(`${route}: image is missing an alt attribute`);
     const source = attribute(image, "src");
     if (source?.startsWith("/") && !(await resolvePublicPath(source))) {
       errors.push(`${route}: missing image ${source}`);

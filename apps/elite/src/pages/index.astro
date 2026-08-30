@@ -9,7 +9,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StudioExperienceSection from "../components/StudioExperienceSection.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
 import HomeCoachRail from "../components/HomeCoachRail.astro";
-import { mediaUrl } from "../lib/media";
+import { cloudMediaBaseUrl, cloudMediaUrl } from "../lib/media";
 
 import faqs from "../data/faqs.json";
 import site from "../data/site.json";
@@ -17,9 +17,11 @@ import trialOffer from "../data/trial-offer.json";
 
 const hero = {
   ...site.hero,
-  videoSrc: mediaUrl(site.hero.videoSrc),
-  videoMobileSrc: site.hero.videoMobileSrc ? mediaUrl(site.hero.videoMobileSrc) : undefined,
-  videoPoster: mediaUrl(site.hero.videoPoster)
+  videoCloudSrc: cloudMediaUrl(site.hero.videoCloudSrc),
+  videoCloudMobileSrc: cloudMediaUrl(site.hero.videoCloudMobileSrc),
+  videoSrc: site.hero.videoSrc,
+  videoMobileSrc: site.hero.videoMobileSrc,
+  videoPoster: site.hero.videoPoster
 };
 ---
 
@@ -28,6 +30,7 @@ const hero = {
   description="Beginner-friendly Tanzkurse in Berlin-Moabit: ohne Vorkenntnisse starten, oft ohne festen Partner. Welcome Pass: 2 Klassen für 20 Euro."
   bodyClass="home-page"
 >
+  <link slot="head" rel="preconnect" href={cloudMediaBaseUrl} crossorigin="anonymous" />
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main home-main">

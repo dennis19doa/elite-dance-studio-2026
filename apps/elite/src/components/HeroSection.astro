@@ -7,6 +7,8 @@ interface HeroData {
   primaryCtaHref: string;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
+  videoCloudSrc?: string;
+  videoCloudMobileSrc?: string;
   videoSrc: string;
   videoMobileSrc?: string;
   videoPoster: string;
@@ -42,6 +44,10 @@ const scheduleHref = `${baseUrl}#schedule`;
       height="1080"
       aria-label="Echte Kursszenen im Elite Dance Studio"
     >
+      {hero.videoCloudMobileSrc && (
+        <source src={hero.videoCloudMobileSrc} type="video/mp4" media="(max-width: 720px)" />
+      )}
+      {hero.videoCloudSrc && <source src={hero.videoCloudSrc} type="video/mp4" />}
       {hero.videoMobileSrc && (
         <source src={hero.videoMobileSrc} type="video/mp4" media="(max-width: 720px)" />
       )}

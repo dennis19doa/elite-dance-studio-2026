@@ -4,9 +4,9 @@
     "label": "Für deinen ersten Besuch",
     "name": "Welcome Pass",
     "price": "20€",
-    "text": "Zwei Classes testen und Elite ohne große Entscheidung kennenlernen.",
+    "text": "Zwei reguläre Classes in unterschiedlichen Styles testen und Elite kennenlernen.",
     "bestFor": "du Elite erst einmal erleben möchtest",
-    "features": ["2 reguläre Classes", "14 Tage gültig", "Nur für neue Besucher:innen"],
+    "features": ["2 reguläre Classes", "10 Tage gültig", "Einmal pro Person · keine Advanced-Kurse"],
     "ctaLabel": "Welcome Pass kaufen",
     "href": "https://www.eversports.de/org/product/eaed6a11-d4bb-44ff-8b0d-ab8acf6828f3?venueId=403f5ec1-2e5b-489c-b5d1-c424903a26c5",
     "featured": true

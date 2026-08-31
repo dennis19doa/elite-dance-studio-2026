@@ -3,7 +3,7 @@ import tvMedia from "../data/tv-media.json";
 const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv").replace(/\/+$/, "");
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
-const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260828-2125`);
+const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260831-1749`);
 ---
 <!doctype html>
 <html lang="en">
@@ -13,7 +13,7 @@ const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260828-212
 <meta name="description" content="Private Elite Dance Studio TV display for current classes and studio media." />
 <meta name="robots" content="noindex,nofollow" />
 <link rel="canonical" href="https://elitedancestudio.de/tv/" />
-<title>Elite TV v2</title>
+<title>Elite TV v3</title>
 <style>
 :root{color-scheme:dark;font-family:Inter,system-ui,sans-serif;background:#050505;color:#fff}
 *{box-sizing:border-box}
@@ -21,7 +21,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 .tv{position:relative;width:100vw;height:100vh;overflow:hidden}
 .scene{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .55s ease}
 .scene.active{opacity:1}
-.video video{width:100%;height:100%;object-fit:cover}
+.video video{width:100%;height:100%;object-fit:cover;background:#050505}
 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.04) 62%,rgba(0,0,0,.45))}
 .clock{position:absolute;top:3vh;right:3vw;text-align:right;font-size:clamp(24px,3vw,52px);font-weight:900}
 .clock span{display:block;font-size:.32em;letter-spacing:.16em;opacity:.7;margin-top:.45rem}
@@ -32,8 +32,10 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 .dot{width:.8em;height:.8em;border-radius:50%;background:#fff}
 .live-display .dot{background:#ff2b2b;box-shadow:0 0 0 0 rgba(255,43,43,.85);animation:statusPulse 1.1s infinite}
 .live-display .status{color:#ff4b4b}
+.next-display .status{color:#d7ff4f}
 .single-poster-wrap{flex:1 1 0;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#040404}
 .poster-main{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;object-position:center;display:block;flex:none;transform-origin:center}
+.poster-main.is-missing{display:none}
 .live-display .poster-main{animation:livePosterPulse 2.5s ease-in-out infinite}
 .probe{position:fixed;left:-10000px;top:0;width:1400px;min-height:900px;opacity:.001;pointer-events:none}
 @keyframes statusPulse{0%{box-shadow:0 0 0 0 rgba(255,43,43,.75);opacity:1}70%{box-shadow:0 0 0 18px rgba(255,43,43,0);opacity:.45}100%{box-shadow:0 0 0 0 rgba(255,43,43,0);opacity:1}}
@@ -44,58 +46,206 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 </head>
 <body>
 <main class="tv">
-<section class="scene video active" id="video-scene"><video id="video" autoplay muted playsinline loop></video><div class="shade"></div><div class="clock"><strong id="clock">--:--</strong><span id="day">BERLIN</span></div></section>
+<section class="scene video active" id="video-scene"><video id="video" autoplay muted playsinline preload="auto"></video><div class="shade"></div><div class="clock"><strong id="clock">--:--</strong><span id="day">BERLIN</span></div></section>
 <section class="scene class-scene" id="single-scene"><div class="class-header"><h1 id="single-title">Class</h1><div id="single-info"><div class="status"><span class="dot"></span><span id="single-status">LIVE NOW</span></div></div></div><div class="single-poster-wrap"><img class="poster-main" id="single-img" alt=""></div></section>
 <div class="probe"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
 </main>
 <script type="module" src="https://widget-static.eversports.io/loader.js"></script>
 <script is:inline define:vars={{ posters, videos }}>
 (()=>{
-const TZ="Europe/Berlin", WINDOW=15, REPEAT=2, SHOW=12;
+const TZ="Europe/Berlin";
+const NEXT_WINDOW=15;
+const DEFAULT_CLASS_MINUTES=60;
+const POSTER_SECONDS=10;
+const STALL_CHECK_MS=5000;
+const STALL_LIMIT=2;
+
 const video=document.getElementById('video');
-if(videos.length) video.src=videos[0];
 const scenes={video:document.getElementById('video-scene'),single:document.getElementById('single-scene')};
-let events=[],lastKey='',timer=null,posterIndex=0;
+let events=[];
+let sceneTimer=null;
+let videoIndex=0;
+let queue=[];
+let lastVideoTime=-1;
+let stalledChecks=0;
+let recovering=false;
+
 const norm=(s='')=>s.toLowerCase().replace(/[^a-z0-9äöüß+]+/gi,' ').replace(/\s+/g,' ').trim();
-const posterFor=(title='')=>posters.find(p=>[p.title,...(p.aliases||[])].some(a=>{a=norm(a);const n=norm(title);return a&&(n.includes(a)||a.includes(n))}))||posters[posterIndex++%posters.length];
 const text=el=>(el?.innerText||el?.textContent||'').replace(/\s+/g,' ').trim();
 const parts=()=>Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'long',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()).map(p=>[p.type,p.value]));
 const min=t=>{const[h,m]=t.split(':').map(Number);return h*60+m};
+const formatTime=(h,m)=>`${String(h).padStart(2,'0')}:${m}`;
+
 function updateClock(){const p=parts();document.getElementById('clock').textContent=`${p.hour}:${p.minute}`;document.getElementById('day').textContent=`${p.weekday} · BERLIN`}
 function roomFrom(s=''){s=s.toLowerCase();if(/schwarz|black/.test(s))return'BLACK ROOM';if(/gelb|yellow/.test(s))return'YELLOW ROOM';if(/blau|blue/.test(s))return'BLUE ROOM';return''}
-function parse(){const root=document.getElementById('eversports-probe');if(!root)return[];const out=[],seen=new Set();for(const el of root.querySelectorAll('*')){const t=text(el);if(t.length<5||t.length>320||!(/\b\d{1,2}:\d{2}\b/.test(t)))continue;const m=t.match(/\b([01]?\d|2[0-3]):([0-5]\d)\b/);if(!m)continue;const start=m[0].padStart(5,'0');const title=t.replace(m[0],'').replace(/\b(Uhr|AM|PM)\b/gi,'').trim();const k=start+'|'+title;if(seen.has(k)||!title)continue;seen.add(k);out.push({start,title,room:roomFrom(t)});}return out.slice(0,80)}
-function statusNow(){const p=parts(),now=Number(p.hour)*60+Number(p.minute);const live=events.map(e=>({...e,delta:min(e.start)-now})).filter(e=>e.delta<=0&&e.delta>=-WINDOW);if(live.length)return{type:'live',classes:live.sort((a,b)=>a.delta-b.delta)};const next=events.map(e=>({...e,delta:min(e.start)-now})).filter(e=>e.delta>=0&&e.delta<=WINDOW).sort((a,b)=>a.delta-b.delta);if(!next.length)return null;const t=next[0].start;return{type:'next',classes:next.filter(e=>e.start===t)}}
-function show(name,seconds=SHOW){Object.entries(scenes).forEach(([k,v])=>v.classList.toggle('active',k===name));if(name==='video')video.play().catch(()=>{});else video.pause();clearTimeout(timer);timer=setTimeout(()=>show('video',40),seconds*1000)}
-function render(state){
-  const e=state.classes[0];
-  if(!e)return;
-  const p=posterFor(e.title);
-  const scene=document.getElementById('single-scene');
-  scene.classList.toggle('live-display',state.type==='live');
-  scene.classList.toggle('next-display',state.type==='next');
-  document.getElementById('single-img').src=p.src;
-  document.getElementById('single-img').alt=e.title;
-  document.getElementById('single-title').textContent=e.title;
-  document.getElementById('single-status').textContent=state.type==='live'?'LIVE NOW':`NEXT · ${e.start}`;
-  show('single');
+
+function posterFor(title=''){
+  const n=norm(title);
+  return posters.find(p=>[p.title,...(p.aliases||[])].some(alias=>{
+    const a=norm(alias);
+    return a&&(n.includes(a)||a.includes(n));
+  }))||null;
 }
+
+function parse(){
+  const root=document.getElementById('eversports-probe');
+  if(!root)return[];
+  const out=[],seen=new Set();
+  for(const el of root.querySelectorAll('*')){
+    const t=text(el);
+    if(t.length<5||t.length>320)continue;
+    const matches=[...t.matchAll(/\b([01]?\d|2[0-3]):([0-5]\d)\b/g)];
+    if(!matches.length)continue;
+    const start=formatTime(matches[0][1],matches[0][2]);
+    const end=matches[1]?formatTime(matches[1][1],matches[1][2]):null;
+    let title=t;
+    matches.slice(0,2).forEach(m=>{title=title.replace(m[0],' ')});
+    title=title.replace(/\b(Uhr|AM|PM)\b/gi,' ').replace(/\s+/g,' ').trim();
+    const k=start+'|'+title;
+    if(seen.has(k)||!title)continue;
+    seen.add(k);
+    out.push({start,end,title,room:roomFrom(t)});
+  }
+  return out.slice(0,80);
+}
+
+function nowMinutes(){const p=parts();return Number(p.hour)*60+Number(p.minute)}
+function eventEnd(e){
+  if(e.end){
+    const end=min(e.end),start=min(e.start);
+    if(end>start)return end;
+  }
+  return min(e.start)+DEFAULT_CLASS_MINUTES;
+}
+
+function displayQueue(){
+  const now=nowMinutes();
+  const live=events
+    .filter(e=>now>=min(e.start)&&now<eventEnd(e))
+    .sort((a,b)=>min(a.start)-min(b.start));
+  const next=events
+    .map(e=>({...e,delta:min(e.start)-now}))
+    .filter(e=>e.delta>0&&e.delta<=NEXT_WINDOW)
+    .sort((a,b)=>a.delta-b.delta);
+  return [
+    ...live.map(e=>({type:'live',event:e})),
+    ...next.map(e=>({type:'next',event:e}))
+  ];
+}
+
+function activate(name){
+  Object.entries(scenes).forEach(([k,v])=>v.classList.toggle('active',k===name));
+}
+
+function renderEntry(entry){
+  const e=entry.event;
+  const p=posterFor(e.title);
+  const scene=scenes.single;
+  const img=document.getElementById('single-img');
+  scene.classList.toggle('live-display',entry.type==='live');
+  scene.classList.toggle('next-display',entry.type==='next');
+  document.getElementById('single-title').textContent=e.title;
+  document.getElementById('single-status').textContent=entry.type==='live'?'LIVE NOW':`NEXT · ${e.start}`;
+  if(p){
+    img.src=p.src;
+    img.alt=e.title;
+    img.classList.remove('is-missing');
+  }else{
+    img.removeAttribute('src');
+    img.alt='';
+    img.classList.add('is-missing');
+  }
+  activate('single');
+}
+
+function playVideo({reload=false}={}){
+  clearTimeout(sceneTimer);
+  queue=[];
+  recovering=false;
+  activate('video');
+  if(!videos.length)return;
+  const src=videos[videoIndex%videos.length];
+  if(reload||video.src!==src){
+    video.src=src;
+    video.load();
+  }else{
+    try{video.currentTime=0}catch{}
+  }
+  lastVideoTime=-1;
+  stalledChecks=0;
+  video.play().catch(()=>{});
+}
+
+function showNextInfo(){
+  clearTimeout(sceneTimer);
+  if(!queue.length){
+    videoIndex=(videoIndex+1)%Math.max(videos.length,1);
+    playVideo({reload:recovering});
+    return;
+  }
+  const entry=queue.shift();
+  renderEntry(entry);
+  sceneTimer=setTimeout(showNextInfo,POSTER_SECONDS*1000);
+}
+
+function finishVideoLoop(){
+  video.pause();
+  queue=displayQueue();
+  if(queue.length)showNextInfo();
+  else{
+    videoIndex=(videoIndex+1)%Math.max(videos.length,1);
+    playVideo();
+  }
+}
+
+function recoverFromStall(){
+  if(recovering)return;
+  recovering=true;
+  video.pause();
+  queue=displayQueue();
+  if(queue.length)showNextInfo();
+  else playVideo({reload:true});
+}
+
 function demo(){
   const mode=new URLSearchParams(location.search).get('demo');
   if(!mode)return false;
+  video.pause();
   const sample=mode==='live'
-    ?{type:'live',classes:[{title:'Reggaeton Beginner',start:'18:00',room:'BLACK ROOM'}]}
+    ?{type:'live',event:{title:'Reggaeton Beginner',start:'18:00',end:'19:00',room:'BLACK ROOM'}}
     :mode==='zouk'
-      ?{type:'live',classes:[{title:'Zouk Beginner',start:'18:00',room:'YELLOW ROOM'}]}
-      :{type:'next',classes:[{title:'Bachata Beginner',start:'20:00',room:'BLACK ROOM'}]};
-  render(sample);
+      ?{type:'live',event:{title:'Zouk Beginner',start:'18:00',end:'19:00',room:'YELLOW ROOM'}}
+      :{type:'next',event:{title:'Bachata Beginner',start:'20:00',end:'21:00',room:'BLACK ROOM'}};
+  renderEntry(sample);
   return true;
 }
+
+posters.forEach(p=>{const img=new Image();img.src=p.src});
 const obs=new MutationObserver(()=>{events=parse()});
 obs.observe(document.getElementById('eversports-probe'),{childList:true,subtree:true,characterData:true});
-setInterval(()=>{events=parse();if(demo())return;const s=statusNow();if(!s)return;const p=parts(),bucket=Math.floor((Number(p.hour)*60+Number(p.minute))/REPEAT),key=s.type+'|'+s.classes.map(c=>c.start+c.title).join('|')+'|'+bucket;if(key!==lastKey){lastKey=key;render(s)}},30000);
+setInterval(()=>{events=parse()},30000);
+
+video.addEventListener('ended',finishVideoLoop);
+video.addEventListener('playing',()=>{stalledChecks=0;lastVideoTime=video.currentTime});
+video.addEventListener('error',recoverFromStall);
+video.addEventListener('stalled',()=>{stalledChecks=Math.max(stalledChecks,1)});
+video.addEventListener('waiting',()=>{stalledChecks=Math.max(stalledChecks,1)});
+
+setInterval(()=>{
+  if(!scenes.video.classList.contains('active')||video.paused||video.ended)return;
+  const current=video.currentTime;
+  if(lastVideoTime>=0&&Math.abs(current-lastVideoTime)<0.15)stalledChecks+=1;
+  else stalledChecks=0;
+  lastVideoTime=current;
+  if(stalledChecks>=STALL_LIMIT)recoverFromStall();
+},STALL_CHECK_MS);
+
 updateClock();
 setInterval(updateClock,1000);
-setTimeout(()=>{events=parse();demo()},2500);
+setTimeout(()=>{
+  events=parse();
+  if(!demo())playVideo();
+},2500);
 })();
 </script>
 </body>

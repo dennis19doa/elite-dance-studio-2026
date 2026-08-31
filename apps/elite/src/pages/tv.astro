@@ -3,7 +3,7 @@ import tvMedia from "../data/tv-media.json";
 const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv").replace(/\/+$/, "");
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
-const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260831-1749`);
+const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260831-reupload2`);
 ---
 <!doctype html>
 <html lang="en">
@@ -118,6 +118,20 @@ function eventEnd(e){
   return min(e.start)+DEFAULT_CLASS_MINUTES;
 }
 
+function dedupeEntries(items,type){
+  const seen=new Set();
+  const out=[];
+  for(const e of items){
+    const poster=posterFor(e.title);
+    const classKey=poster?.title||norm(e.title);
+    const key=`${type}|${e.start}|${classKey}`;
+    if(seen.has(key))continue;
+    seen.add(key);
+    out.push({type,event:e});
+  }
+  return out;
+}
+
 function displayQueue(){
   const now=nowMinutes();
   const live=events
@@ -128,8 +142,8 @@ function displayQueue(){
     .filter(e=>e.delta>0&&e.delta<=NEXT_WINDOW)
     .sort((a,b)=>a.delta-b.delta);
   return [
-    ...live.map(e=>({type:'live',event:e})),
-    ...next.map(e=>({type:'next',event:e}))
+    ...dedupeEntries(live,'live'),
+    ...dedupeEntries(next,'next')
   ];
 }
 

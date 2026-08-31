@@ -3,7 +3,7 @@ import tvMedia from "../data/tv-media.json";
 const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv").replace(/\/+$/, "");
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
-const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260831-reupload2`);
+const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260831-reupload3`);
 ---
 <!doctype html>
 <html lang="en">
@@ -47,7 +47,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <body>
 <main class="tv">
 <section class="scene video active" id="video-scene"><video id="video" autoplay muted playsinline preload="auto"></video><div class="shade"></div><div class="clock"><strong id="clock">--:--</strong><span id="day">BERLIN</span></div></section>
-<section class="scene class-scene" id="single-scene"><div class="class-header"><h1 id="single-title">Class</h1><div id="single-info"><div class="status"><span class="dot"></span><span id="single-status">LIVE NOW</span></div></div></div><div class="single-poster-wrap"><img class="poster-main" id="single-img" alt=""></div></section>
+<section class="scene class-scene" id="single-scene"><div class="class-header"><h1 id="single-title">Class</h1><div id="single-info"><div class="status"><span class="dot"></span><span id="single-status">CURRENT CLASS · LIVE NOW</span></div></div></div><div class="single-poster-wrap"><img class="poster-main" id="single-img" alt=""></div></section>
 <div class="probe"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
 </main>
 <script type="module" src="https://widget-static.eversports.io/loader.js"></script>
@@ -159,7 +159,7 @@ function renderEntry(entry){
   scene.classList.toggle('live-display',entry.type==='live');
   scene.classList.toggle('next-display',entry.type==='next');
   document.getElementById('single-title').textContent=e.title;
-  document.getElementById('single-status').textContent=entry.type==='live'?'LIVE NOW':`NEXT · ${e.start}`;
+  document.getElementById('single-status').textContent=entry.type==='live'?'CURRENT CLASS · LIVE NOW':`NEXT CLASS · ${e.start}`;
   if(p){
     img.src=p.src;
     img.alt=e.title;
@@ -202,8 +202,14 @@ function showNextInfo(){
   sceneTimer=setTimeout(showNextInfo,POSTER_SECONDS*1000);
 }
 
+function refreshScheduleNow(){
+  events=parse();
+  return events;
+}
+
 function finishVideoLoop(){
   video.pause();
+  refreshScheduleNow();
   queue=displayQueue();
   if(queue.length)showNextInfo();
   else{
@@ -216,6 +222,7 @@ function recoverFromStall(){
   if(recovering)return;
   recovering=true;
   video.pause();
+  refreshScheduleNow();
   queue=displayQueue();
   if(queue.length)showNextInfo();
   else playVideo({reload:true});

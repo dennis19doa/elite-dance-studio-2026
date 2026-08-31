@@ -1,9 +1,11 @@
 ---
 import tvMedia from "../data/tv-media.json";
+import tvSchedule from "../data/tv-schedule.json";
+
 const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv").replace(/\/+$/, "");
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
-const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260831-reupload4`);
+const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260831-poster-fallback1`);
 ---
 <!doctype html>
 <html lang="en">
@@ -13,7 +15,7 @@ const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260831-reu
 <meta name="description" content="Private Elite Dance Studio TV display for current classes and studio media." />
 <meta name="robots" content="noindex,nofollow" />
 <link rel="canonical" href="https://elitedancestudio.de/tv/" />
-<title>Elite TV v3</title>
+<title>Elite TV v4</title>
 <style>
 :root{color-scheme:dark;font-family:Inter,system-ui,sans-serif;background:#050505;color:#fff}
 *{box-sizing:border-box}
@@ -51,7 +53,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <div class="probe"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
 </main>
 <script type="module" src="https://widget-static.eversports.io/loader.js"></script>
-<script is:inline define:vars={{ posters, videos }}>
+<script is:inline define:vars={{ posters, videos, tvSchedule }}>
 (()=>{
 const TZ="Europe/Berlin";
 const NEXT_WINDOW=15;
@@ -62,44 +64,102 @@ const STALL_LIMIT=2;
 const video=document.getElementById('video');
 const scenes={video:document.getElementById('video-scene'),single:document.getElementById('single-scene')};
 let events=[];
+let eversportsEvents=[];
 let sceneTimer=null;
 let videoIndex=0;
 let queue=[];
 let lastVideoTime=-1;
 let stalledChecks=0;
 let recovering=false;
+
 const norm=(s='')=>s.toLowerCase().replace(/[^a-z0-9äöüß+]+/gi,' ').replace(/\s+/g,' ').trim();
 const text=el=>(el?.innerText||el?.textContent||'').replace(/\s+/g,' ').trim();
 const parts=()=>Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:TZ,weekday:'long',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()).map(p=>[p.type,p.value]));
 const min=t=>{const[h,m]=t.split(':').map(Number);return h*60+m};
 const formatTime=(h,m)=>`${String(h).padStart(2,'0')}:${m}`;
+
 function updateClock(){const p=parts();document.getElementById('clock').textContent=`${p.hour}:${p.minute}`;document.getElementById('day').textContent=`${p.weekday} · BERLIN`}
 function roomFrom(s=''){s=s.toLowerCase();if(/schwarz|black/.test(s))return'BLACK ROOM';if(/gelb|yellow/.test(s))return'YELLOW ROOM';if(/blau|blue/.test(s))return'BLUE ROOM';return''}
 function posterFor(title=''){const n=norm(title);return posters.find(p=>[p.title,...(p.aliases||[])].some(alias=>{const a=norm(alias);return a&&(n.includes(a)||a.includes(n));}))||null;}
-function parse(){const root=document.getElementById('eversports-probe');if(!root)return[];const out=[],seen=new Set();for(const el of root.querySelectorAll('*')){const t=text(el);if(t.length<5||t.length>320)continue;const matches=[...t.matchAll(/\b([01]?\d|2[0-3]):([0-5]\d)\b/g)];if(!matches.length)continue;const start=formatTime(matches[0][1],matches[0][2]);const end=matches[1]?formatTime(matches[1][1],matches[1][2]):null;let title=t;matches.slice(0,2).forEach(m=>{title=title.replace(m[0],' ')});title=title.replace(/\b(Uhr|AM|PM)\b/gi,' ').replace(/\s+/g,' ').trim();const k=start+'|'+title;if(seen.has(k)||!title)continue;seen.add(k);out.push({start,end,title,room:roomFrom(t)});}return out.slice(0,80);}
+
+function parseEversports(){
+  const root=document.getElementById('eversports-probe');
+  if(!root)return[];
+  const out=[],seen=new Set();
+  for(const el of root.querySelectorAll('*')){
+    const t=text(el);
+    if(t.length<5||t.length>320)continue;
+    const matches=[...t.matchAll(/\b([01]?\d|2[0-3]):([0-5]\d)\b/g)];
+    if(!matches.length)continue;
+    const start=formatTime(matches[0][1],matches[0][2]);
+    const end=matches[1]?formatTime(matches[1][1],matches[1][2]):null;
+    let rawTitle=t;
+    matches.slice(0,2).forEach(m=>{rawTitle=rawTitle.replace(m[0],' ')});
+    rawTitle=rawTitle.replace(/\b(Uhr|AM|PM)\b/gi,' ').replace(/\s+/g,' ').trim();
+    const poster=posterFor(rawTitle);
+    if(!poster)continue;
+    const title=poster.title;
+    const k=start+'|'+title;
+    if(seen.has(k))continue;
+    seen.add(k);
+    out.push({start,end,title,room:roomFrom(t),source:'eversports'});
+  }
+  return out.slice(0,80);
+}
+
+function fallbackEvents(){
+  const weekday=parts().weekday;
+  return tvSchedule
+    .filter(e=>e.weekday===weekday)
+    .map(e=>({...e,room:'',source:'fallback'}));
+}
+
+function refreshScheduleNow(){
+  eversportsEvents=parseEversports();
+  events=eversportsEvents.length?eversportsEvents:fallbackEvents();
+  return events;
+}
+
 function nowMinutes(){const p=parts();return Number(p.hour)*60+Number(p.minute)}
 function eventEnd(e){if(e.end){const end=min(e.end),start=min(e.start);if(end>start)return end;}return min(e.start)+DEFAULT_CLASS_MINUTES;}
-function dedupeEntries(items,type){const seen=new Set();const out=[];for(const e of items){const poster=posterFor(e.title);const classKey=poster?.title||norm(e.title);const key=`${type}|${e.start}|${classKey}`;if(seen.has(key))continue;seen.add(key);out.push({type,event:e});}return out;}
+function dedupeEntries(items,type){const seen=new Set();const out=[];for(const e of items){const poster=posterFor(e.title);if(!poster)continue;const key=`${type}|${e.start}|${poster.title}`;if(seen.has(key))continue;seen.add(key);out.push({type,event:{...e,title:poster.title}});}return out;}
 function displayQueue(){const now=nowMinutes();const live=events.filter(e=>now>=min(e.start)&&now<eventEnd(e)).sort((a,b)=>min(a.start)-min(b.start));const next=events.map(e=>({...e,delta:min(e.start)-now})).filter(e=>e.delta>0&&e.delta<=NEXT_WINDOW).sort((a,b)=>a.delta-b.delta);return [...dedupeEntries(live,'live'),...dedupeEntries(next,'next')];}
 function activate(name){Object.entries(scenes).forEach(([k,v])=>v.classList.toggle('active',k===name));}
-function renderEntry(entry){const e=entry.event;const p=posterFor(e.title);const scene=scenes.single;const img=document.getElementById('single-img');scene.classList.toggle('live-display',entry.type==='live');scene.classList.toggle('next-display',entry.type==='next');document.getElementById('single-title').textContent=e.title;document.getElementById('single-status').textContent=entry.type==='live'?'CURRENT CLASS · LIVE NOW':`NEXT CLASS · ${e.start}`;if(p){img.src=p.src;img.alt=e.title;img.classList.remove('is-missing');}else{img.removeAttribute('src');img.alt='';img.classList.add('is-missing');}activate('single');}
+
+function renderEntry(entry){
+  const e=entry.event;
+  const p=posterFor(e.title);
+  if(!p){showNextInfo();return;}
+  const scene=scenes.single;
+  const img=document.getElementById('single-img');
+  scene.classList.toggle('live-display',entry.type==='live');
+  scene.classList.toggle('next-display',entry.type==='next');
+  document.getElementById('single-title').textContent=p.title;
+  document.getElementById('single-status').textContent=entry.type==='live'?'CURRENT CLASS · LIVE NOW':`NEXT CLASS · ${e.start}`;
+  img.onerror=()=>{img.onerror=null;showNextInfo();};
+  img.src=p.src;
+  img.alt=p.title;
+  img.classList.remove('is-missing');
+  activate('single');
+}
+
 function playVideo({reload=false}={}){clearTimeout(sceneTimer);queue=[];recovering=false;activate('video');if(!videos.length)return;const src=videos[videoIndex%videos.length];if(reload||video.src!==src){video.src=src;video.load();}else{try{video.currentTime=0}catch{}}lastVideoTime=-1;stalledChecks=0;video.play().catch(()=>{});}
 function showNextInfo(){clearTimeout(sceneTimer);if(!queue.length){videoIndex=(videoIndex+1)%Math.max(videos.length,1);playVideo({reload:recovering});return;}const entry=queue.shift();renderEntry(entry);sceneTimer=setTimeout(showNextInfo,POSTER_SECONDS*1000);}
-function refreshScheduleNow(){events=parse();return events;}
 function finishVideoLoop(){video.pause();refreshScheduleNow();queue=displayQueue();if(queue.length)showNextInfo();else{videoIndex=(videoIndex+1)%Math.max(videos.length,1);playVideo();}}
 function recoverFromStall(){if(recovering)return;recovering=true;video.pause();refreshScheduleNow();queue=displayQueue();if(queue.length)showNextInfo();else playVideo({reload:true});}
-function demo(){const mode=new URLSearchParams(location.search).get('demo');if(!mode)return false;video.pause();const sample=mode==='live'?{type:'live',event:{title:'Reggaeton Beginner',start:'18:00',end:'19:00',room:'BLACK ROOM'}}:mode==='zouk'?{type:'live',event:{title:'Zouk Beginner',start:'18:00',end:'19:00',room:'YELLOW ROOM'}}:{type:'next',event:{title:'Bachata Beginner',start:'20:00',end:'21:00',room:'BLACK ROOM'}};renderEntry(sample);return true;}
+function demo(){const mode=new URLSearchParams(location.search).get('demo');if(!mode)return false;video.pause();const sample=mode==='live'?{type:'live',event:{title:'Heels Beginner',start:'18:00',end:'19:00'}}:mode==='zouk'?{type:'live',event:{title:'Zouk Beginner',start:'18:00',end:'19:00'}}:{type:'next',event:{title:'Latin Twerk',start:'19:00',end:'20:00'}};renderEntry(sample);return true;}
+
 posters.forEach(p=>{const img=new Image();img.src=p.src});
-const obs=new MutationObserver(()=>{events=parse()});
+const obs=new MutationObserver(()=>{refreshScheduleNow()});
 obs.observe(document.getElementById('eversports-probe'),{childList:true,subtree:true,characterData:true});
-setInterval(()=>{events=parse()},30000);
+setInterval(refreshScheduleNow,30000);
 video.addEventListener('ended',finishVideoLoop);
 video.addEventListener('playing',()=>{stalledChecks=0;lastVideoTime=video.currentTime});
 video.addEventListener('error',recoverFromStall);
 video.addEventListener('stalled',()=>{stalledChecks=Math.max(stalledChecks,1)});
 video.addEventListener('waiting',()=>{stalledChecks=Math.max(stalledChecks,1)});
 setInterval(()=>{if(!scenes.video.classList.contains('active')||video.paused||video.ended)return;const current=video.currentTime;if(lastVideoTime>=0&&Math.abs(current-lastVideoTime)<0.15)stalledChecks+=1;else stalledChecks=0;lastVideoTime=current;if(stalledChecks>=STALL_LIMIT)recoverFromStall();},STALL_CHECK_MS);
-updateClock();setInterval(updateClock,1000);setTimeout(()=>{events=parse();if(!demo())playVideo();},2500);
+updateClock();setInterval(updateClock,1000);setTimeout(()=>{refreshScheduleNow();if(!demo())playVideo();},2500);
 })();
 </script>
 </body>

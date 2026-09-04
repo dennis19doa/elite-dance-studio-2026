@@ -4,6 +4,7 @@ const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
 const videos = tvMedia.videos.map(remoteMedia);
+const primaryVideo = videos[0] || "";
 ---
 <!doctype html>
 <html lang="en">
@@ -42,7 +43,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 </head>
 <body>
 <main class="tv">
-<section class="scene video active" id="video-scene"><video id="video" autoplay muted playsinline loop></video><div class="shade"></div><div class="clock"><strong id="clock">--:--</strong><span id="day">BERLIN</span></div></section>
+<section class="scene video active" id="video-scene"><video id="video" src={primaryVideo} autoplay muted playsinline loop preload="auto"></video><div class="shade"></div><div class="clock"><strong id="clock">--:--</strong><span id="day">BERLIN</span></div></section>
 <section class="scene class-scene" id="single-scene"><div class="class-header"><h1 id="single-title">Class</h1><div id="single-info"><div class="status"><span class="dot"></span><span id="single-status">LIVE NOW</span></div></div></div><div class="single-poster-wrap"><img class="poster-main" id="single-img" alt=""></div></section>
 <div class="probe"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
 </main>
@@ -51,9 +52,31 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 (()=>{
 const TZ="Europe/Berlin", WINDOW=15, REPEAT=2, SHOW=12;
 const video=document.getElementById('video');
-if(videos.length) video.src=videos[0];
+const videoUrl=videos.length?videos[0]:'';
+video.muted=true;
+video.defaultMuted=true;
+video.autoplay=true;
+video.setAttribute('muted','');
+video.setAttribute('playsinline','');
+if(videoUrl&&!video.getAttribute('src')) video.setAttribute('src',videoUrl);
 const scenes={video:document.getElementById('video-scene'),single:document.getElementById('single-scene')};
-let events=[],lastKey='',timer=null,posterIndex=0;
+let events=[],lastKey='',timer=null,posterIndex=0,videoRetry=null;
+function playVideo(){
+  if(!videoUrl)return;
+  if(video.getAttribute('src')!==videoUrl){video.setAttribute('src',videoUrl);video.load();}
+  video.muted=true;
+  const attempt=video.play();
+  if(attempt&&typeof attempt.catch==='function')attempt.catch(()=>{
+    clearTimeout(videoRetry);
+    videoRetry=setTimeout(()=>{video.load();video.play().catch(()=>{});},1500);
+  });
+}
+video.addEventListener('loadeddata',()=>{if(scenes.video.classList.contains('active'))playVideo();});
+video.addEventListener('canplay',()=>{if(scenes.video.classList.contains('active'))playVideo();});
+video.addEventListener('error',()=>{
+  clearTimeout(videoRetry);
+  videoRetry=setTimeout(()=>{if(videoUrl){video.setAttribute('src',videoUrl);video.load();playVideo();}},2500);
+});
 const norm=(s='')=>s.toLowerCase().replace(/[^a-z0-9äöüß+]+/gi,' ').replace(/\s+/g,' ').trim();
 const posterFor=(title='')=>posters.find(p=>[p.title,...(p.aliases||[])].some(a=>{a=norm(a);const n=norm(title);return a&&(n.includes(a)||a.includes(n))}))||posters[posterIndex++%posters.length];
 const text=el=>(el?.innerText||el?.textContent||'').replace(/\s+/g,' ').trim();
@@ -63,7 +86,7 @@ function updateClock(){const p=parts();document.getElementById('clock').textCont
 function roomFrom(s=''){s=s.toLowerCase();if(/schwarz|black/.test(s))return'BLACK ROOM';if(/gelb|yellow/.test(s))return'YELLOW ROOM';if(/blau|blue/.test(s))return'BLUE ROOM';return''}
 function parse(){const root=document.getElementById('eversports-probe');if(!root)return[];const out=[],seen=new Set();for(const el of root.querySelectorAll('*')){const t=text(el);if(t.length<5||t.length>320||!(/\b\d{1,2}:\d{2}\b/.test(t)))continue;const m=t.match(/\b([01]?\d|2[0-3]):([0-5]\d)\b/);if(!m)continue;const start=m[0].padStart(5,'0');const title=t.replace(m[0],'').replace(/\b(Uhr|AM|PM)\b/gi,'').trim();const k=start+'|'+title;if(seen.has(k)||!title)continue;seen.add(k);out.push({start,title,room:roomFrom(t)});}return out.slice(0,80)}
 function statusNow(){const p=parts(),now=Number(p.hour)*60+Number(p.minute);const live=events.map(e=>({...e,delta:min(e.start)-now})).filter(e=>e.delta<=0&&e.delta>=-WINDOW);if(live.length)return{type:'live',classes:live.sort((a,b)=>a.delta-b.delta)};const next=events.map(e=>({...e,delta:min(e.start)-now})).filter(e=>e.delta>=0&&e.delta<=WINDOW).sort((a,b)=>a.delta-b.delta);if(!next.length)return null;const t=next[0].start;return{type:'next',classes:next.filter(e=>e.start===t)}}
-function show(name,seconds=SHOW){Object.entries(scenes).forEach(([k,v])=>v.classList.toggle('active',k===name));if(name==='video')video.play().catch(()=>{});else video.pause();clearTimeout(timer);timer=setTimeout(()=>show('video',40),seconds*1000)}
+function show(name,seconds=SHOW){Object.entries(scenes).forEach(([k,v])=>v.classList.toggle('active',k===name));if(name==='video')playVideo();else video.pause();clearTimeout(timer);timer=setTimeout(()=>show('video',40),seconds*1000)}
 function render(state){
   const e=state.classes[0];
   if(!e)return;
@@ -93,7 +116,7 @@ obs.observe(document.getElementById('eversports-probe'),{childList:true,subtree:
 setInterval(()=>{events=parse();if(demo())return;const s=statusNow();if(!s)return;const p=parts(),bucket=Math.floor((Number(p.hour)*60+Number(p.minute))/REPEAT),key=s.type+'|'+s.classes.map(c=>c.start+c.title).join('|')+'|'+bucket;if(key!==lastKey){lastKey=key;render(s)}},30000);
 updateClock();
 setInterval(updateClock,1000);
-setTimeout(()=>{events=parse();demo()},2500);
+setTimeout(()=>{events=parse();demo();playVideo();},2500);
 })();
 </script>
 </body>

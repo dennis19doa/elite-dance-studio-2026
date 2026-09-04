@@ -1,0 +1,350 @@
+/* Elite V18 — page-specific cleanup */
+
+/* ---------- COURSES: full style gallery ---------- */
+.style-poster-showcase-v18 {
+  margin-top: clamp(18px, 3vw, 34px);
+  padding: clamp(26px, 4vw, 48px) !important;
+  border: 1px solid rgba(55, 39, 29, .10) !important;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255,79,123,.09), transparent 26rem),
+    var(--warm-paper) !important;
+  color: var(--warm-ink) !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,.16);
+}
+
+.style-poster-showcase-v18 .eyebrow { color: #c53b61 !important; }
+.style-poster-showcase-v18 .style-poster-head h2 {
+  max-width: 12ch;
+  color: var(--warm-ink) !important;
+  font-size: clamp(2.6rem, 5vw, 5rem) !important;
+  line-height: .94 !important;
+}
+.style-poster-showcase-v18 .style-poster-intro p,
+.style-poster-showcase-v18 .style-poster-status { color: #6e6259 !important; }
+.style-poster-showcase-v18 .style-poster-intro a { color: #b83157 !important; }
+.style-poster-showcase-v18 .style-poster-toolbar {
+  display: flex !important;
+  gap: 8px !important;
+  flex-wrap: wrap;
+  margin-top: 26px;
+  border: 0 !important;
+  background: transparent !important;
+}
+.style-poster-showcase-v18 .style-poster-filter {
+  width: auto !important;
+  min-height: 40px;
+  padding: 0 14px !important;
+  border: 1px solid rgba(43,34,30,.14) !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.72) !important;
+  color: #51463e !important;
+}
+.style-poster-showcase-v18 .style-poster-filter[aria-pressed="true"] {
+  border-color: var(--v15-lime) !important;
+  background: var(--v15-lime) !important;
+  color: var(--v15-ink) !important;
+}
+.style-poster-showcase-v18 .style-poster-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+  gap: 16px !important;
+  margin-top: 20px;
+}
+.style-poster-showcase-v18 .style-poster-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(43,34,30,.10) !important;
+  border-radius: 18px !important;
+  background: #fff !important;
+  color: var(--warm-ink) !important;
+  box-shadow: 0 12px 30px rgba(65,43,31,.08);
+}
+.style-poster-showcase-v18 .style-poster-image-link {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+.style-poster-showcase-v18 .style-poster-image-link > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.style-poster-showcase-v18 .style-poster-meta h3,
+.style-poster-showcase-v18 .style-poster-meta span,
+.style-poster-showcase-v18 .style-poster-coach-profile,
+.style-poster-showcase-v18 .style-poster-coach-profile span { color: var(--warm-ink) !important; }
+.style-poster-showcase-v18 .style-poster-meta > div { padding-left: 0 !important; }
+.style-poster-showcase-v18 .style-poster-cta {
+  border-color: rgba(43,34,30,.12) !important;
+  background: #ead9c8 !important;
+  color: var(--warm-ink) !important;
+}
+.style-poster-showcase-v18 .style-poster-cta strong,
+.style-poster-showcase-v18 .style-poster-cta span { color: var(--warm-ink) !important; }
+
+/* ---------- FAQ ---------- */
+.route-faq .faq-page-hero {
+  min-height: 0 !important;
+  padding: clamp(38px, 6vw, 72px) !important;
+}
+.route-faq .faq-page-hero .page-title {
+  max-width: 11ch;
+  font-size: clamp(3.2rem, 6vw, 6.2rem) !important;
+  line-height: .93 !important;
+}
+.faq-hub-v18 {
+  border-color: rgba(55,39,29,.10) !important;
+  background: var(--warm-paper) !important;
+  color: var(--warm-ink) !important;
+}
+.faq-hub-v18 h2,
+.faq-hub-v18 h3,
+.faq-hub-v18 summary,
+.faq-hub-v18 strong { color: var(--warm-ink) !important; }
+.faq-hub-v18 p { color: #6d6159 !important; }
+.faq-hub-v18 .faq-filter {
+  border-color: rgba(43,34,30,.14) !important;
+  background: #fff !important;
+  color: #55483f !important;
+}
+.faq-hub-v18 .faq-filter.is-active {
+  border-color: var(--v15-lime) !important;
+  background: var(--v15-lime) !important;
+  color: var(--v15-ink) !important;
+}
+.faq-hub-v18 .faq-category { border-color: rgba(43,34,30,.12) !important; }
+.faq-hub-v18 .faq-item {
+  border-color: rgba(43,34,30,.11) !important;
+  background: rgba(255,255,255,.65) !important;
+}
+.faq-hub-v18 .faq-contact-card {
+  background: #2b221e !important;
+  color: #fff !important;
+}
+.faq-hub-v18 .faq-contact-card strong,
+.faq-hub-v18 .faq-contact-card span { color: #fff !important; }
+
+/* ---------- ADVANCED ---------- */
+.advanced-hero-v18 { align-items: stretch !important; }
+.advanced-hero-media-v18 {
+  aspect-ratio: 4 / 5 !important;
+  min-height: 0 !important;
+  max-height: 580px;
+  overflow: hidden;
+}
+.advanced-hero-media-v18 img {
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+  object-position: center top;
+}
+.advanced-level-check-v18 {
+  display: grid !important;
+  grid-template-columns: minmax(220px,.7fr) minmax(0,1.3fr) !important;
+  gap: clamp(28px,5vw,60px) !important;
+  align-items: start;
+}
+.advanced-format-grid-v18 {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 12px;
+}
+.advanced-format-grid-v18 article {
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 15px;
+  background: rgba(255,255,255,.045);
+}
+.advanced-format-grid-v18 strong { color: #fff; }
+.advanced-format-grid-v18 p { margin: 8px 0 0; color: rgba(255,255,255,.64); line-height: 1.5; }
+.advanced-card-grid-v18 {
+  display: grid !important;
+  grid-template-columns: repeat(4,minmax(0,1fr)) !important;
+  gap: 16px !important;
+}
+.advanced-card-v18 {
+  overflow: hidden;
+  border: 1px solid rgba(43,34,30,.12) !important;
+  border-radius: 18px !important;
+  background: var(--warm-paper) !important;
+  color: var(--warm-ink) !important;
+}
+.advanced-card-image-v18 {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #181310;
+}
+.advanced-card-image-v18 img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center top;
+}
+.advanced-card-copy-v18 { padding: 18px; }
+.advanced-card-copy-v18 small { color: #b24a63 !important; }
+.advanced-card-copy-v18 h3 { margin: 8px 0 18px; color: var(--warm-ink) !important; }
+.advanced-card-copy-v18 .text-link { color: #96324d !important; }
+
+/* ---------- ROOM RENTAL ---------- */
+.rental-hero-v18 { overflow: hidden; }
+.rental-hero-media-v18 {
+  aspect-ratio: 4 / 3;
+  min-height: 0 !important;
+  overflow: hidden;
+}
+.rental-hero-media-v18 img {
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+  object-fit: cover;
+}
+.rental-quickfacts-v18 {
+  display: flex !important;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-block: 16px !important;
+  border-bottom: 1px solid rgba(242,179,111,.18) !important;
+}
+.rental-quickfacts-v18 span {
+  padding: 8px 12px;
+  border: 1px solid rgba(242,179,111,.18);
+  border-radius: 999px;
+  background: rgba(242,179,111,.08) !important;
+  color: #eadbce !important;
+}
+.rental-room-intro-v18 {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(280px,.75fr);
+  gap: clamp(28px,5vw,64px);
+  align-items: end;
+  padding: clamp(42px,6vw,74px) 0 24px;
+}
+.rental-room-intro-v18 h2 {
+  max-width: 12ch;
+  margin: 8px 0 0;
+  color: #fff;
+  font-size: clamp(2.5rem,4.6vw,4.8rem);
+  line-height: .95 !important;
+}
+.rental-room-intro-v18 p { margin: 0; color: rgba(248,241,233,.62); line-height: 1.65; }
+.rental-room-grid-v18 {
+  display: grid !important;
+  grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+  gap: 16px !important;
+}
+.rental-room-card-v18 {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(43,34,30,.12);
+  border-radius: 20px;
+  background: var(--warm-paper);
+  box-shadow: 0 18px 44px rgba(0,0,0,.16);
+}
+.rental-room-card-v18 figure {
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  overflow: hidden;
+  background: #241d19;
+}
+.rental-room-card-v18 figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .55s cubic-bezier(.22,1,.36,1);
+}
+.rental-room-card-v18:hover figure img { transform: scale(1.025); }
+.rental-room-copy-v18 { padding: 22px; color: var(--warm-ink); }
+.rental-room-label-v18 {
+  display: inline-block;
+  color: #a56832;
+  font-size: .7rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.rental-room-copy-v18 h2 {
+  margin: 8px 0 0;
+  color: var(--warm-ink) !important;
+  font-size: clamp(1.6rem,2.5vw,2.2rem);
+}
+.rental-room-copy-v18 p { margin: 12px 0 0; color: #675b52 !important; line-height: 1.55; }
+.rental-room-tags-v18 { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 16px; }
+.rental-room-tags-v18 span {
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: #eadfd3;
+  color: #4f443c !important;
+  font-size: .68rem;
+  font-weight: 700;
+}
+.rental-room-copy-v18 > a {
+  display: inline-block;
+  margin-top: 20px;
+  color: #9a4f2f !important;
+  font-weight: 800;
+  text-decoration: none;
+}
+.rental-room-black-v18 { border-top: 4px solid #2f2925; }
+.rental-room-yellow-v18 { border-top: 4px solid #e9b34d; }
+.rental-room-blue-v18 { border-top: 4px solid #6687b8; }
+.rental-request-v18 { margin-top: 26px; }
+
+/* ---------- ABOUT ---------- */
+.about-founders-v18 .about-founders-quote-v12 p + p { margin-top: 16px; }
+.about-mission-v18 {
+  margin: clamp(24px,5vw,70px) 0;
+  padding: clamp(34px,6vw,72px);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(255,79,123,.08), transparent 22rem),
+    var(--warm-paper);
+  color: var(--warm-ink);
+}
+.about-mission-v18 .eyebrow { color: #b5415e !important; }
+.about-mission-grid-v18 {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(300px,.8fr);
+  gap: clamp(30px,6vw,76px);
+  align-items: start;
+  margin-top: 14px;
+}
+.about-mission-grid-v18 h2 {
+  max-width: 12ch;
+  margin: 0;
+  color: var(--warm-ink) !important;
+  font-size: clamp(2.8rem,5vw,5.2rem);
+  line-height: .94 !important;
+}
+.about-mission-grid-v18 p { margin: 0; color: #65594f; line-height: 1.7; }
+.about-mission-grid-v18 p + p { margin-top: 18px; }
+
+@media (max-width: 1050px) {
+  .style-poster-showcase-v18 .style-poster-grid,
+  .advanced-card-grid-v18 { grid-template-columns: repeat(3,minmax(0,1fr)) !important; }
+  .rental-room-grid-v18 { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .rental-room-card-v18:last-child { grid-column: 1 / -1; max-width: 620px; }
+}
+
+@media (max-width: 800px) {
+  .style-poster-showcase-v18 .style-poster-grid,
+  .advanced-card-grid-v18 { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .advanced-level-check-v18,
+  .rental-room-intro-v18,
+  .about-mission-grid-v18 { grid-template-columns: 1fr !important; }
+  .advanced-format-grid-v18 { grid-template-columns: 1fr; }
+  .rental-room-grid-v18 { grid-template-columns: 1fr !important; }
+  .rental-room-card-v18:last-child { grid-column: auto; max-width: none; }
+}
+
+@media (max-width: 560px) {
+  .style-poster-showcase-v18 { padding: 22px 16px !important; }
+  .style-poster-showcase-v18 .style-poster-grid,
+  .advanced-card-grid-v18 { grid-template-columns: 1fr !important; }
+  .route-faq .faq-page-hero .page-title { font-size: clamp(2.7rem,14vw,4.2rem) !important; }
+}

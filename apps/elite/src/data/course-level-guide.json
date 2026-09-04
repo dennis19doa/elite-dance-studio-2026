@@ -1,23 +1,9 @@
 [
-  {
-    "badge": "Beginner",
-    "title": "Für deinen allerersten Kurs",
-    "text": "Wenn du noch nie getanzt hast oder einen klaren, langsamen Einstieg willst, starte hier. Das ist für Elite im Moment die wichtigste Einstiegsebene.",
-    "href": "/starter-pass/",
-    "ctaLabel": "Welcome Pass nutzen"
-  },
-  {
-    "badge": "Open Level",
-    "title": "Wenn du testen willst, ohne dich festzulegen",
-    "text": "Open Level ist sinnvoll, wenn der Kurs lesbar bleibt und du mit Energie, Rhythmus oder Ausdruck einsteigen willst, ohne ein reines Anfängerformat zu brauchen.",
-    "href": "/kurse/#kurskompass",
-    "ctaLabel": "Open-Level Kurse sehen"
-  },
-  {
-    "badge": "Unsicher?",
-    "title": "Dann frag kurz nach",
-    "text": "Wenn du zwischen Solo, Partner Dance, Welcome Pass oder erstem Kurs schwankst, helfen wir dir lieber direkt als dich raten zu lassen.",
-    "href": "/kontakt/",
-    "ctaLabel": "Persönlich fragen"
-  }
+  { "kind": "level", "badge": "Level 0", "title": "Dein erster Einstieg", "text": "Für komplette Anfänger:innen. Langsam, klar und ohne vorausgesetzte Basics.", "href": "/stundenplan/", "ctaLabel": "Level 0 finden" },
+  { "kind": "level", "badge": "Beginner", "title": "Basics aufbauen", "text": "Grundschritte, Groove, Technik und Sicherheit im jeweiligen Style.", "href": "/stundenplan/", "ctaLabel": "Beginner finden" },
+  { "kind": "level", "badge": "Beginner+", "title": "Mehr Flow & Challenge", "text": "Für vorhandene Basics und längere Kombinationen mit mehr Tempo.", "href": "/stundenplan/", "ctaLabel": "Beginner+ finden" },
+  { "kind": "level", "badge": "Intermediate", "title": "Technik vertiefen", "text": "Mehr Präzision, Musikalität, Details und anspruchsvollere Kombinationen.", "href": "/fortgeschrittene/", "ctaLabel": "Intermediate ansehen" },
+  { "kind": "level", "badge": "Advanced", "title": "Gezielt weitergehen", "text": "Für erfahrene Tänzer:innen mit stabilen Grundlagen und hoher Trainingsintensität.", "href": "/fortgeschrittene/", "ctaLabel": "Advanced ansehen" },
+  { "kind": "format", "badge": "Closed Groups", "title": "Feste Gruppe. Kontinuierlicher Aufbau.", "text": "Mehrwöchige oder fortlaufende Trainingsgruppen mit verbindlicher Progression.", "href": "/fortgeschrittene/", "ctaLabel": "Closed Groups" },
+  { "kind": "format", "badge": "Intensives", "title": "Ein Thema. Mehrere Wochen Fokus.", "text": "Strukturierte Trainingsblöcke für Technik, Body Movement und gezieltes Feedback.", "href": "/intensives/", "ctaLabel": "Roadmap ansehen" }
 ]

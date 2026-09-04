@@ -1,0 +1,292 @@
+/* Elite V14 — final consistency pass.
+   Loaded last. Keeps the shared dark canvas visible on every route and
+   normalises older Kurse / Prices / Schedule / Rental components without
+   changing their underlying functionality. */
+
+:root {
+  --v14-bg: #0d0d10;
+  --v14-surface: #17171d;
+  --v14-surface-2: #1e1e25;
+  --v14-line: rgba(255,255,255,.11);
+  --v14-text: #f8f7f5;
+  --v14-muted: rgba(248,247,245,.62);
+}
+
+html,
+body,
+body.home-page,
+body.site-subpage {
+  background: var(--v14-bg) !important;
+  color: var(--v14-text);
+}
+
+body.site-subpage .page-main {
+  background: transparent !important;
+}
+
+body.site-subpage .page-main > section,
+body.site-subpage .page-main > div,
+body.site-subpage .page-main > article {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body.site-subpage img,
+body.site-subpage video,
+body.site-subpage iframe {
+  max-width: 100%;
+}
+
+/* Generic older top-level panels should never turn the whole subpage white. */
+body.site-subpage .page-main > .panel,
+body.site-subpage .page-main > section.panel {
+  border-color: var(--v14-line) !important;
+  background: var(--v14-surface) !important;
+  color: var(--v14-text) !important;
+  box-shadow: 0 20px 52px rgba(0,0,0,.2) !important;
+}
+
+body.site-subpage .page-main > .panel h1,
+body.site-subpage .page-main > .panel h2,
+body.site-subpage .page-main > .panel h3,
+body.site-subpage .page-main > section.panel h1,
+body.site-subpage .page-main > section.panel h2,
+body.site-subpage .page-main > section.panel h3 {
+  color: #fff !important;
+}
+
+body.site-subpage .page-main > .panel p,
+body.site-subpage .page-main > section.panel p {
+  color: var(--v14-muted);
+}
+
+/* Eversports is a functional light widget; only its outer page treatment is dark. */
+body.site-subpage .eversports-panel {
+  background: var(--v14-surface) !important;
+  color: #fff !important;
+}
+
+body.site-subpage .eversports-panel h2,
+body.site-subpage .eversports-panel .eyebrow,
+body.site-subpage .eversports-panel .schedule-live-v9 {
+  color: #fff;
+}
+
+body.site-subpage .eversports-frame,
+body.site-subpage .eversports-widget {
+  background: #fff;
+  color: #101014;
+}
+
+/* ---------------- KURSE ---------------- */
+body.site-subpage .level-guide-v2,
+body.site-subpage .style-compass,
+body.site-subpage .steps {
+  border: 1px solid var(--v14-line) !important;
+  background: var(--v14-surface) !important;
+  color: #fff !important;
+}
+
+body.site-subpage .level-guide-v2 .section-head h2,
+body.site-subpage .style-compass h2,
+body.site-subpage .steps .section-head h2 {
+  color: #fff !important;
+}
+
+body.site-subpage .level-guide-v2 .section-head p,
+body.site-subpage .style-compass-head > p,
+body.site-subpage .style-compass-status,
+body.site-subpage .steps .section-head p {
+  color: var(--v14-muted) !important;
+}
+
+body.site-subpage .level-step,
+body.site-subpage .training-format-card {
+  border-color: var(--v14-line) !important;
+  background: var(--v14-surface-2) !important;
+  color: #fff !important;
+}
+
+body.site-subpage .level-step strong,
+body.site-subpage .training-format-card strong,
+body.site-subpage .training-formats-label strong {
+  color: #fff !important;
+}
+
+body.site-subpage .level-step > span:not(.level-step-badge),
+body.site-subpage .training-format-card small {
+  color: var(--v14-muted) !important;
+}
+
+body.site-subpage .level-step-badge,
+body.site-subpage .training-format-card > span,
+body.site-subpage .training-formats-label > span {
+  color: var(--elite-rose) !important;
+}
+
+body.site-subpage .level-step b,
+body.site-subpage .training-format-card b {
+  color: var(--elite-lime) !important;
+}
+
+body.site-subpage .style-compass-controls {
+  border-color: var(--v14-line) !important;
+}
+
+body.site-subpage .style-compass-filter {
+  border-color: var(--v14-line) !important;
+  background: rgba(255,255,255,.04) !important;
+  color: rgba(255,255,255,.7) !important;
+}
+
+body.site-subpage .style-compass-filter.is-active {
+  border-color: var(--elite-lime) !important;
+  background: var(--elite-lime) !important;
+  color: var(--elite-ink) !important;
+}
+
+body.site-subpage .style-compass-card {
+  overflow: hidden;
+  border: 1px solid var(--v14-line) !important;
+  background: var(--v14-surface-2) !important;
+  color: #fff !important;
+}
+
+body.site-subpage .style-compass-image {
+  background: #111116;
+}
+
+body.site-subpage .style-compass-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+}
+
+body.site-subpage .style-compass-copy h3,
+body.site-subpage .style-compass-copy strong {
+  color: #fff !important;
+}
+
+body.site-subpage .style-compass-copy p {
+  color: var(--v14-muted) !important;
+}
+
+body.site-subpage .style-compass-copy small {
+  color: var(--elite-rose) !important;
+}
+
+body.site-subpage .style-compass-actions a {
+  color: var(--elite-lime) !important;
+}
+
+body.site-subpage .style-compass-next {
+  border-color: var(--v14-line) !important;
+  background: #121218 !important;
+  color: #fff !important;
+}
+
+body.site-subpage .steps-list {
+  gap: 12px;
+}
+
+body.site-subpage .step {
+  min-width: 0;
+  border: 1px solid var(--v14-line) !important;
+  background: var(--v14-surface-2) !important;
+  color: #fff !important;
+}
+
+body.site-subpage .step strong {
+  color: #fff !important;
+}
+
+body.site-subpage .step span {
+  color: var(--v14-muted) !important;
+}
+
+/* ---------------- PRICES ---------------- */
+body.site-subpage .pricing-paths,
+body.site-subpage .pricing-v2,
+body.site-subpage .pricing-assurance,
+body.site-subpage .pricing-page-hero {
+  border-color: var(--v14-line) !important;
+  background: var(--v14-surface) !important;
+}
+
+body.site-subpage .pricing-paths h2,
+body.site-subpage .pricing-v2 > .section-head h2,
+body.site-subpage .pricing-assurance h2,
+body.site-subpage .pricing-page-hero h1 {
+  color: #fff !important;
+}
+
+body.site-subpage .pricing-paths > .section-head p,
+body.site-subpage .pricing-v2 > .section-head p,
+body.site-subpage .pricing-assurance p,
+body.site-subpage .pricing-page-hero p {
+  color: var(--v14-muted) !important;
+}
+
+body.site-subpage .pricing-path-card,
+body.site-subpage .pricing-v2 .price-card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+body.site-subpage .pricing-v2 .price-card {
+  background: #f7f4ef !important;
+  color: #101014 !important;
+}
+
+body.site-subpage .pricing-v2 .price-card h3,
+body.site-subpage .pricing-v2 .price-card strong,
+body.site-subpage .pricing-v2 .price-card p,
+body.site-subpage .pricing-v2 .price-card li {
+  color: #101014;
+}
+
+/* ---------------- RENTAL / SCHEDULE / EVENTS / ABOUT ---------------- */
+body.site-subpage .service-page-hero,
+body.site-subpage .rental-request,
+body.site-subpage .booking-intro {
+  border-color: var(--v14-line) !important;
+  background: var(--v14-surface) !important;
+}
+
+body.site-subpage .rental-room-card,
+body.site-subpage .event-chapter-v12,
+body.site-subpage .about-founders-v12,
+body.site-subpage .about-path-v12,
+body.site-subpage .about-closing-v12 {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body.site-subpage .rental-room-card {
+  overflow: hidden;
+}
+
+/* Brand-role consistency. */
+body.site-subpage .eyebrow {
+  color: var(--elite-rose);
+}
+
+body.site-subpage a:not(.button):focus-visible,
+body.site-subpage button:focus-visible {
+  outline: 2px solid var(--elite-lime);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  body.site-subpage .page-main > .panel,
+  body.site-subpage .page-main > section.panel {
+    border-radius: 16px;
+  }
+
+  body.site-subpage .style-compass-grid,
+  body.site-subpage .level-roadmap,
+  body.site-subpage .steps-list {
+    min-width: 0;
+    max-width: 100%;
+  }
+}

@@ -1,34 +1,19 @@
 ---
-interface Signal {
-  title: string;
-  text: string;
-}
-
-interface Props {
-  signals: Signal[];
-}
-
-const { signals } = Astro.props;
 ---
 
-<section class="trust-band panel">
-  <div class="section-head">
-    <div>
-      <div class="eyebrow">Warum Elite</div>
-      <h2>Viele Styles. Ein Studio, das dich beim Einstieg nicht allein lässt.</h2>
-    </div>
-    <p>
-      Elite verbindet die Vielfalt eines großen Kursplans mit der Orientierung eines persönlichen
-      Studios: erst sicher starten, dann ausprobieren, Fortschritt spüren und Menschen finden.
-    </p>
+<section class="why-elite-v12 why-elite-v16 why-elite-v19" aria-labelledby="why-elite-title">
+  <img src="/media/current-site/current-home-visual.webp" alt="Tanzmoment im Elite Dance Studio Berlin" loading="lazy" />
+  <div class="why-elite-shade-v12"></div>
+
+  <div class="why-elite-content-v12">
+    <div class="eyebrow">Warum Elite</div>
+    <h2 id="why-elite-title">Ein Studio, das mit dir mitwächst.</h2>
+    <p>Komm für eine Class. Bleib für Coaches, Progression und Community.</p>
   </div>
 
-  <div class="trust-strip">
-    {signals.map((signal) => (
-      <div class="stat">
-        <strong>{signal.title}</strong>
-        <span>{signal.text}</span>
-      </div>
-    ))}
+  <div class="why-elite-lines-v12" aria-label="Was Elite anders macht">
+    <div><span>Starten</span><strong>Level 0 und Beginner geben dir einen klaren Einstieg.</strong></div>
+    <div><span>Wachsen</span><strong>Advanced, Closed Groups und Intensives bringen dich weiter.</strong></div>
+    <div><span>Dazugehören</span><strong>Classes, Socials und Events werden zu deinem Studioleben.</strong></div>
   </div>
 </section>

@@ -1,5 +1,23 @@
 ---
 import "../styles/global.css";
+import "../styles/v2.css";
+import "../styles/redesign-v9.css";
+import "../styles/stability-v10.css";
+import "../styles/subpages-v11.css";
+import "../styles/editorial-v12.css";
+import "../styles/editorial-v12-pages.css";
+import "../styles/coherent-v13.css";
+import "../styles/polish-v14.css";
+import "../styles/unified-v15.css";
+import "../styles/home-v16.css";
+import "../styles/courses-v16.css";
+import "../styles/color-v17.css";
+import "../styles/warm-v18.css";
+import "../styles/pages-v18.css";
+import "../styles/refine-v19.css";
+import "../styles/mobile-v19.css";
+import "../styles/hero-clean-v19.css";
+import "../styles/pricing-v19-redesign.css";
 import MobileJoinBar from "../components/MobileJoinBar.astro";
 import MotionController from "../components/MotionController.astro";
 import StructuredData from "../components/StructuredData.astro";
@@ -22,6 +40,14 @@ const {
 const siteUrl = Astro.site ?? new URL("https://elitedancestudio.de");
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 const socialImageUrl = new URL(image, siteUrl);
+const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const rawPath = Astro.url.pathname;
+const routePath = rawPath.startsWith(baseUrl) ? `/${rawPath.slice(baseUrl.length)}`.replace(/\/+/g, "/") : rawPath;
+const isHome = routePath === "/" || routePath === "";
+const routeKey = routePath.split("/").filter(Boolean)[0] ?? "home";
+const routeClass = `route-${routeKey.replace(/[^a-z0-9-]/gi, "-").toLowerCase()}`;
+const resolvedBodyClass = Array.from(new Set([isHome ? "home-page" : "site-subpage", routeClass, bodyClass].filter(Boolean))).join(" ");
+const isPreviewBuild = import.meta.env.BASE_URL.includes("/preview/");
 ---
 
 <!doctype html>
@@ -45,13 +71,17 @@ const socialImageUrl = new URL(image, siteUrl);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
-    <meta name="theme-color" content="#241729" />
+    <meta name="theme-color" content="#17120f" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
     {!noindex && <StructuredData pageTitle={title} path={Astro.url.pathname} />}
     <slot name="head" />
   </head>
-  <body class={bodyClass}>
+  <body class={resolvedBodyClass}>
     <slot />
     <MotionController />
     <MobileJoinBar />
+    {isPreviewBuild && <div class="preview-build-badge" aria-hidden="true">Preview V19</div>}
   </body>
 </html>

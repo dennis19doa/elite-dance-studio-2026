@@ -1,0 +1,279 @@
+---
+import tvMedia from "../data/tv-media.json";
+
+const base = import.meta.env.BASE_URL ?? "/";
+const media = (path: string) => `${base}media/${path}`;
+const posters = tvMedia.posters.map((item) => ({ ...item, src: media(item.file) }));
+const videos = tvMedia.videos.map(media);
+const logo = media("current-site/elite-logo.webp");
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#050505" />
+    <title>Elite TV</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background:#050505; color:#fff; }
+      * { box-sizing:border-box; }
+      html,body { width:100%; height:100%; margin:0; overflow:hidden; background:#050505; }
+      body { cursor:none; }
+      .tv { position:relative; width:100vw; height:100vh; overflow:hidden; background:#050505; }
+      .scene { position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity 650ms ease; }
+      .scene.active { opacity:1; pointer-events:auto; }
+      .brand { position:absolute; z-index:10; left:3vw; top:3vh; width:min(14vw,230px); filter:drop-shadow(0 4px 22px #000); }
+      .clock { position:absolute; z-index:10; right:3vw; top:3.8vh; text-align:right; text-shadow:0 4px 18px #000; }
+      .clock strong { display:block; font-size:clamp(28px,3vw,56px); line-height:.9; }
+      .clock span { display:block; margin-top:.5rem; font-size:clamp(11px,1vw,18px); letter-spacing:.16em; text-transform:uppercase; opacity:.72; }
+
+      .video-scene video { width:100%; height:100%; object-fit:cover; background:#000; }
+      .video-shade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.18),transparent 50%,rgba(0,0,0,.7)); }
+      .ticker { position:absolute; z-index:10; left:3vw; right:3vw; bottom:3vh; padding:1rem 1.25rem; border:1px solid rgba(255,255,255,.16); border-radius:18px; background:rgba(5,5,5,.72); backdrop-filter:blur(14px); font-size:clamp(16px,1.5vw,28px); font-weight:750; }
+
+      .poster-scene { background:#030303; }
+      .poster-bg { position:absolute; inset:-4%; width:108%; height:108%; object-fit:cover; filter:blur(30px) brightness(.28); transform:scale(1.08); }
+      .poster-image { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:center; }
+      .poster-gradient { position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.04) 30%,rgba(0,0,0,.18) 55%,rgba(0,0,0,.88) 100%); }
+      .poster-info { position:absolute; z-index:5; left:4vw; right:4vw; bottom:4.5vh; display:flex; align-items:flex-end; justify-content:space-between; gap:3vw; text-shadow:0 3px 20px #000; }
+      .poster-kicker { font-size:clamp(12px,1.15vw,21px); letter-spacing:.2em; text-transform:uppercase; font-weight:850; opacity:.72; }
+      .poster-info h1 { margin:.5rem 0 0; font-size:clamp(42px,6vw,118px); line-height:.84; letter-spacing:-.06em; text-transform:uppercase; }
+      .poster-time { flex:0 0 auto; text-align:right; }
+      .poster-time strong { display:block; font-size:clamp(42px,5vw,96px); line-height:.9; }
+      .poster-time span { display:block; margin-top:.65rem; font-size:clamp(14px,1.3vw,24px); text-transform:uppercase; letter-spacing:.12em; opacity:.8; }
+
+      .reminder-scene { display:flex; flex-direction:column; padding:4vh 3vw 3vw; background:#050505; }
+      .reminder-head { display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; margin-bottom:2.5vh; }
+      .reminder-head small { display:block; font-weight:850; letter-spacing:.18em; text-transform:uppercase; opacity:.62; font-size:clamp(12px,1.1vw,20px); }
+      .reminder-head h1 { margin:.45rem 0 0; font-size:clamp(42px,5.4vw,104px); line-height:.86; letter-spacing:-.06em; text-transform:uppercase; }
+      .reminder-head strong { flex:0 0 auto; font-size:clamp(42px,5vw,92px); line-height:.9; }
+      .class-grid { flex:1; min-height:0; display:grid; grid-template-columns:repeat(var(--count,1),minmax(0,1fr)); gap:1.2vw; }
+      .class-visual { position:relative; min-width:0; overflow:hidden; border-radius:24px; border:1px solid rgba(255,255,255,.14); background:#111; }
+      .class-visual img { width:100%; height:100%; object-fit:cover; }
+      .class-visual::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 38%,rgba(0,0,0,.88)); }
+      .class-copy { position:absolute; z-index:2; left:1.5vw; right:1.5vw; bottom:1.5vw; text-shadow:0 3px 18px #000; }
+      .class-copy strong { display:block; font-size:clamp(25px,2.7vw,52px); line-height:.94; letter-spacing:-.04em; text-transform:uppercase; }
+      .class-copy span { display:block; margin-top:.7rem; font-size:clamp(15px,1.4vw,26px); opacity:.78; }
+      .class-fallback { height:100%; display:flex; align-items:center; justify-content:center; padding:3vw; background:radial-gradient(circle at 25% 20%,rgba(126,74,255,.38),transparent 35%),#090909; }
+
+      .schedule-scene { padding:4.5vh 4vw; background:#070707; display:flex; flex-direction:column; }
+      .schedule-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5vh; }
+      .schedule-head h1 { margin:0; font-size:clamp(48px,5.6vw,108px); line-height:.88; letter-spacing:-.06em; text-transform:uppercase; }
+      .schedule-head p { margin:0 0 .6rem; font-size:clamp(16px,1.35vw,25px); opacity:.55; }
+      .schedule-frame { flex:1; min-height:0; overflow:hidden; border-radius:22px; background:#fff; color:#111; }
+      .schedule-frame-inner { width:100%; height:100%; overflow:auto; scrollbar-width:none; }
+      .schedule-frame-inner::-webkit-scrollbar { display:none; }
+      #eversports-live { min-height:100%; }
+      .source-probe { position:fixed; left:-10000px; top:0; width:1400px; min-height:900px; opacity:.001; pointer-events:none; }
+      .debug { display:none; position:absolute; inset:2vh 2vw; z-index:50; overflow:auto; background:rgba(0,0,0,.95); padding:2rem; border:1px solid #444; white-space:pre-wrap; font:15px/1.45 ui-monospace,monospace; cursor:auto; }
+      .debug.active { display:block; }
+      @media (max-aspect-ratio:4/3) { .class-grid { grid-template-columns:1fr; } .poster-info { align-items:flex-start; flex-direction:column; } .poster-time { text-align:left; } }
+      @media (prefers-reduced-motion:reduce) { .scene { transition:none; } }
+    </style>
+  </head>
+  <body>
+    <main class="tv">
+      <section class="scene video-scene active" id="scene-video">
+        <video id="main-video" autoplay muted playsinline preload="auto"></video>
+        <div class="video-shade"></div>
+        <img class="brand" src={logo} alt="Elite Dance Studio" />
+        <div class="clock"><strong id="clock-time">--:--</strong><span id="clock-day">Berlin</span></div>
+        <div class="ticker" id="ticker-copy">Dance · Train · Connect · Berlin-Moabit</div>
+      </section>
+
+      <section class="scene poster-scene" id="scene-poster">
+        <img class="poster-bg" id="poster-bg" src={posters[0].src} alt="" />
+        <img class="poster-image" id="poster-image" src={posters[0].src} alt="" />
+        <div class="poster-gradient"></div>
+        <div class="poster-info">
+          <div>
+            <div class="poster-kicker">Class at Elite</div>
+            <h1 id="poster-title">{posters[0].title}</h1>
+          </div>
+          <div class="poster-time">
+            <strong id="poster-time">Live schedule</strong>
+            <span id="poster-meta">Elite Dance Studio</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene reminder-scene" id="scene-reminder">
+        <div class="reminder-head">
+          <div><small id="reminder-label">Starting soon</small><h1 id="reminder-heading">Choose your class</h1></div>
+          <strong id="reminder-time">--:--</strong>
+        </div>
+        <div class="class-grid" id="reminder-grid"></div>
+      </section>
+
+      <section class="scene schedule-scene" id="scene-schedule">
+        <div class="schedule-head">
+          <h1>This week at Elite</h1>
+          <p>Live booking calendar</p>
+        </div>
+        <div class="schedule-frame"><div class="schedule-frame-inner"><div id="eversports-live" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div></div>
+      </section>
+
+      <div class="source-probe" aria-hidden="true"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
+      <pre class="debug" id="debug-panel"></pre>
+    </main>
+
+    <script type="module" src="https://widget-static.eversports.io/loader.js"></script>
+    <script is:inline define:vars={{ posters, videos }}>
+      (() => {
+        const VIDEO_SECONDS = 48;
+        const POSTER_SECONDS = 12;
+        const SCHEDULE_SECONDS = 18;
+        const REMINDER_SECONDS = 12;
+        const REMINDER_WINDOW_MINUTES = 15;
+        const REMINDER_REPEAT_MINUTES = 2;
+        const TZ = "Europe/Berlin";
+        const scenes = { video:document.getElementById("scene-video"), poster:document.getElementById("scene-poster"), reminder:document.getElementById("scene-reminder"), schedule:document.getElementById("scene-schedule") };
+        const videoEl = document.getElementById("main-video");
+        const ticker = document.getElementById("ticker-copy");
+        const posterImage = document.getElementById("poster-image");
+        const posterBg = document.getElementById("poster-bg");
+        const posterTitle = document.getElementById("poster-title");
+        const posterTime = document.getElementById("poster-time");
+        const posterMeta = document.getElementById("poster-meta");
+        const reminderTime = document.getElementById("reminder-time");
+        const reminderGrid = document.getElementById("reminder-grid");
+        const debugPanel = document.getElementById("debug-panel");
+        const probe = document.getElementById("eversports-probe");
+        const live = document.getElementById("eversports-live");
+        let sceneTimer, rotationIndex=0, posterIndex=0, videoIndex=0, parsedEvents=[], lastReminderKey="";
+        const rotation = ["video","poster","video","poster","video","schedule"];
+
+        const normalize = (value="") => value.toLowerCase().replace(/[^a-z0-9äöüß+]+/gi," ").replace(/\s+/g," ").trim();
+        const compactText = (el) => (el?.innerText || el?.textContent || "").replace(/\s+/g," ").trim();
+
+        function berlinParts(date=new Date()) {
+          return Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,weekday:"long",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(date).map(p=>[p.type,p.value]));
+        }
+        function updateClock() {
+          const p=berlinParts();
+          document.getElementById("clock-time").textContent=`${p.hour}:${p.minute}`;
+          document.getElementById("clock-day").textContent=`${p.weekday} · Berlin`;
+        }
+
+        function posterForTitle(title="") {
+          const n=normalize(title);
+          return posters.find(p => [p.title,...(p.aliases||[])].some(alias => { const a=normalize(alias); return a && (n.includes(a) || a.includes(n)); })) || null;
+        }
+        function eventMatchesPoster(event, poster) {
+          const n=normalize(event.title);
+          return [poster.title,...(poster.aliases||[])].some(alias => { const a=normalize(alias); return a && (n.includes(a) || a.includes(n)); });
+        }
+
+        function setVideo(index=videoIndex) {
+          if (!videos.length) return;
+          videoIndex=index%videos.length;
+          if (videoEl.src !== new URL(videos[videoIndex],location.href).href) videoEl.src=videos[videoIndex];
+          videoEl.play().catch(()=>{});
+        }
+        videoEl.addEventListener("ended",()=>{ videoIndex=(videoIndex+1)%Math.max(videos.length,1); setVideo(); });
+
+        function showScene(name,duration) {
+          Object.entries(scenes).forEach(([key,el])=>el.classList.toggle("active",key===name));
+          if(name==="video") setVideo(); else videoEl.pause();
+          clearTimeout(sceneTimer);
+          sceneTimer=setTimeout(nextScene,duration*1000);
+        }
+
+        function nextOccurrence(poster) {
+          const p=berlinParts();
+          const now=Number(p.hour)*60+Number(p.minute);
+          const sameDay=parsedEvents.filter(e=>currentDayMatches(e.day,p.weekday) && eventMatchesPoster(e,poster)).map(e=>({...e,delta:minutesOf(e.start)-now})).filter(e=>e.delta>=0).sort((a,b)=>a.delta-b.delta);
+          return sameDay[0] || parsedEvents.find(e=>eventMatchesPoster(e,poster)) || null;
+        }
+        function renderPoster(item) {
+          posterImage.src=item.src; posterBg.src=item.src; posterTitle.textContent=item.title;
+          const event=nextOccurrence(item);
+          posterTime.textContent=event?.start || "See schedule";
+          posterMeta.textContent=event ? [event.day || "Today", event.room].filter(Boolean).join(" · ") : "Elite Dance Studio";
+        }
+
+        function nextScene() {
+          const reminder=getUpcomingReminder();
+          if(reminder && reminder.key!==lastReminderKey){ lastReminderKey=reminder.key; renderReminder(reminder); showScene("reminder",REMINDER_SECONDS); return; }
+          const name=rotation[rotationIndex++%rotation.length];
+          if(name==="poster"){ const item=posters[posterIndex++%posters.length]; renderPoster(item); showScene("poster",POSTER_SECONDS); }
+          else if(name==="schedule") showScene("schedule",SCHEDULE_SECONDS);
+          else { ticker.textContent=parsedEvents.length?"Live timetable connected · classes update automatically":"Dance · Train · Connect · Berlin-Moabit"; showScene("video",VIDEO_SECONDS); }
+        }
+
+        function dateKeyFromText(text) {
+          const days=["monday","tuesday","wednesday","thursday","friday","saturday","sunday","montag","dienstag","mittwoch","donnerstag","freitag","samstag","sonntag"];
+          const lower=text.toLowerCase(); return days.find(day=>lower.includes(day))||"";
+        }
+        function roomFromText(text) {
+          const lower=text.toLowerCase();
+          if(/schwarz|black/.test(lower)) return "Black Room";
+          if(/gelb|yellow/.test(lower)) return "Yellow Room";
+          if(/blau|blue/.test(lower)) return "Blue Room";
+          return "";
+        }
+        function parseWidget(root) {
+          if(!root) return [];
+          const candidates=[...root.querySelectorAll("*")].map(el=>({el,text:compactText(el)})).filter(x=>x.text.length>=5&&x.text.length<=320&&/\b\d{1,2}:\d{2}\b/.test(x.text));
+          const leafish=candidates.filter(item=>![...item.el.children].some(child=>{const t=compactText(child);return t&&t!==item.text&&/\b\d{1,2}:\d{2}\b/.test(t)&&t.length<item.text.length*.85;}));
+          const seen=new Set(), events=[];
+          for(const item of leafish){
+            const times=[...item.text.matchAll(/\b([01]?\d|2[0-3]):([0-5]\d)\b/g)].map(m=>m[0]); if(!times.length) continue;
+            const start=times[0].padStart(5,"0"); const sig=`${start}|${item.text}`; if(seen.has(sig)) continue; seen.add(sig);
+            let context=item.text,parent=item.el.parentElement;
+            for(let i=0;i<4&&parent;i++,parent=parent.parentElement){const t=compactText(parent);if(t.length>context.length&&t.length<900)context+=` ${t}`;}
+            const day=dateKeyFromText(context), room=roomFromText(context);
+            const title=item.text.replace(/\b([01]?\d|2[0-3]):([0-5]\d)\b/g,"").replace(/\b(AM|PM|Uhr)\b/gi,"").replace(/\s{2,}/g," ").trim();
+            if(title&&title.length<=240) events.push({start,title,day,room,raw:item.text});
+          }
+          return events.slice(0,100);
+        }
+        const dayAliases={monday:["monday","montag"],tuesday:["tuesday","dienstag"],wednesday:["wednesday","mittwoch"],thursday:["thursday","donnerstag"],friday:["friday","freitag"],saturday:["saturday","samstag"],sunday:["sunday","sonntag"]};
+        const minutesOf=(time)=>{const[h,m]=time.split(":").map(Number);return h*60+m;};
+        const currentDayMatches=(eventDay,weekday)=>!eventDay||(dayAliases[weekday.toLowerCase()]||[weekday.toLowerCase()]).includes(eventDay);
+
+        function getUpcomingReminder() {
+          if(!parsedEvents.length) return null;
+          const p=berlinParts(), now=Number(p.hour)*60+Number(p.minute);
+          const relevant=parsedEvents.filter(e=>currentDayMatches(e.day,p.weekday)).map(e=>({...e,delta:minutesOf(e.start)-now})).filter(e=>e.delta>=0&&e.delta<=REMINDER_WINDOW_MINUTES).sort((a,b)=>a.delta-b.delta||a.start.localeCompare(b.start));
+          if(!relevant.length) return null;
+          const nearest=relevant[0], classes=relevant.filter(e=>e.start===nearest.start), minuteBucket=Math.floor(now/REMINDER_REPEAT_MINUTES);
+          return {key:`${p.year}-${p.month}-${p.day}|${nearest.start}|${minuteBucket}`,start:nearest.start,delta:nearest.delta,classes};
+        }
+        function renderReminder(reminder) {
+          document.getElementById("reminder-label").textContent=reminder.delta===0?"Starting now":`Starting in ${reminder.delta} min`;
+          document.getElementById("reminder-heading").textContent=reminder.classes.length>1?"Choose your class":"Your class is starting";
+          reminderTime.textContent=reminder.start;
+          reminderGrid.style.setProperty("--count",Math.min(reminder.classes.length,3));
+          reminderGrid.replaceChildren(...reminder.classes.slice(0,3).map(event=>{
+            const card=document.createElement("div"); card.className="class-visual";
+            const poster=posterForTitle(event.title);
+            if(poster){ const img=document.createElement("img"); img.src=poster.src; img.alt=""; card.append(img); }
+            else { const fallback=document.createElement("div"); fallback.className="class-fallback"; card.append(fallback); }
+            const copy=document.createElement("div"); copy.className="class-copy";
+            const strong=document.createElement("strong"); strong.textContent=event.title;
+            const span=document.createElement("span"); span.textContent=[event.start,event.room].filter(Boolean).join(" · ");
+            copy.append(strong,span); card.append(copy); return card;
+          }));
+        }
+        function refreshParsedEvents() {
+          const combined=[...parseWidget(probe),...parseWidget(live)], unique=new Map(combined.map(e=>[`${e.start}|${e.title}|${e.day}`,e]));
+          parsedEvents=[...unique.values()]; updateDebug();
+        }
+        function updateDebug() {
+          if(!new URLSearchParams(location.search).has("debug")) return;
+          debugPanel.classList.add("active"); document.body.style.cursor="auto";
+          debugPanel.textContent=["ELITE TV DEBUG","",`Parsed events: ${parsedEvents.length}`,JSON.stringify(parsedEvents,null,2),"","PROBE TEXT:",compactText(probe).slice(0,12000),"","LIVE WIDGET TEXT:",compactText(live).slice(0,12000)].join("\n");
+        }
+        const observer=new MutationObserver(()=>{clearTimeout(observer._timer);observer._timer=setTimeout(refreshParsedEvents,600);});
+        [probe,live].filter(Boolean).forEach(el=>observer.observe(el,{childList:true,subtree:true,characterData:true}));
+        setInterval(updateClock,1000);
+        setInterval(()=>{refreshParsedEvents();const reminder=getUpcomingReminder();if(reminder&&reminder.key!==lastReminderKey&&!scenes.reminder.classList.contains("active")){lastReminderKey=reminder.key;renderReminder(reminder);showScene("reminder",REMINDER_SECONDS);}},30000);
+        document.addEventListener("visibilitychange",()=>{if(!document.hidden&&scenes.video.classList.contains("active"))setVideo();});
+        updateClock(); setVideo(); setTimeout(refreshParsedEvents,3000); setTimeout(nextScene,VIDEO_SECONDS*1000);
+      })();
+    </script>
+  </body>
+</html>

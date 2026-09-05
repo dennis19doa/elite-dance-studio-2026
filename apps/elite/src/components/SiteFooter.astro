@@ -12,12 +12,13 @@ interface Props {
 
 const { brand, nav } = Astro.props;
 const footerLinks = nav.flatMap((item) => item.children ?? [item]);
+const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <footer class="site-footer">
   <div class="page-shell footer-shell">
     <div>
-      <a class="brand footer-brand" href="/">{brand}</a>
+      <a class="brand footer-brand" href={baseUrl}>{brand}</a>
       <p class="footer-copy">
         Beginner-friendly Tanzkurse in Berlin-Moabit. Offen, persönlich und mit einem klaren
         Einstieg für neue Tänzer:innen.

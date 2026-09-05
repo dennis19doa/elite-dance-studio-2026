@@ -4,65 +4,73 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 
 import site from "../data/site.json";
+
+const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const scheduleHref = `${baseUrl}#schedule`;
 ---
 
 <BaseLayout
   title="Events & Elite Dance Party | Elite Dance Studio Berlin"
   description="Elite Dance Party, Socials, Workshops und Community-Events im Elite Dance Studio in Berlin-Moabit."
+  bodyClass="events-page-v12"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main">
-    <section class="service-page-hero panel">
-      <div class="service-page-copy">
-        <div class="eyebrow">Community in Bewegung</div>
-        <h1 class="page-title">Kurse bringen dich rein. Events lassen dich bleiben.</h1>
-        <p class="lead">
-          Elite ist nicht nur Unterricht. Partys, Socials und Workshops geben dir Raum, Menschen
-          kennenzulernen und das Gelernte ohne Druck zu erleben.
-        </p>
-        <div class="actions">
-          <a class="button primary" href="https://www.instagram.com/elitedanceberlin/">Aktuelle Events auf Instagram</a>
-          <a class="button secondary" href="/stundenplan/">Klasse buchen</a>
+  <main class="page-shell page-main events-main-v12">
+    <section class="events-stage-v12">
+      <img src="/media/current-site/elite-party.jpg" alt="Elite Dance Party im Elite Dance Studio Berlin" />
+      <div class="events-stage-overlay-v12"></div>
+      <div class="events-stage-copy-v12">
+        <span>Elite after class</span>
+        <h1>Tanzen endet nicht, wenn die Musik im Kurs stoppt.</h1>
+        <div>
+          <p>Partys, Workshops und Specials bringen Training, Menschen und echte Tanzzeit zusammen.</p>
+          <a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">Aktuelle Events ↗</a>
         </div>
       </div>
-      <figure class="service-page-media">
-        <img src="/media/placeholders/community-beginners.jpg" alt="Tanz-Community in einer hellen, offenen Studioatmosphäre" />
-      </figure>
     </section>
 
-    <section class="event-story panel">
-      <div class="event-story-copy">
-        <div class="eyebrow">Elite Dance Party</div>
-        <h2>Dein erster Social muss sich nicht wie eine Prüfung anfühlen.</h2>
-        <p>
-          Unsere Partys verbinden Musik, Community und echte Tanzmomente. Auch wenn du gerade erst
-          angefangen hast, kannst du vorbeikommen, zuschauen, Menschen treffen und in deinem Tempo
-          mittanzen.
-        </p>
-        <div class="event-facts">
-          <span>Beginner willkommen</span>
-          <span>Social Dance & Community</span>
-          <span>Termine über Instagram</span>
-        </div>
-        <a class="text-link" href="https://www.instagram.com/elitedanceberlin/">Nächsten Termin prüfen →</a>
+    <div class="events-marquee-v12" aria-hidden="true">
+      <span>PARTY · WORKSHOPS · SOCIAL · COMMUNITY · SPECIALS · BERLIN-MOABIT ·</span>
+      <span>PARTY · WORKSHOPS · SOCIAL · COMMUNITY · SPECIALS · BERLIN-MOABIT ·</span>
+    </div>
+
+    <section class="event-chapter-v12 is-party">
+      <div class="event-chapter-label-v12">Elite Dance Party</div>
+      <figure><img src="/media/current-site/current-home-visual.webp" alt="Community und Tanz bei Elite Dance Studio" loading="lazy" /></figure>
+      <div class="event-chapter-copy-v12">
+        <h2>Du musst nicht erst „gut genug“ sein, um tanzen zu gehen.</h2>
+        <p>Unsere Partys sind der Ort, an dem du ausprobieren kannst, was im Kurs noch neu war. Komm zum Tanzen, Zuschauen, Leute treffen oder einfach für die Musik.</p>
       </div>
-      <figure class="event-poster-frame">
-        <img src="/media/current-site/elite-party.jpg" alt="Bisheriges Elite Dance Party Jubiläumsplakat" loading="lazy" />
-        <figcaption>Bestehendes Elite-Eventmotiv · aktuelle Poster werden hier später automatisch ergänzt.</figcaption>
-      </figure>
     </section>
 
-    <section class="event-type-grid" aria-label="Eventformate bei Elite">
-      <article class="event-type-card event-type-plum">
-        <span>01</span><strong>Dance Parties</strong><p>Gemeinsam tanzen, üben und die Community außerhalb des Kursformats erleben.</p>
-      </article>
-      <article class="event-type-card event-type-slate">
-        <span>02</span><strong>Workshops</strong><p>Neue Styles, Gast-Coaches und fokussierte Themen für einen intensiveren Einblick.</p>
-      </article>
-      <article class="event-type-card event-type-gold">
-        <span>03</span><strong>Studio Specials</strong><p>Open Classes, Community-Treffen und besondere Formate rund um Elite.</p>
-      </article>
+    <section class="event-chapter-v12 is-workshop">
+      <div class="event-chapter-label-v12">Workshops</div>
+      <div class="event-chapter-copy-v12">
+        <h2>Ein Thema. Ein Coach. Mehr Zeit, wirklich reinzugehen.</h2>
+        <p>Gast-Coaches, neue Styles und fokussierte Sessions geben dir Raum für Dinge, die in eine normale Wochenclass nicht hineinpassen.</p>
+      </div>
+      <figure><img src="/media/current-site/kathy-reggaeton.png" alt="Workshop bei Elite Dance Studio" loading="lazy" /></figure>
+    </section>
+
+    <section class="event-chapter-v12 is-special">
+      <figure><img src="/media/current-site/studio-room-a.jpg" alt="Studio Special im Elite Dance Studio Berlin" loading="lazy" /></figure>
+      <div class="event-chapter-copy-v12">
+        <div class="event-chapter-label-v12">Studio Specials</div>
+        <h2>Nicht alles muss in eine normale Kursstunde passen.</h2>
+        <p>Open Classes, Community Sessions und besondere Projekte entstehen dann, wenn wir Lust auf ein Format haben, das mehr Raum braucht.</p>
+      </div>
+    </section>
+
+    <section class="events-signal-v12">
+      <div>
+        <span>Was passiert als Nächstes?</span>
+        <h2>Die schnellsten Updates leben auf Instagram.</h2>
+      </div>
+      <div class="events-signal-actions-v12">
+        <a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">@elitedanceberlin ↗</a>
+        <a href={scheduleHref}>Erst eine Class besuchen →</a>
+      </div>
     </section>
   </main>
 

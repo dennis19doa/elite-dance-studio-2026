@@ -1,0 +1,34 @@
+---
+const styles = [
+  { title: "Bachata", level: "Beginner → Advanced", image: "/media/style-posters/20-bachata-beginner.webp", href: "/stundenplan/" },
+  { title: "Reggaeton", level: "Fundamentals → Intermediate", image: "/media/style-posters/09-reggaeton-fundamentals.webp", href: "/stundenplan/" },
+  { title: "Hip-Hop", level: "Beginner", image: "/media/style-posters/06-hip-hop-beginner-amy.webp", href: "/stundenplan/" },
+  { title: "Heels", level: "Beginner → Intermediate", image: "/media/style-posters/08-high-heels-intermediate.webp", href: "/stundenplan/" },
+  { title: "K-Pop", level: "Open / Beginner", image: "/media/style-posters/02-kpop-beginner.webp", href: "/stundenplan/" }
+];
+---
+
+<section class="home-style-showcase" aria-labelledby="home-style-title">
+  <header class="home-style-head">
+    <div>
+      <div class="eyebrow">25+ Styles</div>
+      <h2 id="home-style-title">Finde deinen Vibe.</h2>
+    </div>
+    <a class="text-link" href="/styles/">Alle Styles ansehen →</a>
+  </header>
+
+  <div class="home-style-grid">
+    {styles.map((style, index) => (
+      <a class:list={["home-style-card", index === 0 && "home-style-card-featured"]} href={style.href}>
+        <img src={style.image} alt={`${style.title} bei Elite Dance Studio`} width="720" height="900" loading="lazy" decoding="async" />
+        <span class="home-style-overlay"></span>
+        <span class="home-style-index">{String(index + 1).padStart(2, "0")}</span>
+        <div class="home-style-copy">
+          <small>{style.level}</small>
+          <strong>{style.title}</strong>
+          <span>Termin finden ↗</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

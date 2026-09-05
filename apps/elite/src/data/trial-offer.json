@@ -1,18 +1,17 @@
 {
-  "eyebrow": "Leichter Einstieg",
-  "title": "Ein Welcome Pass, der den ersten Schritt einfacher macht.",
-  "description": "Statt sofort alles entscheiden zu müssen, können neue Besucher:innen zwei passende Klassen ausprobieren, Fragen klären und ohne Druck herausfinden, was sich gut anfühlt.",
+  "eyebrow": "Neu bei Elite?",
+  "title": "2 Klassen · 20€",
+  "description": "Teste zwei beginner-geeignete Klassen und finde heraus, was zu dir passt.",
   "label": "Welcome Pass",
   "price": "20€",
   "duration": "2 Klassen · 14 Tage · nur für neue Besucher:innen",
   "facts": [
-    "Für komplette Anfänger:innen geeignet",
-    "Ideal für beginner-geeignete reguläre Klassen",
-    "Hilft dabei, zwei Styles zu vergleichen statt sofort festzulegen",
-    "Danach kannst du flexibel mit Drop-in oder Membership weitermachen"
+    "Verschiedene Styles testen",
+    "Beginner-friendly",
+    "Keine Membership nötig"
   ],
-  "primaryCtaLabel": "Welcome Pass ansehen",
+  "primaryCtaLabel": "Welcome Pass holen",
   "primaryCtaHref": "/starter-pass/",
-  "secondaryCtaLabel": "Erste Klasse finden",
+  "secondaryCtaLabel": "Klassen ansehen",
   "secondaryCtaHref": "/kurse/"
 }

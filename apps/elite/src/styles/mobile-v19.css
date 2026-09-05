@@ -1,0 +1,48 @@
+/* Elite V19 — mobile-only scroll reduction for image-led homepage sections. */
+@media (max-width: 720px) {
+  .home-page .studio-worlds {
+    padding: 20px 16px 18px !important;
+  }
+
+  .home-page .studio-worlds .section-head {
+    margin-bottom: 16px;
+  }
+
+  .home-page .studio-worlds .section-head h2 {
+    font-size: clamp(2.1rem, 10vw, 2.85rem) !important;
+    line-height: .98 !important;
+  }
+
+  .home-page .studio-world-grid {
+    display: flex !important;
+    width: auto !important;
+    min-height: 0 !important;
+    gap: 11px !important;
+    overflow-x: auto;
+    margin-inline: -2px;
+    padding: 2px 2px 8px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .home-page .studio-world-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-page .studio-world-card,
+  .home-page .studio-world-events,
+  .home-page .studio-world-coaches,
+  .home-page .studio-world-rental {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    flex: 0 0 min(79vw, 320px);
+    width: min(79vw, 320px);
+    height: 270px !important;
+    min-height: 270px !important;
+    scroll-snap-align: start;
+  }
+
+  .home-page .studio-world-copy {
+    padding: 18px !important;
+  }
+}

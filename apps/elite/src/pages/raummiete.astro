@@ -2,57 +2,110 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-
 import site from "../data/site.json";
 
 const rentalMessage = "https://wa.me/491633863548?text=Hallo%20Elite%20Dance%20Studio%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Raummiete.%20Mein%20Wunschtermin%20ist%3A";
+
+const rooms = [
+  {
+    key: "black",
+    name: "Schwarzer Raum",
+    label: "Größter Raum",
+    size: "115 m²",
+    image: "/media/current-site/studio-room-a.jpg",
+    alt: "Schwarzer Raum im Elite Dance Studio",
+    text: "Viel Fläche für größere Gruppen, Workshops, Proben und intensive Trainingsformate.",
+    uses: ["Gruppen", "Workshops", "Proben", "Events"]
+  },
+  {
+    key: "yellow",
+    name: "Gelber Raum",
+    label: "Flexibler Raum",
+    size: "100 m²",
+    image: "/media/current-site/studio-room-yellow.jpg",
+    alt: "Gelber Raum im Elite Dance Studio",
+    text: "Ein flexibler Trainingsraum für Kurse, Gruppenproben, Privatstunden und Workshops.",
+    uses: ["Classes", "Gruppenproben", "Privates", "Workshops"]
+  },
+  {
+    key: "blue",
+    name: "Blauer Raum",
+    label: "Kompakter Raum",
+    size: "75 m²",
+    image: "/media/current-site/studio-room-blue.jpg",
+    alt: "Blauer Raum im Elite Dance Studio",
+    text: "Für kleinere Gruppen, Solo-Training, Coachings und Content mit ruhigerer Atmosphäre.",
+    uses: ["Solo Training", "Coachings", "Kleine Gruppen", "Content"]
+  }
+];
 ---
 
 <BaseLayout
   title="Tanzstudio & Räume mieten | Elite Dance Studio Berlin"
   description="Drei Tanzräume in Berlin-Moabit für Proben, Workshops, Privatstunden, Castings und Content mieten."
+  bodyClass="site-subpage rental-page-v9 rental-page-v18 rental-page-v19 rental-page-v20"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main">
-    <section class="service-page-hero panel">
+  <main class="page-shell page-main rental-main-v18">
+    <section class="service-page-hero rental-hero-v2 rental-hero-v18 panel">
       <div class="service-page-copy">
-        <div class="eyebrow">Raummiete in Berlin-Moabit</div>
-        <h1 class="page-title">Raum für Training, Workshops und deine Ideen.</h1>
-        <p class="lead">
-          Drei unterschiedliche Studios für Proben, Privatstunden, Castings, Content-Shoots und
-          Formate, die Bewegungsfreiheit brauchen.
-        </p>
+        <div class="eyebrow">Raummiete · Berlin-Moabit</div>
+        <h1 class="page-title">Dein Raum für Training, Idee und Produktion.</h1>
+        <p class="lead">Drei unterschiedliche Räume für Proben, Workshops, Privatstunden, Castings und Content – mitten in Moabit.</p>
         <div class="actions">
           <a class="button primary" href={rentalMessage}>Verfügbarkeit anfragen</a>
           <a class="button secondary" href="mailto:info@elitedancestudio.de?subject=Anfrage%20Raummiete">E-Mail schreiben</a>
         </div>
       </div>
-      <figure class="service-page-media">
+      <figure class="service-page-media rental-hero-media-v18">
         <img src="/media/current-site/studio-room-a.jpg" alt="Großer schwarzer Tanzraum im Elite Dance Studio" />
       </figure>
     </section>
 
-    <section class="rental-room-grid" aria-label="Räume im Elite Dance Studio">
-      <article class="rental-room-card">
-        <img src="/media/current-site/studio-room-a.jpg" alt="Schwarzer Raum im Elite Dance Studio" loading="lazy" />
-        <div><span>Größter Raum</span><h2>Schwarzer Raum</h2><p>Viel Fläche für größere Gruppen, Workshops, Proben, Trainingsformate und Events.</p></div>
-      </article>
-      <article class="rental-room-card">
-        <img src="/media/current-site/studio-room-yellow.jpg" alt="Gelber Raum im Elite Dance Studio" loading="lazy" />
-        <div><span>Flexibler Raum</span><h2>Gelber Raum</h2><p>Ideal für Kurse, Gruppenproben, private Trainings und Workshops.</p></div>
-      </article>
-      <article class="rental-room-card">
-        <img src="/media/current-site/studio-room-blue.jpg" alt="Blauer Raum im Elite Dance Studio" loading="lazy" />
-        <div><span>Kompakter Raum</span><h2>Blauer Raum</h2><p>Für kleinere Gruppen, Solo-Training, Coachings, Content und fokussierte Proben.</p></div>
-      </article>
+    <section class="rental-facts-v20" aria-label="Raummiete auf einen Blick">
+      <div><span>Räume</span><strong>3</strong><p>unterschiedliche Setups</p></div>
+      <div><span>Größe</span><strong>75–115 m²</strong><p>von kompakt bis großzügig</p></div>
+      <div><span>Location</span><strong>Moabit</strong><p>zentral in Berlin</p></div>
+      <div><span>Nutzung</span><strong>Flexibel</strong><p>Training, Workshops & Content</p></div>
     </section>
 
-    <section class="rental-request panel">
-      <div><div class="eyebrow">Deine Anfrage</div><h2>Schreib uns deinen Wunschzeitraum.</h2></div>
+    <section class="rental-room-intro-v18">
       <div>
-        <p>Am schnellsten können wir antworten, wenn du Datum, Uhrzeit, Raum, Personenanzahl und Nutzung direkt mitsendest.</p>
-        <a class="button primary" href={rentalMessage}>Raum per WhatsApp anfragen</a>
+        <div class="eyebrow">Unsere Räume</div>
+        <h2>Drei Räume. Drei unterschiedliche Setups.</h2>
+      </div>
+      <p>Wähle nach Gruppengröße und Nutzung. Wenn du unsicher bist, sag uns kurz, was du vorhast – wir empfehlen dir den passenden Raum.</p>
+    </section>
+
+    <section class="rental-room-grid rental-room-grid-v18" aria-label="Räume im Elite Dance Studio">
+      {rooms.map((room) => (
+        <article class:list={["rental-room-card-v18", `rental-room-${room.key}-v18`]}>
+          <figure>
+            <img src={room.image} alt={room.alt} loading="lazy" decoding="async" />
+            <span class="rental-room-size-v19">{room.size}</span>
+          </figure>
+          <div class="rental-room-copy-v18">
+            <span class="rental-room-label-v18">{room.label}</span>
+            <h2>{room.name}</h2>
+            <p>{room.text}</p>
+            <div class="rental-room-tags-v18">
+              {room.uses.map((use) => <span>{use}</span>)}
+            </div>
+            <a href={rentalMessage}>Raum anfragen →</a>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <section class="rental-request panel rental-request-v18">
+      <div>
+        <div class="eyebrow">Schnelle Anfrage</div>
+        <h2>Datum, Uhrzeit und Nutzung reichen.</h2>
+      </div>
+      <div>
+        <p>Schick uns Wunschzeitraum, Personenanzahl und Nutzung. Wir prüfen die Verfügbarkeit und sagen dir direkt, welcher Raum am besten passt.</p>
+        <a class="button primary" href={rentalMessage}>Auf WhatsApp anfragen</a>
       </div>
     </section>
   </main>

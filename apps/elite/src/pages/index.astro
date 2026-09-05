@@ -7,14 +7,22 @@ import FaqSection from "../components/FaqSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import StudioExperienceSection from "../components/StudioExperienceSection.astro";
-import BeginnerEntrancesSection from "../components/BeginnerEntrancesSection.astro";
-import AboutTeaserSection from "../components/AboutTeaserSection.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
+import HomeCoachRail from "../components/HomeCoachRail.astro";
+import { cloudMediaBaseUrl, cloudMediaUrl } from "../lib/media";
 
 import faqs from "../data/faqs.json";
 import site from "../data/site.json";
 import trialOffer from "../data/trial-offer.json";
-import trustSignals from "../data/trust-signals.json";
+
+const hero = {
+  ...site.hero,
+  videoCloudSrc: cloudMediaUrl(site.hero.videoCloudSrc),
+  videoCloudMobileSrc: cloudMediaUrl(site.hero.videoCloudMobileSrc),
+  videoSrc: site.hero.videoSrc,
+  videoMobileSrc: site.hero.videoMobileSrc,
+  videoPoster: site.hero.videoPoster
+};
 ---
 
 <BaseLayout
@@ -22,26 +30,27 @@ import trustSignals from "../data/trust-signals.json";
   description="Beginner-friendly Tanzkurse in Berlin-Moabit: ohne Vorkenntnisse starten, oft ohne festen Partner. Welcome Pass: 2 Klassen für 20 Euro."
   bodyClass="home-page"
 >
+  <link slot="head" rel="preconnect" href={cloudMediaBaseUrl} crossorigin="anonymous" />
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main home-main">
-    <HeroSection hero={site.hero} />
-    <BeginnerEntrancesSection />
-    <TrustStrip signals={trustSignals} />
+    <HeroSection hero={hero} />
+
     <EversportsSchedule
       home
-      eyebrow="Deine Woche bei Elite"
-      title="Dein nächster Kurs ist kein Geheimnis."
-      description="Der komplette aktuelle Stundenplan gehört zu deinem ersten Eindruck. Finde Level 0 oder Beginner, prüfe Coach und Uhrzeit und buche direkt."
+      title="Was tanzt du diese Woche?"
     />
+
+    <HomeCoachRail />
+    <TrustStrip />
     <TrialOfferSection offer={trialOffer} />
     <StudioExperienceSection />
-    <AboutTeaserSection />
+
     <FaqSection
-      items={faqs}
+      items={faqs.slice(0, 4)}
       eyebrow="Gut zu wissen"
-      title="Antworten, bevor dein erster Kurs beginnt."
-      description="Die wichtigsten Fragen zu Level, Partner, Buchung und deinem ersten Besuch direkt auf der Homepage."
+      title="Noch Fragen vor deinem ersten Kurs?"
+      description=""
       linkHref="/faq/"
       linkLabel="Alle Fragen ansehen"
     />
@@ -49,18 +58,11 @@ import trustSignals from "../data/trust-signals.json";
     <section class="cta-banner panel">
       <div>
         <div class="eyebrow">Persönliche Hilfe</div>
-        <h2>Nicht sicher, welcher Kurs für dich der beste Start ist?</h2>
-        <p>
-          Wenn du zwischen Styles, Leveln oder Angeboten schwankst, helfen wir dir lieber kurz
-          persönlich, statt dich allein durch das Studio suchen zu lassen.
-        </p>
-        <span class="prototype-note">
-          Beginner-friendly, offen und auf deinen ersten sinnvollen Schritt fokussiert.
-        </span>
+        <h2>Nicht sicher, welcher Kurs zu dir passt?</h2>
+        <p>Schreib uns kurz, was du suchst. Wir empfehlen dir eine konkrete Class.</p>
       </div>
       <div class="actions">
-        <a class="button primary" href="/kontakt/">Kontakt aufnehmen</a>
-        <a class="button secondary" href="/kurse/">Kurse ansehen</a>
+        <a class="button primary" href={site.visit.whatsappHref}>WhatsApp schreiben</a>
       </div>
     </section>
   </main>

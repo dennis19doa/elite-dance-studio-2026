@@ -6,16 +6,17 @@ import WelcomePassHero from "../components/WelcomePassHero.astro";
 import WelcomePassBenefits from "../components/WelcomePassBenefits.astro";
 import FirstVisitSection from "../components/FirstVisitSection.astro";
 import FaqSection from "../components/FaqSection.astro";
-import LeadForm from "../components/LeadForm.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
 
 import site from "../data/site.json";
 import welcomePass from "../data/welcome-pass.json";
+
+const welcomePassHref = "https://www.eversports.de/org/product/eaed6a11-d4bb-44ff-8b0d-ab8acf6828f3?venueId=403f5ec1-2e5b-489c-b5d1-c424903a26c5";
 ---
 
 <BaseLayout
-  title="Welcome Pass | Zwei Beginner-Tanzkurse bei Elite Dance Studio"
-  description="Mit dem Welcome Pass zwei beginner-friendly Tanzkurse bei Elite Dance Studio in Berlin-Moabit testen: 2 Klassen für 20 Euro, 14 Tage gültig."
+  title="Welcome Pass | Zwei Tanzkurse bei Elite Dance Studio testen"
+  description="Mit dem Welcome Pass zwei reguläre Tanzkurse bei Elite Dance Studio in Berlin-Moabit testen: 2 Classes für 20 Euro, 10 Tage gültig und einmal pro Person."
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
@@ -23,26 +24,18 @@ import welcomePass from "../data/welcome-pass.json";
     <WelcomePassHero hero={welcomePass.hero} />
     <WelcomePassBenefits benefits={welcomePass.benefits} />
 
-    <LeadForm
-      kind="welcome"
-      id="welcome-form"
-      eyebrow="Welcome Pass anfragen"
-      title="Erzähl uns kurz, wie du starten möchtest."
-      description="Das Formular hilft uns, dir zwei passende Beginner-Klassen zu empfehlen. Danach bestätigen wir persönlich deinen Start."
-    />
-
     <EversportsSchedule
       id="pass-kurse"
       eyebrow="Deine zwei Klassen"
       title="Wähle im aktuellen Stundenplan."
-      description="Der Live-Kalender zeigt dir die echten Termine, Coaches und freien Plätze. Achte für deinen Einstieg auf Level 0 oder Beginner und nenne uns deine Wunschklassen im Formular."
+      description="Kaufe zuerst deinen Welcome Pass über Eversports und buche danach innerhalb von 10 Tagen zwei reguläre Classes. Du kannst unterschiedliche Styles testen; Advanced-Kurse, Closed Groups und Intensives sind ausgenommen."
     />
 
     <FirstVisitSection
       steps={welcomePass.steps}
       eyebrow="So funktioniert es"
-      title="Vom ersten Klick bis zu deiner zweiten Klasse."
-      description="Der Ablauf bleibt bewusst einfach. Wenn du bei der Kurswahl unsicher bist, helfen wir dir persönlich weiter."
+      title="Vom Kauf bis zu deiner zweiten Klasse."
+      description="Direkt online kaufen, Classes auswählen und loslegen. Wenn du bei der Kurswahl unsicher bist, helfen wir dir natürlich trotzdem persönlich weiter."
     />
 
     <FaqSection
@@ -55,11 +48,11 @@ import welcomePass from "../data/welcome-pass.json";
     <section class="cta-banner panel welcome-final-cta">
       <div>
         <div class="eyebrow">Bereit für deinen ersten Schritt?</div>
-        <h2>Deine ersten zwei Klassen beginnen mit einer kurzen Nachricht.</h2>
-        <p>Wir helfen dir bei der Auswahl und reservieren deinen Platz für den passenden Einstieg.</p>
+        <h2>Welcome Pass direkt online kaufen.</h2>
+        <p>Kaufe den Pass über Eversports und buche deine zwei Classes dort direkt selbst – ohne vorherige Anfrage.</p>
       </div>
       <div class="actions">
-        <a class="button welcome-primary" href="#welcome-form">Welcome Pass anfragen</a>
+        <a class="button welcome-primary" href={welcomePassHref} target="_blank" rel="noreferrer">Welcome Pass kaufen</a>
         <a class="button welcome-secondary" href="/kurse/">Kurse vergleichen</a>
       </div>
     </section>

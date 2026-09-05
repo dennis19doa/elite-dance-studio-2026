@@ -1,0 +1,227 @@
+/* V20 mobile launch fixes — visibility, media sizing and phone-first readability. */
+
+@media (max-width: 720px) {
+  /* Avoid reveal clipping leaving media-heavy sections hidden on mobile browsers. */
+  html.motion-ready .home-page .studio-worlds[data-reveal],
+  html.motion-ready .home-page .why-elite-v19[data-reveal],
+  html.motion-ready body.route-events .events-stage-v12[data-reveal],
+  html.motion-ready body.route-kurse .style-poster-showcase-v18[data-reveal],
+  html.motion-ready body.route-coaches .coaches-directory-v15[data-reveal],
+  html.motion-ready body.route-ueber-uns .about-founders-v12[data-reveal],
+  html.motion-ready body.route-intensives .service-page-hero[data-reveal],
+  html.motion-ready body.route-intensives .intensive-roadmap-panel[data-reveal],
+  html.motion-ready body.route-fortgeschrittene .advanced-offer[data-reveal] {
+    opacity: 1 !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+
+  html.motion-ready .home-page .studio-worlds [data-reveal-item],
+  html.motion-ready .home-page .why-elite-v19 [data-reveal-item],
+  html.motion-ready body.route-kurse .style-poster-showcase-v18 [data-reveal-item],
+  html.motion-ready body.route-coaches .coaches-directory-v15 [data-reveal-item],
+  html.motion-ready body.route-intensives .intensive-roadmap-panel [data-reveal-item] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition-delay: 0s !important;
+  }
+
+  /* Homepage: keep all three visual cards fully visible. */
+  .home-page .studio-world-card > img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .home-page .studio-world-events > img {
+    object-position: center center !important;
+  }
+
+  /* Homepage: Warum Elite becomes a readable vertical story instead of a hidden carousel. */
+  .home-page .why-elite-v19 {
+    display: grid !important;
+    height: auto !important;
+    min-height: 0 !important;
+    gap: 20px !important;
+    overflow: hidden !important;
+    padding: 28px 18px 18px !important;
+  }
+
+  .home-page .why-elite-v19 > img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .home-page .why-elite-v19 .why-elite-content-v12 {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .home-page .why-elite-v19 .why-elite-content-v12 h2 {
+    max-width: 12ch !important;
+    font-size: clamp(2.15rem, 10.5vw, 3rem) !important;
+    line-height: .98 !important;
+  }
+
+  .home-page .why-elite-v19 .why-elite-content-v12 p {
+    max-width: 32rem !important;
+    font-size: .94rem !important;
+    line-height: 1.58 !important;
+  }
+
+  .home-page .why-elite-v19 .why-elite-lines-v12 {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+  }
+
+  .home-page .why-elite-v19 .why-elite-lines-v12 > div {
+    width: 100% !important;
+    min-height: 0 !important;
+    padding: 17px 18px !important;
+    border: 1px solid rgba(255,255,255,.18) !important;
+    border-radius: 14px !important;
+    background: rgba(22,16,14,.78) !important;
+  }
+
+  .home-page .why-elite-v19 .why-elite-lines-v12 strong {
+    margin-top: 7px !important;
+    font-size: 1rem !important;
+    line-height: 1.34 !important;
+  }
+
+  /* Events: make the campaign hero photo explicit on phones. */
+  body.route-events .events-stage-v12 > img,
+  body.route-events .event-chapter-v12 figure img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  body.route-events .events-stage-v12 > img {
+    position: absolute !important;
+    inset: 0 !important;
+    object-position: center center !important;
+  }
+
+  /* Courses: keep poster artwork from collapsing behind lazy/reveal states. */
+  body.route-kurse .style-poster-image-link {
+    display: block !important;
+    width: 100% !important;
+    min-height: 320px !important;
+    aspect-ratio: 4 / 5 !important;
+    overflow: hidden !important;
+  }
+
+  body.route-kurse .style-poster-image-link > img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Coaches: reserve a real photo area on every phone card. */
+  body.route-coaches .coach-photo-v15 {
+    display: block !important;
+    width: 100% !important;
+    min-height: 320px !important;
+    aspect-ratio: 4 / 5 !important;
+    overflow: hidden !important;
+  }
+
+  body.route-coaches .coach-photo-v15 img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* About: use the founders portrait at its natural mobile proportion. */
+  body.route-ueber-uns .about-founders-v12 figure {
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    aspect-ratio: 2 / 3 !important;
+    overflow: hidden !important;
+  }
+
+  body.route-ueber-uns .about-founders-v12 figure img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Intensives: guarantee hero and roadmap photography has measurable height. */
+  body.route-intensives .intensive-hero-media,
+  body.route-intensives .intensive-card-image-v15 {
+    display: block !important;
+    width: 100% !important;
+    min-height: 280px !important;
+    aspect-ratio: 4 / 3 !important;
+    overflow: hidden !important;
+  }
+
+  body.route-intensives .intensive-hero-media img,
+  body.route-intensives .intensive-card-image-v15 img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Advanced / Closed Groups: restore a consistent portrait card image. */
+  body.route-fortgeschrittene .advanced-card-image-v18 {
+    display: block !important;
+    width: 100% !important;
+    min-height: 320px !important;
+    aspect-ratio: 4 / 5 !important;
+    overflow: hidden !important;
+  }
+
+  body.route-fortgeschrittene .advanced-card-image-v18 img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}

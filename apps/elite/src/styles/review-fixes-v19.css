@@ -1,0 +1,459 @@
+/* PR #10 review fixes — scoped polish on top of the approved late-V19 system. */
+
+/* KURSE — less oversized, easier to scan. */
+.route-kurse .page-intro {
+  overflow: hidden;
+}
+
+.route-kurse .page-intro .page-intro-copy {
+  max-width: 1080px;
+}
+
+.route-kurse .page-intro .page-title {
+  max-width: 13.5ch;
+  font-size: clamp(3rem, 5.7vw, 6.25rem) !important;
+  line-height: .93 !important;
+  letter-spacing: -.055em !important;
+}
+
+.route-kurse .page-intro .lead {
+  max-width: 48rem;
+}
+
+/* Homepage studio-life section — simpler Elite Dance language. */
+.studio-worlds .section-head h2 {
+  max-width: 10ch;
+  font-size: clamp(2.35rem, 4.6vw, 4.8rem);
+  line-height: .94;
+  letter-spacing: -.05em;
+}
+
+.studio-worlds .studio-world-events img {
+  object-position: center 42%;
+}
+
+/* PRICES — remove numbered-guide feel and make flexible options editorial, not spreadsheet-like. */
+.pricing-page-v19-redesign .pricing-hero-guide-v20 > div {
+  padding-left: 26px !important;
+}
+
+.pricing-page-v19-redesign .pricing-hero-guide-v20 > div::before {
+  display: none !important;
+  content: none !important;
+}
+
+.pricing-page-v19-redesign .pricing-flex-v20 {
+  color: #281e18;
+}
+
+.pricing-page-v19-redesign .pricing-flex-v20 .pricing-chapter-v20 h3 {
+  color: #281e18 !important;
+}
+
+.pricing-page-v19-redesign .pricing-flex-v20 .pricing-chapter-v20 > p {
+  color: #74645a !important;
+}
+
+.pricing-page-v19-redesign .flex-price-list-v20 {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+.pricing-page-v19-redesign .flex-price-row-v20 {
+  display: flex !important;
+  min-width: 0;
+  min-height: 280px;
+  flex-direction: column;
+  gap: 18px;
+  align-items: stretch !important;
+  padding: clamp(22px, 2.6vw, 32px) !important;
+  border: 1px solid rgba(59, 42, 31, .12) !important;
+  border-radius: 18px;
+  background: rgba(255,255,255,.48);
+  box-shadow: 0 12px 28px rgba(72, 48, 31, .06);
+}
+
+.pricing-page-v19-redesign .flex-price-name-v20 > span {
+  color: #ae5937 !important;
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v19-redesign .flex-price-title-line-v19 {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 7px;
+}
+
+.pricing-page-v19-redesign .flex-price-title-line-v19 h4,
+.pricing-page-v19-redesign .flex-price-name-v20 h4 {
+  margin: 0 !important;
+  color: #281e18 !important;
+  font-size: clamp(1.45rem, 2vw, 2rem) !important;
+  line-height: 1;
+  letter-spacing: -.035em;
+}
+
+.pricing-page-v19-redesign .flex-price-tag-v19 {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border: 1px solid rgba(174, 89, 55, .22);
+  border-radius: 999px;
+  background: rgba(174, 89, 55, .07);
+  color: #6d3825;
+  font-size: .78rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.pricing-page-v19-redesign .flex-price-copy-v20 {
+  display: grid;
+  gap: 12px;
+}
+
+.pricing-page-v19-redesign .flex-price-copy-v20 p {
+  margin: 0 !important;
+  color: #66564c !important;
+  font-size: .92rem;
+  line-height: 1.55;
+}
+
+.pricing-page-v19-redesign .flex-price-copy-v20 ul {
+  display: flex !important;
+  gap: 7px 14px !important;
+  flex-wrap: wrap;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+
+.pricing-page-v19-redesign .flex-price-copy-v20 li {
+  position: relative;
+  padding-left: 11px !important;
+  color: #756258 !important;
+  font-size: .78rem !important;
+}
+
+.pricing-page-v19-redesign .flex-price-copy-v20 li::before {
+  position: absolute;
+  top: .52em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #c56845;
+  content: "";
+}
+
+.pricing-page-v19-redesign .flex-price-row-v20 .text-link {
+  margin-top: auto;
+  color: #8d452d !important;
+  font-weight: 800;
+}
+
+/* ROOM RENTAL — useful stats, no prices, no mashed-together text. */
+.route-raummiete .rental-facts-v20 {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  margin-top: 0;
+}
+
+.route-raummiete .rental-facts-v20 > div {
+  display: flex !important;
+  min-height: 158px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(20px, 2.3vw, 30px) !important;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 18px;
+  background: #1d1918;
+}
+
+.route-raummiete .rental-facts-v20 span,
+.route-raummiete .rental-facts-v20 strong,
+.route-raummiete .rental-facts-v20 p {
+  display: block !important;
+  margin: 0 !important;
+}
+
+.route-raummiete .rental-facts-v20 span {
+  color: #d9996d !important;
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.route-raummiete .rental-facts-v20 strong {
+  margin: 18px 0 6px !important;
+  color: #f7eee6 !important;
+  font-family: "Sora", Inter, sans-serif;
+  font-size: clamp(1.7rem, 2.8vw, 2.7rem) !important;
+  line-height: .95;
+  letter-spacing: -.04em;
+}
+
+.route-raummiete .rental-facts-v20 p {
+  color: rgba(247,238,230,.62) !important;
+  font-size: .82rem;
+  line-height: 1.4;
+}
+
+/* ABOUT — magazine/editorial rather than another generic landing page. */
+.route-ueber-uns .about-opening-v12 {
+  min-height: clamp(500px, 66vh, 720px);
+}
+
+.route-ueber-uns .about-opening-copy-v12 {
+  max-width: 830px;
+}
+
+.route-ueber-uns .about-opening-copy-v12 h1 {
+  max-width: 12.5ch;
+  font-size: clamp(3.6rem, 6.4vw, 6.9rem) !important;
+  line-height: .9 !important;
+  letter-spacing: -.058em !important;
+}
+
+.route-ueber-uns .about-opening-copy-v12 p {
+  max-width: 38rem;
+}
+
+.route-ueber-uns .about-founders-magazine-v19 {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, .78fr) !important;
+  gap: clamp(28px, 5vw, 72px) !important;
+  align-items: stretch;
+  padding: clamp(30px, 5vw, 70px) !important;
+  border: 1px solid rgba(75, 53, 38, .12);
+  border-radius: 24px;
+  background: #f0e5d6 !important;
+  color: #261d18;
+}
+
+.route-ueber-uns .about-founders-magazine-v19 .about-founders-quote-v12 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.route-ueber-uns .about-founders-magazine-v19 .about-founders-quote-v12 > span {
+  color: #a75235 !important;
+}
+
+.route-ueber-uns .about-founders-magazine-v19 h2 {
+  max-width: 12ch;
+  color: #251c17 !important;
+  font-size: clamp(2.5rem, 4.7vw, 4.9rem) !important;
+  line-height: .94;
+  letter-spacing: -.052em;
+}
+
+.route-ueber-uns .about-founders-magazine-v19 p {
+  max-width: 42rem;
+  color: #66574d !important;
+  line-height: 1.72;
+}
+
+.route-ueber-uns .about-founders-magazine-v19 .about-editorial-lead-v19 {
+  margin-top: 28px;
+  color: #30241e !important;
+  font-family: "Sora", Inter, sans-serif;
+  font-size: clamp(1.08rem, 1.5vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.route-ueber-uns .about-founders-magazine-v19 figure {
+  align-self: stretch;
+  margin: 0;
+}
+
+.route-ueber-uns .about-founders-magazine-v19 figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+}
+
+.route-ueber-uns .about-founders-magazine-v19 figcaption {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  color: #6d5a4e;
+  font-size: .72rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.route-ueber-uns .about-founders-magazine-v19 figcaption span {
+  color: #a75235;
+  font-weight: 850;
+}
+
+.route-ueber-uns .about-editorial-section-v19 {
+  border-top: 1px solid rgba(255,255,255,.09);
+  padding-top: clamp(34px, 5vw, 64px);
+}
+
+/* INTENSIVES — use real current imagery, consistent crop, less roadmap-number visual noise. */
+.route-intensives .intensive-roadmap-review-v19 {
+  display: grid !important;
+  gap: 18px !important;
+}
+
+.route-intensives .intensive-card-review-v19 {
+  display: block !important;
+  padding: 0 !important;
+}
+
+.route-intensives .intensive-card-review-v19::before,
+.route-intensives .intensive-card-review-v19::after {
+  display: none !important;
+  content: none !important;
+}
+
+.route-intensives .intensive-card-review-v19 .roadmap-card-v15 {
+  width: 100%;
+}
+
+.route-intensives .intensive-card-image-v15 {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.route-intensives .intensive-card-image-v15 img,
+.route-intensives .intensive-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+}
+
+.route-intensives .intensive-card-image-v15 span {
+  z-index: 2;
+}
+
+/* ADVANCED / CLOSED GROUPS — smaller headlines and one consistent image system. */
+.route-fortgeschrittene .advanced-hero-v20 .page-title {
+  max-width: 12ch;
+  font-size: clamp(3rem, 5.5vw, 5.8rem) !important;
+  line-height: .92 !important;
+  letter-spacing: -.055em !important;
+}
+
+.route-fortgeschrittene .advanced-section-head-review-v19 h2 {
+  max-width: 15ch;
+  font-size: clamp(2.25rem, 3.6vw, 3.65rem) !important;
+  line-height: .96;
+  letter-spacing: -.045em;
+}
+
+.route-fortgeschrittene .closed-group-grid-v19 {
+  align-items: stretch;
+}
+
+.route-fortgeschrittene .closed-group-card-v19 {
+  height: 100%;
+}
+
+.route-fortgeschrittene .closed-group-card-v19 .advanced-card-image-v18 {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: #0d0b0b;
+}
+
+.route-fortgeschrittene .closed-group-card-v19 .advanced-card-image-v18 img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  object-position: center;
+}
+
+.route-fortgeschrittene .closed-group-card-v19 .advanced-card-copy-v18 {
+  min-height: 180px;
+}
+
+@media (max-width: 980px) {
+  .pricing-page-v19-redesign .flex-price-list-v20 {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .pricing-page-v19-redesign .flex-price-row-v20:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .route-raummiete .rental-facts-v20 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .route-ueber-uns .about-founders-magazine-v19 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .route-ueber-uns .about-founders-magazine-v19 figure img {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 720px) {
+  .route-kurse .page-intro .page-title {
+    max-width: 12ch;
+    font-size: clamp(2.75rem, 13vw, 4.5rem) !important;
+  }
+
+  .pricing-page-v19-redesign .flex-price-list-v20 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pricing-page-v19-redesign .flex-price-row-v20:last-child {
+    grid-column: auto;
+  }
+
+  .pricing-page-v19-redesign .flex-price-row-v20 {
+    min-height: 0;
+  }
+
+  .route-raummiete .rental-facts-v20 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .route-raummiete .rental-facts-v20 > div {
+    min-height: 130px;
+  }
+
+  .route-ueber-uns .about-opening-copy-v12 h1 {
+    max-width: 11ch;
+    font-size: clamp(3.2rem, 15vw, 5rem) !important;
+  }
+
+  .route-ueber-uns .about-founders-magazine-v19 {
+    padding: 24px !important;
+  }
+
+  .route-ueber-uns .about-founders-magazine-v19 figure img {
+    aspect-ratio: 4 / 5;
+  }
+
+  .route-intensives .intensive-card-image-v15 {
+    aspect-ratio: 4 / 3;
+  }
+
+  .route-fortgeschrittene .advanced-hero-v20 .page-title {
+    max-width: 11ch;
+    font-size: clamp(2.9rem, 13vw, 4.7rem) !important;
+  }
+}

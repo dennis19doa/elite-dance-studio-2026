@@ -1,0 +1,56 @@
+---
+import coaches from "../data/coaches.json";
+
+const rail = [...coaches, ...coaches];
+---
+
+<section class="home-coach-film-v12 home-coach-film-v16" aria-labelledby="home-coach-title" data-coach-rail>
+  <header class="home-coach-film-head-v12">
+    <div>
+      <div class="eyebrow">Unser Team</div>
+      <h2 id="home-coach-title">Meet your coaches.</h2>
+    </div>
+    <div>
+      <button type="button" data-coach-toggle aria-pressed="false">Pause</button>
+      <a href="/coaches/">Team entdecken ↗</a>
+    </div>
+  </header>
+
+  <div class="home-coach-film-window-v12" data-coach-window>
+    <div class="home-coach-film-track-v12">
+      {rail.map((coach, index) => (
+        <a
+          class="home-coach-film-item-v12"
+          href={`/coaches/${coach.slug}/`}
+          aria-hidden={index >= coaches.length ? "true" : undefined}
+          tabindex={index >= coaches.length ? -1 : undefined}
+        >
+          <img src={coach.image} alt={index < coaches.length ? coach.imageAlt : ""} loading="lazy" decoding="async" />
+          <span class="home-coach-film-basic-v16">
+            <small>{coach.focus}</small>
+            <strong>{coach.name}</strong>
+          </span>
+          <div class="home-coach-film-details-v16">
+            <small>{coach.schedule}</small>
+            <p>{coach.text}</p>
+            <b>{coach.instagramHandle}</b>
+            <em>Profil öffnen ↗</em>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const root = document.currentScript?.closest('[data-coach-rail]');
+      const toggle = root?.querySelector('[data-coach-toggle]');
+      if (!root || !toggle) return;
+      toggle.addEventListener('click', () => {
+        const paused = root.classList.toggle('is-paused');
+        toggle.setAttribute('aria-pressed', String(paused));
+        toggle.textContent = paused ? 'Weiter' : 'Pause';
+      });
+    })();
+  </script>
+</section>

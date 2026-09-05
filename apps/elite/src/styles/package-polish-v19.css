@@ -1,0 +1,177 @@
+/* Follow-up polish for package clarity and light-surface contrast. */
+
+/* PRICES — make the first chapter wider, more horizontal, and unmistakably readable. */
+.pricing-page-v19-redesign .pricing-start-v20 .pricing-chapter-v20 {
+  grid-template-columns: minmax(135px, .24fr) minmax(420px, 1.25fr) minmax(280px, .72fr) !important;
+  gap: 22px 36px !important;
+  align-items: center !important;
+  margin-bottom: 34px !important;
+  padding: 20px 22px;
+  border: 1px solid rgba(78, 54, 39, .08);
+  border-radius: 18px;
+  background: rgba(255,255,255,.28);
+  box-shadow: 0 14px 32px rgba(68,45,31,.055);
+}
+
+.pricing-page-v19-redesign .pricing-start-v20 .pricing-chapter-v20 > span {
+  align-self: center !important;
+  padding-top: 0 !important;
+  color: #a94f2f !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.72);
+}
+
+.pricing-page-v19-redesign .pricing-start-v20 .pricing-chapter-v20 h3 {
+  max-width: none !important;
+  color: #241a15 !important;
+  font-size: clamp(2.15rem, 3.15vw, 3.35rem) !important;
+  font-weight: 800 !important;
+  line-height: .96 !important;
+  letter-spacing: -.048em !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.75), 0 10px 24px rgba(69,43,28,.07);
+}
+
+.pricing-page-v19-redesign .pricing-start-v20 .pricing-chapter-v20 > p {
+  max-width: 30rem;
+  color: #58483f !important;
+  font-size: .98rem;
+  font-weight: 550;
+  line-height: 1.55;
+  text-shadow: 0 1px 0 rgba(255,255,255,.55);
+}
+
+/* INTENSIVES — high contrast on cream 'Für wen / Dein Ziel' cards. */
+.intensive-detail-page-v19 .intensive-fit-grid-v19 > div {
+  border: 1px solid rgba(72,48,34,.12) !important;
+  background: #e6d5c2 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 10px 24px rgba(0,0,0,.08);
+}
+
+.intensive-detail-page-v19 .intensive-fit-grid-v19 small {
+  color: #8c3d27 !important;
+  text-shadow: none !important;
+}
+
+.intensive-detail-page-v19 .intensive-fit-grid-v19 p {
+  color: #2a201b !important;
+  font-weight: 560;
+  text-shadow: none !important;
+}
+
+/* INTENSIVE PACKAGE CONTENT */
+.intensive-detail-page-v19 .intensive-package-v19 {
+  min-height: 430px !important;
+}
+
+.intensive-detail-page-v19 .intensive-package-summary-v19 {
+  margin-bottom: 18px !important;
+}
+
+.intensive-detail-page-v19 .intensive-package-list-v19 {
+  display: grid;
+  gap: 11px;
+  margin: 0 0 30px;
+  padding: 0;
+  list-style: none;
+}
+
+.intensive-detail-page-v19 .intensive-package-list-v19 li {
+  position: relative;
+  padding-left: 22px;
+  color: #4f4037;
+  font-size: .92rem;
+  line-height: 1.52;
+}
+
+.intensive-detail-page-v19 .intensive-package-list-v19 li::before {
+  position: absolute;
+  top: .58em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #bd6545;
+  content: "";
+}
+
+.intensive-detail-page-v19 .intensive-package-v19.is-featured .intensive-package-list-v19 li {
+  color: rgba(255,255,255,.84);
+}
+
+.intensive-detail-page-v19 .intensive-package-v19.is-featured .intensive-package-list-v19 li::before {
+  background: #ffd0bd;
+}
+
+.intensive-detail-page-v19 .video-review-explainer-v19 {
+  display: grid;
+  grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr);
+  gap: 28px 54px;
+  align-items: center;
+  margin-top: 16px;
+  padding: clamp(26px, 3.5vw, 42px);
+  border: 1px solid rgba(56,39,29,.11);
+  border-radius: 19px;
+  background: #2a211d;
+  color: #f7eee6;
+}
+
+.intensive-detail-page-v19 .video-review-explainer-v19 span {
+  color: #e3a077;
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.intensive-detail-page-v19 .video-review-explainer-v19 h3 {
+  max-width: 16ch;
+  margin: 9px 0 0;
+  color: #f7eee6 !important;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+
+.intensive-detail-page-v19 .video-review-explainer-v19 p {
+  margin: 0;
+  color: rgba(247,238,230,.72) !important;
+  font-size: .98rem;
+  line-height: 1.68;
+}
+
+@media (max-width: 980px) {
+  .pricing-page-v19-redesign .pricing-start-v20 .pricing-chapter-v20 {
+    grid-template-columns: 1fr 1.8fr !important;
+  }
+
+  .pricing-page-v19-redesign .pricing-start-v20 .pricing-chapter-v20 > p {
+    grid-column: 1 / -1;
+    max-width: 44rem;
+  }
+
+  .intensive-detail-page-v19 .video-review-explainer-v19 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .pricing-page-v19-redesign .pricing-start-v20 .pricing-chapter-v20 {
+    grid-template-columns: 1fr !important;
+    padding: 18px;
+  }
+
+  .pricing-page-v19-redesign .pricing-start-v20 .pricing-chapter-v20 h3 {
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+  }
+
+  .pricing-page-v19-redesign .pricing-start-v20 .pricing-chapter-v20 > p {
+    grid-column: auto;
+  }
+
+  .intensive-detail-page-v19 .intensive-package-v19 {
+    min-height: 0 !important;
+  }
+
+  .intensive-detail-page-v19 .video-review-explainer-v19 {
+    padding: 24px;
+  }
+}

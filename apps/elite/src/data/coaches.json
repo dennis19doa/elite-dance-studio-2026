@@ -42,7 +42,7 @@
     "slug": "nate",
     "name": "Nate",
     "focus": "Heels · Twerk · Latin Commercial",
-    "schedule": "Montag · 18:00–21:00",
+    "schedule": "Montag · 18:00–21:00 · Mittwoch · 19:00–21:30",
     "text": "Nates Classes setzen auf Technik, Ausdruck und Confidence mit Raum für die eigene Persönlichkeit.",
     "beginnerSupport": "Technik zuerst, Ausdruck darf wachsen",
     "image": "/media/coaches/nate.webp",
@@ -104,17 +104,17 @@
     "instagramUrl": "https://www.instagram.com/laura.enmovimiento/"
   },
   {
-    "slug": "ari",
-    "name": "Ari",
-    "focus": "Heels",
+    "slug": "sora",
+    "name": "Sora",
+    "focus": "Waving",
     "schedule": "Freitag · 17:00–18:00",
-    "text": "Aris Heels-Klassen verbinden Haltung, Linien und Performance mit einem verständlichen technischen Fundament.",
-    "beginnerSupport": "Präsenz darf Schritt für Schritt entstehen",
-    "image": "/media/coaches/ari.webp",
-    "imageAlt": "Ari, Heels Coach bei Elite Dance Studio",
+    "text": "Soras Waving-Class verbindet Kontrolle, Isolationen und Flow zu einer präzisen, musikalischen Bewegungssprache.",
+    "beginnerSupport": "Technik und Flow Schritt für Schritt aufbauen",
+    "image": "/media/coaches/sora.webp",
+    "imageAlt": "Sora, Waving Coach bei Elite Dance Studio",
     "imageNote": "Elite Portrait",
-    "instagramHandle": "@arianna_privitera",
-    "instagramUrl": "https://www.instagram.com/arianna_privitera/"
+    "instagramHandle": "@sora_pham",
+    "instagramUrl": "https://www.instagram.com/sora_pham/"
   },
   {
     "slug": "jessica-julian",

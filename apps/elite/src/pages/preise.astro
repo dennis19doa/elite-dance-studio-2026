@@ -13,69 +13,33 @@ import site from "../data/site.json";
 <BaseLayout
   title="Preise & Memberships | Elite Dance Studio Berlin"
   description="Welcome Pass, Drop-in, Karten, USC und Memberships für beginner-friendly Tanzkurse im Elite Dance Studio Berlin-Moabit."
+  bodyClass="pricing-page-v15 pricing-page-v19 pricing-page-v19-redesign"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main">
-    <section class="pricing-page-hero panel">
-      <div class="pricing-page-copy">
-        <div class="eyebrow">Dein Tanzplan</div>
-        <h1 class="page-title">Erst testen. Dann deinen Rhythmus finden.</h1>
-        <p class="lead">
-          Du musst dich nicht sofort festlegen. Starte mit zwei Klassen, bleib flexibel oder
-          baue eine feste Tanzroutine auf.
-        </p>
+  <main class="page-shell page-main pricing-main-v19-redesign">
+    <section class="pricing-hero-v20 panel">
+      <div class="pricing-hero-copy-v20">
+        <div class="eyebrow">Preise · Berlin-Moabit</div>
+        <h1 class="page-title">Tanz so, wie es zu deinem Leben passt.</h1>
+        <p class="lead">Einmal ausprobieren, regelmäßig trainieren oder komplett flexibel bleiben. Du entscheidest erst über deinen Rhythmus – dann über den Preis.</p>
         <div class="actions">
-          <a class="button primary" href="#pricing-paths">Option wählen</a>
+          <a class="button primary" href="#pricing">Optionen vergleichen</a>
           <a class="button secondary" href="/kontakt/">Kurz beraten lassen</a>
         </div>
-        <div class="hero-signals">
-          <div class="hero-signal"><span>01</span><strong>Keine Anmeldegebühr</strong></div>
-          <div class="hero-signal"><span>02</span><strong>Kein fester Tanzpartner nötig</strong></div>
-          <div class="hero-signal"><span>03</span><strong>USC bei regulären Kursen möglich</strong></div>
-        </div>
       </div>
-      <figure class="pricing-page-media">
-        <img
-          src="/media/placeholders/community-beginners.jpg"
-          alt="Konzeptbild einer offenen Beginner-Tanzklasse in einem hellen Studio"
-        />
-        <figcaption>Bildidee · wird später durch echte Elite-Community-Fotografie ersetzt</figcaption>
-      </figure>
-    </section>
-
-    <section class="panel pricing-paths" id="pricing-paths">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">Was passt heute zu dir?</div>
-          <h2>Drei gute Einstiege. Kein falscher.</h2>
-        </div>
-        <p>Die Entscheidung beginnt nicht mit einer Preistabelle, sondern mit deinem Ziel.</p>
-      </div>
-      <div class="pricing-path-grid">
-        <a class="pricing-path-card path-coral" href="/starter-pass/">
-          <span class="path-number">01</span>
-          <div><strong>Ich will Elite erst erleben.</strong><p>Zwei Klassen mit dem Welcome Pass.</p></div>
-          <span class="path-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="pricing-path-card path-blue" href="#pricing">
-          <span class="path-number">02</span>
-          <div><strong>Ich will flexibel tanzen.</strong><p>Drop-in, 5er Karte, 10er Karte oder USC.</p></div>
-          <span class="path-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="pricing-path-card path-gold" href="#pricing">
-          <span class="path-number">03</span>
-          <div><strong>Ich will eine echte Routine.</strong><p>Bronze, Silber oder Gold Membership.</p></div>
-          <span class="path-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
+      <aside class="pricing-hero-guide-v20" aria-label="Welche Preisoption passt zu mir?">
+        <div><span>Start</span><strong>Neu bei Elite?</strong><p>2 Classes für 20€.</p></div>
+        <div><span>Routine</span><strong>Feste Woche?</strong><p>Bronze, Silber oder Gold.</p></div>
+        <div><span>Flexibel</span><strong>Ohne Membership?</strong><p>Drop-in, Karten oder USC.</p></div>
+      </aside>
     </section>
 
     <PricingSection
       pricing={pricing}
-      eyebrow="Preise im Überblick"
-      title="So viel Flexibilität, wie du gerade brauchst."
-      description="Alle aktuellen Optionen, von deinem ersten Besuch bis zur festen Wochenroutine."
+      eyebrow="Deine Optionen"
+      title="Wähle deinen Rhythmus. Nicht den kompliziertesten Tarif."
+      description="Klare Leistungen, klare Preise und keine langfristige Bindung bei unseren Memberships."
     />
 
     <FaqSection

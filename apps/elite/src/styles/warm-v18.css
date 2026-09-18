@@ -1,0 +1,164 @@
+/* Elite V18 — warmer canvas and cleaner navigation */
+:root {
+  --v15-canvas: #17120f;
+  --v15-surface: #211a17;
+  --v15-surface-2: #2b221e;
+  --v12-bg: #17120f;
+  --v12-surface: #211a17;
+  --v17-cream: #f1e7db;
+  --v17-paper: #faf6ef;
+  --warm-paper: #f6eee5;
+  --warm-sand: #e9d8c7;
+  --warm-amber: #f2b36f;
+  --warm-ink: #1b1613;
+}
+
+html,
+body,
+body.home-page,
+body.site-subpage {
+  background: var(--v15-canvas) !important;
+}
+
+body::before,
+body.site-subpage::before {
+  background:
+    radial-gradient(circle at 8% 3%, rgba(255, 79, 123, .14), transparent 30rem),
+    radial-gradient(circle at 88% 8%, rgba(242, 179, 111, .13), transparent 34rem),
+    radial-gradient(circle at 72% 72%, rgba(64, 88, 255, .07), transparent 32rem),
+    var(--v15-canvas) !important;
+}
+
+.site-header-v17 {
+  background: rgba(20, 16, 14, .94) !important;
+}
+
+.site-header-v17 .topbar {
+  gap: 16px !important;
+}
+
+.site-header-v17 .desktop-nav {
+  gap: clamp(10px, 1.15vw, 17px) !important;
+  flex: 1;
+  justify-content: center;
+  min-width: 0;
+}
+
+.site-header-v17 .desktop-nav > .nav-link,
+.site-header-v17 .desktop-nav > .nav-dropdown > summary {
+  white-space: nowrap !important;
+  font-size: .8rem !important;
+}
+
+.site-header-v17 .nav-dropdown-menu {
+  width: min(360px, calc(100vw - 32px));
+  background:
+    linear-gradient(145deg, rgba(255, 79, 123, .08), transparent 42%),
+    #221b18 !important;
+}
+
+.site-header-v17 .nav-dropdown-link {
+  min-width: 0;
+}
+
+.site-header-v17 .nav-dropdown-link > span {
+  display: block;
+  white-space: normal;
+  line-height: 1.2;
+}
+
+.site-header-v17 .nav-dropdown-link small {
+  display: block;
+  max-width: 31ch;
+  margin-top: 4px;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.site-header-v17 .header-contact-button-v17 {
+  border-color: rgba(242, 179, 111, .5) !important;
+  background: rgba(242, 179, 111, .1) !important;
+}
+
+.site-header-v17 .header-contact-button-v17:hover {
+  border-color: var(--warm-amber) !important;
+  background: var(--warm-amber) !important;
+  color: var(--warm-ink) !important;
+}
+
+.site-subpage .page-main > .panel,
+.site-subpage .course-guide,
+.site-subpage .pricing-page-hero,
+.site-subpage .pricing-paths,
+.site-subpage .pricing-v2,
+.site-subpage .pricing-assurance,
+.site-subpage .service-page-hero,
+.site-subpage .intensive-roadmap-panel,
+.site-subpage .progression-choice,
+.site-subpage .faq-section,
+.site-subpage .booking-intro,
+.site-subpage .rental-request,
+.site-subpage .page-intro.panel,
+.site-subpage .page-links.panel {
+  background: linear-gradient(145deg, #241d19, #1f1916) !important;
+}
+
+.home-page .home-coach-film-v16 {
+  border-color: rgba(242,179,111,.2) !important;
+  background:
+    radial-gradient(circle at 86% 10%, rgba(64,88,255,.16), transparent 28rem),
+    radial-gradient(circle at 8% 90%, rgba(255,79,123,.13), transparent 25rem),
+    linear-gradient(145deg, #251c1b, #171312) !important;
+}
+
+.home-page .studio-worlds {
+  border-color: rgba(242,179,111,.2) !important;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(255,79,123,.12), transparent 26rem),
+    linear-gradient(180deg, #261e1a, #191411) !important;
+}
+
+.home-page .schedule-v16 {
+  background:
+    radial-gradient(circle at 92% 0%, rgba(242,179,111,.16), transparent 24rem),
+    linear-gradient(145deg, #fbf7f1, #efe4d7) !important;
+}
+
+.home-page .trial-offer {
+  background:
+    radial-gradient(circle at 92% 10%, rgba(242,179,111,.23), transparent 22rem),
+    linear-gradient(135deg, #ff5d83 0%, #d9476c 58%, #8e3b56 100%) !important;
+}
+
+.site-subpage .eyebrow {
+  color: var(--warm-amber) !important;
+}
+
+body.route-kurse .eyebrow,
+body.route-coaches .eyebrow,
+body.route-events .eyebrow {
+  color: var(--v15-rose) !important;
+}
+
+body.route-stundenplan .eyebrow,
+body.route-fortgeschrittene .eyebrow {
+  color: #91a0ff !important;
+}
+
+body.route-ueber-uns .eyebrow,
+body.route-raummiete .eyebrow {
+  color: var(--warm-amber) !important;
+}
+
+@media (max-width: 1180px) {
+  .site-header-v17 .desktop-nav {
+    gap: 8px !important;
+  }
+  .site-header-v17 .desktop-nav > .nav-link,
+  .site-header-v17 .desktop-nav > .nav-dropdown > summary {
+    font-size: .74rem !important;
+  }
+  .site-header-v17 .header-actions-v17 .button {
+    padding-inline: 11px !important;
+  }
+}

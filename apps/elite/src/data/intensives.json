@@ -1,54 +1,103 @@
 [
   {
-    "number": "01",
+    "slug": "fundamentals",
+    "phase": "Foundation",
     "name": "Fundamentals Intensive",
     "duration": "4 Wochen · 4 × 3 Stunden",
     "summary": "Clean Basics, Haltung, Timing und Connection als starke Grundlage.",
+    "tagline": "Die Grundlage, auf der sauberes Bachata wirklich aufbaut.",
+    "audience": "Für Einsteiger:innen und Tänzer:innen, die ihre Basics sauber neu aufbauen möchten.",
+    "outcome": "Mehr Sicherheit in Haltung, Timing, Connection und Partnerwork.",
     "standardPrice": "140€",
     "premiumPrice": "210€",
     "premiumLabel": "mit Video Reviews & Private Class",
+    "image": "/media/current-site/intensives-dance-floor.jpg",
+    "imageAlt": "Tanzszene bei Elite Dance Studio Berlin",
+    "intro": "Fundamentals ist nicht einfach ein Beginner-Kurs. Das Intensive konzentriert sich auf die Elemente, auf denen dein Bachata langfristig aufbaut – vor allem auf einen kontrollierten, musikalischen Basic Step und eine klare Connection.",
+    "detailParagraphs": [
+      "Wir arbeiten gezielt an Hip Movement, Body Coordination und daran, wie dein Körper den Basic Step organisiert, statt ihn nur auszuführen.",
+      "Open Position und Semi-Closed Position werden über konkrete Übungen aufgebaut, damit Connection verständlich, reproduzierbar und sicher wird.",
+      "Zusätzlich trainierst du Basic-Step-Variationen und unterschiedliche Energien, damit Leading und Following klarer werden und du bewusster entscheiden kannst, wann welche Variation sinnvoll ist."
+    ],
     "points": [
       "Technik, Posture und Partnerwork sauber aufbauen",
-      "Mehr Sicherheit durch strukturiertes Feedback"
+      "Mehr Sicherheit durch strukturiertes Feedback",
+      "Basics direkt in Übungen und Kombinationen anwenden"
     ]
   },
   {
-    "number": "02",
+    "slug": "body-movement-i",
+    "phase": "Control",
     "name": "Body Movement I",
     "duration": "4 Wochen · 4 × 2 Stunden",
     "summary": "Isolation Basics, Flow und Kontrolle für ein klareres Körpergefühl.",
+    "tagline": "Body Movement verständlich aufbauen – von Isolation zu Flow.",
+    "audience": "Für alle, die Body Movement verständlich und technisch von Grund auf lernen möchten.",
+    "outcome": "Mehr Kontrolle, flüssigere Übergänge und ein klareres Gefühl für einzelne Körperbereiche.",
     "standardPrice": "120€",
     "premiumPrice": "190€",
     "premiumLabel": "mit Video Reviews & Private Class",
+    "image": "/media/current-site/intensives-dance-floor.jpg",
+    "imageAlt": "Tanzszene bei Elite Dance Studio Berlin",
+    "intro": "Body Movement I ist der technische Einstieg in Isolations, Waves und kontrollierte Übergänge. Du lernst nicht nur Bewegungen nachzumachen, sondern zu verstehen, wo sie entstehen und wie du sie bewusst steuerst.",
+    "detailParagraphs": [
+      "Der Fokus liegt auf sauberen Isolation Basics, klarer Körperkontrolle und einem Flow, der nicht aus Tempo, sondern aus Kontrolle entsteht.",
+      "Die Inhalte lassen sich direkt in Bachata, Zouk, Salsa und Solo Styles übertragen und helfen dir, Bewegungen bewusster miteinander zu verbinden."
+    ],
     "points": [
       "Isolations, Waves und Körperkontrolle verstehen",
-      "Hilfreich für Bachata, Zouk, Salsa und Solo Styles"
+      "Hilfreich für Bachata, Zouk, Salsa und Solo Styles",
+      "Bewegungen bewusster verbinden statt nur nachzumachen"
     ]
   },
   {
-    "number": "03",
+    "slug": "body-movement-ii",
+    "phase": "Layering",
     "name": "Body Movement II",
     "duration": "4 Wochen · 4 × 2 Stunden",
     "summary": "Mehr Kontrolle, Strength und Layering für präzisere Bewegungen.",
+    "tagline": "Mehr Präzision, Layering und Kontrolle unter höherer Komplexität.",
+    "audience": "Für Tänzer:innen, die Movement Basics bereits kennen und gezielter an Qualität arbeiten möchten.",
+    "outcome": "Mehr Präzision, Layering und Kontrolle auch bei komplexeren Bewegungen.",
     "standardPrice": "120€",
     "premiumPrice": "190€",
     "premiumLabel": "mit Video Reviews & Private Class",
+    "image": "/media/current-site/intensives-dance-floor.jpg",
+    "imageAlt": "Tanzszene bei Elite Dance Studio Berlin",
+    "intro": "Body Movement II setzt auf vorhandenen Basics auf. Statt einzelne Bewegungen isoliert zu trainieren, geht es stärker um Kontrolle, Strength, Layering und darum, mehrere Ebenen sauber miteinander zu verbinden.",
+    "detailParagraphs": [
+      "Du arbeitest an präziseren Übergängen und daran, Technik auch dann stabil zu halten, wenn Bewegungen komplexer oder dynamischer werden.",
+      "Der Fokus liegt auf Bewegungsqualität, Flow und Ausdruck – nicht auf möglichst vielen neuen Figuren."
+    ],
     "points": [
       "Für Tänzer:innen mit vorhandenen Movement Basics",
-      "Fokus auf Kontrolle, Layering, Flow und Ausdruck"
+      "Fokus auf Kontrolle, Layering, Flow und Ausdruck",
+      "Technik unter mehr Tempo und Komplexität stabil halten"
     ]
   },
   {
-    "number": "04",
+    "slug": "body-movement-combined",
+    "phase": "Integration",
     "name": "Body Movement Combined",
     "duration": "4 Wochen · 4 × 2 Stunden",
     "summary": "Ein Full-Body-Training, das Technik, Musikalität und Ausdruck verbindet.",
+    "tagline": "Technik, Flow und Musikalität als eine Bewegung zusammenbringen.",
+    "audience": "Für Tänzer:innen, die einzelne Techniken zu einem natürlicheren Gesamtgefühl verbinden möchten.",
+    "outcome": "Mehr Bewegungsqualität, Musikalität und Freiheit im eigenen Ausdruck.",
     "standardPrice": "120€",
     "premiumPrice": "190€",
     "premiumLabel": "mit Video Reviews & Private Class",
+    "image": "/media/current-site/intensives-dance-floor.jpg",
+    "imageAlt": "Tanzszene bei Elite Dance Studio Berlin",
+    "intro": "Body Movement Combined bringt die einzelnen technischen Bausteine in einen Full-Body-Flow. Das Ziel ist nicht nur Kontrolle, sondern eine Bewegungsqualität, die sich musikalisch und natürlich anfühlt.",
+    "detailParagraphs": [
+      "Du verbindest Isolation, Flow, Kontrolle und Ausdruck zu größeren Bewegungszusammenhängen und lernst, Technik weniger sichtbar und dafür organischer einzusetzen.",
+      "Das Training ist besonders sinnvoll, wenn du Body Movement in Partner Dance, Solo Styles oder Performance nicht nur technisch korrekt, sondern musikalisch frei nutzen möchtest."
+    ],
     "points": [
       "Bewegungsqualität über einzelne Techniken hinaus entwickeln",
-      "Geeignet für Partner Dance, Solo Styles und Performance"
+      "Geeignet für Partner Dance, Solo Styles und Performance",
+      "Technik, Flow und Musikalität als Gesamtbewegung verbinden"
     ]
   }
 ]

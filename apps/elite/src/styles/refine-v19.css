@@ -1,0 +1,466 @@
+/* Elite V19 — compact mobile presentation, practical schedule FAQ and stronger commercial clarity. */
+
+/* ---------------- WHY ELITE: MORE HORIZONTAL, LESS SCROLL ---------------- */
+.why-elite-v19 {
+  position: relative !important;
+  display: grid !important;
+  min-height: 0 !important;
+  gap: clamp(30px, 4vw, 48px);
+  padding: clamp(38px, 5vw, 62px) clamp(28px, 5vw, 64px) clamp(24px, 3vw, 34px) !important;
+  border: 1px solid rgba(242, 179, 111, .18);
+  border-radius: 24px;
+  background: #1b1512;
+}
+
+.why-elite-v19 > img,
+.why-elite-v19 .why-elite-shade-v12 {
+  position: absolute !important;
+  inset: 0;
+}
+
+.why-elite-v19 > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.why-elite-v19 .why-elite-shade-v12 {
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, rgba(20,15,12,.94), rgba(20,15,12,.69) 52%, rgba(20,15,12,.28)),
+    linear-gradient(180deg, transparent 44%, rgba(20,15,12,.78));
+}
+
+.why-elite-v19 .why-elite-content-v12 {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  z-index: 2;
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.why-elite-v19 .why-elite-content-v12 h2 {
+  max-width: 18ch !important;
+  margin-top: 10px;
+  font-size: clamp(2.7rem, 4.7vw, 5.15rem) !important;
+  line-height: .96 !important;
+  letter-spacing: -.052em !important;
+}
+
+.why-elite-v19 .why-elite-content-v12 p {
+  max-width: 40rem;
+  margin-top: 14px;
+}
+
+.why-elite-v19 .why-elite-lines-v12 {
+  position: relative !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 2;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+  margin: 0 !important;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 16px;
+  background: rgba(26, 19, 16, .58);
+  backdrop-filter: blur(14px);
+}
+
+.why-elite-v19 .why-elite-lines-v12 > div {
+  min-height: 112px !important;
+  padding: 19px 21px;
+}
+
+.why-elite-v19 .why-elite-lines-v12 strong {
+  margin-top: 8px;
+  font-size: clamp(.96rem, 1.4vw, 1.18rem);
+}
+
+/* ---------------- STUNDENPLAN FAQ ---------------- */
+.schedule-faq-v19 {
+  margin: clamp(22px, 3vw, 34px) 0 clamp(54px, 7vw, 86px);
+  padding: clamp(26px, 4vw, 44px);
+  border: 1px solid rgba(76, 54, 39, .12);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 92% 4%, rgba(242,179,111,.24), transparent 22rem),
+    linear-gradient(145deg, #fbf7f0, #efe1d2);
+  color: var(--warm-ink);
+  box-shadow: 0 24px 64px rgba(0,0,0,.16);
+}
+
+.schedule-faq-head-v19 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, .7fr);
+  gap: clamp(22px, 4vw, 52px);
+  align-items: end;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(53, 39, 30, .13);
+}
+
+.schedule-faq-v19 .eyebrow {
+  color: #b85f35 !important;
+}
+
+.schedule-faq-v19 h2 {
+  margin: 7px 0 0;
+  color: var(--warm-ink) !important;
+  font-size: clamp(2.25rem, 4.6vw, 4.5rem);
+  line-height: .96 !important;
+}
+
+.schedule-faq-head-v19 > p {
+  margin: 0;
+  color: #675a51;
+  line-height: 1.55;
+}
+
+.schedule-faq-list-v19 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 28px;
+  margin-top: 8px;
+}
+
+.schedule-faq-list-v19 details {
+  border-bottom: 1px solid rgba(53, 39, 30, .13);
+}
+
+.schedule-faq-list-v19 summary {
+  position: relative;
+  padding: 20px 32px 20px 0;
+  color: var(--warm-ink);
+  font-weight: 800;
+  cursor: pointer;
+  list-style: none;
+}
+
+.schedule-faq-list-v19 summary::-webkit-details-marker { display: none; }
+.schedule-faq-list-v19 summary::after {
+  position: absolute;
+  top: 19px;
+  right: 2px;
+  color: #b85f35;
+  content: "+";
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.schedule-faq-list-v19 details[open] summary::after { content: "−"; }
+
+.schedule-faq-list-v19 details p {
+  margin: -4px 0 19px;
+  color: #675a51;
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+.schedule-entry-v19 {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 26px;
+  padding: 18px 20px;
+  border-radius: 15px;
+  background: #281f1a;
+  color: #fff;
+}
+
+.schedule-entry-v19 > div {
+  display: grid;
+  gap: 4px;
+}
+.schedule-entry-v19 span {
+  color: var(--warm-amber);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.schedule-entry-v19 strong { color: #fff; }
+.schedule-entry-v19 p { margin: 0; color: rgba(255,255,255,.66); font-size: .82rem; }
+.schedule-entry-v19 .button.secondary { flex: 0 0 auto; }
+
+/* ---------------- RELATED COACH CARDS ---------------- */
+.related-coaches-v19 .coach {
+  display: flex;
+  flex-direction: column;
+}
+
+.related-coaches-v19 .coach-copy {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.related-coaches-v19 .coach-copy h3,
+.related-coaches-v19 .coach-copy h3 a {
+  max-width: 100%;
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: clip !important;
+  overflow-wrap: anywhere;
+}
+
+.related-coaches-v19 .coach-schedule {
+  line-height: 1.45;
+  white-space: normal;
+}
+
+.related-coaches-v19 .coach-card-actions {
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.related-coaches-v19 .coach-instagram-footer-v19 {
+  min-width: 0;
+  margin-top: 13px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.related-coaches-v19 .coach-instagram-link {
+  width: 100%;
+  min-width: 0;
+}
+
+.related-coaches-v19 .coach-instagram-link span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coach-card-title-v15 p,
+.coach-profile-meta-v15 strong,
+.coach-profile-detail-list-v15 strong {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+
+/* ---------------- PRICE CARDS: CLEAR VISUAL TIERS ---------------- */
+.pricing-v2 .price-card {
+  position: relative;
+  isolation: isolate;
+  border-width: 1px !important;
+  box-shadow: 0 16px 38px rgba(0,0,0,.13) !important;
+  transition: transform .22s ease, box-shadow .22s ease !important;
+}
+
+.pricing-v2 .price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 52px rgba(0,0,0,.2) !important;
+}
+
+.pricing-v2 .price-card[data-plan="welcome-pass"] {
+  border-color: #db466d !important;
+  background: linear-gradient(145deg, #ff6a8e, #ce3d65) !important;
+  color: #fff !important;
+}
+
+.pricing-v2 .price-card[data-plan="drop-in"] {
+  border-color: #e6cfb6 !important;
+  background: linear-gradient(145deg, #fffaf2, #f2e5d5) !important;
+}
+
+.pricing-v2 .price-card[data-plan="5er-karte"] {
+  border-color: #e7bba3 !important;
+  background: linear-gradient(145deg, #f8e5d8, #efcfbc) !important;
+}
+
+.pricing-v2 .price-card[data-plan="10er-karte"] {
+  border-color: #aeb9ff !important;
+  background: linear-gradient(145deg, #e8ebff, #cfd6ff) !important;
+}
+
+.pricing-v2 .price-card[data-plan="usc-membership"] {
+  border-color: #ff875c !important;
+  background: linear-gradient(145deg, #29262a, #17161a) !important;
+  color: #fff !important;
+}
+
+.pricing-v2 .price-card[data-plan="bronze"] {
+  border-color: #b87a4f !important;
+  background: linear-gradient(145deg, #9a6543, #68412d) !important;
+  color: #fff !important;
+}
+
+.pricing-v2 .price-card[data-plan="silber"] {
+  border-color: #b9bbc1 !important;
+  background: linear-gradient(145deg, #f0efed, #cfd0d4) !important;
+  color: #1c1c20 !important;
+}
+
+.pricing-v2 .price-card[data-plan="gold"] {
+  border-color: #d6a437 !important;
+  background: linear-gradient(145deg, #f5d77d, #dda940) !important;
+  color: #21180b !important;
+}
+
+.pricing-v2 .price-card[data-plan="welcome-pass"] strong,
+.pricing-v2 .price-card[data-plan="welcome-pass"] .price,
+.pricing-v2 .price-card[data-plan="welcome-pass"] p,
+.pricing-v2 .price-card[data-plan="welcome-pass"] .price-fit,
+.pricing-v2 .price-card[data-plan="welcome-pass"] .text-link,
+.pricing-v2 .price-card[data-plan="usc-membership"] strong,
+.pricing-v2 .price-card[data-plan="usc-membership"] .price,
+.pricing-v2 .price-card[data-plan="usc-membership"] p,
+.pricing-v2 .price-card[data-plan="usc-membership"] .price-fit,
+.pricing-v2 .price-card[data-plan="usc-membership"] .text-link,
+.pricing-v2 .price-card[data-plan="bronze"] strong,
+.pricing-v2 .price-card[data-plan="bronze"] .price,
+.pricing-v2 .price-card[data-plan="bronze"] p,
+.pricing-v2 .price-card[data-plan="bronze"] .price-fit,
+.pricing-v2 .price-card[data-plan="bronze"] .text-link {
+  color: #fff !important;
+}
+
+.pricing-v2 .price-card[data-plan="gold"] strong,
+.pricing-v2 .price-card[data-plan="gold"] .price,
+.pricing-v2 .price-card[data-plan="gold"] p,
+.pricing-v2 .price-card[data-plan="gold"] .price-fit,
+.pricing-v2 .price-card[data-plan="gold"] .text-link,
+.pricing-v2 .price-card[data-plan="silber"] strong,
+.pricing-v2 .price-card[data-plan="silber"] .price,
+.pricing-v2 .price-card[data-plan="silber"] p,
+.pricing-v2 .price-card[data-plan="silber"] .price-fit,
+.pricing-v2 .price-card[data-plan="silber"] .text-link {
+  color: #211c18 !important;
+}
+
+.pricing-v2 .price-card[data-plan="welcome-pass"] .price-label,
+.pricing-v2 .price-card[data-plan="usc-membership"] .price-label,
+.pricing-v2 .price-card[data-plan="bronze"] .price-label {
+  background: rgba(255,255,255,.14) !important;
+  color: #fff !important;
+}
+
+.pricing-v2 .price-card[data-plan="gold"] .price-label {
+  background: rgba(33,24,11,.12) !important;
+  color: #4e390f !important;
+}
+
+.pricing-v2 .price-card[data-plan="silber"] .price-label {
+  background: rgba(25,25,30,.08) !important;
+  color: #4b4c52 !important;
+}
+
+.pricing-v2 .price-card[data-plan="usc-membership"] .price-label {
+  color: #ff9a74 !important;
+}
+
+/* ---------------- RENTAL SIZE BADGES ---------------- */
+.rental-room-card-v18 figure {
+  position: relative;
+}
+
+.rental-room-size-v19 {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  padding: 8px 11px;
+  border: 1px solid rgba(255,255,255,.4);
+  border-radius: 999px;
+  background: rgba(26,20,17,.78);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 850;
+  backdrop-filter: blur(10px);
+}
+
+/* ---------------- MOBILE ---------------- */
+@media (max-width: 720px) {
+  .why-elite-v19 {
+    min-height: 0 !important;
+    gap: 24px;
+    padding: 28px 18px 18px !important;
+    border-radius: 18px;
+  }
+
+  .why-elite-v19 .why-elite-content-v12 {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .why-elite-v19 .why-elite-content-v12 h2 {
+    max-width: none !important;
+    font-size: clamp(2.05rem, 10.3vw, 2.9rem) !important;
+    line-height: .98 !important;
+  }
+
+  .why-elite-v19 .why-elite-content-v12 p {
+    max-width: 30rem;
+    margin-top: 11px;
+    font-size: .9rem;
+  }
+
+  .why-elite-v19 .why-elite-lines-v12 {
+    display: flex !important;
+    gap: 10px;
+    overflow-x: auto;
+    margin-inline: -2px !important;
+    padding: 2px 2px 8px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    backdrop-filter: none;
+  }
+
+  .why-elite-v19 .why-elite-lines-v12::-webkit-scrollbar { display: none; }
+
+  .why-elite-v19 .why-elite-lines-v12 > div {
+    flex: 0 0 min(78vw, 300px);
+    min-height: 112px !important;
+    padding: 17px 18px;
+    border: 1px solid rgba(255,255,255,.15) !important;
+    border-radius: 14px;
+    background: rgba(27,20,17,.72);
+    scroll-snap-align: start;
+  }
+
+  .why-elite-v19 .why-elite-lines-v12 > div:last-child {
+    border-bottom: 1px solid rgba(255,255,255,.15) !important;
+  }
+
+  .schedule-faq-v19 {
+    padding: 22px 18px;
+    border-radius: 18px;
+  }
+
+  .schedule-faq-head-v19,
+  .schedule-faq-list-v19 {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-faq-head-v19 {
+    gap: 10px;
+  }
+
+  .schedule-faq-list-v19 {
+    margin-top: 4px;
+  }
+
+  .schedule-entry-v19 {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .schedule-entry-v19 .button.secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pricing-v2 .price-card:hover {
+    transform: none;
+  }
+}

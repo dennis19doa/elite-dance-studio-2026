@@ -1,0 +1,887 @@
+/* Elite V19 pricing redesign — page-scoped editorial pricing system. */
+
+.pricing-page-v19-redesign {
+  background:
+    radial-gradient(circle at 15% 5%, rgba(195, 94, 58, .10), transparent 28rem),
+    #17120f;
+}
+
+.pricing-page-v19-redesign .pricing-main-v19-redesign {
+  display: grid;
+  gap: clamp(22px, 3vw, 38px);
+  padding-bottom: clamp(64px, 8vw, 104px);
+}
+
+/* HERO */
+.pricing-page-v19-redesign .pricing-hero-v20 {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(310px, .72fr);
+  gap: clamp(34px, 5vw, 76px);
+  align-items: end;
+  overflow: hidden;
+  min-height: clamp(500px, 68vh, 720px);
+  padding: clamp(42px, 7vw, 88px) clamp(28px, 6vw, 78px);
+  border: 1px solid rgba(243, 185, 128, .18);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 78% 16%, rgba(220, 101, 67, .22), transparent 24rem),
+    radial-gradient(circle at 12% 95%, rgba(246, 187, 111, .11), transparent 28rem),
+    linear-gradient(135deg, #211713 0%, #17110f 54%, #100d0c 100%);
+  box-shadow: 0 34px 88px rgba(0,0,0,.28);
+  color: #fff;
+}
+
+.pricing-page-v19-redesign .pricing-hero-v20::before {
+  position: absolute;
+  top: -11rem;
+  right: -8rem;
+  z-index: -1;
+  width: 31rem;
+  height: 31rem;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 54px rgba(255,255,255,.018),
+    0 0 0 108px rgba(255,255,255,.012);
+  content: "";
+}
+
+.pricing-page-v19-redesign .pricing-hero-copy-v20 {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+}
+
+.pricing-page-v19-redesign .pricing-hero-v20 .eyebrow {
+  color: #f1b078 !important;
+}
+
+.pricing-page-v19-redesign .pricing-hero-v20 .page-title {
+  max-width: 10.5ch;
+  margin: 12px 0 0;
+  color: #fff !important;
+  font-size: clamp(3.5rem, 7vw, 7.8rem);
+  line-height: .9;
+  letter-spacing: -.066em;
+}
+
+.pricing-page-v19-redesign .pricing-hero-v20 .lead {
+  max-width: 39rem;
+  margin: clamp(20px, 3vw, 30px) 0 0;
+  color: rgba(255,255,255,.68);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  line-height: 1.65;
+}
+
+.pricing-page-v19-redesign .pricing-hero-v20 .actions {
+  margin-top: 30px;
+}
+
+.pricing-page-v19-redesign .pricing-hero-v20 .button.primary {
+  border-color: #e8744f;
+  background: #e8744f;
+  color: #fff;
+}
+
+.pricing-page-v19-redesign .pricing-hero-v20 .button.primary:hover {
+  border-color: #f18a65;
+  background: #f18a65;
+}
+
+.pricing-page-v19-redesign .pricing-hero-v20 .button.secondary {
+  border-color: rgba(255,255,255,.18);
+  background: rgba(255,255,255,.055);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.pricing-page-v19-redesign .pricing-hero-guide-v20 {
+  position: relative;
+  display: grid;
+  align-self: stretch;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px;
+  background: rgba(255,255,255,.045);
+  backdrop-filter: blur(18px);
+}
+
+.pricing-page-v19-redesign .pricing-hero-guide-v20 > div {
+  position: relative;
+  display: grid;
+  align-content: center;
+  min-height: 128px;
+  padding: 24px 26px 24px 74px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.pricing-page-v19-redesign .pricing-hero-guide-v20 > div:last-child {
+  border-bottom: 0;
+}
+
+.pricing-page-v19-redesign .pricing-hero-guide-v20 > div::before {
+  position: absolute;
+  left: 25px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(241,176,120,.48);
+  border-radius: 50%;
+  color: #f1b078;
+  font-size: .72rem;
+  font-weight: 800;
+}
+
+.pricing-page-v19-redesign .pricing-hero-guide-v20 > div:nth-child(1)::before { content: "01"; }
+.pricing-page-v19-redesign .pricing-hero-guide-v20 > div:nth-child(2)::before { content: "02"; }
+.pricing-page-v19-redesign .pricing-hero-guide-v20 > div:nth-child(3)::before { content: "03"; }
+
+.pricing-page-v19-redesign .pricing-hero-guide-v20 span {
+  color: #f1b078;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v19-redesign .pricing-hero-guide-v20 strong {
+  display: block;
+  margin-top: 6px;
+  color: #fff;
+  font-size: clamp(1.06rem, 1.4vw, 1.28rem);
+}
+
+.pricing-page-v19-redesign .pricing-hero-guide-v20 p {
+  margin: 5px 0 0;
+  color: rgba(255,255,255,.58);
+  font-size: .88rem;
+}
+
+/* PRICING FRAME */
+.pricing-page-v19-redesign .pricing-v20 {
+  display: grid;
+  gap: clamp(24px, 3vw, 38px);
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.pricing-page-v19-redesign .pricing-intro-v20 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, .6fr);
+  gap: clamp(26px, 5vw, 68px);
+  align-items: end;
+  padding: clamp(18px, 2vw, 28px) clamp(4px, 1vw, 12px) 4px;
+}
+
+.pricing-page-v19-redesign .pricing-intro-v20 h2 {
+  max-width: 14ch;
+  margin: 8px 0 0;
+  color: #fff;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: .96;
+  letter-spacing: -.05em;
+}
+
+.pricing-page-v19-redesign .pricing-intro-v20 > p {
+  margin: 0;
+  color: rgba(255,255,255,.6);
+  line-height: 1.65;
+}
+
+.pricing-page-v19-redesign .pricing-chapter-v20 {
+  display: grid;
+  grid-template-columns: minmax(150px, .34fr) minmax(0, .8fr) minmax(250px, .7fr);
+  gap: 20px 34px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.pricing-page-v19-redesign .pricing-chapter-v20 > span {
+  align-self: start;
+  padding-top: 8px;
+  color: #b85f35;
+  font-size: .7rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v19-redesign .pricing-chapter-v20 h3 {
+  margin: 0;
+  color: #281e18;
+  font-size: clamp(2rem, 3.8vw, 3.85rem);
+  line-height: .97;
+  letter-spacing: -.045em;
+}
+
+.pricing-page-v19-redesign .pricing-chapter-v20 > p {
+  margin: 0;
+  color: #75675d;
+  line-height: 1.55;
+}
+
+/* START */
+.pricing-page-v19-redesign .pricing-start-v20 {
+  padding: clamp(30px, 5vw, 64px);
+  border: 1px solid rgba(75, 54, 40, .12);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 95% 0%, rgba(232,116,79,.15), transparent 25rem),
+    #f7efe5;
+  color: #281e18;
+  box-shadow: 0 24px 68px rgba(0,0,0,.18);
+}
+
+.pricing-page-v19-redesign .pricing-start-grid-v20 {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 16px;
+}
+
+.pricing-page-v19-redesign .price-option-v20 {
+  position: relative;
+  display: flex;
+  min-height: 380px;
+  flex-direction: column;
+  padding: clamp(26px, 4vw, 42px);
+  border: 1px solid rgba(49,35,27,.11);
+  border-radius: 20px;
+  background: rgba(255,255,255,.58);
+  box-shadow: 0 14px 34px rgba(62,42,28,.08);
+  transition: transform .24s ease, box-shadow .24s ease;
+}
+
+.pricing-page-v19-redesign .price-option-v20:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 46px rgba(62,42,28,.13);
+}
+
+.pricing-page-v19-redesign .price-option-v20[data-plan="welcome-pass"] {
+  border-color: rgba(255,255,255,.14);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255,196,152,.22), transparent 18rem),
+    linear-gradient(145deg, #b74255, #7e273d 72%);
+  color: #fff;
+}
+
+.pricing-page-v19-redesign .price-kicker-v20 {
+  color: #a95b3a;
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v19-redesign .price-option-v20[data-plan="welcome-pass"] .price-kicker-v20 {
+  color: #ffd0bb;
+}
+
+.pricing-page-v19-redesign .price-option-v20 h4 {
+  margin: 9px 0 0;
+  color: inherit;
+  font-size: clamp(1.65rem, 2.5vw, 2.5rem);
+  letter-spacing: -.035em;
+}
+
+.pricing-page-v19-redesign .price-value-v20 {
+  margin-top: 16px;
+  color: inherit;
+  font-size: clamp(3rem, 5vw, 5.2rem);
+  font-weight: 800;
+  line-height: .95;
+  letter-spacing: -.06em;
+}
+
+.pricing-page-v19-redesign .price-option-head-v20 > p {
+  max-width: 34rem;
+  margin: 17px 0 0;
+  color: #74645a;
+  line-height: 1.55;
+}
+
+.pricing-page-v19-redesign .price-option-v20[data-plan="welcome-pass"] .price-option-head-v20 > p {
+  color: rgba(255,255,255,.72);
+}
+
+.pricing-page-v19-redesign .price-features-v20 {
+  display: grid;
+  gap: 8px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing-page-v19-redesign .price-features-v20 li {
+  position: relative;
+  padding-left: 20px;
+  color: #55483f;
+  font-size: .88rem;
+  line-height: 1.45;
+}
+
+.pricing-page-v19-redesign .price-features-v20 li::before {
+  position: absolute;
+  top: .52em;
+  left: 1px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d56f4c;
+  content: "";
+}
+
+.pricing-page-v19-redesign .price-option-v20[data-plan="welcome-pass"] .price-features-v20 li {
+  color: rgba(255,255,255,.76);
+}
+
+.pricing-page-v19-redesign .price-option-v20[data-plan="welcome-pass"] .price-features-v20 li::before {
+  background: #ffd0bb;
+}
+
+.pricing-page-v19-redesign .price-fit-v20 {
+  margin: auto 0 0;
+  padding-top: 24px;
+  color: #74645a;
+  font-size: .84rem;
+}
+
+.pricing-page-v19-redesign .price-fit-v20 span {
+  display: block;
+  margin-bottom: 4px;
+  color: #31251e;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v19-redesign .price-option-v20[data-plan="welcome-pass"] .price-fit-v20 {
+  color: rgba(255,255,255,.68);
+}
+
+.pricing-page-v19-redesign .price-option-v20[data-plan="welcome-pass"] .price-fit-v20 span {
+  color: #fff;
+}
+
+.pricing-page-v19-redesign .price-cta-v20 {
+  align-self: flex-start;
+  margin-top: 20px;
+}
+
+.pricing-page-v19-redesign .price-option-v20[data-plan="welcome-pass"] .price-cta-v20 {
+  border-color: #fff;
+  background: #fff;
+  color: #7e273d;
+}
+
+/* MEMBERSHIPS */
+.pricing-page-v19-redesign .pricing-memberships-v20 {
+  overflow: hidden;
+  padding: clamp(34px, 5vw, 66px);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(236,158,92,.16), transparent 34rem),
+    linear-gradient(145deg, #231b17, #120f0e);
+  box-shadow: 0 26px 72px rgba(0,0,0,.24);
+}
+
+.pricing-page-v19-redesign .pricing-memberships-v20 .pricing-chapter-v20 > span {
+  color: #e6a16f;
+}
+
+.pricing-page-v19-redesign .pricing-memberships-v20 .pricing-chapter-v20 h3 {
+  color: #fff;
+}
+
+.pricing-page-v19-redesign .pricing-memberships-v20 .pricing-chapter-v20 > p {
+  color: rgba(255,255,255,.58);
+}
+
+.pricing-page-v19-redesign .membership-grid-v20 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.pricing-page-v19-redesign .membership-card-v20 {
+  position: relative;
+  display: flex;
+  min-height: 470px;
+  flex-direction: column;
+  padding: clamp(25px, 3vw, 36px);
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 20px;
+  background: rgba(255,255,255,.045);
+  color: #fff;
+  transition: transform .24s ease, border-color .24s ease, background .24s ease;
+}
+
+.pricing-page-v19-redesign .membership-card-v20:hover {
+  transform: translateY(-5px);
+  border-color: rgba(242,179,111,.34);
+  background: rgba(255,255,255,.065);
+}
+
+.pricing-page-v19-redesign .membership-bronze-v20 {
+  background: linear-gradient(160deg, rgba(144,88,54,.32), rgba(255,255,255,.035) 58%);
+}
+
+.pricing-page-v19-redesign .membership-silber-v20 {
+  border-color: rgba(239,226,212,.5);
+  background:
+    linear-gradient(180deg, rgba(250,245,239,.98), rgba(226,218,210,.94));
+  color: #251d19;
+  box-shadow: 0 22px 50px rgba(0,0,0,.24);
+  transform: translateY(-10px);
+}
+
+.pricing-page-v19-redesign .membership-silber-v20:hover {
+  transform: translateY(-15px);
+  background: linear-gradient(180deg, #fffaf5, #e9ded3);
+}
+
+.pricing-page-v19-redesign .membership-gold-v20 {
+  background:
+    radial-gradient(circle at 80% 10%, rgba(241,190,100,.22), transparent 16rem),
+    linear-gradient(155deg, rgba(128,89,34,.35), rgba(255,255,255,.04) 60%);
+}
+
+.pricing-page-v19-redesign .membership-top-v20 {
+  display: flex;
+  min-height: 28px;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pricing-page-v19-redesign .membership-top-v20 > span {
+  color: #e9aa76;
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v19-redesign .membership-silber-v20 .membership-top-v20 > span {
+  color: #9a5639;
+}
+
+.pricing-page-v19-redesign .membership-top-v20 em {
+  padding: 7px 9px;
+  border-radius: 999px;
+  background: #2b211c;
+  color: #fff;
+  font-size: .63rem;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v19-redesign .membership-card-v20 h4 {
+  margin: 28px 0 0;
+  color: inherit;
+  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+  letter-spacing: -.045em;
+}
+
+.pricing-page-v19-redesign .membership-price-v20 {
+  margin-top: 8px;
+  color: inherit;
+  font-size: clamp(2rem, 3.2vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.055em;
+}
+
+.pricing-page-v19-redesign .membership-card-v20 > p:not(.price-fit-v20) {
+  margin: 18px 0 0;
+  color: rgba(255,255,255,.62);
+  line-height: 1.55;
+}
+
+.pricing-page-v19-redesign .membership-silber-v20 > p:not(.price-fit-v20) {
+  color: #6b5d53;
+}
+
+.pricing-page-v19-redesign .membership-card-v20 .price-features-v20 li {
+  color: rgba(255,255,255,.72);
+}
+
+.pricing-page-v19-redesign .membership-silber-v20 .price-features-v20 li {
+  color: #574b43;
+}
+
+.pricing-page-v19-redesign .membership-card-v20 .price-fit-v20 {
+  color: rgba(255,255,255,.58);
+}
+
+.pricing-page-v19-redesign .membership-card-v20 .price-fit-v20 span {
+  color: rgba(255,255,255,.9);
+}
+
+.pricing-page-v19-redesign .membership-silber-v20 .price-fit-v20 {
+  color: #6b5d53;
+}
+
+.pricing-page-v19-redesign .membership-silber-v20 .price-fit-v20 span {
+  color: #2d231d;
+}
+
+.pricing-page-v19-redesign .membership-cta-v20 {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.14);
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.pricing-page-v19-redesign .membership-silber-v20 .membership-cta-v20 {
+  border-top-color: rgba(41,31,25,.13);
+  color: #2d231d;
+}
+
+/* FLEXIBLE OPTIONS */
+.pricing-page-v19-redesign .pricing-flex-v20 {
+  padding: clamp(30px, 5vw, 62px);
+  border: 1px solid rgba(75,54,40,.12);
+  border-radius: 26px;
+  background: #efe2d3;
+  box-shadow: 0 24px 68px rgba(0,0,0,.16);
+}
+
+.pricing-page-v19-redesign .flex-price-list-v20 {
+  border-top: 1px solid rgba(48,35,27,.13);
+}
+
+.pricing-page-v19-redesign .flex-price-row-v20 {
+  display: grid;
+  grid-template-columns: minmax(150px, .55fr) minmax(160px, .4fr) minmax(260px, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+  padding: 27px 0;
+  border-bottom: 1px solid rgba(48,35,27,.13);
+}
+
+.pricing-page-v19-redesign .flex-price-name-v20 span {
+  color: #a65a3a;
+  font-size: .65rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v19-redesign .flex-price-name-v20 h4 {
+  margin: 5px 0 0;
+  color: #2d221c;
+  font-size: 1.25rem;
+}
+
+.pricing-page-v19-redesign .flex-price-value-v20 {
+  color: #2d221c;
+  font-size: clamp(1.7rem, 2.5vw, 2.55rem);
+  font-weight: 800;
+  letter-spacing: -.045em;
+}
+
+.pricing-page-v19-redesign .flex-price-copy-v20 p {
+  margin: 0;
+  color: #685b52;
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+.pricing-page-v19-redesign .flex-price-copy-v20 ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 8px 0 0;
+  padding: 0;
+  color: #85756b;
+  font-size: .72rem;
+  list-style: none;
+}
+
+.pricing-page-v19-redesign .flex-price-copy-v20 li::before {
+  margin-right: 6px;
+  color: #b85f35;
+  content: "•";
+}
+
+.pricing-page-v19-redesign .flex-price-row-v20 .text-link {
+  color: #8b472e;
+  font-size: .8rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* FAQ + ASSURANCE */
+.pricing-page-v19-redesign .faq-section {
+  padding: clamp(30px, 5vw, 62px) !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  border-radius: 26px !important;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(203,105,67,.12), transparent 24rem),
+    #211916 !important;
+  box-shadow: 0 24px 68px rgba(0,0,0,.22) !important;
+}
+
+.pricing-page-v19-redesign .faq-section .section-head h2,
+.pricing-page-v19-redesign .faq-section .faq-item summary {
+  color: #fff !important;
+}
+
+.pricing-page-v19-redesign .faq-section .section-head-aside p,
+.pricing-page-v19-redesign .faq-section .faq-item p {
+  color: rgba(255,255,255,.58) !important;
+}
+
+.pricing-page-v19-redesign .faq-section .faq-item {
+  border-color: rgba(255,255,255,.11) !important;
+}
+
+.pricing-page-v19-redesign .faq-section .section-text-link {
+  color: #f1b078 !important;
+}
+
+.pricing-page-v19-redesign .pricing-assurance {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, .72fr);
+  gap: clamp(28px, 5vw, 68px);
+  align-items: end;
+  padding: clamp(34px, 5vw, 64px) !important;
+  border: 1px solid rgba(69,48,35,.12) !important;
+  border-radius: 26px !important;
+  background:
+    radial-gradient(circle at 5% 100%, rgba(222,110,71,.16), transparent 24rem),
+    #f7efe5 !important;
+  color: #2d221c;
+  box-shadow: 0 22px 62px rgba(0,0,0,.16) !important;
+}
+
+.pricing-page-v19-redesign .pricing-assurance h2 {
+  max-width: 15ch;
+  margin: 8px 0 0;
+  color: #2d221c !important;
+  font-size: clamp(2.3rem, 4.5vw, 4.5rem);
+  line-height: .96;
+  letter-spacing: -.05em;
+}
+
+.pricing-page-v19-redesign .pricing-assurance > div:last-child p {
+  margin: 0 0 22px;
+  color: #6b5d53;
+  line-height: 1.6;
+}
+
+/* TABLET */
+@media (max-width: 980px) {
+  .pricing-page-v19-redesign .pricing-hero-v20 {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-guide-v20 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-guide-v20 > div {
+    min-height: 140px;
+    padding: 58px 20px 20px;
+    border-right: 1px solid rgba(255,255,255,.1);
+    border-bottom: 0;
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-guide-v20 > div:last-child {
+    border-right: 0;
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-guide-v20 > div::before {
+    top: 20px;
+    left: 20px;
+  }
+
+  .pricing-page-v19-redesign .pricing-chapter-v20 {
+    grid-template-columns: .38fr 1fr;
+  }
+
+  .pricing-page-v19-redesign .pricing-chapter-v20 > p {
+    grid-column: 2;
+  }
+
+  .pricing-page-v19-redesign .membership-grid-v20 {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v19-redesign .membership-card-v20 {
+    min-height: 0;
+  }
+
+  .pricing-page-v19-redesign .membership-silber-v20,
+  .pricing-page-v19-redesign .membership-silber-v20:hover {
+    transform: none;
+  }
+
+  .pricing-page-v19-redesign .flex-price-row-v20 {
+    grid-template-columns: .6fr .42fr 1fr;
+  }
+
+  .pricing-page-v19-redesign .flex-price-row-v20 .text-link {
+    grid-column: 3;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 720px) {
+  .pricing-page-v19-redesign .pricing-main-v19-redesign {
+    gap: 16px;
+    padding-bottom: 74px;
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-v20 {
+    gap: 28px;
+    padding: 34px 20px 20px;
+    border-radius: 20px;
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-v20 .page-title {
+    max-width: 12ch;
+    font-size: clamp(3rem, 16vw, 4.6rem);
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-v20 .lead {
+    font-size: .92rem;
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-v20 .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-v20 .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-guide-v20 {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-guide-v20 > div {
+    min-height: 0;
+    padding: 20px 18px 20px 60px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+
+  .pricing-page-v19-redesign .pricing-hero-guide-v20 > div::before {
+    top: 22px;
+    left: 18px;
+  }
+
+  .pricing-page-v19-redesign .pricing-intro-v20 {
+    grid-template-columns: 1fr;
+    padding: 18px 4px 6px;
+  }
+
+  .pricing-page-v19-redesign .pricing-intro-v20 h2 {
+    font-size: clamp(2.25rem, 11vw, 3.3rem);
+  }
+
+  .pricing-page-v19-redesign .pricing-start-v20,
+  .pricing-page-v19-redesign .pricing-memberships-v20,
+  .pricing-page-v19-redesign .pricing-flex-v20,
+  .pricing-page-v19-redesign .faq-section,
+  .pricing-page-v19-redesign .pricing-assurance {
+    padding: 26px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .pricing-page-v19-redesign .pricing-chapter-v20 {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .pricing-page-v19-redesign .pricing-chapter-v20 > span {
+    padding-top: 0;
+  }
+
+  .pricing-page-v19-redesign .pricing-chapter-v20 > p {
+    grid-column: auto;
+    margin-top: 4px;
+    font-size: .86rem;
+  }
+
+  .pricing-page-v19-redesign .pricing-chapter-v20 h3 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .pricing-page-v19-redesign .pricing-start-grid-v20 {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v19-redesign .price-option-v20 {
+    min-height: 0;
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .pricing-page-v19-redesign .price-value-v20 {
+    font-size: clamp(3rem, 15vw, 4.2rem);
+  }
+
+  .pricing-page-v19-redesign .membership-card-v20 {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .pricing-page-v19-redesign .membership-card-v20 h4 {
+    margin-top: 20px;
+  }
+
+  .pricing-page-v19-redesign .flex-price-row-v20 {
+    grid-template-columns: 1fr auto;
+    gap: 10px 16px;
+    align-items: start;
+    padding: 22px 0;
+  }
+
+  .pricing-page-v19-redesign .flex-price-value-v20 {
+    text-align: right;
+  }
+
+  .pricing-page-v19-redesign .flex-price-copy-v20 {
+    grid-column: 1 / -1;
+  }
+
+  .pricing-page-v19-redesign .flex-price-copy-v20 ul {
+    display: grid;
+    gap: 4px;
+  }
+
+  .pricing-page-v19-redesign .flex-price-row-v20 .text-link {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+  }
+
+  .pricing-page-v19-redesign .pricing-assurance {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v19-redesign .pricing-assurance h2 {
+    font-size: clamp(2.2rem, 11vw, 3.2rem);
+  }
+}

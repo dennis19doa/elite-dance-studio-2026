@@ -1,0 +1,214 @@
+/* Elite V10 stability layer — intentionally small and loaded last.
+   Fixes shared canvas, header consistency and targeted readability without
+   replacing the page layouts underneath. */
+
+:root {
+  --elite-canvas: #101014;
+  --elite-canvas-soft: #17171d;
+  --elite-canvas-raised: #1f1d24;
+}
+
+html {
+  background: var(--elite-canvas);
+}
+
+body,
+body.home-page,
+body.site-subpage {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(255, 79, 123, .11), transparent 32rem),
+    radial-gradient(circle at 94% 8%, rgba(64, 88, 255, .10), transparent 30rem),
+    var(--elite-canvas) !important;
+  background-attachment: fixed !important;
+}
+
+/* One header language everywhere. */
+.site-header-v2 {
+  background: rgba(16, 16, 20, .92) !important;
+  border-bottom-color: rgba(255, 255, 255, .08) !important;
+}
+
+.site-header-v2 .button.primary {
+  background: var(--elite-lime) !important;
+  color: var(--elite-ink) !important;
+  box-shadow: none !important;
+}
+
+.site-header-v2 .button.primary:hover {
+  background: #defd79 !important;
+}
+
+.site-header-v2 .button.secondary {
+  border-color: rgba(255,255,255,.18) !important;
+  background: rgba(255,255,255,.07) !important;
+  color: #fff !important;
+}
+
+/* Transparent headings that now sit directly on the dark site canvas. */
+.home-coach-head-v9 h2,
+.coach-directory-head-v9 h2 {
+  color: #fff;
+}
+
+.home-coach-head-v9 .eyebrow,
+.coach-directory-head-v9 .eyebrow {
+  color: var(--elite-lime);
+}
+
+.coach-directory-head-v9 p {
+  color: rgba(255,255,255,.62);
+}
+
+.home-coach-link-v9,
+.coach-rail-toggle-v9 {
+  border-color: rgba(255,255,255,.16);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+}
+
+.home-coach-link-v9:hover,
+.coach-rail-toggle-v9:hover {
+  background: rgba(255,255,255,.14);
+}
+
+/* Homepage coach rail: dark cards so it belongs to the same site. */
+.home-coach-card-v9 {
+  border: 1px solid rgba(255,255,255,.1);
+  background: var(--elite-canvas-soft);
+  color: #fff;
+  box-shadow: 0 18px 42px rgba(0,0,0,.28);
+}
+
+.home-coach-card-copy-v9 strong { color: #fff; }
+.home-coach-card-copy-v9 span { color: rgba(255,255,255,.56); }
+
+/* Coaches directory: keep all restored information, but make the page feel
+   intentionally designed instead of white cards floating on another theme. */
+.coach-filters-v9 {
+  border-color: rgba(255,255,255,.1);
+  background: rgba(16,16,20,.84);
+}
+
+.coach-filter-v9 {
+  border: 1px solid rgba(255,255,255,.1);
+  background: var(--elite-canvas-raised);
+  color: rgba(255,255,255,.76);
+}
+
+.coach-filter-v9:hover {
+  color: #fff;
+  border-color: rgba(210,248,90,.5);
+}
+
+.coach-filter-v9.is-active {
+  background: var(--elite-lime);
+  color: var(--elite-ink);
+}
+
+.coach-card-v9 {
+  border-color: rgba(255,255,255,.1);
+  background: var(--elite-canvas-soft);
+  color: #fff;
+  box-shadow: 0 18px 46px rgba(0,0,0,.26);
+}
+
+.coach-card-top-v9 h3,
+.coach-profile-v9,
+.coach-instagram-v9 {
+  color: #fff;
+}
+
+.coach-card-top-v9 time,
+.coach-card-body-v9 > p {
+  color: rgba(255,255,255,.58);
+}
+
+.coach-support-v9 {
+  background: rgba(64,88,255,.16);
+  color: #dce1ff;
+}
+
+.coach-instagram-v9 {
+  border-color: rgba(255,255,255,.14);
+}
+
+.coach-instagram-v9:hover {
+  border-color: var(--elite-rose);
+  color: var(--elite-rose);
+}
+
+/* The actual schedule stays a bright task surface, but its surrounding page
+   now uses the same dark canvas as every other page. */
+.schedule-v9 {
+  border-color: rgba(255,255,255,.08);
+  box-shadow: 0 24px 70px rgba(0,0,0,.32);
+}
+
+.schedule-facts-v10 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 24px 0 18px;
+}
+
+.schedule-fact-v10 {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid rgba(33,23,36,.08);
+  border-radius: 14px;
+  background: #f6f3ef;
+}
+
+.schedule-fact-v10 strong {
+  color: var(--elite-ink);
+  font-size: .78rem;
+}
+
+.schedule-fact-v10 span {
+  color: #716a74;
+  font-size: .72rem;
+  line-height: 1.4;
+}
+
+/* Give older subpage cards a deliberate edge against the shared canvas. */
+.site-subpage .panel,
+.rental-page-v9 .rental-room-card,
+.about-story-v9 {
+  border-color: rgba(255,255,255,.09);
+  box-shadow: 0 22px 58px rgba(0,0,0,.24);
+}
+
+.rental-page-v9 .rental-quickfacts,
+.schedule-page-v9 .booking-quick-v9 {
+  background: rgba(255,255,255,.92);
+}
+
+/* Visible only on PR preview builds. This lets us verify deployment instead of
+   guessing which artifact GitHub Pages is serving. */
+.preview-build-badge {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 9999;
+  padding: 7px 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  background: rgba(16,16,20,.88);
+  color: rgba(255,255,255,.78);
+  font: 700 10px/1 var(--font-body);
+  letter-spacing: .06em;
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .schedule-facts-v10 {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-build-badge {
+    right: 8px;
+    bottom: 72px;
+  }
+}

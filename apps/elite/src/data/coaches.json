@@ -42,7 +42,7 @@
     "slug": "nate",
     "name": "Nate",
     "focus": "Heels · Twerk · Latin Commercial",
-    "schedule": "Montag · 18:00–21:00",
+    "schedule": "Montag · 18:00–21:00 · Mittwoch · 19:00–21:30",
     "text": "Nates Classes setzen auf Technik, Ausdruck und Confidence mit Raum für die eigene Persönlichkeit.",
     "beginnerSupport": "Technik zuerst, Ausdruck darf wachsen",
     "image": "/media/coaches/nate.webp",
@@ -50,6 +50,19 @@
     "imageNote": "Elite Portrait",
     "instagramHandle": "@nate_xander",
     "instagramUrl": "https://www.instagram.com/nate_xander/"
+  },
+  {
+    "slug": "isalina",
+    "name": "Isalina",
+    "focus": "Twerking",
+    "schedule": "Freitag · 18:00–19:00",
+    "text": "Isalinas Twerking-Class verbindet Technik, Musikalität und Confidence mit einem klaren, energiegeladenen Aufbau.",
+    "beginnerSupport": "Basics, Technik und Ausdruck Schritt für Schritt",
+    "image": "/media/coaches/isalina.webp",
+    "imageAlt": "Isalina, Twerking Coach bei Elite Dance Studio",
+    "imageNote": "Elite Portrait",
+    "instagramHandle": "@isalina__",
+    "instagramUrl": "https://www.instagram.com/isalina__/"
   },
   {
     "slug": "minh",
@@ -104,17 +117,30 @@
     "instagramUrl": "https://www.instagram.com/laura.enmovimiento/"
   },
   {
-    "slug": "ari",
-    "name": "Ari",
-    "focus": "Heels",
-    "schedule": "Freitag · 17:00–18:00",
-    "text": "Aris Heels-Klassen verbinden Haltung, Linien und Performance mit einem verständlichen technischen Fundament.",
-    "beginnerSupport": "Präsenz darf Schritt für Schritt entstehen",
-    "image": "/media/coaches/ari.webp",
-    "imageAlt": "Ari, Heels Coach bei Elite Dance Studio",
+    "slug": "laura-choreography",
+    "name": "Laura",
+    "focus": "Choreography",
+    "schedule": "Freitag · 18:00–19:00",
+    "text": "Laura verbindet Choreografie, Musikalität und Ausdruck zu einer zugänglichen, dynamischen Class.",
+    "beginnerSupport": "Choreo verständlich und musikalisch aufbauen",
+    "image": "/media/coaches/laura-choreography.webp",
+    "imageAlt": "Laura, Choreography Coach bei Elite Dance Studio",
     "imageNote": "Elite Portrait",
-    "instagramHandle": "@arianna_privitera",
-    "instagramUrl": "https://www.instagram.com/arianna_privitera/"
+    "instagramHandle": "@laennhi",
+    "instagramUrl": "https://www.instagram.com/laennhi/"
+  },
+  {
+    "slug": "sora",
+    "name": "Sora",
+    "focus": "Waving",
+    "schedule": "Freitag · 17:00–18:00",
+    "text": "Soras Waving-Class verbindet Kontrolle, Isolationen und Flow zu einer präzisen, musikalischen Bewegungssprache.",
+    "beginnerSupport": "Technik und Flow Schritt für Schritt aufbauen",
+    "image": "/media/coaches/sora.webp",
+    "imageAlt": "Sora, Waving Coach bei Elite Dance Studio",
+    "imageNote": "Elite Portrait",
+    "instagramHandle": "@sora_pham",
+    "instagramUrl": "https://www.instagram.com/sora_pham/"
   },
   {
     "slug": "jessica-julian",
@@ -156,6 +182,19 @@
     "instagramUrl": "https://www.instagram.com/amy.otto05/"
   },
   {
+    "slug": "annita",
+    "name": "Annita",
+    "focus": "Hip Hop Beginner",
+    "schedule": "Samstag · 14:00–15:00",
+    "text": "Annita vermittelt Hip-Hop-Basics, Groove und Choreografie mit einem klaren Einstieg für Beginner.",
+    "beginnerSupport": "Ideal für den Einstieg in Hip Hop",
+    "image": "/media/coaches/annita.webp",
+    "imageAlt": "Annita, Hip Hop Beginner Coach bei Elite Dance Studio",
+    "imageNote": "Elite Portrait",
+    "instagramHandle": "@anitabc3",
+    "instagramUrl": "https://www.instagram.com/anitabc3/"
+  },
+  {
     "slug": "rocio-checo",
     "name": "Rocio & Checo",
     "focus": "Bachata",
@@ -169,19 +208,6 @@
     "instagramUrl": "https://www.instagram.com/rocio_kdance/"
   },
   {
-    "slug": "manolo-elvira",
-    "name": "Manolo & Elvira",
-    "focus": "Bachata",
-    "schedule": "Samstag · 19:00–20:00",
-    "text": "Manolo und Elvira setzen in ihren Bachata-Klassen auf Verbindung, musikalische Details und gemeinsames Wachstum.",
-    "beginnerSupport": "Partnerwork mit klarer Orientierung",
-    "image": "/media/coaches/manolo-elvira.webp",
-    "imageAlt": "Manolo und Elvira, Bachata Coaches bei Elite Dance Studio",
-    "imageNote": "Elite Portrait",
-    "instagramHandle": "@elvira.bachata",
-    "instagramUrl": "https://www.instagram.com/elvira.bachata/"
-  },
-  {
     "slug": "karin",
     "name": "Karin",
     "focus": "Zouk",
@@ -190,7 +216,9 @@
     "beginnerSupport": "Zouk-Grundlagen mit Ruhe aufbauen",
     "image": "/media/coaches/karin.webp",
     "imageAlt": "Karin, Zouk Coach bei Elite Dance Studio",
-    "imageNote": "Elite Portrait"
+    "imageNote": "Elite Portrait",
+    "instagramHandle": "@ka.blubb",
+    "instagramUrl": "https://www.instagram.com/ka.blubb/"
   },
   {
     "slug": "chirag",
@@ -262,7 +290,9 @@
     "beginnerSupport": "Grooves und Footwork sauber kennenlernen",
     "image": "/media/coaches/notika.webp",
     "imageAlt": "Notika, House Coach bei Elite Dance Studio",
-    "imageNote": "Elite Portrait"
+    "imageNote": "Elite Portrait",
+    "instagramHandle": "@natafawaz_notika",
+    "instagramUrl": "https://www.instagram.com/natafawaz_notika/"
   },
   {
     "slug": "julia",
@@ -273,6 +303,8 @@
     "beginnerSupport": "Ausdruck und Technik ohne Vergleichsdruck",
     "image": "/media/coaches/julia.webp",
     "imageAlt": "Julia, Contemporary Coach bei Elite Dance Studio",
-    "imageNote": "Elite Portrait"
+    "imageNote": "Elite Portrait",
+    "instagramHandle": "@golub_ju",
+    "instagramUrl": "https://www.instagram.com/golub_ju/"
   }
 ]

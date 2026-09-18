@@ -19,7 +19,7 @@ interface Props {
 
 const { posters } = Astro.props;
 const filters = [
-  { value: "all", label: `Alle ${posters.length}` },
+  { value: "all", label: `Alle Styles (${posters.length})` },
   { value: "beginner", label: "Für Beginner" },
   { value: "partner", label: "Partner Dance" },
   { value: "urban", label: "Urban" },
@@ -30,7 +30,8 @@ const filters = [
 const coachSlugsByPoster: Record<string, string[]> = {
   "Bachata Beginner": ["laura"],
   "Reggaeton Beginner": ["kathy"],
-  "Heels Beginner": ["ari"],
+  "Heels Beginner": ["nate"],
+  "Waving Beginner": ["sora"],
   "K-Pop Beginner": ["valentina"],
   "House Beginner": ["notika"],
   "Zouk Beginner": ["karin", "chirag"],
@@ -56,17 +57,14 @@ const coachSlugsByPoster: Record<string, string[]> = {
 const coachBySlug = new Map(coaches.map((coach) => [coach.slug, coach]));
 ---
 
-<section class="style-poster-showcase" id="style-poster-gallery" aria-labelledby="style-poster-title" data-style-gallery>
+<section class="style-poster-showcase style-poster-showcase-v18" id="style-poster-gallery" aria-labelledby="style-poster-title" data-style-gallery>
   <div class="style-poster-head">
     <div>
-      <div class="eyebrow">Die Styles von Elite</div>
-      <h2 id="style-poster-title">Wähle zuerst, was dich visuell bewegt.</h2>
+      <div class="eyebrow">Alle Styles bei Elite</div>
+      <h2 id="style-poster-title">Finde den Style, der zu dir passt.</h2>
     </div>
     <div class="style-poster-intro">
-      <p>
-        Du musst die Unterschiede noch nicht kennen. Filtere nach deiner Energie, öffne den
-        Stundenplan und finde die Klasse, die sich nach deinem nächsten Schritt anfühlt.
-      </p>
+      <p>Von Social Dance bis Choreo, Technik und Performance: filtere nach dem, was dich interessiert, und öffne danach direkt den Live-Stundenplan.</p>
       <a href="/stundenplan/#schedule">Live-Termine ansehen <span aria-hidden="true">→</span></a>
     </div>
   </div>
@@ -79,18 +77,17 @@ const coachBySlug = new Map(coaches.map((coach) => [coach.slug, coach]));
         data-poster-filter={filter.value}
         aria-pressed={index === 0 ? "true" : "false"}
       >
-        <span>{String(index + 1).padStart(2, "0")}</span>
         {filter.label}
       </button>
     ))}
   </div>
 
   <div class="style-poster-status" aria-live="polite">
-    <span data-poster-count>{posters.length}</span> Klassenwelten sichtbar
+    <span data-poster-count>{posters.length}</span> Styles sichtbar
   </div>
 
   <div class="style-poster-grid">
-    {posters.map((poster, index) => {
+    {posters.map((poster) => {
       const posterCoaches = (coachSlugsByPoster[poster.title] ?? [])
         .flatMap((slug) => {
           const coach = coachBySlug.get(slug);
@@ -98,76 +95,75 @@ const coachBySlug = new Map(coaches.map((coach) => [coach.slug, coach]));
         });
 
       return (
-      <article
-        class:list={["style-poster-card", `style-poster-tone-${poster.tone}`]}
-        data-poster-card
-        data-world={poster.world}
-        data-beginner={String(poster.beginner)}
-      >
-        <a
-          class="style-poster-image-link"
-          href="/stundenplan/#schedule"
-          aria-label={`${poster.title} im Stundenplan finden`}
+        <article
+          class:list={["style-poster-card", `style-poster-tone-${poster.tone}`]}
+          data-poster-card
+          data-world={poster.world}
+          data-beginner={String(poster.beginner)}
         >
-          <img
-            src={poster.image}
-            alt={poster.alt}
-            width="720"
-            height="900"
-            loading="lazy"
-            decoding="async"
-          />
-          <span class="style-poster-open" aria-hidden="true">Termin finden ↗</span>
-        </a>
-        <div class="style-poster-meta">
-          <span class="style-poster-index">{String(index + 1).padStart(2, "0")}</span>
-          <div>
-            <span>{poster.worldLabel} · {poster.level}</span>
-            <h3>{poster.title}</h3>
+          <a
+            class="style-poster-image-link"
+            href="/stundenplan/#schedule"
+            aria-label={`${poster.title} im Stundenplan finden`}
+          >
+            <img
+              src={poster.image}
+              alt={poster.alt}
+              width="720"
+              height="900"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="style-poster-open" aria-hidden="true">Termin finden ↗</span>
+          </a>
+          <div class="style-poster-meta">
+            <div>
+              <span>{poster.worldLabel} · {poster.level}</span>
+              <h3>{poster.title}</h3>
+            </div>
           </div>
-        </div>
-        {posterCoaches.length > 0 && (
-          <div class="style-poster-coaches" aria-label={`Coaches für ${poster.title}`}>
-            {posterCoaches.map((coach) => (
-              <div class="style-poster-coach-unit">
-                <a class="style-poster-coach-profile" href={`/coaches/${coach.slug}/`}>
-                  <img src={coach.image} alt="" loading="lazy" />
-                  <span>Mit {coach.name}</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-                {coach.instagramUrl ? (
-                  <a
-                    class="style-poster-coach-instagram"
-                    href={coach.instagramUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`${coach.name} auf Instagram öffnen`}
-                    title={coach.instagramHandle}
-                  >
-                    <InstagramIcon />
+          {posterCoaches.length > 0 && (
+            <div class="style-poster-coaches" aria-label={`Coaches für ${poster.title}`}>
+              {posterCoaches.map((coach) => (
+                <div class="style-poster-coach-unit">
+                  <a class="style-poster-coach-profile" href={`/coaches/${coach.slug}/`}>
+                    <img src={coach.image} alt="" loading="lazy" />
+                    <span>Mit {coach.name}</span>
+                    <span aria-hidden="true">→</span>
                   </a>
-                ) : (
-                  <span class="style-poster-coach-instagram is-disabled" aria-label={`Instagram von ${coach.name} folgt`} title="Instagram folgt">
-                    <InstagramIcon />
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </article>
+                  {coach.instagramUrl ? (
+                    <a
+                      class="style-poster-coach-instagram"
+                      href={coach.instagramUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${coach.name} auf Instagram öffnen`}
+                      title={coach.instagramHandle}
+                    >
+                      <InstagramIcon />
+                    </a>
+                  ) : (
+                    <span class="style-poster-coach-instagram is-disabled" aria-label={`Instagram von ${coach.name} folgt`} title="Instagram folgt">
+                      <InstagramIcon />
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </article>
       );
     })}
   </div>
 
   <div class="style-poster-cta">
     <div>
-      <span>Dein Style ist nur der Anfang.</span>
-      <strong>Finde jetzt den nächsten passenden Termin.</strong>
+      <span>Noch unsicher?</span>
+      <strong>Teste zwei unterschiedliche Classes mit dem Welcome Pass.</strong>
     </div>
     <div class="actions">
       <a class="button primary" href="/stundenplan/#schedule">Klasse buchen</a>
-      <a class="button secondary" href="/starter-pass/">Zwei Styles testen · 20€</a>
+      <a class="button secondary" href="/starter-pass/">Zwei Classes · 20€</a>
     </div>
   </div>
 </section>

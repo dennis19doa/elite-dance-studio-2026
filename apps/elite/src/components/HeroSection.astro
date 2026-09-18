@@ -7,8 +7,8 @@ interface HeroData {
   primaryCtaHref: string;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
-  beginnerNoteTitle: string;
-  beginnerNoteText: string;
+  videoCloudSrc?: string;
+  videoCloudMobileSrc?: string;
   videoSrc: string;
   videoMobileSrc?: string;
   videoPoster: string;
@@ -19,9 +19,18 @@ interface Props {
 }
 
 const { hero } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const scheduleHref = `${baseUrl}#schedule`;
 ---
 
-<section class="home-hero">
+<section class="home-hero home-hero-v16 home-hero-clean-v19">
+  <div class="hero-statement-v19" aria-label="We make Berlin move.">
+    <h1>
+      <span class="hero-line-v19 hero-line-small-v19"><span>We make</span></span>
+      <span class="hero-line-v19 hero-line-main-v19"><span><em>Berlin</em> move.</span></span>
+    </h1>
+  </div>
+
   <div class="hero-visual hero-video-only panel">
     <video
       class="hero-video"
@@ -35,6 +44,10 @@ const { hero } = Astro.props;
       height="1080"
       aria-label="Echte Kursszenen im Elite Dance Studio"
     >
+      {hero.videoCloudMobileSrc && (
+        <source src={hero.videoCloudMobileSrc} type="video/mp4" media="(max-width: 720px)" />
+      )}
+      {hero.videoCloudSrc && <source src={hero.videoCloudSrc} type="video/mp4" />}
       {hero.videoMobileSrc && (
         <source src={hero.videoMobileSrc} type="video/mp4" media="(max-width: 720px)" />
       )}
@@ -42,31 +55,16 @@ const { hero } = Astro.props;
     </video>
   </div>
 
-  <div class="hero-copy panel">
-    <div class="hero-copy-index" aria-hidden="true">
-      <span>Berlin · Moabit</span>
-      <strong>Dance<br />Feel<br />Belong</strong>
+  <div class="hero-actions-v19">
+    <div class="actions">
+      <a class="button primary" href={scheduleHref}>{hero.primaryCtaLabel}</a>
+      <a class="button secondary" href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</a>
     </div>
 
-    <div class="hero-copy-main">
-      <div class="eyebrow">{hero.eyebrow}</div>
-      <h1>{hero.title}</h1>
-      <p class="lead">{hero.description}</p>
-      <div class="actions">
-        <a class="button primary" href={hero.primaryCtaHref}>{hero.primaryCtaLabel}</a>
-        <a class="button secondary" href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</a>
-      </div>
+    <div class="hero-proof-v19" aria-label="Elite Dance Studio auf einen Blick">
+      <span>25+ Styles</span>
+      <span>Level 0 → Advanced</span>
+      <span>Berlin-Moabit</span>
     </div>
-
-    <aside class="hero-copy-support">
-      <span class="hero-note-kicker">Neu im Tanzen?</span>
-      <div class="hero-note">
-        <strong>{hero.beginnerNoteTitle}</strong>
-        <span>{hero.beginnerNoteText}</span>
-      </div>
-      <a class="hero-guided-link" href="/kurse/#kurskompass">
-        Geführten Einstieg ansehen <span aria-hidden="true">↘</span>
-      </a>
-    </aside>
   </div>
 </section>

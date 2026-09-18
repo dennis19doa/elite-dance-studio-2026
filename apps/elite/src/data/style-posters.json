@@ -50,6 +50,16 @@
     "tone": "violet"
   },
   {
+    "title": "Waving Beginner",
+    "level": "Beginner",
+    "world": "expression",
+    "worldLabel": "Technique & Expression",
+    "beginner": true,
+    "image": "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/classes/ChatGPT%20Image%20Aug%2023,%202026,%2006_04_55%20PM.png",
+    "alt": "Waving Beginner Kurs mit Sora im Elite Dance Studio",
+    "tone": "aqua"
+  },
+  {
     "title": "Zouk Beginner",
     "level": "Beginner",
     "world": "partner",

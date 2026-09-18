@@ -80,7 +80,7 @@ const personSchema = {
       </div>
 
       <figure class="coach-profile-portrait-v15">
-        <img src={coach.image} alt={coach.imageAlt} width="900" height="1125" />
+        <img src={coach.image} alt={coach.imageAlt} width="900" height="1125" style={`--coach-image-position: ${coach.slug === "sora" ? "center center" : "center top"};`} />
       </figure>
     </section>
 

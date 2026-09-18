@@ -11,7 +11,7 @@ const categoryFor = (focus: string) => {
   const value = focus.toLowerCase();
   if (/bachata|zouk|kizomba|salsa|lambada/.test(value)) return "partner";
   if (/hip hop|breaking|house/.test(value)) return "urban";
-  if (/heels|commercial|k-pop|reggaeton|jazz|twerk/.test(value)) return "performance";
+  if (/heels|commercial|k-pop|reggaeton|jazz|twerk|choreography/.test(value)) return "performance";
   return "movement";
 };
 
@@ -54,7 +54,7 @@ const bookingHref = `${baseUrl}#schedule`;
         {coaches.map((coach) => (
           <article class="coach-card-v15" data-coach-card data-category={categoryFor(coach.focus)}>
             <a class="coach-photo-v15" href={`/coaches/${coach.slug}/`} aria-label={`${coach.name} Profil öffnen`}>
-              <img src={coach.image} alt={coach.imageAlt} loading="lazy" decoding="async" />
+              <img src={coach.image} alt={coach.imageAlt} loading="lazy" decoding="async" style={`--coach-image-position: ${coach.slug === "sora" ? "center center" : "center top"};`} />
               <span>{coach.focus}</span>
             </a>
 

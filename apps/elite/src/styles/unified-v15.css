@@ -395,7 +395,7 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: var(--coach-image-position, center top);
   transition: transform .42s cubic-bezier(.22, 1, .36, 1);
 }
 
@@ -539,7 +539,7 @@ body::before {
   background:#202028;
   box-shadow:0 26px 70px rgba(0,0,0,.34);
 }
-.coach-profile-portrait-v15 img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+.coach-profile-portrait-v15 img { width:100%; height:100%; object-fit:cover; object-position:var(--coach-image-position, center top); }
 
 .coach-profile-details-v15 {
   display:grid;

@@ -158,7 +158,7 @@
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    object-position: center top !important;
+    object-position: var(--coach-image-position, center top) !important;
     visibility: visible !important;
     opacity: 1 !important;
   }

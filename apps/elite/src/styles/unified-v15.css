@@ -1296,3 +1296,420 @@ body::before {
     max-height: none;
   }
 }
+
+
+/* ---------------- COACH PROFILE V24 COMPACT INTEREST LAYOUT ---------------- */
+.coach-profile-shell-v24 {
+  padding-bottom: clamp(42px, 6vw, 72px);
+  border-bottom: 1px solid var(--v15-line);
+}
+
+.coach-profile-shell-v24 > .coach-profile-back-v15 {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+.coach-profile-grid-v24 {
+  display: grid;
+  grid-template-columns: minmax(280px, .78fr) minmax(430px, 1.22fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+.coach-profile-left-v24,
+.coach-profile-right-v24 {
+  min-width: 0;
+}
+
+.coach-profile-portrait-v24 {
+  width: min(100%, 390px);
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--v15-line);
+  border-radius: 18px;
+  background: #202028;
+  box-shadow: 0 20px 52px rgba(0,0,0,.25);
+}
+
+.coach-profile-portrait-v24 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--coach-image-position, center top);
+}
+
+.coach-profile-copy-v24 {
+  max-width: 430px;
+  padding-top: 20px;
+}
+
+.coach-profile-name-row-v24 {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.coach-profile-name-row-v24 h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.9rem, 4.7vw, 5.1rem);
+  line-height: .92;
+  letter-spacing: -.055em;
+}
+
+.coach-profile-focus-v24 {
+  margin: 8px 0 0;
+  color: var(--v15-lime);
+  font-size: .7rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.coach-profile-instagram-v24 {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 1 auto;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,79,123,.28);
+  border-radius: 999px;
+  color: var(--v15-rose);
+  font-size: .7rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.coach-profile-instagram-v24 svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+}
+
+.coach-profile-instagram-v24 span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coach-profile-bio-v24 {
+  margin: 18px 0 0;
+  color: var(--v15-muted);
+  font-size: .93rem;
+  line-height: 1.68;
+}
+
+.coach-profile-chips-v24 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 18px;
+}
+
+.coach-profile-chips-v24 span {
+  padding: 7px 9px;
+  border: 1px solid var(--v15-line);
+  border-radius: 999px;
+  background: rgba(255,255,255,.035);
+  color: rgba(255,255,255,.72);
+  font-size: .66rem;
+  font-weight: 700;
+}
+
+.coach-profile-book-v24 {
+  margin-top: 18px;
+}
+
+.coach-profile-right-v24 {
+  padding-top: 2px;
+}
+
+.coach-profile-video-top-v24 {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 9px;
+  color: rgba(255,255,255,.48);
+  font-size: .62rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.coach-profile-video-top-v24 span {
+  color: var(--v15-rose);
+  font-weight: 850;
+}
+
+.coach-profile-video-top-v24 b {
+  font-weight: 750;
+}
+
+.coach-profile-video-v24 {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 0 18px auto;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--v15-line);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255,79,123,.13), transparent 33%),
+    radial-gradient(circle at 82% 76%, rgba(210,248,90,.06), transparent 30%),
+    #0c0c10;
+  box-shadow: 0 24px 60px rgba(0,0,0,.27);
+}
+
+.coach-profile-video-v24 video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #09090b;
+}
+
+.coach-profile-video-empty-v24 {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 26px;
+  color: #fff;
+}
+
+.coach-profile-video-empty-v24 > span {
+  display: grid;
+  width: 50px;
+  height: 50px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(210,248,90,.26);
+  border-radius: 999px;
+  background: rgba(210,248,90,.07);
+  color: var(--v15-lime);
+  font-size: .9rem;
+  padding-left: 3px;
+}
+
+.coach-profile-video-empty-v24 small {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--v15-rose);
+  font-size: .62rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.coach-profile-video-empty-v24 strong {
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  line-height: 1;
+}
+
+.coach-profile-classes-v24 {
+  max-width: 720px;
+  margin-left: auto;
+  overflow: hidden;
+  border: 1px solid var(--v15-line);
+  border-radius: 16px;
+  background: rgba(255,255,255,.025);
+}
+
+.coach-profile-classes-top-v24 {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--v15-line);
+}
+
+.coach-profile-classes-top-v24 > strong {
+  color: #fff;
+  font-size: .8rem;
+}
+
+.coach-profile-classes-top-v24 > a {
+  color: var(--v15-lime);
+  font-size: .67rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.coach-profile-class-list-v24 {
+  display: grid;
+}
+
+.coach-profile-class-row-v24 {
+  display: grid;
+  grid-template-columns: 84px 108px minmax(150px,1fr) auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 58px;
+  padding: 10px 14px;
+  color: inherit;
+  text-decoration: none;
+  transition: background .18s ease;
+}
+
+.coach-profile-class-row-v24 + .coach-profile-class-row-v24 {
+  border-top: 1px solid var(--v15-line);
+}
+
+.coach-profile-class-row-v24:hover,
+.coach-profile-class-row-v24:focus-visible {
+  background: rgba(255,255,255,.055);
+}
+
+.coach-profile-class-row-v24:focus-visible {
+  outline: 2px solid var(--v15-lime);
+  outline-offset: -2px;
+}
+
+.coach-profile-class-row-v24 > span {
+  color: var(--v15-rose);
+  font-size: .6rem;
+  font-weight: 850;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.coach-profile-class-row-v24 time {
+  color: rgba(255,255,255,.72);
+  font-size: .75rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.coach-profile-class-row-v24 > strong {
+  color: #fff;
+  font-size: .84rem;
+}
+
+.coach-profile-class-row-v24 > b {
+  justify-self: end;
+  padding: 6px 8px;
+  border: 1px solid rgba(210,248,90,.2);
+  border-radius: 999px;
+  color: var(--v15-lime);
+  font-size: .59rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.coach-profile-page-v15 .related-coaches-v15 {
+  margin-top: clamp(38px, 5vw, 58px);
+  padding-top: 0;
+}
+
+.coach-profile-page-v15 .related-coaches-v15 .section-head {
+  margin-bottom: 18px;
+}
+
+.coach-profile-page-v15 .related-coaches-v15 .section-head h2 {
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+}
+
+@media (max-width: 980px) {
+  .coach-profile-grid-v24 {
+    grid-template-columns: minmax(240px,.8fr) minmax(340px,1.2fr);
+    gap: 26px;
+  }
+
+  .coach-profile-name-row-v24 {
+    display: grid;
+    align-items: start;
+  }
+
+  .coach-profile-instagram-v24 {
+    width: fit-content;
+  }
+
+  .coach-profile-class-row-v24 {
+    grid-template-columns: 72px 98px minmax(0,1fr);
+  }
+
+  .coach-profile-class-row-v24 > b {
+    grid-column: 3;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 760px) {
+  .coach-profile-grid-v24 {
+    grid-template-columns: 1fr;
+  }
+
+  .coach-profile-portrait-v24 {
+    width: min(100%, 420px);
+  }
+
+  .coach-profile-copy-v24 {
+    max-width: 620px;
+  }
+
+  .coach-profile-right-v24 {
+    margin-top: 8px;
+  }
+
+  .coach-profile-video-v24,
+  .coach-profile-classes-v24 {
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .coach-profile-class-row-v24 {
+    grid-template-columns: 1fr auto;
+    gap: 6px 12px;
+    padding: 12px 14px;
+  }
+
+  .coach-profile-class-row-v24 > span {
+    grid-column: 1;
+  }
+
+  .coach-profile-class-row-v24 time {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .coach-profile-class-row-v24 > strong,
+  .coach-profile-class-row-v24 > b {
+    grid-column: 1 / -1;
+  }
+
+  .coach-profile-class-row-v24 > b {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 520px) {
+  .coach-profile-name-row-v24 {
+    gap: 11px;
+  }
+
+  .coach-profile-name-row-v24 h1 {
+    font-size: clamp(3rem, 16vw, 4.8rem);
+  }
+
+  .coach-profile-video-v24 {
+    aspect-ratio: 4 / 3;
+  }
+
+  .coach-profile-video-empty-v24 {
+    justify-content: flex-start;
+    padding: 22px;
+  }
+
+  .coach-profile-classes-top-v24 {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+}

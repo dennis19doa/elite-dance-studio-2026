@@ -188,30 +188,6 @@ const personSchema = {
       )}
     </section>
 
-    {coachVideoSrc && (
-      <section class="coach-profile-video-v21">
-        <div class="coach-profile-video-copy-v21">
-          <div class="eyebrow">In Bewegung</div>
-          <h2>{coach.videoTitle ?? `Erlebe ${coach.name} im Tanz.`}</h2>
-          <p>{coach.videoText ?? "Ein kurzer visueller Eindruck von Style, Energie und Bewegung."}</p>
-        </div>
-        <figure class="coach-profile-video-frame-v21">
-          <video
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster={coach.image}
-            aria-label={`Tanzvideo mit ${coach.name}`}
-          >
-            <source src={coachVideoSrc} type="video/mp4" />
-          </video>
-          <figcaption>{coach.name} · {coach.focus}</figcaption>
-        </figure>
-      </section>
-    )}
-
     {coach.instagramUrl && (
       <section class="coach-profile-social-v15">
         <div>

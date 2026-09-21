@@ -7026,6 +7026,31 @@ blockquote {
   border-radius: 20px 4px 20px 4px;
 }
 
+/* Keep the embedded schedule softer than pure black while preserving contrast
+   against the turquoise activity cards and the white calendar background. */
+.eversports-widget [data-eversports-widget-id] {
+  color: #12332e;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.eversports-widget [data-eversports-widget-id] :where(
+  p,
+  span,
+  strong,
+  b,
+  li,
+  time,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+) {
+  color: #12332e !important;
+}
+
 /* FAQ system */
 .section-head-aside {
   display: grid;

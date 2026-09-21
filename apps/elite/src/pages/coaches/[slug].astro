@@ -4,6 +4,7 @@ import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import CoachesSection from "../../components/CoachesSection.astro";
 import InstagramIcon from "../../components/InstagramIcon.astro";
+import { cloudMediaUrl } from "../../lib/media";
 
 import coaches from "../../data/coaches.json";
 import site from "../../data/site.json";
@@ -25,6 +26,11 @@ const relatedCoaches = coaches
 const siteUrl = Astro.site ?? new URL("https://elitedancestudio.de");
 const previewBase = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const bookingHref = `${previewBase}#schedule`;
+const coachClasses = coach.classes ?? [];
+const scheduleSummary = coachClasses.length
+  ? `${coachClasses.length} Classes · ${coachClasses[0].day}`
+  : coach.schedule;
+const coachVideoSrc = coach.videoCloudSrc ? cloudMediaUrl(coach.videoCloudSrc) : coach.videoSrc;
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -59,7 +65,7 @@ const personSchema = {
         <p class="lead">{coach.text}</p>
 
         <div class="coach-profile-meta-v15">
-          <div><span>Aktuelle Class</span><strong>{coach.schedule}</strong></div>
+          <div><span>Aktuelle Classes</span><strong>{scheduleSummary}</strong></div>
           {coach.beginnerSupport && <div><span>Für deinen Einstieg</span><strong>{coach.beginnerSupport}</strong></div>}
         </div>
 
@@ -84,29 +90,81 @@ const personSchema = {
       </figure>
     </section>
 
-    <section class="coach-profile-details-v15">
-      <div>
-        <div class="eyebrow">Im Unterricht</div>
-        <h2>Was du bei {coach.name} erwarten kannst.</h2>
+    <section class="coach-profile-teaching-v21">
+      <div class="coach-profile-teaching-copy-v21">
+        <div class="eyebrow">Teaching & Background</div>
+        <h2>So unterrichtet {coach.name}.</h2>
+        <p>{coach.bio ?? coach.text}</p>
       </div>
-      <div class="coach-profile-detail-list-v15">
+      <div class="coach-profile-teaching-facts-v21">
         <article>
           <span>Style & Fokus</span>
           <strong>{coach.focus}</strong>
           <p>{coach.text}</p>
         </article>
         <article>
-          <span>Regulärer Termin</span>
-          <strong>{coach.schedule}</strong>
-          <p>Freie Plätze und mögliche Änderungen siehst du immer aktuell im Live-Stundenplan.</p>
-        </article>
-        <article>
-          <span>Dein Einstieg</span>
+          <span>Für deinen Einstieg</span>
           <strong>{coach.beginnerSupport ?? "Frag uns nach dem passenden Level"}</strong>
           <p>Wenn du bei Level oder Class unsicher bist, helfen wir dir vor der Buchung persönlich weiter.</p>
         </article>
       </div>
     </section>
+
+    <section class="coach-profile-classes-v21" aria-labelledby={`coach-classes-${coach.slug}`}>
+      <div class="coach-profile-classes-head-v21">
+        <div>
+          <div class="eyebrow">Regelmäßige Classes</div>
+          <h2 id={`coach-classes-${coach.slug}`}>Wann du mit {coach.name} trainieren kannst.</h2>
+        </div>
+        <a class="button secondary" href={bookingHref}>Live-Stundenplan öffnen</a>
+      </div>
+
+      {coachClasses.length ? (
+        <div class="coach-profile-class-list-v21">
+          {coachClasses.map((item) => (
+            <article class="coach-profile-class-row-v21">
+              <span class="coach-profile-class-day-v21">{item.day}</span>
+              <time>{item.time}</time>
+              <strong>{item.title}</strong>
+              <span class="coach-profile-class-meta-v21">{item.meta}</span>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="coach-profile-class-list-v21">
+          <article class="coach-profile-class-row-v21">
+            <span class="coach-profile-class-day-v21">Regelmäßig</span>
+            <time>{coach.schedule}</time>
+            <strong>{coach.focus}</strong>
+            <span class="coach-profile-class-meta-v21">Aktuelle Zeiten im Live-Stundenplan</span>
+          </article>
+        </div>
+      )}
+    </section>
+
+    {coachVideoSrc && (
+      <section class="coach-profile-video-v21">
+        <div class="coach-profile-video-copy-v21">
+          <div class="eyebrow">In Bewegung</div>
+          <h2>{coach.videoTitle ?? `Erlebe ${coach.name} im Tanz.`}</h2>
+          <p>{coach.videoText ?? "Ein kurzer visueller Eindruck von Style, Energie und Bewegung."}</p>
+        </div>
+        <figure class="coach-profile-video-frame-v21">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster={coach.image}
+            aria-label={`Tanzvideo mit ${coach.name}`}
+          >
+            <source src={coachVideoSrc} type="video/mp4" />
+          </video>
+          <figcaption>{coach.name} · {coach.focus}</figcaption>
+        </figure>
+      </section>
+    )}
 
     {coach.instagramUrl && (
       <section class="coach-profile-social-v15">

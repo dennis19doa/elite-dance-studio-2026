@@ -2,7 +2,6 @@
 const paths = [
   {
     value: "partner",
-    number: "01",
     label: "Gemeinsam & social",
     title: "Connection spüren",
     text: "Für alle, die Musik mit anderen erleben und später auch auf Socials tanzen möchten. Du kannst in der Regel allein starten.",
@@ -12,7 +11,6 @@ const paths = [
   },
   {
     value: "energy",
-    number: "02",
     label: "Power & Choreo",
     title: "Energie rauslassen",
     text: "Für alle, die über Groove, Songs und Choreografie einsteigen und sich kraftvoller bewegen möchten.",
@@ -22,7 +20,6 @@ const paths = [
   },
   {
     value: "expression",
-    number: "03",
     label: "Technik & Ausdruck",
     title: "Bewegung verstehen",
     text: "Für alle, die Körpergefühl, Musikalität und eine bewusstere Bewegungsqualität entwickeln möchten.",
@@ -35,25 +32,19 @@ const paths = [
 
 <section class="style-compass panel" id="kurskompass" aria-labelledby="style-compass-title" data-style-compass>
   <div class="style-compass-head">
-    <span class="style-compass-index" aria-hidden="true">01—03</span>
     <div>
       <div class="eyebrow">Dein Kurskompass</div>
-      <h2 id="style-compass-title">Was möchtest du beim Tanzen fühlen?</h2>
+      <h2 id="style-compass-title">Was willst du beim Tanzen fühlen?</h2>
     </div>
     <p>
-      Du musst keinen Fachbegriff kennen. Wähle zuerst die Erfahrung, die du suchst. Die genauen
-      Tage, Coaches und freien Plätze kommen immer aus dem Live-Stundenplan.
+      Wähle zuerst das Gefühl, das du suchst. Termine, Coaches und freie Plätze findest du danach im Live-Stundenplan.
     </p>
   </div>
 
   <div class="style-compass-controls" role="group" aria-label="Kurse nach gewünschtem Gefühl filtern">
-    <button class="style-compass-filter is-active" type="button" data-compass-filter="all" aria-pressed="true">
-      <span>00</span> Alle Wege
-    </button>
+    <button class="style-compass-filter is-active" type="button" data-compass-filter="all" aria-pressed="true">Alle Wege</button>
     {paths.map((path) => (
-      <button class="style-compass-filter" type="button" data-compass-filter={path.value} aria-pressed="false">
-        <span>{path.number}</span> {path.label}
-      </button>
+      <button class="style-compass-filter" type="button" data-compass-filter={path.value} aria-pressed="false">{path.label}</button>
     ))}
   </div>
 
@@ -66,7 +57,6 @@ const paths = [
       <article class="style-compass-card" data-compass-card={path.value}>
         <div class="style-compass-image">
           <img src={path.image} alt={path.alt} width="720" height="900" loading="lazy" decoding="async" />
-          <span>{path.number}</span>
         </div>
         <div class="style-compass-copy">
           <small>{path.label}</small>
@@ -107,11 +97,9 @@ const paths = [
           item.setAttribute("aria-pressed", String(active));
         });
 
-        let visible = 0;
         cards.forEach((card) => {
           const show = filter === "all" || card.dataset.compassCard === filter;
           card.hidden = !show;
-          if (show) visible += 1;
         });
 
         if (status) {

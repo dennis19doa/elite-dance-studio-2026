@@ -4,12 +4,15 @@
     "name": "Fundamentals Intensive",
     "duration": "4 Wochen · 4 × 3 Stunden",
     "summary": "Clean Basics, Haltung, Timing und Connection als starke Grundlage.",
+    "audience": "Für Einsteiger:innen und Tänzer:innen, die ihre Basics sauber neu aufbauen möchten.",
+    "outcome": "Mehr Sicherheit in Haltung, Timing, Connection und Partnerwork.",
     "standardPrice": "140€",
     "premiumPrice": "210€",
     "premiumLabel": "mit Video Reviews & Private Class",
     "points": [
       "Technik, Posture und Partnerwork sauber aufbauen",
-      "Mehr Sicherheit durch strukturiertes Feedback"
+      "Mehr Sicherheit durch strukturiertes Feedback",
+      "Basics direkt in Übungen und Kombinationen anwenden"
     ]
   },
   {
@@ -17,12 +20,15 @@
     "name": "Body Movement I",
     "duration": "4 Wochen · 4 × 2 Stunden",
     "summary": "Isolation Basics, Flow und Kontrolle für ein klareres Körpergefühl.",
+    "audience": "Für alle, die Body Movement verständlich und technisch von Grund auf lernen möchten.",
+    "outcome": "Mehr Kontrolle, flüssigere Übergänge und ein klareres Gefühl für einzelne Körperbereiche.",
     "standardPrice": "120€",
     "premiumPrice": "190€",
     "premiumLabel": "mit Video Reviews & Private Class",
     "points": [
       "Isolations, Waves und Körperkontrolle verstehen",
-      "Hilfreich für Bachata, Zouk, Salsa und Solo Styles"
+      "Hilfreich für Bachata, Zouk, Salsa und Solo Styles",
+      "Bewegungen bewusster verbinden statt nur nachzumachen"
     ]
   },
   {
@@ -30,12 +36,15 @@
     "name": "Body Movement II",
     "duration": "4 Wochen · 4 × 2 Stunden",
     "summary": "Mehr Kontrolle, Strength und Layering für präzisere Bewegungen.",
+    "audience": "Für Tänzer:innen, die Movement Basics bereits kennen und gezielter an Qualität arbeiten möchten.",
+    "outcome": "Mehr Präzision, Layering und Kontrolle auch bei komplexeren Bewegungen.",
     "standardPrice": "120€",
     "premiumPrice": "190€",
     "premiumLabel": "mit Video Reviews & Private Class",
     "points": [
       "Für Tänzer:innen mit vorhandenen Movement Basics",
-      "Fokus auf Kontrolle, Layering, Flow und Ausdruck"
+      "Fokus auf Kontrolle, Layering, Flow und Ausdruck",
+      "Technik unter mehr Tempo und Komplexität stabil halten"
     ]
   },
   {
@@ -43,12 +52,15 @@
     "name": "Body Movement Combined",
     "duration": "4 Wochen · 4 × 2 Stunden",
     "summary": "Ein Full-Body-Training, das Technik, Musikalität und Ausdruck verbindet.",
+    "audience": "Für Tänzer:innen, die einzelne Techniken zu einem natürlicheren Gesamtgefühl verbinden möchten.",
+    "outcome": "Mehr Bewegungsqualität, Musikalität und Freiheit im eigenen Ausdruck.",
     "standardPrice": "120€",
     "premiumPrice": "190€",
     "premiumLabel": "mit Video Reviews & Private Class",
     "points": [
       "Bewegungsqualität über einzelne Techniken hinaus entwickeln",
-      "Geeignet für Partner Dance, Solo Styles und Performance"
+      "Geeignet für Partner Dance, Solo Styles und Performance",
+      "Technik, Flow und Musikalität als Gesamtbewegung verbinden"
     ]
   }
 ]

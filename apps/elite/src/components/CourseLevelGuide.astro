@@ -1,39 +1,42 @@
 ---
-interface GuideItem {
-  badge: string;
-  title: string;
-  text: string;
-  href: string;
-  ctaLabel: string;
-}
-
-interface Props {
-  items: GuideItem[];
-}
-
+interface GuideItem { kind: "level" | "format"; badge: string; title: string; text: string; href: string; ctaLabel: string; }
+interface Props { items: GuideItem[]; }
 const { items } = Astro.props;
+const levels = items.filter((item) => item.kind === "level");
+const formats = items.filter((item) => item.kind === "format");
 ---
-
-<section class="course-guide panel">
-  <div class="section-head">
+<section class="course-guide level-guide-v2 panel" id="levels">
+  <div class="section-head compact-section-head">
     <div>
-      <div class="eyebrow">Level Guide</div>
-      <h2>So liest du die Kursseite, wenn du neu bei Elite bist.</h2>
+      <div class="eyebrow">Dein Level</div>
+      <h2>Von Level 0 bis Advanced.</h2>
     </div>
-    <p>
-      Die besten Studios machen sofort klar, welcher Einstieg für wen gedacht ist. Genau das
-      soll dir diese Orientierung hier geben.
-    </p>
+    <p>Wähle nach Erfahrung – nicht danach, wie mutig du dich heute fühlst.</p>
   </div>
 
-  <div class="guide-grid">
-    {items.map((item) => (
-      <article class="guide-card">
-        <span class="badge">{item.badge}</span>
+  <div class="level-roadmap" aria-label="Level im Elite Dance Studio">
+    {levels.map((item) => (
+      <a class="level-step" href={item.href}>
+        <span class="level-step-badge">{item.badge}</span>
         <strong>{item.title}</strong>
         <span>{item.text}</span>
-        <a class="pill guide-link" href={item.href}>{item.ctaLabel}</a>
-      </article>
+        <b>{item.ctaLabel} →</b>
+      </a>
+    ))}
+  </div>
+
+  <div class="training-formats">
+    <div class="training-formats-label">
+      <span>Trainingsformate</span>
+      <strong>Mehr Fokus als eine einzelne Class.</strong>
+    </div>
+    {formats.map((item) => (
+      <a class="training-format-card" href={item.href}>
+        <span>{item.badge}</span>
+        <strong>{item.title}</strong>
+        <small>{item.text}</small>
+        <b>{item.ctaLabel} →</b>
+      </a>
     ))}
   </div>
 </section>

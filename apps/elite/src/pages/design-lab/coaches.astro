@@ -1,0 +1,138 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import InstagramIcon from "../../components/InstagramIcon.astro";
+import coaches from "../../data/coaches.json";
+import site from "../../data/site.json";
+
+const sample = coaches.slice(0, 6);
+---
+
+<BaseLayout
+  title="Coach Design Lab | Elite Dance Studio"
+  description="Internal visual comparison for Elite Dance Studio coach layouts."
+  noindex={true}
+  bodyClass="site-subpage coach-design-lab"
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main lab-main">
+    <header class="lab-intro">
+      <div>
+        <div class="eyebrow">Design Lab · Coaches</div>
+        <h1>Choose the direction.</h1>
+      </div>
+      <p>All three options use the same real coaches, 4:5 portraits, personal text, class time, beginner note, Instagram and profile link. Only the visual structure changes.</p>
+    </header>
+
+    <nav class="lab-nav" aria-label="Coach layout options">
+      <a href="#option-a">A · Premium Cards</a>
+      <a href="#option-b">B · Editorial Split</a>
+      <a href="#option-c">C · Compact Directory</a>
+    </nav>
+
+    <section class="lab-option" id="option-a">
+      <header class="lab-option-head"><div><span>OPTION A</span><h2>Premium Cards</h2></div><p>Clean 3-column directory. Strong 4:5 portrait first, all information directly below.</p></header>
+      <div class="lab-grid-a">
+        {sample.map((coach) => (
+          <article class="lab-card-a">
+            <figure><img src={coach.image} alt={coach.imageAlt} /><span>{coach.focus}</span></figure>
+            <div class="lab-card-copy">
+              <div><h3>{coach.name}</h3><small>{coach.schedule}</small></div>
+              <p>{coach.text}</p>
+              {coach.beginnerSupport && <div class="lab-note"><b>Gut zu wissen</b><span>{coach.beginnerSupport}</span></div>}
+              <div class="lab-links"><a href={`/coaches/${coach.slug}/`}>Profil ansehen ↗</a>{coach.instagramUrl && <a href={coach.instagramUrl} target="_blank" rel="noreferrer"><InstagramIcon />{coach.instagramHandle}</a>}</div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="lab-option" id="option-b">
+      <header class="lab-option-head"><div><span>OPTION B</span><h2>Editorial Split</h2></div><p>Two coaches per row. Portrait remains contained 4:5, while text and Instagram get more breathing room.</p></header>
+      <div class="lab-grid-b">
+        {sample.map((coach) => (
+          <article class="lab-card-b">
+            <figure><img src={coach.image} alt={coach.imageAlt} /></figure>
+            <div class="lab-card-b-copy">
+              <small>{coach.focus}</small>
+              <h3>{coach.name}</h3>
+              <time>{coach.schedule}</time>
+              <p>{coach.text}</p>
+              {coach.beginnerSupport && <div class="lab-note"><b>Für deinen Einstieg</b><span>{coach.beginnerSupport}</span></div>}
+              <div class="lab-links"><a href={`/coaches/${coach.slug}/`}>Coach-Profil ↗</a>{coach.instagramUrl && <a href={coach.instagramUrl} target="_blank" rel="noreferrer"><InstagramIcon />{coach.instagramHandle}</a>}</div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="lab-option" id="option-c">
+      <header class="lab-option-head"><div><span>OPTION C</span><h2>Compact Directory</h2></div><p>More coaches visible at once. Still contained and informative, but with a lighter footprint.</p></header>
+      <div class="lab-grid-c">
+        {sample.map((coach) => (
+          <article class="lab-card-c">
+            <figure><img src={coach.image} alt={coach.imageAlt} /></figure>
+            <div class="lab-card-c-head"><div><small>{coach.focus}</small><h3>{coach.name}</h3></div><span>{coach.schedule}</span></div>
+            <p>{coach.text}</p>
+            <div class="lab-links"><a href={`/coaches/${coach.slug}/`}>Profil ↗</a>{coach.instagramUrl && <a href={coach.instagramUrl} target="_blank" rel="noreferrer"><InstagramIcon />{coach.instagramHandle}</a>}</div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+
+  <style>
+    :global(body.coach-design-lab) { background:#0d0d10 !important; color:#f8f7f5; }
+    :global(body.coach-design-lab::before) { background:radial-gradient(circle at 8% 0%,rgba(255,79,123,.12),transparent 32rem),radial-gradient(circle at 94% 8%,rgba(64,88,255,.11),transparent 32rem),#0d0d10 !important; }
+    .lab-main { padding-top:clamp(44px,6vw,78px); padding-bottom:80px; }
+    .lab-intro { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr); gap:48px; align-items:end; padding-bottom:34px; border-bottom:1px solid rgba(255,255,255,.12); }
+    .lab-intro h1 { margin:10px 0 0; max-width:8ch; color:#fff; font-size:clamp(3.4rem,7vw,7rem); line-height:.9; letter-spacing:-.06em; }
+    .lab-intro p { margin:0; max-width:44rem; color:rgba(255,255,255,.62); line-height:1.65; }
+    .lab-nav { position:sticky; top:72px; z-index:4; display:flex; gap:8px; flex-wrap:wrap; margin:24px 0 54px; padding:10px; border:1px solid rgba(255,255,255,.1); border-radius:999px; background:rgba(13,13,16,.88); backdrop-filter:blur(14px); width:fit-content; }
+    .lab-nav a { padding:10px 14px; border-radius:999px; color:#fff; text-decoration:none; font-size:.78rem; font-weight:800; }
+    .lab-nav a:hover { background:#d2f85a; color:#101014; }
+    .lab-option { scroll-margin-top:130px; margin-top:72px; }
+    .lab-option-head { display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,.65fr); gap:28px; align-items:end; margin-bottom:26px; padding-bottom:18px; border-bottom:1px solid rgba(255,255,255,.12); }
+    .lab-option-head span { color:#ff4f7b; font-size:.72rem; font-weight:900; letter-spacing:.12em; }
+    .lab-option-head h2 { margin:6px 0 0; color:#fff; font-size:clamp(2.2rem,4vw,4.4rem); letter-spacing:-.045em; }
+    .lab-option-head p { margin:0; color:rgba(255,255,255,.58); line-height:1.55; }
+    .lab-grid-a { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
+    .lab-card-a { overflow:hidden; border:1px solid rgba(255,255,255,.11); border-radius:20px; background:#17171d; box-shadow:0 20px 50px rgba(0,0,0,.24); }
+    .lab-card-a figure,.lab-card-b figure,.lab-card-c figure { margin:0; position:relative; overflow:hidden; aspect-ratio:4/5; background:#202028; }
+    .lab-card-a figure img,.lab-card-b figure img,.lab-card-c figure img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+    .lab-card-a figure span { position:absolute; right:14px; bottom:12px; left:14px; color:#d2f85a; font-size:.68rem; font-weight:900; text-transform:uppercase; }
+    .lab-card-copy { display:grid; gap:15px; padding:20px; }
+    .lab-card-copy h3,.lab-card-b-copy h3,.lab-card-c h3 { margin:0; color:#fff; }
+    .lab-card-copy h3 { font-size:1.8rem; }
+    .lab-card-copy small { color:#ff4f7b; font-weight:750; }
+    .lab-card-copy p,.lab-card-b-copy p,.lab-card-c > p { margin:0; color:rgba(255,255,255,.64); line-height:1.58; }
+    .lab-note { display:grid; gap:4px; padding:12px 13px; border-left:3px solid #4058ff; background:rgba(64,88,255,.1); }
+    .lab-note b { color:#9ba7ff; font-size:.64rem; text-transform:uppercase; letter-spacing:.08em; }
+    .lab-note span { color:rgba(255,255,255,.78); font-size:.78rem; }
+    .lab-links { display:flex; gap:14px; flex-wrap:wrap; margin-top:auto; padding-top:2px; }
+    .lab-links a { display:inline-flex; align-items:center; gap:7px; color:#fff; text-decoration:none; font-size:.78rem; font-weight:800; }
+    .lab-links a:last-child { color:#ff4f7b; }
+    .lab-links :global(svg) { width:16px; height:16px; }
+    .lab-grid-b { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+    .lab-card-b { display:grid; grid-template-columns:minmax(180px,.78fr) minmax(0,1.22fr); min-height:420px; overflow:hidden; border:1px solid rgba(255,255,255,.11); border-radius:18px; background:#17171d; }
+    .lab-card-b figure { aspect-ratio:auto; min-height:100%; }
+    .lab-card-b-copy { display:flex; flex-direction:column; gap:13px; padding:24px; }
+    .lab-card-b-copy > small { color:#d2f85a; font-size:.68rem; font-weight:900; text-transform:uppercase; }
+    .lab-card-b-copy h3 { font-size:2rem; }
+    .lab-card-b-copy time { color:#ff4f7b; font-size:.75rem; font-weight:750; }
+    .lab-grid-c { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .lab-card-c { display:grid; gap:14px; padding-bottom:18px; border-bottom:1px solid rgba(255,255,255,.12); }
+    .lab-card-c figure { border-radius:14px; }
+    .lab-card-c-head { display:flex; justify-content:space-between; gap:14px; align-items:start; }
+    .lab-card-c-head small { color:#d2f85a; font-size:.65rem; font-weight:850; text-transform:uppercase; }
+    .lab-card-c h3 { margin-top:4px; font-size:1.55rem; }
+    .lab-card-c-head > span { max-width:10rem; color:#ff4f7b; font-size:.7rem; text-align:right; }
+    .lab-card-c > p { font-size:.82rem; }
+    @media(max-width:980px){ .lab-intro,.lab-option-head{grid-template-columns:1fr}.lab-grid-a,.lab-grid-c{grid-template-columns:repeat(2,minmax(0,1fr))}.lab-grid-b{grid-template-columns:1fr}.lab-card-b{grid-template-columns:220px minmax(0,1fr)} }
+    @media(max-width:640px){ .lab-nav{top:64px; width:100%; overflow-x:auto; flex-wrap:nowrap}.lab-nav a{flex:0 0 auto}.lab-grid-a,.lab-grid-b,.lab-grid-c{grid-template-columns:1fr}.lab-card-b{grid-template-columns:1fr}.lab-card-b figure{aspect-ratio:4/5}.lab-intro h1{font-size:3.6rem} }
+  </style>
+</BaseLayout>

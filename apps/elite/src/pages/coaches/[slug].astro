@@ -25,7 +25,7 @@ const relatedCoaches = coaches
 
 const siteUrl = Astro.site ?? new URL("https://elitedancestudio.de");
 const previewBase = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-const bookingHref = `${previewBase}#schedule`;
+const bookingHref = `${previewBase}stundenplan/#schedule`;
 const coachClasses = coach.classes ?? [];
 const scheduleSummary = coachClasses.length
   ? `${coachClasses.length} Classes · ${coachClasses[0].day}`
@@ -168,22 +168,28 @@ const personSchema = {
       {coachClasses.length ? (
         <div class="coach-profile-class-list-v21">
           {coachClasses.map((item) => (
-            <article class="coach-profile-class-row-v21">
+            <a
+              class="coach-profile-class-row-v21"
+              href={item.href ?? bookingHref}
+              target={item.href?.startsWith("http") ? "_blank" : undefined}
+              rel={item.href?.startsWith("http") ? "noreferrer" : undefined}
+              aria-label={`${item.title} ${item.time} im Live-Stundenplan öffnen`}
+            >
               <span class="coach-profile-class-day-v21">{item.day}</span>
               <time>{item.time}</time>
               <strong>{item.title}</strong>
-              <span class="coach-profile-class-meta-v21">{item.meta}</span>
-            </article>
+              <span class="coach-profile-class-meta-v21">{item.meta}<b aria-hidden="true">↗</b></span>
+            </a>
           ))}
         </div>
       ) : (
         <div class="coach-profile-class-list-v21">
-          <article class="coach-profile-class-row-v21">
+          <a class="coach-profile-class-row-v21" href={bookingHref} aria-label={`${coach.name} im Live-Stundenplan öffnen`}>
             <span class="coach-profile-class-day-v21">Regelmäßig</span>
             <time>{coach.schedule}</time>
             <strong>{coach.focus}</strong>
-            <span class="coach-profile-class-meta-v21">Aktuelle Zeiten im Live-Stundenplan</span>
-          </article>
+            <span class="coach-profile-class-meta-v21">Im Live-Stundenplan öffnen <b aria-hidden="true">↗</b></span>
+          </a>
         </div>
       )}
     </section>

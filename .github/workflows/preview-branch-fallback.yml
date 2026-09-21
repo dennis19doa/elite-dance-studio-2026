@@ -1,0 +1,111 @@
+name: Elite Branch Preview Fallback
+
+on:
+  push:
+    branches: [simplify-homepage-copy]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/preview/pr-1/
+
+    steps:
+      - name: Checkout redesign branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install preview dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build redesign preview
+        run: pnpm --filter @dance/elite build
+        env:
+          GITHUB_PAGES_BASE: ${{ github.event.repository.name }}/preview/pr-1
+          PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+
+      - name: Preserve preview build
+        run: |
+          rm -rf preview-dist
+          mkdir preview-dist
+          cp -a apps/elite/dist/. preview-dist/
+
+      - name: Checkout current live main separately
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: live-source
+
+      - name: Install live dependencies
+        working-directory: live-source
+        run: pnpm install --frozen-lockfile
+
+      - name: Build untouched live site
+        working-directory: live-source
+        run: pnpm --filter @dance/elite build
+        env:
+          GITHUB_PAGES_BASE: ${{ github.event.repository.name }}
+          PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
+
+      - name: Assemble live site and V20 preview
+        shell: bash
+        run: |
+          rm -rf site
+          mkdir -p site/preview/pr-1
+          cp -a live-source/apps/elite/dist/. site/
+          cp -a preview-dist/. site/preview/pr-1/
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          repo = "${{ github.event.repository.name }}"
+          preview = Path("site/preview/pr-1")
+          base = f"/{repo}/preview/pr-1/"
+
+          for path in preview.rglob("*"):
+              if path.suffix.lower() not in {".html", ".css", ".js", ".json", ".xml", ".txt"}:
+                  continue
+              try:
+                  text = path.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  continue
+
+              for attr in ("href", "src", "poster", "action"):
+                  pattern = rf'{attr}="/(?!{re.escape(repo)}/)([^"#]+)"'
+                  text = re.sub(pattern, lambda m: f'{attr}="{base}{m.group(1)}"', text)
+
+              text = text.replace('url("/media/', f'url("{base}media/')
+              text = text.replace("url('/media/", f"url('{base}media/")
+              text = text.replace('url(/media/', f'url({base}media/')
+              path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy V20 preview alongside live site
+        uses: actions/deploy-pages@v4

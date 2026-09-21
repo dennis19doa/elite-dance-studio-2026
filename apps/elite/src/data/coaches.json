@@ -17,13 +17,37 @@
     "name": "Elena & Dennis",
     "focus": "Bachata",
     "schedule": "Dienstag · 18:30–21:30",
-    "text": "Elena und Dennis unterrichten Connection, Musikalität und Technik für mehr Sicherheit auf der Social-Tanzfläche.",
+    "text": "Elena und Dennis verbinden klare Strukturen und solide Bachata-Fundamentals mit Connection, Musikalität und Technik – damit du dich nicht nur in der Class, sondern auch auf der Social-Tanzfläche sicherer fühlst.",
     "beginnerSupport": "Allein kommen ist vollkommen normal",
     "image": "/media/coaches/elena-dennis.webp",
     "imageAlt": "Elena und Dennis, Bachata Coaches bei Elite Dance Studio",
     "imageNote": "Elite Portrait",
     "instagramHandle": "@elenaydennisbachata",
-    "instagramUrl": "https://www.instagram.com/elenaydennisbachata/"
+    "instagramUrl": "https://www.instagram.com/elenaydennisbachata/",
+    "bio": "Seit über sechs Jahren beschäftigen sich Elena und Dennis intensiv mit Bachata und dem Unterrichten. Ihr Ziel ist, dass du Zusammenhänge wirklich verstehst: von Fundamentals und Partnerverbindung bis zu Musikalität, Technik und bewussten Entscheidungen im Tanz. So entsteht ein Unterricht, der dir eine stabile Basis gibt und gleichzeitig Raum für deinen eigenen Ausdruck lässt.",
+    "classes": [
+      {
+        "day": "Dienstag",
+        "time": "18:30–19:30",
+        "title": "Bachata Beginner",
+        "meta": "Open Class"
+      },
+      {
+        "day": "Dienstag",
+        "time": "19:30–20:30",
+        "title": "Bachata Intermediate",
+        "meta": "Open Class"
+      },
+      {
+        "day": "Dienstag",
+        "time": "20:30–21:30",
+        "title": "Bachata Advanced",
+        "meta": "Closed Group"
+      }
+    ],
+    "videoCloudSrc": "tv/hero/hero:home-hero-v2-1080.mp4",
+    "videoTitle": "Bachata wirkt in Bewegung.",
+    "videoText": "Ein kurzer Eindruck aus dem Studio – Connection, Musikalität und Bewegung statt nur Profiltext."
   },
   {
     "slug": "mati",

@@ -1,0 +1,30 @@
+{
+  "videos": [
+    "hero/elite-homepage-video-medium.mp4"
+  ],
+  "posters": [
+    {"title":"Heels Beginner","file":"style-posters/01-heels-beginner.webp","aliases":["heels beginner","high heels beginner"]},
+    {"title":"K-Pop Beginner","file":"style-posters/02-kpop-beginner.webp","aliases":["k-pop","kpop"]},
+    {"title":"House Beginner","file":"style-posters/03-house-beginner.webp","aliases":["house"]},
+    {"title":"Zouk Beginner","file":"style-posters/04-zouk-beginner.webp","aliases":["zouk"]},
+    {"title":"Breaking","file":"style-posters/05-breaking.webp","aliases":["breaking","breakdance"]},
+    {"title":"Hip Hop Beginner","file":"style-posters/06-hip-hop-beginner-amy.webp","aliases":["hip hop","hip-hop"]},
+    {"title":"Latin Commercial","file":"style-posters/07-latin-commercial.webp","aliases":["latin commercial"]},
+    {"title":"Heels Intermediate","file":"style-posters/08-high-heels-intermediate.webp","aliases":["heels intermediate","high heels intermediate"]},
+    {"title":"Reggaeton Fundamentals","file":"style-posters/09-reggaeton-fundamentals.webp","aliases":["reggaeton fundamentals","reggaeton fundamental"]},
+    {"title":"Salsa Footwork Fusion","file":"style-posters/10-salsa-footwork-fusion-cali-style.webp","aliases":["salsa footwork","cali style"]},
+    {"title":"Hip Hop Beginner","file":"style-posters/11-hip-hop-beginner-minh.webp","aliases":["hip hop beginner minh"]},
+    {"title":"Kizomba","file":"style-posters/12-kizomba.webp","aliases":["kizomba"]},
+    {"title":"Commercial Beginner+","file":"style-posters/13-commercial-beginner-plus-dima.webp","aliases":["commercial beginner+","commercial beginner plus"]},
+    {"title":"Latin Twerk","file":"style-posters/14-latin-twerk.webp","aliases":["latin twerk","twerk"]},
+    {"title":"Contemporary Fusion","file":"style-posters/15-contemporary-fusion.webp","aliases":["contemporary fusion","contemporary"]},
+    {"title":"Lambada Beginner","file":"style-posters/16-lambada-beginner.webp","aliases":["lambada"]},
+    {"title":"Commercial Level 0","file":"style-posters/17-commercial-level-0.webp","aliases":["commercial level 0","commercial l0"]},
+    {"title":"Commercial Beginner+","file":"style-posters/18-commercial-beginner-plus-marlon.webp","aliases":["commercial beginner+ marlon","commercial beginner plus marlon"]},
+    {"title":"Bachata Intermediate","file":"style-posters/19-bachata-intermediate.webp","aliases":["bachata intermediate"]},
+    {"title":"Bachata Beginner","file":"style-posters/20-bachata-beginner.webp","aliases":["bachata beginner","bachata basics"]},
+    {"title":"Bachata Footwork","file":"style-posters/21-bachata-footwork.webp","aliases":["bachata footwork","footwork partnerwork"]},
+    {"title":"Reggaeton Beginner","file":"style-posters/22-reggaeton-beginner.webp","aliases":["reggaeton beginner"]},
+    {"title":"Reggaeton Beg/Int","file":"style-posters/23-reggaeton-beginner-intermediate.webp","aliases":["reggaeton beg/int","reggaeton beginner intermediate","reggaeton intermediate"]}
+  ]
+}

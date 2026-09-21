@@ -56,38 +56,84 @@ const personSchema = {
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main coach-profile-main-v15">
-    <section class="coach-profile-hero-v15">
-      <div class="coach-profile-copy-v15">
-        <a class="coach-profile-back-v15" href="/coaches/"><span aria-hidden="true">←</span> Alle Coaches</a>
-        <div class="eyebrow">Meet your coach</div>
-        <h1>{coach.name}</h1>
-        <p class="coach-profile-focus-v15">{coach.focus}</p>
-        <p class="lead">{coach.text}</p>
+    <section class="coach-profile-hero-v22">
+      <a class="coach-profile-back-v15" href="/coaches/"><span aria-hidden="true">←</span> Alle Coaches</a>
 
-        <div class="coach-profile-meta-v15">
-          <div><span>Aktuelle Classes</span><strong>{scheduleSummary}</strong></div>
-          {coach.beginnerSupport && <div><span>Für deinen Einstieg</span><strong>{coach.beginnerSupport}</strong></div>}
+      <div class="coach-profile-hero-grid-v22">
+        <div class="coach-profile-left-v22">
+          <figure class="coach-profile-portrait-v22">
+            <img
+              src={coach.image}
+              alt={coach.imageAlt}
+              width="900"
+              height="1125"
+              style={`--coach-image-position: ${coach.slug === "sora" ? "center center" : "center top"};`}
+            />
+          </figure>
+
+          <div class="coach-profile-copy-v22">
+            <div class="eyebrow">Meet your coach</div>
+            <h1>{coach.name}</h1>
+            <p class="coach-profile-focus-v22">{coach.focus}</p>
+            <p class="lead">{coach.text}</p>
+
+            <div class="coach-profile-meta-v22">
+              <div><span>Aktuelle Classes</span><strong>{scheduleSummary}</strong></div>
+              {coach.beginnerSupport && (
+                <div><span>Für deinen Einstieg</span><strong>{coach.beginnerSupport}</strong></div>
+              )}
+            </div>
+
+            <div class="coach-profile-actions-v22">
+              <a class="button primary" href={bookingHref}>Class finden</a>
+              {coach.instagramUrl ? (
+                <a class="coach-profile-instagram-v15" href={coach.instagramUrl} target="_blank" rel="noreferrer">
+                  <InstagramIcon />
+                  <span>{coach.instagramHandle}</span>
+                </a>
+              ) : (
+                <span class="coach-profile-instagram-v15 is-disabled">
+                  <InstagramIcon />
+                  <span>Instagram folgt</span>
+                </span>
+              )}
+            </div>
+          </div>
         </div>
 
-        <div class="coach-profile-actions-v15">
-          <a class="button primary" href={bookingHref}>Class finden</a>
-          {coach.instagramUrl ? (
-            <a class="coach-profile-instagram-v15" href={coach.instagramUrl} target="_blank" rel="noreferrer">
-              <InstagramIcon />
-              <span>{coach.instagramHandle}</span>
-            </a>
-          ) : (
-            <span class="coach-profile-instagram-v15 is-disabled">
-              <InstagramIcon />
-              <span>Instagram folgt</span>
-            </span>
-          )}
+        <div class="coach-profile-video-slot-v22">
+          <div class="coach-profile-video-label-v22">
+            <span>Coach video</span>
+            <b>{coach.focus}</b>
+          </div>
+
+          <figure class:list={["coach-profile-video-frame-v22", { "has-video": Boolean(coachVideoSrc) }]}>
+            {coachVideoSrc ? (
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster={coach.image}
+                aria-label={`Tanzvideo mit ${coach.name}`}
+              >
+                <source src={coachVideoSrc} type="video/mp4" />
+              </video>
+            ) : (
+              <div class="coach-profile-video-placeholder-v22">
+                <span class="coach-profile-video-play-v22" aria-hidden="true">▶</span>
+                <div>
+                  <small>Video folgt</small>
+                  <strong>{coach.name} in Bewegung</strong>
+                  <p>Dieser Bereich ist für das Coach-Video vorbereitet.</p>
+                </div>
+              </div>
+            )}
+            <figcaption>{coach.name} · {coach.focus}</figcaption>
+          </figure>
         </div>
       </div>
-
-      <figure class="coach-profile-portrait-v15">
-        <img src={coach.image} alt={coach.imageAlt} width="900" height="1125" style={`--coach-image-position: ${coach.slug === "sora" ? "center center" : "center top"};`} />
-      </figure>
     </section>
 
     <section class="coach-profile-teaching-v21">

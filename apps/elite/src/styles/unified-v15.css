@@ -646,3 +646,270 @@ body::before {
   .coach-social-link-v15 { min-width:0; }
   .intensive-card-image-v15 { aspect-ratio:4 / 3; }
 }
+
+
+/* ---------------- COACH PROFILE V21 CLEANUP ---------------- */
+.coach-profile-teaching-v21,
+.coach-profile-classes-v21,
+.coach-profile-video-v21 {
+  border-bottom: 1px solid var(--v15-line);
+}
+
+.coach-profile-teaching-v21 {
+  display: grid;
+  grid-template-columns: minmax(260px, .8fr) minmax(0, 1.2fr);
+  gap: clamp(38px, 7vw, 96px);
+  padding: clamp(52px, 7vw, 88px) 0;
+  align-items: start;
+}
+
+.coach-profile-teaching-copy-v21 h2,
+.coach-profile-classes-head-v21 h2,
+.coach-profile-video-copy-v21 h2 {
+  margin: 9px 0 0;
+  color: #fff;
+  font-size: clamp(2.2rem, 4vw, 4.15rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+
+.coach-profile-teaching-copy-v21 > p {
+  max-width: 42rem;
+  margin: 22px 0 0;
+  color: var(--v15-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.coach-profile-teaching-facts-v21 {
+  display: grid;
+  gap: 12px;
+}
+
+.coach-profile-teaching-facts-v21 article {
+  display: grid;
+  gap: 8px;
+  padding: 22px;
+  border: 1px solid var(--v15-line);
+  border-radius: 16px;
+  background: rgba(255,255,255,.035);
+}
+
+.coach-profile-teaching-facts-v21 span,
+.coach-profile-class-day-v21 {
+  color: var(--v15-rose);
+  font-size: .66rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.coach-profile-teaching-facts-v21 strong {
+  color: #fff;
+  font-size: 1.04rem;
+}
+
+.coach-profile-teaching-facts-v21 p {
+  margin: 0;
+  color: var(--v15-muted);
+  font-size: .88rem;
+  line-height: 1.58;
+}
+
+.coach-profile-classes-v21 {
+  padding: clamp(52px, 7vw, 88px) 0;
+}
+
+.coach-profile-classes-head-v21 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 30px;
+}
+
+.coach-profile-classes-head-v21 h2 {
+  max-width: 15ch;
+}
+
+.coach-profile-classes-head-v21 .button.secondary {
+  border-color: rgba(255,255,255,.16);
+  background: rgba(255,255,255,.055);
+  color: #fff;
+}
+
+.coach-profile-class-list-v21 {
+  overflow: hidden;
+  border: 1px solid var(--v15-line);
+  border-radius: 18px;
+  background: rgba(255,255,255,.025);
+}
+
+.coach-profile-class-row-v21 {
+  display: grid;
+  grid-template-columns: 130px 150px minmax(220px, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  min-height: 82px;
+  padding: 16px 20px;
+}
+
+.coach-profile-class-row-v21 + .coach-profile-class-row-v21 {
+  border-top: 1px solid var(--v15-line);
+}
+
+.coach-profile-class-row-v21 time {
+  color: #fff;
+  font-size: .91rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.coach-profile-class-row-v21 strong {
+  color: #fff;
+  font-size: 1.08rem;
+}
+
+.coach-profile-class-meta-v21 {
+  justify-self: end;
+  padding: 7px 10px;
+  border: 1px solid rgba(210,248,90,.22);
+  border-radius: 999px;
+  color: var(--v15-lime);
+  font-size: .66rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.coach-profile-video-v21 {
+  display: grid;
+  grid-template-columns: minmax(230px, .56fr) minmax(0, 1.44fr);
+  gap: clamp(34px, 6vw, 76px);
+  align-items: center;
+  padding: clamp(52px, 7vw, 88px) 0;
+}
+
+.coach-profile-video-copy-v21 h2 {
+  max-width: 10ch;
+}
+
+.coach-profile-video-copy-v21 p {
+  max-width: 28rem;
+  margin: 18px 0 0;
+  color: var(--v15-muted);
+  line-height: 1.65;
+}
+
+.coach-profile-video-frame-v21 {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--v15-line);
+  border-radius: 20px;
+  background: #0b0b0e;
+  box-shadow: 0 28px 70px rgba(0,0,0,.3);
+}
+
+.coach-profile-video-frame-v21 video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coach-profile-video-frame-v21::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 34%;
+  background: linear-gradient(180deg, transparent, rgba(7,7,9,.72));
+  pointer-events: none;
+  content: "";
+}
+
+.coach-profile-video-frame-v21 figcaption {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  left: 18px;
+  z-index: 2;
+  color: rgba(255,255,255,.88);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  .coach-profile-teaching-v21,
+  .coach-profile-video-v21 {
+    grid-template-columns: 1fr;
+  }
+
+  .coach-profile-classes-head-v21 {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .coach-profile-classes-head-v21 .button.secondary {
+    width: fit-content;
+  }
+
+  .coach-profile-class-row-v21 {
+    grid-template-columns: 110px 135px minmax(0, 1fr);
+  }
+
+  .coach-profile-class-meta-v21 {
+    grid-column: 3;
+    justify-self: start;
+  }
+
+  .coach-profile-video-frame-v21 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 680px) {
+  .coach-profile-teaching-v21,
+  .coach-profile-classes-v21,
+  .coach-profile-video-v21 {
+    padding: 42px 0;
+  }
+
+  .coach-profile-class-row-v21 {
+    grid-template-columns: 1fr auto;
+    gap: 7px 14px;
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .coach-profile-class-day-v21 {
+    grid-column: 1;
+  }
+
+  .coach-profile-class-row-v21 time {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .coach-profile-class-row-v21 strong {
+    grid-column: 1 / -1;
+    font-size: 1rem;
+  }
+
+  .coach-profile-class-meta-v21 {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 4px;
+  }
+
+  .coach-profile-video-frame-v21 {
+    border-radius: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coach-profile-video-frame-v21 video {
+    animation: none;
+  }
+}

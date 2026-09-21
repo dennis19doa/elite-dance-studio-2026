@@ -1219,3 +1219,80 @@ body::before {
     height: 48px;
   }
 }
+
+
+/* ---------------- COACH PROFILE V23 COMPACT VIDEO + CLASS LINKS ---------------- */
+.coach-profile-hero-grid-v22 {
+  grid-template-columns: minmax(300px, .82fr) minmax(420px, 1.18fr);
+}
+
+.coach-profile-video-slot-v22 {
+  width: 100%;
+  max-width: 720px;
+  justify-self: end;
+}
+
+.coach-profile-video-frame-v22 {
+  aspect-ratio: 16 / 10;
+  max-height: 500px;
+}
+
+.coach-profile-video-frame-v22 video {
+  object-fit: contain;
+  background: #09090b;
+}
+
+.coach-profile-video-placeholder-v22 {
+  min-height: 0;
+  padding: clamp(26px, 4vw, 48px);
+}
+
+.coach-profile-class-row-v21 {
+  color: inherit;
+  text-decoration: none;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.coach-profile-class-row-v21:hover,
+.coach-profile-class-row-v21:focus-visible {
+  background: rgba(255,255,255,.055);
+}
+
+.coach-profile-class-row-v21:focus-visible {
+  outline: 2px solid var(--v15-lime);
+  outline-offset: -2px;
+}
+
+.coach-profile-class-meta-v21 {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.coach-profile-class-meta-v21 b {
+  font-size: .72rem;
+  line-height: 1;
+}
+
+@media (max-width: 980px) {
+  .coach-profile-hero-grid-v22 {
+    grid-template-columns: minmax(250px,.82fr) minmax(330px,1.18fr);
+  }
+
+  .coach-profile-video-frame-v22 {
+    aspect-ratio: 4 / 3;
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 760px) {
+  .coach-profile-video-slot-v22 {
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .coach-profile-video-frame-v22 {
+    aspect-ratio: 4 / 3;
+    max-height: none;
+  }
+}

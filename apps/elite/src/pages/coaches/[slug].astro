@@ -170,9 +170,7 @@ const personSchema = {
           {coachClasses.map((item) => (
             <a
               class="coach-profile-class-row-v21"
-              href={item.href ?? bookingHref}
-              target={item.href?.startsWith("http") ? "_blank" : undefined}
-              rel={item.href?.startsWith("http") ? "noreferrer" : undefined}
+              href={bookingHref}
               aria-label={`${item.title} ${item.time} im Live-Stundenplan öffnen`}
             >
               <span class="coach-profile-class-day-v21">{item.day}</span>

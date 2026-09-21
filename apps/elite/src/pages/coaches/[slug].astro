@@ -2,7 +2,6 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
-import CoachesSection from "../../components/CoachesSection.astro";
 import InstagramIcon from "../../components/InstagramIcon.astro";
 import { cloudMediaUrl } from "../../lib/media";
 
@@ -57,12 +56,12 @@ const personSchema = {
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main coach-profile-main-v15">
-    <section class="coach-profile-shell-v24">
-      <a class="coach-profile-back-v15" href="/coaches/"><span aria-hidden="true">←</span> Alle Coaches</a>
+    <section class="coach-profile-v25">
+      <a class="coach-back-v25" href="/coaches/"><span aria-hidden="true">←</span> Alle Coaches</a>
 
-      <div class="coach-profile-grid-v24">
-        <div class="coach-profile-left-v24">
-          <figure class="coach-profile-portrait-v24">
+      <div class="coach-layout-v25">
+        <article class="coach-info-v25">
+          <figure class="coach-portrait-v25">
             <img
               src={coach.image}
               alt={coach.imageAlt}
@@ -72,38 +71,31 @@ const personSchema = {
             />
           </figure>
 
-          <div class="coach-profile-copy-v24">
-            <div class="coach-profile-name-row-v24">
+          <div class="coach-copy-v25">
+            <div class="coach-heading-v25">
               <div>
                 <h1>{coach.name}</h1>
-                <p class="coach-profile-focus-v24">{coach.focus}</p>
+                <span>{coach.focus}</span>
               </div>
               {coach.instagramUrl && (
-                <a class="coach-profile-instagram-v24" href={coach.instagramUrl} target="_blank" rel="noreferrer" aria-label={`${coach.name} auf Instagram öffnen`}>
+                <a class="coach-instagram-v25" href={coach.instagramUrl} target="_blank" rel="noreferrer" aria-label={`${coach.name} auf Instagram öffnen`}>
                   <InstagramIcon />
                   <span>{coach.instagramHandle}</span>
                 </a>
               )}
             </div>
 
-            <p class="coach-profile-bio-v24">{profileText}</p>
+            <p>{profileText}</p>
 
-            <div class="coach-profile-chips-v24">
-              <span>{scheduleSummary}</span>
-              {coach.beginnerSupport && <span>{coach.beginnerSupport}</span>}
+            <div class="coach-actions-v25">
+              <a class="button primary" href={bookingHref}>Class finden</a>
+              <span class="coach-quick-v25">{scheduleSummary}</span>
             </div>
-
-            <a class="button primary coach-profile-book-v24" href={bookingHref}>Class finden</a>
           </div>
-        </div>
+        </article>
 
-        <div class="coach-profile-right-v24">
-          <div class="coach-profile-video-top-v24">
-            <span>Coach Video</span>
-            <b>{coach.focus}</b>
-          </div>
-
-          <figure class:list={["coach-profile-video-v24", { "has-video": Boolean(coachVideoSrc) }]}>
+        <aside class="coach-media-v25">
+          <figure class:list={["coach-video-v25", { "has-video": Boolean(coachVideoSrc) }]}>
             {coachVideoSrc ? (
               <video
                 autoplay
@@ -117,30 +109,26 @@ const personSchema = {
                 <source src={coachVideoSrc} type="video/mp4" />
               </video>
             ) : (
-              <div class="coach-profile-video-empty-v24">
+              <div class="coach-video-empty-v25">
                 <span aria-hidden="true">▶</span>
                 <div>
-                  <small>Video folgt</small>
+                  <small>Coach Video</small>
                   <strong>{coach.name} in Bewegung</strong>
+                  <p>Video folgt.</p>
                 </div>
               </div>
             )}
           </figure>
 
-          <div class="coach-profile-classes-v24">
-            <div class="coach-profile-classes-top-v24">
-              <strong>Classes bei Elite</strong>
+          <div class="coach-classes-v25">
+            <div class="coach-classes-head-v25">
+              <strong>Classes</strong>
               <a href={bookingHref}>Live-Stundenplan ↗</a>
             </div>
-
-            <div class="coach-profile-class-list-v24">
+            <div class="coach-class-list-v25">
               {coachClasses.length ? (
                 coachClasses.map((item) => (
-                  <a
-                    class="coach-profile-class-row-v24"
-                    href={bookingHref}
-                    aria-label={`${item.title} ${item.time} im Live-Stundenplan öffnen`}
-                  >
+                  <a class="coach-class-v25" href={bookingHref} aria-label={`${item.title} ${item.time} im Live-Stundenplan öffnen`}>
                     <span>{item.day}</span>
                     <time>{item.time}</time>
                     <strong>{item.title}</strong>
@@ -148,25 +136,471 @@ const personSchema = {
                   </a>
                 ))
               ) : (
-                <a class="coach-profile-class-row-v24" href={bookingHref} aria-label={`${coach.name} im Live-Stundenplan öffnen`}>
+                <a class="coach-class-v25" href={bookingHref} aria-label={`${coach.name} im Live-Stundenplan öffnen`}>
                   <span>Regelmäßig</span>
                   <time>{coach.schedule}</time>
                   <strong>{coach.focus}</strong>
-                  <b>Details ↗</b>
+                  <b>Öffnen ↗</b>
                 </a>
               )}
             </div>
           </div>
-        </div>
+        </aside>
       </div>
     </section>
 
-    <CoachesSection
-      coaches={relatedCoaches}
-      eyebrow=""
-      title="Weitere Coaches"
-      description=""
-    />
+    <section class="coach-related-v25" aria-label="Weitere Coaches">
+      <div class="coach-related-head-v25">
+        <strong>Weitere Coaches</strong>
+        <a href="/coaches/">Alle ansehen ↗</a>
+      </div>
+      <div class="coach-related-row-v25">
+        {relatedCoaches.map((item) => (
+          <a class="coach-related-card-v25" href={`/coaches/${item.slug}/`}>
+            <img src={item.image} alt="" loading="lazy" />
+            <span>
+              <strong>{item.name}</strong>
+              <small>{item.focus}</small>
+            </span>
+            <b aria-hidden="true">→</b>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <style is:inline>
+      .coach-profile-v25 {
+        padding-bottom: clamp(32px, 5vw, 56px);
+        border-bottom: 1px solid rgba(255,255,255,.10);
+      }
+
+      .coach-back-v25 {
+        display: inline-flex;
+        gap: 7px;
+        align-items: center;
+        margin-bottom: 18px;
+        color: rgba(255,255,255,.55);
+        font-size: .78rem;
+        text-decoration: none;
+      }
+
+      .coach-back-v25:hover { color: #fff; }
+
+      .coach-layout-v25 {
+        display: grid !important;
+        grid-template-columns: minmax(270px, 360px) minmax(0, 1fr) !important;
+        gap: clamp(28px, 5vw, 64px) !important;
+        align-items: start !important;
+      }
+
+      .coach-info-v25,
+      .coach-media-v25 {
+        min-width: 0 !important;
+        max-width: none !important;
+      }
+
+      .coach-portrait-v25 {
+        display: block !important;
+        width: 100% !important;
+        max-width: 360px !important;
+        height: 340px !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        aspect-ratio: auto !important;
+        border: 1px solid rgba(255,255,255,.10);
+        border-radius: 18px;
+        background: #202028;
+        box-shadow: 0 18px 42px rgba(0,0,0,.24);
+      }
+
+      .coach-portrait-v25 img {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        object-fit: cover !important;
+        object-position: var(--coach-image-position, center top) !important;
+      }
+
+      .coach-copy-v25 {
+        padding-top: 18px;
+      }
+
+      .coach-heading-v25 {
+        display: flex;
+        gap: 14px;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+
+      .coach-heading-v25 h1 {
+        margin: 0 !important;
+        color: #fff !important;
+        font-size: clamp(2.7rem, 4.1vw, 4.5rem) !important;
+        line-height: .92 !important;
+        letter-spacing: -.055em !important;
+      }
+
+      .coach-heading-v25 > div > span {
+        display: block;
+        margin-top: 7px;
+        color: #d2f85a;
+        font-size: .67rem;
+        font-weight: 850;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .coach-instagram-v25 {
+        display: inline-flex;
+        min-width: 0;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 9px;
+        border: 1px solid rgba(255,79,123,.28);
+        border-radius: 999px;
+        color: #ff668b;
+        font-size: .66rem;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .coach-instagram-v25 svg {
+        width: 14px;
+        height: 14px;
+        flex: 0 0 auto;
+      }
+
+      .coach-instagram-v25 span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .coach-copy-v25 > p {
+        margin: 15px 0 0 !important;
+        color: rgba(255,255,255,.62) !important;
+        font-size: .9rem !important;
+        line-height: 1.62 !important;
+      }
+
+      .coach-actions-v25 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-top: 16px;
+      }
+
+      .coach-actions-v25 .button {
+        min-height: 40px !important;
+        padding: 0 14px !important;
+      }
+
+      .coach-quick-v25 {
+        color: rgba(255,255,255,.55);
+        font-size: .7rem;
+        font-weight: 700;
+      }
+
+      .coach-media-v25 {
+        display: grid !important;
+        gap: 14px !important;
+      }
+
+      .coach-video-v25 {
+        display: block !important;
+        width: 100% !important;
+        max-width: 680px !important;
+        height: 300px !important;
+        min-height: 0 !important;
+        margin: 0 0 0 auto !important;
+        overflow: hidden !important;
+        aspect-ratio: auto !important;
+        border: 1px solid rgba(255,255,255,.10);
+        border-radius: 18px;
+        background:
+          radial-gradient(circle at 15% 15%, rgba(255,79,123,.14), transparent 36%),
+          #0d0d11;
+        box-shadow: 0 22px 54px rgba(0,0,0,.27);
+      }
+
+      .coach-video-v25 video {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        background: #09090b !important;
+      }
+
+      .coach-video-empty-v25 {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        padding: 24px;
+        color: #fff;
+      }
+
+      .coach-video-empty-v25 > span {
+        display: grid;
+        width: 48px;
+        height: 48px;
+        flex: 0 0 auto;
+        place-items: center;
+        padding-left: 3px;
+        border: 1px solid rgba(210,248,90,.28);
+        border-radius: 999px;
+        color: #d2f85a;
+      }
+
+      .coach-video-empty-v25 small {
+        display: block;
+        margin-bottom: 4px;
+        color: #ff668b;
+        font-size: .61rem;
+        font-weight: 850;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .coach-video-empty-v25 strong {
+        display: block;
+        color: #fff;
+        font-size: clamp(1.35rem, 2.3vw, 2rem);
+        line-height: 1;
+      }
+
+      .coach-video-empty-v25 p {
+        margin: 7px 0 0 !important;
+        color: rgba(255,255,255,.48) !important;
+        font-size: .75rem !important;
+      }
+
+      .coach-classes-v25 {
+        width: 100%;
+        max-width: 680px;
+        margin-left: auto;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,.10);
+        border-radius: 14px;
+        background: rgba(255,255,255,.025);
+      }
+
+      .coach-classes-head-v25 {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+        padding: 11px 14px;
+        border-bottom: 1px solid rgba(255,255,255,.10);
+      }
+
+      .coach-classes-head-v25 strong {
+        color: #fff;
+        font-size: .76rem;
+      }
+
+      .coach-classes-head-v25 a {
+        color: #d2f85a;
+        font-size: .64rem;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .coach-class-list-v25 { display: grid; }
+
+      .coach-class-v25 {
+        display: grid;
+        grid-template-columns: 78px 100px minmax(130px,1fr) auto;
+        gap: 10px;
+        align-items: center;
+        min-height: 50px;
+        padding: 9px 12px;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .coach-class-v25 + .coach-class-v25 {
+        border-top: 1px solid rgba(255,255,255,.08);
+      }
+
+      .coach-class-v25:hover,
+      .coach-class-v25:focus-visible {
+        background: rgba(255,255,255,.05);
+      }
+
+      .coach-class-v25 > span {
+        color: #ff668b;
+        font-size: .56rem;
+        font-weight: 850;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+      }
+
+      .coach-class-v25 time {
+        color: rgba(255,255,255,.65);
+        font-size: .7rem;
+        font-weight: 750;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .coach-class-v25 > strong {
+        color: #fff;
+        font-size: .79rem;
+      }
+
+      .coach-class-v25 > b {
+        justify-self: end;
+        color: #d2f85a;
+        font-size: .57rem;
+        white-space: nowrap;
+      }
+
+      .coach-related-v25 {
+        padding: 28px 0 0 !important;
+      }
+
+      .coach-related-head-v25 {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .coach-related-head-v25 > strong {
+        color: #fff;
+        font-size: .86rem;
+      }
+
+      .coach-related-head-v25 > a {
+        color: rgba(255,255,255,.55);
+        font-size: .67rem;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .coach-related-row-v25 {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+        gap: 10px !important;
+      }
+
+      .coach-related-card-v25 {
+        display: grid;
+        grid-template-columns: 58px minmax(0,1fr) auto;
+        gap: 11px;
+        align-items: center;
+        min-width: 0;
+        padding: 8px;
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 12px;
+        background: rgba(255,255,255,.025);
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .coach-related-card-v25 img {
+        display: block !important;
+        width: 58px !important;
+        height: 58px !important;
+        max-width: 58px !important;
+        object-fit: cover !important;
+        object-position: center top;
+        border-radius: 9px;
+      }
+
+      .coach-related-card-v25 > span {
+        display: grid;
+        min-width: 0;
+        gap: 3px;
+      }
+
+      .coach-related-card-v25 strong {
+        overflow: hidden;
+        color: #fff;
+        font-size: .75rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .coach-related-card-v25 small {
+        overflow: hidden;
+        color: rgba(255,255,255,.48);
+        font-size: .61rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .coach-related-card-v25 > b {
+        color: #d2f85a;
+        font-size: .8rem;
+      }
+
+      @media (max-width: 900px) {
+        .coach-layout-v25 {
+          grid-template-columns: minmax(230px, 310px) minmax(0,1fr) !important;
+          gap: 24px !important;
+        }
+
+        .coach-portrait-v25 {
+          height: 300px !important;
+        }
+
+        .coach-video-v25 {
+          height: 250px !important;
+        }
+
+        .coach-class-v25 {
+          grid-template-columns: 1fr auto;
+          gap: 5px 10px;
+        }
+
+        .coach-class-v25 > strong,
+        .coach-class-v25 > b {
+          grid-column: 1 / -1;
+        }
+
+        .coach-class-v25 > b {
+          justify-self: start;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .coach-layout-v25 {
+          grid-template-columns: 1fr !important;
+        }
+
+        .coach-portrait-v25 {
+          width: 100% !important;
+          max-width: none !important;
+          height: min(78vw, 420px) !important;
+        }
+
+        .coach-heading-v25 {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .coach-video-v25,
+        .coach-classes-v25 {
+          max-width: none !important;
+          margin-left: 0 !important;
+        }
+
+        .coach-video-v25 {
+          height: min(58vw, 300px) !important;
+        }
+
+        .coach-related-row-v25 {
+          grid-template-columns: 1fr !important;
+        }
+      }
+    </style>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />

@@ -30,7 +30,7 @@ const coachClasses = coach.classes ?? [];
 const scheduleSummary = coachClasses.length
   ? `${coachClasses.length} Classes · ${coachClasses[0].day}`
   : coach.schedule;
-const coachVideoSrc = coach.videoCloudSrc ? cloudMediaUrl(coach.videoCloudSrc) : coach.videoSrc;
+const coachVideoSrc = coach.videoCloudSrc ? cloudMediaUrl(coach.videoCloudSrc) : undefined;
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",

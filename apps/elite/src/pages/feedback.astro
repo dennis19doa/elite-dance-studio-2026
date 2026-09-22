@@ -10,6 +10,7 @@ import site from "../data/site.json";
   title="First Class Feedback | Elite Dance Studio Berlin"
   description="Tell us how your first class at Elite Dance Studio went and help us improve the experience for future students."
   noindex={true}
+  bodyClass="feedback-page-body"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
@@ -19,3 +20,25 @@ import site from "../data/site.json";
 
   <SiteFooter brand={site.brand} nav={site.nav} />
 </BaseLayout>
+
+
+<style is:global>
+  body.feedback-page-body {
+    background:
+      radial-gradient(circle at 8% 4%, rgba(162, 78, 105, 0.17), transparent 27rem),
+      radial-gradient(circle at 92% 12%, rgba(197, 164, 107, 0.22), transparent 30rem),
+      linear-gradient(180deg, #fff9f5 0%, #f7eee9 48%, #f3e8e1 100%);
+  }
+
+  body.feedback-page-body .site-header {
+    background: rgba(255, 250, 247, 0.92);
+  }
+
+  body.feedback-page-body .site-footer {
+    background: transparent;
+  }
+
+  .feedback-page {
+    padding-top: 42px;
+  }
+</style>

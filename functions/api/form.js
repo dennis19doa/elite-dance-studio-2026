@@ -36,6 +36,27 @@ async function getAccessToken(env) {
 }
 
 function buildMessage(fields) {
+  if (fields.formKind === "feedback") {
+    return [
+      "First Visit Feedback",
+      "",
+      `Class: ${fields.className || "–"}`,
+      `Teacher: ${fields.teacherName || "–"}`,
+      `Before class / friction: ${fields.preVisitFriction.length ? fields.preVisitFriction.join(", ") : "–"}`,
+      `Overall first impression: ${fields.overallRating || "–"} / 5`,
+      `Class level: ${fields.levelFit || "–"}`,
+      `Would return: ${fields.returnIntent || "–"}`,
+      `Discovery source: ${fields.discoverySource || "–"}`,
+      "",
+      "Open feedback:",
+      fields.openFeedback || "–",
+      "",
+      `Source: ${fields.source || "eversports-first-visit"}`,
+      "Datenschutz-Einwilligung: akzeptiert",
+      "Quelle: elitedancestudio.de/feedback/",
+    ].join("\n");
+  }
+
   const lines = [
     fields.formKind === "welcome" ? "Neue Welcome-Pass-Anfrage" : "Neue Website-Anfrage",
     "",
@@ -98,14 +119,27 @@ export async function onRequestPost({ request, env }) {
       availability: clean(form.get("availability"), 2000),
       topic: clean(form.get("topic"), 300),
       message: clean(form.get("message"), 5000),
+      className: clean(form.get("class_name"), 300),
+      teacherName: clean(form.get("teacher_name"), 300),
+      preVisitFriction: form.getAll("pre_visit_friction").map((value) => clean(value, 120)).filter(Boolean),
+      overallRating: clean(form.get("overall_rating"), 20),
+      levelFit: clean(form.get("level_fit"), 120),
+      returnIntent: clean(form.get("return_intent"), 120),
+      openFeedback: clean(form.get("open_feedback"), 5000),
+      discoverySource: clean(form.get("discovery_source"), 200),
+      source: clean(form.get("source"), 300),
       privacyConsent: clean(form.get("privacy_consent"), 40),
     };
 
-    if (!["welcome", "contact"].includes(fields.formKind)) {
+    if (!["welcome", "contact", "feedback"].includes(fields.formKind)) {
       return json({ ok: false, error: "invalid_form" }, 400);
     }
 
-    if (!fields.name || !isEmail(fields.email) || fields.privacyConsent !== "accepted") {
+    if (fields.privacyConsent !== "accepted") {
+      return json({ ok: false, error: "invalid_submission" }, 400);
+    }
+
+    if (fields.formKind !== "feedback" && (!fields.name || !isEmail(fields.email))) {
       return json({ ok: false, error: "invalid_submission" }, 400);
     }
 
@@ -117,10 +151,27 @@ export async function onRequestPost({ request, env }) {
       return json({ ok: false, error: "missing_required_fields" }, 400);
     }
 
+    if (
+      fields.formKind === "feedback" &&
+      (
+        !fields.className ||
+        !fields.teacherName ||
+        !fields.preVisitFriction.length ||
+        !fields.overallRating ||
+        !fields.levelFit ||
+        !fields.returnIntent ||
+        !fields.discoverySource
+      )
+    ) {
+      return json({ ok: false, error: "missing_required_fields" }, 400);
+    }
+
     const accessToken = await getAccessToken(env);
     const subject = fields.formKind === "welcome"
       ? `Welcome Pass – ${fields.name}`
-      : `Website-Anfrage – ${fields.name} – ${fields.topic}`;
+      : fields.formKind === "feedback"
+        ? `First Visit Feedback – ${fields.className} – ${fields.teacherName}`
+        : `Website-Anfrage – ${fields.name} – ${fields.topic}`;
 
     const mailResponse = await fetch(
       `https://mail.zoho.eu/api/accounts/${encodeURIComponent(env.ZOHO_ACCOUNT_ID)}/messages`,

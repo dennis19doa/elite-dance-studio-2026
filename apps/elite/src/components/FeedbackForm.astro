@@ -7,11 +7,13 @@ const ratingOptions = [1, 2, 3, 4, 5];
 
 <section class="feedback-shell panel">
   <div class="feedback-intro">
-    <div class="eyebrow">First class feedback</div>
+    <div class="feedback-topline">
+      <div class="eyebrow">First class feedback</div>
+      <span class="feedback-time">3 quick steps · about 60 sec</span>
+    </div>
     <h1>How was your first class at Elite? 💛</h1>
     <p>
-      This takes about two minutes. We want to understand your whole first experience with Elite —
-      from finding information and arriving at the studio to the class itself.
+      A few quick taps help us improve the whole first visit — not just the class.
     </p>
   </div>
 
@@ -27,98 +29,78 @@ const ratingOptions = [1, 2, 3, 4, 5];
     <input type="hidden" name="source" value="eversports-first-visit" data-feedback-source />
     <input class="feedback-honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
-    <div class="feedback-grid">
-      <label class="feedback-field">
-        <span>Which class did you attend? *</span>
-        <input
-          type="text"
-          name="class_name"
-          required
-          placeholder="e.g. Heels Beginner"
-          autocomplete="off"
-          data-feedback-class
-        />
-      </label>
-
-      <label class="feedback-field">
-        <span>Who was your teacher? *</span>
-        <input
-          type="text"
-          name="teacher_name"
-          required
-          placeholder="Teacher name"
-          autocomplete="off"
-          data-feedback-teacher
-        />
-      </label>
+    <div class="feedback-progress" aria-label="Survey progress">
+      <div class="feedback-progress-meta">
+        <strong data-progress-label>Step 1 of 3</strong>
+        <span data-progress-copy>Getting here</span>
+      </div>
+      <div class="feedback-progress-track" aria-hidden="true">
+        <span data-progress-bar></span>
+      </div>
     </div>
 
-    <div class="feedback-section">
-      <div class="feedback-section-head">
+    <section class="feedback-step" data-feedback-step="1">
+      <div class="feedback-step-head">
         <span>01</span>
         <div>
-          <h2>Before your visit</h2>
-          <p>Was it easy to understand how Elite works and get yourself into the right class?</p>
+          <h2>First, the basics</h2>
+          <p>Tell us which class you joined and whether anything made the first visit harder than it needed to be.</p>
         </div>
       </div>
 
-      <fieldset class="feedback-question">
-        <legend>How easy was it to find the information you needed before your first class? *</legend>
-        <div class="rating-scale" aria-label="Ease of finding information from 1 to 5">
-          {ratingOptions.map((rating) => (
-            <label>
-              <input type="radio" name="information_ease" value={rating} required />
-              <span><b>{rating}</b><small>{rating === 1 ? "Very difficult" : rating === 5 ? "Very easy" : ""}</small></span>
-            </label>
-          ))}
+      <div class="feedback-grid">
+        <label class="feedback-field">
+          <span>Which class did you attend? *</span>
+          <input
+            type="text"
+            name="class_name"
+            required
+            placeholder="e.g. Heels Beginner"
+            autocomplete="off"
+            data-feedback-class
+          />
+        </label>
+
+        <label class="feedback-field">
+          <span>Who was your teacher? *</span>
+          <input
+            type="text"
+            name="teacher_name"
+            required
+            placeholder="Teacher name"
+            autocomplete="off"
+            data-feedback-teacher
+          />
+        </label>
+      </div>
+
+      <fieldset class="feedback-question friction-question" data-friction-group>
+        <legend>Before class, was anything difficult? *</legend>
+        <p class="question-hint">Choose everything that applies.</p>
+        <div class="chip-grid">
+          <label><input type="checkbox" name="pre_visit_friction" value="finding_information" /><span>Finding information</span></label>
+          <label><input type="checkbox" name="pre_visit_friction" value="choosing_class_level" /><span>Choosing a class / level</span></label>
+          <label><input type="checkbox" name="pre_visit_friction" value="booking" /><span>Booking</span></label>
+          <label><input type="checkbox" name="pre_visit_friction" value="finding_entrance" /><span>Finding the entrance</span></label>
+          <label><input type="checkbox" name="pre_visit_friction" value="knowing_what_to_expect" /><span>Knowing what to expect</span></label>
+          <label class="chip-positive"><input type="checkbox" name="pre_visit_friction" value="nothing_difficult" data-no-friction /><span>Nothing — it was easy ✓</span></label>
         </div>
+        <p class="question-error" data-friction-error hidden>Please choose at least one option.</p>
       </fieldset>
 
-      <fieldset class="feedback-question">
-        <legend>How easy was the booking process? *</legend>
-        <div class="rating-scale" aria-label="Booking ease from 1 to 5">
-          {ratingOptions.map((rating) => (
-            <label>
-              <input type="radio" name="booking_ease" value={rating} required />
-              <span><b>{rating}</b><small>{rating === 1 ? "Very difficult" : rating === 5 ? "Very easy" : ""}</small></span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      <div class="feedback-nav feedback-nav-end">
+        <button class="button primary" type="button" data-next-step>Next: your class →</button>
+      </div>
+    </section>
 
-      <fieldset class="feedback-question">
-        <legend>How easy was it to find the studio and entrance? *</legend>
-        <div class="rating-scale" aria-label="Ease of finding the studio from 1 to 5">
-          {ratingOptions.map((rating) => (
-            <label>
-              <input type="radio" name="arrival_ease" value={rating} required />
-              <span><b>{rating}</b><small>{rating === 1 ? "Very difficult" : rating === 5 ? "Very easy" : ""}</small></span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
-    </div>
-
-    <div class="feedback-section">
-      <div class="feedback-section-head">
+    <section class="feedback-step" data-feedback-step="2" hidden>
+      <div class="feedback-step-head">
         <span>02</span>
         <div>
-          <h2>Your first impression of Elite</h2>
-          <p>Think about the studio, atmosphere and how you felt when you arrived.</p>
+          <h2>Nice — you’re halfway there.</h2>
+          <p>Three quick taps about the class itself.</p>
         </div>
       </div>
-
-      <fieldset class="feedback-question">
-        <legend>How welcome did you feel at the studio? *</legend>
-        <div class="rating-scale" aria-label="Feeling welcome at the studio from 1 to 5">
-          {ratingOptions.map((rating) => (
-            <label>
-              <input type="radio" name="studio_welcome" value={rating} required />
-              <span><b>{rating}</b><small>{rating === 1 ? "Not welcome" : rating === 5 ? "Very welcome" : ""}</small></span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
 
       <fieldset class="feedback-question">
         <legend>What was your overall first impression of Elite? *</legend>
@@ -126,39 +108,17 @@ const ratingOptions = [1, 2, 3, 4, 5];
           {ratingOptions.map((rating) => (
             <label>
               <input type="radio" name="overall_rating" value={rating} required />
-              <span><b>{rating}</b><small>{rating === 1 ? "Poor" : rating === 5 ? "Excellent" : ""}</small></span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
-    </div>
-
-    <div class="feedback-section">
-      <div class="feedback-section-head">
-        <span>03</span>
-        <div>
-          <h2>Your class</h2>
-          <p>Now just a few questions about the class itself.</p>
-        </div>
-      </div>
-
-      <fieldset class="feedback-question">
-        <legend>How clearly was the class explained? *</legend>
-        <div class="rating-scale" aria-label="Class clarity from 1 to 5">
-          {ratingOptions.map((rating) => (
-            <label>
-              <input type="radio" name="clarity_rating" value={rating} required />
-              <span><b>{rating}</b><small>{rating === 1 ? "Not clear" : rating === 5 ? "Very clear" : ""}</small></span>
+              <span><b>{rating}</b><small>{rating === 1 ? "Not great" : rating === 5 ? "Loved it" : ""}</small></span>
             </label>
           ))}
         </div>
       </fieldset>
 
       <fieldset class="feedback-question">
-        <legend>How was the level for you? *</legend>
+        <legend>How was the class level for you? *</legend>
         <div class="choice-grid choice-grid-three">
           <label><input type="radio" name="level_fit" value="too_easy" required /><span>Too easy</span></label>
-          <label><input type="radio" name="level_fit" value="just_right" required /><span>Just right</span></label>
+          <label><input type="radio" name="level_fit" value="just_right" required /><span>Just right ✓</span></label>
           <label><input type="radio" name="level_fit" value="too_difficult" required /><span>Too difficult</span></label>
         </div>
       </fieldset>
@@ -172,25 +132,32 @@ const ratingOptions = [1, 2, 3, 4, 5];
           <label><input type="radio" name="return_intent" value="probably_not" required /><span>Probably not</span></label>
         </div>
       </fieldset>
-    </div>
 
-    <div class="feedback-grid">
-      <label class="feedback-field feedback-field-wide">
-        <span>What did you like most about your first visit?</span>
-        <textarea name="liked_most" rows="4" placeholder="The class, teacher, atmosphere, studio, booking — anything that stood out positively"></textarea>
+      <div class="feedback-nav">
+        <button class="feedback-back" type="button" data-prev-step>← Back</button>
+        <button class="button primary" type="button" data-next-step>Almost done →</button>
+      </div>
+    </section>
+
+    <section class="feedback-step" data-feedback-step="3" hidden>
+      <div class="feedback-step-head">
+        <span>03</span>
+        <div>
+          <h2>Last step ✨</h2>
+          <p>One useful detail, then you’re done.</p>
+        </div>
+      </div>
+
+      <label class="feedback-field">
+        <span>Anything you'd like us to know?</span>
+        <textarea
+          name="open_feedback"
+          rows="4"
+          placeholder="Something you loved, something confusing, or anything we could improve — optional"
+        ></textarea>
       </label>
 
-      <label class="feedback-field feedback-field-wide">
-        <span>Was anything confusing, difficult or different from what you expected?</span>
-        <textarea name="improvement" rows="4" placeholder="For example: finding information, booking, the entrance, studio orientation, class level or anything else"></textarea>
-      </label>
-
-      <label class="feedback-field feedback-field-wide">
-        <span>What other classes or styles would you like to see at Elite?</span>
-        <textarea name="future_classes" rows="3" placeholder="A style, level, time slot or type of class you are missing"></textarea>
-      </label>
-
-      <label class="feedback-field feedback-field-wide">
+      <label class="feedback-field">
         <span>How did you first hear about Elite? *</span>
         <select name="discovery_source" required>
           <option value="">Please choose</option>
@@ -204,32 +171,32 @@ const ratingOptions = [1, 2, 3, 4, 5];
           <option value="other">Other / I don't remember</option>
         </select>
       </label>
-    </div>
 
-    <label class="feedback-consent">
-      <input type="checkbox" name="privacy_consent" value="accepted" required />
-      <span>
-        I agree that Elite Dance Studio may use my answers internally to improve classes and the studio experience. *
-      </span>
-    </label>
+      <label class="feedback-consent">
+        <input type="checkbox" name="privacy_consent" value="accepted" required />
+        <span>I agree that Elite Dance Studio may use my answers internally to improve classes and the studio experience. *</span>
+      </label>
 
-    <div class="feedback-submit">
-      <button class="button primary" type="submit">Send feedback</button>
-      <span>* Required</span>
-    </div>
+      <div class="feedback-nav">
+        <button class="feedback-back" type="button" data-prev-step>← Back</button>
+        <button class="button primary feedback-finish" type="submit">Send feedback ✓</button>
+      </div>
 
-    <p class="feedback-status" role="status" aria-live="polite" data-feedback-status>
-      {isConfigured
-        ? "Your feedback is used for internal quality improvement."
-        : "Preview mode: the form design is ready; the secure submission endpoint still needs to be connected."}
-    </p>
+      <p class="feedback-status" role="status" aria-live="polite" data-feedback-status>
+        {isConfigured
+          ? "Your feedback is used for internal quality improvement."
+          : "Preview mode: the form design is ready; the secure submission endpoint still needs to be connected."}
+      </p>
+    </section>
   </form>
 
   <div class="feedback-success" data-feedback-success hidden>
-    <div class="eyebrow">Thank you</div>
-    <h2>Your feedback is in. 💛</h2>
+    <div class="feedback-celebration" aria-hidden="true">✓</div>
+    <div class="eyebrow">Done</div>
+    <h2>Thank you — that really helps. 💛</h2>
     <p>
-      Thanks for helping us make Elite better. We hope to see you on the dance floor again soon.
+      Your feedback helps us make the first Elite experience clearer, easier and more enjoyable.
+      We hope to see you on the dance floor again soon.
     </p>
     <a class="button secondary" href="/stundenplan/">See the weekly schedule</a>
   </div>
@@ -237,9 +204,8 @@ const ratingOptions = [1, 2, 3, 4, 5];
   <details class="feedback-privacy">
     <summary>What happens with my answers?</summary>
     <p>
-      We use the responses internally to understand the full first-visit journey: information,
-      booking, arrival, studio experience and classes. The answers are not used
-      to subscribe you to marketing emails.
+      We use the responses internally to understand the first-visit journey, class experience
+      and where new students discover Elite. The answers are not used to subscribe you to marketing emails.
     </p>
   </details>
 </section>
@@ -248,31 +214,107 @@ const ratingOptions = [1, 2, 3, 4, 5];
   const feedbackForm = document.querySelector<HTMLFormElement>("[data-feedback-form]");
 
   if (feedbackForm) {
+    const steps = Array.from(feedbackForm.querySelectorAll<HTMLElement>("[data-feedback-step]"));
     const status = feedbackForm.querySelector<HTMLElement>("[data-feedback-status]");
     const button = feedbackForm.querySelector<HTMLButtonElement>('button[type="submit"]');
     const success = document.querySelector<HTMLElement>("[data-feedback-success]");
+    const progressLabel = feedbackForm.querySelector<HTMLElement>("[data-progress-label]");
+    const progressCopy = feedbackForm.querySelector<HTMLElement>("[data-progress-copy]");
+    const progressBar = feedbackForm.querySelector<HTMLElement>("[data-progress-bar]");
     const params = new URLSearchParams(window.location.search);
+    let currentStep = 1;
 
     const sourceField = feedbackForm.querySelector<HTMLInputElement>("[data-feedback-source]");
     const classField = feedbackForm.querySelector<HTMLInputElement>("[data-feedback-class]");
     const teacherField = feedbackForm.querySelector<HTMLInputElement>("[data-feedback-teacher]");
+    const frictionGroup = feedbackForm.querySelector<HTMLElement>("[data-friction-group]");
+    const frictionError = feedbackForm.querySelector<HTMLElement>("[data-friction-error]");
+    const noFriction = feedbackForm.querySelector<HTMLInputElement>("[data-no-friction]");
+    const frictionInputs = Array.from(feedbackForm.querySelectorAll<HTMLInputElement>('input[name="pre_visit_friction"]'));
 
     if (sourceField && params.get("source")) sourceField.value = params.get("source") || sourceField.value;
     if (classField && params.get("class")) classField.value = params.get("class") || "";
     if (teacherField && params.get("teacher")) teacherField.value = params.get("teacher") || "";
 
+    frictionInputs.forEach((input) => {
+      input.addEventListener("change", () => {
+        if (input === noFriction && input.checked) {
+          frictionInputs.forEach((other) => {
+            if (other !== input) other.checked = false;
+          });
+        } else if (input.checked && noFriction) {
+          noFriction.checked = false;
+        }
+
+        if (frictionInputs.some((item) => item.checked) && frictionError) {
+          frictionError.hidden = true;
+        }
+      });
+    });
+
+    const updateProgress = () => {
+      const labels = ["Getting here", "Your class", "One last thing"];
+      if (progressLabel) progressLabel.textContent = `Step ${currentStep} of 3`;
+      if (progressCopy) progressCopy.textContent = labels[currentStep - 1];
+      if (progressBar) progressBar.style.width = `${(currentStep / 3) * 100}%`;
+
+      steps.forEach((step) => {
+        step.hidden = Number(step.dataset.feedbackStep) !== currentStep;
+      });
+
+      feedbackForm.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    const validateCurrentStep = () => {
+      const step = steps.find((item) => Number(item.dataset.feedbackStep) === currentStep);
+      if (!step) return true;
+
+      if (currentStep === 1 && !frictionInputs.some((item) => item.checked)) {
+        if (frictionError) frictionError.hidden = false;
+        frictionGroup?.scrollIntoView({ behavior: "smooth", block: "center" });
+        return false;
+      }
+
+      const requiredFields = Array.from(step.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>("[required]"));
+      for (const field of requiredFields) {
+        if (!field.checkValidity()) {
+          field.reportValidity();
+          return false;
+        }
+      }
+
+      return true;
+    };
+
+    feedbackForm.querySelectorAll<HTMLButtonElement>("[data-next-step]").forEach((nextButton) => {
+      nextButton.addEventListener("click", () => {
+        if (!validateCurrentStep()) return;
+        currentStep = Math.min(3, currentStep + 1);
+        updateProgress();
+      });
+    });
+
+    feedbackForm.querySelectorAll<HTMLButtonElement>("[data-prev-step]").forEach((backButton) => {
+      backButton.addEventListener("click", () => {
+        currentStep = Math.max(1, currentStep - 1);
+        updateProgress();
+      });
+    });
+
+    updateProgress();
+
     feedbackForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
+      if (!validateCurrentStep()) return;
+
       if (feedbackForm.dataset.configured !== "true") {
         if (status) {
-          status.textContent = "The form is ready, but the secure submission endpoint still needs to be connected before we activate the Eversports email.";
+          status.textContent = "The survey flow is ready. We only need to connect the secure response storage before activating the Eversports email.";
           status.dataset.state = "preview";
         }
         return;
       }
-
-      if (!feedbackForm.reportValidity()) return;
 
       if (button) button.disabled = true;
       if (status) {
@@ -308,14 +350,32 @@ const ratingOptions = [1, 2, 3, 4, 5];
 
 <style>
   .feedback-shell {
-    max-width: 920px;
+    max-width: 860px;
     margin: 0 auto;
     padding: clamp(24px, 5vw, 52px);
   }
 
   .feedback-intro {
     max-width: 720px;
-    margin-bottom: 34px;
+    margin-bottom: 28px;
+  }
+
+  .feedback-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .feedback-time {
+    padding: 7px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.56);
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 700;
   }
 
   .feedback-intro h1 {
@@ -327,26 +387,68 @@ const ratingOptions = [1, 2, 3, 4, 5];
   .feedback-intro p,
   .feedback-status,
   .feedback-privacy p,
-  .feedback-success p {
+  .feedback-success p,
+  .feedback-step-head p,
+  .question-hint {
     color: var(--muted);
-    line-height: 1.65;
+    line-height: 1.6;
   }
 
   .feedback-form {
     display: grid;
-    gap: 26px;
+    gap: 24px;
   }
 
-  .feedback-section {
-    display: grid;
-    gap: 22px;
-    padding: 28px;
+  .feedback-progress {
+    position: sticky;
+    top: 88px;
+    z-index: 3;
+    padding: 14px 16px;
     border: 1px solid var(--line);
-    border-radius: 24px 7px 24px 7px;
-    background: rgba(255, 255, 255, 0.46);
+    border-radius: 16px 5px 16px 5px;
+    background: rgba(250, 251, 252, 0.94);
+    box-shadow: 0 10px 30px rgba(37, 26, 42, 0.08);
+    backdrop-filter: blur(14px);
   }
 
-  .feedback-section-head {
+  .feedback-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 9px;
+    font-size: 0.78rem;
+  }
+
+  .feedback-progress-meta span {
+    color: var(--muted);
+  }
+
+  .feedback-progress-track {
+    height: 7px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(48, 32, 53, 0.09);
+  }
+
+  .feedback-progress-track span {
+    display: block;
+    width: 33.333%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--coral), var(--sun));
+    transition: width 280ms ease;
+  }
+
+  .feedback-step {
+    display: grid;
+    gap: 25px;
+    padding: clamp(22px, 4vw, 34px);
+    border: 1px solid var(--line);
+    border-radius: 28px 8px 28px 8px;
+    background: rgba(255, 255, 255, 0.52);
+  }
+
+  .feedback-step-head {
     display: grid;
     grid-template-columns: 42px 1fr;
     gap: 14px;
@@ -355,21 +457,20 @@ const ratingOptions = [1, 2, 3, 4, 5];
     border-bottom: 1px solid var(--line);
   }
 
-  .feedback-section-head > span {
+  .feedback-step-head > span {
+    padding-top: 4px;
     color: var(--accent-deep);
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.14em;
   }
 
-  .feedback-section-head h2 {
-    font-size: clamp(1.55rem, 3vw, 2rem);
+  .feedback-step-head h2 {
+    font-size: clamp(1.65rem, 3vw, 2.15rem);
   }
 
-  .feedback-section-head p {
+  .feedback-step-head p {
     margin: 7px 0 0;
-    color: var(--muted);
-    line-height: 1.55;
   }
 
   .feedback-grid {
@@ -381,10 +482,6 @@ const ratingOptions = [1, 2, 3, 4, 5];
   .feedback-field {
     display: grid;
     gap: 8px;
-  }
-
-  .feedback-field-wide {
-    grid-column: 1 / -1;
   }
 
   .feedback-field > span,
@@ -399,7 +496,7 @@ const ratingOptions = [1, 2, 3, 4, 5];
     width: 100%;
     border: 1px solid var(--line);
     border-radius: 14px 4px 14px 4px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.86);
     color: var(--text);
     font: inherit;
   }
@@ -429,7 +526,12 @@ const ratingOptions = [1, 2, 3, 4, 5];
   }
 
   .feedback-question legend {
-    margin-bottom: 12px;
+    margin-bottom: 4px;
+  }
+
+  .question-hint {
+    margin: 0 0 12px;
+    font-size: 0.82rem;
   }
 
   .rating-scale {
@@ -439,34 +541,37 @@ const ratingOptions = [1, 2, 3, 4, 5];
   }
 
   .rating-scale label,
-  .choice-grid label {
+  .choice-grid label,
+  .chip-grid label {
     position: relative;
     cursor: pointer;
   }
 
   .rating-scale input,
-  .choice-grid input {
+  .choice-grid input,
+  .chip-grid input {
     position: absolute;
     opacity: 0;
     pointer-events: none;
   }
 
   .rating-scale span,
-  .choice-grid span {
+  .choice-grid span,
+  .chip-grid span {
     display: flex;
-    min-height: 68px;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--line);
-    border-radius: 16px 5px 16px 5px;
-    background: rgba(255, 255, 255, 0.66);
+    background: rgba(255, 255, 255, 0.72);
     text-align: center;
     transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
   }
 
   .rating-scale span {
+    min-height: 68px;
     flex-direction: column;
     gap: 2px;
+    border-radius: 16px 5px 16px 5px;
   }
 
   .rating-scale b {
@@ -480,7 +585,8 @@ const ratingOptions = [1, 2, 3, 4, 5];
   }
 
   .rating-scale input:checked + span,
-  .choice-grid input:checked + span {
+  .choice-grid input:checked + span,
+  .chip-grid input:checked + span {
     border-color: var(--forest);
     background: var(--forest);
     color: #fff;
@@ -492,7 +598,8 @@ const ratingOptions = [1, 2, 3, 4, 5];
   }
 
   .rating-scale input:focus-visible + span,
-  .choice-grid input:focus-visible + span {
+  .choice-grid input:focus-visible + span,
+  .chip-grid input:focus-visible + span {
     outline: 3px solid rgba(127, 53, 82, 0.2);
     outline-offset: 2px;
   }
@@ -510,7 +617,33 @@ const ratingOptions = [1, 2, 3, 4, 5];
   .choice-grid span {
     min-height: 54px;
     padding: 10px 12px;
+    border-radius: 14px 4px 14px 4px;
     font-weight: 700;
+  }
+
+  .chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip-grid span {
+    min-height: 44px;
+    padding: 9px 13px;
+    border-radius: 999px;
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  .chip-positive span {
+    border-color: rgba(127, 53, 82, 0.2);
+    background: rgba(197, 164, 107, 0.12);
+  }
+
+  .question-error {
+    margin: 10px 0 0;
+    color: #8c2e2e;
+    font-size: 0.82rem;
   }
 
   .feedback-consent {
@@ -518,7 +651,7 @@ const ratingOptions = [1, 2, 3, 4, 5];
     gap: 10px;
     align-items: flex-start;
     color: var(--muted);
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     line-height: 1.5;
   }
 
@@ -526,21 +659,38 @@ const ratingOptions = [1, 2, 3, 4, 5];
     margin-top: 3px;
   }
 
-  .feedback-submit {
+  .feedback-nav {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 14px;
-    flex-wrap: wrap;
+    padding-top: 2px;
   }
 
-  .feedback-submit > span {
+  .feedback-nav-end {
+    justify-content: flex-end;
+  }
+
+  .feedback-back {
+    border: 0;
+    background: transparent;
     color: var(--muted);
-    font-size: 0.78rem;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+  }
+
+  .feedback-back:hover {
+    color: var(--text);
+  }
+
+  .feedback-finish {
+    min-width: 170px;
   }
 
   .feedback-status {
-    margin: -10px 0 0;
-    font-size: 0.86rem;
+    margin: -8px 0 0;
+    font-size: 0.84rem;
   }
 
   .feedback-status[data-state="error"] {
@@ -552,17 +702,36 @@ const ratingOptions = [1, 2, 3, 4, 5];
   }
 
   .feedback-success {
-    padding: 28px;
-    border-radius: 24px 7px 24px 7px;
-    background: linear-gradient(135deg, rgba(48, 32, 53, 0.08), rgba(125, 136, 165, 0.12));
+    padding: clamp(28px, 5vw, 48px);
+    text-align: center;
+    border-radius: 28px 8px 28px 8px;
+    background: linear-gradient(135deg, rgba(48, 32, 53, 0.08), rgba(197, 164, 107, 0.15));
+  }
+
+  .feedback-celebration {
+    display: grid;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 18px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--forest);
+    color: #fff;
+    font-size: 1.8rem;
+    box-shadow: 0 14px 34px rgba(48, 32, 53, 0.2);
   }
 
   .feedback-success h2 {
     margin-top: 10px;
   }
 
+  .feedback-success p {
+    max-width: 34rem;
+    margin: 14px auto 0;
+  }
+
   .feedback-success .button {
-    margin-top: 12px;
+    margin-top: 18px;
   }
 
   .feedback-privacy {
@@ -585,10 +754,14 @@ const ratingOptions = [1, 2, 3, 4, 5];
 
   @media (max-width: 720px) {
     .feedback-shell {
-      padding: 22px;
+      padding: 20px;
     }
 
-    .feedback-section {
+    .feedback-progress {
+      top: 76px;
+    }
+
+    .feedback-step {
       padding: 20px;
     }
 
@@ -598,16 +771,27 @@ const ratingOptions = [1, 2, 3, 4, 5];
       grid-template-columns: 1fr;
     }
 
-    .feedback-field-wide {
-      grid-column: auto;
-    }
-
     .rating-scale span {
-      min-height: 60px;
+      min-height: 58px;
     }
 
     .rating-scale small {
       display: none;
+    }
+
+    .feedback-nav {
+      align-items: stretch;
+      flex-direction: column-reverse;
+    }
+
+    .feedback-nav-end {
+      flex-direction: column;
+    }
+
+    .feedback-nav .button,
+    .feedback-back {
+      width: 100%;
+      min-height: 48px;
     }
   }
 </style>

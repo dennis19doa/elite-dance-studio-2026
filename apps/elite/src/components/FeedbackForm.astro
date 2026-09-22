@@ -1,5 +1,7 @@
 ---
-const endpoint = import.meta.env.PUBLIC_FEEDBACK_FORM_ENDPOINT;
+const endpoint =
+  import.meta.env.PUBLIC_FEEDBACK_FORM_ENDPOINT ||
+  "https://formsubmit.co/ajax/info@elitedancestudio.de";
 const isConfigured = Boolean(endpoint);
 
 const ratingOptions = [1, 2, 3, 4, 5];
@@ -26,9 +28,11 @@ const ratingOptions = [1, 2, 3, 4, 5];
     data-configured={String(isConfigured)}
   >
     <input type="hidden" name="request_type" value="first_visit_feedback" />
-    <input type="hidden" name="_subject" value="New first-class feedback" />
+    <input type="hidden" name="_subject" value="Elite Feedback · First Visit" />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_url" value="https://elitedancestudio.de/feedback/" />
     <input type="hidden" name="source" value="eversports-first-visit" data-feedback-source />
-    <input class="feedback-honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    <input class="feedback-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
     <div class="feedback-progress" aria-label="Survey progress">
       <div class="feedback-progress-meta">
@@ -189,7 +193,7 @@ const ratingOptions = [1, 2, 3, 4, 5];
       <p class="feedback-status" role="status" aria-live="polite" data-feedback-status>
         {isConfigured
           ? "Your feedback is used for internal quality improvement."
-          : "Preview mode: the form design is ready; the secure submission endpoint still needs to be connected."}
+          : "Feedback submissions are sent directly to the Elite studio inbox."}
       </p>
     </section>
   </form>
@@ -209,7 +213,8 @@ const ratingOptions = [1, 2, 3, 4, 5];
     <summary>What happens with my answers?</summary>
     <p>
       We use the responses internally to understand the first-visit journey, class experience
-      and where new students discover Elite. The answers are not used to subscribe you to marketing emails.
+      and where new students discover Elite. Your answers are sent to the Elite studio inbox
+      and are not used to subscribe you to marketing emails.
     </p>
   </details>
 </section>
@@ -318,7 +323,7 @@ const ratingOptions = [1, 2, 3, 4, 5];
 
       if (feedbackForm.dataset.configured !== "true") {
         if (status) {
-          status.textContent = "The survey flow is ready. We only need to connect the secure response storage before activating the Eversports email.";
+          status.textContent = "The feedback email connection is not available right now. Please try again later.";
           status.dataset.state = "preview";
         }
         return;

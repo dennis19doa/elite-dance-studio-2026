@@ -1,0 +1,508 @@
+---
+const endpoint = import.meta.env.PUBLIC_FEEDBACK_FORM_ENDPOINT;
+const isConfigured = Boolean(endpoint);
+
+const ratingOptions = [1, 2, 3, 4, 5];
+---
+
+<section class="feedback-shell panel">
+  <div class="feedback-intro">
+    <div class="eyebrow">First class feedback</div>
+    <h1>How was your first class at Elite? 💛</h1>
+    <p>
+      This takes about one minute. Your answers help us understand what worked,
+      what we can improve, and what you would like to see more of at Elite.
+    </p>
+  </div>
+
+  <form
+    class="feedback-form"
+    action={endpoint || "#"}
+    method="post"
+    data-feedback-form
+    data-configured={String(isConfigured)}
+  >
+    <input type="hidden" name="request_type" value="first_visit_feedback" />
+    <input type="hidden" name="_subject" value="New first-class feedback" />
+    <input type="hidden" name="source" value="eversports-first-visit" data-feedback-source />
+    <input class="feedback-honeypot" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+    <div class="feedback-grid">
+      <label class="feedback-field">
+        <span>Which class did you attend? *</span>
+        <input
+          type="text"
+          name="class_name"
+          required
+          placeholder="e.g. Heels Beginner"
+          autocomplete="off"
+          data-feedback-class
+        />
+      </label>
+
+      <label class="feedback-field">
+        <span>Who was your teacher? *</span>
+        <input
+          type="text"
+          name="teacher_name"
+          required
+          placeholder="Teacher name"
+          autocomplete="off"
+          data-feedback-teacher
+        />
+      </label>
+    </div>
+
+    <fieldset class="feedback-question">
+      <legend>How was your overall experience? *</legend>
+      <div class="rating-scale" aria-label="Overall experience from 1 to 5">
+        {ratingOptions.map((rating) => (
+          <label>
+            <input type="radio" name="overall_rating" value={rating} required />
+            <span><b>{rating}</b><small>{rating === 1 ? "Poor" : rating === 5 ? "Excellent" : ""}</small></span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+
+    <fieldset class="feedback-question">
+      <legend>The teacher explained things clearly. *</legend>
+      <div class="rating-scale" aria-label="Teaching clarity from 1 to 5">
+        {ratingOptions.map((rating) => (
+          <label>
+            <input type="radio" name="clarity_rating" value={rating} required />
+            <span><b>{rating}</b><small>{rating === 1 ? "Not really" : rating === 5 ? "Absolutely" : ""}</small></span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+
+    <fieldset class="feedback-question">
+      <legend>I felt comfortable and welcome in the class. *</legend>
+      <div class="rating-scale" aria-label="Feeling welcome from 1 to 5">
+        {ratingOptions.map((rating) => (
+          <label>
+            <input type="radio" name="welcome_rating" value={rating} required />
+            <span><b>{rating}</b><small>{rating === 1 ? "Not really" : rating === 5 ? "Absolutely" : ""}</small></span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+
+    <fieldset class="feedback-question">
+      <legend>How was the level for you? *</legend>
+      <div class="choice-grid choice-grid-three">
+        <label><input type="radio" name="level_fit" value="too_easy" required /><span>Too easy</span></label>
+        <label><input type="radio" name="level_fit" value="just_right" required /><span>Just right</span></label>
+        <label><input type="radio" name="level_fit" value="too_difficult" required /><span>Too difficult</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="feedback-question">
+      <legend>Would you take another class with this teacher? *</legend>
+      <div class="choice-grid">
+        <label><input type="radio" name="return_intent" value="definitely" required /><span>Definitely</span></label>
+        <label><input type="radio" name="return_intent" value="probably" required /><span>Probably</span></label>
+        <label><input type="radio" name="return_intent" value="not_sure" required /><span>Not sure</span></label>
+        <label><input type="radio" name="return_intent" value="probably_not" required /><span>Probably not</span></label>
+      </div>
+    </fieldset>
+
+    <div class="feedback-grid">
+      <label class="feedback-field feedback-field-wide">
+        <span>What did you like most about the class or teacher?</span>
+        <textarea name="liked_most" rows="4" placeholder="Anything that stood out positively?"></textarea>
+      </label>
+
+      <label class="feedback-field feedback-field-wide">
+        <span>Is there anything we could improve?</span>
+        <textarea name="improvement" rows="4" placeholder="Your honest feedback helps us improve."></textarea>
+      </label>
+
+      <label class="feedback-field feedback-field-wide">
+        <span>What other classes or styles would you like to see at Elite?</span>
+        <textarea name="future_classes" rows="3" placeholder="A style, level, time slot or type of class you are missing"></textarea>
+      </label>
+
+      <label class="feedback-field feedback-field-wide">
+        <span>How did you first hear about Elite? *</span>
+        <select name="discovery_source" required>
+          <option value="">Please choose</option>
+          <option value="instagram">Instagram</option>
+          <option value="google">Google search</option>
+          <option value="google_maps">Google Maps</option>
+          <option value="friend">Friend / recommendation</option>
+          <option value="urban_sports_club">Urban Sports Club</option>
+          <option value="event_party">Event or party</option>
+          <option value="walked_past">Walked past the studio</option>
+          <option value="other">Other / I don't remember</option>
+        </select>
+      </label>
+    </div>
+
+    <label class="feedback-consent">
+      <input type="checkbox" name="privacy_consent" value="accepted" required />
+      <span>
+        I agree that Elite Dance Studio may use my answers internally to improve classes and the studio experience. *
+      </span>
+    </label>
+
+    <div class="feedback-submit">
+      <button class="button primary" type="submit">Send feedback</button>
+      <span>* Required</span>
+    </div>
+
+    <p class="feedback-status" role="status" aria-live="polite" data-feedback-status>
+      {isConfigured
+        ? "Your feedback is used for internal quality improvement."
+        : "Preview mode: the form design is ready; the secure submission endpoint still needs to be connected."}
+    </p>
+  </form>
+
+  <div class="feedback-success" data-feedback-success hidden>
+    <div class="eyebrow">Thank you</div>
+    <h2>Your feedback is in. 💛</h2>
+    <p>
+      Thanks for helping us make Elite better. We hope to see you on the dance floor again soon.
+    </p>
+    <a class="button secondary" href="/stundenplan/">See the weekly schedule</a>
+  </div>
+
+  <details class="feedback-privacy">
+    <summary>What happens with my answers?</summary>
+    <p>
+      We use the responses internally to understand the first-visit experience, class level,
+      teaching clarity and what our community would like to see next. The answers are not used
+      to subscribe you to marketing emails.
+    </p>
+  </details>
+</section>
+
+<script>
+  const feedbackForm = document.querySelector<HTMLFormElement>("[data-feedback-form]");
+
+  if (feedbackForm) {
+    const status = feedbackForm.querySelector<HTMLElement>("[data-feedback-status]");
+    const button = feedbackForm.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const success = document.querySelector<HTMLElement>("[data-feedback-success]");
+    const params = new URLSearchParams(window.location.search);
+
+    const sourceField = feedbackForm.querySelector<HTMLInputElement>("[data-feedback-source]");
+    const classField = feedbackForm.querySelector<HTMLInputElement>("[data-feedback-class]");
+    const teacherField = feedbackForm.querySelector<HTMLInputElement>("[data-feedback-teacher]");
+
+    if (sourceField && params.get("source")) sourceField.value = params.get("source") || sourceField.value;
+    if (classField && params.get("class")) classField.value = params.get("class") || "";
+    if (teacherField && params.get("teacher")) teacherField.value = params.get("teacher") || "";
+
+    feedbackForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (feedbackForm.dataset.configured !== "true") {
+        if (status) {
+          status.textContent = "The form is ready, but the secure submission endpoint still needs to be connected before we activate the Eversports email.";
+          status.dataset.state = "preview";
+        }
+        return;
+      }
+
+      if (!feedbackForm.reportValidity()) return;
+
+      if (button) button.disabled = true;
+      if (status) {
+        status.textContent = "Sending your feedback …";
+        status.dataset.state = "loading";
+      }
+
+      try {
+        const response = await fetch(feedbackForm.action, {
+          method: "POST",
+          body: new FormData(feedbackForm),
+          headers: { Accept: "application/json" }
+        });
+
+        if (!response.ok) throw new Error("Submission failed");
+
+        feedbackForm.hidden = true;
+        if (success) {
+          success.hidden = false;
+          success.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      } catch {
+        if (status) {
+          status.textContent = "That did not work. Please try again in a moment.";
+          status.dataset.state = "error";
+        }
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
+  }
+</script>
+
+<style>
+  .feedback-shell {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: clamp(24px, 5vw, 52px);
+  }
+
+  .feedback-intro {
+    max-width: 720px;
+    margin-bottom: 34px;
+  }
+
+  .feedback-intro h1 {
+    max-width: 12ch;
+    margin-top: 12px;
+    font-size: clamp(2.6rem, 7vw, 4.7rem);
+  }
+
+  .feedback-intro p,
+  .feedback-status,
+  .feedback-privacy p,
+  .feedback-success p {
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .feedback-form {
+    display: grid;
+    gap: 26px;
+  }
+
+  .feedback-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .feedback-field {
+    display: grid;
+    gap: 8px;
+  }
+
+  .feedback-field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .feedback-field > span,
+  .feedback-question legend {
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .feedback-field input,
+  .feedback-field select,
+  .feedback-field textarea {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 14px 4px 14px 4px;
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--text);
+    font: inherit;
+  }
+
+  .feedback-field input,
+  .feedback-field select {
+    min-height: 50px;
+    padding: 0 14px;
+  }
+
+  .feedback-field textarea {
+    padding: 14px;
+    resize: vertical;
+  }
+
+  .feedback-field input:focus,
+  .feedback-field select:focus,
+  .feedback-field textarea:focus {
+    outline: 3px solid rgba(127, 53, 82, 0.14);
+    border-color: rgba(127, 53, 82, 0.5);
+  }
+
+  .feedback-question {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .feedback-question legend {
+    margin-bottom: 12px;
+  }
+
+  .rating-scale {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .rating-scale label,
+  .choice-grid label {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .rating-scale input,
+  .choice-grid input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .rating-scale span,
+  .choice-grid span {
+    display: flex;
+    min-height: 68px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line);
+    border-radius: 16px 5px 16px 5px;
+    background: rgba(255, 255, 255, 0.66);
+    text-align: center;
+    transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+  }
+
+  .rating-scale span {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .rating-scale b {
+    font-size: 1.2rem;
+  }
+
+  .rating-scale small {
+    min-height: 14px;
+    color: var(--muted);
+    font-size: 0.68rem;
+  }
+
+  .rating-scale input:checked + span,
+  .choice-grid input:checked + span {
+    border-color: var(--forest);
+    background: var(--forest);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .rating-scale input:checked + span small {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .rating-scale input:focus-visible + span,
+  .choice-grid input:focus-visible + span {
+    outline: 3px solid rgba(127, 53, 82, 0.2);
+    outline-offset: 2px;
+  }
+
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .choice-grid-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .choice-grid span {
+    min-height: 54px;
+    padding: 10px 12px;
+    font-weight: 700;
+  }
+
+  .feedback-consent {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .feedback-consent input {
+    margin-top: 3px;
+  }
+
+  .feedback-submit {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .feedback-submit > span {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .feedback-status {
+    margin: -10px 0 0;
+    font-size: 0.86rem;
+  }
+
+  .feedback-status[data-state="error"] {
+    color: #8c2e2e;
+  }
+
+  .feedback-status[data-state="loading"] {
+    color: var(--accent-deep);
+  }
+
+  .feedback-success {
+    padding: 28px;
+    border-radius: 24px 7px 24px 7px;
+    background: linear-gradient(135deg, rgba(48, 32, 53, 0.08), rgba(125, 136, 165, 0.12));
+  }
+
+  .feedback-success h2 {
+    margin-top: 10px;
+  }
+
+  .feedback-success .button {
+    margin-top: 12px;
+  }
+
+  .feedback-privacy {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .feedback-privacy summary {
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .feedback-honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+  }
+
+  @media (max-width: 720px) {
+    .feedback-shell {
+      padding: 22px;
+    }
+
+    .feedback-grid,
+    .choice-grid,
+    .choice-grid-three {
+      grid-template-columns: 1fr;
+    }
+
+    .feedback-field-wide {
+      grid-column: auto;
+    }
+
+    .rating-scale span {
+      min-height: 60px;
+    }
+
+    .rating-scale small {
+      display: none;
+    }
+  }
+</style>

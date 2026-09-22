@@ -364,12 +364,12 @@ const ratingOptions = [1, 2, 3, 4, 5];
     margin: 0 auto;
     overflow: hidden;
     padding: clamp(28px, 5vw, 56px);
-    border: 1px solid rgba(48, 32, 53, 0.08);
+    border: 1px solid rgba(127, 53, 82, 0.10);
     border-radius: 34px 10px 34px 10px;
     background:
-      radial-gradient(circle at 94% 4%, rgba(162, 78, 105, 0.13), transparent 25rem),
-      radial-gradient(circle at 6% 92%, rgba(125, 136, 165, 0.14), transparent 29rem),
-      linear-gradient(155deg, #fbf8fa 0%, #f1f2f6 54%, #f7f3ec 100%);
+      radial-gradient(circle at 94% 4%, rgba(162, 78, 105, 0.16), transparent 25rem),
+      radial-gradient(circle at 6% 92%, rgba(197, 164, 107, 0.18), transparent 29rem),
+      linear-gradient(155deg, #fffaf7 0%, #f9efea 54%, #f7eee5 100%);
     box-shadow: 0 26px 68px rgba(37, 26, 42, 0.11);
     color: var(--text);
   }
@@ -378,13 +378,13 @@ const ratingOptions = [1, 2, 3, 4, 5];
     position: absolute;
     inset: 0 0 auto 0;
     display: grid;
-    grid-template-columns: 1.2fr 0.9fr 0.7fr;
+    grid-template-columns: 1.25fr 0.85fr 0.7fr;
     height: 5px;
   }
 
   .feedback-accent-bar span:nth-child(1) { background: var(--coral); }
-  .feedback-accent-bar span:nth-child(2) { background: var(--sky); }
-  .feedback-accent-bar span:nth-child(3) { background: var(--sun); }
+  .feedback-accent-bar span:nth-child(2) { background: var(--sun); }
+  .feedback-accent-bar span:nth-child(3) { background: var(--accent-deep); }
 
   .feedback-intro {
     max-width: 760px;
@@ -450,7 +450,7 @@ const ratingOptions = [1, 2, 3, 4, 5];
     padding: 14px 16px 13px;
     border: 1px solid rgba(48, 32, 53, 0.09);
     border-radius: 18px 5px 18px 5px;
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 251, 248, 0.86);
     box-shadow: 0 10px 26px rgba(37, 26, 42, 0.06);
   }
 
@@ -521,20 +521,20 @@ const ratingOptions = [1, 2, 3, 4, 5];
 
   .feedback-step[data-feedback-step="1"] {
     background:
-      radial-gradient(circle at 100% 0%, rgba(162, 78, 105, 0.09), transparent 20rem),
-      linear-gradient(160deg, #fffafb, #f8f1f4);
+      radial-gradient(circle at 100% 0%, rgba(162, 78, 105, 0.13), transparent 20rem),
+      linear-gradient(160deg, #fff9f7, #fbeceb);
   }
 
   .feedback-step[data-feedback-step="2"] {
     background:
-      radial-gradient(circle at 100% 0%, rgba(125, 136, 165, 0.12), transparent 20rem),
-      linear-gradient(160deg, #fbfcff, #f0f2f7);
+      radial-gradient(circle at 100% 0%, rgba(197, 164, 107, 0.18), transparent 20rem),
+      linear-gradient(160deg, #fffaf3, #f8ecdf);
   }
 
   .feedback-step[data-feedback-step="3"] {
     background:
-      radial-gradient(circle at 100% 0%, rgba(197, 164, 107, 0.13), transparent 20rem),
-      linear-gradient(160deg, #fffdf9, #f6f1e8);
+      radial-gradient(circle at 100% 0%, rgba(127, 53, 82, 0.10), transparent 20rem),
+      linear-gradient(160deg, #fff8f8, #f6e9ed);
   }
 
   .feedback-step-head {
@@ -565,13 +565,13 @@ const ratingOptions = [1, 2, 3, 4, 5];
   }
 
   .feedback-step[data-feedback-step="2"] .feedback-step-head > span {
-    background: var(--sky-soft);
-    color: #59647e;
+    background: rgba(197, 164, 107, 0.20);
+    color: #80643a;
   }
 
   .feedback-step[data-feedback-step="3"] .feedback-step-head > span {
-    background: rgba(197, 164, 107, 0.19);
-    color: #80663d;
+    background: rgba(162, 78, 105, 0.13);
+    color: var(--accent-deep);
   }
 
   .feedback-step-head h2 {
@@ -758,8 +758,8 @@ const ratingOptions = [1, 2, 3, 4, 5];
 
   .feedback-step[data-feedback-step="2"] .rating-scale input:checked + span,
   .feedback-step[data-feedback-step="2"] .choice-grid input:checked + span {
-    border-color: #68738c;
-    background: linear-gradient(145deg, #8490aa, #68738c);
+    border-color: #aa854b;
+    background: linear-gradient(145deg, #c9a968, #a9854c);
   }
 
   .rating-scale input:checked + span small {
@@ -898,8 +898,9 @@ const ratingOptions = [1, 2, 3, 4, 5];
     border: 1px solid rgba(48, 32, 53, 0.08);
     border-radius: 28px 8px 28px 8px;
     background:
-      radial-gradient(circle at 50% 0%, rgba(197, 164, 107, 0.18), transparent 20rem),
-      linear-gradient(160deg, #fffaf3, #f1edf3);
+      radial-gradient(circle at 50% 0%, rgba(197, 164, 107, 0.20), transparent 20rem),
+      radial-gradient(circle at 100% 100%, rgba(162, 78, 105, 0.10), transparent 18rem),
+      linear-gradient(160deg, #fff9f3, #f7e9e6);
     color: var(--text);
   }
 

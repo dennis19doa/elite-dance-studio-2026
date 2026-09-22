@@ -5,11 +5,12 @@ const isConfigured = Boolean(endpoint);
 const ratingOptions = [1, 2, 3, 4, 5];
 ---
 
-<section class="feedback-shell panel">
+<section class="feedback-shell">
+  <div class="feedback-accent-bar" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="feedback-intro">
     <div class="feedback-topline">
       <div class="eyebrow">First class feedback</div>
-      <span class="feedback-time">3 quick steps · about 60 sec</span>
+      <span class="feedback-time"><i aria-hidden="true"></i> 3 quick steps · about 60 sec</span>
     </div>
     <h1>How was your first class at Elite? 💛</h1>
     <p>
@@ -36,6 +37,9 @@ const ratingOptions = [1, 2, 3, 4, 5];
       </div>
       <div class="feedback-progress-track" aria-hidden="true">
         <span data-progress-bar></span>
+      </div>
+      <div class="feedback-progress-dots" aria-hidden="true">
+        <i class="is-active"></i><i></i><i></i>
       </div>
     </div>
 
@@ -221,6 +225,7 @@ const ratingOptions = [1, 2, 3, 4, 5];
     const progressLabel = feedbackForm.querySelector<HTMLElement>("[data-progress-label]");
     const progressCopy = feedbackForm.querySelector<HTMLElement>("[data-progress-copy]");
     const progressBar = feedbackForm.querySelector<HTMLElement>("[data-progress-bar]");
+    const progressDots = Array.from(feedbackForm.querySelectorAll<HTMLElement>(".feedback-progress-dots i"));
     const params = new URLSearchParams(window.location.search);
     let currentStep = 1;
 
@@ -257,6 +262,9 @@ const ratingOptions = [1, 2, 3, 4, 5];
       if (progressLabel) progressLabel.textContent = `Step ${currentStep} of 3`;
       if (progressCopy) progressCopy.textContent = labels[currentStep - 1];
       if (progressBar) progressBar.style.width = `${(currentStep / 3) * 100}%`;
+      progressDots.forEach((dot, index) => {
+        dot.classList.toggle("is-active", index < currentStep);
+      });
 
       steps.forEach((step) => {
         step.hidden = Number(step.dataset.feedbackStep) !== currentStep;
@@ -350,14 +358,46 @@ const ratingOptions = [1, 2, 3, 4, 5];
 
 <style>
   .feedback-shell {
-    max-width: 860px;
+    position: relative;
+    max-width: 900px;
     margin: 0 auto;
-    padding: clamp(24px, 5vw, 52px);
+    overflow: hidden;
+    padding: clamp(28px, 5vw, 58px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 34px 10px 34px 10px;
+    background:
+      radial-gradient(circle at 92% 4%, rgba(162, 78, 105, 0.30), transparent 24rem),
+      radial-gradient(circle at 8% 96%, rgba(125, 136, 165, 0.20), transparent 28rem),
+      linear-gradient(145deg, #302035 0%, #211923 58%, #19141c 100%);
+    box-shadow: 0 30px 80px rgba(37, 26, 42, 0.24);
+    color: #fff;
+  }
+
+  .feedback-accent-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 1.2fr 0.9fr 0.7fr;
+    height: 6px;
+  }
+
+  .feedback-accent-bar span:nth-child(1) {
+    background: var(--coral);
+  }
+
+  .feedback-accent-bar span:nth-child(2) {
+    background: var(--sky);
+  }
+
+  .feedback-accent-bar span:nth-child(3) {
+    background: var(--sun);
   }
 
   .feedback-intro {
-    max-width: 720px;
-    margin-bottom: 28px;
+    max-width: 730px;
+    margin-bottom: 30px;
   }
 
   .feedback-topline {
@@ -368,66 +408,86 @@ const ratingOptions = [1, 2, 3, 4, 5];
     flex-wrap: wrap;
   }
 
+  .feedback-shell .eyebrow {
+    color: #d8bd87;
+  }
+
   .feedback-time {
-    padding: 7px 10px;
-    border: 1px solid var(--line);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 11px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.56);
-    color: var(--muted);
+    background: rgba(255, 255, 255, 0.07);
+    color: rgba(255, 255, 255, 0.74);
     font-size: 0.75rem;
     font-weight: 700;
+    backdrop-filter: blur(10px);
+  }
+
+  .feedback-time i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--sun);
+    box-shadow: 0 0 0 5px rgba(197, 164, 107, 0.12);
   }
 
   .feedback-intro h1 {
     max-width: 12ch;
-    margin-top: 12px;
-    font-size: clamp(2.6rem, 7vw, 4.7rem);
+    margin-top: 14px;
+    color: #fff;
+    font-size: clamp(2.8rem, 7vw, 4.9rem);
   }
 
-  .feedback-intro p,
-  .feedback-status,
-  .feedback-privacy p,
-  .feedback-success p,
-  .feedback-step-head p,
-  .question-hint {
-    color: var(--muted);
-    line-height: 1.6;
+  .feedback-intro > p {
+    max-width: 39rem;
+    margin: 18px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 1.02rem;
+    line-height: 1.65;
   }
 
   .feedback-form {
     display: grid;
-    gap: 24px;
+    gap: 18px;
   }
 
   .feedback-progress {
     position: sticky;
     top: 88px;
     z-index: 3;
-    padding: 14px 16px;
-    border: 1px solid var(--line);
-    border-radius: 16px 5px 16px 5px;
-    background: rgba(250, 251, 252, 0.94);
-    box-shadow: 0 10px 30px rgba(37, 26, 42, 0.08);
-    backdrop-filter: blur(14px);
+    padding: 15px 17px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 18px 5px 18px 5px;
+    background: rgba(36, 23, 41, 0.91);
+    box-shadow: 0 16px 36px rgba(8, 5, 10, 0.24);
+    backdrop-filter: blur(18px);
   }
 
   .feedback-progress-meta {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    margin-bottom: 9px;
-    font-size: 0.78rem;
+    margin-bottom: 10px;
+    font-size: 0.76rem;
+  }
+
+  .feedback-progress-meta strong {
+    color: #fff;
+    letter-spacing: 0.03em;
   }
 
   .feedback-progress-meta span {
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.58);
   }
 
   .feedback-progress-track {
-    height: 7px;
+    height: 6px;
     overflow: hidden;
     border-radius: 999px;
-    background: rgba(48, 32, 53, 0.09);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .feedback-progress-track span {
@@ -436,37 +496,97 @@ const ratingOptions = [1, 2, 3, 4, 5];
     height: 100%;
     border-radius: inherit;
     background: linear-gradient(90deg, var(--coral), var(--sun));
-    transition: width 280ms ease;
+    transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .feedback-progress-dots {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 8px;
+  }
+
+  .feedback-progress-dots i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    transition: background-color 220ms ease, transform 220ms ease;
+  }
+
+  .feedback-progress-dots i.is-active {
+    background: #d8bd87;
+    transform: scale(1.15);
   }
 
   .feedback-step {
     display: grid;
     gap: 25px;
-    padding: clamp(22px, 4vw, 34px);
-    border: 1px solid var(--line);
-    border-radius: 28px 8px 28px 8px;
-    background: rgba(255, 255, 255, 0.52);
+    padding: clamp(24px, 4vw, 36px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 30px 8px 30px 8px;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(162, 78, 105, 0.08), transparent 19rem),
+      rgba(248, 248, 250, 0.97);
+    box-shadow: 0 20px 54px rgba(7, 5, 9, 0.18);
+    color: var(--text);
+  }
+
+  .feedback-step[data-feedback-step="2"] {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(125, 136, 165, 0.15), transparent 20rem),
+      rgba(248, 248, 250, 0.98);
+  }
+
+  .feedback-step[data-feedback-step="3"] {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(197, 164, 107, 0.15), transparent 20rem),
+      rgba(248, 248, 250, 0.98);
   }
 
   .feedback-step-head {
     display: grid;
-    grid-template-columns: 42px 1fr;
-    gap: 14px;
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
     align-items: start;
-    padding-bottom: 18px;
+    padding-bottom: 20px;
     border-bottom: 1px solid var(--line);
   }
 
   .feedback-step-head > span {
-    padding-top: 4px;
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 14px 4px 14px 4px;
+    background: var(--coral-soft);
     color: var(--accent-deep);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .feedback-step[data-feedback-step="2"] .feedback-step-head > span {
+    background: var(--sky-soft);
+    color: #57627f;
+  }
+
+  .feedback-step[data-feedback-step="3"] .feedback-step-head > span {
+    background: rgba(197, 164, 107, 0.2);
+    color: #7d6338;
   }
 
   .feedback-step-head h2 {
-    font-size: clamp(1.65rem, 3vw, 2.15rem);
+    color: var(--forest);
+    font-size: clamp(1.7rem, 3vw, 2.25rem);
+  }
+
+  .feedback-step-head p,
+  .feedback-status,
+  .feedback-privacy p,
+  .feedback-success p,
+  .question-hint {
+    color: var(--muted);
+    line-height: 1.6;
   }
 
   .feedback-step-head p {
@@ -481,11 +601,12 @@ const ratingOptions = [1, 2, 3, 4, 5];
 
   .feedback-field {
     display: grid;
-    gap: 8px;
+    gap: 9px;
   }
 
   .feedback-field > span,
   .feedback-question legend {
+    color: var(--forest);
     font-weight: 700;
     line-height: 1.4;
   }
@@ -494,29 +615,31 @@ const ratingOptions = [1, 2, 3, 4, 5];
   .feedback-field select,
   .feedback-field textarea {
     width: 100%;
-    border: 1px solid var(--line);
-    border-radius: 14px 4px 14px 4px;
+    border: 1px solid rgba(48, 32, 53, 0.12);
+    border-radius: 15px 4px 15px 4px;
     background: rgba(255, 255, 255, 0.86);
     color: var(--text);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
     font: inherit;
   }
 
   .feedback-field input,
   .feedback-field select {
-    min-height: 50px;
-    padding: 0 14px;
+    min-height: 52px;
+    padding: 0 15px;
   }
 
   .feedback-field textarea {
-    padding: 14px;
+    padding: 15px;
     resize: vertical;
   }
 
   .feedback-field input:focus,
   .feedback-field select:focus,
   .feedback-field textarea:focus {
-    outline: 3px solid rgba(127, 53, 82, 0.14);
-    border-color: rgba(127, 53, 82, 0.5);
+    outline: 3px solid rgba(162, 78, 105, 0.13);
+    border-color: rgba(162, 78, 105, 0.48);
+    background: #fff;
   }
 
   .feedback-question {
@@ -537,7 +660,7 @@ const ratingOptions = [1, 2, 3, 4, 5];
   .rating-scale {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 8px;
+    gap: 9px;
   }
 
   .rating-scale label,
@@ -561,21 +684,34 @@ const ratingOptions = [1, 2, 3, 4, 5];
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(48, 32, 53, 0.11);
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--text);
     text-align: center;
-    transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+    transition:
+      transform 170ms ease,
+      border-color 170ms ease,
+      background-color 170ms ease,
+      box-shadow 170ms ease;
+  }
+
+  .rating-scale span:hover,
+  .choice-grid span:hover,
+  .chip-grid span:hover {
+    border-color: rgba(162, 78, 105, 0.28);
+    box-shadow: 0 8px 20px rgba(48, 32, 53, 0.07);
+    transform: translateY(-1px);
   }
 
   .rating-scale span {
-    min-height: 68px;
+    min-height: 70px;
     flex-direction: column;
     gap: 2px;
-    border-radius: 16px 5px 16px 5px;
+    border-radius: 17px 5px 17px 5px;
   }
 
   .rating-scale b {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   .rating-scale small {
@@ -587,10 +723,22 @@ const ratingOptions = [1, 2, 3, 4, 5];
   .rating-scale input:checked + span,
   .choice-grid input:checked + span,
   .chip-grid input:checked + span {
-    border-color: var(--forest);
-    background: var(--forest);
+    border-color: var(--accent-deep);
+    background: linear-gradient(145deg, #8e405e, var(--accent-deep));
     color: #fff;
+    box-shadow: 0 11px 24px rgba(127, 53, 82, 0.18);
     transform: translateY(-2px);
+  }
+
+  .feedback-step[data-feedback-step="2"] .rating-scale input:checked + span,
+  .feedback-step[data-feedback-step="2"] .choice-grid input:checked + span {
+    border-color: #69758f;
+    background: linear-gradient(145deg, #7d88a5, #616d88);
+  }
+
+  .feedback-step[data-feedback-step="3"] .choice-grid input:checked + span {
+    border-color: #9f7f49;
+    background: linear-gradient(145deg, #c5a46b, #967642);
   }
 
   .rating-scale input:checked + span small {
@@ -600,14 +748,14 @@ const ratingOptions = [1, 2, 3, 4, 5];
   .rating-scale input:focus-visible + span,
   .choice-grid input:focus-visible + span,
   .chip-grid input:focus-visible + span {
-    outline: 3px solid rgba(127, 53, 82, 0.2);
-    outline-offset: 2px;
+    outline: 3px solid rgba(162, 78, 105, 0.18);
+    outline-offset: 3px;
   }
 
   .choice-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 8px;
+    gap: 9px;
   }
 
   .choice-grid-three {
@@ -615,29 +763,29 @@ const ratingOptions = [1, 2, 3, 4, 5];
   }
 
   .choice-grid span {
-    min-height: 54px;
+    min-height: 56px;
     padding: 10px 12px;
-    border-radius: 14px 4px 14px 4px;
+    border-radius: 15px 4px 15px 4px;
     font-weight: 700;
   }
 
   .chip-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 9px;
   }
 
   .chip-grid span {
     min-height: 44px;
-    padding: 9px 13px;
-    border-radius: 999px;
+    padding: 9px 14px;
+    border-radius: 13px 4px 13px 4px;
     font-size: 0.86rem;
     font-weight: 700;
   }
 
   .chip-positive span {
-    border-color: rgba(127, 53, 82, 0.2);
-    background: rgba(197, 164, 107, 0.12);
+    border-color: rgba(197, 164, 107, 0.42);
+    background: rgba(197, 164, 107, 0.13);
   }
 
   .question-error {
@@ -650,13 +798,17 @@ const ratingOptions = [1, 2, 3, 4, 5];
     display: flex;
     gap: 10px;
     align-items: flex-start;
+    padding: 13px 14px;
+    border-radius: 14px 4px 14px 4px;
+    background: rgba(48, 32, 53, 0.045);
     color: var(--muted);
-    font-size: 0.86rem;
+    font-size: 0.84rem;
     line-height: 1.5;
   }
 
   .feedback-consent input {
     margin-top: 3px;
+    accent-color: var(--accent-deep);
   }
 
   .feedback-nav {
@@ -664,11 +816,20 @@ const ratingOptions = [1, 2, 3, 4, 5];
     align-items: center;
     justify-content: space-between;
     gap: 14px;
-    padding-top: 2px;
+    padding-top: 4px;
   }
 
   .feedback-nav-end {
     justify-content: flex-end;
+  }
+
+  .feedback-step .button.primary {
+    background: var(--forest);
+    box-shadow: 0 14px 28px rgba(48, 32, 53, 0.18);
+  }
+
+  .feedback-step .button.primary:hover {
+    background: #241629;
   }
 
   .feedback-back {
@@ -681,7 +842,7 @@ const ratingOptions = [1, 2, 3, 4, 5];
   }
 
   .feedback-back:hover {
-    color: var(--text);
+    color: var(--accent-deep);
   }
 
   .feedback-finish {
@@ -690,7 +851,7 @@ const ratingOptions = [1, 2, 3, 4, 5];
 
   .feedback-status {
     margin: -8px 0 0;
-    font-size: 0.84rem;
+    font-size: 0.82rem;
   }
 
   .feedback-status[data-state="error"] {
@@ -702,47 +863,63 @@ const ratingOptions = [1, 2, 3, 4, 5];
   }
 
   .feedback-success {
-    padding: clamp(28px, 5vw, 48px);
+    padding: clamp(34px, 6vw, 56px);
     text-align: center;
-    border-radius: 28px 8px 28px 8px;
-    background: linear-gradient(135deg, rgba(48, 32, 53, 0.08), rgba(197, 164, 107, 0.15));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 30px 8px 30px 8px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(197, 164, 107, 0.18), transparent 20rem),
+      rgba(255, 255, 255, 0.07);
+    color: #fff;
   }
 
   .feedback-celebration {
     display: grid;
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 18px;
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 20px;
     place-items: center;
-    border-radius: 50%;
-    background: var(--forest);
-    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px 6px 20px 6px;
+    background: linear-gradient(145deg, #c5a46b, #9a7a47);
+    color: #211923;
     font-size: 1.8rem;
-    box-shadow: 0 14px 34px rgba(48, 32, 53, 0.2);
+    font-weight: 800;
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
   }
 
   .feedback-success h2 {
     margin-top: 10px;
+    color: #fff;
   }
 
   .feedback-success p {
     max-width: 34rem;
     margin: 14px auto 0;
+    color: rgba(255, 255, 255, 0.68);
   }
 
   .feedback-success .button {
-    margin-top: 18px;
+    margin-top: 20px;
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.09);
+    color: #fff;
   }
 
   .feedback-privacy {
-    margin-top: 28px;
+    margin-top: 25px;
     padding-top: 20px;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.72);
   }
 
   .feedback-privacy summary {
     cursor: pointer;
     font-weight: 700;
+  }
+
+  .feedback-privacy p {
+    color: rgba(255, 255, 255, 0.56);
   }
 
   .feedback-honeypot {
@@ -754,7 +931,12 @@ const ratingOptions = [1, 2, 3, 4, 5];
 
   @media (max-width: 720px) {
     .feedback-shell {
-      padding: 20px;
+      padding: 24px 18px;
+      border-radius: 26px 7px 26px 7px;
+    }
+
+    .feedback-intro h1 {
+      font-size: clamp(2.7rem, 12vw, 3.5rem);
     }
 
     .feedback-progress {
@@ -762,13 +944,27 @@ const ratingOptions = [1, 2, 3, 4, 5];
     }
 
     .feedback-step {
-      padding: 20px;
+      padding: 21px;
+      border-radius: 24px 6px 24px 6px;
+    }
+
+    .feedback-step-head {
+      grid-template-columns: 42px 1fr;
+    }
+
+    .feedback-step-head > span {
+      width: 38px;
+      height: 38px;
     }
 
     .feedback-grid,
     .choice-grid,
     .choice-grid-three {
       grid-template-columns: 1fr;
+    }
+
+    .rating-scale {
+      gap: 6px;
     }
 
     .rating-scale span {

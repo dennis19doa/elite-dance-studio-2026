@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import FeedbackForm from "../components/FeedbackForm.astro";
+import site from "../data/site.json";
+---
+
+<BaseLayout
+  title="First Class Feedback | Elite Dance Studio Berlin"
+  description="Tell us how your first class at Elite Dance Studio went and help us improve the experience for future students."
+  noindex={true}
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main feedback-page">
+    <FeedbackForm />
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>

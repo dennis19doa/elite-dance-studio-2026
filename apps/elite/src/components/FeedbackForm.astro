@@ -10,8 +10,8 @@ const ratingOptions = [1, 2, 3, 4, 5];
     <div class="eyebrow">First class feedback</div>
     <h1>How was your first class at Elite? 💛</h1>
     <p>
-      This takes about one minute. Your answers help us understand what worked,
-      what we can improve, and what you would like to see more of at Elite.
+      This takes about two minutes. We want to understand your whole first experience with Elite —
+      from finding information and arriving at the studio to the class itself.
     </p>
   </div>
 
@@ -53,70 +53,136 @@ const ratingOptions = [1, 2, 3, 4, 5];
       </label>
     </div>
 
-    <fieldset class="feedback-question">
-      <legend>How was your overall experience? *</legend>
-      <div class="rating-scale" aria-label="Overall experience from 1 to 5">
-        {ratingOptions.map((rating) => (
-          <label>
-            <input type="radio" name="overall_rating" value={rating} required />
-            <span><b>{rating}</b><small>{rating === 1 ? "Poor" : rating === 5 ? "Excellent" : ""}</small></span>
-          </label>
-        ))}
+    <div class="feedback-section">
+      <div class="feedback-section-head">
+        <span>01</span>
+        <div>
+          <h2>Before your visit</h2>
+          <p>Was it easy to understand how Elite works and get yourself into the right class?</p>
+        </div>
       </div>
-    </fieldset>
 
-    <fieldset class="feedback-question">
-      <legend>The teacher explained things clearly. *</legend>
-      <div class="rating-scale" aria-label="Teaching clarity from 1 to 5">
-        {ratingOptions.map((rating) => (
-          <label>
-            <input type="radio" name="clarity_rating" value={rating} required />
-            <span><b>{rating}</b><small>{rating === 1 ? "Not really" : rating === 5 ? "Absolutely" : ""}</small></span>
-          </label>
-        ))}
-      </div>
-    </fieldset>
+      <fieldset class="feedback-question">
+        <legend>How easy was it to find the information you needed before your first class? *</legend>
+        <div class="rating-scale" aria-label="Ease of finding information from 1 to 5">
+          {ratingOptions.map((rating) => (
+            <label>
+              <input type="radio" name="information_ease" value={rating} required />
+              <span><b>{rating}</b><small>{rating === 1 ? "Very difficult" : rating === 5 ? "Very easy" : ""}</small></span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
-    <fieldset class="feedback-question">
-      <legend>I felt comfortable and welcome in the class. *</legend>
-      <div class="rating-scale" aria-label="Feeling welcome from 1 to 5">
-        {ratingOptions.map((rating) => (
-          <label>
-            <input type="radio" name="welcome_rating" value={rating} required />
-            <span><b>{rating}</b><small>{rating === 1 ? "Not really" : rating === 5 ? "Absolutely" : ""}</small></span>
-          </label>
-        ))}
-      </div>
-    </fieldset>
+      <fieldset class="feedback-question">
+        <legend>How easy was the booking process? *</legend>
+        <div class="rating-scale" aria-label="Booking ease from 1 to 5">
+          {ratingOptions.map((rating) => (
+            <label>
+              <input type="radio" name="booking_ease" value={rating} required />
+              <span><b>{rating}</b><small>{rating === 1 ? "Very difficult" : rating === 5 ? "Very easy" : ""}</small></span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
-    <fieldset class="feedback-question">
-      <legend>How was the level for you? *</legend>
-      <div class="choice-grid choice-grid-three">
-        <label><input type="radio" name="level_fit" value="too_easy" required /><span>Too easy</span></label>
-        <label><input type="radio" name="level_fit" value="just_right" required /><span>Just right</span></label>
-        <label><input type="radio" name="level_fit" value="too_difficult" required /><span>Too difficult</span></label>
-      </div>
-    </fieldset>
+      <fieldset class="feedback-question">
+        <legend>How easy was it to find the studio and entrance? *</legend>
+        <div class="rating-scale" aria-label="Ease of finding the studio from 1 to 5">
+          {ratingOptions.map((rating) => (
+            <label>
+              <input type="radio" name="arrival_ease" value={rating} required />
+              <span><b>{rating}</b><small>{rating === 1 ? "Very difficult" : rating === 5 ? "Very easy" : ""}</small></span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    </div>
 
-    <fieldset class="feedback-question">
-      <legend>Would you take another class with this teacher? *</legend>
-      <div class="choice-grid">
-        <label><input type="radio" name="return_intent" value="definitely" required /><span>Definitely</span></label>
-        <label><input type="radio" name="return_intent" value="probably" required /><span>Probably</span></label>
-        <label><input type="radio" name="return_intent" value="not_sure" required /><span>Not sure</span></label>
-        <label><input type="radio" name="return_intent" value="probably_not" required /><span>Probably not</span></label>
+    <div class="feedback-section">
+      <div class="feedback-section-head">
+        <span>02</span>
+        <div>
+          <h2>Your first impression of Elite</h2>
+          <p>Think about the studio, atmosphere and how you felt when you arrived.</p>
+        </div>
       </div>
-    </fieldset>
+
+      <fieldset class="feedback-question">
+        <legend>How welcome did you feel at the studio? *</legend>
+        <div class="rating-scale" aria-label="Feeling welcome at the studio from 1 to 5">
+          {ratingOptions.map((rating) => (
+            <label>
+              <input type="radio" name="studio_welcome" value={rating} required />
+              <span><b>{rating}</b><small>{rating === 1 ? "Not welcome" : rating === 5 ? "Very welcome" : ""}</small></span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset class="feedback-question">
+        <legend>What was your overall first impression of Elite? *</legend>
+        <div class="rating-scale" aria-label="Overall first impression from 1 to 5">
+          {ratingOptions.map((rating) => (
+            <label>
+              <input type="radio" name="overall_rating" value={rating} required />
+              <span><b>{rating}</b><small>{rating === 1 ? "Poor" : rating === 5 ? "Excellent" : ""}</small></span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="feedback-section">
+      <div class="feedback-section-head">
+        <span>03</span>
+        <div>
+          <h2>Your class</h2>
+          <p>Now just a few questions about the class itself.</p>
+        </div>
+      </div>
+
+      <fieldset class="feedback-question">
+        <legend>How clearly was the class explained? *</legend>
+        <div class="rating-scale" aria-label="Class clarity from 1 to 5">
+          {ratingOptions.map((rating) => (
+            <label>
+              <input type="radio" name="clarity_rating" value={rating} required />
+              <span><b>{rating}</b><small>{rating === 1 ? "Not clear" : rating === 5 ? "Very clear" : ""}</small></span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset class="feedback-question">
+        <legend>How was the level for you? *</legend>
+        <div class="choice-grid choice-grid-three">
+          <label><input type="radio" name="level_fit" value="too_easy" required /><span>Too easy</span></label>
+          <label><input type="radio" name="level_fit" value="just_right" required /><span>Just right</span></label>
+          <label><input type="radio" name="level_fit" value="too_difficult" required /><span>Too difficult</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="feedback-question">
+        <legend>Would you come back for another class at Elite? *</legend>
+        <div class="choice-grid">
+          <label><input type="radio" name="return_intent" value="definitely" required /><span>Definitely</span></label>
+          <label><input type="radio" name="return_intent" value="probably" required /><span>Probably</span></label>
+          <label><input type="radio" name="return_intent" value="not_sure" required /><span>Not sure</span></label>
+          <label><input type="radio" name="return_intent" value="probably_not" required /><span>Probably not</span></label>
+        </div>
+      </fieldset>
+    </div>
 
     <div class="feedback-grid">
       <label class="feedback-field feedback-field-wide">
-        <span>What did you like most about the class or teacher?</span>
-        <textarea name="liked_most" rows="4" placeholder="Anything that stood out positively?"></textarea>
+        <span>What did you like most about your first visit?</span>
+        <textarea name="liked_most" rows="4" placeholder="The class, teacher, atmosphere, studio, booking — anything that stood out positively"></textarea>
       </label>
 
       <label class="feedback-field feedback-field-wide">
-        <span>Is there anything we could improve?</span>
-        <textarea name="improvement" rows="4" placeholder="Your honest feedback helps us improve."></textarea>
+        <span>Was anything confusing, difficult or different from what you expected?</span>
+        <textarea name="improvement" rows="4" placeholder="For example: finding information, booking, the entrance, studio orientation, class level or anything else"></textarea>
       </label>
 
       <label class="feedback-field feedback-field-wide">
@@ -171,8 +237,8 @@ const ratingOptions = [1, 2, 3, 4, 5];
   <details class="feedback-privacy">
     <summary>What happens with my answers?</summary>
     <p>
-      We use the responses internally to understand the first-visit experience, class level,
-      teaching clarity and what our community would like to see next. The answers are not used
+      We use the responses internally to understand the full first-visit journey: information,
+      booking, arrival, studio experience and classes. The answers are not used
       to subscribe you to marketing emails.
     </p>
   </details>
@@ -269,6 +335,41 @@ const ratingOptions = [1, 2, 3, 4, 5];
   .feedback-form {
     display: grid;
     gap: 26px;
+  }
+
+  .feedback-section {
+    display: grid;
+    gap: 22px;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 24px 7px 24px 7px;
+    background: rgba(255, 255, 255, 0.46);
+  }
+
+  .feedback-section-head {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 14px;
+    align-items: start;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .feedback-section-head > span {
+    color: var(--accent-deep);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  .feedback-section-head h2 {
+    font-size: clamp(1.55rem, 3vw, 2rem);
+  }
+
+  .feedback-section-head p {
+    margin: 7px 0 0;
+    color: var(--muted);
+    line-height: 1.55;
   }
 
   .feedback-grid {
@@ -485,6 +586,10 @@ const ratingOptions = [1, 2, 3, 4, 5];
   @media (max-width: 720px) {
     .feedback-shell {
       padding: 22px;
+    }
+
+    .feedback-section {
+      padding: 20px;
     }
 
     .feedback-grid,

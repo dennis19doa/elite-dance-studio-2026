@@ -5,9 +5,9 @@
   "features": {
     "schedule": {
       "title": "Elite Dance Studio · Wochenplan",
-      "file": "classes/Elite_Dance_Studio_Wochenplan_A3_Horizontal_Print.pdf",
+      "file": "classes/elite_dance_studio_wochenplan.png",
       "seconds": 20,
-      "type": "pdf"
+      "type": "image"
     },
     "party": {
       "title": "Elite Dance Party",

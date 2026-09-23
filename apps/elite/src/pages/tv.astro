@@ -6,12 +6,22 @@ const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
 const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260923-tv-refresh`);
+const TV_ASSET_VERSION = "20260923-1808";
+const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;
 const featureSchedule = tvMedia.features?.schedule
-  ? { ...tvMedia.features.schedule, src: remoteMedia(tvMedia.features.schedule.file) }
+  ? { ...tvMedia.features.schedule, src: versionedMedia(tvMedia.features.schedule.file) }
   : null;
 const featureParty = tvMedia.features?.party
-  ? { ...tvMedia.features.party, src: remoteMedia(tvMedia.features.party.file) }
+  ? { ...tvMedia.features.party, src: versionedMedia(tvMedia.features.party.file) }
   : null;
+const scheduleCandidates = featureSchedule
+  ? Array.from(new Set([
+      featureSchedule.src,
+      versionedMedia("classes/elite_dance_studio_wochenplan.png"),
+      versionedMedia("classes/Elite-Dance-Studio-Wochenplan.png"),
+      versionedMedia("classes/elite-dance-studio-wochenplan.png")
+    ]))
+  : [];
 ---
 <!doctype html>
 <html lang="en">
@@ -62,7 +72,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <section class="scene feature-scene" id="schedule-scene">
   {featureSchedule && (
     <>
-      <img class="feature-image schedule-image" id="schedule-img" src={featureSchedule.src} alt={featureSchedule.title} />
+      <img class="feature-image schedule-image" id="schedule-img" src={featureSchedule.src} alt={featureSchedule.title} loading="eager" fetchpriority="high" />
       <div class="feature-badge">Weekly Schedule · Elite Dance Studio</div>
     </>
   )}
@@ -74,7 +84,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <div class="probe"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
 </main>
 <script type="module" src="https://widget-static.eversports.io/loader.js"></script>
-<script is:inline define:vars={{ posters, videos, tvSchedule, featureSchedule, featureParty }}>
+<script is:inline define:vars={{ posters, videos, tvSchedule, featureSchedule, featureParty, scheduleCandidates }}>
 (()=>{
 const TZ="Europe/Berlin";
 const NEXT_WINDOW=15;
@@ -85,6 +95,8 @@ const PARTY_SECONDS=featureParty?.seconds||10;
 const STALL_CHECK_MS=5000;
 const STALL_LIMIT=2;
 const video=document.getElementById('video');
+const scheduleImg=document.getElementById('schedule-img');
+let scheduleCandidateIndex=0;
 const scenes={
   video:document.getElementById('video-scene'),
   schedule:document.getElementById('schedule-scene'),
@@ -196,9 +208,33 @@ function showPartyFeature(){
 }
 function showScheduleFeature(){
   clearTimeout(sceneTimer);
-  if(!featureSchedule){showPartyFeature();return;}
-  activate('schedule');
-  sceneTimer=setTimeout(showPartyFeature,SCHEDULE_SECONDS*1000);
+  if(!featureSchedule||!scheduleImg){showPartyFeature();return;}
+
+  const reveal=()=>{
+    activate('schedule');
+    sceneTimer=setTimeout(showPartyFeature,SCHEDULE_SECONDS*1000);
+  };
+
+  const tryCandidate=()=>{
+    if(scheduleImg.complete&&scheduleImg.naturalWidth>0){reveal();return;}
+    if(scheduleCandidateIndex>=scheduleCandidates.length){showPartyFeature();return;}
+
+    const src=scheduleCandidates[scheduleCandidateIndex++];
+    scheduleImg.onload=()=>{
+      scheduleImg.onload=null;
+      scheduleImg.onerror=null;
+      reveal();
+    };
+    scheduleImg.onerror=()=>{
+      scheduleImg.onload=null;
+      scheduleImg.onerror=null;
+      tryCandidate();
+    };
+    if(scheduleImg.src!==src)scheduleImg.src=src;
+    else if(scheduleImg.complete&&scheduleImg.naturalWidth===0)tryCandidate();
+  };
+
+  tryCandidate();
 }
 function finishVideoLoop(){video.pause();showScheduleFeature();}
 function recoverFromStall(){if(recovering)return;recovering=true;video.pause();refreshScheduleNow();queue=displayQueue();if(queue.length)showNextInfo();else playVideo({reload:true});}
@@ -206,6 +242,7 @@ function demo(){const mode=new URLSearchParams(location.search).get('demo');if(!
 
 posters.forEach(p=>{const img=new Image();img.src=p.src});
 if(featureParty?.src){const img=new Image();img.src=featureParty.src;}
+scheduleCandidates.forEach(src=>{const img=new Image();img.src=src;});
 const obs=new MutationObserver(()=>{refreshScheduleNow()});
 obs.observe(document.getElementById('eversports-probe'),{childList:true,subtree:true,characterData:true});
 setInterval(refreshScheduleNow,30000);

@@ -5,7 +5,13 @@ import tvSchedule from "../data/tv-schedule.json";
 const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv").replace(/\/+$/, "");
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
-const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260831-poster-fallback1`);
+const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260923-tv-refresh`);
+const featureSchedule = tvMedia.features?.schedule
+  ? { ...tvMedia.features.schedule, src: remoteMedia(tvMedia.features.schedule.file) }
+  : null;
+const featureParty = tvMedia.features?.party
+  ? { ...tvMedia.features.party, src: remoteMedia(tvMedia.features.party.file) }
+  : null;
 ---
 <!doctype html>
 <html lang="en">
@@ -15,7 +21,7 @@ const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260831-pos
 <meta name="description" content="Private Elite Dance Studio TV display for current classes and studio media." />
 <meta name="robots" content="noindex,nofollow" />
 <link rel="canonical" href="https://elitedancestudio.de/tv/" />
-<title>Elite TV v4</title>
+<title>Elite TV v5</title>
 <style>
 :root{color-scheme:dark;font-family:Inter,system-ui,sans-serif;background:#050505;color:#fff}
 *{box-sizing:border-box}
@@ -37,6 +43,10 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 .next-display .status{color:#d7ff4f}
 .single-poster-wrap{flex:1 1 0;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#040404}
 .poster-main{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;object-position:center;display:block;flex:none;transform-origin:center}
+.feature-scene{background:#030303;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.feature-image{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#030303}
+.schedule-pdf{width:100%;height:100%;border:0;background:#fff;pointer-events:none}
+.feature-badge{position:absolute;left:2.4vw;bottom:2.4vh;padding:.55rem .85rem;border-radius:999px;background:rgba(0,0,0,.66);backdrop-filter:blur(8px);font-weight:850;font-size:clamp(12px,1vw,18px);letter-spacing:.08em;text-transform:uppercase;color:#fff}
 .poster-main.is-missing{display:none}
 .live-display .poster-main{animation:livePosterPulse 2.5s ease-in-out infinite}
 .probe{position:fixed;left:-10000px;top:0;width:1400px;min-height:900px;opacity:.001;pointer-events:none}
@@ -49,20 +59,38 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <body>
 <main class="tv">
 <section class="scene video active" id="video-scene"><video id="video" autoplay muted playsinline preload="auto"></video><div class="shade"></div><div class="clock"><strong id="clock">--:--</strong><span id="day">BERLIN</span></div></section>
+<section class="scene feature-scene" id="schedule-scene">
+  {featureSchedule && (
+    <>
+      <iframe class="schedule-pdf" id="schedule-pdf" src={`${featureSchedule.src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH&page=1`} title="Elite Dance Studio Wochenplan"></iframe>
+      <div class="feature-badge">Weekly Schedule · Elite Dance Studio</div>
+    </>
+  )}
+</section>
+<section class="scene feature-scene" id="party-scene">
+  {featureParty && <img class="feature-image" id="party-img" src={featureParty.src} alt={featureParty.title} />}
+</section>
 <section class="scene class-scene" id="single-scene"><div class="class-header"><h1 id="single-title">Class</h1><div id="single-info"><div class="status"><span class="dot"></span><span id="single-status">CURRENT CLASS · LIVE NOW</span></div></div></div><div class="single-poster-wrap"><img class="poster-main" id="single-img" alt=""></div></section>
 <div class="probe"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
 </main>
 <script type="module" src="https://widget-static.eversports.io/loader.js"></script>
-<script is:inline define:vars={{ posters, videos, tvSchedule }}>
+<script is:inline define:vars={{ posters, videos, tvSchedule, featureSchedule, featureParty }}>
 (()=>{
 const TZ="Europe/Berlin";
 const NEXT_WINDOW=15;
 const DEFAULT_CLASS_MINUTES=60;
 const POSTER_SECONDS=10;
+const SCHEDULE_SECONDS=featureSchedule?.seconds||20;
+const PARTY_SECONDS=featureParty?.seconds||10;
 const STALL_CHECK_MS=5000;
 const STALL_LIMIT=2;
 const video=document.getElementById('video');
-const scenes={video:document.getElementById('video-scene'),single:document.getElementById('single-scene')};
+const scenes={
+  video:document.getElementById('video-scene'),
+  schedule:document.getElementById('schedule-scene'),
+  party:document.getElementById('party-scene'),
+  single:document.getElementById('single-scene')
+};
 let events=[];
 let eversportsEvents=[];
 let sceneTimer=null;
@@ -80,7 +108,13 @@ const formatTime=(h,m)=>`${String(h).padStart(2,'0')}:${m}`;
 
 function updateClock(){const p=parts();document.getElementById('clock').textContent=`${p.hour}:${p.minute}`;document.getElementById('day').textContent=`${p.weekday} · BERLIN`}
 function roomFrom(s=''){s=s.toLowerCase();if(/schwarz|black/.test(s))return'BLACK ROOM';if(/gelb|yellow/.test(s))return'YELLOW ROOM';if(/blau|blue/.test(s))return'BLUE ROOM';return''}
-function posterFor(title=''){const n=norm(title);return posters.find(p=>[p.title,...(p.aliases||[])].some(alias=>{const a=norm(alias);return a&&(n.includes(a)||a.includes(n));}))||null;}
+function posterFor(title=''){
+  const n=norm(title);
+  return posters.find(p=>[p.title,...(p.aliases||[])].some(alias=>{
+    const a=norm(alias);
+    return a&&(n.includes(a)||a.includes(n));
+  }))||null;
+}
 
 function parseEversports(){
   const root=document.getElementById('eversports-probe');
@@ -145,11 +179,33 @@ function renderEntry(entry){
 
 function playVideo({reload=false}={}){clearTimeout(sceneTimer);queue=[];recovering=false;activate('video');if(!videos.length)return;const src=videos[videoIndex%videos.length];if(reload||video.src!==src){video.src=src;video.load();}else{try{video.currentTime=0}catch{}}lastVideoTime=-1;stalledChecks=0;video.play().catch(()=>{});}
 function showNextInfo(){clearTimeout(sceneTimer);if(!queue.length){videoIndex=(videoIndex+1)%Math.max(videos.length,1);playVideo({reload:recovering});return;}const entry=queue.shift();renderEntry(entry);sceneTimer=setTimeout(showNextInfo,POSTER_SECONDS*1000);}
-function finishVideoLoop(){video.pause();refreshScheduleNow();queue=displayQueue();if(queue.length)showNextInfo();else{videoIndex=(videoIndex+1)%Math.max(videos.length,1);playVideo();}}
+function continueAfterFeatures(){
+  refreshScheduleNow();
+  queue=displayQueue();
+  if(queue.length)showNextInfo();
+  else{
+    videoIndex=(videoIndex+1)%Math.max(videos.length,1);
+    playVideo();
+  }
+}
+function showPartyFeature(){
+  clearTimeout(sceneTimer);
+  if(!featureParty){continueAfterFeatures();return;}
+  activate('party');
+  sceneTimer=setTimeout(continueAfterFeatures,PARTY_SECONDS*1000);
+}
+function showScheduleFeature(){
+  clearTimeout(sceneTimer);
+  if(!featureSchedule){showPartyFeature();return;}
+  activate('schedule');
+  sceneTimer=setTimeout(showPartyFeature,SCHEDULE_SECONDS*1000);
+}
+function finishVideoLoop(){video.pause();showScheduleFeature();}
 function recoverFromStall(){if(recovering)return;recovering=true;video.pause();refreshScheduleNow();queue=displayQueue();if(queue.length)showNextInfo();else playVideo({reload:true});}
 function demo(){const mode=new URLSearchParams(location.search).get('demo');if(!mode)return false;video.pause();const sample=mode==='live'?{type:'live',event:{title:'Heels Beginner',start:'18:00',end:'19:00'}}:mode==='zouk'?{type:'live',event:{title:'Zouk Beginner',start:'18:00',end:'19:00'}}:{type:'next',event:{title:'Latin Twerk',start:'19:00',end:'20:00'}};renderEntry(sample);return true;}
 
 posters.forEach(p=>{const img=new Image();img.src=p.src});
+if(featureParty?.src){const img=new Image();img.src=featureParty.src;}
 const obs=new MutationObserver(()=>{refreshScheduleNow()});
 obs.observe(document.getElementById('eversports-probe'),{childList:true,subtree:true,characterData:true});
 setInterval(refreshScheduleNow,30000);

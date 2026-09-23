@@ -45,7 +45,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 .poster-main{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;object-position:center;display:block;flex:none;transform-origin:center}
 .feature-scene{background:#030303;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .feature-image{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:#030303}
-.schedule-pdf{width:100%;height:100%;border:0;background:#fff;pointer-events:none}
+.schedule-image{object-fit:contain;background:#030303}
 .feature-badge{position:absolute;left:2.4vw;bottom:2.4vh;padding:.55rem .85rem;border-radius:999px;background:rgba(0,0,0,.66);backdrop-filter:blur(8px);font-weight:850;font-size:clamp(12px,1vw,18px);letter-spacing:.08em;text-transform:uppercase;color:#fff}
 .poster-main.is-missing{display:none}
 .live-display .poster-main{animation:livePosterPulse 2.5s ease-in-out infinite}
@@ -62,7 +62,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <section class="scene feature-scene" id="schedule-scene">
   {featureSchedule && (
     <>
-      <iframe class="schedule-pdf" id="schedule-pdf" src={`${featureSchedule.src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH&page=1`} title="Elite Dance Studio Wochenplan"></iframe>
+      <img class="feature-image schedule-image" id="schedule-img" src={featureSchedule.src} alt={featureSchedule.title} />
       <div class="feature-badge">Weekly Schedule · Elite Dance Studio</div>
     </>
   )}

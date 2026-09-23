@@ -4,75 +4,668 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 
 import site from "../data/site.json";
-
-const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-const scheduleHref = `${baseUrl}#schedule`;
 ---
 
 <BaseLayout
-  title="Events & Elite Dance Party | Elite Dance Studio Berlin"
-  description="Elite Dance Party, Socials, Workshops und Community-Events im Elite Dance Studio in Berlin-Moabit."
-  bodyClass="events-page-v12"
+  title="Bachata & Zouk Party jeden Samstag | Elite Dance Studio Berlin"
+  description="Jeden Samstag Bachata & Zouk im Elite Dance Studio Berlin: Pre-Party Workshops, zwei Räume, Social Dancing und die Möglichkeit auf kostenlosen Party-Eintritt über Instagram."
+  image="/media/events/elite-saturday-bachata-zouk-party.webp"
+  bodyClass="events-page-v20"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main events-main-v12">
-    <section class="events-stage-v12">
-      <img src="/media/current-site/elite-party.jpg" alt="Elite Dance Party im Elite Dance Studio Berlin" />
-      <div class="events-stage-overlay-v12"></div>
-      <div class="events-stage-copy-v12">
-        <span>Elite after class</span>
-        <h1>Tanzen endet nicht, wenn die Musik im Kurs stoppt.</h1>
-        <div>
-          <p>Partys, Workshops und Specials bringen Training, Menschen und echte Tanzzeit zusammen.</p>
-          <a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">Aktuelle Events ↗</a>
+  <main class="page-shell page-main events-party-main-v20">
+    <section class="events-party-hero-v20">
+      <div class="events-party-hero-copy-v20">
+        <span class="events-party-kicker-v20">Jeden Samstag · Berlin-Moabit</span>
+        <h1>Bachata & Zouk.<br /><em>Zwei Räume.</em><br />Ein Samstag.</h1>
+        <p>
+          Pre-Party Workshops, Bachata Party und Zouk Party – jede Woche im Elite Dance Studio.
+        </p>
+        <div class="events-party-badges-v20" aria-label="Party Highlights">
+          <span>Every Saturday</span>
+          <span>2 Rooms</span>
+          <span>Bachata + Zouk</span>
+        </div>
+        <div class="events-party-actions-v20">
+          <a href="#saturday-party">Samstagsplan ansehen ↓</a>
+          <a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">Instagram ↗</a>
+        </div>
+      </div>
+
+      <div class="events-party-hero-poster-v20">
+        <img
+          src="/media/events/elite-saturday-bachata-zouk-party.webp"
+          alt="Bachata und Zouk Party jeden Samstag im Elite Dance Studio Berlin"
+        />
+      </div>
+    </section>
+
+    <div class="events-party-marquee-v20" aria-hidden="true">
+      <span>EVERY SATURDAY · BACHATA · ZOUK · TWO ROOMS · PRE-PARTY WORKSHOPS · BERLIN-MOABIT ·</span>
+      <span>EVERY SATURDAY · BACHATA · ZOUK · TWO ROOMS · PRE-PARTY WORKSHOPS · BERLIN-MOABIT ·</span>
+    </div>
+
+    <section class="saturday-party-v20" id="saturday-party" aria-labelledby="saturday-party-title">
+      <figure class="saturday-poster-v20">
+        <img
+          src="/media/events/elite-saturday-bachata-zouk-party.webp"
+          alt="Aktuelles Poster der Bachata und Zouk Party im Elite Dance Studio"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="saturday-info-v20">
+        <div class="saturday-heading-v20">
+          <span>Jeden Samstag</span>
+          <h2 id="saturday-party-title">Dein Samstag bei Elite.</h2>
+          <p>Zwei Räume, zwei Communities und ein Abend zum Tanzen.</p>
+        </div>
+
+        <div class="saturday-timeline-v20" aria-label="Samstagsprogramm">
+          <div class="saturday-slot-v20">
+            <time>19:00–20:00</time>
+            <div>
+              <strong>Zouk Pre-Party Workshop</strong>
+              <span>Startet im Oktober</span>
+            </div>
+          </div>
+
+          <div class="saturday-slot-v20">
+            <time>20:00–21:00</time>
+            <div>
+              <strong>Bachata Pre-Party Workshop mit Elena & Dennis</strong>
+              <span>13€ oder Urban Sports Club</span>
+            </div>
+          </div>
+
+          <div class="saturday-slot-v20">
+            <time>20:00</time>
+            <div>
+              <strong>Zouk Party · zweiter Raum</strong>
+              <span>Ab Oktober · 5€ oder USC</span>
+            </div>
+          </div>
+
+          <div class="saturday-slot-v20">
+            <time>21:00</time>
+            <div>
+              <strong>Bachata Party</strong>
+              <span>5€ oder USC</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="free-entry-v20" aria-labelledby="free-entry-title">
+          <div class="free-entry-head-v20">
+            <span>Free Entry</span>
+            <h3 id="free-entry-title">Teile die Party. Komm kostenlos rein.</h3>
+          </div>
+
+          <ol>
+            <li>
+              <span>01</span>
+              <p>Teile das aktuelle <strong>Party-Poster</strong> am selben Samstag bis spätestens <strong>18:00 Uhr</strong> in deiner Instagram Story.</p>
+            </li>
+            <li>
+              <span>02</span>
+              <p>
+                Folge
+                <a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">@elitedanceberlin</a>
+                und
+                <a href="https://www.instagram.com/elenaydennisbachata/" target="_blank" rel="noreferrer">@elenaydennisbachata</a>.
+              </p>
+            </li>
+            <li>
+              <span>03</span>
+              <p>Dein Instagram-Account muss mindestens <strong>400 Follower</strong> haben.</p>
+            </li>
+          </ol>
+
+          <p class="free-entry-note-v20">Wenn du alle drei Bedingungen erfüllst, ist dein Party-Eintritt kostenlos.</p>
+        </aside>
+
+        <div class="saturday-location-v20">
+          <span>Elite Dance Studio</span>
+          <strong>Wiclefstraße 16–17 · Berlin-Moabit</strong>
         </div>
       </div>
     </section>
 
-    <div class="events-marquee-v12" aria-hidden="true">
-      <span>PARTY · WORKSHOPS · SOCIAL · COMMUNITY · SPECIALS · BERLIN-MOABIT ·</span>
-      <span>PARTY · WORKSHOPS · SOCIAL · COMMUNITY · SPECIALS · BERLIN-MOABIT ·</span>
-    </div>
-
-    <section class="event-chapter-v12 is-party">
-      <div class="event-chapter-label-v12">Elite Dance Party</div>
-      <figure><img src="/media/current-site/current-home-visual.webp" alt="Community und Tanz bei Elite Dance Studio" loading="lazy" /></figure>
-      <div class="event-chapter-copy-v12">
-        <h2>Du musst nicht erst „gut genug“ sein, um tanzen zu gehen.</h2>
-        <p>Unsere Partys sind der Ort, an dem du ausprobieren kannst, was im Kurs noch neu war. Komm zum Tanzen, Zuschauen, Leute treffen oder einfach für die Musik.</p>
-      </div>
-    </section>
-
-    <section class="event-chapter-v12 is-workshop">
-      <div class="event-chapter-label-v12">Workshops</div>
-      <div class="event-chapter-copy-v12">
-        <h2>Ein Thema. Ein Coach. Mehr Zeit, wirklich reinzugehen.</h2>
-        <p>Gast-Coaches, neue Styles und fokussierte Sessions geben dir Raum für Dinge, die in eine normale Wochenclass nicht hineinpassen.</p>
-      </div>
-      <figure><img src="/media/current-site/kathy-reggaeton.png" alt="Workshop bei Elite Dance Studio" loading="lazy" /></figure>
-    </section>
-
-    <section class="event-chapter-v12 is-special">
-      <figure><img src="/media/current-site/studio-room-a.jpg" alt="Studio Special im Elite Dance Studio Berlin" loading="lazy" /></figure>
-      <div class="event-chapter-copy-v12">
-        <div class="event-chapter-label-v12">Studio Specials</div>
-        <h2>Nicht alles muss in eine normale Kursstunde passen.</h2>
-        <p>Open Classes, Community Sessions und besondere Projekte entstehen dann, wenn wir Lust auf ein Format haben, das mehr Raum braucht.</p>
-      </div>
-    </section>
-
-    <section class="events-signal-v12">
+    <section class="events-more-v20" aria-labelledby="events-more-title">
+      <header>
+        <span>Mehr bei Elite</span>
+        <h2 id="events-more-title">Nicht nur Samstagabend.</h2>
+      </header>
       <div>
-        <span>Was passiert als Nächstes?</span>
-        <h2>Die schnellsten Updates leben auf Instagram.</h2>
+        <article>
+          <span>Workshops</span>
+          <h3>Mehr Zeit für ein Thema.</h3>
+          <p>Gast-Coaches, neue Styles und fokussierte Sessions außerhalb des regulären Stundenplans.</p>
+        </article>
+        <article>
+          <span>Studio Specials</span>
+          <h3>Community, Projekte & Specials.</h3>
+          <p>Open Classes und besondere Formate, wenn ein Thema mehr Raum verdient.</p>
+        </article>
       </div>
-      <div class="events-signal-actions-v12">
-        <a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">@elitedanceberlin ↗</a>
-        <a href={scheduleHref}>Erst eine Class besuchen →</a>
+    </section>
+
+    <section class="events-instagram-v20">
+      <div>
+        <span>Aktuelle Updates</span>
+        <h2>Neue Poster und Specials zuerst auf Instagram.</h2>
       </div>
+      <a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">@elitedanceberlin ↗</a>
     </section>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />
 </BaseLayout>
+
+<style>
+  .events-party-main-v20 {
+    color: #fff;
+  }
+
+  .events-party-hero-v20 {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(320px, .72fr);
+    min-height: 720px;
+    margin-top: 24px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 8% 15%, rgba(218, 45, 97, .2), transparent 28rem),
+      linear-gradient(135deg, #100d12 0%, #211119 54%, #110d12 100%);
+  }
+
+  .events-party-hero-copy-v20 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(42px, 7vw, 86px);
+  }
+
+  .events-party-kicker-v20,
+  .saturday-heading-v20 > span,
+  .events-more-v20 header > span,
+  .events-instagram-v20 span {
+    color: var(--elite-lime);
+    font-size: .74rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .events-party-hero-copy-v20 h1 {
+    max-width: 10ch;
+    margin: 18px 0 0;
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 7.7vw, 8rem);
+    line-height: .86;
+    letter-spacing: -.06em;
+  }
+
+  .events-party-hero-copy-v20 h1 em {
+    color: var(--elite-rose);
+    font-style: normal;
+  }
+
+  .events-party-hero-copy-v20 > p {
+    max-width: 38rem;
+    margin: 28px 0 0;
+    color: rgba(255,255,255,.68);
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+
+  .events-party-badges-v20 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .events-party-badges-v20 span {
+    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(255,255,255,.05);
+    color: rgba(255,255,255,.84);
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+
+  .events-party-actions-v20 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 34px;
+  }
+
+  .events-party-actions-v20 a {
+    padding-bottom: 7px;
+    border-bottom: 1px solid rgba(255,255,255,.35);
+    color: #fff;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .events-party-hero-poster-v20 {
+    position: relative;
+    min-height: 720px;
+    overflow: hidden;
+    background: #120a0f;
+  }
+
+  .events-party-hero-poster-v20::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 1;
+    width: 26%;
+    background: linear-gradient(90deg, #211119, transparent);
+    content: "";
+    pointer-events: none;
+  }
+
+  .events-party-hero-poster-v20 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .events-party-marquee-v20 {
+    display: flex;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    overflow: hidden;
+    padding: 13px 0 14px;
+    background: var(--elite-rose);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: clamp(.95rem, 1.8vw, 1.45rem);
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .events-party-marquee-v20 span {
+    flex: 0 0 auto;
+    padding-right: 1.5rem;
+    animation: eventsPartyTickerV20 30s linear infinite;
+  }
+
+  @keyframes eventsPartyTickerV20 {
+    to { transform: translateX(-100%); }
+  }
+
+  .saturday-party-v20 {
+    display: grid;
+    grid-template-columns: minmax(330px, .82fr) minmax(0, 1.18fr);
+    gap: clamp(34px, 6vw, 82px);
+    align-items: start;
+    padding: clamp(58px, 8vw, 110px) 0;
+    border-bottom: 1px solid rgba(255,255,255,.11);
+  }
+
+  .saturday-poster-v20 {
+    position: sticky;
+    top: 110px;
+    margin: 0;
+    overflow: hidden;
+    background: #181117;
+    box-shadow: 0 28px 72px rgba(0,0,0,.36);
+  }
+
+  .saturday-poster-v20 img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .saturday-heading-v20 h2 {
+    max-width: 9ch;
+    margin: 12px 0 0;
+    color: #fff;
+    font-size: clamp(3rem, 5.5vw, 6.2rem);
+    line-height: .9;
+    letter-spacing: -.05em;
+  }
+
+  .saturday-heading-v20 > p {
+    max-width: 34rem;
+    margin: 22px 0 0;
+    color: rgba(255,255,255,.6);
+    line-height: 1.65;
+  }
+
+  .saturday-timeline-v20 {
+    display: grid;
+    margin-top: 38px;
+    border-top: 1px solid rgba(255,255,255,.14);
+  }
+
+  .saturday-slot-v20 {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+  }
+
+  .saturday-slot-v20 time {
+    color: var(--elite-rose);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .saturday-slot-v20 div {
+    display: grid;
+    gap: 5px;
+  }
+
+  .saturday-slot-v20 strong {
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  .saturday-slot-v20 span {
+    color: rgba(255,255,255,.55);
+    font-size: .88rem;
+  }
+
+  .free-entry-v20 {
+    margin-top: 42px;
+    padding: clamp(26px, 4vw, 42px);
+    border: 1px solid rgba(255,255,255,.12);
+    background:
+      radial-gradient(circle at 100% 0, rgba(220, 56, 100, .18), transparent 18rem),
+      #171419;
+  }
+
+  .free-entry-head-v20 > span {
+    color: var(--elite-lime);
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .free-entry-head-v20 h3 {
+    max-width: 13ch;
+    margin: 10px 0 0;
+    color: #fff;
+    font-size: clamp(2rem, 3.7vw, 3.8rem);
+    line-height: .96;
+  }
+
+  .free-entry-v20 ol {
+    display: grid;
+    gap: 0;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: none;
+  }
+
+  .free-entry-v20 li {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+    padding: 18px 0;
+    border-top: 1px solid rgba(255,255,255,.1);
+  }
+
+  .free-entry-v20 li > span {
+    color: var(--elite-rose);
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+  }
+
+  .free-entry-v20 li p {
+    margin: 0;
+    color: rgba(255,255,255,.76);
+    line-height: 1.6;
+  }
+
+  .free-entry-v20 li strong,
+  .free-entry-v20 li a {
+    color: #fff;
+    font-weight: 800;
+  }
+
+  .free-entry-note-v20 {
+    margin: 18px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,.1);
+    color: var(--elite-lime);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
+  .saturday-location-v20 {
+    display: grid;
+    gap: 5px;
+    margin-top: 26px;
+    color: rgba(255,255,255,.62);
+  }
+
+  .saturday-location-v20 span {
+    color: var(--elite-rose);
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+  }
+
+  .saturday-location-v20 strong {
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  .events-more-v20 {
+    padding: clamp(58px, 8vw, 100px) 0;
+    border-bottom: 1px solid rgba(255,255,255,.11);
+  }
+
+  .events-more-v20 header {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 1.4fr);
+    gap: 34px;
+    align-items: end;
+  }
+
+  .events-more-v20 header h2 {
+    max-width: 10ch;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.8rem, 5vw, 5.4rem);
+    line-height: .9;
+  }
+
+  .events-more-v20 > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 36px;
+  }
+
+  .events-more-v20 article {
+    min-height: 260px;
+    padding: clamp(24px, 4vw, 38px);
+    border: 1px solid rgba(255,255,255,.11);
+    background: #151519;
+  }
+
+  .events-more-v20 article:first-child {
+    border-top: 4px solid var(--elite-blue);
+  }
+
+  .events-more-v20 article:last-child {
+    border-top: 4px solid var(--elite-lime);
+  }
+
+  .events-more-v20 article > span {
+    color: rgba(255,255,255,.48);
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .events-more-v20 article h3 {
+    max-width: 13ch;
+    margin: 18px 0 0;
+    color: #fff;
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    line-height: .98;
+  }
+
+  .events-more-v20 article p {
+    max-width: 31rem;
+    margin: 20px 0 0;
+    color: rgba(255,255,255,.57);
+    line-height: 1.65;
+  }
+
+  .events-instagram-v20 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 36px;
+    align-items: end;
+    margin: clamp(52px, 8vw, 96px) 0 70px;
+    padding: clamp(28px, 5vw, 52px);
+    background: var(--elite-blue);
+  }
+
+  .events-instagram-v20 h2 {
+    max-width: 13ch;
+    margin: 9px 0 0;
+    color: #fff;
+    font-size: clamp(2.6rem, 5vw, 5rem);
+    line-height: .92;
+  }
+
+  .events-instagram-v20 a {
+    padding-bottom: 7px;
+    border-bottom: 1px solid rgba(255,255,255,.35);
+    color: #fff;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .events-party-hero-v20 {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .events-party-hero-copy-v20 {
+      padding: 44px 28px 38px;
+    }
+
+    .events-party-hero-copy-v20 h1 {
+      font-size: clamp(3.6rem, 13vw, 6.2rem);
+    }
+
+    .events-party-hero-poster-v20 {
+      min-height: 0;
+      aspect-ratio: 7 / 8;
+    }
+
+    .events-party-hero-poster-v20::before {
+      inset: 0 0 auto;
+      width: auto;
+      height: 20%;
+      background: linear-gradient(180deg, #211119, transparent);
+    }
+
+    .saturday-party-v20 {
+      grid-template-columns: 1fr;
+    }
+
+    .saturday-poster-v20 {
+      position: relative;
+      top: auto;
+      width: min(100%, 620px);
+      margin: 0 auto;
+    }
+
+    .events-more-v20 header {
+      grid-template-columns: 1fr;
+    }
+
+    .events-instagram-v20 {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .events-party-main-v20 {
+      width: min(calc(100% - 20px), var(--max));
+    }
+
+    .events-party-hero-copy-v20 {
+      padding: 34px 20px 30px;
+    }
+
+    .events-party-hero-copy-v20 h1 {
+      font-size: clamp(3rem, 15vw, 4.4rem);
+    }
+
+    .events-party-hero-copy-v20 > p {
+      font-size: .96rem;
+    }
+
+    .events-party-hero-poster-v20 {
+      aspect-ratio: auto;
+    }
+
+    .events-party-hero-poster-v20 img {
+      height: auto;
+      object-fit: contain;
+    }
+
+    .saturday-party-v20 {
+      padding-top: 44px;
+    }
+
+    .saturday-heading-v20 h2 {
+      font-size: clamp(2.8rem, 14vw, 4rem);
+    }
+
+    .saturday-slot-v20 {
+      grid-template-columns: 1fr;
+      gap: 7px;
+    }
+
+    .free-entry-v20 {
+      padding: 24px 20px;
+    }
+
+    .free-entry-v20 li {
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .events-more-v20 > div {
+      grid-template-columns: 1fr;
+    }
+
+    .events-instagram-v20 {
+      margin-bottom: 44px;
+      padding: 26px 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .events-party-marquee-v20 span {
+      animation: none;
+    }
+  }
+</style>

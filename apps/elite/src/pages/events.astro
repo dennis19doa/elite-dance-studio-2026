@@ -98,31 +98,45 @@ import site from "../data/site.json";
 
         <aside class="free-entry-v20" aria-labelledby="free-entry-title">
           <div class="free-entry-head-v20">
-            <span>Free Entry</span>
-            <h3 id="free-entry-title">Teile die Party. Komm kostenlos rein.</h3>
+            <span>Free Entry Rules</span>
+            <h3 id="free-entry-title">So bekommst du freien Eintritt.</h3>
+            <p>Erfülle alle drei Bedingungen bis spätestens Samstag um 18:00 Uhr.</p>
           </div>
 
-          <ol>
-            <li>
-              <span>01</span>
-              <p>Teile das aktuelle <strong>Party-Poster</strong> am selben Samstag bis spätestens <strong>18:00 Uhr</strong> in deiner Instagram Story.</p>
-            </li>
-            <li>
-              <span>02</span>
-              <p>
-                Folge
-                <a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">@elitedanceberlin</a>
-                und
-                <a href="https://www.instagram.com/elenaydennisbachata/" target="_blank" rel="noreferrer">@elenaydennisbachata</a>.
-              </p>
-            </li>
-            <li>
-              <span>03</span>
-              <p>Dein Instagram-Account muss mindestens <strong>400 Follower</strong> haben.</p>
-            </li>
-          </ol>
+          <div class="free-entry-list-v20">
+            <div class="free-entry-item-v20">
+              <div class="free-entry-number-v20">1</div>
+              <div>
+                <strong>Party-Poster in deiner Story teilen</strong>
+                <p>Teile das aktuelle Party-Poster am selben Samstag <b>vor 18:00 Uhr</b> in deiner Instagram Story.</p>
+              </div>
+            </div>
 
-          <p class="free-entry-note-v20">Wenn du alle drei Bedingungen erfüllst, ist dein Party-Eintritt kostenlos.</p>
+            <div class="free-entry-item-v20">
+              <div class="free-entry-number-v20">2</div>
+              <div>
+                <strong>Beiden Accounts folgen</strong>
+                <p>
+                  Folge
+                  <a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noreferrer">@elitedanceberlin</a>
+                  und
+                  <a href="https://www.instagram.com/elenaydennisbachata/" target="_blank" rel="noreferrer">@elenaydennisbachata</a>.
+                </p>
+              </div>
+            </div>
+
+            <div class="free-entry-item-v20">
+              <div class="free-entry-number-v20">3</div>
+              <div>
+                <strong>Mindestens 400 Follower</strong>
+                <p>Dein Instagram-Account muss mindestens <b>400 Follower</b> haben.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="free-entry-note-v20">
+            Alle 3 Bedingungen erfüllt? Dann ist dein <strong>Party-Eintritt kostenlos.</strong>
+          </div>
         </aside>
 
         <div class="saturday-location-v20">
@@ -170,20 +184,24 @@ import site from "../data/site.json";
 
   .events-party-hero-v20 {
     display: grid;
-    grid-template-columns: minmax(0, 1.08fr) minmax(320px, .72fr);
-    min-height: 720px;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
+    gap: clamp(26px, 4vw, 52px);
+    align-items: center;
+    min-height: 0;
     margin-top: 24px;
+    padding: clamp(28px, 4vw, 48px);
     overflow: hidden;
     background:
-      radial-gradient(circle at 8% 15%, rgba(218, 45, 97, .2), transparent 28rem),
+      radial-gradient(circle at 8% 15%, rgba(218, 45, 97, .18), transparent 28rem),
       linear-gradient(135deg, #100d12 0%, #211119 54%, #110d12 100%);
   }
 
   .events-party-hero-copy-v20 {
     display: flex;
+    min-width: 0;
     flex-direction: column;
     justify-content: center;
-    padding: clamp(42px, 7vw, 86px);
+    padding: 0;
   }
 
   .events-party-kicker-v20,
@@ -198,13 +216,13 @@ import site from "../data/site.json";
   }
 
   .events-party-hero-copy-v20 h1 {
-    max-width: 10ch;
+    max-width: 8.5ch;
     margin: 18px 0 0;
     color: #fff;
     font-family: var(--font-display);
-    font-size: clamp(4rem, 7.7vw, 8rem);
-    line-height: .86;
-    letter-spacing: -.06em;
+    font-size: clamp(3.45rem, 6.4vw, 6.7rem);
+    line-height: .88;
+    letter-spacing: -.055em;
   }
 
   .events-party-hero-copy-v20 h1 em {
@@ -255,25 +273,19 @@ import site from "../data/site.json";
 
   .events-party-hero-poster-v20 {
     position: relative;
-    min-height: 720px;
+    width: 100%;
+    max-width: 430px;
+    justify-self: end;
     overflow: hidden;
     background: #120a0f;
-  }
-
-  .events-party-hero-poster-v20::before {
-    position: absolute;
-    inset: 0 auto 0 0;
-    z-index: 1;
-    width: 26%;
-    background: linear-gradient(90deg, #211119, transparent);
-    content: "";
-    pointer-events: none;
+    box-shadow: 0 28px 72px rgba(0,0,0,.36);
   }
 
   .events-party-hero-poster-v20 img {
+    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
   }
 
   .events-party-marquee-v20 {
@@ -378,73 +390,99 @@ import site from "../data/site.json";
 
   .free-entry-v20 {
     margin-top: 42px;
-    padding: clamp(26px, 4vw, 42px);
-    border: 1px solid rgba(255,255,255,.12);
+    padding: clamp(26px, 4vw, 38px);
+    border: 1px solid rgba(207,239,84,.3);
     background:
-      radial-gradient(circle at 100% 0, rgba(220, 56, 100, .18), transparent 18rem),
-      #171419;
+      radial-gradient(circle at 100% 0, rgba(220, 56, 100, .2), transparent 18rem),
+      linear-gradient(180deg, #1c151c 0%, #121015 100%);
+    box-shadow: 0 22px 56px rgba(0,0,0,.28);
   }
 
   .free-entry-head-v20 > span {
-    color: var(--elite-lime);
+    display: inline-flex;
+    padding: 7px 10px;
+    background: var(--elite-lime);
+    color: #111116;
     font-size: .72rem;
-    font-weight: 800;
-    letter-spacing: .13em;
+    font-weight: 900;
+    letter-spacing: .12em;
     text-transform: uppercase;
   }
 
   .free-entry-head-v20 h3 {
     max-width: 13ch;
-    margin: 10px 0 0;
+    margin: 14px 0 0;
     color: #fff;
-    font-size: clamp(2rem, 3.7vw, 3.8rem);
-    line-height: .96;
+    font-size: clamp(2rem, 3.3vw, 3.35rem);
+    line-height: .98;
   }
 
-  .free-entry-v20 ol {
-    display: grid;
-    gap: 0;
-    margin: 28px 0 0;
-    padding: 0;
-    list-style: none;
-    counter-reset: none;
-  }
-
-  .free-entry-v20 li {
-    display: grid;
-    grid-template-columns: 42px minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
-    padding: 18px 0;
-    border-top: 1px solid rgba(255,255,255,.1);
-  }
-
-  .free-entry-v20 li > span {
-    color: var(--elite-rose);
-    font-size: .75rem;
-    font-weight: 800;
-    letter-spacing: .08em;
-  }
-
-  .free-entry-v20 li p {
-    margin: 0;
-    color: rgba(255,255,255,.76);
+  .free-entry-head-v20 p {
+    max-width: 34rem;
+    margin: 14px 0 0;
+    color: rgba(255,255,255,.72);
     line-height: 1.6;
   }
 
-  .free-entry-v20 li strong,
-  .free-entry-v20 li a {
+  .free-entry-list-v20 {
+    display: grid;
+    gap: 12px;
+    margin-top: 26px;
+  }
+
+  .free-entry-item-v20 {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.045);
+  }
+
+  .free-entry-number-v20 {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    background: var(--elite-rose);
     color: #fff;
-    font-weight: 800;
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    font-weight: 900;
+  }
+
+  .free-entry-item-v20 strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  .free-entry-item-v20 p {
+    margin: 0;
+    color: rgba(255,255,255,.78);
+    line-height: 1.58;
+  }
+
+  .free-entry-item-v20 a,
+  .free-entry-item-v20 b {
+    color: #fff;
+    font-weight: 850;
   }
 
   .free-entry-note-v20 {
-    margin: 18px 0 0;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255,255,255,.1);
+    margin-top: 18px;
+    padding: 16px 18px;
+    border-left: 4px solid var(--elite-lime);
+    background: rgba(207,239,84,.09);
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.55;
+  }
+
+  .free-entry-note-v20 strong {
     color: var(--elite-lime);
-    font-weight: 800;
-    line-height: 1.5;
   }
 
   .saturday-location-v20 {
@@ -562,10 +600,11 @@ import site from "../data/site.json";
     .events-party-hero-v20 {
       grid-template-columns: 1fr;
       min-height: 0;
+      padding: 38px 28px;
     }
 
     .events-party-hero-copy-v20 {
-      padding: 44px 28px 38px;
+      padding: 0;
     }
 
     .events-party-hero-copy-v20 h1 {
@@ -573,15 +612,9 @@ import site from "../data/site.json";
     }
 
     .events-party-hero-poster-v20 {
-      min-height: 0;
-      aspect-ratio: 7 / 8;
-    }
-
-    .events-party-hero-poster-v20::before {
-      inset: 0 0 auto;
-      width: auto;
-      height: 20%;
-      background: linear-gradient(180deg, #211119, transparent);
+      width: min(100%, 430px);
+      max-width: none;
+      justify-self: start;
     }
 
     .saturday-party-v20 {
@@ -610,8 +643,13 @@ import site from "../data/site.json";
       width: min(calc(100% - 20px), var(--max));
     }
 
+    .events-party-hero-v20 {
+      padding: 26px 18px;
+      gap: 24px;
+    }
+
     .events-party-hero-copy-v20 {
-      padding: 34px 20px 30px;
+      padding: 0;
     }
 
     .events-party-hero-copy-v20 h1 {
@@ -623,7 +661,7 @@ import site from "../data/site.json";
     }
 
     .events-party-hero-poster-v20 {
-      aspect-ratio: auto;
+      width: 100%;
     }
 
     .events-party-hero-poster-v20 img {
@@ -645,7 +683,19 @@ import site from "../data/site.json";
     }
 
     .free-entry-v20 {
-      padding: 24px 20px;
+      padding: 24px 18px;
+    }
+
+    .free-entry-item-v20 {
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 12px;
+      padding: 15px;
+    }
+
+    .free-entry-number-v20 {
+      width: 44px;
+      height: 44px;
+      font-size: .95rem;
     }
 
     .free-entry-v20 li {

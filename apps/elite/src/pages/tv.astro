@@ -5,7 +5,7 @@ import tvSchedule from "../data/tv-schedule.json";
 const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv").replace(/\/+$/, "");
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
-const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260923-tv-refresh`);
+const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260923-video2`);
 const TV_ASSET_VERSION = "20260923-1808";
 const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;
 const featureSchedule = tvMedia.features?.schedule

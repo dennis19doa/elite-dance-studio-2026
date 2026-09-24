@@ -143,13 +143,8 @@ const closedGroups = [
           <p>Wähle deine Monate und schreib uns deine Trainingswünsche. Wir bestätigen dir den Platz anschließend per WhatsApp.</p>
         </div>
 
-        <form class="advanced-registration-form-v22" action="https://formsubmit.co/ajax/info@elitedancestudio.de" method="post" data-advanced-form>
+        <form class="advanced-registration-form-v22" action="/api/form" method="post" data-advanced-form>
           <input type="hidden" name="form_kind" value="advanced" />
-          <input type="hidden" name="_subject" value="Bachata Advanced Anmeldung" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_url" value="https://elitedancestudio.de/fortgeschrittene/#bachata-advanced" />
-          <input type="hidden" name="request_type" value="bachata_advanced_registration" />
           <input class="advanced-honeypot-v22" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
           <fieldset class="advanced-month-fieldset-v22">
@@ -199,7 +194,7 @@ const closedGroups = [
 
           <label class="advanced-consent-v22">
             <input type="checkbox" name="privacy_consent" value="accepted" required />
-            <span>Ich stimme zu, dass Elite Dance Studio meine Angaben über den Formular-Dienst zur Bearbeitung dieser Anmeldung verwendet. *</span>
+            <span>Ich stimme zu, dass Elite Dance Studio meine Angaben zur Bearbeitung dieser Anmeldung verwendet. *</span>
           </label>
 
           <div class="advanced-submit-row-v22">
@@ -257,26 +252,35 @@ const closedGroups = [
         }
 
         try {
-          const formData = new FormData(form);
-          const name = String(formData.get("name") || "").trim();
-          formData.set("_subject", `Bachata Advanced Anmeldung – ${name || "Website"}`);
-
           const response = await fetch(form.action, {
             method: "POST",
-            body: formData,
+            body: new FormData(form),
             headers: { Accept: "application/json" },
           });
 
-          if (!response.ok) throw new Error("Submission failed");
+          const result = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            const error = result?.error || "unknown_error";
+            throw new Error(error);
+          }
 
           form.reset();
           if (status) {
             status.textContent = "Danke! Deine Anmeldung ist angekommen. Wir melden uns mit der Bestätigung per WhatsApp bei dir.";
             status.dataset.state = "success";
           }
-        } catch {
+        } catch (error) {
+          const code = error instanceof Error ? error.message : "unknown_error";
+          const messages = {
+            configuration_error: "Die E-Mail-Verbindung der Website ist gerade nicht vollständig konfiguriert.",
+            missing_required_fields: "Bitte prüfe noch einmal alle Pflichtfelder.",
+            invalid_submission: "Bitte prüfe deine Angaben und versuche es erneut.",
+            send_failed: "Die Anmeldung konnte gerade nicht an unser E-Mail-Postfach gesendet werden.",
+            unknown_error: "Die Anmeldung konnte gerade nicht gesendet werden.",
+          };
           if (status) {
-            status.textContent = "Die Anmeldung konnte gerade nicht gesendet werden. Bitte schreib uns kurz auf WhatsApp.";
+            status.textContent = `${messages[code] || messages.unknown_error} Bitte versuche es erneut oder schreib uns auf WhatsApp.`;
             status.dataset.state = "error";
           }
         } finally {

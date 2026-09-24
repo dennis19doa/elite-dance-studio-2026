@@ -4,94 +4,168 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import site from "../data/site.json";
 
-const advancedClasses = [
+const closedGroups = [
   {
     title: "Bachata Advanced",
-    focus: "Dienstag · 20:30–21:30",
+    schedule: "Dienstag · 20:30–21:30",
+    meta: "Partnerwork · Technik · Musikalität",
     image: "/media/current-site/elena-dennis-bachata.png",
-    alt: "Bachata Advanced Closed Group bei Elite Dance"
+    alt: "Bachata Advanced Closed Group bei Elite Dance Studio",
+    href: "#bachata-advanced",
+    cta: "2026-Blöcke ansehen →",
+    featured: true
   },
   {
     title: "Bachata Footwork",
-    focus: "Donnerstag · 20:00–21:00",
+    schedule: "Donnerstag · 20:00–21:00",
+    meta: "Solo · Technik · Präzision",
     image: "/media/style-posters/21-bachata-footwork.webp",
-    alt: "Bachata Footwork Closed Group bei Elite Dance"
+    alt: "Bachata Footwork Closed Group bei Elite Dance Studio",
+    href: "/kontakt/",
+    cta: "Platz anfragen →"
   },
   {
     title: "Heels Closed Group",
-    focus: "Mittwoch · 20:00–21:30",
+    schedule: "Mittwoch · 20:00–21:30",
+    meta: "Lines · Performance · Confidence",
     image: "/media/style-posters/08-high-heels-intermediate.webp",
-    alt: "Heels Closed Group bei Elite Dance"
+    alt: "Heels Closed Group bei Elite Dance Studio",
+    href: "/kontakt/",
+    cta: "Platz anfragen →"
   },
   {
     title: "Breaking Closed Group",
-    focus: "Donnerstag · 20:00–21:30",
+    schedule: "Donnerstag · 20:00–21:30",
+    meta: "Power · Technik · Progression",
     image: "/media/style-posters/05-breaking.webp",
-    alt: "Breaking Closed Group mit Minh bei Elite Dance"
+    alt: "Breaking Closed Group mit Minh bei Elite Dance Studio",
+    href: "/kontakt/",
+    cta: "Platz anfragen →"
   }
 ];
+
+const bachataMonths = ["Oktober", "November", "Dezember"].map((month) => ({
+  month,
+  href: `https://wa.me/491633863548?text=${encodeURIComponent(`Hallo Elite Dance Studio! Ich möchte mich für Bachata Advanced im ${month} 2026 anmelden.`)}`
+}));
+
+const topicHref = `https://wa.me/491633863548?text=${encodeURIComponent("Hallo Elite Dance Studio! Mein Wunschthema für Bachata Advanced bis Ende 2026 ist: ")}`;
 ---
 
-<BaseLayout title="Intermediate, Advanced & Closed Groups | Elite Dance Studio Berlin" description="Intermediate- und Advanced-Tanztraining, Closed Groups und Intensives im Elite Dance Studio Berlin-Moabit." image="/media/current-site/elena-dennis-bachata.png" bodyClass="advanced-page-v18 advanced-page-v20 advanced-page-review-v19">
+<BaseLayout
+  title="Advanced & Closed Groups | Elite Dance Studio Berlin"
+  description="Advanced Training und Closed Groups im Elite Dance Studio Berlin-Moabit. Feste Gruppen, klare Progression und Bachata Advanced Registrierung für Oktober bis Dezember 2026."
+  image="/media/current-site/elena-dennis-bachata.png"
+  bodyClass="advanced-page-v21"
+>
   <SiteHeader brand={site.brand} nav={site.nav} />
-  <main class="page-shell page-main advanced-main-v18">
-    <section class="advanced-hero-v20 panel">
-      <div class="eyebrow">Intermediate · Advanced · Closed Groups</div>
-      <div class="advanced-hero-grid-v20">
-        <h1 class="page-title">Wenn du tiefer trainieren willst.</h1>
-        <div class="advanced-hero-side-v20">
-          <p class="lead">Vertiefe Technik, Präzision und Ausdruck in festen Gruppen und Trainingsformaten mit echter Progression.</p>
-          <div class="advanced-hero-proof-v20">
-            <span>Advanced Training</span>
-            <span>Closed Groups</span>
-            <span>Intensives</span>
-          </div>
-          <div class="actions">
-            <a class="button primary" href="#advanced-classes">Closed Groups ansehen</a>
-            <a class="button secondary" href="/intensives/">Intensives</a>
-          </div>
+
+  <main class="page-shell page-main advanced-main-v21">
+    <section class="advanced-brand-hero-v21 panel">
+      <div class="advanced-brand-copy-v21">
+        <div class="eyebrow">Advanced & Closed Groups</div>
+        <h1>Trainiere tiefer. Bleib dran.</h1>
+        <p class="lead">
+          Feste Gruppen, klarer Fokus und mehr Kontinuität für Tänzer:innen, die nicht jede Woche bei null anfangen wollen.
+        </p>
+        <div class="advanced-hero-tags-v21" aria-label="Trainingsformate">
+          <span>Advanced</span>
+          <span>Closed Groups</span>
+          <span>Berlin-Moabit</span>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="#closed-groups">Gruppen ansehen</a>
+          <a class="button secondary" href="#bachata-advanced">Bachata Advanced 2026</a>
         </div>
       </div>
-    </section>
-
-    <section class="advanced-level-check panel advanced-level-check-v18">
-      <div>
-        <div class="eyebrow">Welches Format passt?</div>
-        <h2>Drei Wege, tiefer zu trainieren.</h2>
-      </div>
-      <div class="advanced-format-grid-v18">
-        <article><strong>Regular Class</strong><p>Flexibel im Wochenplan trainieren und dein Level kontinuierlich halten.</p></article>
-        <article><strong>Closed Group</strong><p>Mit derselben Gruppe arbeiten und über mehrere Wochen gemeinsam aufbauen.</p></article>
-        <article><strong>Intensive</strong><p>Mehrere Wochen konzentriert an einem konkreten technischen Thema arbeiten.</p></article>
+      <div class="advanced-brand-visual-v21" aria-hidden="true">
+        <span>ELITE</span>
+        <strong>TRAIN<br />DEEPER</strong>
+        <small>Technique · Progression · Community</small>
       </div>
     </section>
 
-    <section class="advanced-offer panel advanced-offer-v18" id="advanced-classes">
-      <div class="section-head compact-section-head advanced-section-head-review-v19">
-        <div><div class="eyebrow">Aktuelle Closed Groups</div><h2>Vier feste Trainingsgruppen.</h2></div>
-        <p>Feste Woche, gleiche Gruppe, mehr Kontinuität. Freie Plätze bitte direkt bei uns anfragen.</p>
-      </div>
-      <div class="advanced-card-grid advanced-card-grid-v18 closed-group-grid-v19">
-        {advancedClasses.map((course) => (
-          <article class="advanced-card advanced-card-v18 closed-group-card-v19">
-            <a class="advanced-card-image-v18" href="/kontakt/">
+    <section class="advanced-groups-v21 panel" id="closed-groups">
+      <header class="advanced-section-head-v21">
+        <div>
+          <div class="eyebrow">Aktuelle Closed Groups</div>
+          <h2>Wähle dein Training.</h2>
+        </div>
+        <p>Feste Woche. Gleiche Gruppe. Mehr Fortschritt.</p>
+      </header>
+
+      <div class="advanced-group-grid-v21">
+        {closedGroups.map((course) => (
+          <article class:list={["advanced-group-card-v21", course.featured && "is-featured"]}>
+            <a class="advanced-group-image-v21" href={course.href}>
               <img src={course.image} alt={course.alt} width="1080" height="1350" loading="lazy" decoding="async" />
+              {course.featured && <span class="advanced-card-badge-v21">Okt–Dez offen</span>}
             </a>
-            <div class="advanced-card-copy-v18">
-              <small>Closed Group · {course.focus}</small>
+            <div class="advanced-group-copy-v21">
+              <small>{course.schedule}</small>
               <h3>{course.title}</h3>
-              <a class="text-link" href="/kontakt/">Platz anfragen →</a>
+              <p>{course.meta}</p>
+              <a class="text-link" href={course.href}>{course.cta}</a>
             </div>
           </article>
         ))}
       </div>
     </section>
 
-    <section class="progression-choice panel">
-      <div><span>Regelmäßig</span><h3>Advanced Classes</h3><p>Kontinuierliches Training im Wochenplan.</p><a class="button secondary" href="/stundenplan/">Class buchen</a></div>
-      <div><span>Feste Gruppe</span><h3>Closed Groups</h3><p>Verbindlicher Aufbau mit derselben Trainingsgruppe.</p><a class="button secondary" href="/kontakt/">Gruppe anfragen</a></div>
-      <div><span>Roadmap</span><h3>Intensives</h3><p>Mehrere Wochen fokussiert an Technik und Movement arbeiten.</p><a class="button primary" href="/intensives/">Intensives ansehen</a></div>
+    <section class="bachata-advanced-v21 panel" id="bachata-advanced">
+      <div class="bachata-advanced-copy-v21">
+        <div class="eyebrow">Bachata Advanced · Rest of 2026</div>
+        <h2>Plane dein Training bis Dezember.</h2>
+        <p class="bachata-intro-v21">
+          Die Anmeldung für Oktober, November und Dezember ist bereits offen. Wähle direkt den Monat, in dem du dabei sein möchtest.
+        </p>
+
+        <div class="bachata-update-v21">
+          <span>Neu</span>
+          <div>
+            <strong>Practice before class.</strong>
+            <p>Vor den Classes schicken wir kurze Übungen und Drills zum Vorbereiten – damit wir im Training schneller in Technik, Feedback und Partnerwork einsteigen können.</p>
+          </div>
+        </div>
+
+        <div class="bachata-topic-v21">
+          <div>
+            <small>Du kannst mitgestalten</small>
+            <strong>Was möchtest du bis Jahresende trainieren?</strong>
+          </div>
+          <a class="button secondary" href={topicHref} target="_blank" rel="noreferrer">Thema vorschlagen</a>
+        </div>
+      </div>
+
+      <div class="bachata-months-v21">
+        <div class="bachata-months-head-v21">
+          <span>2026</span>
+          <h3>Wähle deinen Monat.</h3>
+        </div>
+        <div class="bachata-month-grid-v21">
+          {bachataMonths.map((item, index) => (
+            <a class="bachata-month-card-v21" href={item.href} target="_blank" rel="noreferrer">
+              <small>{String(index + 10).padStart(2, "0")} / 2026</small>
+              <strong>{item.month}</strong>
+              <span>Anmelden →</span>
+            </a>
+          ))}
+        </div>
+        <p class="bachata-month-note-v21">Die Anmeldung startet als direkte WhatsApp-Anfrage. Wir bestätigen dir anschließend den passenden Block.</p>
+      </div>
+    </section>
+
+    <section class="advanced-next-v21 panel">
+      <div>
+        <span class="eyebrow">Noch mehr Fokus?</span>
+        <h2>Intensives bauen Technik über mehrere Wochen auf.</h2>
+      </div>
+      <div class="actions">
+        <a class="button primary" href="/intensives/">Intensives ansehen</a>
+        <a class="button secondary" href="/stundenplan/">Stundenplan</a>
+      </div>
     </section>
   </main>
+
   <SiteFooter brand={site.brand} nav={site.nav} />
 </BaseLayout>

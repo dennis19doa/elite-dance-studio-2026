@@ -1,0 +1,13 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Frame-Options: SAMEORIGIN
+
+# Astro fingerprints generated assets, so these can use long-lived immutable caching.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Studio photos/videos may be replaced under the same URL, so keep a shorter TTL.
+/media/*
+  Cache-Control: public, max-age=604800, must-revalidate

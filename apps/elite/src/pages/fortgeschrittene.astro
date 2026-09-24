@@ -143,8 +143,13 @@ const closedGroups = [
           <p>Wähle deine Monate und schreib uns deine Trainingswünsche. Wir bestätigen dir den Platz anschließend per WhatsApp.</p>
         </div>
 
-        <form class="advanced-registration-form-v22" action="https://formsubmit.co/ajax/info@elitedancestudio.de" method="post" data-advanced-form>
+        <form class="advanced-registration-form-v22" action="https://formsubmit.co/info@elitedancestudio.de" method="post" data-advanced-form>
           <input type="hidden" name="form_kind" value="advanced" />
+          <input type="hidden" name="_subject" value="Bachata Advanced Anmeldung" data-advanced-subject-line />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_url" value="https://elitedancestudio.de/fortgeschrittene/#bachata-advanced" />
+          <input type="hidden" name="_next" value="https://elitedancestudio.de/fortgeschrittene/?sent=1#bachata-advanced" />
+          <input type="hidden" name="request_type" value="bachata_advanced_registration" />
           <input class="advanced-honeypot-v22" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
           <fieldset class="advanced-month-fieldset-v22">
@@ -230,12 +235,21 @@ const closedGroups = [
 
       const status = form.querySelector("[data-advanced-status]");
       const submit = form.querySelector('button[type="submit"]');
+      const subjectLine = form.querySelector("[data-advanced-subject-line]");
 
-      form.addEventListener("submit", async (event) => {
-        event.preventDefault();
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("sent") === "1" && status) {
+        status.textContent = "Danke! Deine Anmeldung wurde gesendet. Wir melden uns mit der Bestätigung per WhatsApp bei dir.";
+        status.dataset.state = "success";
+        params.delete("sent");
+        const query = params.toString();
+        history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}#bachata-advanced`);
+      }
 
+      form.addEventListener("submit", (event) => {
         const months = [...form.querySelectorAll("[data-advanced-month]:checked")].map((input) => input.value);
         if (!months.length) {
+          event.preventDefault();
           if (status) {
             status.textContent = "Bitte wähle mindestens einen Monat aus.";
             status.dataset.state = "error";
@@ -243,91 +257,24 @@ const closedGroups = [
           return;
         }
 
-        if (!form.reportValidity()) return;
+        if (!form.reportValidity()) {
+          event.preventDefault();
+          return;
+        }
+
+        const name = String(new FormData(form).get("name") || "").trim();
+        if (subjectLine instanceof HTMLInputElement) {
+          subjectLine.value = `Bachata Advanced Anmeldung – ${name || "Website"}`;
+        }
 
         if (submit instanceof HTMLButtonElement) submit.disabled = true;
         if (status) {
-          status.textContent = "Deine Anmeldung wird gesendet …";
+          status.textContent = "Deine Anmeldung wird sicher über FormSubmit gesendet …";
           status.dataset.state = "loading";
-        }
-
-        try {
-          const formData = new FormData(form);
-
-          const payload = {
-            _subject: `Bachata Advanced Anmeldung – ${String(formData.get("name") || "Website")}`,
-            _template: "table",
-            _url: "https://elitedancestudio.de/fortgeschrittene/#bachata-advanced",
-            _honey: String(formData.get("_honey") || ""),
-            request_type: "bachata_advanced_registration",
-            name: String(formData.get("name") || ""),
-            email: String(formData.get("email") || ""),
-            whatsapp: String(formData.get("phone") || ""),
-            monate: formData.getAll("months").map(String).join(", "),
-            trainingswuensche: String(formData.get("training_subject") || ""),
-            weitere_nachricht: String(formData.get("extra_note") || ""),
-            datenschutz: String(formData.get("privacy_consent") || ""),
-          };
-
-          const response = await fetch(form.action, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify(payload),
-          });
-
-          const result = await response.json().catch(() => ({}));
-
-          if (!response.ok || result?.success === "false" || result?.success === false) {
-            const providerMessage =
-              String(result?.message || result?.error || "").trim() ||
-              `HTTP ${response.status}`;
-            throw new Error(providerMessage);
-          }
-
-          form.reset();
-          if (status) {
-            status.textContent = "Danke! Deine Anmeldung wurde gesendet. Wir melden uns mit der Bestätigung per WhatsApp bei dir.";
-            status.dataset.state = "success";
-          }
-        } catch (error) {
-          const providerMessage = error instanceof Error ? error.message : "Unbekannter Fehler";
-          const normalized = providerMessage.toLowerCase();
-          let explanation = "FormSubmit konnte die Anmeldung gerade nicht versenden.";
-
-          if (
-            normalized.includes("confirm") ||
-            normalized.includes("activate") ||
-            normalized.includes("verification")
-          ) {
-            explanation = "FormSubmit wartet noch auf die Aktivierung der Empfängeradresse. Bitte prüft info@elitedancestudio.de auf eine Aktivierungs-E-Mail von FormSubmit.";
-          } else if (
-            normalized.includes("spam") ||
-            normalized.includes("captcha") ||
-            normalized.includes("bot")
-          ) {
-            explanation = "FormSubmit hat die Anfrage durch seinen Spam-Schutz blockiert.";
-          } else if (
-            normalized.includes("email") ||
-            normalized.includes("recipient")
-          ) {
-            explanation = "FormSubmit konnte die Empfängeradresse nicht bestätigen.";
-          }
-
-          console.error("FormSubmit advanced registration failed:", providerMessage);
-
-          if (status) {
-            status.textContent = `${explanation} (${providerMessage})`;
-            status.dataset.state = "error";
-          }
-        } finally {
-          if (submit instanceof HTMLButtonElement) submit.disabled = false;
         }
       });
     })();
   </script>
 <!-- production-deploy-refresh -->
-<!-- production-formsubmit-live-v1 -->
+<!-- production-formsubmit-live-v2 -->
 </BaseLayout>

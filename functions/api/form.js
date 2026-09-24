@@ -12,15 +12,6 @@ function isEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-class FormBackendError extends Error {
-  constructor(code, details = {}) {
-    super(code);
-    this.name = "FormBackendError";
-    this.code = code;
-    this.details = details;
-  }
-}
-
 async function getAccessToken(env) {
   const body = new URLSearchParams({
     refresh_token: env.ZOHO_REFRESH_TOKEN,
@@ -37,12 +28,8 @@ async function getAccessToken(env) {
 
   const data = await response.json().catch(() => ({}));
   if (!response.ok || !data.access_token) {
-    const upstreamError = clean(data.error || data.error_description || "unknown_error", 160);
-    console.error("Zoho token refresh failed", response.status, upstreamError);
-    throw new FormBackendError("zoho_token_refresh_failed", {
-      upstreamStatus: response.status,
-      upstreamError,
-    });
+    console.error("Zoho token refresh failed", response.status, data.error || "unknown_error");
+    throw new Error("zoho_token_refresh_failed");
   }
 
   return data.access_token;
@@ -256,33 +243,13 @@ export async function onRequestPost({ request, env }) {
     const mailData = await mailResponse.json().catch(() => ({}));
     const zohoCode = Number(mailData?.status?.code ?? mailResponse.status);
     if (!mailResponse.ok || zohoCode >= 400) {
-      const upstreamError = clean(
-        mailData?.data?.errorCode ||
-        mailData?.status?.description ||
-        mailData?.message ||
-        "unknown_error",
-        200,
-      );
-      console.error("Zoho send failed", mailResponse.status, zohoCode, upstreamError);
-      throw new FormBackendError("zoho_send_failed", {
-        upstreamStatus: mailResponse.status,
-        zohoCode,
-        upstreamError,
-      });
+      console.error("Zoho send failed", mailResponse.status, zohoCode);
+      throw new Error("zoho_send_failed");
     }
 
     return json({ ok: true });
   } catch (error) {
     console.error("Website form submission failed", error instanceof Error ? error.message : "unknown_error");
-
-    if (error instanceof FormBackendError) {
-      return json({
-        ok: false,
-        error: error.code,
-        diagnostic: error.details,
-      }, 502);
-    }
-
     return json({ ok: false, error: "send_failed" }, 502);
   }
 }

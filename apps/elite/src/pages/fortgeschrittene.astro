@@ -322,7 +322,6 @@ const closedGroups = [
             status.textContent = `${explanation} (${providerMessage})`;
             status.dataset.state = "error";
           }
-        }
         } finally {
           if (submit instanceof HTMLButtonElement) submit.disabled = false;
         }

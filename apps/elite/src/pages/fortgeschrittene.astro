@@ -194,7 +194,7 @@ const closedGroups = [
 
           <label class="advanced-consent-v22">
             <input type="checkbox" name="privacy_consent" value="accepted" required />
-            <span>Ich stimme zu, dass Elite Dance Studio meine Angaben zur Bearbeitung dieser Anmeldung verwendet. *</span>
+            <span>Ich stimme zu, dass Elite Dance Studio meine Angaben über den Formular-Dienst zur Bearbeitung dieser Anmeldung verwendet. *</span>
           </label>
 
           <div class="advanced-submit-row-v22">
@@ -252,22 +252,48 @@ const closedGroups = [
         }
 
         try {
-          const response = await fetch(form.action, {
-            method: "POST",
-            body: new FormData(form),
-            headers: { Accept: "application/json" },
-          });
+          const primaryData = new FormData(form);
+          let delivered = false;
 
-          if (!response.ok) throw new Error("Submission failed");
+          try {
+            const response = await fetch(form.action, {
+              method: "POST",
+              body: primaryData,
+              headers: { Accept: "application/json" },
+            });
+            delivered = response.ok;
+          } catch {
+            delivered = false;
+          }
+
+          if (!delivered) {
+            const fallbackData = new FormData(form);
+            const name = String(fallbackData.get("name") || "").trim();
+            fallbackData.set("_subject", `Bachata Advanced Anmeldung – ${name || "Website"}`);
+            fallbackData.set("_template", "table");
+            fallbackData.set("_captcha", "false");
+            fallbackData.set("_url", "https://elitedancestudio.de/fortgeschrittene/#bachata-advanced");
+            fallbackData.set("request_type", "bachata_advanced_registration");
+
+            const fallbackResponse = await fetch("https://formsubmit.co/ajax/info@elitedancestudio.de", {
+              method: "POST",
+              body: fallbackData,
+              headers: { Accept: "application/json" },
+            });
+
+            delivered = fallbackResponse.ok;
+          }
+
+          if (!delivered) throw new Error("Submission failed");
 
           form.reset();
           if (status) {
-            status.textContent = "Danke! Deine Anmeldung ist angekommen. Wir melden uns mit der Bestätigung bei dir.";
+            status.textContent = "Danke! Deine Anmeldung ist angekommen. Wir melden uns mit der Bestätigung per WhatsApp bei dir.";
             status.dataset.state = "success";
           }
         } catch {
           if (status) {
-            status.textContent = "Das hat gerade nicht funktioniert. Bitte versuche es erneut oder schreibe uns auf WhatsApp.";
+            status.textContent = "Die Anmeldung konnte gerade nicht gesendet werden. Bitte schreib uns kurz auf WhatsApp.";
             status.dataset.state = "error";
           }
         } finally {

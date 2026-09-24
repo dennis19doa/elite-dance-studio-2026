@@ -105,6 +105,21 @@ function buildMessage(fields) {
   return lines.join("\n");
 }
 
+export function onRequestGet({ env }) {
+  const requiredEnv = [
+    "ZOHO_REFRESH_TOKEN",
+    "ZOHO_CLIENT_ID",
+    "ZOHO_CLIENT_SECRET",
+    "ZOHO_ACCOUNT_ID",
+    "ZOHO_FROM_EMAIL",
+  ];
+  return json({
+    ok: true,
+    version: "advanced-form-v3",
+    zohoConfigured: requiredEnv.every((key) => Boolean(env[key])),
+  });
+}
+
 export async function onRequestPost({ request, env }) {
   try {
     const requiredEnv = [

@@ -143,8 +143,13 @@ const closedGroups = [
           <p>Wähle deine Monate und schreib uns deine Trainingswünsche. Wir bestätigen dir den Platz anschließend per WhatsApp.</p>
         </div>
 
-        <form class="advanced-registration-form-v22" action="/api/form" method="post" data-advanced-form>
+        <form class="advanced-registration-form-v22" action="https://formsubmit.co/ajax/info@elitedancestudio.de" method="post" data-advanced-form>
           <input type="hidden" name="form_kind" value="advanced" />
+          <input type="hidden" name="_subject" value="Bachata Advanced Anmeldung" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_url" value="https://elitedancestudio.de/fortgeschrittene/#bachata-advanced" />
+          <input type="hidden" name="request_type" value="bachata_advanced_registration" />
           <input class="advanced-honeypot-v22" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
           <fieldset class="advanced-month-fieldset-v22">
@@ -252,39 +257,17 @@ const closedGroups = [
         }
 
         try {
-          const primaryData = new FormData(form);
-          let delivered = false;
+          const formData = new FormData(form);
+          const name = String(formData.get("name") || "").trim();
+          formData.set("_subject", `Bachata Advanced Anmeldung – ${name || "Website"}`);
 
-          try {
-            const response = await fetch(form.action, {
-              method: "POST",
-              body: primaryData,
-              headers: { Accept: "application/json" },
-            });
-            delivered = response.ok;
-          } catch {
-            delivered = false;
-          }
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: { Accept: "application/json" },
+          });
 
-          if (!delivered) {
-            const fallbackData = new FormData(form);
-            const name = String(fallbackData.get("name") || "").trim();
-            fallbackData.set("_subject", `Bachata Advanced Anmeldung – ${name || "Website"}`);
-            fallbackData.set("_template", "table");
-            fallbackData.set("_captcha", "false");
-            fallbackData.set("_url", "https://elitedancestudio.de/fortgeschrittene/#bachata-advanced");
-            fallbackData.set("request_type", "bachata_advanced_registration");
-
-            const fallbackResponse = await fetch("https://formsubmit.co/ajax/info@elitedancestudio.de", {
-              method: "POST",
-              body: fallbackData,
-              headers: { Accept: "application/json" },
-            });
-
-            delivered = fallbackResponse.ok;
-          }
-
-          if (!delivered) throw new Error("Submission failed");
+          if (!response.ok) throw new Error("Submission failed");
 
           form.reset();
           if (status) {

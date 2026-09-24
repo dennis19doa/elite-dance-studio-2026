@@ -8,164 +8,318 @@ const closedGroups = [
   {
     title: "Bachata Advanced",
     schedule: "Dienstag · 20:30–21:30",
-    meta: "Partnerwork · Technik · Musikalität",
+    focus: "Partnerwork · Technik · Musikalität",
     image: "/media/current-site/elena-dennis-bachata.png",
-    alt: "Bachata Advanced Closed Group bei Elite Dance Studio",
+    alt: "Bachata Advanced mit Elena und Dennis bei Elite Dance Studio",
     href: "#bachata-advanced",
-    cta: "2026-Blöcke ansehen →",
+    cta: "Details & Anmeldung",
     featured: true
   },
   {
     title: "Bachata Footwork",
     schedule: "Donnerstag · 20:00–21:00",
-    meta: "Solo · Technik · Präzision",
+    focus: "Solo · Präzision · Kontrolle",
     image: "/media/style-posters/21-bachata-footwork.webp",
     alt: "Bachata Footwork Closed Group bei Elite Dance Studio",
     href: "/kontakt/",
-    cta: "Platz anfragen →"
+    cta: "Platz anfragen"
   },
   {
     title: "Heels Closed Group",
     schedule: "Mittwoch · 20:00–21:30",
-    meta: "Lines · Performance · Confidence",
+    focus: "Lines · Technik · Performance",
     image: "/media/style-posters/08-high-heels-intermediate.webp",
     alt: "Heels Closed Group bei Elite Dance Studio",
     href: "/kontakt/",
-    cta: "Platz anfragen →"
+    cta: "Platz anfragen"
   },
   {
     title: "Breaking Closed Group",
     schedule: "Donnerstag · 20:00–21:30",
-    meta: "Power · Technik · Progression",
+    focus: "Power · Technik · Progression",
     image: "/media/style-posters/05-breaking.webp",
     alt: "Breaking Closed Group mit Minh bei Elite Dance Studio",
     href: "/kontakt/",
-    cta: "Platz anfragen →"
+    cta: "Platz anfragen"
   }
 ];
 
-const bachataMonths = ["Oktober", "November", "Dezember"].map((month) => ({
-  month,
-  href: `https://wa.me/491633863548?text=${encodeURIComponent(`Hallo Elite Dance Studio! Ich möchte mich für Bachata Advanced im ${month} 2026 anmelden.`)}`
-}));
-
-const topicHref = `https://wa.me/491633863548?text=${encodeURIComponent("Hallo Elite Dance Studio! Mein Wunschthema für Bachata Advanced bis Ende 2026 ist: ")}`;
+const topicOptions = [
+  "Connection & Lead/Follow",
+  "Turns & Spins",
+  "Musicality",
+  "Body Movement",
+  "Partnerwork Details"
+];
 ---
 
 <BaseLayout
   title="Advanced & Closed Groups | Elite Dance Studio Berlin"
-  description="Advanced Training und Closed Groups im Elite Dance Studio Berlin-Moabit. Feste Gruppen, klare Progression und Bachata Advanced Registrierung für Oktober bis Dezember 2026."
+  description="Advanced Training und Closed Groups im Elite Dance Studio Berlin-Moabit. Feste Gruppen, klare Progression und Bachata Advanced Anmeldung für Oktober bis Dezember 2026."
   image="/media/current-site/elena-dennis-bachata.png"
-  bodyClass="advanced-page-v21"
+  bodyClass="advanced-page-v22"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main advanced-main-v21">
-    <section class="advanced-brand-hero-v21 panel">
-      <div class="advanced-brand-copy-v21">
+  <main class="page-shell page-main advanced-main-v22">
+    <section class="advanced-hero-v22">
+      <div class="advanced-hero-copy-v22">
         <div class="eyebrow">Advanced & Closed Groups</div>
-        <h1>Trainiere tiefer. Bleib dran.</h1>
-        <p class="lead">
-          Feste Gruppen, klarer Fokus und mehr Kontinuität für Tänzer:innen, die nicht jede Woche bei null anfangen wollen.
+        <h1>Trainiere nicht einfach mehr. Trainiere gezielter.</h1>
+        <p>
+          Feste Gruppen für Tänzer:innen, die Technik, Qualität und Fortschritt über mehrere Wochen wirklich aufbauen wollen.
         </p>
-        <div class="advanced-hero-tags-v21" aria-label="Trainingsformate">
-          <span>Advanced</span>
-          <span>Closed Groups</span>
-          <span>Berlin-Moabit</span>
+        <div class="advanced-hero-actions-v22">
+          <a class="button primary" href="#closed-groups">Closed Groups ansehen</a>
+          <a class="button secondary" href="#bachata-advanced">Bachata Advanced anmelden</a>
         </div>
-        <div class="actions">
-          <a class="button primary" href="#closed-groups">Gruppen ansehen</a>
-          <a class="button secondary" href="#bachata-advanced">Bachata Advanced 2026</a>
+        <div class="advanced-hero-meta-v22" aria-label="Advanced Training Vorteile">
+          <span>Feste Gruppe</span>
+          <span>Klare Progression</span>
+          <span>Mehr Feedback</span>
         </div>
       </div>
-      <div class="advanced-brand-visual-v21" aria-hidden="true">
-        <span>ELITE</span>
-        <strong>TRAIN<br />DEEPER</strong>
-        <small>Technique · Progression · Community</small>
-      </div>
+
+      <figure class="advanced-hero-media-v22">
+        <img
+          src="/media/current-site/elena-dennis-bachata.png"
+          alt="Elena und Dennis beim Bachata Advanced Training"
+          width="1600"
+          height="1200"
+        />
+        <figcaption>
+          <small>Bachata Advanced</small>
+          <strong>Dienstag · 20:30</strong>
+        </figcaption>
+      </figure>
     </section>
 
-    <section class="advanced-groups-v21 panel" id="closed-groups">
-      <header class="advanced-section-head-v21">
+    <section class="advanced-groups-v22" id="closed-groups">
+      <header class="advanced-section-head-v22">
         <div>
-          <div class="eyebrow">Aktuelle Closed Groups</div>
-          <h2>Wähle dein Training.</h2>
+          <div class="eyebrow">Aktuelle Gruppen</div>
+          <h2>Vier Formate. Ein Ziel: besser werden.</h2>
         </div>
-        <p>Feste Woche. Gleiche Gruppe. Mehr Fortschritt.</p>
+        <p>Closed Groups laufen mit derselben Gruppe und bauen inhaltlich aufeinander auf.</p>
       </header>
 
-      <div class="advanced-group-grid-v21">
+      <div class="advanced-group-grid-v22">
         {closedGroups.map((course) => (
-          <article class:list={["advanced-group-card-v21", course.featured && "is-featured"]}>
-            <a class="advanced-group-image-v21" href={course.href}>
+          <article class:list={["advanced-group-card-v22", course.featured && "is-featured"]}>
+            <a class="advanced-group-image-v22" href={course.href}>
               <img src={course.image} alt={course.alt} width="1080" height="1350" loading="lazy" decoding="async" />
-              {course.featured && <span class="advanced-card-badge-v21">Okt–Dez offen</span>}
+              {course.featured && <span class="advanced-group-badge-v22">Anmeldung offen</span>}
             </a>
-            <div class="advanced-group-copy-v21">
+            <div class="advanced-group-body-v22">
               <small>{course.schedule}</small>
               <h3>{course.title}</h3>
-              <p>{course.meta}</p>
-              <a class="text-link" href={course.href}>{course.cta}</a>
+              <p>{course.focus}</p>
+              <a class="advanced-card-link-v22" href={course.href}>{course.cta} <span aria-hidden="true">→</span></a>
             </div>
           </article>
         ))}
       </div>
     </section>
 
-    <section class="bachata-advanced-v21 panel" id="bachata-advanced">
-      <div class="bachata-advanced-copy-v21">
-        <div class="eyebrow">Bachata Advanced · Rest of 2026</div>
-        <h2>Plane dein Training bis Dezember.</h2>
-        <p class="bachata-intro-v21">
-          Die Anmeldung für Oktober, November und Dezember ist bereits offen. Wähle direkt den Monat, in dem du dabei sein möchtest.
+    <section class="bachata-advanced-v22" id="bachata-advanced">
+      <div class="bachata-program-v22">
+        <div class="eyebrow">Bachata Advanced · Oktober–Dezember 2026</div>
+        <h2>Du kannst die nächsten Monate jetzt schon planen.</h2>
+        <p class="bachata-program-lead-v22">
+          Melde dich direkt für Oktober, November und/oder Dezember an. Die Themen für den Rest des Jahres bauen wir auch anhand eurer Wünsche weiter aus.
         </p>
 
-        <div class="bachata-update-v21">
-          <span>Neu</span>
-          <div>
-            <strong>Practice before class.</strong>
-            <p>Vor den Classes schicken wir kurze Übungen und Drills zum Vorbereiten – damit wir im Training schneller in Technik, Feedback und Partnerwork einsteigen können.</p>
-          </div>
-        </div>
-
-        <div class="bachata-topic-v21">
-          <div>
-            <small>Du kannst mitgestalten</small>
-            <strong>Was möchtest du bis Jahresende trainieren?</strong>
-          </div>
-          <a class="button secondary" href={topicHref} target="_blank" rel="noreferrer">Thema vorschlagen</a>
+        <div class="bachata-updates-v22">
+          <article>
+            <span>01</span>
+            <div>
+              <strong>Übungen vor der Class</strong>
+              <p>Vor dem Training schicken wir kurze Drills, damit wir in der Class schneller in Details und Feedback gehen können.</p>
+            </div>
+          </article>
+          <article>
+            <span>02</span>
+            <div>
+              <strong>Monatliche Schwerpunkte</strong>
+              <p>Jeder Block bekommt einen klaren Fokus statt jede Woche komplett neu anzufangen.</p>
+            </div>
+          </article>
+          <article>
+            <span>03</span>
+            <div>
+              <strong>Deine Themenwünsche</strong>
+              <p>Bei der Anmeldung kannst du direkt sagen, woran du bis Jahresende arbeiten möchtest.</p>
+            </div>
+          </article>
         </div>
       </div>
 
-      <div class="bachata-months-v21">
-        <div class="bachata-months-head-v21">
-          <span>2026</span>
-          <h3>Wähle deinen Monat.</h3>
+      <div class="bachata-registration-v22">
+        <div class="bachata-form-heading-v22">
+          <span>Advanced Registration</span>
+          <h3>Für welche Monate bist du dabei?</h3>
+          <p>Mehrfachauswahl ist möglich. Wir melden uns danach mit der Bestätigung bei dir.</p>
         </div>
-        <div class="bachata-month-grid-v21">
-          {bachataMonths.map((item, index) => (
-            <a class="bachata-month-card-v21" href={item.href} target="_blank" rel="noreferrer">
-              <small>{String(index + 10).padStart(2, "0")} / 2026</small>
-              <strong>{item.month}</strong>
-              <span>Anmelden →</span>
-            </a>
-          ))}
-        </div>
-        <p class="bachata-month-note-v21">Die Anmeldung startet als direkte WhatsApp-Anfrage. Wir bestätigen dir anschließend den passenden Block.</p>
+
+        <form class="advanced-registration-form-v22" action="/api/form" method="post" data-advanced-form>
+          <input type="hidden" name="form_kind" value="contact" />
+          <input type="hidden" name="topic" value="Intensives / Closed Groups" />
+          <input type="hidden" name="message" value="" data-advanced-message />
+          <input class="advanced-honeypot-v22" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <fieldset class="advanced-month-fieldset-v22">
+            <legend>Monat auswählen *</legend>
+            <div class="advanced-month-options-v22">
+              <label>
+                <input type="checkbox" value="Oktober 2026" data-advanced-month />
+                <span><small>10 / 2026</small><strong>Oktober</strong></span>
+              </label>
+              <label>
+                <input type="checkbox" value="November 2026" data-advanced-month />
+                <span><small>11 / 2026</small><strong>November</strong></span>
+              </label>
+              <label>
+                <input type="checkbox" value="Dezember 2026" data-advanced-month />
+                <span><small>12 / 2026</small><strong>Dezember</strong></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="advanced-form-grid-v22">
+            <label>
+              <span>Name *</span>
+              <input type="text" name="name" autocomplete="name" required placeholder="Dein Name" />
+            </label>
+            <label>
+              <span>E-Mail *</span>
+              <input type="email" name="email" autocomplete="email" required placeholder="du@beispiel.de" />
+            </label>
+            <label class="advanced-form-wide-v22">
+              <span>Telefon</span>
+              <input type="tel" name="phone" autocomplete="tel" placeholder="Optional" />
+            </label>
+          </div>
+
+          <fieldset class="advanced-topic-fieldset-v22">
+            <legend>Welche Themen interessieren dich?</legend>
+            <div class="advanced-topic-options-v22">
+              {topicOptions.map((topic) => (
+                <label>
+                  <input type="checkbox" value={topic} data-advanced-topic />
+                  <span>{topic}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <label class="advanced-custom-topic-v22">
+            <span>Eigenes Wunschthema</span>
+            <input type="text" data-advanced-custom-topic placeholder="Zum Beispiel: Dips, Waves, Styling …" />
+          </label>
+
+          <label class="advanced-note-v22">
+            <span>Noch etwas, das wir wissen sollten?</span>
+            <textarea rows="3" data-advanced-note placeholder="Optional"></textarea>
+          </label>
+
+          <label class="advanced-consent-v22">
+            <input type="checkbox" name="privacy_consent" value="accepted" required />
+            <span>Ich stimme zu, dass Elite Dance Studio meine Angaben zur Bearbeitung dieser Anmeldung verwendet. *</span>
+          </label>
+
+          <div class="advanced-submit-row-v22">
+            <button class="button primary" type="submit">Bachata Advanced anmelden</button>
+            <span>* Pflichtfelder</span>
+          </div>
+
+          <p class="advanced-form-status-v22" role="status" aria-live="polite" data-advanced-status>
+            Deine Anmeldung wird direkt an das Elite-Team geschickt.
+          </p>
+        </form>
       </div>
     </section>
 
-    <section class="advanced-next-v21 panel">
+    <section class="advanced-footer-cta-v22">
       <div>
-        <span class="eyebrow">Noch mehr Fokus?</span>
-        <h2>Intensives bauen Technik über mehrere Wochen auf.</h2>
+        <div class="eyebrow">Andere Trainingsform gesucht?</div>
+        <h2>Intensives für Fokus. Stundenplan für Flexibilität.</h2>
       </div>
-      <div class="actions">
-        <a class="button primary" href="/intensives/">Intensives ansehen</a>
-        <a class="button secondary" href="/stundenplan/">Stundenplan</a>
+      <div class="advanced-footer-actions-v22">
+        <a class="button secondary" href="/intensives/">Intensives ansehen</a>
+        <a class="button primary" href="/stundenplan/">Stundenplan öffnen</a>
       </div>
     </section>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />
+
+  <script is:inline>
+    (() => {
+      const form = document.querySelector("[data-advanced-form]");
+      if (!(form instanceof HTMLFormElement)) return;
+
+      const status = form.querySelector("[data-advanced-status]");
+      const message = form.querySelector("[data-advanced-message]");
+      const submit = form.querySelector('button[type="submit"]');
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const months = [...form.querySelectorAll("[data-advanced-month]:checked")].map((input) => input.value);
+        if (!months.length) {
+          if (status) {
+            status.textContent = "Bitte wähle mindestens einen Monat aus.";
+            status.dataset.state = "error";
+          }
+          return;
+        }
+
+        if (!form.reportValidity()) return;
+
+        const topics = [...form.querySelectorAll("[data-advanced-topic]:checked")].map((input) => input.value);
+        const customTopic = form.querySelector("[data-advanced-custom-topic]")?.value?.trim() || "";
+        const note = form.querySelector("[data-advanced-note]")?.value?.trim() || "";
+
+        if (message instanceof HTMLInputElement) {
+          message.value = [
+            "Bachata Advanced Anmeldung 2026",
+            "",
+            "Monate: " + months.join(", "),
+            "Wunschthemen: " + (topics.length ? topics.join(", ") : "–"),
+            "Eigenes Wunschthema: " + (customTopic || "–"),
+            "Weitere Nachricht: " + (note || "–"),
+          ].join("\n");
+        }
+
+        if (submit instanceof HTMLButtonElement) submit.disabled = true;
+        if (status) {
+          status.textContent = "Deine Anmeldung wird gesendet …";
+          status.dataset.state = "loading";
+        }
+
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          });
+
+          if (!response.ok) throw new Error("Submission failed");
+
+          form.reset();
+          if (status) {
+            status.textContent = "Danke! Deine Anmeldung ist angekommen. Wir melden uns mit der Bestätigung bei dir.";
+            status.dataset.state = "success";
+          }
+        } catch {
+          if (status) {
+            status.textContent = "Das hat gerade nicht funktioniert. Bitte versuche es erneut oder schreibe uns auf WhatsApp.";
+            status.dataset.state = "error";
+          }
+        } finally {
+          if (submit instanceof HTMLButtonElement) submit.disabled = false;
+        }
+      });
+    })();
+  </script>
 </BaseLayout>

@@ -144,24 +144,22 @@ const closedGroups = [
         </div>
 
         <form class="advanced-registration-form-v22" action="/api/form" method="post" data-advanced-form>
-          <input type="hidden" name="form_kind" value="contact" />
-          <input type="hidden" name="topic" value="Intensives / Closed Groups" />
-          <input type="hidden" name="message" value="" data-advanced-message />
+          <input type="hidden" name="form_kind" value="advanced" />
           <input class="advanced-honeypot-v22" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
           <fieldset class="advanced-month-fieldset-v22">
             <legend>Monat auswählen *</legend>
             <div class="advanced-month-options-v22">
               <label>
-                <input type="checkbox" value="Oktober 2026" data-advanced-month />
+                <input type="checkbox" name="months" value="Oktober 2026" data-advanced-month />
                 <span><small>10 / 2026</small><strong>Oktober</strong></span>
               </label>
               <label>
-                <input type="checkbox" value="November 2026" data-advanced-month />
+                <input type="checkbox" name="months" value="November 2026" data-advanced-month />
                 <span><small>11 / 2026</small><strong>November</strong></span>
               </label>
               <label>
-                <input type="checkbox" value="Dezember 2026" data-advanced-month />
+                <input type="checkbox" name="months" value="Dezember 2026" data-advanced-month />
                 <span><small>12 / 2026</small><strong>Dezember</strong></span>
               </label>
             </div>
@@ -185,13 +183,13 @@ const closedGroups = [
 
           <label class="advanced-subject-v23">
             <span>Was möchtest du trainieren? *</span>
-            <textarea rows="4" required data-advanced-subject placeholder="Schreib uns frei deine Themenwünsche – z. B. Connection, Turns, Musicality, Body Movement …"></textarea>
+            <textarea rows="4" name="training_subject" required data-advanced-subject placeholder="Schreib uns frei deine Themenwünsche – z. B. Connection, Turns, Musicality, Body Movement …"></textarea>
             <small class="advanced-field-note-v23">Keine Auswahlboxen – schreib genau das, woran du arbeiten möchtest.</small>
           </label>
 
           <label class="advanced-note-v22">
             <span>Noch etwas, das wir wissen sollten?</span>
-            <textarea rows="3" data-advanced-note placeholder="Optional"></textarea>
+            <textarea rows="3" name="extra_note" data-advanced-note placeholder="Optional"></textarea>
           </label>
 
           <label class="advanced-consent-v22">
@@ -231,7 +229,6 @@ const closedGroups = [
       if (!(form instanceof HTMLFormElement)) return;
 
       const status = form.querySelector("[data-advanced-status]");
-      const message = form.querySelector("[data-advanced-message]");
       const submit = form.querySelector('button[type="submit"]');
 
       form.addEventListener("submit", async (event) => {
@@ -247,19 +244,6 @@ const closedGroups = [
         }
 
         if (!form.reportValidity()) return;
-
-        const subject = form.querySelector("[data-advanced-subject]")?.value?.trim() || "";
-        const note = form.querySelector("[data-advanced-note]")?.value?.trim() || "";
-
-        if (message instanceof HTMLInputElement) {
-          message.value = [
-            "Bachata Advanced Anmeldung 2026",
-            "",
-            "Monate: " + months.join(", "),
-            "Trainingswünsche: " + (subject || "–"),
-            "Weitere Nachricht: " + (note || "–"),
-          ].join("\n");
-        }
 
         if (submit instanceof HTMLButtonElement) submit.disabled = true;
         if (status) {

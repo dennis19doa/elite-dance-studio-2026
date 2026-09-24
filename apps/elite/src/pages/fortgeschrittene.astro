@@ -44,13 +44,6 @@ const closedGroups = [
   }
 ];
 
-const topicOptions = [
-  "Connection & Lead/Follow",
-  "Turns & Spins",
-  "Musicality",
-  "Body Movement",
-  "Partnerwork Details"
-];
 ---
 
 <BaseLayout
@@ -65,7 +58,7 @@ const topicOptions = [
     <section class="advanced-hero-v22">
       <div class="advanced-hero-copy-v22">
         <div class="eyebrow">Advanced & Closed Groups</div>
-        <h1>Trainiere nicht einfach mehr. Trainiere gezielter.</h1>
+        <h1>Trainiere gezielter.</h1>
         <p>
           Feste Gruppen für Tänzer:innen, die Technik, Qualität und Fortschritt über mehrere Wochen wirklich aufbauen wollen.
         </p>
@@ -129,27 +122,21 @@ const topicOptions = [
           Melde dich direkt für Oktober, November und/oder Dezember an. Die Themen für den Rest des Jahres bauen wir auch anhand eurer Wünsche weiter aus.
         </p>
 
-        <div class="bachata-updates-v22">
+        <div class="bachata-story-v23">
           <article>
-            <span>01</span>
-            <div>
-              <strong>Übungen vor der Class</strong>
-              <p>Vor dem Training schicken wir kurze Drills, damit wir in der Class schneller in Details und Feedback gehen können.</p>
-            </div>
+            <small>Vor der Class</small>
+            <strong>Practice first.<br />Go deeper in class.</strong>
+            <p>Du bekommst kurze Übungen und Drills vor dem Training. So können wir in der Class direkt an Details, Qualität und Feedback arbeiten.</p>
           </article>
           <article>
-            <span>02</span>
-            <div>
-              <strong>Monatliche Schwerpunkte</strong>
-              <p>Jeder Block bekommt einen klaren Fokus statt jede Woche komplett neu anzufangen.</p>
-            </div>
+            <small>Im Training</small>
+            <strong>Ein Block.<br />Ein klarer Fokus.</strong>
+            <p>Die Inhalte bauen aufeinander auf, damit Fortschritt nicht jede Woche wieder bei null beginnt.</p>
           </article>
           <article>
-            <span>03</span>
-            <div>
-              <strong>Deine Themenwünsche</strong>
-              <p>Bei der Anmeldung kannst du direkt sagen, woran du bis Jahresende arbeiten möchtest.</p>
-            </div>
+            <small>Dein Input</small>
+            <strong>Du sagst uns,<br />was du brauchst.</strong>
+            <p>Schreib uns bei der Anmeldung frei, welche Themen du bis Jahresende wirklich trainieren möchtest.</p>
           </article>
         </div>
       </div>
@@ -158,7 +145,7 @@ const topicOptions = [
         <div class="bachata-form-heading-v22">
           <span>Advanced Registration</span>
           <h3>Für welche Monate bist du dabei?</h3>
-          <p>Mehrfachauswahl ist möglich. Wir melden uns danach mit der Bestätigung bei dir.</p>
+          <p>Wähle deine Monate und schreib uns deine Trainingswünsche. Wir bestätigen dir den Platz anschließend per WhatsApp.</p>
         </div>
 
         <form class="advanced-registration-form-v22" action="/api/form" method="post" data-advanced-form>
@@ -195,26 +182,16 @@ const topicOptions = [
               <input type="email" name="email" autocomplete="email" required placeholder="du@beispiel.de" />
             </label>
             <label class="advanced-form-wide-v22">
-              <span>Telefon</span>
-              <input type="tel" name="phone" autocomplete="tel" placeholder="Optional" />
+              <span>WhatsApp-Nummer *</span>
+              <input type="tel" name="phone" autocomplete="tel" required placeholder="+49 …" />
+              <small class="advanced-field-note-v23">Bitte die Nummer angeben, unter der wir dir die Bestätigung schicken können.</small>
             </label>
           </div>
 
-          <fieldset class="advanced-topic-fieldset-v22">
-            <legend>Welche Themen interessieren dich?</legend>
-            <div class="advanced-topic-options-v22">
-              {topicOptions.map((topic) => (
-                <label>
-                  <input type="checkbox" value={topic} data-advanced-topic />
-                  <span>{topic}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-
-          <label class="advanced-custom-topic-v22">
-            <span>Eigenes Wunschthema</span>
-            <input type="text" data-advanced-custom-topic placeholder="Zum Beispiel: Dips, Waves, Styling …" />
+          <label class="advanced-subject-v23">
+            <span>Was möchtest du trainieren? *</span>
+            <textarea rows="4" required data-advanced-subject placeholder="Schreib uns frei deine Themenwünsche – z. B. Connection, Turns, Musicality, Body Movement …"></textarea>
+            <small class="advanced-field-note-v23">Keine Auswahlboxen – schreib genau das, woran du arbeiten möchtest.</small>
           </label>
 
           <label class="advanced-note-v22">
@@ -276,8 +253,7 @@ const topicOptions = [
 
         if (!form.reportValidity()) return;
 
-        const topics = [...form.querySelectorAll("[data-advanced-topic]:checked")].map((input) => input.value);
-        const customTopic = form.querySelector("[data-advanced-custom-topic]")?.value?.trim() || "";
+        const subject = form.querySelector("[data-advanced-subject]")?.value?.trim() || "";
         const note = form.querySelector("[data-advanced-note]")?.value?.trim() || "";
 
         if (message instanceof HTMLInputElement) {
@@ -285,8 +261,7 @@ const topicOptions = [
             "Bachata Advanced Anmeldung 2026",
             "",
             "Monate: " + months.join(", "),
-            "Wunschthemen: " + (topics.length ? topics.join(", ") : "–"),
-            "Eigenes Wunschthema: " + (customTopic || "–"),
+            "Trainingswünsche: " + (subject || "–"),
             "Weitere Nachricht: " + (note || "–"),
           ].join("\n");
         }

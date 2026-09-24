@@ -11,10 +11,6 @@
       "href": "/kurse/"
     },
     {
-      "label": "Advanced & Closed Groups",
-      "href": "/fortgeschrittene/"
-    },
-    {
       "label": "Coaches",
       "href": "/coaches/"
     },
@@ -25,6 +21,10 @@
     {
       "label": "Raummiete",
       "href": "/raummiete/"
+    },
+    {
+      "label": "Advanced & Closed Groups",
+      "href": "/fortgeschrittene/"
     },
     {
       "label": "Über uns",

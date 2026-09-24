@@ -2,34 +2,114 @@
   "brand": "Elite Dance Studio",
   "city": "Berlin",
   "nav": [
-    { "label": "Stundenplan", "href": "/stundenplan/" },
-    { "label": "Kurse", "href": "/kurse/" },
-    { "label": "Coaches", "href": "/coaches/" },
-    { "label": "Preise", "href": "/preise/" },
-    { "label": "Raummiete", "href": "/raummiete/" },
-    { "label": "Über uns", "href": "/ueber-uns/" },
+    {
+      "label": "Stundenplan",
+      "href": "/stundenplan/"
+    },
+    {
+      "label": "Kurse",
+      "href": "/kurse/"
+    },
+    {
+      "label": "Advanced & Closed Groups",
+      "href": "/fortgeschrittene/"
+    },
+    {
+      "label": "Coaches",
+      "href": "/coaches/"
+    },
+    {
+      "label": "Preise",
+      "href": "/preise/"
+    },
     {
       "label": "Mehr",
-      "href": "/intensives/",
+      "href": "/ueber-uns/",
       "children": [
-        { "label": "Intensives", "href": "/intensives/", "description": "Mehrwöchige Trainingswege mit klarem Fokus" },
-        { "label": "Advanced & Closed Groups", "href": "/fortgeschrittene/", "description": "Für erfahrene Tänzer:innen und feste Trainingsgruppen" },
-        { "label": "Events", "href": "/events/", "description": "Socials, Workshops und besondere Termine" },
-        { "label": "FAQ", "href": "/faq/", "description": "Antworten zu Kursen, Buchung und deinem ersten Besuch" }
+        {
+          "label": "Intensives",
+          "href": "/intensives/",
+          "description": "Mehrwöchige Trainingswege mit klarem Fokus"
+        },
+        {
+          "label": "Events",
+          "href": "/events/",
+          "description": "Socials, Workshops und besondere Termine"
+        },
+        {
+          "label": "Raummiete",
+          "href": "/raummiete/",
+          "description": "Studioräume für Training und Produktion"
+        },
+        {
+          "label": "Über uns",
+          "href": "/ueber-uns/",
+          "description": "Werte, Studio und Community kennenlernen"
+        },
+        {
+          "label": "FAQ",
+          "href": "/faq/",
+          "description": "Antworten zu Kursen, Buchung und deinem ersten Besuch"
+        },
+        {
+          "label": "Kontakt",
+          "href": "/kontakt/",
+          "description": "Anfahrt, Nachricht und persönliche Hilfe"
+        }
       ]
     }
   ],
   "pathways": [
-    { "title": "Welcome Pass", "href": "/starter-pass/", "text": "Zwei Klassen testen und Elite kennenlernen." },
-    { "title": "Kurse", "href": "/kurse/", "text": "Levels, Styles und Live-Stundenplan." },
-    { "title": "Styles", "href": "/styles/", "text": "Alle Tanzrichtungen im Überblick." },
-    { "title": "Preise", "href": "/preise/", "text": "Drop-ins, Karten, USC und Memberships." },
-    { "title": "Coaches", "href": "/coaches/", "text": "Menschen, Energie und Teaching-Persönlichkeit." },
-    { "title": "Intensives", "href": "/intensives/", "text": "Strukturierte Trainingswege für gezielten Fortschritt." },
-    { "title": "Fortgeschrittene", "href": "/fortgeschrittene/", "text": "Intermediate, Advanced und Closed Groups." },
-    { "title": "Über uns", "href": "/ueber-uns/", "text": "Studio, Werte und Community." },
-    { "title": "Raummiete", "href": "/raummiete/", "text": "Drei Räume für Training, Workshops und Produktionen." },
-    { "title": "Kontakt", "href": "/kontakt/", "text": "WhatsApp, E-Mail, Anfahrt und persönliche Hilfe." }
+    {
+      "title": "Welcome Pass",
+      "href": "/starter-pass/",
+      "text": "Zwei Klassen testen und Elite kennenlernen."
+    },
+    {
+      "title": "Kurse",
+      "href": "/kurse/",
+      "text": "Levels, Styles und Live-Stundenplan."
+    },
+    {
+      "title": "Styles",
+      "href": "/styles/",
+      "text": "Alle Tanzrichtungen im Überblick."
+    },
+    {
+      "title": "Preise",
+      "href": "/preise/",
+      "text": "Drop-ins, Karten, USC und Memberships."
+    },
+    {
+      "title": "Coaches",
+      "href": "/coaches/",
+      "text": "Menschen, Energie und Teaching-Persönlichkeit."
+    },
+    {
+      "title": "Intensives",
+      "href": "/intensives/",
+      "text": "Strukturierte Trainingswege für gezielten Fortschritt."
+    },
+    {
+      "title": "Fortgeschrittene",
+      "href": "/fortgeschrittene/",
+      "text": "Intermediate, Advanced und Closed Groups."
+    },
+    {
+      "title": "Über uns",
+      "href": "/ueber-uns/",
+      "text": "Studio, Werte und Community."
+    },
+    {
+      "title": "Raummiete",
+      "href": "/raummiete/",
+      "text": "Drei Räume für Training, Workshops und Produktionen."
+    },
+    {
+      "title": "Kontakt",
+      "href": "/kontakt/",
+      "text": "WhatsApp, E-Mail, Anfahrt und persönliche Hilfe."
+    }
   ],
   "hero": {
     "eyebrow": "Elite Dance Studio · Berlin-Moabit",
@@ -48,15 +128,36 @@
     "videoPoster": "/media/hero/elite-homepage-poster.jpg",
     "videoOverlayBadge": "Berlin-Moabit",
     "searchLinks": [
-      { "label": "Beginner Tanzkurse", "href": "/kurse/" },
-      { "label": "Advanced & Closed Groups", "href": "/fortgeschrittene/" },
-      { "label": "Intensives", "href": "/intensives/" },
-      { "label": "Preise & Welcome Pass", "href": "/preise/" }
+      {
+        "label": "Beginner Tanzkurse",
+        "href": "/kurse/"
+      },
+      {
+        "label": "Advanced & Closed Groups",
+        "href": "/fortgeschrittene/"
+      },
+      {
+        "label": "Intensives",
+        "href": "/intensives/"
+      },
+      {
+        "label": "Preise & Welcome Pass",
+        "href": "/preise/"
+      }
     ],
     "highlights": [
-      { "title": "Level 0 bis Advanced", "text": "Klare Einstiege und echte Progression." },
-      { "title": "Solo & Partner Dance", "text": "Viele Formate funktionieren auch ohne festen Partner." },
-      { "title": "Mehr als Classes", "text": "Intensives, Closed Groups, Events und Community." }
+      {
+        "title": "Level 0 bis Advanced",
+        "text": "Klare Einstiege und echte Progression."
+      },
+      {
+        "title": "Solo & Partner Dance",
+        "text": "Viele Formate funktionieren auch ohne festen Partner."
+      },
+      {
+        "title": "Mehr als Classes",
+        "text": "Intensives, Closed Groups, Events und Community."
+      }
     ],
     "visualBadge": "Elite Dance Studio Berlin",
     "visualTitle": "Dance · Feel · Belong",
@@ -64,12 +165,30 @@
     "visualNote": "Kurse, Intensives, Socials und Räume in Berlin-Moabit.",
     "videoSteps": [],
     "featureList": [
-      { "title": "Welcome Pass", "text": "Zwei Klassen testen." },
-      { "title": "Alle Levels", "text": "Von Level 0 bis Advanced." },
-      { "title": "Direkte Buchung", "text": "Stundenplan öffnen und Platz sichern." },
-      { "title": "Raummiete", "text": "Drei Studios für Training und Produktion." }
+      {
+        "title": "Welcome Pass",
+        "text": "Zwei Klassen testen."
+      },
+      {
+        "title": "Alle Levels",
+        "text": "Von Level 0 bis Advanced."
+      },
+      {
+        "title": "Direkte Buchung",
+        "text": "Stundenplan öffnen und Platz sichern."
+      },
+      {
+        "title": "Raummiete",
+        "text": "Drei Studios für Training und Produktion."
+      }
     ],
-    "visualFacts": ["Level 0", "Beginner", "Intermediate", "Advanced", "Intensives"]
+    "visualFacts": [
+      "Level 0",
+      "Beginner",
+      "Intermediate",
+      "Advanced",
+      "Intensives"
+    ]
   },
   "communityQuote": "Dance. Feel. Belong.",
   "communityPoints": [

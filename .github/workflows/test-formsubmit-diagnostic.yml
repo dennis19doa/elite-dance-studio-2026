@@ -1,0 +1,33 @@
+name: Test FormSubmit Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/test-formsubmit-diagnostic.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test-formsubmit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send diagnostic submission
+        shell: bash
+        run: |
+          set -o pipefail
+          BODY_FILE="$(mktemp)"
+          HTTP_CODE="$(curl -sS -o "$BODY_FILE" -w "%{http_code}" \
+            -X POST "https://formsubmit.co/ajax/info@elitedancestudio.de" \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/json" \
+            --data '{"_subject":"DIAGNOSTIC TEST - Bachata Advanced","_template":"table","_url":"https://elitedancestudio.de/fortgeschrittene/#bachata-advanced","request_type":"bachata_advanced_registration_test","name":"Elite Website Diagnostic","email":"diagnostic@elitedancestudio.de","whatsapp":"+4900000000","monate":"November 2026","trainingswuensche":"Diagnostic test only","weitere_nachricht":"Please ignore this test submission.","datenschutz":"accepted"}')"
+          echo "HTTP_STATUS=$HTTP_CODE"
+          echo "RESPONSE_BODY_START"
+          cat "$BODY_FILE"
+          echo
+          echo "RESPONSE_BODY_END"
+          if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 300 ]; then
+            exit 1
+          fi

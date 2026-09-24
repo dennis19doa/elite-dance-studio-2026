@@ -13,34 +13,30 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Check live form health
+      - name: Test direct Cloudflare Pages endpoints
         shell: bash
         run: |
-          echo "GET /api/form"
-          curl -sS -D /tmp/headers.txt -o /tmp/body.txt "https://elitedancestudio.de/api/form" || true
-          cat /tmp/headers.txt
-          echo "BODY_START"
-          cat /tmp/body.txt
-          echo
-          echo "BODY_END"
-
-      - name: Send diagnostic advanced registration
-        shell: bash
-        run: |
-          echo "POST /api/form"
-          HTTP_CODE="$(curl -sS -o /tmp/post-body.txt -w "%{http_code}" \
-            -X POST "https://elitedancestudio.de/api/form" \
-            -H "Accept: application/json" \
-            -F "form_kind=advanced" \
-            -F "name=Elite Website Diagnostic" \
-            -F "email=info@elitedancestudio.de" \
-            -F "phone=+4900000000" \
-            -F "months=November 2026" \
-            -F "training_subject=Diagnostic test only" \
-            -F "extra_note=Please ignore this diagnostic submission." \
-            -F "privacy_consent=accepted")"
-          echo "HTTP_STATUS=$HTTP_CODE"
-          echo "BODY_START"
-          cat /tmp/post-body.txt
-          echo
-          echo "BODY_END"
+          for URL in \
+            "https://elite-dance-studio-2026.pages.dev/api/form" \
+            "https://c42846d9.elite-dance-studio-2026.pages.dev/api/form"
+          do
+            echo "===== $URL ====="
+            GET_CODE="$(curl -sS -o /tmp/get-body.txt -w "%{http_code}" "$URL" || true)"
+            echo "GET_STATUS=$GET_CODE"
+            cat /tmp/get-body.txt
+            echo
+            POST_CODE="$(curl -sS -o /tmp/post-body.txt -w "%{http_code}" \
+              -X POST "$URL" \
+              -H "Accept: application/json" \
+              -F "form_kind=advanced" \
+              -F "name=Elite Website Diagnostic" \
+              -F "email=info@elitedancestudio.de" \
+              -F "phone=+4900000000" \
+              -F "months=November 2026" \
+              -F "training_subject=Diagnostic test only" \
+              -F "extra_note=Please ignore this diagnostic submission." \
+              -F "privacy_consent=accepted" || true)"
+            echo "POST_STATUS=$POST_CODE"
+            cat /tmp/post-body.txt
+            echo
+          done

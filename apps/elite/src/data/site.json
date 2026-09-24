@@ -23,8 +23,16 @@
       "href": "/preise/"
     },
     {
+      "label": "Raummiete",
+      "href": "/raummiete/"
+    },
+    {
+      "label": "Über uns",
+      "href": "/ueber-uns/"
+    },
+    {
       "label": "Mehr",
-      "href": "/ueber-uns/",
+      "href": "/intensives/",
       "children": [
         {
           "label": "Intensives",
@@ -32,29 +40,19 @@
           "description": "Mehrwöchige Trainingswege mit klarem Fokus"
         },
         {
+          "label": "Advanced & Closed Groups",
+          "href": "/fortgeschrittene/",
+          "description": "Für erfahrene Tänzer:innen und feste Trainingsgruppen"
+        },
+        {
           "label": "Events",
           "href": "/events/",
           "description": "Socials, Workshops und besondere Termine"
         },
         {
-          "label": "Raummiete",
-          "href": "/raummiete/",
-          "description": "Studioräume für Training und Produktion"
-        },
-        {
-          "label": "Über uns",
-          "href": "/ueber-uns/",
-          "description": "Werte, Studio und Community kennenlernen"
-        },
-        {
           "label": "FAQ",
           "href": "/faq/",
           "description": "Antworten zu Kursen, Buchung und deinem ersten Besuch"
-        },
-        {
-          "label": "Kontakt",
-          "href": "/kontakt/",
-          "description": "Anfahrt, Nachricht und persönliche Hilfe"
         }
       ]
     }

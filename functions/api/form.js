@@ -57,6 +57,26 @@ function buildMessage(fields) {
     ].join("\n");
   }
 
+  if (fields.formKind === "advanced") {
+    return [
+      "Bachata Advanced Anmeldung",
+      "",
+      `Name: ${fields.name}`,
+      `E-Mail: ${fields.email}`,
+      `WhatsApp: ${fields.phone}`,
+      `Monate: ${fields.months.length ? fields.months.join(", ") : "–"}`,
+      "",
+      "Trainingswünsche:",
+      fields.trainingSubject || "–",
+      "",
+      "Weitere Nachricht:",
+      fields.extraNote || "–",
+      "",
+      "Datenschutz-Einwilligung: akzeptiert",
+      "Quelle: elitedancestudio.de/fortgeschrittene/#bachata-advanced",
+    ].join("\n");
+  }
+
   const lines = [
     fields.formKind === "welcome" ? "Neue Welcome-Pass-Anfrage" : "Neue Website-Anfrage",
     "",
@@ -119,6 +139,9 @@ export async function onRequestPost({ request, env }) {
       availability: clean(form.get("availability"), 2000),
       topic: clean(form.get("topic"), 300),
       message: clean(form.get("message"), 5000),
+      months: form.getAll("months").map((value) => clean(value, 80)).filter(Boolean),
+      trainingSubject: clean(form.get("training_subject"), 3000),
+      extraNote: clean(form.get("extra_note"), 3000),
       className: clean(form.get("class_name"), 300),
       teacherName: clean(form.get("teacher_name"), 300),
       preVisitFriction: form.getAll("pre_visit_friction").map((value) => clean(value, 120)).filter(Boolean),
@@ -131,7 +154,7 @@ export async function onRequestPost({ request, env }) {
       privacyConsent: clean(form.get("privacy_consent"), 40),
     };
 
-    if (!["welcome", "contact", "feedback"].includes(fields.formKind)) {
+    if (!["welcome", "contact", "feedback", "advanced"].includes(fields.formKind)) {
       return json({ ok: false, error: "invalid_form" }, 400);
     }
 
@@ -148,6 +171,13 @@ export async function onRequestPost({ request, env }) {
     }
 
     if (fields.formKind === "contact" && (!fields.topic || !fields.message)) {
+      return json({ ok: false, error: "missing_required_fields" }, 400);
+    }
+
+    if (
+      fields.formKind === "advanced" &&
+      (!fields.phone || !fields.months.length || !fields.trainingSubject)
+    ) {
       return json({ ok: false, error: "missing_required_fields" }, 400);
     }
 
@@ -171,7 +201,9 @@ export async function onRequestPost({ request, env }) {
       ? `Welcome Pass – ${fields.name}`
       : fields.formKind === "feedback"
         ? `First Visit Feedback – ${fields.className} – ${fields.teacherName}`
-        : `Website-Anfrage – ${fields.name} – ${fields.topic}`;
+        : fields.formKind === "advanced"
+          ? `Bachata Advanced Anmeldung – ${fields.name}`
+          : `Website-Anfrage – ${fields.name} – ${fields.topic}`;
 
     const mailResponse = await fetch(
       `https://mail.zoho.eu/api/accounts/${encodeURIComponent(env.ZOHO_ACCOUNT_ID)}/messages`,

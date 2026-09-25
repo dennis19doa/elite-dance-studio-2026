@@ -29,13 +29,7 @@ async function getAccessToken(env) {
   const data = await response.json().catch(() => ({}));
   if (!response.ok || !data.access_token) {
     console.error("Zoho token refresh failed", response.status, data.error || "unknown_error");
-    const err = new Error("zoho_token_refresh_failed");
-    err.diagnostic = {
-      stage: "token_refresh",
-      upstreamStatus: response.status,
-      upstreamError: String(data.error || "unknown_error").slice(0, 120),
-    };
-    throw err;
+    throw new Error("zoho_token_refresh_failed");
   }
 
   return data.access_token;
@@ -121,7 +115,7 @@ export function onRequestGet({ env }) {
   ];
   return json({
     ok: true,
-    version: "advanced-form-v5",
+    version: "advanced-form-v3",
     zohoConfigured: requiredEnv.every((key) => Boolean(env[key])),
   });
 }
@@ -250,22 +244,12 @@ export async function onRequestPost({ request, env }) {
     const zohoCode = Number(mailData?.status?.code ?? mailResponse.status);
     if (!mailResponse.ok || zohoCode >= 400) {
       console.error("Zoho send failed", mailResponse.status, zohoCode);
-      const err = new Error("zoho_send_failed");
-      err.diagnostic = {
-        stage: "mail_send",
-        upstreamStatus: mailResponse.status,
-        zohoCode,
-      };
-      throw err;
+      throw new Error("zoho_send_failed");
     }
 
     return json({ ok: true });
   } catch (error) {
     console.error("Website form submission failed", error instanceof Error ? error.message : "unknown_error");
-    return json({
-      ok: false,
-      error: error instanceof Error ? error.message : "send_failed",
-      diagnostic: error && typeof error === "object" && "diagnostic" in error ? error.diagnostic : undefined,
-    }, 502);
+    return json({ ok: false, error: "send_failed" }, 502);
   }
 }

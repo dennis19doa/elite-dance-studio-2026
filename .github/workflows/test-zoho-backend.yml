@@ -1,0 +1,26 @@
+name: Temporary Zoho Backend Test
+
+on:
+  push:
+    paths:
+      - ".github/workflows/test-zoho-backend.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check backend health
+        run: |
+          echo "GET /api/form"
+          curl -sS -i "https://elite-dance-studio-2026.pages.dev/api/form"
+      - name: Submit test form
+        run: |
+          echo "POST /api/form"
+          curl -sS -i -X POST "https://elite-dance-studio-2026.pages.dev/api/form" \
+            -F "form_kind=contact" \
+            -F "name=Zoho Backend Test" \
+            -F "email=test@example.com" \
+            -F "topic=Backend test" \
+            -F "message=Automated Zoho backend test after refresh token update." \
+            -F "privacy_consent=accepted"

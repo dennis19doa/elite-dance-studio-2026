@@ -115,7 +115,7 @@ export function onRequestGet({ env }) {
   ];
   return json({
     ok: true,
-    version: "advanced-form-v3",
+    version: "advanced-form-v4",
     zohoConfigured: requiredEnv.every((key) => Boolean(env[key])),
   });
 }

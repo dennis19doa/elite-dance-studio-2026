@@ -5,7 +5,8 @@ import tvSchedule from "../data/tv-schedule.json";
 const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv").replace(/\/+$/, "");
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
-const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260926-video3`);
+const videos = tvMedia.videos.map((path) => `${remoteMedia(path)}?v=20260926-video4`);
+const initialVideo = videos[0] || "";
 const TV_ASSET_VERSION = "20260923-1808";
 const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;
 const featureSchedule = tvMedia.features?.schedule
@@ -68,7 +69,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 </head>
 <body>
 <main class="tv">
-<section class="scene video active" id="video-scene"><video id="video" autoplay muted playsinline preload="auto"></video><div class="shade"></div><div class="clock"><strong id="clock">--:--</strong><span id="day">BERLIN</span></div></section>
+<section class="scene video active" id="video-scene"><video id="video" src={initialVideo} autoplay muted playsinline preload="auto"></video><div class="shade"></div><div class="clock"><strong id="clock">--:--</strong><span id="day">BERLIN</span></div></section>
 <section class="scene feature-scene" id="schedule-scene">
   {featureSchedule && (
     <>

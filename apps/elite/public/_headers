@@ -11,3 +11,15 @@
 # Studio photos/videos may be replaced under the same URL, so keep a shorter TTL.
 /media/*
   Cache-Control: public, max-age=604800, must-revalidate
+
+
+# TV must always load the current player/media configuration.
+/tv
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
+
+/tv/*
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store

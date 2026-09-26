@@ -2,10 +2,10 @@
 import tvMedia from "../data/tv-media.json";
 import tvSchedule from "../data/tv-schedule.json";
 
-const tvMediaBase = (import.meta.env.PUBLIC_TV_MEDIA_BASE_URL || "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv").replace(/\/+$/, "");
+const tvMediaBase = "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv";
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
-const videos = tvMedia.videos.map((path) => remoteMedia(path));
+const videos = ["https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/videos/Video%20TV.mp4"];
 const initialVideo = videos[0] || "";
 const TV_ASSET_VERSION = "20260923-1808";
 const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;

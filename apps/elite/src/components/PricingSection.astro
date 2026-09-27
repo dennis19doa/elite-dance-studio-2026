@@ -23,100 +23,141 @@ const usc = byCategory("USC");
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 const membershipGlyph = (name: string) => name === "Bronze" ? "1×" : name === "Silber" ? "2×" : "∞";
 const compactFeatures = (features?: string[]) => (features ?? []).filter((feature) => !feature.toLowerCase().includes("kündbar")).slice(0, 2);
+const flexibleGlyph = (name: string) => name === "Drop-in" ? "1" : name.startsWith("5") ? "5" : "10";
 ---
 
-<section class="pricing panel pricing-v20 pricing-v23" id="pricing">
-  <section class="pricing-memberships-v20 pricing-memberships-v23" id="memberships" aria-labelledby="pricing-membership-title">
-    <div class="pricing-chapter-v20 pricing-chapter-light-v20 pricing-chapter-v23">
-      <span>Memberships</span>
-      <h2 id="pricing-membership-title">Regelmäßig trainieren.</h2>
-      <p>Bronze, Silber oder Gold. Alle Memberships gelten für reguläre Classes und sind monatlich kündbar.</p>
+<section class="pricing panel pricing-v20 pricing-v23 pricing-v25" id="pricing">
+  <section class="pricing-start-v25" id="start" aria-labelledby="pricing-start-title">
+    <div class="pricing-section-head-v25">
+      <div>
+        <span class="pricing-section-kicker-v25">01 · Neu bei Elite</span>
+        <h2 id="pricing-start-title">Welcome Pass</h2>
+      </div>
+      <p>Dein erster Schritt. Zwei Classes testen und danach entscheiden, wie du weitermachen willst.</p>
     </div>
 
-    <div class="membership-grid-v20 membership-grid-v23">
-      {memberships.map((item) => (
-        <article class:list={["membership-card-v20", "membership-card-v23", "membership-card-v24", `membership-${slugify(item.name)}-v20`, item.featured && "is-featured"]}>
-          <div class="membership-card-visual-v24" aria-hidden="true">
-            <span>{membershipGlyph(item.name)}</span>
+    {start.map((item) => (
+      <article class="welcome-pass-premium-v25" data-plan={slugify(item.name)}>
+        <div class="welcome-pass-art-v25" aria-hidden="true">
+          <span class="welcome-pass-art-label-v25">FIRST VISIT</span>
+          <strong>{item.price}</strong>
+          <i></i>
+          <small>2 CLASSES</small>
+        </div>
+
+        <div class="welcome-pass-body-v25">
+          <span class="welcome-pass-badge-v25">Einmal pro Person</span>
+          <h3>Probier Elite aus, ohne dich festzulegen.</h3>
+          <div class="welcome-pass-facts-v25">
+            <span>2 reguläre Classes</span>
+            <span>10 Tage gültig</span>
+            <span>Styles frei kombinieren</span>
           </div>
-          <div class="membership-top-v20 membership-top-v24">
+        </div>
+
+        {item.href && (
+          <a class="welcome-pass-button-v25" href={item.href} target="_blank" rel="noreferrer">
+            <span>Welcome Pass kaufen</span>
+            <b aria-hidden="true">→</b>
+          </a>
+        )}
+      </article>
+    ))}
+  </section>
+
+  <section class="pricing-memberships-v25" id="memberships" aria-labelledby="pricing-membership-title">
+    <div class="pricing-section-head-v25 pricing-section-head-dark-v25">
+      <div>
+        <span class="pricing-section-kicker-v25">02 · Regelmäßig</span>
+        <h2 id="pricing-membership-title">Deine Membership.</h2>
+      </div>
+      <p>Ein klarer Rhythmus pro Monat. Wähle, wie oft du trainieren möchtest.</p>
+    </div>
+
+    <div class="membership-grid-v25">
+      {memberships.map((item, index) => (
+        <article class:list={["membership-card-v25", `membership-${slugify(item.name)}-v25`, item.featured && "is-featured"]}>
+          <div class="membership-index-v25">0{index + 1}</div>
+          <div class="membership-glyph-v25" aria-hidden="true">{membershipGlyph(item.name)}</div>
+
+          <div class="membership-name-v25">
             <span>{item.label}</span>
-            {item.featured && <em>Beliebteste Wahl</em>}
+            <h3>{item.name}</h3>
           </div>
-          <h3>{item.name}</h3>
-          <div class="membership-price-v20">{item.price}</div>
-          <div class="membership-shortcuts-v24">
+
+          <div class="membership-price-v25">{item.price}</div>
+
+          <div class="membership-facts-v25">
             {compactFeatures(item.features).map((feature) => <span>{feature}</span>)}
+            <span>Monatlich kündbar</span>
           </div>
-          {item.href && <a class="membership-cta-v20 membership-cta-v23 membership-cta-v24" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "Membership wählen"} <span aria-hidden="true">→</span></a>}
+
+          {item.featured && <div class="membership-featured-v25">Beliebteste Wahl</div>}
+
+          {item.href && (
+            <a class="membership-button-v25" href={item.href} target="_blank" rel="noreferrer">
+              <span>{item.ctaLabel ?? "Membership wählen"}</span>
+              <b aria-hidden="true">→</b>
+            </a>
+          )}
         </article>
       ))}
     </div>
   </section>
 
-  <section class="pricing-start-v20 pricing-start-v23" id="start" aria-labelledby="pricing-start-title">
-    <div class="pricing-chapter-v20 pricing-chapter-v23">
-      <span>Neu bei Elite</span>
-      <h2 id="pricing-start-title">Welcome Pass.</h2>
-      <p>Zwei reguläre Classes testen, bevor du dich für deinen weiteren Trainingsrhythmus entscheidest.</p>
+  <section class="pricing-flex-v25" id="flexible" aria-labelledby="pricing-flex-title">
+    <div class="pricing-section-head-v25">
+      <div>
+        <span class="pricing-section-kicker-v25">03 · Ohne Membership</span>
+        <h2 id="pricing-flex-title">Flexibel bleiben.</h2>
+      </div>
+      <p>Einzelne Classes oder Karten — du entscheidest, wann du kommst.</p>
     </div>
 
-    {start.map((item) => (
-      <article class="welcome-pass-v23" data-plan={slugify(item.name)}>
-        <div class="welcome-pass-price-v23">
-          <span>{item.label}</span>
-          <strong>{item.price}</strong>
-          <small>2 reguläre Classes · 10 Tage</small>
-        </div>
-        <div class="welcome-pass-copy-v23">
-          <h3>{item.name}</h3>
-          <p>{item.text}</p>
-          {item.features && <ul>{item.features.map((feature) => <li>{feature}</li>)}</ul>}
-        </div>
-        {item.href && <a class="button primary welcome-pass-cta-v23" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "Welcome Pass kaufen"}</a>}
-      </article>
-    ))}
-  </section>
-
-  <section class="pricing-flex-v20 pricing-flex-v23" id="flexible" aria-labelledby="pricing-flex-title">
-    <div class="pricing-chapter-v20 pricing-chapter-v23">
-      <span>Ohne Membership</span>
-      <h2 id="pricing-flex-title">Flexibel trainieren.</h2>
-      <p>Für einzelne Besuche oder wenn dein Trainingsrhythmus nicht jede Woche gleich ist.</p>
-    </div>
-
-    <div class="flex-price-list-v20 flex-price-list-v23">
+    <div class="flex-grid-v25">
       {flexible.map((item) => (
-        <article class="flex-price-row-v20 flex-price-row-v23" data-plan={slugify(item.name)}>
-          <div class="flex-price-name-v20">
+        <article class="flex-card-v25" data-plan={slugify(item.name)}>
+          <div class="flex-card-top-v25">
+            <div class="flex-card-glyph-v25" aria-hidden="true">{flexibleGlyph(item.name)}</div>
             <span>{item.label}</span>
-            <div class="flex-price-title-line-v19">
-              <h3>{item.name}</h3>
-              <small class="flex-price-tag-v19">{item.price}</small>
-            </div>
           </div>
-          <div class="flex-price-copy-v20">
-            <p>{item.text}</p>
-            {item.features && <ul>{item.features.map((feature) => <li>{feature}</li>)}</ul>}
+
+          <h3>{item.name}</h3>
+          <div class="flex-card-price-v25">{item.price}</div>
+
+          <div class="flex-card-facts-v25">
+            {(item.features ?? []).slice(0, 2).map((feature) => <span>{feature}</span>)}
           </div>
-          {item.href && <a class="text-link" href={item.href} target={isExternal(item.href) ? "_blank" : undefined} rel={isExternal(item.href) ? "noreferrer" : undefined}>{item.ctaLabel ?? "Mehr erfahren"} →</a>}
+
+          {item.href && (
+            <a class="flex-card-link-v25" href={item.href} target={isExternal(item.href) ? "_blank" : undefined} rel={isExternal(item.href) ? "noreferrer" : undefined}>
+              <span>{item.ctaLabel ?? "Mehr erfahren"}</span>
+              <b aria-hidden="true">→</b>
+            </a>
+          )}
         </article>
       ))}
     </div>
   </section>
 
   {usc.map((item) => (
-    <section class="pricing-usc-v23" id="usc" aria-labelledby="pricing-usc-title">
-      <div>
-        <span class="pricing-usc-kicker-v23">Urban Sports Club</span>
+    <section class="pricing-usc-v25" id="usc" aria-labelledby="pricing-usc-title">
+      <div class="usc-mark-v25" aria-hidden="true">USC</div>
+      <div class="usc-copy-v25">
+        <span class="pricing-section-kicker-v25">04 · Urban Sports Club</span>
         <h2 id="pricing-usc-title">Schon bei USC?</h2>
-        <p>{item.text} Closed Groups und Intensives sind nicht enthalten.</p>
+        <p>Reguläre Open Classes kannst du direkt über dein USC-Konto buchen.</p>
       </div>
-      <div class="pricing-usc-details-v23">
+      <div class="usc-meta-v25">
         <strong>{item.price}</strong>
-        <small>Reguläre Open Classes</small>
+        <small>Closed Groups & Intensives ausgenommen</small>
       </div>
-      {item.href && <a class="button secondary pricing-usc-cta-v23" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "USC öffnen"}</a>}
+      {item.href && (
+        <a class="usc-button-v25" href={item.href} target="_blank" rel="noreferrer">
+          <span>USC öffnen</span>
+          <b aria-hidden="true">→</b>
+        </a>
+      )}
     </section>
   ))}
 </section>

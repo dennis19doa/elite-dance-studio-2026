@@ -12,73 +12,75 @@ interface PricingItem {
   featured?: boolean;
 }
 interface Props { pricing: PricingItem[]; }
+
 const { pricing } = Astro.props;
 const isExternal = (href?: string) => Boolean(href?.startsWith("http"));
 const byCategory = (category: string) => pricing.filter((item) => item.category === category);
 const start = byCategory("Start");
 const memberships = byCategory("Memberships");
 const flexible = byCategory("Flexibel");
+const usc = byCategory("USC");
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 ---
 
-<section class="pricing panel pricing-v20" id="pricing">
-  <section class="pricing-memberships-v20" id="memberships" aria-labelledby="pricing-membership-title">
-    <div class="pricing-chapter-v20 pricing-chapter-light-v20">
-      <span>Deine Routine</span>
-      <h2 id="pricing-membership-title">Memberships zuerst.</h2>
-      <p>Wenn du den Welcome Pass schon kennst, ist das hier dein nächster Schritt. Alle Memberships laufen jeweils einen Monat und sind danach jederzeit kündbar.</p>
+<section class="pricing panel pricing-v20 pricing-v23" id="pricing">
+  <section class="pricing-memberships-v20 pricing-memberships-v23" id="memberships" aria-labelledby="pricing-membership-title">
+    <div class="pricing-chapter-v20 pricing-chapter-light-v20 pricing-chapter-v23">
+      <span>Memberships</span>
+      <h2 id="pricing-membership-title">Regelmäßig trainieren.</h2>
+      <p>Bronze, Silber oder Gold. Alle Memberships gelten für reguläre Classes und sind monatlich kündbar.</p>
     </div>
 
-    <div class="membership-grid-v20">
+    <div class="membership-grid-v20 membership-grid-v23">
       {memberships.map((item) => (
-        <article class:list={["membership-card-v20", `membership-${slugify(item.name)}-v20`, item.featured && "is-featured"]}>
+        <article class:list={["membership-card-v20", "membership-card-v23", `membership-${slugify(item.name)}-v20`, item.featured && "is-featured"]}>
           <div class="membership-top-v20">
             <span>{item.label}</span>
             {item.featured && <em>Beliebteste Wahl</em>}
           </div>
           <h3>{item.name}</h3>
           <div class="membership-price-v20">{item.price}</div>
-          <p>{item.text}</p>
-          {item.features && <ul class="price-features-v20">{item.features.map((feature) => <li>{feature}</li>)}</ul>}
-          {item.bestFor && <p class="price-fit-v20"><span>Ideal, wenn</span>{item.bestFor}</p>}
-          {item.href && <a class="membership-cta-v20" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "Membership wählen"} <span aria-hidden="true">→</span></a>}
+          {item.features && <ul class="price-features-v20 membership-features-v23">{item.features.map((feature) => <li>{feature}</li>)}</ul>}
+          {item.href && <a class="membership-cta-v20 membership-cta-v23" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "Membership wählen"} <span aria-hidden="true">→</span></a>}
         </article>
       ))}
     </div>
   </section>
 
-  <section class="pricing-start-v20" id="start" aria-labelledby="pricing-start-title">
-    <div class="pricing-chapter-v20">
+  <section class="pricing-start-v20 pricing-start-v23" id="start" aria-labelledby="pricing-start-title">
+    <div class="pricing-chapter-v20 pricing-chapter-v23">
       <span>Neu bei Elite</span>
-      <h2 id="pricing-start-title">Erst ausprobieren. Dann entscheiden.</h2>
-      <p>Der Welcome Pass ist für deinen ersten Einstieg. Wenn du Elite schon kennst, kannst du diesen Bereich einfach überspringen.</p>
+      <h2 id="pricing-start-title">Welcome Pass.</h2>
+      <p>Zwei reguläre Classes testen, bevor du dich für deinen weiteren Trainingsrhythmus entscheidest.</p>
     </div>
-    <div class="pricing-start-grid-v20">
-      {start.map((item) => (
-        <article class:list={["price-option-v20", "price-start-v20", item.featured && "is-featured"]} data-plan={slugify(item.name)}>
-          <div class="price-option-head-v20">
-            <span class="price-kicker-v20">{item.label}</span>
-            <h3>{item.name}</h3>
-            <div class="price-value-v20">{item.price}</div>
-            <p>{item.text}</p>
-          </div>
-          {item.features && <ul class="price-features-v20">{item.features.map((feature) => <li>{feature}</li>)}</ul>}
-          {item.bestFor && <p class="price-fit-v20"><span>Passt zu dir, wenn</span>{item.bestFor}</p>}
-          {item.href && <a class="button primary price-cta-v20" href={item.href} target={isExternal(item.href) ? "_blank" : undefined} rel={isExternal(item.href) ? "noreferrer" : undefined}>{item.ctaLabel ?? "Mehr erfahren"}</a>}
-        </article>
-      ))}
-    </div>
+
+    {start.map((item) => (
+      <article class="welcome-pass-v23" data-plan={slugify(item.name)}>
+        <div class="welcome-pass-price-v23">
+          <span>{item.label}</span>
+          <strong>{item.price}</strong>
+          <small>2 reguläre Classes · 10 Tage</small>
+        </div>
+        <div class="welcome-pass-copy-v23">
+          <h3>{item.name}</h3>
+          <p>{item.text}</p>
+          {item.features && <ul>{item.features.map((feature) => <li>{feature}</li>)}</ul>}
+        </div>
+        {item.href && <a class="button primary welcome-pass-cta-v23" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "Welcome Pass kaufen"}</a>}
+      </article>
+    ))}
   </section>
 
-  <section class="pricing-flex-v20" id="flexible" aria-labelledby="pricing-flex-title">
-    <div class="pricing-chapter-v20">
-      <span>Ohne Monatsrhythmus</span>
-      <h2 id="pricing-flex-title">Flexibel bleiben.</h2>
-      <p>Drop-in, Karten oder USC — für unregelmäßige Wochen und alle, die keine Membership möchten.</p>
+  <section class="pricing-flex-v20 pricing-flex-v23" id="flexible" aria-labelledby="pricing-flex-title">
+    <div class="pricing-chapter-v20 pricing-chapter-v23">
+      <span>Ohne Membership</span>
+      <h2 id="pricing-flex-title">Flexibel trainieren.</h2>
+      <p>Für einzelne Besuche oder wenn dein Trainingsrhythmus nicht jede Woche gleich ist.</p>
     </div>
-    <div class="flex-price-list-v20">
+
+    <div class="flex-price-list-v20 flex-price-list-v23">
       {flexible.map((item) => (
-        <article class="flex-price-row-v20" id={item.name === "USC" ? "usc" : undefined} data-plan={slugify(item.name)}>
+        <article class="flex-price-row-v20 flex-price-row-v23" data-plan={slugify(item.name)}>
           <div class="flex-price-name-v20">
             <span>{item.label}</span>
             <div class="flex-price-title-line-v19">
@@ -95,4 +97,19 @@ const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-
       ))}
     </div>
   </section>
+
+  {usc.map((item) => (
+    <section class="pricing-usc-v23" id="usc" aria-labelledby="pricing-usc-title">
+      <div>
+        <span class="pricing-usc-kicker-v23">Urban Sports Club</span>
+        <h2 id="pricing-usc-title">Schon bei USC?</h2>
+        <p>{item.text} Closed Groups und Intensives sind nicht enthalten.</p>
+      </div>
+      <div class="pricing-usc-details-v23">
+        <strong>{item.price}</strong>
+        <small>Reguläre Open Classes</small>
+      </div>
+      {item.href && <a class="button secondary pricing-usc-cta-v23" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "USC öffnen"}</a>}
+    </section>
+  ))}
 </section>

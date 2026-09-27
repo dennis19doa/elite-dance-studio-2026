@@ -11,8 +11,8 @@ interface PricingItem {
   href?: string;
   featured?: boolean;
 }
-interface Props { pricing: PricingItem[]; eyebrow?: string; title?: string; description?: string; }
-const { pricing, eyebrow = "Preise", title = "Einfach. Flexibel. So wie du.", description = "Teste Elite, trainiere regelmäßig oder bleib flexibel." } = Astro.props;
+interface Props { pricing: PricingItem[]; }
+const { pricing } = Astro.props;
 const isExternal = (href?: string) => Boolean(href?.startsWith("http"));
 const byCategory = (category: string) => pricing.filter((item) => item.category === category);
 const start = byCategory("Start");
@@ -22,26 +22,43 @@ const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-
 ---
 
 <section class="pricing panel pricing-v20" id="pricing">
-  <header class="pricing-intro-v20">
-    <div>
-      <div class="eyebrow">{eyebrow}</div>
-      <h2>{title}</h2>
+  <section class="pricing-memberships-v20" id="memberships" aria-labelledby="pricing-membership-title">
+    <div class="pricing-chapter-v20 pricing-chapter-light-v20">
+      <span>Deine Routine</span>
+      <h2 id="pricing-membership-title">Memberships zuerst.</h2>
+      <p>Wenn du den Welcome Pass schon kennst, ist das hier dein nächster Schritt. Alle Memberships laufen jeweils einen Monat und sind danach jederzeit kündbar.</p>
     </div>
-    <p>{description}</p>
-  </header>
 
-  <section class="pricing-start-v20" aria-labelledby="pricing-start-title">
+    <div class="membership-grid-v20">
+      {memberships.map((item) => (
+        <article class:list={["membership-card-v20", `membership-${slugify(item.name)}-v20`, item.featured && "is-featured"]}>
+          <div class="membership-top-v20">
+            <span>{item.label}</span>
+            {item.featured && <em>Beliebteste Wahl</em>}
+          </div>
+          <h3>{item.name}</h3>
+          <div class="membership-price-v20">{item.price}</div>
+          <p>{item.text}</p>
+          {item.features && <ul class="price-features-v20">{item.features.map((feature) => <li>{feature}</li>)}</ul>}
+          {item.bestFor && <p class="price-fit-v20"><span>Ideal, wenn</span>{item.bestFor}</p>}
+          {item.href && <a class="membership-cta-v20" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "Membership wählen"} <span aria-hidden="true">→</span></a>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="pricing-start-v20" id="start" aria-labelledby="pricing-start-title">
     <div class="pricing-chapter-v20">
       <span>Neu bei Elite</span>
-      <h3 id="pricing-start-title">Erst ausprobieren. Dann entscheiden.</h3>
-      <p>Du brauchst keine Membership, um herauszufinden, ob Elite zu dir passt.</p>
+      <h2 id="pricing-start-title">Erst ausprobieren. Dann entscheiden.</h2>
+      <p>Der Welcome Pass ist für deinen ersten Einstieg. Wenn du Elite schon kennst, kannst du diesen Bereich einfach überspringen.</p>
     </div>
     <div class="pricing-start-grid-v20">
       {start.map((item) => (
         <article class:list={["price-option-v20", "price-start-v20", item.featured && "is-featured"]} data-plan={slugify(item.name)}>
           <div class="price-option-head-v20">
             <span class="price-kicker-v20">{item.label}</span>
-            <h4>{item.name}</h4>
+            <h3>{item.name}</h3>
             <div class="price-value-v20">{item.price}</div>
             <p>{item.text}</p>
           </div>
@@ -53,43 +70,19 @@ const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-
     </div>
   </section>
 
-  <section class="pricing-memberships-v20" aria-labelledby="pricing-membership-title">
-    <div class="pricing-chapter-v20 pricing-chapter-light-v20">
-      <span>Wenn Tanzen Teil deiner Woche wird</span>
-      <h3 id="pricing-membership-title">Memberships für echte Routine.</h3>
-      <p>Alle Memberships laufen jeweils einen Monat und sind danach jederzeit kündbar.</p>
-    </div>
-    <div class="membership-grid-v20">
-      {memberships.map((item) => (
-        <article class:list={["membership-card-v20", `membership-${slugify(item.name)}-v20`, item.featured && "is-featured"]}>
-          <div class="membership-top-v20">
-            <span>{item.label}</span>
-            {item.featured && <em>Beliebteste Wahl</em>}
-          </div>
-          <h4>{item.name}</h4>
-          <div class="membership-price-v20">{item.price}</div>
-          <p>{item.text}</p>
-          {item.features && <ul class="price-features-v20">{item.features.map((feature) => <li>{feature}</li>)}</ul>}
-          {item.bestFor && <p class="price-fit-v20"><span>Ideal, wenn</span>{item.bestFor}</p>}
-          {item.href && <a class="membership-cta-v20" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "Membership wählen"} <span aria-hidden="true">→</span></a>}
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="pricing-flex-v20" aria-labelledby="pricing-flex-title">
+  <section class="pricing-flex-v20" id="flexible" aria-labelledby="pricing-flex-title">
     <div class="pricing-chapter-v20">
       <span>Ohne Monatsrhythmus</span>
-      <h3 id="pricing-flex-title">Flexibel bleiben.</h3>
-      <p>Für unregelmäßige Wochen, Karten-Fans oder wenn du bereits USC nutzt.</p>
+      <h2 id="pricing-flex-title">Flexibel bleiben.</h2>
+      <p>Drop-in, Karten oder USC — für unregelmäßige Wochen und alle, die keine Membership möchten.</p>
     </div>
     <div class="flex-price-list-v20">
       {flexible.map((item) => (
-        <article class="flex-price-row-v20" data-plan={slugify(item.name)}>
+        <article class="flex-price-row-v20" id={item.name === "USC" ? "usc" : undefined} data-plan={slugify(item.name)}>
           <div class="flex-price-name-v20">
             <span>{item.label}</span>
             <div class="flex-price-title-line-v19">
-              <h4>{item.name}</h4>
+              <h3>{item.name}</h3>
               <small class="flex-price-tag-v19">{item.price}</small>
             </div>
           </div>

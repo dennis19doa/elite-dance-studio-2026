@@ -21,6 +21,8 @@ const memberships = byCategory("Memberships");
 const flexible = byCategory("Flexibel");
 const usc = byCategory("USC");
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+const membershipGlyph = (name: string) => name === "Bronze" ? "1×" : name === "Silber" ? "2×" : "∞";
+const compactFeatures = (features?: string[]) => (features ?? []).filter((feature) => !feature.toLowerCase().includes("kündbar")).slice(0, 2);
 ---
 
 <section class="pricing panel pricing-v20 pricing-v23" id="pricing">
@@ -33,15 +35,20 @@ const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-
 
     <div class="membership-grid-v20 membership-grid-v23">
       {memberships.map((item) => (
-        <article class:list={["membership-card-v20", "membership-card-v23", `membership-${slugify(item.name)}-v20`, item.featured && "is-featured"]}>
-          <div class="membership-top-v20">
+        <article class:list={["membership-card-v20", "membership-card-v23", "membership-card-v24", `membership-${slugify(item.name)}-v20`, item.featured && "is-featured"]}>
+          <div class="membership-card-visual-v24" aria-hidden="true">
+            <span>{membershipGlyph(item.name)}</span>
+          </div>
+          <div class="membership-top-v20 membership-top-v24">
             <span>{item.label}</span>
             {item.featured && <em>Beliebteste Wahl</em>}
           </div>
           <h3>{item.name}</h3>
           <div class="membership-price-v20">{item.price}</div>
-          {item.features && <ul class="price-features-v20 membership-features-v23">{item.features.map((feature) => <li>{feature}</li>)}</ul>}
-          {item.href && <a class="membership-cta-v20 membership-cta-v23" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "Membership wählen"} <span aria-hidden="true">→</span></a>}
+          <div class="membership-shortcuts-v24">
+            {compactFeatures(item.features).map((feature) => <span>{feature}</span>)}
+          </div>
+          {item.href && <a class="membership-cta-v20 membership-cta-v23 membership-cta-v24" href={item.href} target="_blank" rel="noreferrer">{item.ctaLabel ?? "Membership wählen"} <span aria-hidden="true">→</span></a>}
         </article>
       ))}
     </div>

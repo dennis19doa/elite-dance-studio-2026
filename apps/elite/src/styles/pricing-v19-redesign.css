@@ -2906,3 +2906,174 @@
     width: 100%;
   }
 }
+
+
+/* ---------- V26: unified icons + stronger contrast ---------- */
+.pricing-page-v26 .pricing-path-icon-v26 {
+  border-radius: 16px;
+  box-shadow: none;
+  background: rgba(255,255,255,.045);
+}
+
+.pricing-page-v26 .pricing-path-icon-v26::before,
+.pricing-page-v26 .pricing-path-icon-v26::after {
+  display: none !important;
+  content: none !important;
+}
+
+.pricing-page-v26 .pricing-path-icon-v26 svg {
+  width: 29px;
+  height: 29px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pricing-page-v26 .visual-welcome-v24 {
+  color: #ffd0bb;
+  border-color: rgba(255,208,187,.34);
+  background: rgba(183,66,85,.13);
+}
+
+.pricing-page-v26 .visual-membership-v24 {
+  color: #d2f85a;
+  border: 1px solid rgba(210,248,90,.25);
+  background: rgba(210,248,90,.055);
+}
+
+.pricing-page-v26 .visual-flex-v24 {
+  color: #efb07c;
+  border: 1px solid rgba(239,176,124,.24);
+  background: rgba(239,176,124,.045);
+}
+
+.pricing-page-v26 .visual-usc-v24 {
+  color: #bac5ff;
+  border-color: rgba(186,197,255,.26);
+  background: rgba(92,129,255,.055);
+}
+
+/* Keep the visual language consistent across the destination cards too. */
+.pricing-page-v26 .membership-glyph-v25,
+.pricing-page-v26 .flex-card-glyph-v25,
+.pricing-page-v26 .usc-mark-v25 {
+  border-radius: 20px;
+  box-shadow: none;
+}
+
+.pricing-page-v26 .membership-glyph-v25 {
+  width: 78px;
+  height: 78px;
+  border-color: rgba(255,255,255,.12);
+  background: rgba(255,255,255,.045);
+}
+
+.pricing-page-v26 .membership-silber-v25 .membership-glyph-v25 {
+  border-color: rgba(38,29,24,.12);
+  background: rgba(38,29,24,.045);
+}
+
+.pricing-page-v26 .flex-card-glyph-v25 {
+  border-color: rgba(145,78,50,.13);
+  background: rgba(184,95,53,.055);
+}
+
+.pricing-page-v26 .usc-mark-v25 {
+  border-color: rgba(186,197,255,.2);
+  background: rgba(92,129,255,.055);
+}
+
+/* White-on-gradient readability: keep glows decorative, text stays legible. */
+.pricing-page-v26 .welcome-pass-premium-v25 {
+  background:
+    radial-gradient(circle at 82% 14%, rgba(255,205,179,.09), transparent 18rem),
+    linear-gradient(135deg,#963149 0%,#742338 58%,#511a2a 100%);
+}
+
+.pricing-page-v26 .welcome-pass-art-v25 strong,
+.pricing-page-v26 .welcome-pass-art-label-v25,
+.pricing-page-v26 .welcome-pass-art-v25 small,
+.pricing-page-v26 .welcome-pass-body-v25 h3,
+.pricing-page-v26 .welcome-pass-badge-v25,
+.pricing-page-v26 .welcome-pass-facts-v25 span {
+  text-shadow: 0 2px 16px rgba(40,8,18,.38);
+}
+
+.pricing-page-v26 .membership-bronze-v25,
+.pricing-page-v26 .membership-gold-v25 {
+  text-shadow: 0 2px 14px rgba(10,7,5,.34);
+}
+
+.pricing-page-v26 .membership-bronze-v25 {
+  background:
+    radial-gradient(circle at 18% 12%,rgba(181,104,57,.18),transparent 18rem),
+    linear-gradient(155deg,#3a281f 0%,#211813 72%,#17110e 100%);
+}
+
+.pricing-page-v26 .membership-gold-v25 {
+  background:
+    radial-gradient(circle at 82% 10%,rgba(241,190,89,.13),transparent 18rem),
+    linear-gradient(155deg,#493519 0%,#2a1e12 56%,#17110c 100%);
+}
+
+.pricing-page-v26 .membership-bronze-v25 .membership-name-v25 h3,
+.pricing-page-v26 .membership-bronze-v25 .membership-price-v25,
+.pricing-page-v26 .membership-gold-v25 .membership-name-v25 h3,
+.pricing-page-v26 .membership-gold-v25 .membership-price-v25,
+.pricing-page-v26 .membership-bronze-v25 .membership-button-v25,
+.pricing-page-v26 .membership-gold-v25 .membership-button-v25 {
+  color: #fff;
+}
+
+.pricing-page-v26 .membership-bronze-v25 .membership-facts-v25 span,
+.pricing-page-v26 .membership-gold-v25 .membership-facts-v25 span {
+  border-color: rgba(255,255,255,.12);
+  background: rgba(0,0,0,.10);
+  color: rgba(255,255,255,.84);
+  text-shadow: 0 1px 10px rgba(0,0,0,.32);
+}
+
+/* The silver/light card must stay explicitly dark, with no inherited white shadow. */
+.pricing-page-v26 .membership-silber-v25,
+.pricing-page-v26 .membership-silber-v25 .membership-name-v25 h3,
+.pricing-page-v26 .membership-silber-v25 .membership-price-v25,
+.pricing-page-v26 .membership-silber-v25 .membership-button-v25 {
+  color: #261d18;
+  text-shadow: none;
+}
+
+.pricing-page-v26 .membership-silber-v25 .membership-facts-v25 span,
+.pricing-page-v26 .membership-silber-v25 .membership-name-v25 > span,
+.pricing-page-v26 .membership-silber-v25 .membership-index-v25 {
+  text-shadow: none;
+}
+
+/* Stronger contrast on light sections: no white text can leak in from older styles. */
+.pricing-page-v26 .pricing-start-v25 > .pricing-section-head-v25 h2,
+.pricing-page-v26 .pricing-flex-v25 > .pricing-section-head-v25 h2,
+.pricing-page-v26 .flex-card-v25 h3,
+.pricing-page-v26 .flex-card-price-v25 {
+  color: #281e18 !important;
+  text-shadow: none !important;
+}
+
+.pricing-page-v26 .pricing-start-v25 > .pricing-section-head-v25 > p,
+.pricing-page-v26 .pricing-flex-v25 > .pricing-section-head-v25 > p,
+.pricing-page-v26 .flex-card-facts-v25 span {
+  color: #6d5f55 !important;
+  text-shadow: none !important;
+}
+
+@media (max-width: 720px) {
+  .pricing-page-v26 .pricing-path-icon-v26 svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .pricing-page-v26 .membership-glyph-v25 {
+    width: 66px;
+    height: 66px;
+    border-radius: 17px;
+  }
+}

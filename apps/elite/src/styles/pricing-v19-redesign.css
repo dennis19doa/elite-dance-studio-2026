@@ -2132,3 +2132,777 @@
     font-size: clamp(2.1rem,10vw,3rem);
   }
 }
+
+
+/* ---------- V25: premium destination sections ---------- */
+.pricing-page-v25 .pricing-v25 {
+  display: grid;
+  gap: 18px;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.pricing-page-v25 .pricing-start-v25,
+.pricing-page-v25 .pricing-memberships-v25,
+.pricing-page-v25 .pricing-flex-v25,
+.pricing-page-v25 .pricing-usc-v25 {
+  scroll-margin-top: 92px;
+}
+
+/* Shared editorial section heading */
+.pricing-page-v25 .pricing-section-head-v25 {
+  display: grid;
+  grid-template-columns: minmax(0,.85fr) minmax(260px,.55fr);
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.pricing-page-v25 .pricing-section-head-v25 h2 {
+  margin: 7px 0 0;
+  color: #281e18;
+  font-size: clamp(2.35rem,4vw,4.25rem);
+  line-height: .94;
+  letter-spacing: -.055em;
+}
+
+.pricing-page-v25 .pricing-section-head-v25 > p {
+  max-width: 35rem;
+  margin: 0;
+  color: #75675d;
+  font-size: .9rem;
+  line-height: 1.55;
+}
+
+.pricing-page-v25 .pricing-section-kicker-v25 {
+  color: #a65a3a;
+  font-size: .64rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* Welcome Pass */
+.pricing-page-v25 .pricing-start-v25 {
+  padding: clamp(34px,4.7vw,58px);
+  overflow: hidden;
+  border: 1px solid rgba(75,54,40,.1);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 96% 0%, rgba(232,116,79,.15), transparent 25rem),
+    #f4eadf;
+  box-shadow: 0 26px 72px rgba(0,0,0,.17);
+}
+
+.pricing-page-v25 .welcome-pass-premium-v25 {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(230px,.58fr) minmax(0,1fr) auto;
+  gap: clamp(28px,4.8vw,64px);
+  align-items: center;
+  min-height: 330px;
+  padding: clamp(28px,4vw,48px);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(255,213,189,.13), transparent 17rem),
+    linear-gradient(135deg,#a93852 0%,#7f273e 55%,#5f1e30 100%);
+  color: #fff;
+  box-shadow: 0 26px 52px rgba(98,31,49,.24);
+}
+
+.pricing-page-v25 .welcome-pass-premium-v25::before {
+  position: absolute;
+  top: -150px;
+  right: -105px;
+  width: 330px;
+  height: 330px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 50%;
+  box-shadow: 0 0 0 46px rgba(255,255,255,.025), 0 0 0 92px rgba(255,255,255,.014);
+  content: "";
+  pointer-events: none;
+}
+
+.pricing-page-v25 .welcome-pass-art-v25 {
+  position: relative;
+  display: grid;
+  place-items: start;
+  min-height: 220px;
+  align-content: center;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 22px;
+  background:
+    linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.025));
+  backdrop-filter: blur(8px);
+}
+
+.pricing-page-v25 .welcome-pass-art-label-v25 {
+  color: #ffd0bb;
+  font-size: .62rem;
+  font-weight: 850;
+  letter-spacing: .13em;
+}
+
+.pricing-page-v25 .welcome-pass-art-v25 strong {
+  margin-top: 22px;
+  font-size: clamp(4.4rem,6.2vw,7rem);
+  line-height: .75;
+  letter-spacing: -.075em;
+}
+
+.pricing-page-v25 .welcome-pass-art-v25 i {
+  width: 64px;
+  height: 2px;
+  margin-top: 26px;
+  background: rgba(255,255,255,.5);
+}
+
+.pricing-page-v25 .welcome-pass-art-v25 small {
+  margin-top: 12px;
+  color: rgba(255,255,255,.6);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.pricing-page-v25 .welcome-pass-body-v25 {
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-page-v25 .welcome-pass-badge-v25 {
+  display: inline-flex;
+  padding: 7px 10px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 999px;
+  background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.76);
+  font-size: .65rem;
+  font-weight: 760;
+}
+
+.pricing-page-v25 .welcome-pass-body-v25 h3 {
+  max-width: 12ch;
+  margin: 18px 0 0;
+  color: #fff;
+  font-size: clamp(2.25rem,3.6vw,4rem);
+  line-height: .94;
+  letter-spacing: -.055em;
+}
+
+.pricing-page-v25 .welcome-pass-facts-v25 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 24px;
+}
+
+.pricing-page-v25 .welcome-pass-facts-v25 span {
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.72);
+  font-size: .7rem;
+}
+
+.pricing-page-v25 .welcome-pass-button-v25 {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 190px;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 18px;
+  border-radius: 14px;
+  background: #fff;
+  color: #7e273d;
+  font-size: .85rem;
+  font-weight: 850;
+  text-decoration: none;
+  box-shadow: 0 14px 32px rgba(45,10,20,.18);
+}
+
+.pricing-page-v25 .welcome-pass-button-v25 b {
+  font-size: 1.1rem;
+}
+
+/* Memberships */
+.pricing-page-v25 .pricing-memberships-v25 {
+  padding: clamp(38px,5.1vw,64px);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(236,158,92,.16), transparent 36rem),
+    linear-gradient(145deg,#241b17,#120f0e);
+  box-shadow: 0 28px 78px rgba(0,0,0,.27);
+}
+
+.pricing-page-v25 .pricing-section-head-dark-v25 h2 {
+  color: #fff;
+}
+
+.pricing-page-v25 .pricing-section-head-dark-v25 > p {
+  color: rgba(255,255,255,.56);
+}
+
+.pricing-page-v25 .pricing-section-head-dark-v25 .pricing-section-kicker-v25 {
+  color: #e7a36e;
+}
+
+.pricing-page-v25 .membership-grid-v25 {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 16px;
+}
+
+.pricing-page-v25 .membership-card-v25 {
+  position: relative;
+  display: flex;
+  min-height: 560px;
+  flex-direction: column;
+  padding: clamp(30px,3.5vw,44px);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 26px;
+  background: rgba(255,255,255,.042);
+  color: #fff;
+  box-shadow: 0 22px 46px rgba(0,0,0,.16);
+  transition: transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+
+.pricing-page-v25 .membership-card-v25:hover {
+  transform: translateY(-6px);
+  border-color: rgba(242,179,111,.32);
+  box-shadow: 0 32px 66px rgba(0,0,0,.24);
+}
+
+.pricing-page-v25 .membership-card-v25::before {
+  position: absolute;
+  top: -95px;
+  right: -95px;
+  width: 250px;
+  height: 250px;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 50%;
+  content: "";
+}
+
+.pricing-page-v25 .membership-card-v25::after {
+  position: absolute;
+  right: 32px;
+  bottom: 90px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid rgba(255,255,255,.05);
+  border-radius: 50%;
+  content: "";
+}
+
+.pricing-page-v25 .membership-bronze-v25 {
+  background:
+    radial-gradient(circle at 15% 15%,rgba(170,96,52,.25),transparent 17rem),
+    rgba(255,255,255,.04);
+}
+
+.pricing-page-v25 .membership-silber-v25 {
+  color: #261d18;
+  border-color: rgba(246,239,232,.65);
+  background:
+    radial-gradient(circle at 82% 10%,rgba(255,255,255,.8),transparent 16rem),
+    linear-gradient(160deg,#faf5ef,#ddd3ca);
+  box-shadow: 0 28px 62px rgba(0,0,0,.25);
+  transform: translateY(-10px);
+}
+
+.pricing-page-v25 .membership-silber-v25:hover {
+  transform: translateY(-15px);
+}
+
+.pricing-page-v25 .membership-gold-v25 {
+  background:
+    radial-gradient(circle at 78% 12%,rgba(247,196,95,.22),transparent 18rem),
+    linear-gradient(160deg,rgba(126,89,34,.35),rgba(255,255,255,.04) 58%);
+}
+
+.pricing-page-v25 .membership-index-v25 {
+  position: absolute;
+  top: 28px;
+  right: 30px;
+  color: rgba(255,255,255,.22);
+  font-size: .68rem;
+  font-weight: 850;
+  letter-spacing: .12em;
+}
+
+.pricing-page-v25 .membership-silber-v25 .membership-index-v25 {
+  color: rgba(38,29,24,.26);
+}
+
+.pricing-page-v25 .membership-glyph-v25 {
+  display: grid;
+  place-items: center;
+  width: 86px;
+  height: 86px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
+  font-size: 1.45rem;
+  font-weight: 850;
+}
+
+.pricing-page-v25 .membership-silber-v25 .membership-glyph-v25 {
+  border-color: rgba(38,29,24,.12);
+  background: rgba(38,29,24,.05);
+}
+
+.pricing-page-v25 .membership-name-v25 {
+  margin-top: 34px;
+}
+
+.pricing-page-v25 .membership-name-v25 > span {
+  color: #e8aa76;
+  font-size: .64rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v25 .membership-silber-v25 .membership-name-v25 > span {
+  color: #9a5639;
+}
+
+.pricing-page-v25 .membership-name-v25 h3 {
+  margin: 8px 0 0;
+  color: inherit;
+  font-size: clamp(2.6rem,3.6vw,4rem);
+  line-height: .9;
+  letter-spacing: -.06em;
+}
+
+.pricing-page-v25 .membership-price-v25 {
+  margin-top: 14px;
+  color: inherit;
+  font-size: clamp(2.25rem,3vw,3.4rem);
+  font-weight: 850;
+  line-height: .95;
+  letter-spacing: -.055em;
+}
+
+.pricing-page-v25 .membership-facts-v25 {
+  display: grid;
+  gap: 8px;
+  margin-top: 34px;
+}
+
+.pricing-page-v25 .membership-facts-v25 span {
+  width: fit-content;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 999px;
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.7);
+  font-size: .72rem;
+}
+
+.pricing-page-v25 .membership-silber-v25 .membership-facts-v25 span {
+  border-color: rgba(38,29,24,.08);
+  background: rgba(38,29,24,.045);
+  color: #5c4f47;
+}
+
+.pricing-page-v25 .membership-featured-v25 {
+  position: absolute;
+  right: 24px;
+  bottom: 94px;
+  padding: 7px 9px;
+  border-radius: 999px;
+  background: #2b211c;
+  color: #fff;
+  font-size: .61rem;
+  font-weight: 850;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v25 .membership-button-v25 {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: auto;
+  padding: 0 18px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  color: #fff;
+  font-size: .86rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.pricing-page-v25 .membership-silber-v25 .membership-button-v25 {
+  border-top-color: rgba(38,29,24,.12);
+  color: #2d231d;
+}
+
+/* Flexible options */
+.pricing-page-v25 .pricing-flex-v25 {
+  padding: clamp(34px,4.7vw,58px);
+  border: 1px solid rgba(75,54,40,.1);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 4% 100%,rgba(232,116,79,.12),transparent 21rem),
+    #efe2d3;
+  box-shadow: 0 24px 66px rgba(0,0,0,.15);
+}
+
+.pricing-page-v25 .flex-grid-v25 {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 14px;
+}
+
+.pricing-page-v25 .flex-card-v25 {
+  position: relative;
+  display: flex;
+  min-height: 390px;
+  flex-direction: column;
+  padding: clamp(26px,3vw,36px);
+  overflow: hidden;
+  border: 1px solid rgba(48,35,27,.1);
+  border-radius: 24px;
+  background: rgba(255,255,255,.52);
+  color: #2d221c;
+  box-shadow: 0 16px 34px rgba(62,42,28,.07);
+  transition: transform .22s ease,box-shadow .22s ease;
+}
+
+.pricing-page-v25 .flex-card-v25:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 46px rgba(62,42,28,.12);
+}
+
+.pricing-page-v25 .flex-card-v25::after {
+  position: absolute;
+  top: -55px;
+  right: -55px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(48,35,27,.06);
+  border-radius: 50%;
+  content: "";
+}
+
+.pricing-page-v25 .flex-card-top-v25 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.pricing-page-v25 .flex-card-top-v25 > span {
+  color: #9e5a3c;
+  font-size: .62rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v25 .flex-card-glyph-v25 {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border: 1px solid rgba(145,78,50,.15);
+  border-radius: 18px;
+  background: rgba(184,95,53,.08);
+  color: #9e4e2e;
+  font-size: 1.15rem;
+  font-weight: 850;
+}
+
+.pricing-page-v25 .flex-card-v25 h3 {
+  margin: 34px 0 0;
+  color: #2d221c;
+  font-size: clamp(1.9rem,2.6vw,2.8rem);
+  line-height: .95;
+  letter-spacing: -.05em;
+}
+
+.pricing-page-v25 .flex-card-price-v25 {
+  margin-top: 10px;
+  color: #2d221c;
+  font-size: clamp(2.4rem,3.2vw,3.6rem);
+  font-weight: 850;
+  line-height: .95;
+  letter-spacing: -.06em;
+}
+
+.pricing-page-v25 .flex-card-facts-v25 {
+  display: grid;
+  gap: 7px;
+  margin-top: 26px;
+}
+
+.pricing-page-v25 .flex-card-facts-v25 span {
+  color: #75675d;
+  font-size: .76rem;
+}
+
+.pricing-page-v25 .flex-card-link-v25 {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(48,35,27,.1);
+  color: #7f3e28;
+  font-size: .82rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+/* USC */
+.pricing-page-v25 .pricing-usc-v25 {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr) minmax(170px,.35fr) auto;
+  gap: clamp(24px,4vw,52px);
+  align-items: center;
+  min-height: 240px;
+  padding: clamp(30px,4vw,48px);
+  overflow: hidden;
+  border: 1px solid rgba(149,166,255,.14);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 88% 10%,rgba(92,129,255,.13),transparent 21rem),
+    linear-gradient(145deg,#211b24,#151217);
+  color: #fff;
+  box-shadow: 0 24px 64px rgba(0,0,0,.22);
+}
+
+.pricing-page-v25 .pricing-usc-v25::after {
+  position: absolute;
+  right: -100px;
+  bottom: -125px;
+  width: 330px;
+  height: 330px;
+  border: 1px solid rgba(155,176,255,.08);
+  border-radius: 50%;
+  box-shadow: 0 0 0 48px rgba(155,176,255,.022);
+  content: "";
+}
+
+.pricing-page-v25 .usc-mark-v25 {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 112px;
+  border: 1px solid rgba(166,182,255,.25);
+  border-radius: 28px;
+  background: rgba(92,129,255,.08);
+  color: #c1caff;
+  font-size: 1.25rem;
+  font-weight: 850;
+  letter-spacing: .04em;
+}
+
+.pricing-page-v25 .usc-copy-v25,
+.pricing-page-v25 .usc-meta-v25,
+.pricing-page-v25 .usc-button-v25 {
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-page-v25 .usc-copy-v25 .pricing-section-kicker-v25 {
+  color: #aebcff;
+}
+
+.pricing-page-v25 .usc-copy-v25 h2 {
+  margin: 7px 0 0;
+  color: #fff;
+  font-size: clamp(2.1rem,3.5vw,3.7rem);
+  line-height: .94;
+  letter-spacing: -.055em;
+}
+
+.pricing-page-v25 .usc-copy-v25 p {
+  max-width: 34rem;
+  margin: 11px 0 0;
+  color: rgba(255,255,255,.56);
+  font-size: .86rem;
+  line-height: 1.5;
+}
+
+.pricing-page-v25 .usc-meta-v25 {
+  display: grid;
+  gap: 5px;
+}
+
+.pricing-page-v25 .usc-meta-v25 strong {
+  color: #fff;
+  font-size: 1.35rem;
+}
+
+.pricing-page-v25 .usc-meta-v25 small {
+  max-width: 12rem;
+  color: rgba(255,255,255,.47);
+  font-size: .68rem;
+  line-height: 1.35;
+}
+
+.pricing-page-v25 .usc-button-v25 {
+  display: flex;
+  min-width: 150px;
+  min-height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  background: rgba(255,255,255,.065);
+  color: #fff;
+  font-size: .82rem;
+  font-weight: 850;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+}
+
+@media (max-width: 1050px) {
+  .pricing-page-v25 .membership-grid-v25,
+  .pricing-page-v25 .flex-grid-v25 {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v25 .membership-card-v25,
+  .pricing-page-v25 .flex-card-v25 {
+    min-height: 0;
+  }
+
+  .pricing-page-v25 .membership-silber-v25,
+  .pricing-page-v25 .membership-silber-v25:hover {
+    transform: none;
+  }
+
+  .pricing-page-v25 .welcome-pass-premium-v25 {
+    grid-template-columns: minmax(200px,.48fr) 1fr;
+  }
+
+  .pricing-page-v25 .welcome-pass-button-v25 {
+    grid-column: 2;
+    width: fit-content;
+  }
+
+  .pricing-page-v25 .pricing-usc-v25 {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .pricing-page-v25 .usc-meta-v25 {
+    grid-column: 2;
+  }
+
+  .pricing-page-v25 .usc-button-v25 {
+    grid-column: 3;
+    grid-row: 1 / 3;
+  }
+}
+
+@media (max-width: 720px) {
+  .pricing-page-v25 .pricing-section-head-v25 {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .pricing-page-v25 .pricing-section-head-v25 h2 {
+    font-size: clamp(2.2rem,10vw,3.1rem);
+  }
+
+  .pricing-page-v25 .pricing-start-v25,
+  .pricing-page-v25 .pricing-memberships-v25,
+  .pricing-page-v25 .pricing-flex-v25 {
+    padding: 26px 18px !important;
+    border-radius: 20px;
+  }
+
+  .pricing-page-v25 .welcome-pass-premium-v25 {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 20px;
+    padding: 22px 18px;
+    border-radius: 18px;
+  }
+
+  .pricing-page-v25 .welcome-pass-art-v25 {
+    min-height: 180px;
+  }
+
+  .pricing-page-v25 .welcome-pass-button-v25 {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .pricing-page-v25 .membership-card-v25 {
+    padding: 26px 22px;
+    border-radius: 18px;
+  }
+
+  .pricing-page-v25 .membership-glyph-v25 {
+    width: 70px;
+    height: 70px;
+  }
+
+  .pricing-page-v25 .membership-name-v25 {
+    margin-top: 24px;
+  }
+
+  .pricing-page-v25 .membership-featured-v25 {
+    position: static;
+    width: fit-content;
+    margin-top: 18px;
+  }
+
+  .pricing-page-v25 .membership-button-v25 {
+    margin-top: 28px;
+  }
+
+  .pricing-page-v25 .flex-card-v25 {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+
+  .pricing-page-v25 .pricing-usc-v25 {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    min-height: 0;
+    padding: 25px 18px;
+    border-radius: 20px;
+  }
+
+  .pricing-page-v25 .usc-mark-v25 {
+    width: 86px;
+    height: 86px;
+  }
+
+  .pricing-page-v25 .usc-meta-v25,
+  .pricing-page-v25 .usc-button-v25 {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .pricing-page-v25 .usc-button-v25 {
+    width: 100%;
+  }
+}

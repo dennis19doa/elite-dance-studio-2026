@@ -6,19 +6,27 @@
     "price": "20€",
     "text": "Zwei reguläre Classes in unterschiedlichen Styles testen und Elite kennenlernen.",
     "bestFor": "du Elite erst einmal erleben möchtest",
-    "features": ["2 reguläre Classes", "10 Tage gültig", "Einmal pro Person · keine Advanced-Kurse"],
+    "features": [
+      "2 reguläre Classes",
+      "10 Tage gültig",
+      "Einmal pro Person · keine Advanced-Kurse"
+    ],
     "ctaLabel": "Welcome Pass kaufen",
     "href": "https://www.eversports.de/org/product/eaed6a11-d4bb-44ff-8b0d-ab8acf6828f3?venueId=403f5ec1-2e5b-489c-b5d1-c424903a26c5",
     "featured": true
   },
   {
-    "category": "Start",
+    "category": "Flexibel",
     "label": "Eine Class",
     "name": "Drop-in",
     "price": "13€",
     "text": "Komm spontan zu einer regulären 60-Minuten-Class.",
     "bestFor": "du dich nicht festlegen möchtest",
-    "features": ["60 Min: 13€", "90 Min: 16€", "Keine Membership nötig"],
+    "features": [
+      "60 Min: 13€",
+      "90 Min: 16€",
+      "Keine Membership nötig"
+    ],
     "ctaLabel": "Kurs finden",
     "href": "/stundenplan/"
   },
@@ -29,7 +37,11 @@
     "price": "45€ / Monat",
     "text": "Ein klarer Wochenrhythmus, ohne dich langfristig zu binden.",
     "bestFor": "du einmal pro Woche trainieren willst",
-    "features": ["1 Class pro Woche", "Freie Wahl regulärer Classes", "Monatlich kündbar"],
+    "features": [
+      "1 Class pro Woche",
+      "Freie Wahl regulärer Classes",
+      "Monatlich kündbar"
+    ],
     "ctaLabel": "Bronze wählen",
     "href": "https://www.eversports.de/phoenix?productId=0ce8358e-16f9-43f8-9c30-1bf439a02d81&venueId=403f5ec1-2e5b-489c-b5d1-c424903a26c5&origin=widget"
   },
@@ -40,7 +52,11 @@
     "price": "79€ / Monat",
     "text": "Mehr Routine, mehr Wiederholung und schneller spürbarer Fortschritt.",
     "bestFor": "du zweimal pro Woche trainieren willst",
-    "features": ["8 Credits pro Monat", "Freie Wahl regulärer Classes", "Monatlich kündbar"],
+    "features": [
+      "8 Credits pro Monat",
+      "Freie Wahl regulärer Classes",
+      "Monatlich kündbar"
+    ],
     "ctaLabel": "Silber wählen",
     "href": "https://www.eversports.de/phoenix?productId=410b52c2-ce29-41b8-9f3f-7b20b5c9ee4e&venueId=403f5ec1-2e5b-489c-b5d1-c424903a26c5&origin=widget",
     "featured": true
@@ -52,7 +68,11 @@
     "price": "99€ / Monat",
     "text": "Trainiere verschiedene Styles so oft du möchtest und mach Elite zu deiner Routine.",
     "bestFor": "du maximale Freiheit willst",
-    "features": ["Unbegrenzte reguläre Classes", "Mehrere Styles kombinieren", "Monatlich kündbar"],
+    "features": [
+      "Unbegrenzte reguläre Classes",
+      "Mehrere Styles kombinieren",
+      "Monatlich kündbar"
+    ],
     "ctaLabel": "Gold wählen",
     "href": "https://www.eversports.de/phoenix?productId=f907a51f-2172-40de-a721-cebc6da4ca64&venueId=403f5ec1-2e5b-489c-b5d1-c424903a26c5&origin=widget"
   },
@@ -63,7 +83,11 @@
     "price": "60€",
     "text": "Regelmäßig trainieren, aber ohne monatliche Membership.",
     "bestFor": "du flexibel bleiben willst",
-    "features": ["12€ pro Class", "4 Monate gültig", "Für reguläre Classes"],
+    "features": [
+      "12€ pro Class",
+      "4 Monate gültig",
+      "Für reguläre Classes"
+    ],
     "ctaLabel": "Stundenplan öffnen",
     "href": "/stundenplan/"
   },
@@ -74,18 +98,26 @@
     "price": "115€",
     "text": "Mehr Classes im Paket und der niedrigste Preis pro Besuch ohne Membership.",
     "bestFor": "du häufig trainierst, aber frei bleiben willst",
-    "features": ["11,50€ pro Class", "10 flexible Besuche", "Für reguläre Classes"],
+    "features": [
+      "11,50€ pro Class",
+      "10 flexible Besuche",
+      "Für reguläre Classes"
+    ],
     "ctaLabel": "Stundenplan öffnen",
     "href": "/stundenplan/"
   },
   {
-    "category": "Flexibel",
+    "category": "USC",
     "label": "Urban Sports Club",
     "name": "USC",
     "price": "Über USC",
     "text": "Buche und checke über dein Urban Sports Club Konto ein.",
     "bestFor": "du bereits USC Mitglied bist",
-    "features": ["Reguläre Open Classes", "Check-in über USC", "Keine Closed Groups oder Intensives"],
+    "features": [
+      "Reguläre Open Classes",
+      "Check-in über USC",
+      "Keine Closed Groups oder Intensives"
+    ],
     "ctaLabel": "USC Kalender öffnen",
     "href": "https://urbansportsclub.com/de/venues/elite-dance-studio-1"
   }

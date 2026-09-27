@@ -23,7 +23,7 @@ const usc = byCategory("USC");
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 const membershipGlyph = (name: string) => name === "Bronze" ? "1×" : name === "Silber" ? "2×" : "∞";
 const compactFeatures = (features?: string[]) => (features ?? []).filter((feature) => !feature.toLowerCase().includes("kündbar")).slice(0, 2);
-const flexibleGlyph = (name: string) => name === "Drop-in" ? "1" : name.startsWith("5") ? "5" : "10";
+const flexibleCount = (name: string) => name === "Drop-in" ? "1" : name.startsWith("5") ? "5" : "10";
 ---
 
 <section class="pricing panel pricing-v20 pricing-v23 pricing-v25" id="pricing">
@@ -118,7 +118,13 @@ const flexibleGlyph = (name: string) => name === "Drop-in" ? "1" : name.startsWi
       {flexible.map((item) => (
         <article class="flex-card-v25" data-plan={slugify(item.name)}>
           <div class="flex-card-top-v25">
-            <div class="flex-card-glyph-v25" aria-hidden="true">{flexibleGlyph(item.name)}</div>
+            <div class="flex-card-glyph-v25 flex-card-icon-v27" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6.5 6.5A2.5 2.5 0 0 1 9 4h6a2.5 2.5 0 0 1 2.5 2.5v1.1a2.5 2.5 0 0 0 0 4.8v1.1A2.5 2.5 0 0 1 15 16H9a2.5 2.5 0 0 1-2.5-2.5v-1.1a2.5 2.5 0 0 0 0-4.8V6.5Z"/>
+                <path d="M9.5 8h5M9.5 11h3.5"/>
+              </svg>
+              <span>{flexibleCount(item.name)}</span>
+            </div>
             <span>{item.label}</span>
           </div>
 

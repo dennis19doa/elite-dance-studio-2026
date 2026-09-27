@@ -13,6 +13,17 @@
   Cache-Control: public, max-age=604800, must-revalidate
 
 
+# Pricing contains live checkout links and should not be served stale.
+/preise
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
+
+/preise/*
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
+
 # TV must always load the current player/media configuration.
 /tv
   Cache-Control: no-store, no-cache, must-revalidate, max-age=0

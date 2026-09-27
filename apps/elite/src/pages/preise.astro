@@ -13,51 +13,51 @@ import site from "../data/site.json";
 <BaseLayout
   title="Preise & Memberships | Elite Dance Studio Berlin"
   description="Welcome Pass, Drop-in, Karten, USC und Memberships für beginner-friendly Tanzkurse im Elite Dance Studio Berlin-Moabit."
-  bodyClass="pricing-page-v15 pricing-page-v19 pricing-page-v19-redesign pricing-page-v22"
+  bodyClass="pricing-page-v15 pricing-page-v19 pricing-page-v19-redesign pricing-page-v23"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main pricing-main-v19-redesign">
-    <section class="pricing-hero-v22 panel">
-      <div class="pricing-hero-copy-v22">
-        <div class="eyebrow">Preise · Berlin-Moabit</div>
-        <h1 class="page-title">Finde direkt den Preis, der zu deinem Rhythmus passt.</h1>
-        <p class="lead">Schon den Welcome Pass gemacht? Dann direkt zu Bronze, Silber oder Gold. Neu bei Elite? Starte mit 2 Classes für 20€.</p>
-        <div class="actions">
-          <a class="button primary" href="#memberships">Memberships ansehen</a>
-          <a class="button secondary" href="#start">Neu? Welcome Pass</a>
+    <section class="pricing-overview-v23 panel" aria-labelledby="pricing-overview-title">
+      <div class="pricing-overview-head-v23">
+        <div>
+          <div class="eyebrow">Preise · Berlin-Moabit</div>
+          <h1 id="pricing-overview-title">Was passt zu dir?</h1>
         </div>
+        <p>Wähle direkt die Option, die zu deinem Trainingsrhythmus passt. Die wichtigsten Preise siehst du sofort.</p>
       </div>
 
-      <div class="pricing-quick-grid-v22" aria-label="Preisoptionen auf einen Blick">
-        <a class="pricing-quick-card-v22 pricing-quick-membership-v22" href="#memberships">
-          <span>Nach dem Welcome Pass</span>
-          <strong>Bronze · Silber · Gold</strong>
-          <div class="pricing-quick-membership-prices-v22">
-            <b>45€</b><b>79€</b><b>99€</b>
+      <div class="pricing-overview-grid-v23">
+        <a class="pricing-overview-card-v23 is-membership" href="#memberships">
+          <span>Regelmäßig trainieren</span>
+          <strong>Memberships</strong>
+          <div class="pricing-overview-prices-v23">
+            <b>Bronze 45€</b>
+            <b>Silber 79€</b>
+            <b>Gold 99€</b>
           </div>
-          <small>Monatlich · reguläre Classes</small>
+          <small>monatlich · reguläre Classes</small>
         </a>
 
-        <a class="pricing-quick-card-v22" href="#start">
+        <a class="pricing-overview-card-v23" href="#start">
           <span>Neu bei Elite</span>
           <strong>Welcome Pass</strong>
-          <b>20€ · 2 Classes</b>
-          <small>10 Tage gültig</small>
+          <b class="pricing-overview-main-price-v23">20€ · 2 Classes</b>
+          <small>10 Tage gültig · einmal pro Person</small>
         </a>
 
-        <a class="pricing-quick-card-v22" href="#flexible">
+        <a class="pricing-overview-card-v23" href="#flexible">
           <span>Ohne Membership</span>
-          <strong>Flexibel trainieren</strong>
-          <b>ab 13€</b>
-          <small>Drop-in · 5er · 10er Karte</small>
+          <strong>Flexibel</strong>
+          <b class="pricing-overview-main-price-v23">ab 13€</b>
+          <small>Drop-in · 5er Karte · 10er Karte</small>
         </a>
 
-        <a class="pricing-quick-card-v22" href="#usc">
-          <span>Schon Mitglied?</span>
+        <a class="pricing-overview-card-v23" href="#usc">
+          <span>Schon USC-Mitglied?</span>
           <strong>Urban Sports Club</strong>
-          <b>Über USC</b>
-          <small>Für reguläre Open Classes</small>
+          <b class="pricing-overview-main-price-v23">Über USC</b>
+          <small>reguläre Open Classes</small>
         </a>
       </div>
     </section>

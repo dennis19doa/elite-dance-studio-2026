@@ -95,6 +95,7 @@ const SCHEDULE_SECONDS=featureSchedule?.seconds||20;
 const PARTY_SECONDS=featureParty?.seconds||10;
 const STALL_CHECK_MS=5000;
 const STALL_LIMIT=2;
+const VIDEO_LOAD_TIMEOUT_MS=10000;
 const TV_CODE_RELOAD_MS=5*60*1000;
 const video=document.getElementById('video');
 const scheduleImg=document.getElementById('schedule-img');
@@ -191,7 +192,7 @@ function renderEntry(entry){
   activate('single');
 }
 
-function playVideo({reload=false}={}){clearTimeout(sceneTimer);queue=[];recovering=false;activate('video');if(!videos.length)return;const src=videos[videoIndex%videos.length];if(reload||video.src!==src){video.src=src;video.load();}else{try{video.currentTime=0}catch{}}lastVideoTime=-1;stalledChecks=0;video.play().catch(()=>{});}
+function playVideo({reload=false}={}){clearTimeout(sceneTimer);queue=[];recovering=false;activate('video');if(!videos.length)return;const src=videos[videoIndex%videos.length];if(reload||video.src!==src){video.src=src;video.load();}else{try{video.currentTime=0}catch{}}lastVideoTime=-1;stalledChecks=0;video.play().catch(()=>showPartyFeature());setTimeout(()=>{if(scenes.video.classList.contains('active')&&video.readyState<2)showPartyFeature();},VIDEO_LOAD_TIMEOUT_MS);}
 function showNextInfo(){clearTimeout(sceneTimer);if(!queue.length){videoIndex=(videoIndex+1)%Math.max(videos.length,1);playVideo({reload:recovering});return;}const entry=queue.shift();renderEntry(entry);sceneTimer=setTimeout(showNextInfo,POSTER_SECONDS*1000);}
 function continueAfterFeatures(){
   refreshScheduleNow();
@@ -239,7 +240,7 @@ function showScheduleFeature(){
   tryCandidate();
 }
 function finishVideoLoop(){video.pause();showScheduleFeature();}
-function recoverFromStall(){if(recovering)return;recovering=true;video.pause();refreshScheduleNow();queue=displayQueue();if(queue.length)showNextInfo();else playVideo({reload:true});}
+function recoverFromStall(){if(recovering)return;recovering=true;video.pause();refreshScheduleNow();queue=displayQueue();if(queue.length)showNextInfo();else showPartyFeature();}
 function demo(){const mode=new URLSearchParams(location.search).get('demo');if(!mode)return false;video.pause();const sample=mode==='live'?{type:'live',event:{title:'Heels Beginner',start:'18:00',end:'19:00'}}:mode==='zouk'?{type:'live',event:{title:'Zouk Beginner',start:'18:00',end:'19:00'}}:{type:'next',event:{title:'Latin Twerk',start:'19:00',end:'20:00'}};renderEntry(sample);return true;}
 
 posters.forEach(p=>{const img=new Image();img.src=p.src});
@@ -254,7 +255,7 @@ video.addEventListener('error',recoverFromStall);
 video.addEventListener('stalled',()=>{stalledChecks=Math.max(stalledChecks,1)});
 video.addEventListener('waiting',()=>{stalledChecks=Math.max(stalledChecks,1)});
 setInterval(()=>{if(!scenes.video.classList.contains('active')||video.paused||video.ended)return;const current=video.currentTime;if(lastVideoTime>=0&&Math.abs(current-lastVideoTime)<0.15)stalledChecks+=1;else stalledChecks=0;lastVideoTime=current;if(stalledChecks>=STALL_LIMIT)recoverFromStall();},STALL_CHECK_MS);
-updateClock();setInterval(updateClock,1000);setInterval(()=>location.reload(),TV_CODE_RELOAD_MS);setTimeout(()=>{refreshScheduleNow();if(!demo())playVideo();},2500);
+updateClock();setInterval(updateClock,1000);setInterval(()=>location.reload(),TV_CODE_RELOAD_MS);setTimeout(()=>{refreshScheduleNow();if(!demo())showPartyFeature();},1200);
 })();
 </script>
 </body>

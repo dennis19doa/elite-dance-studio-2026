@@ -3077,3 +3077,208 @@
     border-radius: 17px;
   }
 }
+
+
+/* ---------- V27: enforce readable light sections + stronger product cards ---------- */
+.pricing-page-v27 .pricing-start-v25,
+.pricing-page-v27 .pricing-flex-v25 {
+  background:
+    radial-gradient(circle at 8% 100%, rgba(215,119,76,.08), transparent 22rem),
+    #f1e5d8;
+  border-color: rgba(72,50,36,.12);
+}
+
+/* Override site-wide display-heading effects on light pricing surfaces. */
+.pricing-page-v27 .pricing-start-v25 .pricing-section-head-v25 h2,
+.pricing-page-v27 .pricing-flex-v25 .pricing-section-head-v25 h2,
+.pricing-page-v27 .flex-card-v25 h3 {
+  color: #2a201a !important;
+  -webkit-text-fill-color: #2a201a !important;
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  text-shadow: none !important;
+}
+
+.pricing-page-v27 .pricing-start-v25 .pricing-section-head-v25 > p,
+.pricing-page-v27 .pricing-flex-v25 .pricing-section-head-v25 > p {
+  color: #66584f !important;
+  -webkit-text-fill-color: #66584f !important;
+  text-shadow: none !important;
+}
+
+.pricing-page-v27 .pricing-start-v25 .pricing-section-kicker-v25,
+.pricing-page-v27 .pricing-flex-v25 .pricing-section-kicker-v25 {
+  color: #9f4f31 !important;
+  -webkit-text-fill-color: #9f4f31 !important;
+}
+
+/* Welcome Pass: darker product surface, stronger readable whites. */
+.pricing-page-v27 .welcome-pass-premium-v25 {
+  background:
+    radial-gradient(circle at 84% 12%, rgba(255,211,186,.065), transparent 18rem),
+    linear-gradient(135deg,#8a2942 0%,#682033 58%,#461522 100%);
+  border-color: rgba(255,255,255,.16);
+  box-shadow:
+    0 30px 58px rgba(78,24,40,.26),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.pricing-page-v27 .welcome-pass-body-v25 h3,
+.pricing-page-v27 .welcome-pass-art-v25 strong,
+.pricing-page-v27 .welcome-pass-art-label-v25,
+.pricing-page-v27 .welcome-pass-art-v25 small,
+.pricing-page-v27 .welcome-pass-badge-v25,
+.pricing-page-v27 .welcome-pass-facts-v25 span {
+  color: #fff !important;
+  -webkit-text-fill-color: currentColor !important;
+  text-shadow: 0 2px 14px rgba(31,6,13,.46) !important;
+}
+
+.pricing-page-v27 .welcome-pass-art-v25 {
+  background: rgba(255,255,255,.055);
+  border-color: rgba(255,255,255,.17);
+}
+
+.pricing-page-v27 .welcome-pass-badge-v25,
+.pricing-page-v27 .welcome-pass-facts-v25 span {
+  background: rgba(0,0,0,.12);
+  border: 1px solid rgba(255,255,255,.11);
+}
+
+/* Flexible cards: more contrast, stronger hierarchy, less empty/washed-out. */
+.pricing-page-v27 .flex-grid-v25 {
+  gap: 18px;
+}
+
+.pricing-page-v27 .flex-card-v25 {
+  min-height: 410px;
+  border-color: rgba(65,45,33,.13);
+  background:
+    linear-gradient(180deg, rgba(255,252,248,.98) 0%, rgba(247,238,228,.98) 100%);
+  box-shadow:
+    0 18px 38px rgba(66,43,29,.09),
+    inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+.pricing-page-v27 .flex-card-v25::before {
+  position: absolute;
+  top: 0;
+  left: 28px;
+  right: 28px;
+  height: 3px;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(90deg, #a45131, #d08a60);
+  content: "";
+}
+
+.pricing-page-v27 .flex-card-v25:hover {
+  transform: translateY(-6px);
+  border-color: rgba(133,75,47,.2);
+  box-shadow: 0 28px 52px rgba(66,43,29,.14);
+}
+
+.pricing-page-v27 .flex-card-top-v25 {
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-page-v27 .flex-card-icon-v27 {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgba(158,79,47,.16);
+  border-radius: 18px;
+  background: rgba(164,81,49,.055);
+  color: #93472d;
+}
+
+.pricing-page-v27 .flex-card-icon-v27 svg {
+  width: 29px;
+  height: 29px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pricing-page-v27 .flex-card-icon-v27 > span {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 5px;
+  border: 2px solid #faf3eb;
+  border-radius: 999px;
+  background: #8d432a;
+  color: #fff;
+  font-size: .66rem;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.pricing-page-v27 .flex-card-top-v25 > span {
+  color: #995038;
+  -webkit-text-fill-color: #995038;
+}
+
+.pricing-page-v27 .flex-card-v25 h3 {
+  margin-top: 28px;
+  font-size: clamp(2rem,2.8vw,3rem);
+}
+
+.pricing-page-v27 .flex-card-price-v25 {
+  margin-top: 7px;
+  color: #231a15 !important;
+  -webkit-text-fill-color: #231a15 !important;
+  text-shadow: none !important;
+}
+
+.pricing-page-v27 .flex-card-facts-v25 {
+  margin-top: 22px;
+}
+
+.pricing-page-v27 .flex-card-facts-v25 span {
+  color: #695b52 !important;
+  -webkit-text-fill-color: #695b52 !important;
+}
+
+.pricing-page-v27 .flex-card-link-v25 {
+  min-height: 56px;
+  margin-top: auto;
+  padding: 0 14px;
+  border: 1px solid rgba(127,62,40,.13);
+  border-radius: 12px;
+  background: rgba(127,62,40,.045);
+  color: #7b3b27;
+  -webkit-text-fill-color: #7b3b27;
+}
+
+.pricing-page-v27 .flex-card-link-v25:hover {
+  background: rgba(127,62,40,.08);
+}
+
+/* Keep dark-section text explicitly readable too. */
+.pricing-page-v27 .pricing-memberships-v25 .pricing-section-head-v25 h2,
+.pricing-page-v27 .usc-copy-v25 h2 {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+}
+
+@media (max-width: 720px) {
+  .pricing-page-v27 .flex-card-v25 {
+    min-height: 0;
+  }
+
+  .pricing-page-v27 .flex-card-link-v25 {
+    margin-top: 24px;
+  }
+}

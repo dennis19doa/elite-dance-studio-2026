@@ -1183,3 +1183,510 @@
     min-height: 0;
   }
 }
+
+
+/* ---------- V23: compact pricing chooser + purchase-first layout ---------- */
+.pricing-page-v23 .pricing-main-v19-redesign {
+  gap: 18px;
+  padding-top: 22px;
+}
+
+.pricing-page-v23 .pricing-overview-v23 {
+  margin-bottom: 0;
+  padding: clamp(22px, 3vw, 34px) !important;
+  border: 1px solid rgba(243,185,128,.15) !important;
+  border-radius: 22px !important;
+  background:
+    radial-gradient(circle at 88% 0%, rgba(232,116,79,.13), transparent 21rem),
+    linear-gradient(135deg, #211713 0%, #17110f 58%, #100d0c 100%) !important;
+  color: #fff;
+  box-shadow: 0 24px 64px rgba(0,0,0,.24) !important;
+}
+
+.pricing-page-v23 .pricing-overview-head-v23 {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(320px, .65fr);
+  gap: 26px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.pricing-page-v23 .pricing-overview-head-v23 .eyebrow {
+  color: #f1b078 !important;
+}
+
+.pricing-page-v23 .pricing-overview-head-v23 h1 {
+  max-width: 10ch;
+  margin: 6px 0 0;
+  color: #fff;
+  font-size: clamp(2.55rem, 4.4vw, 4.7rem);
+  line-height: .92;
+  letter-spacing: -.06em;
+}
+
+.pricing-page-v23 .pricing-overview-head-v23 > p {
+  max-width: 36rem;
+  margin: 0;
+  color: rgba(255,255,255,.62);
+  font-size: .92rem;
+  line-height: 1.55;
+}
+
+.pricing-page-v23 .pricing-overview-grid-v23 {
+  display: grid;
+  grid-template-columns: 1.35fr repeat(3, minmax(0,1fr));
+  gap: 9px;
+}
+
+.pricing-page-v23 .pricing-overview-card-v23 {
+  display: flex;
+  min-width: 0;
+  min-height: 126px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 17px 18px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 15px;
+  background: rgba(255,255,255,.045);
+  color: #fff;
+  text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.pricing-page-v23 .pricing-overview-card-v23:hover {
+  transform: translateY(-3px);
+  border-color: rgba(210,248,90,.42);
+  background: rgba(255,255,255,.075);
+}
+
+.pricing-page-v23 .pricing-overview-card-v23 > span {
+  color: #e6a16f;
+  font-size: .6rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v23 .pricing-overview-card-v23 > strong {
+  margin-top: 6px;
+  color: #fff;
+  font-size: 1.02rem;
+  line-height: 1.15;
+}
+
+.pricing-page-v23 .pricing-overview-main-price-v23 {
+  margin-top: 7px;
+  color: #fff;
+  font-size: .98rem;
+}
+
+.pricing-page-v23 .pricing-overview-card-v23 > small {
+  margin-top: 5px;
+  color: rgba(255,255,255,.5);
+  font-size: .66rem;
+  line-height: 1.35;
+}
+
+.pricing-page-v23 .pricing-overview-card-v23.is-membership {
+  border-color: rgba(210,248,90,.35);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(210,248,90,.11), transparent 13rem),
+    rgba(255,255,255,.06);
+}
+
+.pricing-page-v23 .pricing-overview-card-v23.is-membership > span {
+  color: #d2f85a;
+}
+
+.pricing-page-v23 .pricing-overview-prices-v23 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.pricing-page-v23 .pricing-overview-prices-v23 b {
+  padding: 7px 5px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.075);
+  color: #fff;
+  font-size: .7rem;
+  text-align: center;
+}
+
+.pricing-page-v23 .pricing-v23 {
+  gap: 18px !important;
+}
+
+.pricing-page-v23 .pricing-memberships-v23,
+.pricing-page-v23 .pricing-start-v23,
+.pricing-page-v23 .pricing-flex-v23,
+.pricing-page-v23 .pricing-usc-v23 {
+  scroll-margin-top: 92px;
+}
+
+.pricing-page-v23 .pricing-chapter-v23 {
+  grid-template-columns: minmax(115px,.26fr) minmax(0,.72fr) minmax(260px,.66fr);
+  gap: 16px 28px;
+  margin-bottom: 20px;
+}
+
+.pricing-page-v23 .pricing-chapter-v23 h2 {
+  margin: 0;
+  color: #281e18;
+  font-size: clamp(1.9rem, 3.2vw, 3.2rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+
+.pricing-page-v23 .pricing-chapter-v23 > p {
+  font-size: .86rem;
+}
+
+.pricing-page-v23 .pricing-memberships-v23 {
+  padding: clamp(27px, 3.7vw, 44px);
+}
+
+.pricing-page-v23 .pricing-memberships-v23 .pricing-chapter-v23 h2 {
+  color: #fff;
+}
+
+.pricing-page-v23 .membership-grid-v23 {
+  gap: 10px;
+}
+
+.pricing-page-v23 .membership-card-v23 {
+  min-height: 340px;
+  padding: clamp(22px, 2.4vw, 29px);
+}
+
+.pricing-page-v23 .membership-card-v23 h3 {
+  margin: 20px 0 0;
+  color: inherit;
+  font-size: clamp(1.6rem, 2.3vw, 2.3rem);
+  letter-spacing: -.045em;
+}
+
+.pricing-page-v23 .membership-card-v23 .membership-price-v20 {
+  margin-top: 6px;
+  font-size: clamp(1.85rem, 2.7vw, 2.8rem);
+}
+
+.pricing-page-v23 .membership-features-v23 {
+  margin-top: 22px;
+}
+
+.pricing-page-v23 .membership-cta-v23 {
+  margin-top: auto;
+}
+
+.pricing-page-v23 .pricing-start-v23 {
+  padding: clamp(27px, 3.7vw, 44px);
+}
+
+.pricing-page-v23 .welcome-pass-v23 {
+  display: grid;
+  grid-template-columns: minmax(150px,.32fr) minmax(0,1fr) auto;
+  gap: clamp(22px,4vw,50px);
+  align-items: center;
+  padding: clamp(22px,3vw,34px);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255,196,152,.2), transparent 18rem),
+    linear-gradient(145deg, #b74255, #7e273d 72%);
+  color: #fff;
+}
+
+.pricing-page-v23 .welcome-pass-price-v23 {
+  display: grid;
+  gap: 6px;
+}
+
+.pricing-page-v23 .welcome-pass-price-v23 > span {
+  color: #ffd0bb;
+  font-size: .62rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v23 .welcome-pass-price-v23 > strong {
+  font-size: clamp(2.8rem,4vw,4rem);
+  line-height: .9;
+  letter-spacing: -.06em;
+}
+
+.pricing-page-v23 .welcome-pass-price-v23 > small {
+  color: rgba(255,255,255,.66);
+  font-size: .72rem;
+}
+
+.pricing-page-v23 .welcome-pass-copy-v23 h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.45rem,2vw,2rem);
+}
+
+.pricing-page-v23 .welcome-pass-copy-v23 p {
+  max-width: 37rem;
+  margin: 8px 0 0;
+  color: rgba(255,255,255,.7);
+  font-size: .86rem;
+  line-height: 1.5;
+}
+
+.pricing-page-v23 .welcome-pass-copy-v23 ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 14px;
+  margin: 10px 0 0;
+  padding: 0;
+  color: rgba(255,255,255,.72);
+  font-size: .7rem;
+  list-style: none;
+}
+
+.pricing-page-v23 .welcome-pass-copy-v23 li::before {
+  margin-right: 6px;
+  color: #ffd0bb;
+  content: "•";
+}
+
+.pricing-page-v23 .welcome-pass-cta-v23 {
+  border-color: #fff;
+  background: #fff;
+  color: #7e273d;
+  white-space: nowrap;
+}
+
+.pricing-page-v23 .pricing-flex-v23 {
+  padding: clamp(27px, 3.7vw, 44px);
+}
+
+.pricing-page-v23 .flex-price-row-v23 {
+  grid-template-columns: minmax(165px,.52fr) minmax(0,1fr) auto;
+  gap: 24px;
+  padding: 22px 0;
+}
+
+.pricing-page-v23 .flex-price-row-v23 .flex-price-title-line-v19 {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.pricing-page-v23 .flex-price-row-v23 .flex-price-name-v20 h3 {
+  margin: 5px 0 0;
+  color: #2d221c;
+  font-size: 1.22rem;
+}
+
+.pricing-page-v23 .flex-price-row-v23 .flex-price-tag-v19 {
+  color: #8b472e;
+  font-size: .88rem;
+  font-weight: 850;
+}
+
+.pricing-page-v23 .pricing-usc-v23 {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto auto;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 0;
+  padding: clamp(25px,3.5vw,38px);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(92,129,255,.13), transparent 19rem),
+    #211916;
+  color: #fff;
+  box-shadow: 0 22px 58px rgba(0,0,0,.2);
+}
+
+.pricing-page-v23 .pricing-usc-kicker-v23 {
+  color: #9eb0ff;
+  font-size: .64rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v23 .pricing-usc-v23 h2 {
+  margin: 6px 0 0;
+  color: #fff;
+  font-size: clamp(1.8rem,3vw,3rem);
+  line-height: .98;
+}
+
+.pricing-page-v23 .pricing-usc-v23 p {
+  max-width: 42rem;
+  margin: 8px 0 0;
+  color: rgba(255,255,255,.58);
+  font-size: .84rem;
+  line-height: 1.5;
+}
+
+.pricing-page-v23 .pricing-usc-details-v23 {
+  display: grid;
+  min-width: 135px;
+  gap: 4px;
+}
+
+.pricing-page-v23 .pricing-usc-details-v23 strong {
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.pricing-page-v23 .pricing-usc-details-v23 small {
+  color: rgba(255,255,255,.5);
+  font-size: .7rem;
+}
+
+.pricing-page-v23 .pricing-usc-cta-v23 {
+  border-color: rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  white-space: nowrap;
+}
+
+@media (max-width: 1000px) {
+  .pricing-page-v23 .pricing-overview-head-v23 {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .pricing-page-v23 .pricing-overview-grid-v23 {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .pricing-page-v23 .pricing-overview-card-v23 {
+    min-height: 118px;
+  }
+
+  .pricing-page-v23 .pricing-chapter-v23 {
+    grid-template-columns: minmax(105px,.25fr) 1fr;
+  }
+
+  .pricing-page-v23 .pricing-chapter-v23 > p {
+    grid-column: 2;
+  }
+
+  .pricing-page-v23 .welcome-pass-v23 {
+    grid-template-columns: minmax(140px,.3fr) 1fr;
+  }
+
+  .pricing-page-v23 .welcome-pass-cta-v23 {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .pricing-page-v23 .pricing-usc-v23 {
+    grid-template-columns: 1fr auto;
+  }
+
+  .pricing-page-v23 .pricing-usc-cta-v23 {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .pricing-page-v23 .pricing-main-v19-redesign {
+    gap: 14px;
+    padding-top: 14px;
+  }
+
+  .pricing-page-v23 .pricing-overview-v23 {
+    padding: 22px 16px !important;
+    border-radius: 18px !important;
+  }
+
+  .pricing-page-v23 .pricing-overview-head-v23 h1 {
+    font-size: clamp(2.5rem,12vw,3.7rem);
+  }
+
+  .pricing-page-v23 .pricing-overview-grid-v23 {
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .pricing-page-v23 .pricing-overview-card-v23 {
+    min-height: 118px;
+    padding: 15px 14px;
+  }
+
+  .pricing-page-v23 .pricing-overview-card-v23.is-membership {
+    grid-column: 1 / -1;
+  }
+
+  .pricing-page-v23 .pricing-overview-prices-v23 b {
+    font-size: .67rem;
+  }
+
+  .pricing-page-v23 .pricing-chapter-v23 {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .pricing-page-v23 .pricing-chapter-v23 > p {
+    grid-column: auto;
+  }
+
+  .pricing-page-v23 .pricing-chapter-v23 h2 {
+    font-size: clamp(1.95rem,9.5vw,2.8rem);
+  }
+
+  .pricing-page-v23 .membership-card-v23 {
+    min-height: 0;
+  }
+
+  .pricing-page-v23 .welcome-pass-v23 {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .pricing-page-v23 .welcome-pass-copy-v23 ul {
+    display: grid;
+    gap: 4px;
+  }
+
+  .pricing-page-v23 .welcome-pass-cta-v23 {
+    grid-column: auto;
+    justify-self: stretch;
+  }
+
+  .pricing-page-v23 .flex-price-row-v23 {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .pricing-page-v23 .flex-price-row-v23 .text-link {
+    grid-column: auto;
+  }
+
+  .pricing-page-v23 .pricing-usc-v23 {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 25px 18px;
+    border-radius: 18px;
+  }
+
+  .pricing-page-v23 .pricing-usc-cta-v23 {
+    grid-column: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 460px) {
+  .pricing-page-v23 .pricing-overview-grid-v23 {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v23 .pricing-overview-card-v23.is-membership {
+    grid-column: auto;
+  }
+
+  .pricing-page-v23 .pricing-overview-card-v23 {
+    min-height: 0;
+  }
+}

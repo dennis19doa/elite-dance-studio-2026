@@ -7,7 +7,7 @@ const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(enco
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
 const videos = ["https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/videos/Video%20TV.mp4"];
 const initialVideo = videos[0] || "";
-const TV_ASSET_VERSION = "20260923-1808";
+const TV_ASSET_VERSION = "20260927-1605";
 const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;
 const featureSchedule = tvMedia.features?.schedule
   ? { ...tvMedia.features.schedule, src: versionedMedia(tvMedia.features.schedule.file) }
@@ -94,7 +94,7 @@ const POSTER_SECONDS=10;
 const SCHEDULE_SECONDS=featureSchedule?.seconds||20;
 const PARTY_SECONDS=featureParty?.seconds||10;
 const STALL_CHECK_MS=5000;
-const STALL_LIMIT=2;
+const STALL_LIMIT=2;\nconst TV_CODE_RELOAD_MS=5*60*1000;
 const video=document.getElementById('video');
 const scheduleImg=document.getElementById('schedule-img');
 let scheduleCandidateIndex=0;
@@ -253,7 +253,7 @@ video.addEventListener('error',recoverFromStall);
 video.addEventListener('stalled',()=>{stalledChecks=Math.max(stalledChecks,1)});
 video.addEventListener('waiting',()=>{stalledChecks=Math.max(stalledChecks,1)});
 setInterval(()=>{if(!scenes.video.classList.contains('active')||video.paused||video.ended)return;const current=video.currentTime;if(lastVideoTime>=0&&Math.abs(current-lastVideoTime)<0.15)stalledChecks+=1;else stalledChecks=0;lastVideoTime=current;if(stalledChecks>=STALL_LIMIT)recoverFromStall();},STALL_CHECK_MS);
-updateClock();setInterval(updateClock,1000);setTimeout(()=>{refreshScheduleNow();if(!demo())playVideo();},2500);
+updateClock();setInterval(updateClock,1000);setInterval(()=>location.reload(),TV_CODE_RELOAD_MS);setTimeout(()=>{refreshScheduleNow();if(!demo())playVideo();},2500);
 })();
 </script>
 </body>

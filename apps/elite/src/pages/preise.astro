@@ -13,51 +13,67 @@ import site from "../data/site.json";
 <BaseLayout
   title="Preise & Memberships | Elite Dance Studio Berlin"
   description="Welcome Pass, Drop-in, Karten, USC und Memberships für beginner-friendly Tanzkurse im Elite Dance Studio Berlin-Moabit."
-  bodyClass="pricing-page-v15 pricing-page-v19 pricing-page-v19-redesign pricing-page-v23"
+  bodyClass="pricing-page-v15 pricing-page-v19 pricing-page-v19-redesign pricing-page-v24"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="page-shell page-main pricing-main-v19-redesign">
-    <section class="pricing-overview-v23 panel" aria-labelledby="pricing-overview-title">
-      <div class="pricing-overview-head-v23">
+    <section class="pricing-overview-v24 panel" aria-labelledby="pricing-overview-title">
+      <div class="pricing-overview-head-v24">
         <div>
           <div class="eyebrow">Preise · Berlin-Moabit</div>
-          <h1 id="pricing-overview-title">Was passt zu dir?</h1>
+          <h1 id="pricing-overview-title">Wie möchtest du trainieren?</h1>
         </div>
-        <p>Wähle direkt die Option, die zu deinem Trainingsrhythmus passt. Die wichtigsten Preise siehst du sofort.</p>
+        <p>Wähle deinen Weg. Die Details kommen erst danach.</p>
       </div>
 
-      <div class="pricing-overview-grid-v23">
-        <a class="pricing-overview-card-v23 is-membership" href="#memberships">
-          <span>Regelmäßig trainieren</span>
-          <strong>Memberships</strong>
-          <div class="pricing-overview-prices-v23">
-            <b>Bronze 45€</b>
-            <b>Silber 79€</b>
-            <b>Gold 99€</b>
+      <div class="pricing-overview-grid-v24">
+        <a class="pricing-path-v24 path-welcome-v24" href="#start">
+          <div class="pricing-path-visual-v24 visual-welcome-v24" aria-hidden="true">
+            <span>2×</span>
           </div>
-          <small>monatlich · reguläre Classes</small>
+          <div>
+            <span class="pricing-path-kicker-v24">Neu bei Elite</span>
+            <strong>Welcome Pass</strong>
+            <small>Erst ausprobieren</small>
+          </div>
+          <span class="pricing-path-arrow-v24" aria-hidden="true">↘</span>
         </a>
 
-        <a class="pricing-overview-card-v23" href="#start">
-          <span>Neu bei Elite</span>
-          <strong>Welcome Pass</strong>
-          <b class="pricing-overview-main-price-v23">20€ · 2 Classes</b>
-          <small>10 Tage gültig · einmal pro Person</small>
+        <a class="pricing-path-v24 path-membership-v24" href="#memberships">
+          <div class="pricing-path-visual-v24 visual-membership-v24" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </div>
+          <div>
+            <span class="pricing-path-kicker-v24">Regelmäßig</span>
+            <strong>Memberships</strong>
+            <small>Bronze · Silber · Gold</small>
+          </div>
+          <span class="pricing-path-arrow-v24" aria-hidden="true">↘</span>
         </a>
 
-        <a class="pricing-overview-card-v23" href="#flexible">
-          <span>Ohne Membership</span>
-          <strong>Flexibel</strong>
-          <b class="pricing-overview-main-price-v23">ab 13€</b>
-          <small>Drop-in · 5er Karte · 10er Karte</small>
+        <a class="pricing-path-v24 path-flex-v24" href="#flexible">
+          <div class="pricing-path-visual-v24 visual-flex-v24" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </div>
+          <div>
+            <span class="pricing-path-kicker-v24">Ohne Bindung</span>
+            <strong>Flexibel</strong>
+            <small>Drop-in & Karten</small>
+          </div>
+          <span class="pricing-path-arrow-v24" aria-hidden="true">↘</span>
         </a>
 
-        <a class="pricing-overview-card-v23" href="#usc">
-          <span>Schon USC-Mitglied?</span>
-          <strong>Urban Sports Club</strong>
-          <b class="pricing-overview-main-price-v23">Über USC</b>
-          <small>reguläre Open Classes</small>
+        <a class="pricing-path-v24 path-usc-v24" href="#usc">
+          <div class="pricing-path-visual-v24 visual-usc-v24" aria-hidden="true">
+            <span>USC</span>
+          </div>
+          <div>
+            <span class="pricing-path-kicker-v24">Schon Mitglied</span>
+            <strong>Urban Sports Club</strong>
+            <small>Direkt über USC buchen</small>
+          </div>
+          <span class="pricing-path-arrow-v24" aria-hidden="true">↘</span>
         </a>
       </div>
     </section>

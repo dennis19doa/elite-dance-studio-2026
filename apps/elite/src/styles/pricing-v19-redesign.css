@@ -1690,3 +1690,445 @@
     min-height: 0;
   }
 }
+
+
+/* ---------- V24: visual chooser + larger premium membership cards ---------- */
+.pricing-page-v24 .pricing-main-v19-redesign {
+  gap: 18px;
+  padding-top: 18px;
+}
+
+.pricing-page-v24 .pricing-overview-v24 {
+  margin-bottom: 0;
+  padding: clamp(24px, 3.4vw, 40px) !important;
+  border: 1px solid rgba(243,185,128,.14) !important;
+  border-radius: 24px !important;
+  background:
+    radial-gradient(circle at 88% 0%, rgba(232,116,79,.14), transparent 22rem),
+    linear-gradient(135deg, #211713 0%, #17110f 58%, #100d0c 100%) !important;
+  color: #fff;
+  box-shadow: 0 26px 70px rgba(0,0,0,.24) !important;
+}
+
+.pricing-page-v24 .pricing-overview-head-v24 {
+  display: grid;
+  grid-template-columns: minmax(0,.95fr) auto;
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 22px;
+}
+
+.pricing-page-v24 .pricing-overview-head-v24 .eyebrow {
+  color: #f1b078 !important;
+}
+
+.pricing-page-v24 .pricing-overview-head-v24 h1 {
+  max-width: 11ch;
+  margin: 6px 0 0;
+  color: #fff;
+  font-size: clamp(2.6rem,4.8vw,5rem);
+  line-height: .92;
+  letter-spacing: -.06em;
+}
+
+.pricing-page-v24 .pricing-overview-head-v24 > p {
+  max-width: 19rem;
+  margin: 0;
+  color: rgba(255,255,255,.56);
+  font-size: .9rem;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.pricing-page-v24 .pricing-overview-grid-v24 {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 10px;
+}
+
+.pricing-page-v24 .pricing-path-v24 {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr);
+  gap: 15px;
+  align-items: center;
+  min-height: 154px;
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 18px;
+  background: rgba(255,255,255,.045);
+  color: #fff;
+  text-decoration: none;
+  transition: transform .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.pricing-page-v24 .pricing-path-v24:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.22);
+  background: rgba(255,255,255,.075);
+}
+
+.pricing-page-v24 .pricing-path-v24::after {
+  position: absolute;
+  right: -42px;
+  bottom: -56px;
+  width: 120px;
+  height: 120px;
+  border: 1px solid rgba(255,255,255,.05);
+  border-radius: 50%;
+  content: "";
+}
+
+.pricing-page-v24 .pricing-path-kicker-v24 {
+  display: block;
+  color: rgba(255,255,255,.46);
+  font-size: .6rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v24 .pricing-path-v24 strong {
+  display: block;
+  margin-top: 5px;
+  color: #fff;
+  font-size: 1.08rem;
+  line-height: 1.13;
+}
+
+.pricing-page-v24 .pricing-path-v24 small {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255,255,255,.55);
+  font-size: .7rem;
+}
+
+.pricing-page-v24 .pricing-path-arrow-v24 {
+  position: absolute;
+  right: 15px;
+  bottom: 13px;
+  color: rgba(255,255,255,.35);
+  font-size: 1rem;
+}
+
+.pricing-page-v24 .pricing-path-visual-v24 {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  flex: 0 0 auto;
+}
+
+.pricing-page-v24 .visual-welcome-v24 {
+  border: 1px solid rgba(255,199,176,.58);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.12), transparent 50%), rgba(183,66,85,.22);
+  box-shadow: 0 0 0 9px rgba(183,66,85,.08);
+}
+
+.pricing-page-v24 .visual-welcome-v24 span {
+  color: #ffd0bb;
+  font-size: 1.08rem;
+  font-weight: 850;
+}
+
+.pricing-page-v24 .path-welcome-v24 {
+  border-color: rgba(255,174,144,.2);
+  background:
+    radial-gradient(circle at 0 100%, rgba(183,66,85,.18), transparent 13rem),
+    rgba(255,255,255,.045);
+}
+
+.pricing-page-v24 .path-welcome-v24 .pricing-path-kicker-v24 {
+  color: #ffd0bb;
+}
+
+.pricing-page-v24 .visual-membership-v24 {
+  align-content: center;
+  gap: 5px;
+}
+
+.pricing-page-v24 .visual-membership-v24 i {
+  display: block;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(210,248,90,.72);
+  box-shadow: 0 0 18px rgba(210,248,90,.09);
+}
+
+.pricing-page-v24 .visual-membership-v24 i:nth-child(1) { width: 31px; }
+.pricing-page-v24 .visual-membership-v24 i:nth-child(2) { width: 42px; }
+.pricing-page-v24 .visual-membership-v24 i:nth-child(3) { width: 53px; }
+
+.pricing-page-v24 .path-membership-v24 {
+  border-color: rgba(210,248,90,.18);
+  background:
+    radial-gradient(circle at 0 100%, rgba(210,248,90,.08), transparent 13rem),
+    rgba(255,255,255,.045);
+}
+
+.pricing-page-v24 .path-membership-v24 .pricing-path-kicker-v24 {
+  color: #d2f85a;
+}
+
+.pricing-page-v24 .visual-flex-v24 i {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgba(241,176,120,.8);
+  border-radius: 50%;
+  background: #211713;
+}
+
+.pricing-page-v24 .visual-flex-v24 i:nth-child(1) { top: 10px; left: 9px; }
+.pricing-page-v24 .visual-flex-v24 i:nth-child(2) { top: 24px; left: 28px; }
+.pricing-page-v24 .visual-flex-v24 i:nth-child(3) { right: 7px; bottom: 8px; }
+
+.pricing-page-v24 .visual-flex-v24::before,
+.pricing-page-v24 .visual-flex-v24::after {
+  position: absolute;
+  height: 1px;
+  background: rgba(241,176,120,.5);
+  content: "";
+  transform-origin: left center;
+}
+
+.pricing-page-v24 .visual-flex-v24::before {
+  top: 21px;
+  left: 16px;
+  width: 24px;
+  transform: rotate(34deg);
+}
+
+.pricing-page-v24 .visual-flex-v24::after {
+  top: 35px;
+  left: 35px;
+  width: 23px;
+  transform: rotate(36deg);
+}
+
+.pricing-page-v24 .visual-usc-v24 {
+  border: 1px solid rgba(158,176,255,.46);
+  border-radius: 16px;
+  background: rgba(92,129,255,.09);
+}
+
+.pricing-page-v24 .visual-usc-v24 span {
+  color: #bcc7ff;
+  font-size: .78rem;
+  font-weight: 850;
+  letter-spacing: .03em;
+}
+
+.pricing-page-v24 .path-usc-v24 .pricing-path-kicker-v24 {
+  color: #bcc7ff;
+}
+
+/* membership section becomes the main visual decision */
+.pricing-page-v24 .pricing-v23 {
+  gap: 18px !important;
+}
+
+.pricing-page-v24 .pricing-memberships-v23 {
+  padding: clamp(34px,4.7vw,58px);
+  border-radius: 28px;
+}
+
+.pricing-page-v24 .pricing-memberships-v23 .pricing-chapter-v23 {
+  margin-bottom: 30px;
+}
+
+.pricing-page-v24 .membership-grid-v23 {
+  gap: 16px;
+}
+
+.pricing-page-v24 .membership-card-v24 {
+  position: relative;
+  min-height: 455px;
+  padding: clamp(28px,3.2vw,40px);
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.pricing-page-v24 .membership-card-v24::after {
+  position: absolute;
+  top: -95px;
+  right: -95px;
+  width: 230px;
+  height: 230px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.pricing-page-v24 .membership-card-visual-v24 {
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 50%;
+  background: rgba(255,255,255,.055);
+  box-shadow: inset 0 0 0 9px rgba(255,255,255,.025);
+}
+
+.pricing-page-v24 .membership-card-visual-v24 span {
+  color: inherit;
+  font-size: 1.25rem;
+  font-weight: 850;
+  letter-spacing: -.04em;
+}
+
+.pricing-page-v24 .membership-bronze-v20 .membership-card-visual-v24 {
+  border-color: rgba(226,153,101,.35);
+  background: rgba(171,99,55,.17);
+}
+
+.pricing-page-v24 .membership-silber-v20 .membership-card-visual-v24 {
+  border-color: rgba(58,46,39,.16);
+  background: rgba(58,46,39,.06);
+}
+
+.pricing-page-v24 .membership-gold-v20 .membership-card-visual-v24 {
+  border-color: rgba(246,198,100,.35);
+  background: rgba(246,198,100,.09);
+}
+
+.pricing-page-v24 .membership-top-v24 {
+  min-height: 26px;
+}
+
+.pricing-page-v24 .membership-card-v24 h3 {
+  margin-top: 24px;
+  font-size: clamp(2.2rem,3vw,3.25rem);
+}
+
+.pricing-page-v24 .membership-card-v24 .membership-price-v20 {
+  margin-top: 10px;
+  font-size: clamp(2.3rem,3.3vw,3.65rem);
+}
+
+.pricing-page-v24 .membership-shortcuts-v24 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.pricing-page-v24 .membership-shortcuts-v24 span {
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 999px;
+  background: rgba(255,255,255,.055);
+  color: rgba(255,255,255,.72);
+  font-size: .72rem;
+  line-height: 1.2;
+}
+
+.pricing-page-v24 .membership-silber-v20 .membership-shortcuts-v24 span {
+  border-color: rgba(45,35,29,.09);
+  background: rgba(45,35,29,.045);
+  color: #5d5048;
+}
+
+.pricing-page-v24 .membership-cta-v24 {
+  min-height: 52px;
+  margin-top: auto;
+  padding: 16px 18px 0;
+  border-top: 1px solid rgba(255,255,255,.14);
+  font-size: .9rem;
+}
+
+.pricing-page-v24 .membership-silber-v20 .membership-cta-v24 {
+  border-top-color: rgba(45,35,29,.12);
+}
+
+@media (max-width: 1040px) {
+  .pricing-page-v24 .pricing-overview-grid-v24 {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+
+  .pricing-page-v24 .pricing-path-v24 {
+    min-height: 142px;
+  }
+
+  .pricing-page-v24 .membership-grid-v23 {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v24 .membership-card-v24 {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .pricing-page-v24 .pricing-main-v19-redesign {
+    padding-top: 12px;
+  }
+
+  .pricing-page-v24 .pricing-overview-v24 {
+    padding: 22px 16px !important;
+    border-radius: 19px !important;
+  }
+
+  .pricing-page-v24 .pricing-overview-head-v24 {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .pricing-page-v24 .pricing-overview-head-v24 h1 {
+    font-size: clamp(2.45rem,12vw,3.75rem);
+  }
+
+  .pricing-page-v24 .pricing-overview-head-v24 > p {
+    max-width: 27rem;
+    text-align: left;
+  }
+
+  .pricing-page-v24 .pricing-overview-grid-v24 {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .pricing-page-v24 .pricing-path-v24 {
+    min-height: 112px;
+    grid-template-columns: 54px 1fr;
+    padding: 16px;
+  }
+
+  .pricing-page-v24 .pricing-path-visual-v24 {
+    width: 48px;
+    height: 48px;
+  }
+
+  .pricing-page-v24 .visual-membership-v24 i:nth-child(1) { width: 27px; }
+  .pricing-page-v24 .visual-membership-v24 i:nth-child(2) { width: 35px; }
+  .pricing-page-v24 .visual-membership-v24 i:nth-child(3) { width: 43px; }
+
+  .pricing-page-v24 .pricing-memberships-v23 {
+    padding: 27px 18px !important;
+  }
+
+  .pricing-page-v24 .membership-card-v24 {
+    padding: 26px 22px;
+    border-radius: 18px;
+  }
+
+  .pricing-page-v24 .membership-card-visual-v24 {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 22px;
+  }
+
+  .pricing-page-v24 .membership-card-v24 h3 {
+    font-size: clamp(2rem,10vw,2.8rem);
+  }
+
+  .pricing-page-v24 .membership-card-v24 .membership-price-v20 {
+    font-size: clamp(2.1rem,10vw,3rem);
+  }
+}

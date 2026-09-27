@@ -885,3 +885,301 @@
     font-size: clamp(2.2rem, 11vw, 3.2rem);
   }
 }
+
+
+/* ---------- V22: pricing should behave like a decision page, not a splash page ---------- */
+.pricing-page-v22 .pricing-main-v19-redesign {
+  gap: clamp(16px, 2vw, 26px);
+}
+
+.pricing-page-v22 .pricing-hero-v22 {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(520px, 1.1fr);
+  gap: clamp(28px, 4vw, 54px);
+  align-items: center;
+  min-height: 0;
+  margin-bottom: 0;
+  padding: clamp(30px, 4.2vw, 50px);
+  overflow: hidden;
+  border: 1px solid rgba(243,185,128,.16);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 86% 0%, rgba(232,116,79,.16), transparent 22rem),
+    linear-gradient(135deg, #211713 0%, #17110f 56%, #100d0c 100%);
+  color: #fff;
+  box-shadow: 0 26px 70px rgba(0,0,0,.25);
+}
+
+.pricing-page-v22 .pricing-hero-copy-v22 {
+  max-width: 590px;
+}
+
+.pricing-page-v22 .pricing-hero-v22 .eyebrow {
+  color: #f1b078 !important;
+}
+
+.pricing-page-v22 .pricing-hero-v22 .page-title {
+  max-width: 12ch;
+  margin: 10px 0 0;
+  color: #fff !important;
+  font-size: clamp(2.7rem, 4.7vw, 5.4rem);
+  line-height: .93;
+  letter-spacing: -.06em;
+}
+
+.pricing-page-v22 .pricing-hero-v22 .lead {
+  max-width: 34rem;
+  margin: 18px 0 0;
+  color: rgba(255,255,255,.68);
+  font-size: .98rem;
+  line-height: 1.58;
+}
+
+.pricing-page-v22 .pricing-hero-v22 .actions {
+  margin-top: 22px;
+}
+
+.pricing-page-v22 .pricing-hero-v22 .button.primary {
+  border-color: #d2f85a;
+  background: #d2f85a;
+  color: #16120f;
+  box-shadow: none;
+}
+
+.pricing-page-v22 .pricing-hero-v22 .button.primary:hover {
+  border-color: #defb78;
+  background: #defb78;
+}
+
+.pricing-page-v22 .pricing-hero-v22 .button.secondary {
+  border-color: rgba(255,255,255,.18);
+  background: rgba(255,255,255,.055);
+  color: #fff;
+}
+
+.pricing-page-v22 .pricing-quick-grid-v22 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 10px;
+}
+
+.pricing-page-v22 .pricing-quick-card-v22 {
+  display: flex;
+  min-height: 132px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 19px 20px;
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 16px;
+  background: rgba(255,255,255,.045);
+  color: #fff;
+  text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.pricing-page-v22 .pricing-quick-card-v22:hover {
+  transform: translateY(-3px);
+  border-color: rgba(210,248,90,.42);
+  background: rgba(255,255,255,.075);
+}
+
+.pricing-page-v22 .pricing-quick-card-v22 > span {
+  color: #e6a16f;
+  font-size: .62rem;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.pricing-page-v22 .pricing-quick-card-v22 > strong {
+  margin-top: 7px;
+  color: #fff;
+  font-size: 1.05rem;
+  line-height: 1.15;
+}
+
+.pricing-page-v22 .pricing-quick-card-v22 > b {
+  margin-top: 8px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.pricing-page-v22 .pricing-quick-card-v22 > small {
+  margin-top: 6px;
+  color: rgba(255,255,255,.55);
+  font-size: .68rem;
+  line-height: 1.35;
+}
+
+.pricing-page-v22 .pricing-quick-membership-v22 {
+  border-color: rgba(210,248,90,.38);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(210,248,90,.11), transparent 12rem),
+    rgba(255,255,255,.065);
+}
+
+.pricing-page-v22 .pricing-quick-membership-v22 > span {
+  color: #d2f85a;
+}
+
+.pricing-page-v22 .pricing-quick-membership-prices-v22 {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.pricing-page-v22 .pricing-quick-membership-prices-v22 b {
+  flex: 1;
+  padding: 7px 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font-size: .84rem;
+  text-align: center;
+}
+
+.pricing-page-v22 .pricing-v20 {
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.pricing-page-v22 .pricing-memberships-v20,
+.pricing-page-v22 .pricing-start-v20,
+.pricing-page-v22 .pricing-flex-v20 {
+  scroll-margin-top: 92px;
+}
+
+.pricing-page-v22 .pricing-chapter-v20 {
+  margin-bottom: 22px;
+}
+
+.pricing-page-v22 .pricing-chapter-v20 h2 {
+  margin: 0;
+  color: #281e18;
+  font-size: clamp(2rem, 3.8vw, 3.85rem);
+  line-height: .97;
+  letter-spacing: -.045em;
+}
+
+.pricing-page-v22 .pricing-memberships-v20 .pricing-chapter-v20 h2 {
+  color: #fff;
+}
+
+.pricing-page-v22 .pricing-memberships-v20 {
+  padding: clamp(30px, 4vw, 52px);
+}
+
+.pricing-page-v22 .membership-card-v20 {
+  min-height: 400px;
+}
+
+.pricing-page-v22 .membership-card-v20 h3 {
+  margin: 26px 0 0;
+  color: inherit;
+  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+  letter-spacing: -.045em;
+}
+
+.pricing-page-v22 .price-option-v20 h3 {
+  margin: 9px 0 0;
+  color: inherit;
+  font-size: clamp(1.65rem, 2.5vw, 2.5rem);
+  letter-spacing: -.035em;
+}
+
+.pricing-page-v22 .flex-price-name-v20 h3 {
+  margin: 5px 0 0;
+  color: #2d221c;
+  font-size: 1.25rem;
+}
+
+.pricing-page-v22 .pricing-start-v20 {
+  padding: clamp(28px, 4vw, 52px);
+}
+
+.pricing-page-v22 .price-option-v20 {
+  min-height: 340px;
+}
+
+.pricing-page-v22 .pricing-flex-v20 {
+  padding: clamp(28px, 4vw, 50px);
+}
+
+.pricing-page-v22 #usc {
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 1040px) {
+  .pricing-page-v22 .pricing-hero-v22 {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v22 .pricing-hero-copy-v22 {
+    max-width: 760px;
+  }
+
+  .pricing-page-v22 .pricing-quick-grid-v22 {
+    grid-template-columns: repeat(4, minmax(0,1fr));
+  }
+
+  .pricing-page-v22 .pricing-quick-card-v22 {
+    min-height: 150px;
+  }
+
+  .pricing-page-v22 .pricing-quick-membership-prices-v22 {
+    gap: 4px;
+  }
+
+  .pricing-page-v22 .pricing-quick-membership-prices-v22 b {
+    padding-inline: 5px;
+    font-size: .75rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .pricing-page-v22 .pricing-hero-v22 {
+    padding: 26px 18px 18px;
+    border-radius: 20px;
+  }
+
+  .pricing-page-v22 .pricing-hero-v22 .page-title {
+    max-width: 13ch;
+    font-size: clamp(2.6rem, 12.5vw, 4rem);
+  }
+
+  .pricing-page-v22 .pricing-hero-v22 .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v22 .pricing-hero-v22 .button {
+    width: 100%;
+  }
+
+  .pricing-page-v22 .pricing-quick-grid-v22 {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .pricing-page-v22 .pricing-quick-card-v22 {
+    min-height: 132px;
+    padding: 17px 16px;
+  }
+
+  .pricing-page-v22 .pricing-chapter-v20 h2 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .pricing-page-v22 .membership-card-v20,
+  .pricing-page-v22 .price-option-v20 {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing-page-v22 .pricing-quick-grid-v22 {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-page-v22 .pricing-quick-card-v22 {
+    min-height: 0;
+  }
+}

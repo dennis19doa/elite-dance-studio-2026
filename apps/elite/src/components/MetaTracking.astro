@@ -1,0 +1,293 @@
+---
+const pixelId = "1091673576684496";
+---
+
+<div class="tracking-consent" data-tracking-consent hidden role="dialog" aria-modal="true" aria-labelledby="tracking-consent-title">
+  <div class="tracking-consent__copy">
+    <strong id="tracking-consent-title">Marketing & Conversion Tracking</strong>
+    <p>
+      Wir verwenden optional den Meta Pixel, um zu verstehen, welche Anzeigen zu Website-Besuchen und
+      Buchungsinteresse führen. Ohne deine Zustimmung wird der Meta Pixel nicht geladen.
+    </p>
+  </div>
+  <div class="tracking-consent__actions">
+    <button type="button" class="tracking-consent__button tracking-consent__button--secondary" data-consent-reject>
+      Nur notwendige
+    </button>
+    <button type="button" class="tracking-consent__button tracking-consent__button--primary" data-consent-accept>
+      Marketing akzeptieren
+    </button>
+  </div>
+</div>
+
+<style>
+  .tracking-consent[hidden] {
+    display: none;
+  }
+
+  .tracking-consent {
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    width: min(760px, calc(100% - 28px));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 22px;
+    align-items: center;
+    padding: 18px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 18px;
+    background: rgba(23, 18, 15, 0.97);
+    color: #fff;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.34);
+    backdrop-filter: blur(18px);
+  }
+
+  .tracking-consent__copy {
+    display: grid;
+    gap: 5px;
+  }
+
+  .tracking-consent__copy strong {
+    font-family: "Sora", sans-serif;
+    font-size: 0.95rem;
+  }
+
+  .tracking-consent__copy p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .tracking-consent__actions {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .tracking-consent__button {
+    min-height: 42px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .tracking-consent__button--secondary {
+    background: transparent;
+    color: #fff;
+  }
+
+  .tracking-consent__button--primary {
+    background: #fff;
+    color: #17120f;
+  }
+
+  @media (max-width: 720px) {
+    .tracking-consent {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      bottom: 10px;
+      padding: 16px;
+    }
+
+    .tracking-consent__actions {
+      justify-content: stretch;
+    }
+
+    .tracking-consent__button {
+      flex: 1 1 150px;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ pixelId }}>
+  (() => {
+    const CONSENT_KEY = "elite_marketing_consent_v1";
+    const ATTRIBUTION_KEY = "elite_ad_attribution_v1";
+    const banner = document.querySelector("[data-tracking-consent]");
+    const acceptButton = banner?.querySelector("[data-consent-accept]");
+    const rejectButton = banner?.querySelector("[data-consent-reject]");
+
+    let pixelLoaded = false;
+    let consentGranted = false;
+    let checkoutTrackingBound = false;
+
+    const offerByProductId = {
+      "eaed6a11-d4bb-44ff-8b0d-ab8acf6828f3": {
+        content_name: "Welcome Pass",
+        content_category: "Welcome Pass",
+        value: 20
+      },
+      "0ce8358e-16f9-43f8-9c30-1bf439a02d81": {
+        content_name: "Bronze Membership",
+        content_category: "Membership",
+        value: 45
+      },
+      "410b52c2-ce29-41b8-9f3f-7b20b5c9ee4e": {
+        content_name: "Silber Membership",
+        content_category: "Membership",
+        value: 79
+      },
+      "f907a51f-2172-40de-a721-cebc6da4ca64": {
+        content_name: "Gold Membership",
+        content_category: "Membership",
+        value: 99
+      }
+    };
+
+    const showBanner = () => {
+      if (banner) banner.hidden = false;
+    };
+
+    const hideBanner = () => {
+      if (banner) banner.hidden = true;
+    };
+
+    const captureAttribution = () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const keys = [
+          "utm_source",
+          "utm_medium",
+          "utm_campaign",
+          "utm_content",
+          "utm_term",
+          "campaign_id",
+          "adset_id",
+          "ad_id",
+          "fbclid"
+        ];
+        const attribution = {};
+        keys.forEach((key) => {
+          const value = params.get(key);
+          if (value) attribution[key] = value;
+        });
+        if (Object.keys(attribution).length) {
+          attribution.landing_page = window.location.pathname;
+          attribution.captured_at = new Date().toISOString();
+          sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(attribution));
+        }
+      } catch {
+        // Tracking must never interfere with the website.
+      }
+    };
+
+    const trackCurrentPage = () => {
+      if (!consentGranted || typeof window.fbq !== "function") return;
+
+      const path = window.location.pathname.replace(/\/+$/, "");
+      if (path.endsWith("/starter-pass")) {
+        window.fbq("track", "ViewContent", {
+          content_name: "Welcome Pass",
+          content_category: "Welcome Pass",
+          content_type: "product",
+          value: 20,
+          currency: "EUR"
+        });
+      }
+    };
+
+    const bindCheckoutTracking = () => {
+      if (checkoutTrackingBound) return;
+      checkoutTrackingBound = true;
+
+      document.addEventListener("click", (event) => {
+        const link = event.target?.closest?.("a[href]");
+        if (!link || !consentGranted || typeof window.fbq !== "function") return;
+
+        const href = link.getAttribute("href") || "";
+        if (!href.includes("eversports.de")) return;
+
+        const match = Object.entries(offerByProductId).find(([productId]) => href.includes(productId));
+        if (!match) return;
+
+        const [, offer] = match;
+        window.fbq("track", "InitiateCheckout", {
+          ...offer,
+          content_type: "product",
+          currency: "EUR"
+        });
+      });
+    };
+
+    const loadMetaPixel = () => {
+      consentGranted = true;
+      captureAttribution();
+      bindCheckoutTracking();
+
+      if (pixelLoaded) {
+        if (typeof window.fbq === "function") window.fbq("consent", "grant");
+        return;
+      }
+
+      pixelLoaded = true;
+
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = true;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = true;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+
+      window.fbq("consent", "grant");
+      window.fbq("init", pixelId);
+      window.fbq("track", "PageView");
+      trackCurrentPage();
+    };
+
+    const clearMetaCookies = () => {
+      ["_fbp", "_fbc"].forEach((name) => {
+        document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+      });
+    };
+
+    const grantConsent = () => {
+      localStorage.setItem(CONSENT_KEY, "granted");
+      hideBanner();
+      loadMetaPixel();
+    };
+
+    const rejectConsent = () => {
+      consentGranted = false;
+      localStorage.setItem(CONSENT_KEY, "denied");
+      if (typeof window.fbq === "function") window.fbq("consent", "revoke");
+      clearMetaCookies();
+      hideBanner();
+    };
+
+    acceptButton?.addEventListener("click", grantConsent);
+    rejectButton?.addEventListener("click", rejectConsent);
+
+    document.addEventListener("click", (event) => {
+      if (event.target?.closest?.("[data-open-tracking-settings]")) {
+        event.preventDefault();
+        showBanner();
+      }
+    });
+
+    const savedConsent = localStorage.getItem(CONSENT_KEY);
+    if (savedConsent === "granted") {
+      loadMetaPixel();
+    } else if (savedConsent !== "denied") {
+      showBanner();
+    }
+  })();
+</script>

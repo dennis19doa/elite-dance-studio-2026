@@ -90,6 +90,24 @@ const pixelId = "1091673576684496";
     color: #17120f;
   }
 
+  :global(.footer-cookie-settings) {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    opacity: 0.72;
+  }
+
+  :global(.footer-cookie-settings:hover),
+  :global(.footer-cookie-settings:focus-visible) {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
   @media (max-width: 720px) {
     .tracking-consent {
       grid-template-columns: 1fr;

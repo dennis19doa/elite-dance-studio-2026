@@ -26,6 +26,7 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_UR
     </div>
     <nav class="footer-nav" aria-label="Footer">
       {footerLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+      <button type="button" class="footer-cookie-settings" data-open-tracking-settings>Cookie-Einstellungen</button>
     </nav>
   </div>
 </footer>

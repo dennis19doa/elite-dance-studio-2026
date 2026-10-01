@@ -43,7 +43,11 @@ export async function onRequestGet({ request, env }) {
     const url = new URL(request.url);
     const rawDays = Number.parseInt(url.searchParams.get("days") || "30", 10);
     const days = Number.isFinite(rawDays) ? Math.min(Math.max(rawDays, 1), 365) : 30;
+    const includeTests = url.searchParams.get("tests") === "1";
     const since = new Date(Date.now() - (days * 86400000)).toISOString();
+    const campaignFilter = includeTests
+      ? ""
+      : " AND campaign NOT LIKE 'test_%' AND campaign NOT LIKE 'test-%'";
 
     await ensureSchema(env.ANALYTICS_DB);
 
@@ -54,7 +58,7 @@ export async function onRequestGet({ request, env }) {
         SUM(CASE WHEN event_type = 'welcome_pass_checkout_click' THEN 1 ELSE 0 END) AS checkout_clicks,
         SUM(CASE WHEN event_type = 'membership_checkout_click' THEN 1 ELSE 0 END) AS membership_clicks
       FROM marketing_events
-      WHERE created_at >= ?
+      WHERE created_at >= ?${campaignFilter}
     `).bind(since);
 
     const campaignQuery = env.ANALYTICS_DB.prepare(`
@@ -69,7 +73,7 @@ export async function onRequestGet({ request, env }) {
         MIN(created_at) AS first_seen,
         MAX(created_at) AS last_seen
       FROM marketing_events
-      WHERE created_at >= ?
+      WHERE created_at >= ?${campaignFilter}
       GROUP BY campaign, creative, source
       ORDER BY checkout_clicks DESC, visits DESC
     `).bind(since);
@@ -80,7 +84,7 @@ export async function onRequestGet({ request, env }) {
         SUM(CASE WHEN event_type = 'landing' THEN 1 ELSE 0 END) AS visits,
         SUM(CASE WHEN event_type = 'welcome_pass_checkout_click' THEN 1 ELSE 0 END) AS checkout_clicks
       FROM marketing_events
-      WHERE created_at >= ?
+      WHERE created_at >= ?${campaignFilter}
       GROUP BY substr(created_at, 1, 10)
       ORDER BY date ASC
     `).bind(since);
@@ -95,11 +99,13 @@ export async function onRequestGet({ request, env }) {
     return json({
       ok: true,
       days,
+      includeTests,
       summary: {
         visits: Number(summary.visits || 0),
         starterPassViews: Number(summary.starter_pass_views || 0),
         checkoutClicks: Number(summary.checkout_clicks || 0),
-        membershipClicks: Number(summary.membership_clicks || 0)
+        membershipClicks: Number(summary.membership_clicks || 0),
+        activeCreatives: (campaignResult.results || []).length
       },
       campaigns: (campaignResult.results || []).map((row) => ({
         campaign: row.campaign,

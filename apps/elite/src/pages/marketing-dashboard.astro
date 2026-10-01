@@ -9,11 +9,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   bodyClass="marketing-dashboard-page"
 >
   <main class="marketing-dashboard-shell">
-    <header class="marketing-dashboard-header">
+    <header class="dashboard-header">
       <div>
         <span class="dashboard-kicker">ELITE DANCE · INTERNAL</span>
-        <h1>Marketing Dashboard</h1>
-        <p>Instagram campaign traffic → Welcome Pass intent → Eversports checkout clicks.</p>
+        <h1>Marketing performance</h1>
+        <p>Measure which Instagram creatives bring people closest to buying the Welcome Pass.</p>
       </div>
       <a href="/" class="dashboard-home-link">← Website</a>
     </header>
@@ -47,51 +47,76 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <section class="dashboard-content" data-dashboard-content hidden>
       <div class="dashboard-toolbar">
-        <div>
-          <span>Reporting period</span>
+        <div class="dashboard-toolbar-section">
+          <span class="toolbar-label">Reporting period</span>
           <div class="dashboard-range" role="group" aria-label="Reporting period">
             <button type="button" data-days="7">7 days</button>
             <button type="button" data-days="30" class="is-active">30 days</button>
             <button type="button" data-days="90">90 days</button>
           </div>
         </div>
+
         <div class="dashboard-toolbar-actions">
+          <label class="test-toggle">
+            <input type="checkbox" data-include-tests />
+            <span>Show test campaigns</span>
+          </label>
           <span class="dashboard-user" data-dashboard-user></span>
-          <button type="button" class="dashboard-refresh" data-dashboard-refresh>Refresh</button>
-          <button type="button" class="dashboard-refresh" data-dashboard-logout>Sign out</button>
+          <button type="button" class="dashboard-quiet-button" data-dashboard-refresh>Refresh</button>
+          <button type="button" class="dashboard-quiet-button" data-dashboard-logout>Sign out</button>
         </div>
       </div>
 
       <div class="dashboard-metrics">
         <article>
-          <span>Campaign visits</span>
+          <span>Tracked visits</span>
           <strong data-metric="visits">0</strong>
-          <small>Visits arriving with a campaign link</small>
-        </article>
-        <article>
-          <span>Welcome Pass views</span>
-          <strong data-metric="starterPassViews">0</strong>
-          <small>Reached the Welcome Pass page</small>
+          <small>Campaign entries, not unique people</small>
         </article>
         <article class="is-primary">
-          <span>Eversports checkout clicks</span>
+          <span>Checkout intent</span>
           <strong data-metric="checkoutClicks">0</strong>
-          <small>Clicked “Welcome Pass kaufen”</small>
+          <small>Clicks on “Welcome Pass kaufen”</small>
         </article>
         <article>
           <span>Intent rate</span>
           <strong data-metric="intentRate">0%</strong>
           <small>Checkout clicks ÷ campaign visits</small>
         </article>
+        <article>
+          <span>Creatives tracked</span>
+          <strong data-metric="activeCreatives">0</strong>
+          <small>Campaign + creative combinations</small>
+        </article>
       </div>
+
+      <section class="dashboard-insight-grid">
+        <article class="dashboard-panel dashboard-highlight">
+          <span class="dashboard-kicker">Current signal</span>
+          <h2 data-best-creative>Not enough data yet</h2>
+          <p data-best-detail>
+            Once a creative has at least 10 tracked visits, we’ll surface the strongest checkout-intent signal here.
+          </p>
+        </article>
+
+        <article class="dashboard-panel dashboard-definition">
+          <span class="dashboard-kicker">How to read this</span>
+          <p>
+            <strong>Checkout intent</strong> is our main interim conversion metric. It means a visitor
+            clicked through to Eversports to buy the Welcome Pass. It is not yet a confirmed Eversports purchase.
+          </p>
+        </article>
+      </section>
 
       <section class="dashboard-panel">
         <div class="dashboard-panel-head">
           <div>
-            <span class="dashboard-kicker">Campaign comparison</span>
-            <h2>Which creative brings buying intent?</h2>
+            <span class="dashboard-kicker">Creative comparison</span>
+            <h2>Which ad attracts people with buying intent?</h2>
           </div>
+          <p>Compare intent rate only after each creative has enough visits. Very small samples can look misleadingly strong.</p>
         </div>
+
         <div class="dashboard-table-wrap">
           <table>
             <thead>
@@ -99,9 +124,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 <th>Campaign</th>
                 <th>Creative</th>
                 <th>Visits</th>
-                <th>Pass views</th>
                 <th>Checkout clicks</th>
                 <th>Intent rate</th>
+                <th>Data quality</th>
+                <th>Last activity</th>
               </tr>
             </thead>
             <tbody data-campaign-rows></tbody>
@@ -109,12 +135,35 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
       </section>
 
-      <section class="dashboard-panel dashboard-link-builder">
-        <div>
-          <span class="dashboard-kicker">Link builder</span>
-          <h2>Create the link for your next Instagram ad.</h2>
-          <p>Use one campaign name and one creative name per ad so the dashboard can compare them.</p>
+      <section class="dashboard-panel">
+        <div class="dashboard-panel-head">
+          <div>
+            <span class="dashboard-kicker">Activity over time</span>
+            <h2>Visits and checkout intent by day</h2>
+          </div>
+          <p>Useful for seeing whether campaign traffic is turning into stronger intent over time.</p>
         </div>
+        <div class="trend-chart" data-trend-chart>
+          <p class="empty-state">No campaign activity yet.</p>
+        </div>
+        <div class="trend-legend">
+          <span><i class="legend-swatch visits"></i> Visits</span>
+          <span><i class="legend-swatch checkouts"></i> Checkout clicks</span>
+        </div>
+      </section>
+
+      <section class="dashboard-panel dashboard-link-builder">
+        <div class="dashboard-panel-head">
+          <div>
+            <span class="dashboard-kicker">Campaign link builder</span>
+            <h2>Create the link for your next Instagram ad</h2>
+          </div>
+          <p>
+            Keep the campaign name the same across an A/B test and change only the creative name.
+            Example: <strong>reggaeton_october</strong> + <strong>class_video_01</strong>.
+          </p>
+        </div>
+
         <div class="dashboard-builder-grid">
           <label>
             Campaign
@@ -125,10 +174,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <input type="text" data-builder-creative placeholder="class_video_01" />
           </label>
         </div>
+
         <div class="dashboard-generated-link">
           <input type="text" readonly data-builder-output />
           <button type="button" data-builder-copy>Copy link</button>
         </div>
+
+        <p class="builder-note">
+          This link sends visitors directly to the Welcome Pass page. Campaign attribution stays attached while they browse Elite,
+          without using marketing cookies.
+        </p>
       </section>
     </section>
   </main>
@@ -144,10 +199,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     .marketing-dashboard-shell {
       width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 42px 0 70px;
+      padding: 38px 0 70px;
     }
 
-    .marketing-dashboard-header,
+    .dashboard-header,
     .dashboard-toolbar,
     .dashboard-panel-head {
       display: flex;
@@ -156,30 +211,40 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       gap: 24px;
     }
 
-    .marketing-dashboard-header {
-      margin-bottom: 28px;
+    .dashboard-header {
+      margin-bottom: 24px;
     }
 
-    .marketing-dashboard-header h1,
-    .dashboard-panel h2 {
+    .dashboard-header h1,
+    .dashboard-panel h2,
+    .dashboard-login h2 {
       margin: 5px 0 8px;
       font-family: "Sora", sans-serif;
+      letter-spacing: -0.035em;
     }
 
-    .marketing-dashboard-header h1 {
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      letter-spacing: -0.04em;
+    .dashboard-header h1 {
+      font-size: clamp(2rem, 4vw, 3.35rem);
     }
 
-    .marketing-dashboard-header p,
-    .dashboard-panel p,
-    .dashboard-login p {
+    .dashboard-header > div > p,
+    .dashboard-panel-head > p,
+    .dashboard-definition p,
+    .dashboard-highlight p,
+    .dashboard-login p,
+    .builder-note {
       margin: 0;
-      color: rgba(247, 242, 236, 0.68);
+      color: rgba(247, 242, 236, 0.64);
+      line-height: 1.55;
+    }
+
+    .dashboard-panel-head > p {
+      max-width: 430px;
+      font-size: 0.84rem;
     }
 
     .dashboard-kicker {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -189,9 +254,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     .dashboard-home-link {
       color: #f7f2ec;
       text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 999px;
       padding: 10px 14px;
+      white-space: nowrap;
     }
 
     .dashboard-login,
@@ -210,12 +276,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     .dashboard-login label,
     .dashboard-builder-grid label,
-    .dashboard-toolbar > div > span {
+    .toolbar-label {
       display: block;
       margin-bottom: 8px;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 700;
-      color: rgba(247, 242, 236, 0.72);
+      color: rgba(247, 242, 236, 0.68);
     }
 
     .dashboard-login-row,
@@ -239,7 +305,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     .dashboard-login button,
     .dashboard-range button,
-    .dashboard-refresh,
+    .dashboard-quiet-button,
     .dashboard-generated-link button {
       border: 0;
       border-radius: 12px;
@@ -263,6 +329,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       text-decoration: underline;
     }
 
+    .dashboard-content {
+      display: grid;
+      gap: 18px;
+    }
+
+    .dashboard-toolbar {
+      padding: 14px 16px;
+      align-items: center;
+    }
+
     .dashboard-toolbar-actions {
       display: flex;
       align-items: center;
@@ -272,24 +348,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     .dashboard-user {
-      margin-right: 4px;
-      color: rgba(247, 242, 236, 0.58);
-      font-size: 0.78rem;
-    }
-
-    .dashboard-login p {
-      margin-top: 10px;
-      font-size: 0.78rem;
-    }
-
-    .dashboard-content {
-      display: grid;
-      gap: 18px;
-    }
-
-    .dashboard-toolbar {
-      padding: 16px 18px;
-      align-items: center;
+      color: rgba(247, 242, 236, 0.54);
+      font-size: 0.76rem;
     }
 
     .dashboard-range {
@@ -298,7 +358,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     }
 
     .dashboard-range button,
-    .dashboard-refresh {
+    .dashboard-quiet-button {
       background: rgba(255, 255, 255, 0.07);
       color: rgba(255, 255, 255, 0.76);
     }
@@ -308,36 +368,75 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       color: #17110e;
     }
 
+    .test-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.045);
+      color: rgba(247, 242, 236, 0.68);
+      font-size: 0.76rem;
+      cursor: pointer;
+    }
+
+    .test-toggle input {
+      accent-color: #f6ece2;
+    }
+
     .dashboard-metrics {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
     }
 
     .dashboard-metrics article {
-      padding: 19px;
+      padding: 18px;
     }
 
     .dashboard-metrics article.is-primary {
-      border-color: rgba(212, 70, 88, 0.55);
-      background: linear-gradient(145deg, rgba(157, 26, 47, 0.28), rgba(255, 255, 255, 0.035));
+      border-color: rgba(212, 70, 88, 0.50);
+      background: linear-gradient(145deg, rgba(157, 26, 47, 0.25), rgba(255, 255, 255, 0.035));
     }
 
     .dashboard-metrics span,
     .dashboard-metrics small {
       display: block;
-      color: rgba(247, 242, 236, 0.62);
+      color: rgba(247, 242, 236, 0.60);
     }
 
     .dashboard-metrics strong {
       display: block;
       margin: 8px 0 5px;
       font-family: "Sora", sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-size: clamp(1.8rem, 3vw, 2.65rem);
+    }
+
+    .dashboard-metrics small {
+      font-size: 0.74rem;
+      line-height: 1.4;
+    }
+
+    .dashboard-insight-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 12px;
     }
 
     .dashboard-panel {
-      padding: 22px;
+      padding: 21px;
+    }
+
+    .dashboard-highlight {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+    }
+
+    .dashboard-highlight h2 {
+      font-size: clamp(1.35rem, 2.2vw, 2rem);
+    }
+
+    .dashboard-definition strong {
+      color: #fff;
     }
 
     .dashboard-table-wrap {
@@ -348,30 +447,127 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 760px;
+      min-width: 900px;
     }
 
     th,
     td {
       padding: 13px 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.075);
       text-align: left;
     }
 
     th {
-      color: rgba(247, 242, 236, 0.54);
-      font-size: 0.72rem;
+      color: rgba(247, 242, 236, 0.50);
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
 
     td {
-      font-size: 0.9rem;
+      font-size: 0.86rem;
     }
 
     td.metric-strong {
       font-weight: 800;
       color: #fff;
+    }
+
+    .quality-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      color: rgba(247, 242, 236, 0.72);
+      font-size: 0.7rem;
+      white-space: nowrap;
+    }
+
+    .quality-badge.is-ready {
+      background: rgba(102, 179, 124, 0.13);
+      color: #bfe9ca;
+    }
+
+    .trend-chart {
+      display: flex;
+      align-items: end;
+      gap: 8px;
+      min-height: 210px;
+      margin-top: 18px;
+      padding: 18px 8px 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .trend-day {
+      flex: 1 1 0;
+      min-width: 22px;
+      display: grid;
+      gap: 6px;
+      justify-items: center;
+    }
+
+    .trend-bars {
+      width: 100%;
+      height: 150px;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    .trend-bar {
+      width: min(15px, 42%);
+      min-height: 3px;
+      border-radius: 5px 5px 2px 2px;
+    }
+
+    .trend-bar.visits {
+      background: rgba(247, 242, 236, 0.30);
+    }
+
+    .trend-bar.checkouts {
+      background: #d75a6d;
+    }
+
+    .trend-day-label {
+      font-size: 0.64rem;
+      color: rgba(247, 242, 236, 0.46);
+      white-space: nowrap;
+    }
+
+    .trend-legend {
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+      margin-top: 10px;
+      color: rgba(247, 242, 236, 0.56);
+      font-size: 0.72rem;
+    }
+
+    .trend-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-swatch {
+      width: 9px;
+      height: 9px;
+      border-radius: 3px;
+    }
+
+    .legend-swatch.visits {
+      background: rgba(247, 242, 236, 0.30);
+    }
+
+    .legend-swatch.checkouts {
+      background: #d75a6d;
+    }
+
+    .empty-state {
+      margin: auto;
+      color: rgba(247, 242, 236, 0.48);
     }
 
     .dashboard-link-builder {
@@ -385,17 +581,30 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       gap: 12px;
     }
 
-    @media (max-width: 850px) {
+    .builder-note {
+      font-size: 0.76rem;
+    }
+
+    @media (max-width: 900px) {
       .dashboard-metrics {
         grid-template-columns: 1fr 1fr;
       }
+
+      .dashboard-insight-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
-    @media (max-width: 620px) {
-      .marketing-dashboard-header,
-      .dashboard-toolbar {
+    @media (max-width: 680px) {
+      .dashboard-header,
+      .dashboard-toolbar,
+      .dashboard-panel-head {
         align-items: stretch;
         flex-direction: column;
+      }
+
+      .dashboard-toolbar-actions {
+        justify-content: flex-start;
       }
 
       .dashboard-metrics,
@@ -406,6 +615,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       .dashboard-login-row,
       .dashboard-generated-link {
         flex-direction: column;
+      }
+
+      .trend-chart {
+        overflow-x: auto;
+        align-items: end;
+      }
+
+      .trend-day {
+        min-width: 34px;
       }
     }
   </style>
@@ -425,9 +643,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       const logoutButton = document.querySelector("[data-dashboard-logout]");
       const userLabel = document.querySelector("[data-dashboard-user]");
       const rangeButtons = [...document.querySelectorAll("[data-days]")];
+      const includeTestsInput = document.querySelector("[data-include-tests]");
       const rows = document.querySelector("[data-campaign-rows]");
+      const trendChart = document.querySelector("[data-trend-chart]");
+      const bestCreative = document.querySelector("[data-best-creative]");
+      const bestDetail = document.querySelector("[data-best-detail]");
 
       let days = 30;
+      let includeTests = false;
 
       const metric = (name, value) => {
         const node = document.querySelector(`[data-metric="${name}"]`);
@@ -446,26 +669,99 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
 
+      const quality = (visits) => {
+        if (visits >= 30) return { label: "Useful sample", className: "is-ready" };
+        if (visits >= 10) return { label: "Building", className: "" };
+        return { label: "Early data", className: "" };
+      };
+
+      const formatActivity = (iso) => {
+        if (!iso) return "—";
+        const date = new Date(iso);
+        if (Number.isNaN(date.getTime())) return "—";
+        return new Intl.DateTimeFormat("en-GB", {
+          day: "2-digit",
+          month: "short",
+          hour: "2-digit",
+          minute: "2-digit"
+        }).format(date);
+      };
+
+      const renderTrend = (daily) => {
+        if (!trendChart) return;
+        if (!daily?.length) {
+          trendChart.innerHTML = '<p class="empty-state">No campaign activity yet.</p>';
+          return;
+        }
+
+        const recent = daily.slice(-Math.min(daily.length, 21));
+        const maxValue = Math.max(1, ...recent.flatMap((item) => [item.visits || 0, item.checkoutClicks || 0]));
+
+        trendChart.innerHTML = recent.map((item) => {
+          const visitHeight = Math.max(3, Math.round(((item.visits || 0) / maxValue) * 145));
+          const checkoutHeight = Math.max(item.checkoutClicks ? 3 : 0, Math.round(((item.checkoutClicks || 0) / maxValue) * 145));
+          const label = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short" })
+            .format(new Date(`${item.date}T12:00:00Z`));
+
+          return `
+            <div class="trend-day" title="${escapeHtml(label)} · ${item.visits} visits · ${item.checkoutClicks} checkout clicks">
+              <div class="trend-bars">
+                <span class="trend-bar visits" style="height:${visitHeight}px"></span>
+                <span class="trend-bar checkouts" style="height:${checkoutHeight}px"></span>
+              </div>
+              <span class="trend-day-label">${escapeHtml(label)}</span>
+            </div>
+          `;
+        }).join("");
+      };
+
+      const renderBest = (campaigns) => {
+        const eligible = (campaigns || [])
+          .filter((item) => item.visits >= 10)
+          .map((item) => ({
+            ...item,
+            rate: item.visits ? item.checkoutClicks / item.visits : 0
+          }))
+          .sort((a, b) => b.rate - a.rate || b.checkoutClicks - a.checkoutClicks);
+
+        const top = eligible[0];
+        if (!top) {
+          bestCreative.textContent = "Not enough data yet";
+          bestDetail.textContent = "Once a creative has at least 10 tracked visits, we’ll surface the strongest checkout-intent signal here.";
+          return;
+        }
+
+        bestCreative.textContent = top.creative || top.campaign;
+        bestDetail.textContent = `${top.campaign} · ${percent(top.checkoutClicks, top.visits)} intent rate · ${top.checkoutClicks} checkout clicks from ${top.visits} tracked visits.`;
+      };
+
       const render = (data) => {
         const summary = data.summary || {};
         metric("visits", summary.visits || 0);
-        metric("starterPassViews", summary.starterPassViews || 0);
         metric("checkoutClicks", summary.checkoutClicks || 0);
         metric("intentRate", percent(summary.checkoutClicks || 0, summary.visits || 0));
+        metric("activeCreatives", summary.activeCreatives || 0);
 
         const campaigns = data.campaigns || [];
         rows.innerHTML = campaigns.length
-          ? campaigns.map((item) => `
-              <tr>
-                <td class="metric-strong">${escapeHtml(item.campaign)}</td>
-                <td>${escapeHtml(item.creative || "—")}</td>
-                <td>${item.visits}</td>
-                <td>${item.starterPassViews}</td>
-                <td class="metric-strong">${item.checkoutClicks}</td>
-                <td class="metric-strong">${percent(item.checkoutClicks, item.visits)}</td>
-              </tr>
-            `).join("")
-          : '<tr><td colspan="6">No campaign data yet for this period.</td></tr>';
+          ? campaigns.map((item) => {
+              const q = quality(item.visits);
+              return `
+                <tr>
+                  <td class="metric-strong">${escapeHtml(item.campaign)}</td>
+                  <td>${escapeHtml(item.creative || "—")}</td>
+                  <td>${item.visits}</td>
+                  <td class="metric-strong">${item.checkoutClicks}</td>
+                  <td class="metric-strong">${percent(item.checkoutClicks, item.visits)}</td>
+                  <td><span class="quality-badge ${q.className}">${q.label}</span></td>
+                  <td>${escapeHtml(formatActivity(item.lastSeen))}</td>
+                </tr>
+              `;
+            }).join("")
+          : '<tr><td colspan="7">No real campaign data yet for this period.</td></tr>';
+
+        renderBest(campaigns);
+        renderTrend(data.daily || []);
       };
 
       const showLogin = (text) => {
@@ -482,7 +778,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       const load = async () => {
         try {
-          const response = await fetch(`/api/marketing-stats?days=${days}`, {
+          const params = new URLSearchParams({ days: String(days) });
+          if (includeTests) params.set("tests", "1");
+
+          const response = await fetch(`/api/marketing-stats?${params.toString()}`, {
             cache: "no-store",
             credentials: "same-origin"
           });
@@ -619,6 +918,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           rangeButtons.forEach((item) => item.classList.toggle("is-active", item === button));
           load();
         });
+      });
+
+      includeTestsInput?.addEventListener("change", () => {
+        includeTests = Boolean(includeTestsInput.checked);
+        load();
       });
 
       const campaignInput = document.querySelector("[data-builder-campaign]");

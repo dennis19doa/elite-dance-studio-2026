@@ -4,6 +4,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import WelcomePassHero from "../components/WelcomePassHero.astro";
 import WelcomePassBenefits from "../components/WelcomePassBenefits.astro";
+import WelcomePassTrust from "../components/WelcomePassTrust.astro";
 import FirstVisitSection from "../components/FirstVisitSection.astro";
 import FaqSection from "../components/FaqSection.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
@@ -22,20 +23,21 @@ const welcomePassHref = "https://www.eversports.de/org/product/eaed6a11-d4bb-44f
 
   <main class="page-shell page-main">
     <WelcomePassHero hero={welcomePass.hero} />
+    <WelcomePassTrust address={site.visit.address} />
     <WelcomePassBenefits benefits={welcomePass.benefits} />
 
     <EversportsSchedule
       id="pass-kurse"
       eyebrow="Deine zwei Klassen"
-      title="Wähle im aktuellen Stundenplan."
-      description="Kaufe zuerst deinen Welcome Pass über Eversports und buche danach innerhalb von 10 Tagen zwei reguläre Classes. Du kannst unterschiedliche Styles testen; Advanced-Kurse, Closed Groups und Intensives sind ausgenommen."
+      title="Sieh vor dem Kauf, welche Classes aktuell laufen."
+      description="Der Stundenplan unten ist live. Für deinen Einstieg eignen sich besonders Level 0 und Beginner Classes. Nach dem Kauf buchst du deine zwei regulären Classes direkt über Eversports."
     />
 
     <FirstVisitSection
       steps={welcomePass.steps}
       eyebrow="So funktioniert es"
-      title="Vom Kauf bis zu deiner zweiten Klasse."
-      description="Direkt online kaufen, Classes auswählen und loslegen. Wenn du bei der Kurswahl unsicher bist, helfen wir dir natürlich trotzdem persönlich weiter."
+      title="Drei Schritte. Keine versteckten Hürden."
+      description="Kaufen, zwei Classes buchen, Elite kennenlernen. Wenn du bei der Kurswahl unsicher bist, helfen wir dir natürlich persönlich weiter."
     />
 
     <FaqSection
@@ -48,11 +50,11 @@ const welcomePassHref = "https://www.eversports.de/org/product/eaed6a11-d4bb-44f
     <section class="cta-banner panel welcome-final-cta">
       <div>
         <div class="eyebrow">Bereit für deinen ersten Schritt?</div>
-        <h2>Welcome Pass direkt online kaufen.</h2>
-        <p>Kaufe den Pass über Eversports und buche deine zwei Classes dort direkt selbst – ohne vorherige Anfrage.</p>
+        <h2>2 Classes · 20€ · direkt über Eversports.</h2>
+        <p>Einmalig kaufen, zwei reguläre Classes testen und danach selbst entscheiden. Kein Abo, keine automatische Verlängerung.</p>
       </div>
       <div class="actions">
-        <a class="button welcome-primary" href={welcomePassHref} target="_blank" rel="noreferrer">Welcome Pass kaufen</a>
+        <a class="button welcome-primary" href={welcomePassHref} target="_blank" rel="noreferrer">Welcome Pass für 20€ kaufen</a>
         <a class="button welcome-secondary" href="/kurse/">Kurse vergleichen</a>
       </div>
     </section>

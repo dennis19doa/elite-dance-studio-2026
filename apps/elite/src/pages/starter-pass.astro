@@ -2,63 +2,518 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import WelcomePassHero from "../components/WelcomePassHero.astro";
-import WelcomePassBenefits from "../components/WelcomePassBenefits.astro";
-import WelcomePassTrust from "../components/WelcomePassTrust.astro";
-import FirstVisitSection from "../components/FirstVisitSection.astro";
-import FaqSection from "../components/FaqSection.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
+import FaqSection from "../components/FaqSection.astro";
 
 import site from "../data/site.json";
-import welcomePass from "../data/welcome-pass.json";
 
 const welcomePassHref = "https://www.eversports.de/org/product/eaed6a11-d4bb-44ff-8b0d-ab8acf6828f3?venueId=403f5ec1-2e5b-489c-b5d1-c424903a26c5";
+
+const faqs = [
+  {
+    question: "Ist der Welcome Pass für absolute Anfänger:innen?",
+    answer: "Ja. Für den Einstieg empfehlen wir Level 0 oder Beginner Classes."
+  },
+  {
+    question: "Brauche ich einen Tanzpartner?",
+    answer: "Nein. Solo Classes funktionieren ohne Partner und auch zu vielen Beginner Partner-Dance-Classes kannst du allein kommen."
+  },
+  {
+    question: "Welche Classes kann ich nutzen?",
+    answer: "Der Welcome Pass gilt für reguläre Classes. Advanced-Kurse, Closed Groups und Intensives sind ausgenommen."
+  },
+  {
+    question: "Wie lange ist der Pass gültig?",
+    answer: "10 Tage ab deinem ersten Besuch und einmal pro Person."
+  }
+];
 ---
 
 <BaseLayout
-  title="Welcome Pass | Zwei Tanzkurse bei Elite Dance Studio testen"
-  description="Mit dem Welcome Pass zwei reguläre Tanzkurse bei Elite Dance Studio in Berlin-Moabit testen: 2 Classes für 20 Euro, 10 Tage gültig und einmal pro Person."
+  title="Welcome Pass | 2 Tanzkurse für 20€ bei Elite Dance Studio"
+  description="Teste Elite Dance Studio in Berlin-Moabit mit 2 regulären Classes für 20€. Beginner-friendly, viele Styles und direkte Buchung über Eversports."
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main">
-    <WelcomePassHero hero={welcomePass.hero} />
-    <WelcomePassTrust address={site.visit.address} />
-    <WelcomePassBenefits benefits={welcomePass.benefits} />
+  <main class="welcome-page">
+    <section class="welcome-hero">
+      <video
+        class="welcome-hero-video"
+        src="/media/hero/elite-homepage-video-medium.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/media/hero/elite-homepage-poster.jpg"
+        aria-label="Elite Dance Studio class atmosphere"
+      ></video>
+      <div class="welcome-hero-shade"></div>
+      <div class="welcome-hero-copy">
+        <span class="welcome-eyebrow">WELCOME PASS · BERLIN-MOABIT</span>
+        <h1>2 Classes.<br />20€.<br />Find your style.</h1>
+        <p>Teste Elite in zwei echten Classes und finde heraus, welcher Style zu dir passt.</p>
+        <div class="welcome-actions">
+          <a class="welcome-main-cta" href={welcomePassHref} target="_blank" rel="noreferrer">Welcome Pass holen</a>
+          <a class="welcome-text-link" href="#classes">Classes ansehen ↓</a>
+        </div>
+      </div>
 
-    <EversportsSchedule
-      id="pass-kurse"
-      eyebrow="Deine zwei Klassen"
-      title="Sieh vor dem Kauf, welche Classes aktuell laufen."
-      description="Der Stundenplan unten ist live. Für deinen Einstieg eignen sich besonders Level 0 und Beginner Classes. Nach dem Kauf buchst du deine zwei regulären Classes direkt über Eversports."
-    />
+      <div class="welcome-hero-stats" aria-label="Welcome Pass highlights">
+        <div><strong>25+</strong><span>Styles</span></div>
+        <div><strong>2</strong><span>Classes</span></div>
+        <div><strong>10</strong><span>Tage</span></div>
+        <div><strong>Moabit</strong><span>Berlin</span></div>
+      </div>
+    </section>
 
-    <FirstVisitSection
-      steps={welcomePass.steps}
-      eyebrow="So funktioniert es"
-      title="Drei Schritte. Keine versteckten Hürden."
-      description="Kaufen, zwei Classes buchen, Elite kennenlernen. Wenn du bei der Kurswahl unsicher bist, helfen wir dir natürlich persönlich weiter."
-    />
+    <section class="welcome-section welcome-why">
+      <div class="welcome-section-head">
+        <span class="welcome-eyebrow dark">WHY ELITE</span>
+        <h2>Come for the class.<br />Stay for the feeling.</h2>
+      </div>
 
-    <FaqSection
-      items={welcomePass.faqs}
-      eyebrow="Welcome Pass FAQ"
-      title="Alles, was du vor der Buchung wissen möchtest."
-      description="Die wichtigsten Antworten stehen direkt hier. Für alles Persönliche kannst du uns jederzeit schreiben."
-    />
+      <div class="welcome-visual-grid">
+        <article class="welcome-visual-card">
+          <img src="/media/current-site/kathy-reggaeton.png" alt="Reggaeton class at Elite Dance Studio" loading="lazy" />
+          <div class="welcome-card-overlay">
+            <strong>Find your style</strong>
+            <span>Reggaeton, Bachata, Heels, Hip Hop, House & more</span>
+          </div>
+        </article>
 
-    <section class="cta-banner panel welcome-final-cta">
+        <article class="welcome-visual-card">
+          <img src="/media/current-site/intensives-dance-floor.jpg" alt="Students dancing at Elite Dance Studio" loading="lazy" />
+          <div class="welcome-card-overlay">
+            <strong>Train with real coaches</strong>
+            <span>Clear teaching, energy and progress</span>
+          </div>
+        </article>
+
+        <article class="welcome-visual-card">
+          <img src="/media/current-site/elite-party.jpg" alt="Elite Dance Studio community" loading="lazy" />
+          <div class="welcome-card-overlay">
+            <strong>Become part of it</strong>
+            <span>Classes, socials, events and community</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="welcome-section welcome-how">
+      <div class="welcome-section-head compact">
+        <span class="welcome-eyebrow dark">START SIMPLE</span>
+        <h2>Three steps. That’s it.</h2>
+      </div>
+
+      <div class="welcome-steps">
+        <div><span>01</span><strong>Get your pass</strong></div>
+        <div><span>02</span><strong>Choose 2 Classes</strong></div>
+        <div><span>03</span><strong>Come dance</strong></div>
+      </div>
+    </section>
+
+    <section id="classes" class="welcome-section schedule-wrap">
+      <EversportsSchedule
+        id="pass-kurse"
+        eyebrow="Live schedule"
+        title="Choose what feels like you."
+        description="Start with Level 0 or Beginner, or explore another regular Class that catches your eye."
+      />
+    </section>
+
+    <section class="welcome-section welcome-proof">
+      <div class="welcome-proof-copy">
+        <span class="welcome-eyebrow">YOUR FIRST VISIT</span>
+        <h2>You don’t need to know everything before you start.</h2>
+        <p>Come 10–15 minutes early. We’ll help you find your room and get comfortable before class begins.</p>
+        <a href={site.visit.whatsappHref} target="_blank" rel="noreferrer">Ask us on WhatsApp ↗</a>
+      </div>
+      <img src="/media/current-site/studio-room-yellow.jpg" alt="Elite Dance Studio room in Berlin" loading="lazy" />
+    </section>
+
+    <section class="welcome-section welcome-faq">
+      <FaqSection
+        items={faqs}
+        eyebrow="Quick answers"
+        title="Still deciding?"
+        description="Only the essentials."
+      />
+    </section>
+
+    <section class="welcome-final">
       <div>
-        <div class="eyebrow">Bereit für deinen ersten Schritt?</div>
-        <h2>2 Classes · 20€ · direkt über Eversports.</h2>
-        <p>Einmalig kaufen, zwei reguläre Classes testen und danach selbst entscheiden. Kein Abo, keine automatische Verlängerung.</p>
+        <span class="welcome-eyebrow">READY?</span>
+        <h2>2 Classes for 20€.</h2>
+        <p>Book through Eversports and start with the Class that feels right for you.</p>
       </div>
-      <div class="actions">
-        <a class="button welcome-primary" href={welcomePassHref} target="_blank" rel="noreferrer">Welcome Pass für 20€ kaufen</a>
-        <a class="button welcome-secondary" href="/kurse/">Kurse vergleichen</a>
-      </div>
+      <a class="welcome-main-cta light" href={welcomePassHref} target="_blank" rel="noreferrer">Get the Welcome Pass</a>
     </section>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />
+
+  <style>
+    .welcome-page {
+      width: min(1240px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 18px 0 70px;
+    }
+
+    .welcome-hero {
+      position: relative;
+      min-height: min(760px, 82vh);
+      border-radius: 28px;
+      overflow: hidden;
+      background: #17120f;
+      color: #fff;
+    }
+
+    .welcome-hero-video,
+    .welcome-hero-shade {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .welcome-hero-video {
+      object-fit: cover;
+    }
+
+    .welcome-hero-shade {
+      background:
+        linear-gradient(90deg, rgba(12, 8, 7, 0.86) 0%, rgba(12, 8, 7, 0.42) 52%, rgba(12, 8, 7, 0.10) 100%),
+        linear-gradient(0deg, rgba(12, 8, 7, 0.48), transparent 46%);
+    }
+
+    .welcome-hero-copy {
+      position: relative;
+      z-index: 2;
+      width: min(660px, 84%);
+      padding: clamp(54px, 8vw, 108px);
+    }
+
+    .welcome-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f3b2bb;
+    }
+
+    .welcome-eyebrow.dark {
+      color: #9a3345;
+    }
+
+    .welcome-hero h1,
+    .welcome-section h2,
+    .welcome-final h2 {
+      font-family: "Sora", sans-serif;
+      letter-spacing: -0.055em;
+    }
+
+    .welcome-hero h1 {
+      margin: 14px 0 18px;
+      max-width: 720px;
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      line-height: 0.92;
+    }
+
+    .welcome-hero-copy p {
+      max-width: 560px;
+      margin: 0;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      line-height: 1.6;
+    }
+
+    .welcome-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .welcome-main-cta {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 999px;
+      background: #f7efe8;
+      color: #17120f;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .welcome-main-cta.light {
+      background: #fff;
+    }
+
+    .welcome-text-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .welcome-hero-stats {
+      position: absolute;
+      z-index: 2;
+      left: clamp(28px, 6vw, 84px);
+      right: clamp(28px, 6vw, 84px);
+      bottom: 28px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .welcome-hero-stats div {
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 16px;
+      background: rgba(20,14,12,.42);
+      backdrop-filter: blur(12px);
+    }
+
+    .welcome-hero-stats strong,
+    .welcome-hero-stats span {
+      display: block;
+    }
+
+    .welcome-hero-stats strong {
+      font-family: "Sora", sans-serif;
+      font-size: 1.2rem;
+    }
+
+    .welcome-hero-stats span {
+      margin-top: 3px;
+      color: rgba(255,255,255,.68);
+      font-size: .75rem;
+    }
+
+    .welcome-section {
+      margin-top: 18px;
+      padding: clamp(28px, 5vw, 54px);
+      border-radius: 28px;
+      background: #f5efe9;
+      color: #211915;
+    }
+
+    .welcome-section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .welcome-section-head.compact {
+      margin-bottom: 18px;
+    }
+
+    .welcome-section h2 {
+      margin: 8px 0 0;
+      max-width: 760px;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: .98;
+    }
+
+    .welcome-visual-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .96fr .96fr;
+      gap: 12px;
+    }
+
+    .welcome-visual-card {
+      position: relative;
+      min-height: 410px;
+      overflow: hidden;
+      border-radius: 22px;
+      background: #1b1512;
+    }
+
+    .welcome-visual-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .welcome-card-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 24px 20px 20px;
+      color: #fff;
+      background: linear-gradient(transparent, rgba(8,5,4,.88));
+    }
+
+    .welcome-card-overlay strong,
+    .welcome-card-overlay span {
+      display: block;
+    }
+
+    .welcome-card-overlay strong {
+      font-size: 1.15rem;
+    }
+
+    .welcome-card-overlay span {
+      margin-top: 4px;
+      color: rgba(255,255,255,.72);
+      font-size: .82rem;
+    }
+
+    .welcome-steps {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 12px;
+    }
+
+    .welcome-steps div {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .welcome-steps span {
+      color: #9a3345;
+      font-weight: 800;
+      font-size: .78rem;
+    }
+
+    .welcome-steps strong {
+      font-size: 1rem;
+    }
+
+    .schedule-wrap {
+      padding: 0;
+      background: transparent;
+    }
+
+    .welcome-proof {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 14px;
+      background: #17120f;
+      color: #fff;
+      padding: 14px;
+    }
+
+    .welcome-proof-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(24px, 5vw, 50px);
+    }
+
+    .welcome-proof-copy h2 {
+      margin: 10px 0 16px;
+      max-width: 560px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .welcome-proof-copy p {
+      margin: 0;
+      max-width: 520px;
+      color: rgba(255,255,255,.72);
+      line-height: 1.6;
+    }
+
+    .welcome-proof-copy a {
+      margin-top: 18px;
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .welcome-proof img {
+      width: 100%;
+      min-height: 390px;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .welcome-faq {
+      padding-top: 14px;
+    }
+
+    .welcome-final {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 28px;
+      margin-top: 18px;
+      padding: clamp(28px, 5vw, 54px);
+      border-radius: 28px;
+      background: #9b273c;
+      color: #fff;
+    }
+
+    .welcome-final h2 {
+      margin: 8px 0 6px;
+      font-size: clamp(2.3rem, 4vw, 4.3rem);
+    }
+
+    .welcome-final p {
+      margin: 0;
+      color: rgba(255,255,255,.78);
+    }
+
+    @media (max-width: 860px) {
+      .welcome-hero {
+        min-height: 720px;
+      }
+
+      .welcome-hero-copy {
+        width: auto;
+        padding: 44px 28px 190px;
+      }
+
+      .welcome-hero-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .welcome-visual-grid,
+      .welcome-proof {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome-visual-card {
+        min-height: 340px;
+      }
+
+      .welcome-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome-final {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .welcome-page {
+        width: min(100% - 16px, 1240px);
+      }
+
+      .welcome-hero h1 {
+        font-size: clamp(3rem, 16vw, 4.9rem);
+      }
+
+      .welcome-section {
+        padding: 24px 18px;
+      }
+
+      .welcome-section-head {
+        display: block;
+      }
+    }
+  </style>
 </BaseLayout>

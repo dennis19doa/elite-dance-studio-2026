@@ -1,0 +1,505 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Marketing Dashboard | Elite Dance Studio"
+  description="Private campaign performance dashboard for Elite Dance Studio."
+  noindex={true}
+  bodyClass="marketing-dashboard-page"
+>
+  <main class="marketing-dashboard-shell">
+    <header class="marketing-dashboard-header">
+      <div>
+        <span class="dashboard-kicker">ELITE DANCE · INTERNAL</span>
+        <h1>Marketing Dashboard</h1>
+        <p>Instagram campaign traffic → Welcome Pass intent → Eversports checkout clicks.</p>
+      </div>
+      <a href="/" class="dashboard-home-link">← Website</a>
+    </header>
+
+    <section class="dashboard-login" data-dashboard-login>
+      <label for="dashboard-token">Dashboard access key</label>
+      <div class="dashboard-login-row">
+        <input id="dashboard-token" type="password" autocomplete="current-password" placeholder="Enter access key" />
+        <button type="button" data-dashboard-load>Open dashboard</button>
+      </div>
+      <p data-dashboard-message>Access is required to load campaign data.</p>
+    </section>
+
+    <section class="dashboard-content" data-dashboard-content hidden>
+      <div class="dashboard-toolbar">
+        <div>
+          <span>Reporting period</span>
+          <div class="dashboard-range" role="group" aria-label="Reporting period">
+            <button type="button" data-days="7">7 days</button>
+            <button type="button" data-days="30" class="is-active">30 days</button>
+            <button type="button" data-days="90">90 days</button>
+          </div>
+        </div>
+        <button type="button" class="dashboard-refresh" data-dashboard-refresh>Refresh</button>
+      </div>
+
+      <div class="dashboard-metrics">
+        <article>
+          <span>Campaign visits</span>
+          <strong data-metric="visits">0</strong>
+          <small>Visits arriving with a campaign link</small>
+        </article>
+        <article>
+          <span>Welcome Pass views</span>
+          <strong data-metric="starterPassViews">0</strong>
+          <small>Reached the Welcome Pass page</small>
+        </article>
+        <article class="is-primary">
+          <span>Eversports checkout clicks</span>
+          <strong data-metric="checkoutClicks">0</strong>
+          <small>Clicked “Welcome Pass kaufen”</small>
+        </article>
+        <article>
+          <span>Intent rate</span>
+          <strong data-metric="intentRate">0%</strong>
+          <small>Checkout clicks ÷ campaign visits</small>
+        </article>
+      </div>
+
+      <section class="dashboard-panel">
+        <div class="dashboard-panel-head">
+          <div>
+            <span class="dashboard-kicker">Campaign comparison</span>
+            <h2>Which creative brings buying intent?</h2>
+          </div>
+        </div>
+        <div class="dashboard-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Campaign</th>
+                <th>Creative</th>
+                <th>Visits</th>
+                <th>Pass views</th>
+                <th>Checkout clicks</th>
+                <th>Intent rate</th>
+              </tr>
+            </thead>
+            <tbody data-campaign-rows></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="dashboard-panel dashboard-link-builder">
+        <div>
+          <span class="dashboard-kicker">Link builder</span>
+          <h2>Create the link for your next Instagram ad.</h2>
+          <p>Use one campaign name and one creative name per ad so the dashboard can compare them.</p>
+        </div>
+        <div class="dashboard-builder-grid">
+          <label>
+            Campaign
+            <input type="text" data-builder-campaign placeholder="reggaeton_october" />
+          </label>
+          <label>
+            Creative / video
+            <input type="text" data-builder-creative placeholder="class_video_01" />
+          </label>
+        </div>
+        <div class="dashboard-generated-link">
+          <input type="text" readonly data-builder-output />
+          <button type="button" data-builder-copy>Copy link</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <style>
+    :global(body.marketing-dashboard-page) {
+      margin: 0;
+      min-height: 100vh;
+      background: #100d0b;
+      color: #f7f2ec;
+    }
+
+    .marketing-dashboard-shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 70px;
+    }
+
+    .marketing-dashboard-header,
+    .dashboard-toolbar,
+    .dashboard-panel-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .marketing-dashboard-header {
+      margin-bottom: 28px;
+    }
+
+    .marketing-dashboard-header h1,
+    .dashboard-panel h2 {
+      margin: 5px 0 8px;
+      font-family: "Sora", sans-serif;
+    }
+
+    .marketing-dashboard-header h1 {
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      letter-spacing: -0.04em;
+    }
+
+    .marketing-dashboard-header p,
+    .dashboard-panel p,
+    .dashboard-login p {
+      margin: 0;
+      color: rgba(247, 242, 236, 0.68);
+    }
+
+    .dashboard-kicker {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f0a6b0;
+    }
+
+    .dashboard-home-link {
+      color: #f7f2ec;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      padding: 10px 14px;
+    }
+
+    .dashboard-login,
+    .dashboard-panel,
+    .dashboard-metrics article,
+    .dashboard-toolbar {
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 20px;
+    }
+
+    .dashboard-login {
+      max-width: 620px;
+      padding: 22px;
+    }
+
+    .dashboard-login label,
+    .dashboard-builder-grid label,
+    .dashboard-toolbar > div > span {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: rgba(247, 242, 236, 0.72);
+    }
+
+    .dashboard-login-row,
+    .dashboard-generated-link {
+      display: flex;
+      gap: 10px;
+    }
+
+    .dashboard-login input,
+    .dashboard-builder-grid input,
+    .dashboard-generated-link input {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      background: #181310;
+      color: #fff;
+      padding: 12px 14px;
+      font: inherit;
+    }
+
+    .dashboard-login button,
+    .dashboard-range button,
+    .dashboard-refresh,
+    .dashboard-generated-link button {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 15px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .dashboard-login button,
+    .dashboard-generated-link button {
+      background: #f6ece2;
+      color: #17110e;
+    }
+
+    .dashboard-login p {
+      margin-top: 10px;
+      font-size: 0.78rem;
+    }
+
+    .dashboard-content {
+      display: grid;
+      gap: 18px;
+    }
+
+    .dashboard-toolbar {
+      padding: 16px 18px;
+      align-items: center;
+    }
+
+    .dashboard-range {
+      display: flex;
+      gap: 7px;
+    }
+
+    .dashboard-range button,
+    .dashboard-refresh {
+      background: rgba(255, 255, 255, 0.07);
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .dashboard-range button.is-active {
+      background: #f6ece2;
+      color: #17110e;
+    }
+
+    .dashboard-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .dashboard-metrics article {
+      padding: 19px;
+    }
+
+    .dashboard-metrics article.is-primary {
+      border-color: rgba(212, 70, 88, 0.55);
+      background: linear-gradient(145deg, rgba(157, 26, 47, 0.28), rgba(255, 255, 255, 0.035));
+    }
+
+    .dashboard-metrics span,
+    .dashboard-metrics small {
+      display: block;
+      color: rgba(247, 242, 236, 0.62);
+    }
+
+    .dashboard-metrics strong {
+      display: block;
+      margin: 8px 0 5px;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+    }
+
+    .dashboard-panel {
+      padding: 22px;
+    }
+
+    .dashboard-table-wrap {
+      overflow-x: auto;
+      margin-top: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th,
+    td {
+      padding: 13px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: left;
+    }
+
+    th {
+      color: rgba(247, 242, 236, 0.54);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    td {
+      font-size: 0.9rem;
+    }
+
+    td.metric-strong {
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .dashboard-link-builder {
+      display: grid;
+      gap: 18px;
+    }
+
+    .dashboard-builder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 850px) {
+      .dashboard-metrics {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .marketing-dashboard-header,
+      .dashboard-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .dashboard-metrics,
+      .dashboard-builder-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-login-row,
+      .dashboard-generated-link {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    (() => {
+      const login = document.querySelector("[data-dashboard-login]");
+      const content = document.querySelector("[data-dashboard-content]");
+      const tokenInput = document.querySelector("#dashboard-token");
+      const message = document.querySelector("[data-dashboard-message]");
+      const loadButton = document.querySelector("[data-dashboard-load]");
+      const refreshButton = document.querySelector("[data-dashboard-refresh]");
+      const rangeButtons = [...document.querySelectorAll("[data-days]")];
+      const rows = document.querySelector("[data-campaign-rows]");
+      let token = "";
+      let days = 30;
+
+      const metric = (name, value) => {
+        const node = document.querySelector(`[data-metric="${name}"]`);
+        if (node) node.textContent = value;
+      };
+
+      const percent = (numerator, denominator) => {
+        if (!denominator) return "0%";
+        return `${((numerator / denominator) * 100).toFixed(1)}%`;
+      };
+
+      const escapeHtml = (value) => String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+      const render = (data) => {
+        const summary = data.summary || {};
+        metric("visits", summary.visits || 0);
+        metric("starterPassViews", summary.starterPassViews || 0);
+        metric("checkoutClicks", summary.checkoutClicks || 0);
+        metric("intentRate", percent(summary.checkoutClicks || 0, summary.visits || 0));
+
+        const campaigns = data.campaigns || [];
+        rows.innerHTML = campaigns.length
+          ? campaigns.map((item) => `
+              <tr>
+                <td class="metric-strong">${escapeHtml(item.campaign)}</td>
+                <td>${escapeHtml(item.creative || "—")}</td>
+                <td>${item.visits}</td>
+                <td>${item.starterPassViews}</td>
+                <td class="metric-strong">${item.checkoutClicks}</td>
+                <td class="metric-strong">${percent(item.checkoutClicks, item.visits)}</td>
+              </tr>
+            `).join("")
+          : '<tr><td colspan="6">No campaign data yet for this period.</td></tr>';
+      };
+
+      const load = async () => {
+        if (!token) return;
+        message.textContent = "Loading…";
+
+        try {
+          const response = await fetch(`/api/marketing-stats?days=${days}`, {
+            headers: { authorization: `Bearer ${token}` },
+            cache: "no-store"
+          });
+          const data = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            throw new Error(data.error || "Unable to load dashboard");
+          }
+
+          render(data);
+          login.hidden = true;
+          content.hidden = false;
+          message.textContent = "";
+        } catch (error) {
+          login.hidden = false;
+          content.hidden = true;
+          message.textContent = error.message === "unauthorized"
+            ? "That access key is not correct."
+            : "Dashboard data is not available yet. Check the analytics setup.";
+        }
+      };
+
+      loadButton?.addEventListener("click", () => {
+        token = tokenInput?.value?.trim() || "";
+        if (!token) {
+          message.textContent = "Enter the dashboard access key.";
+          return;
+        }
+        load();
+      });
+
+      tokenInput?.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") loadButton?.click();
+      });
+
+      refreshButton?.addEventListener("click", load);
+
+      rangeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          days = Number(button.dataset.days || 30);
+          rangeButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+          load();
+        });
+      });
+
+      const campaignInput = document.querySelector("[data-builder-campaign]");
+      const creativeInput = document.querySelector("[data-builder-creative]");
+      const output = document.querySelector("[data-builder-output]");
+      const copyButton = document.querySelector("[data-builder-copy]");
+
+      const slug = (value) => String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "");
+
+      const updateLink = () => {
+        const campaign = slug(campaignInput?.value);
+        const creative = slug(creativeInput?.value);
+        const url = new URL("https://elitedancestudio.de/starter-pass/");
+        if (campaign) url.searchParams.set("campaign", campaign);
+        if (creative) url.searchParams.set("creative", creative);
+        url.searchParams.set("utm_source", "instagram");
+        url.searchParams.set("utm_medium", "paid_social");
+        if (output) output.value = url.toString();
+      };
+
+      campaignInput?.addEventListener("input", updateLink);
+      creativeInput?.addEventListener("input", updateLink);
+      copyButton?.addEventListener("click", async () => {
+        if (!output?.value) return;
+        await navigator.clipboard.writeText(output.value);
+        copyButton.textContent = "Copied";
+        setTimeout(() => { copyButton.textContent = "Copy link"; }, 1200);
+      });
+      updateLink();
+    })();
+  </script>
+</BaseLayout>

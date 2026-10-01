@@ -1,26 +1,10 @@
 const COOKIE_NAME = "elite_dashboard_session";
 const SESSION_TTL_SECONDS = 7 * 24 * 60 * 60;
 const CODE_TTL_SECONDS = 10 * 60;
+export const DASHBOARD_EMAIL = "info@elitedancestudio.de";
 
 export function normalizeEmail(value) {
   return String(value ?? "").trim().toLowerCase().slice(0, 254);
-}
-
-export function isEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
-export function getAllowedEmails(env) {
-  return new Set(
-    String(env.MARKETING_DASHBOARD_EMAILS || "")
-      .split(",")
-      .map((value) => normalizeEmail(value))
-      .filter(Boolean)
-  );
-}
-
-export function isAllowedEmail(email, env) {
-  return getAllowedEmails(env).has(normalizeEmail(email));
 }
 
 export async function ensureAuthSchema(db) {

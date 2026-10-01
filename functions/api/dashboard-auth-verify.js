@@ -1,10 +1,8 @@
 import {
+  DASHBOARD_EMAIL,
   createDashboardSession,
   ensureAuthSchema,
   hashLoginCode,
-  isAllowedEmail,
-  isEmail,
-  normalizeEmail,
   requestIsSameSite,
   sessionCookie,
   timingSafeEqual
@@ -28,15 +26,15 @@ export async function onRequestPost({ request, env }) {
       return json({ ok: false, error: "origin_not_allowed" }, 403);
     }
 
-    if (!env.ANALYTICS_DB || !env.DASHBOARD_AUTH_SECRET || !env.MARKETING_DASHBOARD_EMAILS) {
+    if (!env.ANALYTICS_DB || !env.DASHBOARD_AUTH_SECRET) {
       return json({ ok: false, error: "dashboard_auth_not_configured" }, 503);
     }
 
     const payload = await request.json().catch(() => ({}));
-    const email = normalizeEmail(payload.email);
     const code = String(payload.code || "").trim();
+    const email = DASHBOARD_EMAIL;
 
-    if (!isEmail(email) || !isAllowedEmail(email, env) || !/^\d{6}$/.test(code)) {
+    if (!/^\d{6}$/.test(code)) {
       return json({ ok: false, error: "invalid_code" }, 401);
     }
 

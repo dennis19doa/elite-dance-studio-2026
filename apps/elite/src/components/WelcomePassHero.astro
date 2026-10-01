@@ -41,10 +41,14 @@ const { hero } = Astro.props;
     </div>
 
     <div class="welcome-reassurance">
+      <span>Buchung über Eversports</span>
+      <span>Kein Abo</span>
       <span>Beginner-friendly</span>
-      <span>Kein Partner nötig</span>
-      <span>Keine Membership nötig</span>
     </div>
+
+    <p class="welcome-purchase-note">
+      Einmalige Zahlung · keine automatische Verlängerung · Advanced, Closed Groups & Intensives ausgenommen
+    </p>
   </div>
 
   <div class="welcome-video-wrap">
@@ -61,3 +65,13 @@ const { hero } = Astro.props;
     ></video>
   </div>
 </section>
+
+<style>
+  .welcome-purchase-note {
+    margin: 2px 0 0;
+    max-width: 620px;
+    color: var(--text-muted, #6f675f);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+</style>

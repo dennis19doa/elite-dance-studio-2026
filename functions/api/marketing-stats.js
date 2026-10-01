@@ -1,3 +1,5 @@
+import { getDashboardSession } from "../_lib/dashboard-auth.js";
+
 const JSON_HEADERS = {
   "content-type": "application/json; charset=utf-8",
   "cache-control": "no-store"
@@ -27,23 +29,14 @@ async function ensureSchema(db) {
   ]);
 }
 
-function getBearerToken(request) {
-  const header = request.headers.get("authorization") || "";
-  const match = header.match(/^Bearer\s+(.+)$/i);
-  return match ? match[1] : "";
-}
-
 export async function onRequestGet({ request, env }) {
   try {
     if (!env.ANALYTICS_DB) {
       return json({ ok: false, error: "analytics_not_configured" }, 503);
     }
 
-    if (!env.MARKETING_DASHBOARD_TOKEN) {
-      return json({ ok: false, error: "dashboard_token_not_configured" }, 503);
-    }
-
-    if (getBearerToken(request) !== env.MARKETING_DASHBOARD_TOKEN) {
+    const session = await getDashboardSession(request, env);
+    if (!session) {
       return json({ ok: false, error: "unauthorized" }, 401);
     }
 

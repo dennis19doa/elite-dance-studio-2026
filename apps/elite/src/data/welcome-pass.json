@@ -1,12 +1,12 @@
 {
   "hero": {
-    "eyebrow": "Dein erster Schritt bei Elite",
-    "title": "Zwei Klassen. Kein Druck. Einfach anfangen.",
-    "description": "Mit dem Welcome Pass können neue Besucher:innen zwei reguläre Classes in unterschiedlichen Styles testen und Elite in Ruhe kennenlernen.",
+    "eyebrow": "Welcome Pass · für neue Tänzer:innen",
+    "title": "2 Classes für 20€. Finde heraus, ob Elite zu dir passt.",
+    "description": "Teste zwei reguläre Classes in Berlin-Moabit, lerne unsere Coaches und die Atmosphäre kennen und entscheide erst danach, wie du weitermachen möchtest.",
     "price": "20€",
-    "priceNote": "für 2 Klassen",
-    "duration": "10 Tage gültig · einmal pro Person",
-    "primaryCtaLabel": "Welcome Pass kaufen",
+    "priceNote": "für 2 reguläre Classes",
+    "duration": "10 Tage ab erster Class · einmal pro Person",
+    "primaryCtaLabel": "Welcome Pass für 20€ kaufen",
     "primaryCtaHref": "https://www.eversports.de/org/product/eaed6a11-d4bb-44ff-8b0d-ab8acf6828f3?venueId=403f5ec1-2e5b-489c-b5d1-c424903a26c5",
     "secondaryCtaLabel": "Passende Kurse ansehen",
     "secondaryCtaHref": "#pass-kurse",
@@ -19,57 +19,69 @@
   "benefits": [
     {
       "number": "01",
-      "title": "Styles frei testen",
-      "text": "Wähle aus unseren regulären Classes. Advanced-Kurse, Closed Groups und Intensives sind vom Welcome Pass ausgenommen."
+      "title": "Echte Classes testen",
+      "text": "Du besuchst reguläre Classes mit unseren Coaches und bekommst einen realistischen Eindruck davon, wie sich Training bei Elite anfühlt."
     },
     {
       "number": "02",
-      "title": "Zwei Klassen testen",
-      "text": "Probiere zwei reguläre Classes aus oder vergleiche zwei Styles, bevor du dich auf eine Richtung festlegst."
+      "title": "Zwei Styles vergleichen",
+      "text": "Teste zwei unterschiedliche Styles oder besuche denselben Style zweimal. So musst du dich vor dem ersten Besuch noch nicht festlegen."
     },
     {
       "number": "03",
-      "title": "Ohne langfristige Bindung",
-      "text": "Lerne das Studio, die Coaches und die Atmosphäre kennen. Danach entscheidest du in Ruhe, ob und wie du weitermachst."
+      "title": "Danach frei entscheiden",
+      "text": "Der Welcome Pass ist kein Abo. Nach deinen zwei Classes entscheidest du selbst, ob du mit Drop-in, Karte oder Membership weitermachen möchtest."
     }
   ],
   "steps": [
     {
       "number": "1",
-      "title": "Pass kaufen",
-      "text": "Kaufe deinen Welcome Pass direkt online über Eversports. Du brauchst uns vorher keine Nachricht zu schicken."
+      "title": "Welcome Pass über Eversports kaufen",
+      "text": "Du kaufst den Pass für 20€ direkt über Eversports. Eine Membership oder vorherige Nachricht an uns ist nicht nötig."
     },
     {
       "number": "2",
-      "title": "Klassen auswählen",
-      "text": "Buche innerhalb von 10 Tagen zwei reguläre Classes über Eversports. Du kannst unterschiedliche Styles testen; Advanced, Closed Groups und Intensives sind ausgenommen."
+      "title": "Zwei reguläre Classes buchen",
+      "text": "Wähle deine Classes im aktuellen Eversports-Stundenplan. Der Pass gilt 10 Tage ab deinem ersten Besuch."
     },
     {
       "number": "3",
-      "title": "Elite erleben",
-      "text": "Komm 10 bis 15 Minuten früher, tanze ohne Druck mit und entscheide erst danach, was sich richtig anfühlt."
+      "title": "Elite in Ruhe kennenlernen",
+      "text": "Komm beim ersten Mal 10–15 Minuten früher, tanze mit und entscheide erst nach deinen zwei Classes, ob und wie du weitermachen möchtest."
     }
   ],
   "faqs": [
     {
       "question": "Ist der Welcome Pass auch für absolute Anfänger:innen?",
-      "answer": "Ja. Der Pass richtet sich besonders an Menschen ohne Tanzerfahrung. Für den Einstieg empfehlen wir dir Level 0 oder Beginner Classes."
+      "answer": "Ja. Der Pass ist besonders sinnvoll, wenn du Elite zum ersten Mal kennenlernen möchtest. Für absolute Anfänger:innen empfehlen wir Level 0 oder Beginner Classes."
     },
     {
       "question": "Brauche ich einen Tanzpartner?",
-      "answer": "Nein. Für unsere Solo-Style-Klassen brauchst du keinen Partner. Auch bei unseren regulären Beginner Partner-Dance-Classes kannst du allein kommen."
+      "answer": "Nein. Für Solo-Style-Klassen brauchst du keinen Partner. Auch zu unseren regulären Beginner Partner-Dance-Classes kannst du allein kommen."
     },
     {
-      "question": "Muss ich beide Klassen im gleichen Style nehmen?",
-      "answer": "Nein. Du kannst zwei unterschiedliche Styles vergleichen oder denselben Style zweimal besuchen. Ausgenommen sind Advanced-Kurse, Closed Groups und Intensives."
+      "question": "Welche Classes kann ich mit dem Welcome Pass besuchen?",
+      "answer": "Du kannst reguläre Classes im Stundenplan buchen. Advanced-Kurse, Closed Groups und Intensives sind vom Welcome Pass ausgenommen."
     },
     {
-      "question": "Wie lange ist der Pass gültig?",
-      "answer": "Der Welcome Pass ist ab dem ersten Besuch 10 Tage gültig und kann pro Person nur einmal gekauft und genutzt werden."
+      "question": "Muss ich beide Classes im gleichen Style nehmen?",
+      "answer": "Nein. Du kannst zwei unterschiedliche Styles vergleichen oder denselben Style zweimal besuchen."
     },
     {
-      "question": "Was passiert nach den zwei Klassen?",
-      "answer": "Du entscheidest selbst. Du kannst mit einem Drop-in, einer 10er Karte oder einer Membership weitermachen. Wenn du noch unsicher bist, beraten wir dich persönlich."
+      "question": "Wann beginnen die 10 Tage Gültigkeit?",
+      "answer": "Die 10 Tage beginnen mit deinem ersten Besuch. Innerhalb dieses Zeitraums kannst du deine zweite Class nutzen."
+    },
+    {
+      "question": "Wie oft kann ich den Welcome Pass kaufen?",
+      "answer": "Der Welcome Pass ist ein Einstiegsangebot und kann pro Person einmal gekauft und genutzt werden."
+    },
+    {
+      "question": "Wie läuft die Zahlung und Buchung?",
+      "answer": "Kauf und Buchung laufen direkt über Eversports. Nach dem Kauf wählst du dort deine zwei regulären Classes aus."
+    },
+    {
+      "question": "Was passiert nach den zwei Classes?",
+      "answer": "Nichts automatisch. Du entscheidest selbst, ob du mit einem Drop-in, einer Karte oder einer Membership weitermachen möchtest."
     }
   ]
 }

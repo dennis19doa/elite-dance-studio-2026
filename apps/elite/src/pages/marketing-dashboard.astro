@@ -19,12 +19,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </header>
 
     <section class="dashboard-login" data-dashboard-login>
-      <div data-auth-email-step>
-        <label for="dashboard-email">Your authorized email</label>
-        <div class="dashboard-login-row">
-          <input id="dashboard-email" type="email" autocomplete="email" placeholder="name@example.com" />
-          <button type="button" data-auth-send>Send code</button>
-        </div>
+      <div data-auth-send-step>
+        <span class="dashboard-kicker">Protected access</span>
+        <h2>Verify your access</h2>
+        <p>A one-time code will be sent to the Elite master email.</p>
+        <button type="button" data-auth-send>Send login code</button>
       </div>
 
       <div data-auth-code-step hidden>
@@ -40,10 +39,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           />
           <button type="button" data-auth-verify>Open dashboard</button>
         </div>
-        <button type="button" class="dashboard-auth-secondary" data-auth-change>Use another email</button>
+        <button type="button" class="dashboard-auth-secondary" data-auth-resend>Send a new code</button>
       </div>
 
-      <p data-dashboard-message>Enter an authorized email. We’ll send a one-time code that expires after 10 minutes.</p>
+      <p data-dashboard-message>Only the Elite master account can receive a login code.</p>
     </section>
 
     <section class="dashboard-content" data-dashboard-content hidden>
@@ -416,13 +415,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       const login = document.querySelector("[data-dashboard-login]");
       const content = document.querySelector("[data-dashboard-content]");
       const message = document.querySelector("[data-dashboard-message]");
-      const emailStep = document.querySelector("[data-auth-email-step]");
+      const sendStep = document.querySelector("[data-auth-send-step]");
       const codeStep = document.querySelector("[data-auth-code-step]");
-      const emailInput = document.querySelector("#dashboard-email");
       const codeInput = document.querySelector("#dashboard-code");
       const sendButton = document.querySelector("[data-auth-send]");
       const verifyButton = document.querySelector("[data-auth-verify]");
-      const changeButton = document.querySelector("[data-auth-change]");
+      const resendButton = document.querySelector("[data-auth-resend]");
       const refreshButton = document.querySelector("[data-dashboard-refresh]");
       const logoutButton = document.querySelector("[data-dashboard-logout]");
       const userLabel = document.querySelector("[data-dashboard-user]");
@@ -430,7 +428,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       const rows = document.querySelector("[data-campaign-rows]");
 
       let days = 30;
-      let currentEmail = "";
 
       const metric = (name, value) => {
         const node = document.querySelector(`[data-metric="${name}"]`);
@@ -477,8 +474,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         if (text) message.textContent = text;
       };
 
-      const showEmailStep = () => {
-        emailStep.hidden = false;
+      const showSendStep = () => {
+        sendStep.hidden = false;
         codeStep.hidden = true;
         codeInput.value = "";
       };
@@ -492,7 +489,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           const data = await response.json().catch(() => ({}));
 
           if (response.status === 401) {
-            showLogin("Enter an authorized email. We’ll send a one-time code.");
+            showLogin("Your session expired. Send a new login code to continue.");
             return false;
           }
 
@@ -523,8 +520,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           const data = await response.json().catch(() => ({}));
 
           if (response.ok && data.authenticated) {
-            currentEmail = data.email || "";
-            userLabel.textContent = currentEmail;
+            userLabel.textContent = data.email || "Elite master account";
             await load();
             return;
           }
@@ -532,18 +528,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           // Fall through to email login.
         }
 
-        showLogin("Enter an authorized email. We’ll send a one-time code.");
-        showEmailStep();
+        showLogin("Send a one-time code to the Elite master email to continue.");
+        showSendStep();
       };
 
-      sendButton?.addEventListener("click", async () => {
-        const email = emailInput?.value?.trim() || "";
-        if (!email) {
-          message.textContent = "Enter your email first.";
-          return;
-        }
-
+      const requestCode = async () => {
         sendButton.disabled = true;
+        if (resendButton) resendButton.disabled = true;
         message.textContent = "Sending code…";
 
         try {
@@ -551,25 +542,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             method: "POST",
             headers: { "content-type": "application/json" },
             credentials: "same-origin",
-            body: JSON.stringify({ email })
+            body: "{}"
           });
           const data = await response.json().catch(() => ({}));
 
           if (!response.ok) throw new Error(data.error || "Unable to send code");
 
-          currentEmail = email;
-          emailStep.hidden = true;
+          sendStep.hidden = true;
           codeStep.hidden = false;
-          message.textContent = "If this email is authorized, the 6-digit code is on its way. It expires in 10 minutes.";
+          message.textContent = "The 6-digit code was sent to info@elitedancestudio.de. It expires in 10 minutes.";
           codeInput?.focus();
         } catch (error) {
           message.textContent = error.message === "dashboard_auth_not_configured"
-            ? "Email login still needs its Cloudflare configuration."
+            ? "The secure dashboard still needs its Cloudflare database connection."
             : "We couldn’t send the code right now.";
         } finally {
           sendButton.disabled = false;
+          if (resendButton) resendButton.disabled = false;
         }
-      });
+      };
+
+      sendButton?.addEventListener("click", requestCode);
+      resendButton?.addEventListener("click", requestCode);
 
       verifyButton?.addEventListener("click", async () => {
         const code = codeInput?.value?.trim() || "";
@@ -586,13 +580,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             method: "POST",
             headers: { "content-type": "application/json" },
             credentials: "same-origin",
-            body: JSON.stringify({ email: currentEmail, code })
+            body: JSON.stringify({ code })
           });
           const data = await response.json().catch(() => ({}));
 
           if (!response.ok) throw new Error(data.error || "Unable to verify code");
 
-          userLabel.textContent = currentEmail;
+          userLabel.textContent = "info@elitedancestudio.de";
           await load();
         } catch (error) {
           message.textContent = error.message === "invalid_code"
@@ -607,17 +601,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         if (event.key === "Enter") verifyButton?.click();
       });
 
-      emailInput?.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") sendButton?.click();
-      });
-
-      changeButton?.addEventListener("click", () => {
-        currentEmail = "";
-        showEmailStep();
-        message.textContent = "Enter an authorized email.";
-        emailInput?.focus();
-      });
-
       refreshButton?.addEventListener("click", load);
 
       logoutButton?.addEventListener("click", async () => {
@@ -625,10 +608,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           method: "POST",
           credentials: "same-origin"
         }).catch(() => {});
-        currentEmail = "";
         userLabel.textContent = "";
-        showEmailStep();
-        showLogin("Signed out. Enter your email to receive a new code.");
+        showSendStep();
+        showLogin("Signed out. Send a new login code to continue.");
       });
 
       rangeButtons.forEach((button) => {

@@ -1,0 +1,113 @@
+---
+const isPreviewBuild = import.meta.env.BASE_URL.includes("/preview/");
+---
+
+{!isPreviewBuild && (
+  <script is:inline>
+    (() => {
+      const params = new URLSearchParams(window.location.search);
+      const pick = (...keys) => {
+        for (const key of keys) {
+          const value = params.get(key);
+          if (value) return value.trim().slice(0, 120);
+        }
+        return "";
+      };
+
+      const campaign = pick("campaign", "utm_campaign", "c");
+      if (!campaign) return;
+
+      const creative = pick("creative", "utm_content", "ad");
+      const source = pick("utm_source") || "instagram";
+      const medium = pick("utm_medium") || "paid_social";
+
+      const payloadBase = {
+        campaign,
+        creative,
+        source,
+        medium,
+        page: window.location.pathname
+      };
+
+      const send = (eventType, extra = {}) => {
+        const body = JSON.stringify({ ...payloadBase, eventType, ...extra });
+        try {
+          fetch("/api/marketing-track", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body,
+            keepalive: true,
+            credentials: "same-origin"
+          }).catch(() => {});
+        } catch {
+          // Analytics must never interfere with the visitor experience.
+        }
+      };
+
+      // Keep campaign attribution in the URL while the visitor browses Elite.
+      // No cookies, localStorage or browser identifiers are used.
+      document.querySelectorAll("a[href]").forEach((link) => {
+        const href = link.getAttribute("href");
+        if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
+
+        try {
+          const url = new URL(href, window.location.href);
+          if (url.origin !== window.location.origin) return;
+
+          url.searchParams.set("campaign", campaign);
+          if (creative) url.searchParams.set("creative", creative);
+          if (source) url.searchParams.set("utm_source", source);
+          if (medium) url.searchParams.set("utm_medium", medium);
+
+          link.setAttribute("href", `${url.pathname}${url.search}${url.hash}`);
+        } catch {
+          // Ignore malformed or non-standard links.
+        }
+      });
+
+      let cameFromOutside = true;
+      if (document.referrer) {
+        try {
+          cameFromOutside = new URL(document.referrer).origin !== window.location.origin;
+        } catch {
+          cameFromOutside = true;
+        }
+      }
+
+      if (cameFromOutside) send("landing");
+
+      const normalizedPath = window.location.pathname.replace(/\/+$/, "");
+      if (normalizedPath.endsWith("/starter-pass")) {
+        send("starter_pass_view", { product: "welcome-pass" });
+      }
+
+      const welcomePassProductId = "eaed6a11-d4bb-44ff-8b0d-ab8acf6828f3";
+      const membershipProducts = {
+        "0ce8358e-16f9-43f8-9c30-1bf439a02d81": "bronze",
+        "410b52c2-ce29-41b8-9f3f-7b20b5c9ee4e": "silber",
+        "f907a51f-2172-40de-a721-cebc6da4ca64": "gold"
+      };
+
+      document.addEventListener("click", (event) => {
+        const link = event.target?.closest?.("a[href]");
+        if (!link) return;
+
+        const href = link.getAttribute("href") || "";
+        if (!href.includes("eversports.de")) return;
+
+        if (href.includes(welcomePassProductId)) {
+          send("welcome_pass_checkout_click", { product: "welcome-pass" });
+          return;
+        }
+
+        const membership = Object.entries(membershipProducts).find(([id]) => href.includes(id));
+        if (membership) {
+          send("membership_checkout_click", { product: membership[1] });
+          return;
+        }
+
+        send("eversports_click", { product: "other" });
+      });
+    })();
+  </script>
+)}

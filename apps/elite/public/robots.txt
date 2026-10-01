@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /marketing-dashboard/
 
 Sitemap: https://elitedancestudio.de/sitemap.xml

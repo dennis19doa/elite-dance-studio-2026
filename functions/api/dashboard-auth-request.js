@@ -1,12 +1,10 @@
 import {
   AUTH_LIMITS,
+  DASHBOARD_EMAIL,
   cleanupAuth,
   ensureAuthSchema,
   generateLoginCode,
   hashLoginCode,
-  isAllowedEmail,
-  isEmail,
-  normalizeEmail,
   requestIsSameSite,
   sendLoginCode
 } from "../_lib/dashboard-auth.js";
@@ -26,20 +24,14 @@ export async function onRequestPost({ request, env }) {
       return json({ ok: false, error: "origin_not_allowed" }, 403);
     }
 
-    if (!env.ANALYTICS_DB || !env.DASHBOARD_AUTH_SECRET || !env.MARKETING_DASHBOARD_EMAILS) {
+    if (!env.ANALYTICS_DB || !env.DASHBOARD_AUTH_SECRET) {
       return json({ ok: false, error: "dashboard_auth_not_configured" }, 503);
     }
 
-    const payload = await request.json().catch(() => ({}));
-    const email = normalizeEmail(payload.email);
-    const generic = { ok: true, message: "If this email is authorized, a login code has been sent." };
-
-    if (!isEmail(email) || !isAllowedEmail(email, env)) {
-      return json(generic);
-    }
-
     const db = env.ANALYTICS_DB;
+    const email = DASHBOARD_EMAIL;
     const now = Math.floor(Date.now() / 1000);
+
     await ensureAuthSchema(db);
     await cleanupAuth(db, now);
 
@@ -57,9 +49,8 @@ export async function onRequestPost({ request, env }) {
     const latest = Number(recent?.latest || 0);
     const requestCount = Number(recent?.request_count || 0);
 
-    // Silent throttling prevents inbox spam without revealing which emails are allowed.
     if ((latest && now - latest < 60) || requestCount >= 5) {
-      return json(generic);
+      return json({ ok: true, throttled: true });
     }
 
     await db
@@ -78,7 +69,7 @@ export async function onRequestPost({ request, env }) {
       .run();
 
     await sendLoginCode(email, code, env);
-    return json(generic);
+    return json({ ok: true });
   } catch (error) {
     console.error("Dashboard code request failed", error instanceof Error ? error.message : "unknown_error");
     return json({ ok: false, error: "code_request_failed" }, 500);

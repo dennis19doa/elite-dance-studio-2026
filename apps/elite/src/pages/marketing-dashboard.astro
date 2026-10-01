@@ -12,8 +12,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <header class="dashboard-header">
       <div>
         <span class="dashboard-kicker">ELITE DANCE · INTERNAL</span>
-        <h1>Marketing performance</h1>
-        <p>Measure which Instagram creatives bring people closest to buying the Welcome Pass.</p>
+        <h1>Campaign performance</h1>
+        <p>See what drives people to Eversports. Fast.</p>
       </div>
       <a href="/" class="dashboard-home-link">← Website</a>
     </header>
@@ -90,31 +90,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </article>
       </div>
 
-      <section class="dashboard-insight-grid">
-        <article class="dashboard-panel dashboard-highlight">
-          <span class="dashboard-kicker">Current signal</span>
-          <h2 data-best-creative>Not enough data yet</h2>
-          <p data-best-detail>
-            Once a creative has at least 10 tracked visits, we’ll surface the strongest checkout-intent signal here.
-          </p>
-        </article>
-
-        <article class="dashboard-panel dashboard-definition">
-          <span class="dashboard-kicker">How to read this</span>
-          <p>
-            <strong>Checkout intent</strong> is our main interim conversion metric. It means a visitor
-            clicked through to Eversports to buy the Welcome Pass. It is not yet a confirmed Eversports purchase.
-          </p>
-        </article>
+      <section class="dashboard-panel dashboard-funnel-panel">
+        <div class="dashboard-panel-head">
+          <div>
+            <span class="dashboard-kicker">Funnel</span>
+            <h2>From ad click to buying intent</h2>
+          </div>
+        </div>
+        <div class="dashboard-funnel">
+          <div class="funnel-step">
+            <span>Visits</span>
+            <strong data-funnel="visits">0</strong>
+          </div>
+          <div class="funnel-arrow">→</div>
+          <div class="funnel-step is-main">
+            <span>Eversports clicks</span>
+            <strong data-funnel="checkoutClicks">0</strong>
+          </div>
+          <div class="funnel-arrow">→</div>
+          <div class="funnel-step">
+            <span>Intent rate</span>
+            <strong data-funnel="intentRate">0%</strong>
+          </div>
+        </div>
       </section>
 
       <section class="dashboard-panel">
         <div class="dashboard-panel-head">
           <div>
             <span class="dashboard-kicker">Creative comparison</span>
-            <h2>Which ad attracts people with buying intent?</h2>
+            <h2>Creative leaderboard</h2>
           </div>
-          <p>Compare intent rate only after each creative has enough visits. Very small samples can look misleadingly strong.</p>
+          <p>Highest intent rate matters most once each creative has enough traffic.</p>
         </div>
 
         <div class="dashboard-table-wrap">
@@ -139,9 +146,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="dashboard-panel-head">
           <div>
             <span class="dashboard-kicker">Activity over time</span>
-            <h2>Visits and checkout intent by day</h2>
+            <h2>Trend</h2>
           </div>
-          <p>Useful for seeing whether campaign traffic is turning into stronger intent over time.</p>
+          <p></p>
         </div>
         <div class="trend-chart" data-trend-chart>
           <p class="empty-state">No campaign activity yet.</p>
@@ -156,12 +163,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="dashboard-panel-head">
           <div>
             <span class="dashboard-kicker">Campaign link builder</span>
-            <h2>Create the link for your next Instagram ad</h2>
+            <h2>New campaign link</h2>
           </div>
-          <p>
-            Keep the campaign name the same across an A/B test and change only the creative name.
-            Example: <strong>reggaeton_october</strong> + <strong>class_video_01</strong>.
-          </p>
+          <p>Same campaign name. Different creative name.</p>
         </div>
 
         <div class="dashboard-builder-grid">
@@ -180,10 +184,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <button type="button" data-builder-copy>Copy link</button>
         </div>
 
-        <p class="builder-note">
-          This link sends visitors directly to the Welcome Pass page. Campaign attribution stays attached while they browse Elite,
-          without using marketing cookies.
-        </p>
       </section>
     </section>
   </main>
@@ -417,26 +417,52 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       line-height: 1.4;
     }
 
-    .dashboard-insight-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 12px;
-    }
-
     .dashboard-panel {
       padding: 21px;
     }
 
-    .dashboard-highlight {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+    .dashboard-funnel-panel {
+      padding-bottom: 24px;
     }
 
-    .dashboard-highlight h2 {
-      font-size: clamp(1.35rem, 2.2vw, 2rem);
+    .dashboard-funnel {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
     }
 
-    .dashboard-definition strong {
-      color: #fff;
+    .funnel-step {
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.045);
+    }
+
+    .funnel-step.is-main {
+      background: rgba(157, 26, 47, 0.24);
+      border: 1px solid rgba(212,70,88,.40);
+    }
+
+    .funnel-step span,
+    .funnel-step strong {
+      display: block;
+    }
+
+    .funnel-step span {
+      color: rgba(247,242,236,.55);
+      font-size: .74rem;
+    }
+
+    .funnel-step strong {
+      margin-top: 6px;
+      font-family: "Sora", sans-serif;
+      font-size: 2rem;
+    }
+
+    .funnel-arrow {
+      color: rgba(247,242,236,.35);
+      font-size: 1.5rem;
     }
 
     .dashboard-table-wrap {
@@ -590,9 +616,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         grid-template-columns: 1fr 1fr;
       }
 
-      .dashboard-insight-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     @media (max-width: 680px) {
@@ -615,6 +638,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       .dashboard-login-row,
       .dashboard-generated-link {
         flex-direction: column;
+      }
+
+      .dashboard-funnel {
+        grid-template-columns: 1fr;
+      }
+
+      .funnel-arrow {
+        display: none;
       }
 
       .trend-chart {
@@ -646,8 +677,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       const includeTestsInput = document.querySelector("[data-include-tests]");
       const rows = document.querySelector("[data-campaign-rows]");
       const trendChart = document.querySelector("[data-trend-chart]");
-      const bestCreative = document.querySelector("[data-best-creative]");
-      const bestDetail = document.querySelector("[data-best-detail]");
 
       let days = 30;
       let includeTests = false;
@@ -715,32 +744,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         }).join("");
       };
 
-      const renderBest = (campaigns) => {
-        const eligible = (campaigns || [])
-          .filter((item) => item.visits >= 10)
-          .map((item) => ({
-            ...item,
-            rate: item.visits ? item.checkoutClicks / item.visits : 0
-          }))
-          .sort((a, b) => b.rate - a.rate || b.checkoutClicks - a.checkoutClicks);
-
-        const top = eligible[0];
-        if (!top) {
-          bestCreative.textContent = "Not enough data yet";
-          bestDetail.textContent = "Once a creative has at least 10 tracked visits, we’ll surface the strongest checkout-intent signal here.";
-          return;
-        }
-
-        bestCreative.textContent = top.creative || top.campaign;
-        bestDetail.textContent = `${top.campaign} · ${percent(top.checkoutClicks, top.visits)} intent rate · ${top.checkoutClicks} checkout clicks from ${top.visits} tracked visits.`;
-      };
-
       const render = (data) => {
         const summary = data.summary || {};
         metric("visits", summary.visits || 0);
         metric("checkoutClicks", summary.checkoutClicks || 0);
         metric("intentRate", percent(summary.checkoutClicks || 0, summary.visits || 0));
         metric("activeCreatives", summary.activeCreatives || 0);
+        const funnelVisits = document.querySelector('[data-funnel="visits"]');
+        const funnelCheckout = document.querySelector('[data-funnel="checkoutClicks"]');
+        const funnelRate = document.querySelector('[data-funnel="intentRate"]');
+        if (funnelVisits) funnelVisits.textContent = summary.visits || 0;
+        if (funnelCheckout) funnelCheckout.textContent = summary.checkoutClicks || 0;
+        if (funnelRate) funnelRate.textContent = percent(summary.checkoutClicks || 0, summary.visits || 0);
 
         const campaigns = data.campaigns || [];
         rows.innerHTML = campaigns.length
@@ -760,7 +775,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             }).join("")
           : '<tr><td colspan="7">No real campaign data yet for this period.</td></tr>';
 
-        renderBest(campaigns);
         renderTrend(data.daily || []);
       };
 

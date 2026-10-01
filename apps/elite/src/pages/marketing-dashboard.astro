@@ -19,12 +19,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </header>
 
     <section class="dashboard-login" data-dashboard-login>
-      <label for="dashboard-token">Dashboard access key</label>
-      <div class="dashboard-login-row">
-        <input id="dashboard-token" type="password" autocomplete="current-password" placeholder="Enter access key" />
-        <button type="button" data-dashboard-load>Open dashboard</button>
+      <div data-auth-email-step>
+        <label for="dashboard-email">Your authorized email</label>
+        <div class="dashboard-login-row">
+          <input id="dashboard-email" type="email" autocomplete="email" placeholder="name@example.com" />
+          <button type="button" data-auth-send>Send code</button>
+        </div>
       </div>
-      <p data-dashboard-message>Access is required to load campaign data.</p>
+
+      <div data-auth-code-step hidden>
+        <label for="dashboard-code">6-digit email code</label>
+        <div class="dashboard-login-row">
+          <input
+            id="dashboard-code"
+            type="text"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            maxlength="6"
+            placeholder="000000"
+          />
+          <button type="button" data-auth-verify>Open dashboard</button>
+        </div>
+        <button type="button" class="dashboard-auth-secondary" data-auth-change>Use another email</button>
+      </div>
+
+      <p data-dashboard-message>Enter an authorized email. We’ll send a one-time code that expires after 10 minutes.</p>
     </section>
 
     <section class="dashboard-content" data-dashboard-content hidden>
@@ -37,7 +56,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <button type="button" data-days="90">90 days</button>
           </div>
         </div>
-        <button type="button" class="dashboard-refresh" data-dashboard-refresh>Refresh</button>
+        <div class="dashboard-toolbar-actions">
+          <span class="dashboard-user" data-dashboard-user></span>
+          <button type="button" class="dashboard-refresh" data-dashboard-refresh>Refresh</button>
+          <button type="button" class="dashboard-refresh" data-dashboard-logout>Sign out</button>
+        </div>
       </div>
 
       <div class="dashboard-metrics">
@@ -227,10 +250,32 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       cursor: pointer;
     }
 
-    .dashboard-login button,
+    .dashboard-login button:not(.dashboard-auth-secondary),
     .dashboard-generated-link button {
       background: #f6ece2;
       color: #17110e;
+    }
+
+    .dashboard-auth-secondary {
+      margin-top: 10px;
+      padding: 0 !important;
+      background: transparent;
+      color: rgba(247, 242, 236, 0.66);
+      text-decoration: underline;
+    }
+
+    .dashboard-toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .dashboard-user {
+      margin-right: 4px;
+      color: rgba(247, 242, 236, 0.58);
+      font-size: 0.78rem;
     }
 
     .dashboard-login p {
@@ -370,14 +415,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     (() => {
       const login = document.querySelector("[data-dashboard-login]");
       const content = document.querySelector("[data-dashboard-content]");
-      const tokenInput = document.querySelector("#dashboard-token");
       const message = document.querySelector("[data-dashboard-message]");
-      const loadButton = document.querySelector("[data-dashboard-load]");
+      const emailStep = document.querySelector("[data-auth-email-step]");
+      const codeStep = document.querySelector("[data-auth-code-step]");
+      const emailInput = document.querySelector("#dashboard-email");
+      const codeInput = document.querySelector("#dashboard-code");
+      const sendButton = document.querySelector("[data-auth-send]");
+      const verifyButton = document.querySelector("[data-auth-verify]");
+      const changeButton = document.querySelector("[data-auth-change]");
       const refreshButton = document.querySelector("[data-dashboard-refresh]");
+      const logoutButton = document.querySelector("[data-dashboard-logout]");
+      const userLabel = document.querySelector("[data-dashboard-user]");
       const rangeButtons = [...document.querySelectorAll("[data-days]")];
       const rows = document.querySelector("[data-campaign-rows]");
-      let token = "";
+
       let days = 30;
+      let currentEmail = "";
 
       const metric = (name, value) => {
         const node = document.querySelector(`[data-metric="${name}"]`);
@@ -418,16 +471,30 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           : '<tr><td colspan="6">No campaign data yet for this period.</td></tr>';
       };
 
-      const load = async () => {
-        if (!token) return;
-        message.textContent = "Loading…";
+      const showLogin = (text) => {
+        login.hidden = false;
+        content.hidden = true;
+        if (text) message.textContent = text;
+      };
 
+      const showEmailStep = () => {
+        emailStep.hidden = false;
+        codeStep.hidden = true;
+        codeInput.value = "";
+      };
+
+      const load = async () => {
         try {
           const response = await fetch(`/api/marketing-stats?days=${days}`, {
-            headers: { authorization: `Bearer ${token}` },
-            cache: "no-store"
+            cache: "no-store",
+            credentials: "same-origin"
           });
           const data = await response.json().catch(() => ({}));
+
+          if (response.status === 401) {
+            showLogin("Enter an authorized email. We’ll send a one-time code.");
+            return false;
+          }
 
           if (!response.ok) {
             throw new Error(data.error || "Unable to load dashboard");
@@ -436,30 +503,133 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           render(data);
           login.hidden = true;
           content.hidden = false;
-          message.textContent = "";
+          return true;
         } catch (error) {
-          login.hidden = false;
-          content.hidden = true;
-          message.textContent = error.message === "unauthorized"
-            ? "That access key is not correct."
-            : "Dashboard data is not available yet. Check the analytics setup.";
+          showLogin(
+            error.message === "analytics_not_configured" || error.message === "dashboard_auth_not_configured"
+              ? "The analytics backend still needs its Cloudflare database connection."
+              : "Dashboard data is temporarily unavailable."
+          );
+          return false;
         }
       };
 
-      loadButton?.addEventListener("click", () => {
-        token = tokenInput?.value?.trim() || "";
-        if (!token) {
-          message.textContent = "Enter the dashboard access key.";
+      const restoreSession = async () => {
+        try {
+          const response = await fetch("/api/dashboard-auth-status", {
+            cache: "no-store",
+            credentials: "same-origin"
+          });
+          const data = await response.json().catch(() => ({}));
+
+          if (response.ok && data.authenticated) {
+            currentEmail = data.email || "";
+            userLabel.textContent = currentEmail;
+            await load();
+            return;
+          }
+        } catch {
+          // Fall through to email login.
+        }
+
+        showLogin("Enter an authorized email. We’ll send a one-time code.");
+        showEmailStep();
+      };
+
+      sendButton?.addEventListener("click", async () => {
+        const email = emailInput?.value?.trim() || "";
+        if (!email) {
+          message.textContent = "Enter your email first.";
           return;
         }
-        load();
+
+        sendButton.disabled = true;
+        message.textContent = "Sending code…";
+
+        try {
+          const response = await fetch("/api/dashboard-auth-request", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            credentials: "same-origin",
+            body: JSON.stringify({ email })
+          });
+          const data = await response.json().catch(() => ({}));
+
+          if (!response.ok) throw new Error(data.error || "Unable to send code");
+
+          currentEmail = email;
+          emailStep.hidden = true;
+          codeStep.hidden = false;
+          message.textContent = "If this email is authorized, the 6-digit code is on its way. It expires in 10 minutes.";
+          codeInput?.focus();
+        } catch (error) {
+          message.textContent = error.message === "dashboard_auth_not_configured"
+            ? "Email login still needs its Cloudflare configuration."
+            : "We couldn’t send the code right now.";
+        } finally {
+          sendButton.disabled = false;
+        }
       });
 
-      tokenInput?.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") loadButton?.click();
+      verifyButton?.addEventListener("click", async () => {
+        const code = codeInput?.value?.trim() || "";
+        if (!/^\d{6}$/.test(code)) {
+          message.textContent = "Enter the 6-digit code from the email.";
+          return;
+        }
+
+        verifyButton.disabled = true;
+        message.textContent = "Checking code…";
+
+        try {
+          const response = await fetch("/api/dashboard-auth-verify", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            credentials: "same-origin",
+            body: JSON.stringify({ email: currentEmail, code })
+          });
+          const data = await response.json().catch(() => ({}));
+
+          if (!response.ok) throw new Error(data.error || "Unable to verify code");
+
+          userLabel.textContent = currentEmail;
+          await load();
+        } catch (error) {
+          message.textContent = error.message === "invalid_code"
+            ? "That code is incorrect or expired."
+            : "We couldn’t verify the code right now.";
+        } finally {
+          verifyButton.disabled = false;
+        }
+      });
+
+      codeInput?.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") verifyButton?.click();
+      });
+
+      emailInput?.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") sendButton?.click();
+      });
+
+      changeButton?.addEventListener("click", () => {
+        currentEmail = "";
+        showEmailStep();
+        message.textContent = "Enter an authorized email.";
+        emailInput?.focus();
       });
 
       refreshButton?.addEventListener("click", load);
+
+      logoutButton?.addEventListener("click", async () => {
+        await fetch("/api/dashboard-auth-logout", {
+          method: "POST",
+          credentials: "same-origin"
+        }).catch(() => {});
+        currentEmail = "";
+        userLabel.textContent = "";
+        showEmailStep();
+        showLogin("Signed out. Enter your email to receive a new code.");
+      });
 
       rangeButtons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -499,7 +669,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         copyButton.textContent = "Copied";
         setTimeout(() => { copyButton.textContent = "Copy link"; }, 1200);
       });
+
       updateLink();
+      restoreSession();
     })();
   </script>
 </BaseLayout>

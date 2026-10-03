@@ -11,7 +11,7 @@ const posters = tvMedia.posters.map((item) => ({
 }));
 const videos = ["https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/videos/Video%20TV.mp4"];
 const initialVideo = videos[0] || "";
-const TV_ASSET_VERSION = "20261003-classes-qr-v4";
+const TV_ASSET_VERSION = "20261003-promos-v1";
 const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;
 const featureSchedule = tvMedia.features?.schedule
   ? { ...tvMedia.features.schedule, src: versionedMedia(tvMedia.features.schedule.file) }
@@ -22,6 +22,9 @@ const featureParty = tvMedia.features?.party
 const featureReview = tvMedia.features?.review
   ? { ...tvMedia.features.review, src: versionedMedia(tvMedia.features.review.file) }
   : null;
+const featurePromos = Array.isArray(tvMedia.features?.promos)
+  ? tvMedia.features.promos.map((item) => ({ ...item, src: versionedMedia(item.file) }))
+  : [];
 const scheduleCandidates = featureSchedule
   ? Array.from(new Set([
       featureSchedule.src,
@@ -91,11 +94,14 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <section class="scene feature-scene" id="review-scene">
   {featureReview && <img class="feature-image" id="review-img" src={featureReview.src} alt={featureReview.title} loading="eager" fetchpriority="high" decoding="async" />}
 </section>
+<section class="scene feature-scene" id="promo-scene">
+  <img class="feature-image" id="promo-img" alt="" loading="eager" decoding="async" />
+</section>
 <section class="scene class-scene" id="single-scene"><div class="class-header"><h1 id="single-title">Class</h1><div id="single-info"><div class="status"><span class="dot"></span><span id="single-status">CURRENT CLASS · LIVE NOW</span></div></div></div><div class="single-poster-wrap"><img class="poster-main" id="single-img" alt=""></div></section>
 <div class="probe"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
 </main>
 <script type="module" src="https://widget-static.eversports.io/loader.js"></script>
-<script is:inline define:vars={{ posters, videos, tvSchedule, featureSchedule, featureParty, featureReview, scheduleCandidates }}>
+<script is:inline define:vars={{ posters, videos, tvSchedule, featureSchedule, featureParty, featureReview, featurePromos, scheduleCandidates }}>
 (()=>{
 const TZ="Europe/Berlin";
 const NEXT_WINDOW=15;
@@ -111,12 +117,15 @@ const TV_CODE_RELOAD_MS=5*60*1000;
 const video=document.getElementById('video');
 const scheduleImg=document.getElementById('schedule-img');
 const reviewImg=document.getElementById('review-img');
+const promoImg=document.getElementById('promo-img');
 let scheduleCandidateIndex=0;
+let promoIndex=Number(localStorage.getItem('eliteTvPromoIndex')||'0');
 const scenes={
   video:document.getElementById('video-scene'),
   schedule:document.getElementById('schedule-scene'),
   party:document.getElementById('party-scene'),
   review:document.getElementById('review-scene'),
+  promo:document.getElementById('promo-scene'),
   single:document.getElementById('single-scene')
 };
 let events=[];
@@ -276,11 +285,35 @@ function showReviewFeature(){
     };
   };
 }
+function showPromoFeature(){
+  clearTimeout(sceneTimer);
+  if(!featurePromos.length||!promoImg){continueAfterFeatures();return;}
+  const promo=featurePromos[promoIndex%featurePromos.length];
+  promoIndex=(promoIndex+1)%featurePromos.length;
+  localStorage.setItem('eliteTvPromoIndex',String(promoIndex));
+
+  const reveal=()=>{
+    promoImg.onload=null;
+    promoImg.onerror=null;
+    activate('promo');
+    sceneTimer=setTimeout(continueAfterFeatures,(promo.seconds||12)*1000);
+  };
+
+  promoImg.alt=promo.title||'Elite Dance Studio';
+  promoImg.onload=reveal;
+  promoImg.onerror=()=>{
+    promoImg.onload=null;
+    promoImg.onerror=null;
+    continueAfterFeatures();
+  };
+  promoImg.src=promo.src;
+  if(promoImg.complete&&promoImg.naturalWidth>0)reveal();
+}
 function showPartyFeature(){
   clearTimeout(sceneTimer);
-  if(!featureParty){continueAfterFeatures();return;}
+  if(!featureParty){showPromoFeature();return;}
   activate('party');
-  sceneTimer=setTimeout(continueAfterFeatures,PARTY_SECONDS*1000);
+  sceneTimer=setTimeout(showPromoFeature,PARTY_SECONDS*1000);
 }
 function showScheduleFeature(){
   clearTimeout(sceneTimer);
@@ -319,6 +352,7 @@ function demo(){const mode=new URLSearchParams(location.search).get('demo');if(!
 posters.forEach(p=>{const img=new Image();img.src=p.src});
 if(featureParty?.src){const img=new Image();img.src=featureParty.src;}
 if(featureReview?.src){const img=new Image();img.src=featureReview.src;}
+featurePromos.forEach(p=>{const img=new Image();img.src=p.src;});
 scheduleCandidates.forEach(src=>{const img=new Image();img.src=src;});
 const obs=new MutationObserver(()=>{refreshScheduleNow()});
 obs.observe(document.getElementById('eversports-probe'),{childList:true,subtree:true,characterData:true});

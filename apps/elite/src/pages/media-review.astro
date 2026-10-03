@@ -6,6 +6,8 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import intensives from "../data/intensives.json";
 import site from "../data/site.json";
+import tvMedia from "../data/tv-media.json";
+import tvSchedule from "../data/tv-schedule.json";
 
 type MediaAsset = {
   src: string;
@@ -100,6 +102,33 @@ const currentAssignments = [
   })
 ];
 
+const tvMediaBase = "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv";
+const tvAssetUrl = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
+const normalizeTvTitle = (value = "") =>
+  value.toLowerCase().replace(/[^a-z0-9äöüß+]+/gi, " ").replace(/\s+/g, " ").trim();
+const matchesTvPoster = (poster: (typeof tvMedia.posters)[number], title: string) => {
+  const normalizedTitle = normalizeTvTitle(title);
+  return [poster.title, ...(poster.aliases || [])].some((alias) => {
+    const normalizedAlias = normalizeTvTitle(alias);
+    return normalizedAlias && (normalizedTitle.includes(normalizedAlias) || normalizedAlias.includes(normalizedTitle));
+  });
+};
+const scheduleTitles = Array.from(new Set(tvSchedule.map((entry) => entry.title))).sort();
+const tvPosterAssignments = tvMedia.posters.map((poster) => ({
+  ...poster,
+  src: tvAssetUrl(poster.file),
+  usedBy: scheduleTitles.filter((title) => matchesTvPoster(poster, title))
+}));
+const unmappedScheduleTitles = scheduleTitles.filter(
+  (title) => !tvMedia.posters.some((poster) => matchesTvPoster(poster, title))
+);
+const ambiguousScheduleTitles = scheduleTitles
+  .map((title) => ({
+    title,
+    posters: tvMedia.posters.filter((poster) => matchesTvPoster(poster, title)).map((poster) => poster.title)
+  }))
+  .filter((item) => item.posters.length > 1);
+
 const remoteAssets: MediaAsset[] = [
   {
     src: "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/classes/ChatGPT%20Image%20Aug%2023,%202026,%2006_04_55%20PM.png",
@@ -153,9 +182,54 @@ const remoteAssets: MediaAsset[] = [
       ))}
     </section>
 
+    <section class="asset-section" id="tv-class-posters" aria-labelledby="tv-class-posters-title">
+      <header>
+        <div>
+          <span class="eyebrow">{tvPosterAssignments.length} TV poster mappings</span>
+          <h2 id="tv-class-posters-title">TV class → image assignments</h2>
+        </div>
+        <p>This is the exact poster mapping currently used by the TV. Each card shows the image, filename and which schedule titles can resolve to it.</p>
+      </header>
+
+      {(unmappedScheduleTitles.length > 0 || ambiguousScheduleTitles.length > 0) && (
+        <div class="tv-mapping-warnings">
+          {unmappedScheduleTitles.length > 0 && (
+            <div>
+              <strong>No mapped poster:</strong>
+              <p>{unmappedScheduleTitles.join(" · ")}</p>
+            </div>
+          )}
+          {ambiguousScheduleTitles.length > 0 && (
+            <div>
+              <strong>Ambiguous mapping:</strong>
+              {ambiguousScheduleTitles.map((item) => (
+                <p><b>{item.title}</b> → {item.posters.join(" / ")}</p>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      <div class="assignment-grid">
+        {tvPosterAssignments.map((assignment) => (
+          <article class="assignment-card">
+            <a href={assignment.src} target="_blank" rel="noreferrer" class="assignment-image" aria-label={`${assignment.title} poster full size`}>
+              <img src={assignment.src} alt={`TV poster for ${assignment.title}`} loading="lazy" decoding="async" />
+            </a>
+            <div>
+              <span>{assignment.title}</span>
+              <strong>{assignment.file}</strong>
+              <p><b>Schedule matches:</b> {assignment.usedBy.length ? assignment.usedBy.join(" · ") : "None currently"}</p>
+              <p><b>Aliases:</b> {(assignment.aliases || []).join(" · ")}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
     <section class="media-review-instructions" aria-label="How to choose media">
       <strong>How to send your choices:</strong>
-      <p>Reply with, for example, “Body Movement I → <code>studio-room-blue.jpg</code>”. If the original files are on your NAS, upload the five missing originals and I will place them in Cloudflare and connect them correctly.</p>
+      <p>For the TV list above, reply with something like “Heels Beginner → use <code>High Heels Monday.png</code> on Monday only”. I can then correct the mapping directly.</p>
     </section>
 
     {localGroups.map((group) => (
@@ -305,6 +379,18 @@ const remoteAssets: MediaAsset[] = [
   .media-review-instructions strong { color: #fff; }
   .media-review-instructions p { margin: 0; color: rgba(255, 255, 255, 0.76); line-height: 1.55; }
   .media-review-instructions code { color: #f3bf82; font: inherit; }
+
+  .tv-mapping-warnings {
+    display: grid;
+    gap: 12px;
+    padding: 18px 20px;
+    border: 1px solid rgba(255, 187, 92, 0.32);
+    border-radius: 16px;
+    background: rgba(255, 187, 92, 0.08);
+  }
+  .tv-mapping-warnings strong { color: #fff; }
+  .tv-mapping-warnings p { margin: 5px 0 0; color: rgba(255, 255, 255, 0.72); line-height: 1.45; }
+  .tv-mapping-warnings b { color: #f3bf82; }
 
   .asset-section { display: grid; gap: 22px; scroll-margin-top: 100px; }
   .asset-card { display: grid; text-decoration: none; transition: transform 160ms ease, border-color 160ms ease; }

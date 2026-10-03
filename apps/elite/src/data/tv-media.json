@@ -18,7 +18,7 @@
     "review": {
       "title": "Google Review",
       "file": "events/Berlin Nightlife Review Poster(2).png",
-      "seconds": 10,
+      "seconds": 20,
       "type": "image"
     }
   },
@@ -65,6 +65,16 @@
       ]
     },
     {
+      "title": "Choreography Wednesday",
+      "file": "classes/Laura’s Wednesday Dance Class.png",
+      "aliases": [
+        "choreography wednesday",
+        "choreo wednesday",
+        "laura choreography",
+        "choreography laura"
+      ]
+    },
+    {
       "title": "Choreography",
       "file": "classes/Choereography Friday.png",
       "aliases": [
@@ -107,6 +117,14 @@
       ]
     },
     {
+      "title": "Zouk Beginner",
+      "file": "classes/d8356f17-5997-413f-ae75-3ee975f51f1f.png",
+      "aliases": [
+        "zouk beginner",
+        "zouk"
+      ]
+    },
+    {
       "title": "Heels Beginner",
       "file": "classes/Heels beginner wednesday.png",
       "aliases": [
@@ -124,6 +142,25 @@
         "high heels monday",
         "heels monday",
         "heels beginner monday"
+      ]
+    },
+    {
+      "title": "Waving Beginner",
+      "file": "classes/Purple Wave Beginner Dance Poster.png",
+      "aliases": [
+        "waving beginner",
+        "waving",
+        "wave beginner"
+      ]
+    },
+    {
+      "title": "Hip Hop Beginner Saturday",
+      "file": "classes/ChatGPT Image Sep 26, 2026, 02_06_50 PM.png",
+      "aliases": [
+        "hip hop beginner saturday",
+        "hip-hop beginner saturday",
+        "hip hop annita",
+        "hip-hop annita"
       ]
     },
     {
@@ -192,12 +229,21 @@
       ]
     },
     {
+      "title": "Twerking",
+      "file": "classes/twerking-isalina-eversports-original-photo.png",
+      "aliases": [
+        "twerking",
+        "twerking isalina",
+        "twerk isalina"
+      ]
+    },
+    {
       "title": "Latin Twerk",
       "file": "classes/Latin Twerk Monday.png",
       "aliases": [
         "latin twerk",
-        "twerk",
-        "latin twerking"
+        "latin twerk beginner",
+        "latin twerk monday"
       ]
     },
     {
@@ -230,7 +276,7 @@
     },
     {
       "title": "Salsa Footwork Fusion",
-      "file": "classes/Salsa Footwork.png",
+      "file": "classes/Salsa Footowork.png",
       "aliases": [
         "salsa footwork fusion",
         "salsa footwork",

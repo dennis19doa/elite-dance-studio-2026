@@ -113,27 +113,56 @@ const matchesTvPoster = (poster: (typeof tvMedia.posters)[number], title: string
     return normalizedAlias && (normalizedTitle.includes(normalizedAlias) || normalizedAlias.includes(normalizedTitle));
   });
 };
+const weekdayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 const scheduleTitles = Array.from(new Set(tvSchedule.map((entry) => entry.title))).sort();
 const tvPosterAssignments = tvMedia.posters.map((poster) => ({
   ...poster,
   src: tvAssetUrl(poster.file),
   usedBy: scheduleTitles.filter((title) => matchesTvPoster(poster, title))
 }));
-const unmappedScheduleTitles = scheduleTitles.filter(
-  (title) => !tvMedia.posters.some((poster) => matchesTvPoster(poster, title))
+const resolvedSchedule = [...tvSchedule]
+  .sort((a, b) => {
+    const dayDiff = weekdayOrder.indexOf(a.weekday) - weekdayOrder.indexOf(b.weekday);
+    return dayDiff || a.start.localeCompare(b.start) || a.title.localeCompare(b.title);
+  })
+  .map((entry) => {
+    const matches = tvMedia.posters.filter((poster) => matchesTvPoster(poster, entry.title));
+    const activePoster = matches[0] || null;
+    return {
+      ...entry,
+      activePoster,
+      matches,
+      src: activePoster ? tvAssetUrl(activePoster.file) : null
+    };
+  });
+const scheduleByDay = weekdayOrder
+  .map((weekday) => ({ weekday, entries: resolvedSchedule.filter((entry) => entry.weekday === weekday) }))
+  .filter((day) => day.entries.length > 0);
+const unmappedScheduleTitles = Array.from(new Set(
+  resolvedSchedule.filter((entry) => !entry.activePoster).map((entry) => entry.title)
+));
+const ambiguousScheduleTitles = Array.from(
+  new Map(
+    resolvedSchedule
+      .filter((entry) => entry.matches.length > 1)
+      .map((entry) => [entry.title, {
+        title: entry.title,
+        posters: entry.matches.map((poster) => poster.title)
+      }])
+  ).values()
 );
-const ambiguousScheduleTitles = scheduleTitles
-  .map((title) => ({
-    title,
-    posters: tvMedia.posters.filter((poster) => matchesTvPoster(poster, title)).map((poster) => poster.title)
-  }))
-  .filter((item) => item.posters.length > 1);
 
 const remoteAssets: MediaAsset[] = [
   {
     src: "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/classes/ChatGPT%20Image%20Aug%2023,%202026,%2006_04_55%20PM.png",
     filename: "ChatGPT Image Aug 23, 2026, 06_04_55 PM.png",
     folder: "Cloudflare R2 · TV/classes",
+    kind: "image"
+  },
+  {
+    src: "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/classes/ChatGPT%20Image%20Sep%2026,%202026,%2002_06_50%20PM.png",
+    filename: "ChatGPT Image Sep 26, 2026, 02_06_50 PM.png",
+    folder: "Cloudflare R2 · TV/classes · currently unassigned",
     kind: "image"
   }
 ];
@@ -185,10 +214,10 @@ const remoteAssets: MediaAsset[] = [
     <section class="asset-section" id="tv-class-posters" aria-labelledby="tv-class-posters-title">
       <header>
         <div>
-          <span class="eyebrow">{tvPosterAssignments.length} TV poster mappings</span>
-          <h2 id="tv-class-posters-title">TV class → image assignments</h2>
+          <span class="eyebrow">{resolvedSchedule.length} scheduled TV class slots</span>
+          <h2 id="tv-class-posters-title">TV schedule → image shown</h2>
         </div>
-        <p>This is the exact poster mapping currently used by the TV. Each card shows the image, filename and which schedule titles can resolve to it.</p>
+        <p>Ordered exactly by weekday and time. Each row shows the class slot and the image the TV currently resolves to first.</p>
       </header>
 
       {(unmappedScheduleTitles.length > 0 || ambiguousScheduleTitles.length > 0) && (
@@ -201,28 +230,57 @@ const remoteAssets: MediaAsset[] = [
           )}
           {ambiguousScheduleTitles.length > 0 && (
             <div>
-              <strong>Ambiguous mapping:</strong>
+              <strong>Multiple posters can match these names:</strong>
               {ambiguousScheduleTitles.map((item) => (
-                <p><b>{item.title}</b> → {item.posters.join(" / ")}</p>
+                <p><b>{item.title}</b> → {item.posters.join(" / ")}. The first one listed is what the TV currently uses.</p>
               ))}
             </div>
           )}
         </div>
       )}
 
-      <div class="assignment-grid">
-        {tvPosterAssignments.map((assignment) => (
-          <article class="assignment-card">
-            <a href={assignment.src} target="_blank" rel="noreferrer" class="assignment-image" aria-label={`${assignment.title} poster full size`}>
-              <img src={assignment.src} alt={`TV poster for ${assignment.title}`} loading="lazy" decoding="async" />
-            </a>
-            <div>
-              <span>{assignment.title}</span>
-              <strong>{assignment.file}</strong>
-              <p><b>Schedule matches:</b> {assignment.usedBy.length ? assignment.usedBy.join(" · ") : "None currently"}</p>
-              <p><b>Aliases:</b> {(assignment.aliases || []).join(" · ")}</p>
+      <div class="tv-days">
+        {scheduleByDay.map((day) => (
+          <section class="tv-day" aria-labelledby={`tv-day-${day.weekday.toLowerCase()}`}>
+            <div class="tv-day-title">
+              <span>{day.weekday}</span>
+              <small>{day.entries.length} class{day.entries.length === 1 ? "" : "es"}</small>
             </div>
-          </article>
+            <div class="tv-schedule-grid">
+              {day.entries.map((entry) => (
+                <article class:list={["tv-schedule-card", { "is-unmapped": !entry.activePoster, "is-ambiguous": entry.matches.length > 1 }]}>
+                  <div class="tv-time">
+                    <strong>{entry.start}</strong>
+                    <span>{entry.end}</span>
+                  </div>
+                  <div class="tv-schedule-image">
+                    {entry.src ? (
+                      <a href={entry.src} target="_blank" rel="noreferrer" aria-label={`Open image shown for ${entry.title}`}>
+                        <img src={entry.src} alt={`Image shown for ${entry.title}`} loading="lazy" decoding="async" />
+                      </a>
+                    ) : (
+                      <div class="tv-no-image">NO IMAGE<br />MAPPED</div>
+                    )}
+                  </div>
+                  <div class="tv-schedule-info">
+                    <span>{entry.weekday} · {entry.start}</span>
+                    <strong>{entry.title}</strong>
+                    {entry.activePoster ? (
+                      <>
+                        <p><b>TV shows:</b> {entry.activePoster.title}</p>
+                        <code>{entry.activePoster.file}</code>
+                        {entry.matches.length > 1 && (
+                          <p class="mapping-note">Also matches: {entry.matches.slice(1).map((poster) => poster.title).join(" · ")}</p>
+                        )}
+                      </>
+                    ) : (
+                      <p class="mapping-note">This class currently has no poster connected.</p>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
     </section>
@@ -392,6 +450,75 @@ const remoteAssets: MediaAsset[] = [
   .tv-mapping-warnings p { margin: 5px 0 0; color: rgba(255, 255, 255, 0.72); line-height: 1.45; }
   .tv-mapping-warnings b { color: #f3bf82; }
 
+  .tv-days { display: grid; gap: 30px; }
+  .tv-day { display: grid; gap: 13px; }
+  .tv-day-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+  }
+  .tv-day-title span {
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.3vw, 2.1rem);
+    font-weight: 800;
+  }
+  .tv-day-title small { color: rgba(255,255,255,.5); }
+  .tv-schedule-grid { display: grid; gap: 10px; }
+  .tv-schedule-card {
+    display: grid;
+    grid-template-columns: 92px minmax(150px, 230px) minmax(0, 1fr);
+    min-height: 150px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 16px;
+    background: #211c19;
+  }
+  .tv-schedule-card.is-ambiguous { border-color: rgba(255,187,92,.42); }
+  .tv-schedule-card.is-unmapped { border-color: rgba(255,92,92,.42); }
+  .tv-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding: 16px;
+    text-align: center;
+    background: rgba(255,255,255,.045);
+  }
+  .tv-time strong { color: #fff; font-size: 1.22rem; }
+  .tv-time span { color: rgba(255,255,255,.48); font-size: .78rem; }
+  .tv-schedule-image { min-height: 150px; background: #0d0b0a; }
+  .tv-schedule-image a { display: block; width: 100%; height: 100%; }
+  .tv-schedule-image img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .tv-no-image {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    min-height: 150px;
+    place-items: center;
+    color: rgba(255,255,255,.36);
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .tv-schedule-info { display: grid; align-content: center; gap: 7px; padding: 17px 20px; min-width: 0; }
+  .tv-schedule-info > span {
+    color: #f3bf82;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+  .tv-schedule-info > strong { color: #fff; font-size: 1.05rem; }
+  .tv-schedule-info p { margin: 0; color: rgba(255,255,255,.65); font-size: .82rem; line-height: 1.42; }
+  .tv-schedule-info code { overflow-wrap: anywhere; color: rgba(255,255,255,.46); font-size: .72rem; }
+  .tv-schedule-info .mapping-note { color: #f3bf82; font-size: .76rem; }
+
   .asset-section { display: grid; gap: 22px; scroll-margin-top: 100px; }
   .asset-card { display: grid; text-decoration: none; transition: transform 160ms ease, border-color 160ms ease; }
   .asset-card:hover { border-color: #f3bf82; transform: translateY(-3px); }
@@ -405,5 +532,14 @@ const remoteAssets: MediaAsset[] = [
     .media-review-head { gap: 18px; }
     .media-review-count { width: max-content; }
     .media-review-shell { gap: 30px; }
+    .tv-schedule-card { grid-template-columns: 72px 128px minmax(0,1fr); }
+    .tv-time { padding: 10px 8px; }
+    .tv-schedule-info { padding: 12px 14px; }
+  }
+
+  @media (max-width: 560px) {
+    .tv-schedule-card { grid-template-columns: 70px 1fr; }
+    .tv-schedule-image { min-height: 120px; }
+    .tv-schedule-info { grid-column: 1 / -1; }
   }
 </style>

@@ -1,0 +1,224 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import site from "../../data/site.json";
+---
+
+<BaseLayout
+  title="Heels Closed Group | Elite Dance Studio Berlin"
+  description="Heels Closed Group in Berlin mit Nate. Feste Trainingsgruppe für Technik, Lines, Balance, Performance, Choreografie und sichere Heels-Kontrolle."
+  image="/media/coaches/nate.webp"
+  bodyClass="advanced-page-v22"
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main advanced-main-v22">
+    <section class="advanced-hero-v22">
+      <div class="advanced-hero-copy-v22">
+        <div class="eyebrow">Heels · Closed Group</div>
+        <h1>Technik, Lines und Performance – mit mehr Kontrolle in jedem Detail.</h1>
+        <p>
+          Für Tänzer:innen, die in Heels sicherer werden, ihre Linien klarer setzen und an
+          Technik, Ausdruck und Performance über mehrere Wochen gezielt arbeiten möchten.
+        </p>
+        <div class="advanced-hero-actions-v22">
+          <a class="button primary" href="#anmeldung">Closed Group anmelden</a>
+          <a class="button secondary" href="/fortgeschrittene/">Alle Advanced Groups</a>
+        </div>
+        <div class="advanced-hero-meta-v22" aria-label="Heels Closed Group Details">
+          <span>Mittwoch · 20:00–21:30</span>
+          <span>Nate</span>
+          <span>Feste Gruppe</span>
+        </div>
+      </div>
+
+      <div class="advanced-hero-type-v24" aria-hidden="true">
+        <span>HEELS</span>
+        <strong>TECHNIQUE</strong>
+        <strong>LINES</strong>
+        <strong>PERFORMANCE</strong>
+        <small>Elite Dance Studio · Berlin</small>
+      </div>
+    </section>
+
+    <section class="bachata-advanced-v22" id="programm">
+      <div class="bachata-program-v22">
+        <div class="eyebrow">Heels Closed Group · Mittwoch 20:00–21:30</div>
+        <h2>Mehr als Choreo: Technik aufbauen und wirklich weiterentwickeln.</h2>
+        <p class="bachata-program-lead-v22">
+          In der Closed Group trainiert dieselbe Gruppe über mehrere Wochen zusammen.
+          So bleibt Zeit für Wiederholung, Korrekturen und die Details, die in einer einzelnen Open Class oft zu kurz kommen.
+        </p>
+
+        <div class="bachata-story-v23">
+          <article>
+            <small>Heels Technique</small>
+            <strong>Stabilität zuerst.<br />Dann Freiheit.</strong>
+            <p>
+              Wir arbeiten an Haltung, Balance, Gewichtsverlagerung, Walks, Turns und sicheren
+              Übergängen, damit du dich in Heels kontrollierter und selbstbewusster bewegen kannst.
+            </p>
+          </article>
+          <article>
+            <small>Lines &amp; Choreo</small>
+            <strong>Klarere Formen.<br />Sauberere Details.</strong>
+            <p>
+              Arme, Beine, Winkel, Dynamik und Timing werden bewusst trainiert und direkt in
+              Choreografie umgesetzt, statt Bewegungen nur auswendig zu lernen.
+            </p>
+          </article>
+          <article>
+            <small>Performance</small>
+            <strong>Präsenz entwickeln.<br />Deinen Style finden.</strong>
+            <p>
+              Du arbeitest an Ausdruck, Musikalität und Performance-Qualität, damit die Choreo
+              nicht nur korrekt aussieht, sondern wirklich nach dir wirkt.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <div class="bachata-registration-v22" id="anmeldung">
+        <div class="bachata-form-heading-v22">
+          <span>Closed Group Registration</span>
+          <h3>Für welchen Monat möchtest du dabei sein?</h3>
+          <p>
+            Wähle deinen Monat und sag uns kurz, woran du im Heels-Training besonders arbeiten möchtest.
+            Wir bestätigen dir deinen Platz anschließend per WhatsApp.
+          </p>
+        </div>
+
+        <form class="advanced-registration-form-v22" action="https://formsubmit.co/info@elitedancestudio.de" method="post" data-closed-form>
+          <input type="hidden" name="form_kind" value="closed_group" />
+          <input type="hidden" name="_subject" value="Heels Closed Group Anmeldung" data-subject-line />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_url" value="https://elitedancestudio.de/fortgeschrittene/heels-closed-group/" />
+          <input type="hidden" name="_next" value="https://elitedancestudio.de/fortgeschrittene/heels-closed-group/?sent=1#anmeldung" />
+          <input type="hidden" name="request_type" value="heels_closed_group_registration" />
+          <input class="advanced-honeypot-v22" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <fieldset class="advanced-month-fieldset-v22">
+            <legend>Monat auswählen *</legend>
+            <div class="advanced-month-options-v22">
+              <label>
+                <input type="checkbox" name="months" value="Oktober 2026" data-month />
+                <span><small>10 / 2026</small><strong>Oktober</strong></span>
+              </label>
+              <label>
+                <input type="checkbox" name="months" value="November 2026" data-month />
+                <span><small>11 / 2026</small><strong>November</strong></span>
+              </label>
+              <label>
+                <input type="checkbox" name="months" value="Dezember 2026" data-month />
+                <span><small>12 / 2026</small><strong>Dezember</strong></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="advanced-form-grid-v22">
+            <label>
+              <span>Name *</span>
+              <input type="text" name="name" autocomplete="name" required placeholder="Dein Name" />
+            </label>
+            <label>
+              <span>E-Mail *</span>
+              <input type="email" name="email" autocomplete="email" required placeholder="du@beispiel.de" />
+            </label>
+            <label class="advanced-form-wide-v22">
+              <span>WhatsApp-Nummer *</span>
+              <input type="tel" name="phone" autocomplete="tel" required placeholder="+49 …" />
+              <small class="advanced-field-note-v23">Bitte die Nummer angeben, unter der wir dir die Bestätigung schicken können.</small>
+            </label>
+          </div>
+
+          <label class="advanced-subject-v23">
+            <span>Was möchtest du im Heels-Training verbessern? *</span>
+            <textarea rows="4" name="training_subject" required placeholder="Zum Beispiel: Walks, Turns, Balance, Lines, Floorwork, Performance, Confidence …"></textarea>
+            <small class="advanced-field-note-v23">Schreib uns frei, worauf du dich im Training besonders konzentrieren möchtest.</small>
+          </label>
+
+          <label class="advanced-note-v22">
+            <span>Noch etwas, das wir wissen sollten?</span>
+            <textarea rows="3" name="extra_note" placeholder="Optional"></textarea>
+          </label>
+
+          <label class="advanced-consent-v22">
+            <input type="checkbox" name="privacy_consent" value="accepted" required />
+            <span>Ich stimme zu, dass Elite Dance Studio meine Angaben über den Formular-Dienst zur Bearbeitung dieser Anmeldung verwendet. *</span>
+          </label>
+
+          <div class="advanced-submit-row-v22">
+            <button class="button primary" type="submit">Heels Closed Group anmelden</button>
+            <span>* Pflichtfelder</span>
+          </div>
+
+          <p class="advanced-form-status-v22" role="status" aria-live="polite" data-form-status>
+            Deine Anmeldung wird direkt an das Elite-Team geschickt.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <section class="advanced-footer-cta-v22">
+      <div>
+        <div class="eyebrow">Noch mehr Training?</div>
+        <h2>Entdecke unsere anderen Advanced &amp; Closed Groups.</h2>
+      </div>
+      <div class="advanced-footer-actions-v22">
+        <a class="button secondary" href="/fortgeschrittene/">Alle Closed Groups</a>
+        <a class="button primary" href="/stundenplan/">Stundenplan öffnen</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+
+  <script is:inline>
+    (() => {
+      const form = document.querySelector("[data-closed-form]");
+      if (!(form instanceof HTMLFormElement)) return;
+
+      const status = form.querySelector("[data-form-status]");
+      const submit = form.querySelector('button[type="submit"]');
+      const subjectLine = form.querySelector("[data-subject-line]");
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("sent") === "1" && status) {
+        status.textContent = "Danke! Deine Anmeldung wurde gesendet. Wir melden uns mit der Bestätigung per WhatsApp bei dir.";
+        status.dataset.state = "success";
+        params.delete("sent");
+        const query = params.toString();
+        history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}#anmeldung`);
+      }
+
+      form.addEventListener("submit", (event) => {
+        const months = [...form.querySelectorAll("[data-month]:checked")].map((input) => input.value);
+        if (!months.length) {
+          event.preventDefault();
+          if (status) {
+            status.textContent = "Bitte wähle mindestens einen Monat aus.";
+            status.dataset.state = "error";
+          }
+          return;
+        }
+
+        if (!form.reportValidity()) {
+          event.preventDefault();
+          return;
+        }
+
+        const name = String(new FormData(form).get("name") || "").trim();
+        if (subjectLine instanceof HTMLInputElement) {
+          subjectLine.value = `Heels Closed Group Anmeldung – ${name || "Website"}`;
+        }
+
+        if (submit instanceof HTMLButtonElement) submit.disabled = true;
+        if (status) {
+          status.textContent = "Deine Anmeldung wird sicher über FormSubmit gesendet …";
+          status.dataset.state = "loading";
+        }
+      });
+    })();
+  </script>
+</BaseLayout>

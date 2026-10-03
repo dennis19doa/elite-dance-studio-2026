@@ -11,7 +11,7 @@ const posters = tvMedia.posters.map((item) => ({
 }));
 const videos = ["https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/videos/Video%20TV.mp4"];
 const initialVideo = videos[0] || "";
-const TV_ASSET_VERSION = "20261003-classes-qr-v3";
+const TV_ASSET_VERSION = "20261003-classes-qr-v4";
 const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;
 const featureSchedule = tvMedia.features?.schedule
   ? { ...tvMedia.features.schedule, src: versionedMedia(tvMedia.features.schedule.file) }
@@ -89,7 +89,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
   {featureParty && <img class="feature-image" id="party-img" src={featureParty.src} alt={featureParty.title} />}
 </section>
 <section class="scene feature-scene" id="review-scene">
-  {featureReview && <img class="feature-image" id="review-img" src={featureReview.src} alt={featureReview.title} />}
+  {featureReview && <img class="feature-image" id="review-img" src={featureReview.src} alt={featureReview.title} loading="eager" fetchpriority="high" decoding="async" />}
 </section>
 <section class="scene class-scene" id="single-scene"><div class="class-header"><h1 id="single-title">Class</h1><div id="single-info"><div class="status"><span class="dot"></span><span id="single-status">CURRENT CLASS · LIVE NOW</span></div></div></div><div class="single-poster-wrap"><img class="poster-main" id="single-img" alt=""></div></section>
 <div class="probe"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
@@ -110,6 +110,7 @@ const VIDEO_LOAD_TIMEOUT_MS=10000;
 const TV_CODE_RELOAD_MS=5*60*1000;
 const video=document.getElementById('video');
 const scheduleImg=document.getElementById('schedule-img');
+const reviewImg=document.getElementById('review-img');
 let scheduleCandidateIndex=0;
 const scenes={
   video:document.getElementById('video-scene'),
@@ -246,9 +247,34 @@ function continueAfterFeatures(){
 }
 function showReviewFeature(){
   clearTimeout(sceneTimer);
-  if(!featureReview){showPartyFeature();return;}
-  activate('review');
-  sceneTimer=setTimeout(showPartyFeature,REVIEW_SECONDS*1000);
+  if(!featureReview||!reviewImg){showPartyFeature();return;}
+
+  const reveal=()=>{
+    reviewImg.onload=null;
+    reviewImg.onerror=null;
+    activate('review');
+    sceneTimer=setTimeout(showPartyFeature,REVIEW_SECONDS*1000);
+  };
+
+  if(reviewImg.complete&&reviewImg.naturalWidth>0){
+    reveal();
+    return;
+  }
+
+  reviewImg.onload=reveal;
+  reviewImg.onerror=()=>{
+    reviewImg.onload=null;
+    reviewImg.onerror=null;
+    // Retry once with a cache-busting query so the TV never silently keeps a stale/broken image request.
+    const separator=featureReview.src.includes('?')?'&':'?';
+    reviewImg.src=`${featureReview.src}${separator}retry=${Date.now()}`;
+    reviewImg.onload=reveal;
+    reviewImg.onerror=()=>{
+      reviewImg.onload=null;
+      reviewImg.onerror=null;
+      showPartyFeature();
+    };
+  };
 }
 function showPartyFeature(){
   clearTimeout(sceneTimer);
@@ -303,7 +329,11 @@ video.addEventListener('error',recoverFromStall);
 video.addEventListener('stalled',()=>{stalledChecks=Math.max(stalledChecks,1)});
 video.addEventListener('waiting',()=>{stalledChecks=Math.max(stalledChecks,1)});
 setInterval(()=>{if(!scenes.video.classList.contains('active')||video.paused||video.ended)return;const current=video.currentTime;if(lastVideoTime>=0&&Math.abs(current-lastVideoTime)<0.15)stalledChecks+=1;else stalledChecks=0;lastVideoTime=current;if(stalledChecks>=STALL_LIMIT)recoverFromStall();},STALL_CHECK_MS);
-updateClock();setInterval(updateClock,1000);setInterval(()=>location.reload(),TV_CODE_RELOAD_MS);setTimeout(()=>{refreshScheduleNow();if(!demo())showScheduleFeature();},1200);
+updateClock();setInterval(updateClock,1000);setInterval(()=>{
+  const url=new URL(location.href);
+  url.searchParams.set('reload',Date.now().toString());
+  location.replace(url.toString());
+},TV_CODE_RELOAD_MS);setTimeout(()=>{refreshScheduleNow();if(!demo())showScheduleFeature();},1200);
 })();
 </script>
 </body>

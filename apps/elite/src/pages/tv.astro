@@ -4,7 +4,11 @@ import tvSchedule from "../data/tv-schedule.json";
 
 const tvMediaBase = "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv";
 const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
-const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
+const posters = tvMedia.posters.map((item) => ({
+  ...item,
+  src: remoteMedia(item.file),
+  fallbackSrc: "fallbackSrc" in item ? item.fallbackSrc : null
+}));
 const videos = ["https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/videos/Video%20TV.mp4"];
 const initialVideo = videos[0] || "";
 const TV_ASSET_VERSION = "20261003-classes-qr-v2";
@@ -215,7 +219,14 @@ function renderEntry(entry){
   scene.classList.toggle('next-display',entry.type==='next');
   document.getElementById('single-title').textContent=p.title;
   document.getElementById('single-status').textContent=entry.type==='live'?'CURRENT CLASS · LIVE NOW':`NEXT CLASS · ${e.start}`;
-  img.onerror=()=>{img.onerror=null;showNextInfo();};
+  img.onerror=()=>{
+    if(p.fallbackSrc && img.src!==p.fallbackSrc){
+      img.src=p.fallbackSrc;
+      return;
+    }
+    img.onerror=null;
+    showNextInfo();
+  };
   img.src=p.src;
   img.alt=p.title;
   img.classList.remove('is-missing');

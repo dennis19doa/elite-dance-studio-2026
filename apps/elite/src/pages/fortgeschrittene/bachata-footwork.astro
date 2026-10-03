@@ -1,0 +1,224 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import site from "../../data/site.json";
+---
+
+<BaseLayout
+  title="Bachata Footwork Closed Group | Elite Dance Studio Berlin"
+  description="Bachata Footwork Closed Group in Berlin mit Rocío & Checo. Feste Trainingsgruppe für Technik, Timing, Musikalität, Body Movement und saubere Footwork-Kontrolle."
+  image="/media/coaches/rocio-checo.webp"
+  bodyClass="advanced-page-v22"
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="page-shell page-main advanced-main-v22">
+    <section class="advanced-hero-v22">
+      <div class="advanced-hero-copy-v22">
+        <div class="eyebrow">Bachata Footwork · Closed Group</div>
+        <h1>Präzision, Rhythmus und Kontrolle – Schritt für Schritt.</h1>
+        <p>
+          Für Tänzer:innen, die ihr Solo-Footwork nicht nur erweitern, sondern technisch sauberer,
+          musikalischer und kontrollierter tanzen möchten.
+        </p>
+        <div class="advanced-hero-actions-v22">
+          <a class="button primary" href="#anmeldung">Closed Group anmelden</a>
+          <a class="button secondary" href="/fortgeschrittene/">Alle Advanced Groups</a>
+        </div>
+        <div class="advanced-hero-meta-v22" aria-label="Bachata Footwork Closed Group Details">
+          <span>Donnerstag · 20:00–21:00</span>
+          <span>Rocío &amp; Checo</span>
+          <span>Feste Gruppe</span>
+        </div>
+      </div>
+
+      <div class="advanced-hero-type-v24" aria-hidden="true">
+        <span>BACHATA</span>
+        <strong>FOOTWORK</strong>
+        <strong>CONTROL</strong>
+        <strong>MUSICALITY</strong>
+        <small>Elite Dance Studio · Berlin</small>
+      </div>
+    </section>
+
+    <section class="bachata-advanced-v22" id="programm">
+      <div class="bachata-program-v22">
+        <div class="eyebrow">Bachata Footwork Closed Group · Monatliches Training</div>
+        <h2>Ein Monat. Ein Fokus. Mehr Sicherheit im eigenen Körper.</h2>
+        <p class="bachata-program-lead-v22">
+          Die Gruppe trainiert über mehrere Wochen zusammen. Dadurch können wir Bewegungen aufbauen,
+          wiederholen und verfeinern, statt jede Woche wieder bei null zu beginnen.
+        </p>
+
+        <div class="bachata-story-v23">
+          <article>
+            <small>Technik</small>
+            <strong>Saubere Basics.<br />Mehr Präzision.</strong>
+            <p>
+              Wir arbeiten an Gewichtsverlagerung, Balance, Fußpositionen, Koordination und klaren
+              Bewegungswegen, damit dein Footwork kontrollierter und leichter wirkt.
+            </p>
+          </article>
+          <article>
+            <small>Musikalität</small>
+            <strong>Timing verstehen.<br />Rhythmus variieren.</strong>
+            <p>
+              Du trainierst unterschiedliche Rhythmen, Akzente und Tempowechsel und lernst,
+              Footwork bewusster mit der Musik zu verbinden.
+            </p>
+          </article>
+          <article>
+            <small>Style &amp; Control</small>
+            <strong>Mehr Ausdruck.<br />Mehr eigener Style.</strong>
+            <p>
+              Body Movement, Styling und Übergänge werden mit der Footwork-Technik verbunden,
+              damit Bewegungen nicht isoliert aussehen, sondern zusammenpassen.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <div class="bachata-registration-v22" id="anmeldung">
+        <div class="bachata-form-heading-v22">
+          <span>Closed Group Registration</span>
+          <h3>Für welchen Monat möchtest du dabei sein?</h3>
+          <p>
+            Wähle deinen Monat und schreib uns, woran du besonders arbeiten möchtest.
+            Wir bestätigen dir deinen Platz anschließend per WhatsApp.
+          </p>
+        </div>
+
+        <form class="advanced-registration-form-v22" action="https://formsubmit.co/info@elitedancestudio.de" method="post" data-closed-form>
+          <input type="hidden" name="form_kind" value="closed_group" />
+          <input type="hidden" name="_subject" value="Bachata Footwork Closed Group Anmeldung" data-subject-line />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_url" value="https://elitedancestudio.de/fortgeschrittene/bachata-footwork/" />
+          <input type="hidden" name="_next" value="https://elitedancestudio.de/fortgeschrittene/bachata-footwork/?sent=1#anmeldung" />
+          <input type="hidden" name="request_type" value="bachata_footwork_closed_group_registration" />
+          <input class="advanced-honeypot-v22" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <fieldset class="advanced-month-fieldset-v22">
+            <legend>Monat auswählen *</legend>
+            <div class="advanced-month-options-v22">
+              <label>
+                <input type="checkbox" name="months" value="Oktober 2026" data-month />
+                <span><small>10 / 2026</small><strong>Oktober</strong></span>
+              </label>
+              <label>
+                <input type="checkbox" name="months" value="November 2026" data-month />
+                <span><small>11 / 2026</small><strong>November</strong></span>
+              </label>
+              <label>
+                <input type="checkbox" name="months" value="Dezember 2026" data-month />
+                <span><small>12 / 2026</small><strong>Dezember</strong></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="advanced-form-grid-v22">
+            <label>
+              <span>Name *</span>
+              <input type="text" name="name" autocomplete="name" required placeholder="Dein Name" />
+            </label>
+            <label>
+              <span>E-Mail *</span>
+              <input type="email" name="email" autocomplete="email" required placeholder="du@beispiel.de" />
+            </label>
+            <label class="advanced-form-wide-v22">
+              <span>WhatsApp-Nummer *</span>
+              <input type="tel" name="phone" autocomplete="tel" required placeholder="+49 …" />
+              <small class="advanced-field-note-v23">Bitte die Nummer angeben, unter der wir dir die Bestätigung schicken können.</small>
+            </label>
+          </div>
+
+          <label class="advanced-subject-v23">
+            <span>Was möchtest du im Footwork verbessern? *</span>
+            <textarea rows="4" name="training_subject" required placeholder="Zum Beispiel: Timing, Speed, Body Movement, Koordination, Styling, Musikalität …"></textarea>
+            <small class="advanced-field-note-v23">Schreib uns frei, worauf du dich im Training besonders konzentrieren möchtest.</small>
+          </label>
+
+          <label class="advanced-note-v22">
+            <span>Noch etwas, das wir wissen sollten?</span>
+            <textarea rows="3" name="extra_note" placeholder="Optional"></textarea>
+          </label>
+
+          <label class="advanced-consent-v22">
+            <input type="checkbox" name="privacy_consent" value="accepted" required />
+            <span>Ich stimme zu, dass Elite Dance Studio meine Angaben über den Formular-Dienst zur Bearbeitung dieser Anmeldung verwendet. *</span>
+          </label>
+
+          <div class="advanced-submit-row-v22">
+            <button class="button primary" type="submit">Bachata Footwork anmelden</button>
+            <span>* Pflichtfelder</span>
+          </div>
+
+          <p class="advanced-form-status-v22" role="status" aria-live="polite" data-form-status>
+            Deine Anmeldung wird direkt an das Elite-Team geschickt.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <section class="advanced-footer-cta-v22">
+      <div>
+        <div class="eyebrow">Noch mehr Training?</div>
+        <h2>Entdecke unsere anderen Advanced &amp; Closed Groups.</h2>
+      </div>
+      <div class="advanced-footer-actions-v22">
+        <a class="button secondary" href="/fortgeschrittene/">Alle Closed Groups</a>
+        <a class="button primary" href="/stundenplan/">Stundenplan öffnen</a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+
+  <script is:inline>
+    (() => {
+      const form = document.querySelector("[data-closed-form]");
+      if (!(form instanceof HTMLFormElement)) return;
+
+      const status = form.querySelector("[data-form-status]");
+      const submit = form.querySelector('button[type="submit"]');
+      const subjectLine = form.querySelector("[data-subject-line]");
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("sent") === "1" && status) {
+        status.textContent = "Danke! Deine Anmeldung wurde gesendet. Wir melden uns mit der Bestätigung per WhatsApp bei dir.";
+        status.dataset.state = "success";
+        params.delete("sent");
+        const query = params.toString();
+        history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}#anmeldung`);
+      }
+
+      form.addEventListener("submit", (event) => {
+        const months = [...form.querySelectorAll("[data-month]:checked")].map((input) => input.value);
+        if (!months.length) {
+          event.preventDefault();
+          if (status) {
+            status.textContent = "Bitte wähle mindestens einen Monat aus.";
+            status.dataset.state = "error";
+          }
+          return;
+        }
+
+        if (!form.reportValidity()) {
+          event.preventDefault();
+          return;
+        }
+
+        const name = String(new FormData(form).get("name") || "").trim();
+        if (subjectLine instanceof HTMLInputElement) {
+          subjectLine.value = `Bachata Footwork Closed Group Anmeldung – ${name || "Website"}`;
+        }
+
+        if (submit instanceof HTMLButtonElement) submit.disabled = true;
+        if (status) {
+          status.textContent = "Deine Anmeldung wird sicher über FormSubmit gesendet …";
+          status.dataset.state = "loading";
+        }
+      });
+    })();
+  </script>
+</BaseLayout>

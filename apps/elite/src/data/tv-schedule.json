@@ -3,7 +3,8 @@
     "weekday": "Monday",
     "title": "Heels Beginner",
     "start": "18:00",
-    "end": "19:00"
+    "end": "19:00",
+    "poster": "High Heels"
   },
   {
     "weekday": "Monday",
@@ -71,7 +72,8 @@
     "weekday": "Wednesday",
     "title": "Heels Beginner",
     "start": "19:00",
-    "end": "20:00"
+    "end": "20:00",
+    "poster": "Heels Beginner"
   },
   {
     "weekday": "Wednesday",
@@ -83,7 +85,8 @@
     "weekday": "Wednesday",
     "title": "Reggaeton Beg/Int",
     "start": "20:00",
-    "end": "21:00"
+    "end": "21:00",
+    "poster": "Reggaeton Beg/Int"
   },
   {
     "weekday": "Thursday",
@@ -101,7 +104,8 @@
     "weekday": "Thursday",
     "title": "Reggaeton Beginner",
     "start": "18:00",
-    "end": "19:00"
+    "end": "19:00",
+    "poster": "Reggaeton Beginner"
   },
   {
     "weekday": "Thursday",
@@ -132,7 +136,8 @@
     "weekday": "Friday",
     "title": "Choreography",
     "start": "18:00",
-    "end": "19:00"
+    "end": "19:00",
+    "poster": "Choreography"
   },
   {
     "weekday": "Friday",

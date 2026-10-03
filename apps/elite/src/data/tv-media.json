@@ -122,7 +122,8 @@
       "aliases": [
         "zouk beginner",
         "zouk"
-      ]
+      ],
+      "fallbackSrc": "https://elitedancestudio.de/media/style-posters/04-zouk-beginner.webp"
     },
     {
       "title": "Heels Beginner",

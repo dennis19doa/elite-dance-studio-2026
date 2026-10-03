@@ -17,7 +17,7 @@
     },
     "review": {
       "title": "Google Review",
-      "file": "events/Berlin Nightlife Review Poster(2).png",
+      "file": "events/Berlin Nightlife Review Poster.png",
       "seconds": 20,
       "type": "image"
     }
@@ -118,12 +118,11 @@
     },
     {
       "title": "Zouk Beginner",
-      "file": "classes/d8356f17-5997-413f-ae75-3ee975f51f1f.png",
+      "file": "classes/Zouk Wednesday.png",
       "aliases": [
         "zouk beginner",
         "zouk"
-      ],
-      "fallbackSrc": "https://elitedancestudio.de/media/style-posters/04-zouk-beginner.webp"
+      ]
     },
     {
       "title": "Heels Beginner",

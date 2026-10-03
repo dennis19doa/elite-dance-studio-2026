@@ -20,7 +20,27 @@
       "file": "events/Berlin Nightlife Review Poster.png",
       "seconds": 20,
       "type": "image"
-    }
+    },
+    "promos": [
+      {
+        "title": "Advanced Bachata · Elena & Dennis",
+        "file": "classes/Berlin Neon Bachata Night (1).png",
+        "seconds": 12,
+        "type": "image"
+      },
+      {
+        "title": "Footwork Closed Group · Rocío & Checo",
+        "file": "classes/Footwork_ Bachata Dance Class.png",
+        "seconds": 12,
+        "type": "image"
+      },
+      {
+        "title": "Heels Closed Group · Nate",
+        "file": "classes/Red Heels Dance Class Poster.png",
+        "seconds": 12,
+        "type": "image"
+      }
+    ]
   },
   "posters": [
     {
@@ -35,8 +55,17 @@
       ]
     },
     {
+      "title": "Bachata Advanced",
+      "file": "classes/Berlin Neon Bachata Night (1).png",
+      "aliases": [
+        "bachata advanced",
+        "advanced bachata",
+        "bachata advanced elena dennis"
+      ]
+    },
+    {
       "title": "Bachata Footwork",
-      "file": "classes/Bachata Footwork Thursday.png",
+      "file": "classes/Footwork_ Bachata Dance Class.png",
       "aliases": [
         "bachata footwork",
         "bachata footwork closed group",
@@ -122,6 +151,16 @@
       "aliases": [
         "zouk beginner",
         "zouk"
+      ]
+    },
+    {
+      "title": "Heels Closed Group",
+      "file": "classes/Red Heels Dance Class Poster.png",
+      "aliases": [
+        "heels closed group",
+        "heels intermediate",
+        "heels advanced",
+        "heels nate"
       ]
     },
     {

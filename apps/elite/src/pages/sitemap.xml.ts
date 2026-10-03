@@ -10,6 +10,8 @@ const publicRoutes = [
   "/coaches/",
   "/intensives/",
   "/fortgeschrittene/",
+  "/fortgeschrittene/bachata-footwork/",
+  "/fortgeschrittene/heels-closed-group/",
   "/ueber-uns/",
   "/raummiete/",
   "/kontakt/",

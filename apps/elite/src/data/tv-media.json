@@ -14,6 +14,12 @@
       "file": "classes/ChatGPT Image Sep 27, 2026, 03_59_48 PM.png",
       "seconds": 10,
       "type": "image"
+    },
+    "review": {
+      "title": "Google Review",
+      "file": "events/Berlin Nightlife Review Poster(2).png",
+      "seconds": 10,
+      "type": "image"
     }
   },
   "posters": [

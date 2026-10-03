@@ -7,13 +7,16 @@ const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(enco
 const posters = tvMedia.posters.map((item) => ({ ...item, src: remoteMedia(item.file) }));
 const videos = ["https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/videos/Video%20TV.mp4"];
 const initialVideo = videos[0] || "";
-const TV_ASSET_VERSION = "20260927-1605";
+const TV_ASSET_VERSION = "20261003-1704";
 const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;
 const featureSchedule = tvMedia.features?.schedule
   ? { ...tvMedia.features.schedule, src: versionedMedia(tvMedia.features.schedule.file) }
   : null;
 const featureParty = tvMedia.features?.party
   ? { ...tvMedia.features.party, src: versionedMedia(tvMedia.features.party.file) }
+  : null;
+const featureReview = tvMedia.features?.review
+  ? { ...tvMedia.features.review, src: versionedMedia(tvMedia.features.review.file) }
   : null;
 const scheduleCandidates = featureSchedule
   ? Array.from(new Set([
@@ -81,11 +84,14 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <section class="scene feature-scene" id="party-scene">
   {featureParty && <img class="feature-image" id="party-img" src={featureParty.src} alt={featureParty.title} />}
 </section>
+<section class="scene feature-scene" id="review-scene">
+  {featureReview && <img class="feature-image" id="review-img" src={featureReview.src} alt={featureReview.title} />}
+</section>
 <section class="scene class-scene" id="single-scene"><div class="class-header"><h1 id="single-title">Class</h1><div id="single-info"><div class="status"><span class="dot"></span><span id="single-status">CURRENT CLASS · LIVE NOW</span></div></div></div><div class="single-poster-wrap"><img class="poster-main" id="single-img" alt=""></div></section>
 <div class="probe"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
 </main>
 <script type="module" src="https://widget-static.eversports.io/loader.js"></script>
-<script is:inline define:vars={{ posters, videos, tvSchedule, featureSchedule, featureParty, scheduleCandidates }}>
+<script is:inline define:vars={{ posters, videos, tvSchedule, featureSchedule, featureParty, featureReview, scheduleCandidates }}>
 (()=>{
 const TZ="Europe/Berlin";
 const NEXT_WINDOW=15;
@@ -93,6 +99,7 @@ const DEFAULT_CLASS_MINUTES=60;
 const POSTER_SECONDS=10;
 const SCHEDULE_SECONDS=featureSchedule?.seconds||20;
 const PARTY_SECONDS=featureParty?.seconds||10;
+const REVIEW_SECONDS=featureReview?.seconds||10;
 const STALL_CHECK_MS=5000;
 const STALL_LIMIT=2;
 const VIDEO_LOAD_TIMEOUT_MS=10000;
@@ -104,6 +111,7 @@ const scenes={
   video:document.getElementById('video-scene'),
   schedule:document.getElementById('schedule-scene'),
   party:document.getElementById('party-scene'),
+  review:document.getElementById('review-scene'),
   single:document.getElementById('single-scene')
 };
 let events=[];
@@ -203,11 +211,17 @@ function continueAfterFeatures(){
     playVideo();
   }
 }
+function showReviewFeature(){
+  clearTimeout(sceneTimer);
+  if(!featureReview){continueAfterFeatures();return;}
+  activate('review');
+  sceneTimer=setTimeout(continueAfterFeatures,REVIEW_SECONDS*1000);
+}
 function showPartyFeature(){
   clearTimeout(sceneTimer);
-  if(!featureParty){continueAfterFeatures();return;}
+  if(!featureParty){showReviewFeature();return;}
   activate('party');
-  sceneTimer=setTimeout(continueAfterFeatures,PARTY_SECONDS*1000);
+  sceneTimer=setTimeout(showReviewFeature,PARTY_SECONDS*1000);
 }
 function showScheduleFeature(){
   clearTimeout(sceneTimer);
@@ -245,6 +259,7 @@ function demo(){const mode=new URLSearchParams(location.search).get('demo');if(!
 
 posters.forEach(p=>{const img=new Image();img.src=p.src});
 if(featureParty?.src){const img=new Image();img.src=featureParty.src;}
+if(featureReview?.src){const img=new Image();img.src=featureReview.src;}
 scheduleCandidates.forEach(src=>{const img=new Image();img.src=src;});
 const obs=new MutationObserver(()=>{refreshScheduleNow()});
 obs.observe(document.getElementById('eversports-probe'),{childList:true,subtree:true,characterData:true});

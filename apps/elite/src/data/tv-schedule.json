@@ -13,13 +13,13 @@
   },
   {
     "weekday": "Monday",
-    "title": "Latin Commercial",
+    "title": "House Beginner",
     "start": "20:00",
     "end": "21:00"
   },
   {
     "weekday": "Monday",
-    "title": "House Beginner",
+    "title": "Latin Commercial",
     "start": "20:00",
     "end": "21:00"
   },
@@ -55,15 +55,17 @@
   },
   {
     "weekday": "Wednesday",
-    "title": "Zouk Beginner",
+    "title": "Choreography Wednesday",
     "start": "18:00",
-    "end": "19:00"
+    "end": "19:00",
+    "poster": "Choreography Wednesday"
   },
   {
     "weekday": "Wednesday",
-    "title": "Commercial Level 0",
-    "start": "19:00",
-    "end": "20:00"
+    "title": "Zouk Beginner",
+    "start": "18:00",
+    "end": "19:00",
+    "poster": "Zouk Beginner"
   },
   {
     "weekday": "Wednesday",
@@ -73,15 +75,15 @@
   },
   {
     "weekday": "Wednesday",
-    "title": "Reggaeton Beg/Int",
-    "start": "20:00",
-    "end": "21:00"
-  },
-  {
-    "weekday": "Wednesday",
     "title": "Heels Intermediate",
     "start": "20:00",
     "end": "21:30"
+  },
+  {
+    "weekday": "Wednesday",
+    "title": "Reggaeton Beg/Int",
+    "start": "20:00",
+    "end": "21:00"
   },
   {
     "weekday": "Thursday",
@@ -103,12 +105,6 @@
   },
   {
     "weekday": "Thursday",
-    "title": "Commercial Beginner+",
-    "start": "19:00",
-    "end": "20:00"
-  },
-  {
-    "weekday": "Thursday",
     "title": "Bachata Footwork",
     "start": "20:00",
     "end": "21:00"
@@ -121,33 +117,29 @@
   },
   {
     "weekday": "Friday",
-    "title": "Waving Beginner",
-    "start": "17:00",
-    "end": "18:00"
-  },
-  {
-    "weekday": "Friday",
     "title": "Hip Hop Beginner Friday",
     "start": "17:00",
     "end": "18:00"
   },
   {
     "weekday": "Friday",
-    "title": "Twerking",
-    "start": "18:00",
-    "end": "19:00"
-  },
-  {
-    "weekday": "Friday",
-    "title": "Jazz Beginner",
-    "start": "18:00",
-    "end": "19:00"
+    "title": "Waving Beginner",
+    "start": "17:00",
+    "end": "18:00",
+    "poster": "Waving Beginner"
   },
   {
     "weekday": "Friday",
     "title": "Choreography",
     "start": "18:00",
     "end": "19:00"
+  },
+  {
+    "weekday": "Friday",
+    "title": "Twerking",
+    "start": "18:00",
+    "end": "19:00",
+    "poster": "Twerking"
   },
   {
     "weekday": "Friday",
@@ -169,27 +161,17 @@
   },
   {
     "weekday": "Saturday",
-    "title": "Hip Hop Beginner",
+    "title": "Hip Hop Beginner Saturday",
     "start": "14:00",
-    "end": "15:00"
+    "end": "15:00",
+    "poster": "Hip Hop Beginner Saturday"
   },
   {
     "weekday": "Saturday",
     "title": "Salsa Footwork Fusion",
     "start": "15:00",
-    "end": "16:00"
-  },
-  {
-    "weekday": "Saturday",
-    "title": "Commercial Beginner+",
-    "start": "15:00",
-    "end": "16:00"
-  },
-  {
-    "weekday": "Saturday",
-    "title": "Heels Beginner",
-    "start": "16:00",
-    "end": "17:00"
+    "end": "16:00",
+    "poster": "Salsa Footwork Fusion"
   },
   {
     "weekday": "Saturday",

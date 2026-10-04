@@ -11,13 +11,13 @@ const posters = tvMedia.posters.map((item) => ({
 }));
 const videos = ["https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/videos/Video%20TV.mp4"];
 const initialVideo = videos[0] || "";
-const TV_ASSET_VERSION = "20261003-promos-v1";
+const TV_ASSET_VERSION = "20261004-party1010-hq-v1";
 const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;
 const featureSchedule = tvMedia.features?.schedule
   ? { ...tvMedia.features.schedule, src: versionedMedia(tvMedia.features.schedule.file) }
   : null;
 const featureParty = tvMedia.features?.party
-  ? { ...tvMedia.features.party, src: versionedMedia(tvMedia.features.party.file) }
+  ? { ...tvMedia.features.party, src: tvMedia.features.party.file.startsWith("/") ? `${tvMedia.features.party.file}?v=${TV_ASSET_VERSION}` : versionedMedia(tvMedia.features.party.file) }
   : null;
 const featureReview = tvMedia.features?.review
   ? { ...tvMedia.features.review, src: versionedMedia(tvMedia.features.review.file) }

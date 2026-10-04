@@ -25,7 +25,7 @@ const rail = [...coaches, ...coaches];
           aria-hidden={index >= coaches.length ? "true" : undefined}
           tabindex={index >= coaches.length ? -1 : undefined}
         >
-          <img src={coach.image} alt={index < coaches.length ? coach.imageAlt : ""} loading="lazy" decoding="async" />
+          <img src={coach.image} alt={index < coaches.length ? coach.imageAlt : ""} loading="lazy" decoding="async" style={coach.slug === "sora" ? "object-position: center 36%;" : undefined} />
           <span class="home-coach-film-basic-v16">
             <small>{coach.focus}</small>
             <strong>{coach.name}</strong>

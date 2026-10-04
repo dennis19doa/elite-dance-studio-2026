@@ -4,96 +4,166 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 
 import site from "../data/site.json";
-
-const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-const scheduleHref = `${baseUrl}#schedule`;
 ---
 
 <BaseLayout
   title="Über uns | Elite Dance Studio Berlin"
-  description="Lerne Elite Dance Studio Berlin kennen: Social Dance, Solo Styles, starke Coaches, Community und persönlicher Fortschritt in Berlin-Moabit."
+  description="Lerne Elite Dance Studio Berlin kennen: Elena & Dennis, unsere Idee hinter Elite, Social Dance, Solo Styles und Community in Berlin-Moabit."
   image="/media/current-site/elena-dennis-founders.jpg"
-  bodyClass="about-page-v12 about-page-v18 about-page-editorial-v19"
+  bodyClass="about-page-v22"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main about-main-v12 about-main-v18">
-    <section class="about-opening-v12">
-      <img src="/media/current-site/current-home-visual.webp" alt="Tanzmoment bei Elite Dance in Berlin" />
-      <div class="about-opening-shade-v12"></div>
-      <div class="about-opening-copy-v12">
-        <span>Elite Dance · Berlin-Moabit</span>
-        <h1>Built from dance.<br />Grown through community.</h1>
-        <p>Social Dance, Solo Styles, Technik und Community – an einem Ort.</p>
-      </div>
-    </section>
+  <main class="page-shell page-main about-v22">
+    <section class="about-hero-v22" aria-labelledby="about-title">
+      <div class="about-hero-copy-v22">
+        <div class="eyebrow">Über Elite</div>
+        <h1 id="about-title">Aus Tanz entstanden. Durch Community gewachsen.</h1>
+        <p>
+          Elite Dance Studio ist unser Ort in Berlin-Moabit für Social Dance, Solo Styles und
+          Menschen, die sich durch Tanz weiterentwickeln wollen.
+        </p>
 
-    <section class="about-founders-v12 about-founders-v18 about-founders-magazine-v19">
-      <div class="about-founders-quote-v12">
-        <span>Founders · Elena & Dennis</span>
-        <h2>Social Dance, Solo Styles und eine Community unter einem Dach.</h2>
-        <p class="about-editorial-lead-v19">
-          Elite ist aus der Idee entstanden, Tanzwelten zusammenzubringen, die oft getrennt voneinander gedacht werden.
-        </p>
-        <p>
-          Unsere Wurzeln liegen im Social Dance und in lateinamerikanischen Tanzstilen. Dort haben wir gelernt,
-          wie viel Connection, Musik, Community und Lebensfreude im Tanzen stecken können.
-        </p>
-        <p>
-          Gleichzeitig lieben wir Solo Styles, Technik, Choreografie und die Freiheit, immer wieder etwas Neues auszuprobieren.
-          Elite Dance ist daraus entstanden: ein Studio, in dem diese Welten nebeneinander wachsen können.
-        </p>
+        <div class="about-hero-actions-v22">
+          <a class="button primary" href="/stundenplan/">Stundenplan ansehen</a>
+          <a class="button secondary" href="/kurse/">Kurse entdecken</a>
+        </div>
+
+        <div class="about-hero-facts-v22" aria-label="Elite auf einen Blick">
+          <span>Level 0 bis Advanced</span>
+          <span>Solo & Partner Dance</span>
+          <span>Berlin-Moabit</span>
+        </div>
       </div>
-      <figure>
-        <img src="/media/current-site/elena-dennis-founders.jpg" alt="Elena und Dennis, Founders von Elite Dance" loading="lazy" decoding="async" />
-        <figcaption class="about-founders-caption-strong">Elena & Dennis · Founders</figcaption>
+
+      <figure class="about-hero-media-v22">
+        <img
+          src="/media/current-site/elena-dennis-founders.jpg"
+          alt="Elena und Dennis, Gründer von Elite Dance Studio Berlin"
+        />
+        <figcaption>
+          <span>Founders</span>
+          <strong>Elena & Dennis</strong>
+        </figcaption>
       </figure>
     </section>
 
-    <section class="about-mission-v18 about-editorial-section-v19">
-      <div class="eyebrow">Unser Ziel</div>
-      <div class="about-mission-grid-v18">
-        <h2>Ein Studio, in dem jede Person etwas Neues finden kann.</h2>
-        <div>
-          <p>
-            Vielleicht kommst du wegen Bachata und entdeckst später Contemporary. Vielleicht startest du mit Hip-Hop,
-            probierst Heels oder findest in einem Partner Dance plötzlich eine ganz neue Seite an dir.
-          </p>
-          <p>
-            Für uns soll Tanzen nicht nur Training sein. Es darf Begegnung sein, Ausgleich, Herausforderung und einfach ein guter Teil des Lebens.
-            Deshalb wollen wir einen Ort schaffen, an dem Menschen neugierig bleiben, sich entwickeln und gemeinsam Spaß am Tanzen haben können.
-          </p>
-        </div>
+    <section class="about-story-v22">
+      <div class="about-story-title-v22">
+        <div class="eyebrow">Unsere Geschichte</div>
+        <h2>Wir wollten einen Ort schaffen, den wir selbst gern gehabt hätten.</h2>
       </div>
+
+      <div class="about-story-copy-v22">
+        <p class="about-story-lead-v22">
+          Einen Ort, an dem Social Dance und Solo Styles nicht getrennte Welten sind.
+        </p>
+        <p>
+          Unsere Wurzeln liegen im Social Dance und in lateinamerikanischen Tanzstilen. Dort haben
+          wir gelernt, wie viel Connection, Musik und Community im Tanzen stecken können.
+        </p>
+        <p>
+          Gleichzeitig lieben wir Technik, Choreografie und die Freiheit, immer wieder etwas Neues
+          auszuprobieren. Genau daraus ist Elite entstanden: ein Studio, in dem unterschiedliche
+          Tanzwelten nebeneinander wachsen können.
+        </p>
+      </div>
+
+      <blockquote class="about-story-quote-v22">
+        <span>Unsere Idee</span>
+        <p>Du musst dich nicht auf einen einzigen Weg festlegen, um dich im Tanzen weiterzuentwickeln.</p>
+      </blockquote>
     </section>
 
-    <section class="about-path-v12 about-editorial-section-v19" aria-label="Dein Weg bei Elite">
-      <header>
-        <span>Dein Weg muss nicht gerade sein</span>
-        <h2>Entdecken. Wachsen. Deinen eigenen Weg tanzen.</h2>
+    <section class="about-values-v22" aria-labelledby="about-values-title">
+      <header class="about-values-head-v22">
+        <div>
+          <div class="eyebrow">Was Elite ausmacht</div>
+          <h2 id="about-values-title">Viele Styles. Klare Entwicklung. Ein Studioleben.</h2>
+        </div>
+        <p>
+          Du kannst bei uns neu anfangen, Neues testen oder gezielt weitertrainieren – ohne dass
+          daraus drei verschiedene Welten werden.
+        </p>
       </header>
 
-      <div class="about-path-row-v12">
-        <strong>Entdecken</strong>
-        <p>Viele Styles und unterschiedliche Coaches geben dir Raum, Neues zu testen, ohne dich sofort festlegen zu müssen.</p>
-      </div>
-      <div class="about-path-row-v12">
-        <strong>Wachsen</strong>
-        <p>Level 0, Beginner, Intermediate, Advanced, Closed Groups und Intensives geben dir echte nächste Schritte.</p>
-      </div>
-      <div class="about-path-row-v12">
-        <strong>Dazugehören</strong>
-        <p>Classes, Events, Socials und das Team gehören zu demselben Studioleben – nicht zu getrennten Produkten.</p>
+      <div class="about-values-grid-v22">
+        <article>
+          <span>01</span>
+          <h3>Viele Styles unter einem Dach</h3>
+          <p>
+            Bachata, Hip-Hop, Heels, House, Reggaeton, Contemporary und mehr – mit Raum, deinen
+            eigenen Mix zu finden.
+          </p>
+        </article>
+
+        <article>
+          <span>02</span>
+          <h3>Fortschritt ohne Druck</h3>
+          <p>
+            Level 0, Beginner, Intermediate, Advanced, Closed Groups und Intensives geben dir echte
+            nächste Schritte.
+          </p>
+        </article>
+
+        <article>
+          <span>03</span>
+          <h3>Community gehört dazu</h3>
+          <p>
+            Classes, Socials, Events und Menschen gehören für uns zusammen. Elite soll sich nicht
+            nur wie ein Kursplan anfühlen.
+          </p>
+        </article>
       </div>
     </section>
 
-    <section class="about-closing-v12">
-      <img src="/media/current-site/studio-room-a.jpg" alt="Trainingsraum bei Elite Dance Berlin" loading="lazy" />
-      <div class="about-closing-copy-v12">
-        <span>Dance · Feel · Belong</span>
-        <h2>Finde etwas, das dich bewegt – und einen Ort, an den du gern zurückkommst.</h2>
+    <section class="about-path-v22" aria-labelledby="about-path-title">
+      <div class="about-path-intro-v22">
+        <div class="eyebrow">Dein Weg bei Elite</div>
+        <h2 id="about-path-title">Du musst nicht wissen, wo du am Ende landest.</h2>
+        <p>
+          Fang mit dem an, was dich heute interessiert. Der Rest darf sich beim Tanzen entwickeln.
+        </p>
+      </div>
+
+      <div class="about-path-steps-v22">
+        <article>
+          <span>01</span>
+          <div>
+            <h3>Entdecken</h3>
+            <p>Styles und Coaches ausprobieren, ohne dich sofort festlegen zu müssen.</p>
+          </div>
+        </article>
+        <article>
+          <span>02</span>
+          <div>
+            <h3>Wachsen</h3>
+            <p>Technik, Musikalität und Ausdruck mit klaren nächsten Schritten weiterentwickeln.</p>
+          </div>
+        </article>
+        <article>
+          <span>03</span>
+          <div>
+            <h3>Dazugehören</h3>
+            <p>Menschen kennenlernen, wiederkommen und Teil des Studiolebens werden.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="about-closing-v22">
+      <img
+        src="/media/current-site/studio-room-a.jpg"
+        alt="Trainingsraum im Elite Dance Studio Berlin"
+        loading="lazy"
+      />
+      <div class="about-closing-shade-v22"></div>
+      <div class="about-closing-copy-v22">
+        <div class="eyebrow">Dance · Feel · Belong</div>
+        <h2>Am besten lernst du Elite auf der Tanzfläche kennen.</h2>
+        <p>Such dir eine Class aus und komm vorbei.</p>
         <div>
-          <a class="button primary" href={scheduleHref}>Class finden</a>
+          <a class="button primary" href="/stundenplan/">Class finden</a>
           <a class="button secondary" href="/coaches/">Team kennenlernen</a>
         </div>
       </div>
@@ -104,12 +174,519 @@ const scheduleHref = `${baseUrl}#schedule`;
 </BaseLayout>
 
 <style is:global>
-  .route-ueber-uns .about-founders-magazine-v19 .about-founders-caption-strong {
-    color: #ffffff !important;
-    background: rgba(24, 17, 14, 0.92) !important;
-    font-weight: 850 !important;
-    letter-spacing: 0.055em !important;
+  .about-page-v22 {
+    --about-bg: #17120f;
+    --about-surface: #211a16;
+    --about-surface-soft: #28201b;
+    --about-cream: #f0e5d6;
+    --about-cream-soft: #f6eee5;
+    --about-ink: #2b211b;
+    --about-text: #f7eee6;
+    --about-muted: rgba(247, 238, 230, 0.64);
+    --about-line: rgba(255, 255, 255, 0.1);
+    --about-gold: #f2b36f;
+    --about-lime: #d2f85a;
+  }
+
+  .about-page-v22 .about-v22 {
+    display: grid;
+    gap: clamp(22px, 3vw, 34px);
+    padding-top: clamp(28px, 4vw, 52px);
+  }
+
+  .about-page-v22 .eyebrow {
+    color: var(--about-gold) !important;
+  }
+
+  .about-page-v22 .about-hero-v22 {
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(390px, 0.98fr);
+    min-height: 670px;
+    overflow: hidden;
+    border: 1px solid var(--about-line);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 5% 0%, rgba(242, 179, 111, 0.12), transparent 28rem),
+      linear-gradient(145deg, #201814 0%, #14110f 72%);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.2);
+  }
+
+  .about-page-v22 .about-hero-copy-v22 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(38px, 6vw, 76px);
+  }
+
+  .about-page-v22 .about-hero-copy-v22 h1 {
+    max-width: 10ch;
+    margin: 14px 0 0;
+    color: var(--about-text);
+    font-size: clamp(3.7rem, 6.8vw, 7.2rem);
+    line-height: 0.88;
+    letter-spacing: -0.065em;
+  }
+
+  .about-page-v22 .about-hero-copy-v22 > p {
+    max-width: 38rem;
+    margin: 26px 0 0;
+    color: var(--about-muted);
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+    line-height: 1.66;
+  }
+
+  .about-page-v22 .about-hero-actions-v22 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .about-page-v22 .about-hero-v22 .button.primary,
+  .about-page-v22 .about-closing-v22 .button.primary {
+    background: var(--about-lime) !important;
+    color: #11120e !important;
+    box-shadow: none !important;
+  }
+
+  .about-page-v22 .about-hero-v22 .button.secondary,
+  .about-page-v22 .about-closing-v22 .button.secondary {
+    border-color: rgba(255, 255, 255, 0.18) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: var(--about-text) !important;
+  }
+
+  .about-page-v22 .about-hero-facts-v22 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .about-page-v22 .about-hero-facts-v22 span {
+    padding: 8px 11px;
+    border: 1px solid rgba(242, 179, 111, 0.14);
+    border-radius: 999px;
+    background: rgba(242, 179, 111, 0.05);
+    color: rgba(247, 238, 230, 0.66);
+    font-size: 0.7rem;
+    font-weight: 750;
+  }
+
+  .about-page-v22 .about-hero-media-v22 {
+    position: relative;
+    min-height: 670px;
+    margin: 0;
+    overflow: hidden;
+    background: #0f0c0b;
+  }
+
+  .about-page-v22 .about-hero-media-v22::after {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(16, 12, 10, 0.34), transparent 24%),
+      linear-gradient(180deg, transparent 62%, rgba(13, 10, 9, 0.82));
+    content: "";
+  }
+
+  .about-page-v22 .about-hero-media-v22 img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .about-page-v22 .about-hero-media-v22 figcaption {
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    left: 24px;
+    z-index: 2;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    color: #fff;
+  }
+
+  .about-page-v22 .about-hero-media-v22 figcaption span {
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+
+  .about-page-v22 .about-hero-media-v22 figcaption strong {
+    font-size: 0.95rem;
+  }
+
+  .about-page-v22 .about-story-v22 {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.05fr) minmax(220px, 0.55fr);
+    gap: clamp(30px, 5vw, 72px);
+    align-items: start;
+    padding: clamp(42px, 6vw, 78px);
+    border: 1px solid rgba(65, 45, 32, 0.12);
+    border-radius: 26px;
+    background: var(--about-cream);
+    color: var(--about-ink);
+  }
+
+  .about-page-v22 .about-story-v22 .eyebrow {
+    color: #ad5937 !important;
+  }
+
+  .about-page-v22 .about-story-title-v22 h2 {
+    max-width: 11ch;
+    margin: 10px 0 0;
+    color: var(--about-ink);
+    font-size: clamp(2.45rem, 4.8vw, 5rem);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+  }
+
+  .about-page-v22 .about-story-copy-v22 {
+    align-self: center;
+  }
+
+  .about-page-v22 .about-story-copy-v22 p {
+    margin: 0 0 18px;
+    color: #66574d;
+    line-height: 1.72;
+  }
+
+  .about-page-v22 .about-story-copy-v22 .about-story-lead-v22 {
+    color: #33261f;
+    font-family: "Sora", Inter, sans-serif;
+    font-size: clamp(1.08rem, 1.4vw, 1.28rem);
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .about-page-v22 .about-story-quote-v22 {
+    align-self: stretch;
+    margin: 0;
+    padding: 24px;
+    border-left: 3px solid #bf7045;
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .about-page-v22 .about-story-quote-v22 span {
+    color: #ad5937;
+    font-size: 0.67rem;
+    font-weight: 850;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .about-page-v22 .about-story-quote-v22 p {
+    margin: 28px 0 0;
+    color: #382a22;
+    font-family: "Sora", Inter, sans-serif;
+    font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.42;
+  }
+
+  .about-page-v22 .about-values-v22 {
+    padding: clamp(38px, 5vw, 64px);
+    border: 1px solid var(--about-line);
+    border-radius: 26px;
+    background: linear-gradient(145deg, #201915, #181310);
+    color: var(--about-text);
+  }
+
+  .about-page-v22 .about-values-head-v22 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.55fr);
+    gap: 32px 64px;
+    align-items: end;
+  }
+
+  .about-page-v22 .about-values-head-v22 h2 {
+    max-width: 13ch;
+    margin: 10px 0 0;
+    color: var(--about-text);
+    font-size: clamp(2.6rem, 5vw, 5.2rem);
+    line-height: 0.93;
+    letter-spacing: -0.055em;
+  }
+
+  .about-page-v22 .about-values-head-v22 > p {
+    margin: 0;
+    color: var(--about-muted);
+    line-height: 1.66;
+  }
+
+  .about-page-v22 .about-values-grid-v22 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: clamp(30px, 4vw, 48px);
+  }
+
+  .about-page-v22 .about-values-grid-v22 article {
+    min-height: 260px;
+    padding: 24px;
+    border: 1px solid var(--about-line);
+    border-radius: 18px 6px 18px 6px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .about-page-v22 .about-values-grid-v22 article > span {
+    color: var(--about-gold);
+    font-size: 0.68rem;
+    font-weight: 850;
+    letter-spacing: 0.1em;
+  }
+
+  .about-page-v22 .about-values-grid-v22 h3 {
+    max-width: 12ch;
+    margin: 42px 0 0;
+    color: var(--about-text);
+    font-size: clamp(1.45rem, 2.1vw, 2rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .about-page-v22 .about-values-grid-v22 p {
+    margin: 14px 0 0;
+    color: var(--about-muted);
+    line-height: 1.6;
+  }
+
+  .about-page-v22 .about-path-v22 {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(38px, 7vw, 90px);
+    padding: clamp(42px, 6vw, 76px);
+    border: 1px solid rgba(65, 45, 32, 0.12);
+    border-radius: 26px;
+    background: var(--about-cream-soft);
+    color: var(--about-ink);
+  }
+
+  .about-page-v22 .about-path-v22 .eyebrow {
+    color: #ad5937 !important;
+  }
+
+  .about-page-v22 .about-path-intro-v22 h2 {
+    max-width: 11ch;
+    margin: 10px 0 0;
+    color: var(--about-ink);
+    font-size: clamp(2.55rem, 4.8vw, 4.9rem);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+  }
+
+  .about-page-v22 .about-path-intro-v22 > p {
+    max-width: 32rem;
+    margin: 20px 0 0;
+    color: #6a5a50;
+    line-height: 1.65;
+  }
+
+  .about-page-v22 .about-path-steps-v22 {
+    display: grid;
+  }
+
+  .about-page-v22 .about-path-steps-v22 article {
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    gap: 20px;
+    padding: 25px 0;
+    border-top: 1px solid rgba(54, 39, 29, 0.14);
+  }
+
+  .about-page-v22 .about-path-steps-v22 article:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .about-page-v22 .about-path-steps-v22 article > span {
+    color: #ad5937;
+    font-size: 0.7rem;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+  }
+
+  .about-page-v22 .about-path-steps-v22 h3 {
+    margin: 0;
+    color: var(--about-ink);
+    font-size: clamp(1.5rem, 2.3vw, 2.15rem);
+    letter-spacing: -0.04em;
+  }
+
+  .about-page-v22 .about-path-steps-v22 p {
+    margin: 8px 0 0;
+    color: #6a5a50;
+    line-height: 1.6;
+  }
+
+  .about-page-v22 .about-closing-v22 {
+    position: relative;
+    min-height: 560px;
+    overflow: hidden;
+    margin-bottom: 42px;
+    border: 1px solid var(--about-line);
+    border-radius: 26px;
+    background: #111;
+  }
+
+  .about-page-v22 .about-closing-v22 > img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-page-v22 .about-closing-shade-v22 {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(14, 11, 9, 0.94) 0%, rgba(14, 11, 9, 0.66) 52%, rgba(14, 11, 9, 0.2) 100%),
+      linear-gradient(180deg, transparent 48%, rgba(14, 11, 9, 0.58));
+  }
+
+  .about-page-v22 .about-closing-copy-v22 {
+    position: absolute;
+    top: 50%;
+    left: clamp(28px, 6vw, 72px);
+    z-index: 2;
+    width: min(670px, calc(100% - 56px));
+    transform: translateY(-50%);
+  }
+
+  .about-page-v22 .about-closing-copy-v22 h2 {
+    max-width: 12ch;
+    margin: 10px 0 0;
+    color: var(--about-text);
+    font-size: clamp(3rem, 5.5vw, 5.7rem);
+    line-height: 0.91;
+    letter-spacing: -0.055em;
+  }
+
+  .about-page-v22 .about-closing-copy-v22 p {
+    margin: 18px 0 0;
+    color: var(--about-muted);
+    line-height: 1.6;
+  }
+
+  .about-page-v22 .about-closing-copy-v22 > div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  @media (max-width: 980px) {
+    .about-page-v22 .about-hero-v22,
+    .about-page-v22 .about-story-v22,
+    .about-page-v22 .about-path-v22 {
+      grid-template-columns: 1fr;
+    }
+
+    .about-page-v22 .about-hero-v22 {
+      min-height: 0;
+    }
+
+    .about-page-v22 .about-hero-media-v22 {
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+    }
+
+    .about-page-v22 .about-story-quote-v22 {
+      min-height: 0;
+    }
+
+    .about-page-v22 .about-values-head-v22 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .about-page-v22 .about-v22 {
+      gap: 18px;
+      padding-top: 18px;
+    }
+
+    .about-page-v22 .about-hero-v22,
+    .about-page-v22 .about-story-v22,
+    .about-page-v22 .about-values-v22,
+    .about-page-v22 .about-path-v22,
+    .about-page-v22 .about-closing-v22 {
+      border-radius: 20px 6px 20px 6px;
+    }
+
+    .about-page-v22 .about-hero-copy-v22,
+    .about-page-v22 .about-story-v22,
+    .about-page-v22 .about-values-v22,
+    .about-page-v22 .about-path-v22 {
+      padding: 25px 20px;
+    }
+
+    .about-page-v22 .about-hero-copy-v22 h1 {
+      font-size: clamp(3.3rem, 15vw, 5rem);
+      line-height: 0.9;
+    }
+
+    .about-page-v22 .about-hero-actions-v22 {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .about-page-v22 .about-hero-actions-v22 .button {
+      width: 100%;
+    }
+
+    .about-page-v22 .about-hero-media-v22 {
+      aspect-ratio: 4 / 5;
+    }
+
+    .about-page-v22 .about-values-grid-v22 {
+      grid-template-columns: 1fr;
+    }
+
+    .about-page-v22 .about-values-grid-v22 article {
+      min-height: 0;
+    }
+
+    .about-page-v22 .about-values-grid-v22 h3 {
+      margin-top: 28px;
+    }
+
+    .about-page-v22 .about-closing-v22 {
+      min-height: 620px;
+    }
+
+    .about-page-v22 .about-closing-shade-v22 {
+      background: linear-gradient(180deg, rgba(14, 11, 9, 0.14) 16%, rgba(14, 11, 9, 0.94) 76%);
+    }
+
+    .about-page-v22 .about-closing-copy-v22 {
+      top: auto;
+      right: 20px;
+      bottom: 24px;
+      left: 20px;
+      width: auto;
+      transform: none;
+    }
+
+    .about-page-v22 .about-closing-copy-v22 h2 {
+      font-size: clamp(2.7rem, 13vw, 4.2rem);
+    }
+
+    .about-page-v22 .about-closing-copy-v22 > div:last-child {
+      display: grid;
+    }
+
+    .about-page-v22 .about-closing-copy-v22 .button {
+      width: 100%;
+    }
   }
 </style>

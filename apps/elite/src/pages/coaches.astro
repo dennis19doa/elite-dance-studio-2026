@@ -14,34 +14,73 @@ const categoryFor = (focus: string) => {
   if (/heels|commercial|k-pop|reggaeton|jazz|twerk|choreography/.test(value)) return "performance";
   return "movement";
 };
-
-const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-const bookingHref = `${baseUrl}#schedule`;
 ---
 
 <BaseLayout
   title="Coaches & Tanzlehrer:innen | Elite Dance Studio Berlin"
   description="Lerne die Coaches für Bachata, Reggaeton, Heels, Hip Hop, Commercial, K-Pop und weitere Styles im Elite Dance Studio Berlin kennen."
-  bodyClass="coaches-page-v15"
+  bodyClass="coaches-page-v15 coaches-page-v22"
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
-  <main class="page-shell page-main coaches-main-v15">
-    <header class="coaches-head-v15">
-      <div>
+  <main class="page-shell page-main coaches-main-v15 coaches-main-v22">
+    <section class="coaches-hero-v22" aria-labelledby="coaches-title">
+      <div class="coaches-hero-copy-v22">
         <div class="eyebrow">Unser Team · Berlin-Moabit</div>
-        <h1>Meet your coaches.</h1>
-      </div>
-      <div class="coaches-head-copy-v15">
+        <h1 id="coaches-title">Lerne deine Coaches kennen.</h1>
         <p>
-          Unterschiedliche Styles brauchen unterschiedliche Persönlichkeiten. Entdecke unsere Coaches,
-          ihre aktuelle Class, ihren Teaching-Fokus und Instagram direkt an einem Ort.
+          Unterschiedliche Styles brauchen unterschiedliche Persönlichkeiten. Finde den Coach,
+          die Class und den Teaching-Fokus, der zu dir passt.
         </p>
-        <a class="button primary" href={bookingHref}>Class buchen</a>
+        <div class="coaches-hero-actions-v22">
+          <a class="button primary" href="/stundenplan/">Stundenplan ansehen</a>
+          <a class="button secondary" href="#team">Team entdecken</a>
+        </div>
       </div>
-    </header>
 
-    <section class="coaches-directory-v15" data-coach-directory>
+      <aside class="coaches-guide-v22" aria-label="So findest du deinen Coach">
+        <div class="coaches-guide-head-v22">
+          <span>So findest du deinen Coach</span>
+          <strong>Einfach nach Style starten.</strong>
+        </div>
+
+        <div class="coaches-guide-list-v22">
+          <div>
+            <span>01</span>
+            <div>
+              <strong>Style wählen</strong>
+              <p>Partner Dance, Urban, Performance oder Movement filtern.</p>
+            </div>
+          </div>
+          <div>
+            <span>02</span>
+            <div>
+              <strong>Profil öffnen</strong>
+              <p>Class, Teaching-Fokus und Instagram direkt ansehen.</p>
+            </div>
+          </div>
+          <div>
+            <span>03</span>
+            <div>
+              <strong>Noch unsicher?</strong>
+              <p>Schreib uns kurz und wir empfehlen dir eine passende Class.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="coaches-directory-v15 coaches-directory-v22" id="team" data-coach-directory>
+      <div class="coaches-directory-head-v22">
+        <div>
+          <div class="eyebrow">Unser Team</div>
+          <h2>Finde den Style, der zu dir passt.</h2>
+        </div>
+        <p>
+          Filtere nach Richtung oder stöbere einfach durch alle Coaches.
+        </p>
+      </div>
+
       <div class="coach-filters-v15" role="group" aria-label="Coaches nach Richtung filtern">
         <button type="button" class="is-active" data-filter="all">Alle Coaches</button>
         <button type="button" data-filter="partner">Partner Dance</button>
@@ -52,9 +91,15 @@ const bookingHref = `${baseUrl}#schedule`;
 
       <div class="coach-grid-v15">
         {coaches.map((coach) => (
-          <article class="coach-card-v15" data-coach-card data-category={categoryFor(coach.focus)}>
+          <article class="coach-card-v15 coach-card-v22" data-coach-card data-category={categoryFor(coach.focus)}>
             <a class="coach-photo-v15" href={`/coaches/${coach.slug}/`} aria-label={`${coach.name} Profil öffnen`}>
-              <img src={coach.image} alt={coach.imageAlt} loading="lazy" decoding="async" style={`--coach-image-position: ${coach.slug === "sora" ? "center 36%" : "center top"};`} />
+              <img
+                src={coach.image}
+                alt={coach.imageAlt}
+                loading="lazy"
+                decoding="async"
+                style={`--coach-image-position: ${coach.slug === "sora" ? "center 36%" : "center top"};`}
+              />
               <span>{coach.focus}</span>
             </a>
 
@@ -67,11 +112,14 @@ const bookingHref = `${baseUrl}#schedule`;
               <p class="coach-card-text-v15">{coach.text}</p>
 
               {coach.beginnerSupport && (
-                <p class="coach-card-note-v15"><span>Gut zu wissen</span>{coach.beginnerSupport}</p>
+                <p class="coach-card-note-v15">
+                  <span>Für deinen Einstieg</span>
+                  {coach.beginnerSupport}
+                </p>
               )}
 
               <div class="coach-card-links-v15">
-                <a href={`/coaches/${coach.slug}/`}>Profil ansehen <span aria-hidden="true">↗</span></a>
+                <a href={`/coaches/${coach.slug}/`}>Profil ansehen <span aria-hidden="true">→</span></a>
                 {coach.instagramUrl ? (
                   <a
                     class="coach-instagram-v15"
@@ -115,17 +163,417 @@ const bookingHref = `${baseUrl}#schedule`;
       </script>
     </section>
 
-    <section class="coaches-help-v15">
+    <section class="coaches-help-v15 coaches-help-v22">
       <div>
         <div class="eyebrow">Noch unsicher?</div>
         <h2>Wir helfen dir, die passende Class zu finden.</h2>
+        <p>
+          Schreib uns kurz, welchen Style du suchst und wie viel Erfahrung du hast.
+          Wir empfehlen dir einen konkreten Coach und Kurs.
+        </p>
       </div>
-      <div>
-        <p>Schreib uns kurz, welchen Style du suchst und wie viel Erfahrung du hast. Wir empfehlen dir einen konkreten Coach und Kurs.</p>
-        <a href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20suche%20einen%20passenden%20Kurs%20und%20Coach.">Empfehlung bekommen →</a>
-      </div>
+      <a
+        class="button primary"
+        href="https://wa.me/491633863548?text=Hallo%20Elite%2C%20ich%20suche%20einen%20passenden%20Kurs%20und%20Coach."
+      >
+        Auf WhatsApp fragen
+      </a>
     </section>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />
 </BaseLayout>
+
+<style is:global>
+  .coaches-page-v22 {
+    --coach-v22-text: #f7eee6;
+    --coach-v22-muted: rgba(247, 238, 230, 0.64);
+    --coach-v22-line: rgba(255, 255, 255, 0.1);
+    --coach-v22-surface: #211a17;
+    --coach-v22-surface-2: #2a211d;
+    --coach-v22-gold: #f2b36f;
+    --coach-v22-lime: #d2f85a;
+  }
+
+  .coaches-page-v22 .coaches-main-v22 {
+    display: grid;
+    gap: clamp(22px, 3vw, 34px);
+    padding-top: clamp(28px, 4vw, 52px);
+  }
+
+  .coaches-page-v22 .eyebrow {
+    color: var(--coach-v22-gold) !important;
+  }
+
+  .coaches-page-v22 .coaches-hero-v22 {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+    gap: clamp(32px, 6vw, 84px);
+    align-items: center;
+    min-height: 500px;
+    padding: clamp(38px, 6vw, 72px);
+    border: 1px solid var(--coach-v22-line);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 7% 0%, rgba(242, 179, 111, 0.12), transparent 27rem),
+      linear-gradient(145deg, #211915 0%, #15110f 74%);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.2);
+  }
+
+  .coaches-page-v22 .coaches-hero-copy-v22 h1 {
+    max-width: 10ch;
+    margin: 14px 0 0;
+    color: var(--coach-v22-text);
+    font-size: clamp(3.5rem, 6vw, 6.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+  }
+
+  .coaches-page-v22 .coaches-hero-copy-v22 > p {
+    max-width: 40rem;
+    margin: 24px 0 0;
+    color: var(--coach-v22-muted);
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+    line-height: 1.65;
+  }
+
+  .coaches-page-v22 .coaches-hero-actions-v22 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .coaches-page-v22 .coaches-hero-v22 .button.primary,
+  .coaches-page-v22 .coaches-help-v22 .button.primary {
+    background: var(--coach-v22-lime) !important;
+    color: #11120e !important;
+    box-shadow: none !important;
+  }
+
+  .coaches-page-v22 .coaches-hero-v22 .button.secondary {
+    border-color: rgba(255, 255, 255, 0.18) !important;
+    background: rgba(255, 255, 255, 0.045) !important;
+    color: var(--coach-v22-text) !important;
+  }
+
+  .coaches-page-v22 .coaches-guide-v22 {
+    padding: 12px;
+    border: 1px solid var(--coach-v22-line);
+    border-radius: 22px 6px 22px 6px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .coaches-page-v22 .coaches-guide-head-v22 {
+    display: grid;
+    gap: 5px;
+    padding: 14px 14px 18px;
+  }
+
+  .coaches-page-v22 .coaches-guide-head-v22 span {
+    color: var(--coach-v22-gold);
+    font-size: 0.68rem;
+    font-weight: 850;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .coaches-page-v22 .coaches-guide-head-v22 strong {
+    color: var(--coach-v22-text);
+    font-size: 1.15rem;
+  }
+
+  .coaches-page-v22 .coaches-guide-list-v22 {
+    display: grid;
+    gap: 8px;
+  }
+
+  .coaches-page-v22 .coaches-guide-list-v22 > div {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 14px;
+    padding: 16px;
+    border: 1px solid transparent;
+    border-radius: 15px 5px 15px 5px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .coaches-page-v22 .coaches-guide-list-v22 > div > span {
+    padding-top: 2px;
+    color: var(--coach-v22-gold);
+    font-size: 0.68rem;
+    font-weight: 850;
+    letter-spacing: 0.08em;
+  }
+
+  .coaches-page-v22 .coaches-guide-list-v22 strong {
+    color: var(--coach-v22-text);
+    font-size: 0.94rem;
+  }
+
+  .coaches-page-v22 .coaches-guide-list-v22 p {
+    margin: 5px 0 0;
+    color: var(--coach-v22-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .coaches-page-v22 .coaches-directory-v22 {
+    padding: clamp(32px, 5vw, 54px);
+    border: 1px solid var(--coach-v22-line);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 96% 0%, rgba(242, 179, 111, 0.08), transparent 24rem),
+      linear-gradient(145deg, #211a17, #191411);
+  }
+
+  .coaches-page-v22 .coaches-directory-head-v22 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.55fr);
+    gap: 28px 60px;
+    align-items: end;
+    margin-bottom: 26px;
+  }
+
+  .coaches-page-v22 .coaches-directory-head-v22 h2 {
+    max-width: 12ch;
+    margin: 9px 0 0;
+    color: var(--coach-v22-text);
+    font-size: clamp(2.55rem, 4.8vw, 4.9rem);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+  }
+
+  .coaches-page-v22 .coaches-directory-head-v22 > p {
+    margin: 0;
+    color: var(--coach-v22-muted);
+    line-height: 1.6;
+  }
+
+  .coaches-page-v22 .coach-filters-v15 {
+    margin: 0 0 28px;
+    padding-top: 22px;
+    border-top: 1px solid var(--coach-v22-line);
+  }
+
+  .coaches-page-v22 .coach-filters-v15 button {
+    min-height: 40px;
+    padding: 0 15px;
+    border-color: rgba(242, 179, 111, 0.16);
+    background: rgba(255, 255, 255, 0.035);
+    color: rgba(247, 238, 230, 0.72);
+  }
+
+  .coaches-page-v22 .coach-filters-v15 button:hover {
+    border-color: rgba(242, 179, 111, 0.42);
+    color: #fff;
+  }
+
+  .coaches-page-v22 .coach-filters-v15 button.is-active {
+    border-color: var(--coach-v22-lime);
+    background: var(--coach-v22-lime);
+    color: #16130f;
+  }
+
+  .coaches-page-v22 .coach-grid-v15 {
+    gap: clamp(14px, 2vw, 22px);
+  }
+
+  .coaches-page-v22 .coach-card-v22 {
+    border-color: rgba(255, 255, 255, 0.09);
+    border-radius: 22px 7px 22px 7px;
+    background: var(--coach-v22-surface-2);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+  }
+
+  .coaches-page-v22 .coach-card-v22:hover {
+    transform: translateY(-3px);
+    border-color: rgba(242, 179, 111, 0.25);
+    box-shadow: 0 24px 52px rgba(0, 0, 0, 0.26);
+  }
+
+  .coaches-page-v22 .coach-photo-v15 {
+    aspect-ratio: 4 / 4.65;
+    background: #171210;
+  }
+
+  .coaches-page-v22 .coach-photo-v15::after {
+    height: 38%;
+    background: linear-gradient(180deg, transparent, rgba(14, 10, 9, 0.8));
+  }
+
+  .coaches-page-v22 .coach-photo-v15 > span {
+    color: var(--coach-v22-gold);
+    font-size: 0.66rem;
+    letter-spacing: 0.085em;
+  }
+
+  .coaches-page-v22 .coach-card-content-v15 {
+    gap: 14px;
+    padding: 20px;
+  }
+
+  .coaches-page-v22 .coach-card-title-v15 h2 {
+    color: var(--coach-v22-text);
+    font-size: clamp(1.5rem, 2vw, 1.95rem);
+  }
+
+  .coaches-page-v22 .coach-card-title-v15 p {
+    color: var(--coach-v22-gold);
+    font-size: 0.72rem;
+  }
+
+  .coaches-page-v22 .coach-card-text-v15 {
+    color: var(--coach-v22-muted);
+    font-size: 0.86rem;
+    line-height: 1.58;
+  }
+
+  .coaches-page-v22 .coach-card-note-v15 {
+    gap: 4px;
+    padding: 10px 0 0;
+    border-top: 1px solid var(--coach-v22-line);
+    border-left: 0;
+    background: transparent;
+    color: rgba(247, 238, 230, 0.74);
+    font-size: 0.76rem;
+  }
+
+  .coaches-page-v22 .coach-card-note-v15 span {
+    color: var(--coach-v22-gold);
+    font-size: 0.6rem;
+  }
+
+  .coaches-page-v22 .coach-card-links-v15 {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid var(--coach-v22-line);
+  }
+
+  .coaches-page-v22 .coach-card-links-v15 > a:first-child {
+    color: var(--coach-v22-text);
+    white-space: nowrap;
+  }
+
+  .coaches-page-v22 .coach-card-links-v15 > a:first-child:hover {
+    color: var(--coach-v22-lime);
+  }
+
+  .coaches-page-v22 .coach-instagram-v15 {
+    justify-self: end;
+    color: rgba(247, 238, 230, 0.58);
+    font-size: 0.72rem;
+  }
+
+  .coaches-page-v22 .coach-instagram-v15:hover {
+    color: var(--coach-v22-gold);
+  }
+
+  .coaches-page-v22 .coaches-help-v22 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+    padding: clamp(34px, 5vw, 56px);
+    border: 1px solid rgba(242, 179, 111, 0.16);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 6% 20%, rgba(242, 179, 111, 0.1), transparent 22rem),
+      #171311;
+  }
+
+  .coaches-page-v22 .coaches-help-v22 > div {
+    max-width: 760px;
+  }
+
+  .coaches-page-v22 .coaches-help-v22 h2 {
+    max-width: 14ch;
+    margin: 8px 0 0;
+    color: var(--coach-v22-text);
+    font-size: clamp(2.35rem, 4vw, 4.2rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+  }
+
+  .coaches-page-v22 .coaches-help-v22 p {
+    max-width: 620px;
+    margin: 15px 0 0;
+    color: var(--coach-v22-muted);
+    line-height: 1.6;
+  }
+
+  .coaches-page-v22 .coaches-help-v22 > .button {
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 980px) {
+    .coaches-page-v22 .coaches-hero-v22,
+    .coaches-page-v22 .coaches-directory-head-v22 {
+      grid-template-columns: 1fr;
+    }
+
+    .coaches-page-v22 .coaches-hero-v22 {
+      min-height: 0;
+    }
+
+    .coaches-page-v22 .coaches-hero-copy-v22 h1 {
+      max-width: 12ch;
+    }
+
+    .coaches-page-v22 .coaches-help-v22 {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .coaches-page-v22 .coaches-help-v22 > .button {
+      align-self: flex-start;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .coaches-page-v22 .coaches-main-v22 {
+      gap: 18px;
+      padding-top: 18px;
+    }
+
+    .coaches-page-v22 .coaches-hero-v22,
+    .coaches-page-v22 .coaches-directory-v22,
+    .coaches-page-v22 .coaches-help-v22 {
+      padding: 24px 20px;
+      border-radius: 20px 6px 20px 6px;
+    }
+
+    .coaches-page-v22 .coaches-hero-copy-v22 h1 {
+      max-width: none;
+      font-size: clamp(3rem, 14vw, 4.5rem);
+      line-height: 0.93;
+    }
+
+    .coaches-page-v22 .coaches-hero-actions-v22 {
+      display: grid;
+    }
+
+    .coaches-page-v22 .coaches-hero-actions-v22 .button {
+      width: 100%;
+    }
+
+    .coaches-page-v22 .coaches-directory-head-v22 h2 {
+      max-width: none;
+      font-size: clamp(2.5rem, 11vw, 3.7rem);
+    }
+
+    .coaches-page-v22 .coach-card-links-v15 {
+      grid-template-columns: 1fr;
+    }
+
+    .coaches-page-v22 .coach-instagram-v15 {
+      justify-self: start;
+    }
+
+    .coaches-page-v22 .coaches-help-v22 > .button {
+      width: 100%;
+    }
+  }
+</style>

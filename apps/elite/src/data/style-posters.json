@@ -170,16 +170,6 @@
     "tone": "rose"
   },
   {
-    "title": "Commercial Beginner+ mit Dima",
-    "level": "Beginner+",
-    "world": "performance",
-    "worldLabel": "Performance",
-    "beginner": false,
-    "image": "/media/style-posters/13-commercial-beginner-plus-dima.webp",
-    "alt": "Commercial Beginner Plus Kurs mit Dima im Elite Dance Studio",
-    "tone": "electric"
-  },
-  {
     "title": "Latin Twerk",
     "level": "Open Format",
     "world": "performance",
@@ -198,16 +188,6 @@
     "image": "/media/style-posters/15-contemporary-fusion.webp",
     "alt": "Contemporary Fusion Kurs im Elite Dance Studio",
     "tone": "copper"
-  },
-  {
-    "title": "Commercial Beginner+ mit Marlon",
-    "level": "Beginner+",
-    "world": "performance",
-    "worldLabel": "Performance",
-    "beginner": false,
-    "image": "/media/style-posters/18-commercial-beginner-plus-marlon.webp",
-    "alt": "Commercial Beginner Plus Kurs mit Marlon im Elite Dance Studio",
-    "tone": "electric"
   },
   {
     "title": "Bachata Intermediate",

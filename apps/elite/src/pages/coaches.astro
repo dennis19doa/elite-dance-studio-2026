@@ -54,7 +54,7 @@ const bookingHref = `${baseUrl}#schedule`;
         {coaches.map((coach) => (
           <article class="coach-card-v15" data-coach-card data-category={categoryFor(coach.focus)}>
             <a class="coach-photo-v15" href={`/coaches/${coach.slug}/`} aria-label={`${coach.name} Profil öffnen`}>
-              <img src={coach.image} alt={coach.imageAlt} loading="lazy" decoding="async" style={`--coach-image-position: ${coach.slug === "sora" ? "center center" : "center top"};`} />
+              <img src={coach.image} alt={coach.imageAlt} loading="lazy" decoding="async" style={`--coach-image-position: ${coach.slug === "sora" ? "center 36%" : "center top"};`} />
               <span>{coach.focus}</span>
             </a>
 

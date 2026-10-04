@@ -2,7 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import PageIntro from "../components/PageIntro.astro";
 import CourseLevelGuide from "../components/CourseLevelGuide.astro";
 import StylePosterGallery from "../components/StylePosterGallery.astro";
 import EversportsSchedule from "../components/EversportsSchedule.astro";
@@ -12,14 +11,578 @@ import firstVisit from "../data/first-visit.json";
 import stylePosters from "../data/style-posters.json";
 import site from "../data/site.json";
 ---
-<BaseLayout title="Tanzkurse in Berlin-Moabit | Level 0 bis Advanced | Elite Dance Studio" description="Tanzkurse in Berlin-Moabit von Level 0 und Beginner bis Intermediate und Advanced. Solo- und Partner-Styles, Closed Groups, Intensives und Live-Stundenplan.">
+
+<BaseLayout
+  title="Tanzkurse in Berlin-Moabit | Level 0 bis Advanced | Elite Dance Studio"
+  description="Tanzkurse in Berlin-Moabit von Level 0 und Beginner bis Intermediate und Advanced. Solo- und Partner-Styles, Closed Groups, Intensives und Live-Stundenplan."
+  bodyClass="courses-page-v22"
+>
   <SiteHeader brand={site.brand} nav={site.nav} />
-  <main class="page-shell page-main courses-main-v18">
-    <PageIntro eyebrow="Kurse" title="Finde dein Level. Entdecke deinen Style." description="Von Level 0 bis Advanced – mit Social Dance, Urban, Performance und Technik unter einem Dach." actions={[{ label: "Alle Styles", href: "#style-poster-gallery", variant: "primary" }, { label: "Live-Stundenplan", href: "#schedule", variant: "secondary" }]} />
+
+  <main class="page-shell page-main courses-main-v18 courses-main-v22">
+    <section class="courses-hero-v22" aria-labelledby="courses-title">
+      <div class="courses-hero-copy-v22">
+        <div class="eyebrow">Kurse · Berlin-Moabit</div>
+        <h1 id="courses-title">Finde deinen Einstieg. Entdecke deinen Style.</h1>
+        <p>
+          Von deiner ersten Class bis Advanced: wähle nach Erfahrung, entdecke unterschiedliche
+          Tanzwelten und finde das Training, das zu dir passt.
+        </p>
+
+        <div class="courses-hero-actions-v22">
+          <a class="button primary" href="#style-poster-gallery">Alle Styles ansehen</a>
+          <a class="button secondary" href="#schedule">Live-Stundenplan</a>
+        </div>
+
+        <div class="courses-hero-facts-v22" aria-label="Kursangebot auf einen Blick">
+          <span>Level 0 bis Advanced</span>
+          <span>Solo & Partner Dance</span>
+          <span>Open Classes & Closed Groups</span>
+        </div>
+      </div>
+
+      <aside class="courses-start-v22" aria-label="Welches Level passt zu mir">
+        <div class="courses-start-head-v22">
+          <span>Wo starte ich?</span>
+          <strong>Wähle nach Erfahrung, nicht nach Mut.</strong>
+        </div>
+
+        <div class="courses-start-list-v22">
+          <a href="#levels">
+            <span>01</span>
+            <div>
+              <strong>Neu im Tanzen?</strong>
+              <p>Level 0 oder Beginner ist dein entspannter Einstieg.</p>
+            </div>
+            <b aria-hidden="true">→</b>
+          </a>
+          <a href="#levels">
+            <span>02</span>
+            <div>
+              <strong>Basics sitzen schon?</strong>
+              <p>Beginner+ und Intermediate bringen mehr Flow und Technik.</p>
+            </div>
+            <b aria-hidden="true">→</b>
+          </a>
+          <a href="/fortgeschrittene/">
+            <span>03</span>
+            <div>
+              <strong>Du willst gezielter trainieren?</strong>
+              <p>Advanced, Closed Groups und Intensives geben dir mehr Fokus.</p>
+            </div>
+            <b aria-hidden="true">→</b>
+          </a>
+        </div>
+      </aside>
+    </section>
+
     <CourseLevelGuide items={courseLevelGuide} />
     <StylePosterGallery posters={stylePosters} />
-    <EversportsSchedule eyebrow="Aktuelle Woche" title="Jetzt Termin finden." description="Tag, Coach, Level und freie Plätze direkt im Live-Stundenplan prüfen." />
-    <FirstVisitSection steps={firstVisit} eyebrow="Erster Besuch" title="Deine erste Class bei Elite." description="Kurs wählen, Platz sichern, vorbeikommen." />
+    <EversportsSchedule
+      eyebrow="Aktuelle Woche"
+      title="Jetzt Termin finden."
+      description="Tag, Coach, Level und freie Plätze direkt im Live-Stundenplan prüfen."
+    />
+    <FirstVisitSection
+      steps={firstVisit}
+      eyebrow="Erster Besuch"
+      title="Deine erste Class bei Elite."
+      description="Kurs wählen, Platz sichern, vorbeikommen."
+    />
   </main>
+
   <SiteFooter brand={site.brand} nav={site.nav} />
 </BaseLayout>
+
+<style is:global>
+  .courses-page-v22 {
+    --course-v22-text: #f7eee6;
+    --course-v22-muted: rgba(247, 238, 230, 0.64);
+    --course-v22-line: rgba(255, 255, 255, 0.1);
+    --course-v22-surface: #211a17;
+    --course-v22-surface-2: #2a211d;
+    --course-v22-gold: #f2b36f;
+    --course-v22-lime: #d2f85a;
+    --course-v22-cream: #f3e8dc;
+    --course-v22-ink: #2b211b;
+  }
+
+  .courses-page-v22 .courses-main-v22 {
+    display: grid;
+    gap: clamp(22px, 3vw, 34px);
+    padding-top: clamp(28px, 4vw, 52px);
+    padding-bottom: clamp(52px, 7vw, 90px);
+  }
+
+  .courses-page-v22 .eyebrow {
+    color: var(--course-v22-gold) !important;
+  }
+
+  .courses-page-v22 .courses-main-v22 > :first-child {
+    border-top: 1px solid var(--course-v22-line) !important;
+  }
+
+  .courses-page-v22 .courses-hero-v22 {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+    gap: clamp(34px, 6vw, 82px);
+    align-items: center;
+    min-height: 540px;
+    padding: clamp(38px, 6vw, 72px);
+    overflow: hidden;
+    border: 1px solid var(--course-v22-line);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 6% 0%, rgba(242, 179, 111, 0.12), transparent 28rem),
+      linear-gradient(145deg, #211915 0%, #15110f 74%);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.2);
+  }
+
+  .courses-page-v22 .courses-hero-copy-v22 h1 {
+    max-width: 10.5ch;
+    margin: 14px 0 0;
+    color: var(--course-v22-text);
+    font-size: clamp(3.45rem, 5.6vw, 6.2rem);
+    line-height: 0.91;
+    letter-spacing: -0.06em;
+    text-wrap: balance;
+  }
+
+  .courses-page-v22 .courses-hero-copy-v22 > p {
+    max-width: 42rem;
+    margin: 24px 0 0;
+    color: var(--course-v22-muted);
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+    line-height: 1.65;
+  }
+
+  .courses-page-v22 .courses-hero-actions-v22 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .courses-page-v22 .courses-hero-v22 .button.primary {
+    background: var(--course-v22-lime) !important;
+    color: #11120e !important;
+    box-shadow: none !important;
+  }
+
+  .courses-page-v22 .courses-hero-v22 .button.secondary {
+    border-color: rgba(255, 255, 255, 0.18) !important;
+    background: rgba(255, 255, 255, 0.045) !important;
+    color: var(--course-v22-text) !important;
+  }
+
+  .courses-page-v22 .courses-hero-facts-v22 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .courses-page-v22 .courses-hero-facts-v22 span {
+    padding: 8px 11px;
+    border: 1px solid rgba(242, 179, 111, 0.15);
+    border-radius: 999px;
+    background: rgba(242, 179, 111, 0.05);
+    color: rgba(247, 238, 230, 0.68);
+    font-size: 0.7rem;
+    font-weight: 750;
+  }
+
+  .courses-page-v22 .courses-start-v22 {
+    padding: 12px;
+    border: 1px solid var(--course-v22-line);
+    border-radius: 22px 6px 22px 6px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .courses-page-v22 .courses-start-head-v22 {
+    display: grid;
+    gap: 5px;
+    padding: 14px 14px 18px;
+  }
+
+  .courses-page-v22 .courses-start-head-v22 span {
+    color: var(--course-v22-gold);
+    font-size: 0.68rem;
+    font-weight: 850;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .courses-page-v22 .courses-start-head-v22 strong {
+    color: var(--course-v22-text);
+    font-size: 1.13rem;
+  }
+
+  .courses-page-v22 .courses-start-list-v22 {
+    display: grid;
+    gap: 8px;
+  }
+
+  .courses-page-v22 .courses-start-list-v22 a {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid transparent;
+    border-radius: 15px 5px 15px 5px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--course-v22-text);
+    text-decoration: none;
+    transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+
+  .courses-page-v22 .courses-start-list-v22 a:hover {
+    border-color: rgba(242, 179, 111, 0.2);
+    background: rgba(255, 255, 255, 0.065);
+    transform: translateX(2px);
+  }
+
+  .courses-page-v22 .courses-start-list-v22 a > span {
+    color: var(--course-v22-gold);
+    font-size: 0.68rem;
+    font-weight: 850;
+  }
+
+  .courses-page-v22 .courses-start-list-v22 strong {
+    color: var(--course-v22-text);
+    font-size: 0.94rem;
+  }
+
+  .courses-page-v22 .courses-start-list-v22 p {
+    margin: 5px 0 0;
+    color: var(--course-v22-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .courses-page-v22 .courses-start-list-v22 b {
+    color: var(--course-v22-lime);
+    font-size: 1rem;
+  }
+
+  .courses-page-v22 .course-guide {
+    padding: clamp(34px, 5vw, 56px) !important;
+    border: 1px solid var(--course-v22-line) !important;
+    border-radius: 28px !important;
+    background:
+      radial-gradient(circle at 94% 0%, rgba(242, 179, 111, 0.07), transparent 24rem),
+      linear-gradient(145deg, #211a17, #191411) !important;
+    box-shadow: none !important;
+  }
+
+  .courses-page-v22 .course-guide .section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.55fr);
+    gap: 28px 60px;
+    align-items: end;
+  }
+
+  .courses-page-v22 .course-guide .section-head h2 {
+    max-width: 12ch;
+    margin: 9px 0 0;
+    color: var(--course-v22-text) !important;
+    font-size: clamp(2.5rem, 4.7vw, 4.8rem);
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+  }
+
+  .courses-page-v22 .course-guide .section-head > p {
+    margin: 0;
+    color: var(--course-v22-muted) !important;
+    line-height: 1.6;
+  }
+
+  .courses-page-v22 .level-roadmap {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 30px;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .courses-page-v22 .level-step {
+    grid-column: span 2;
+    min-height: 245px;
+    padding: 22px;
+    border: 1px solid var(--course-v22-line) !important;
+    border-radius: 18px 6px 18px 6px;
+    background: rgba(255, 255, 255, 0.035) !important;
+    color: var(--course-v22-text) !important;
+  }
+
+  .courses-page-v22 .level-step:nth-child(4),
+  .courses-page-v22 .level-step:nth-child(5) {
+    grid-column: span 3;
+  }
+
+  .courses-page-v22 .level-step:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(242, 179, 111, 0.24) !important;
+  }
+
+  .courses-page-v22 .level-step-badge {
+    background: rgba(242, 179, 111, 0.08);
+    color: var(--course-v22-gold) !important;
+  }
+
+  .courses-page-v22 .level-step strong {
+    color: var(--course-v22-text) !important;
+    font-size: clamp(1.22rem, 1.8vw, 1.55rem);
+  }
+
+  .courses-page-v22 .level-step > span:not(.level-step-badge) {
+    color: var(--course-v22-muted) !important;
+  }
+
+  .courses-page-v22 .level-step b {
+    color: var(--course-v22-lime);
+  }
+
+  .courses-page-v22 .training-formats {
+    grid-template-columns: 0.8fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .courses-page-v22 .training-formats-label,
+  .courses-page-v22 .training-format-card {
+    padding: 22px;
+    border-radius: 18px 6px 18px 6px;
+  }
+
+  .courses-page-v22 .training-formats-label {
+    background: #171311;
+  }
+
+  .courses-page-v22 .training-formats-label span {
+    color: var(--course-v22-gold);
+  }
+
+  .courses-page-v22 .training-format-card {
+    border: 1px solid var(--course-v22-line) !important;
+    background: rgba(255, 255, 255, 0.035) !important;
+    color: var(--course-v22-text) !important;
+  }
+
+  .courses-page-v22 .training-format-card > span,
+  .courses-page-v22 .training-format-card b {
+    color: var(--course-v22-gold) !important;
+  }
+
+  .courses-page-v22 .training-format-card small {
+    color: var(--course-v22-muted) !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 {
+    margin-top: 0;
+    padding: clamp(34px, 5vw, 56px) !important;
+    border: 1px solid var(--course-v22-line) !important;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 96% 0%, rgba(242, 179, 111, 0.08), transparent 25rem),
+      linear-gradient(145deg, #211a17, #191411) !important;
+    color: var(--course-v22-text) !important;
+    box-shadow: none;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .eyebrow {
+    color: var(--course-v22-gold) !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-head h2 {
+    color: var(--course-v22-text) !important;
+    font-size: clamp(2.5rem, 4.8vw, 4.9rem) !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-intro p,
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-status {
+    color: var(--course-v22-muted) !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-intro a {
+    color: var(--course-v22-lime) !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-filter {
+    border-color: rgba(242, 179, 111, 0.16) !important;
+    background: rgba(255, 255, 255, 0.035) !important;
+    color: rgba(247, 238, 230, 0.72) !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-filter[aria-pressed="true"] {
+    border-color: var(--course-v22-lime) !important;
+    background: var(--course-v22-lime) !important;
+    color: #15120f !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-card {
+    border-color: rgba(255, 255, 255, 0.09) !important;
+    border-radius: 20px 6px 20px 6px !important;
+    background: var(--course-v22-surface-2) !important;
+    color: var(--course-v22-text) !important;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-meta h3,
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-meta span,
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-coach-profile,
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-coach-profile span {
+    color: var(--course-v22-text) !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-meta > div {
+    padding-left: 0 !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-cta {
+    border-color: rgba(242, 179, 111, 0.15) !important;
+    background: #171311 !important;
+    color: var(--course-v22-text) !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-cta strong,
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-cta span {
+    color: var(--course-v22-text) !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-cta .button.primary {
+    background: var(--course-v22-lime) !important;
+    color: #11120e !important;
+  }
+
+  .courses-page-v22 .style-poster-showcase-v18 .style-poster-cta .button.secondary {
+    border-color: rgba(255, 255, 255, 0.16) !important;
+    background: rgba(255, 255, 255, 0.045) !important;
+    color: var(--course-v22-text) !important;
+  }
+
+  .courses-page-v22 .eversports-panel {
+    margin-top: 0 !important;
+    border-radius: 28px !important;
+  }
+
+  .courses-page-v22 .steps {
+    border: 1px solid var(--course-v22-line) !important;
+    border-radius: 28px !important;
+    background:
+      radial-gradient(circle at 96% 0%, rgba(242, 179, 111, 0.08), transparent 24rem),
+      linear-gradient(145deg, #211a17, #191411) !important;
+    box-shadow: none !important;
+  }
+
+  .courses-page-v22 .steps .section-head h2 {
+    color: var(--course-v22-text) !important;
+  }
+
+  .courses-page-v22 .steps .section-head > p {
+    color: var(--course-v22-muted) !important;
+  }
+
+  .courses-page-v22 .step {
+    border-color: var(--course-v22-line) !important;
+    background: rgba(255, 255, 255, 0.035) !important;
+  }
+
+  .courses-page-v22 .step strong {
+    color: var(--course-v22-text) !important;
+  }
+
+  .courses-page-v22 .step span {
+    color: var(--course-v22-muted) !important;
+  }
+
+  @media (max-width: 980px) {
+    .courses-page-v22 .courses-hero-v22,
+    .courses-page-v22 .course-guide .section-head {
+      grid-template-columns: 1fr;
+    }
+
+    .courses-page-v22 .courses-hero-v22 {
+      min-height: 0;
+    }
+
+    .courses-page-v22 .courses-hero-copy-v22 h1 {
+      max-width: 12ch;
+    }
+
+    .courses-page-v22 .level-roadmap {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .courses-page-v22 .level-step,
+    .courses-page-v22 .level-step:nth-child(4),
+    .courses-page-v22 .level-step:nth-child(5) {
+      grid-column: auto;
+    }
+
+    .courses-page-v22 .level-step:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .courses-page-v22 .training-formats {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .courses-page-v22 .training-formats-label {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .courses-page-v22 .courses-main-v22 {
+      gap: 18px;
+      padding-top: 18px;
+    }
+
+    .courses-page-v22 .courses-hero-v22,
+    .courses-page-v22 .course-guide,
+    .courses-page-v22 .style-poster-showcase-v18,
+    .courses-page-v22 .steps {
+      padding: 24px 20px !important;
+      border-radius: 20px 6px 20px 6px !important;
+    }
+
+    .courses-page-v22 .courses-hero-copy-v22 h1 {
+      max-width: none;
+      font-size: clamp(3rem, 13.5vw, 4.5rem);
+      line-height: 0.93;
+    }
+
+    .courses-page-v22 .courses-hero-actions-v22 {
+      display: grid;
+    }
+
+    .courses-page-v22 .courses-hero-actions-v22 .button {
+      width: 100%;
+    }
+
+    .courses-page-v22 .course-guide .section-head h2,
+    .courses-page-v22 .style-poster-showcase-v18 .style-poster-head h2 {
+      max-width: none;
+      font-size: clamp(2.45rem, 11vw, 3.6rem) !important;
+    }
+
+    .courses-page-v22 .level-roadmap,
+    .courses-page-v22 .training-formats {
+      grid-template-columns: 1fr;
+    }
+
+    .courses-page-v22 .level-step,
+    .courses-page-v22 .level-step:last-child,
+    .courses-page-v22 .training-formats-label {
+      grid-column: auto;
+    }
+
+    .courses-page-v22 .level-step {
+      min-height: 0;
+    }
+  }
+</style>

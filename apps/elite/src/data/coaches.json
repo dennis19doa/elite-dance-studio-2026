@@ -99,19 +99,6 @@
     "instagramUrl": "https://www.instagram.com/iforgottosleep/"
   },
   {
-    "slug": "marlon",
-    "name": "Marlon",
-    "focus": "Commercial",
-    "schedule": "Mittwoch · 18:00–20:00",
-    "text": "Marlons Unterricht verbindet Performance-Energie mit verständlichen Basics und sauberer Bewegungsqualität.",
-    "beginnerSupport": "Klare Counts und sichere Orientierung",
-    "image": "/media/coaches/marlon.webp",
-    "imageAlt": "Marlon, Commercial Coach bei Elite Dance Studio",
-    "imageNote": "Elite Portrait",
-    "instagramHandle": "@marlondenniz",
-    "instagramUrl": "https://www.instagram.com/marlondenniz/"
-  },
-  {
     "slug": "valentina",
     "name": "Valentina",
     "focus": "K-Pop",
@@ -277,30 +264,6 @@
     "imageNote": "Elite Portrait",
     "instagramHandle": "@coco_sarah",
     "instagramUrl": "https://www.instagram.com/coco_sarah/"
-  },
-  {
-    "slug": "dima",
-    "name": "Dima",
-    "focus": "Commercial",
-    "schedule": "Freitag · 20:00–21:00",
-    "text": "Dimas Commercial-Unterricht verbindet Performance, Dynamik und Choreografie zu einer ausdrucksstarken Class.",
-    "beginnerSupport": "Performance mit klarer Choreo-Struktur",
-    "image": "/media/coaches/dima.webp",
-    "imageAlt": "Dima, Commercial Coach bei Elite Dance Studio",
-    "imageNote": "Elite Portrait"
-  },
-  {
-    "slug": "alisa",
-    "name": "Alisa",
-    "focus": "Jazz",
-    "schedule": "Freitag · 18:00–19:00",
-    "text": "Alisas Jazz-Klassen verbinden Technik, Linien und Ausdruck zu einer vielseitigen tänzerischen Grundlage.",
-    "beginnerSupport": "Technik verständlich und motivierend aufbauen",
-    "image": "/media/coaches/alisa.webp",
-    "imageAlt": "Alisa, Jazz Coach bei Elite Dance Studio",
-    "imageNote": "Elite Portrait",
-    "instagramHandle": "@alisa.mxy",
-    "instagramUrl": "https://www.instagram.com/alisa.mxy/"
   },
   {
     "slug": "notika",

@@ -80,7 +80,7 @@ const bookingUrl = "https://www.eversports.de/org/activity/522f6512-9c95-4526-bd
     position: relative;
     display: flex;
     flex-direction: column;
-    width: min(510px, 100%);
+    width: min(430px, 100%);
     max-height: calc(100dvh - 36px);
     overflow: hidden;
     border: 1px solid rgb(255 255 255 / 17%);
@@ -125,7 +125,7 @@ const bookingUrl = "https://www.eversports.de/org/activity/522f6512-9c95-4526-bd
   }
   .papi-promo__poster img {
     display: block;
-    width: 100%;
+    width: min(100%, 345px);
     height: auto;
     max-height: min(69dvh, 710px);
     object-fit: contain;
@@ -253,7 +253,7 @@ const bookingUrl = "https://www.eversports.de/org/activity/522f6512-9c95-4526-bd
         element.addEventListener("click", dismiss)
       );
       promo.querySelectorAll("[data-papi-register]").forEach((element) =>
-        element.addEventListener("click", () => remember(dismissedKey))
+        element.addEventListener("click", dismiss)
       );
       document.addEventListener("keydown", (event) => {
         if (promo.hidden) return;

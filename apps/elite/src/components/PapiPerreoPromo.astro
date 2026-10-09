@@ -1,0 +1,193 @@
+---
+const bookingUrl = "https://www.eversports.de/org/activity/522f6512-9c95-4526-bd03-1f9f50eefc20";
+---
+
+<aside
+  class="papi-promo"
+  data-papi-promo
+  aria-label="Papi PeRReo Workshop – Anmeldung"
+  hidden
+>
+  <button
+    class="papi-promo__close"
+    type="button"
+    data-papi-close
+    aria-label="Workshop-Hinweis schließen"
+    title="Schließen"
+  >×</button>
+
+  <a
+    class="papi-promo__poster"
+    href={bookingUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-papi-register
+    aria-label="Papi PeRReo Workshop am 21. November, 16 bis 18 Uhr – jetzt anmelden"
+  >
+    <img
+      src="/media/events/papi-perreo-workshop.webp"
+      alt="Nate × Mati: Papi PeRReo Workshop. Samstag, 21. November, 16–18 Uhr im Elite Dance Berlin. 40 € einzeln oder 30 € pro Person zu zweit."
+      width="320"
+      height="426"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  <div class="papi-promo__footer">
+    <span class="papi-promo__date">SA · 21.11. · 16–18 UHR</span>
+    <a
+      href={bookingUrl}
+      class="papi-promo__cta"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-papi-register
+    >Platz sichern <span aria-hidden="true">↗</span></a>
+  </div>
+</aside>
+
+<style>
+  .papi-promo[hidden] { display: none !important; }
+
+  .papi-promo {
+    position: fixed;
+    z-index: 80;
+    right: 20px;
+    bottom: 20px;
+    width: min(258px, calc(100vw - 32px));
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 17%);
+    border-radius: 16px;
+    background: #191410;
+    box-shadow: 0 18px 54px rgb(0 0 0 / 32%);
+    color: #fff;
+    transform-origin: bottom right;
+    animation: papi-promo-arrive 340ms ease-out both;
+  }
+
+  .papi-promo__close {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgb(255 255 255 / 45%);
+    border-radius: 50%;
+    background: rgb(20 18 16 / 86%);
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+  }
+  .papi-promo__close:hover,
+  .papi-promo__close:focus-visible {
+    background: #000;
+    outline-offset: 2px;
+  }
+
+  .papi-promo__poster,
+  .papi-promo__poster img { display: block; width: 100%; }
+  .papi-promo__poster img { height: auto; aspect-ratio: 320 / 426; object-fit: cover; }
+
+  .papi-promo__footer {
+    display: grid;
+    gap: 8px;
+    padding: 10px 12px 12px;
+    text-align: center;
+  }
+  .papi-promo__date {
+    color: #f8e4a0;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+  .papi-promo__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 40px;
+    border-radius: 9px;
+    background: #f5d528;
+    color: #15100e;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background-color 180ms ease, transform 180ms ease;
+  }
+  .papi-promo__cta:hover { background: #ffe95d; transform: translateY(-1px); }
+  .papi-promo__cta:focus-visible { outline: 2px solid white; outline-offset: 2px; }
+
+  @keyframes papi-promo-arrive {
+    from { opacity: 0; transform: translateY(16px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @media (max-width: 600px) {
+    .papi-promo {
+      right: 12px;
+      bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+      width: min(210px, calc(100vw - 24px));
+      border-radius: 13px;
+    }
+    .papi-promo__footer { gap: 6px; padding: 8px; }
+    .papi-promo__cta { min-height: 38px; }
+  }
+
+  @media (max-height: 550px) {
+    .papi-promo { width: min(160px, calc(100vw - 24px)); }
+    .papi-promo__footer { padding: 6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .papi-promo { animation: none; }
+    .papi-promo__cta { transition: none; }
+  }
+</style>
+
+<script>
+  const promo = document.querySelector<HTMLElement>("[data-papi-promo]");
+  if (promo) {
+    const shownKey = "elite-papi-perreo-promo-shown";
+    const dismissedKey = "elite-papi-perreo-promo-dismissed";
+    const eventEndsAt = Date.parse("2026-11-21T18:00:00+01:00");
+    const day = 24 * 60 * 60 * 1000;
+    const now = Date.now();
+
+    const lastTimestamp = (key: string): number => {
+      try { return Number(window.localStorage.getItem(key)) || 0; }
+      catch { return 0; }
+    };
+    const remember = (key: string): void => {
+      try { window.localStorage.setItem(key, String(Date.now())); }
+      catch { /* Storage blocked – promotion still works. */ }
+    };
+
+    const dismissedRecently = lastTimestamp(dismissedKey) > now - 14 * day;
+    const shownRecently = lastTimestamp(shownKey) > now - 7 * day;
+
+    if (now < eventEndsAt && !dismissedRecently && !shownRecently) {
+      const revealTimer = window.setTimeout(() => {
+        promo.hidden = false;
+        remember(shownKey);
+      }, 7000);
+
+      const dismiss = () => {
+        window.clearTimeout(revealTimer);
+        promo.hidden = true;
+        remember(dismissedKey);
+      };
+      promo.querySelector("[data-papi-close]")?.addEventListener("click", dismiss);
+      promo.querySelectorAll("[data-papi-register]").forEach((link) => {
+        link.addEventListener("click", () => remember(dismissedKey));
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !promo.hidden) dismiss();
+      });
+    }
+  }
+</script>

@@ -178,8 +178,8 @@ const bookingUrl = "https://www.eversports.de/org/activity/522f6512-9c95-4526-bd
     transition: background-color 160ms ease;
   }
   .papi-promo__cta:hover { background: #ffe95d; }
-  html.papi-promo-open,
-  html.papi-promo-open body { overflow: hidden; }
+  :global(html.papi-promo-open),
+  :global(html.papi-promo-open body) { overflow: hidden; }
 
   @keyframes papi-promo-arrive {
     from { opacity: 0; transform: translateY(20px) scale(.96); }

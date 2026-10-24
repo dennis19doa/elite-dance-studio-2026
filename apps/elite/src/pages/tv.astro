@@ -2,8 +2,14 @@
 import tvMedia from "../data/tv-media.json";
 import tvSchedule from "../data/tv-schedule.json";
 
-const tvMediaBase = "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv";
-const remoteMedia = (path: string) => `${tvMediaBase}/${path.split("/").map(encodeURIComponent).join("/")}`;
+const tvMediaOrigin = "https://pub-78965290644946caade1e59ed21bf9ce.r2.dev";
+const tvMediaBase = `${tvMediaOrigin}/tv`;
+// A leading slash addresses an asset at the R2 bucket root, not within /tv.
+const remoteMedia = (path: string) => {
+  const base = path.startsWith("/") ? tvMediaOrigin : tvMediaBase;
+  const key = path.replace(/^\\/+/, "").split("/").map(encodeURIComponent).join("/");
+  return `${base}/${key}`;
+};
 const posters = tvMedia.posters.map((item) => ({
   ...item,
   src: remoteMedia(item.file),
@@ -11,7 +17,7 @@ const posters = tvMedia.posters.map((item) => ({
 }));
 const videos = ["https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/videos/Video%20TV.mp4"];
 const initialVideo = videos[0] || "";
-const TV_ASSET_VERSION = "20261004-party1010-hq-v1";
+const TV_ASSET_VERSION = "20261024-wochenplan-v1";
 const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;
 const featureSchedule = tvMedia.features?.schedule
   ? { ...tvMedia.features.schedule, src: versionedMedia(tvMedia.features.schedule.file) }

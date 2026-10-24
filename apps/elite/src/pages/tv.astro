@@ -7,7 +7,7 @@ const tvMediaBase = `${tvMediaOrigin}/tv`;
 // A leading slash addresses an asset at the R2 bucket root, not within /tv.
 const remoteMedia = (path: string) => {
   const base = path.startsWith("/") ? tvMediaOrigin : tvMediaBase;
-  const key = path.replace(/^\\/+/, "").split("/").map(encodeURIComponent).join("/");
+  const key = path.startsWith("/") ? path.slice(1).split("/").map(encodeURIComponent).join("/") : path.split("/").map(encodeURIComponent).join("/");
   return `${base}/${key}`;
 };
 const posters = tvMedia.posters.map((item) => ({

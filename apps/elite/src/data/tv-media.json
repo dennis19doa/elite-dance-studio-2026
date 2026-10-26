@@ -10,9 +10,15 @@
       "type": "image"
     },
     "party": {
-      "title": "Elite Dance Party · 24.10",
-      "file": "events/Neon Bachata Zouk Night in Berlin.png",
-      "seconds": 10,
+      "title": "Elite Dance Studio · Halloween Party · 31.10.2026",
+      "file": "events/ChatGPT Image Oct 26, 2026, 02_46_02 AM-2.png",
+      "seconds": 14,
+      "type": "image"
+    },
+    "giveaway": {
+      "title": "Halloween Giveaway · Bachata Explosion 2027",
+      "file": "events/ChatGPT Image Oct 26, 2026, 02_46_20 AM.png",
+      "seconds": 15,
       "type": "image"
     },
     "review": {

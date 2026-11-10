@@ -57,6 +57,23 @@ function buildMessage(fields) {
     ].join("\n");
   }
 
+  if (fields.formKind === "battle") {
+    return [
+      "Elite Dance Battle 2026 – Freestyle-Kategorien",
+      "",
+      "Buchung: bereits durch Teilnehmer:in bestätigt (nicht automatisch verifiziert)",
+      "Name: " + fields.name,
+      "E-Mail: " + fields.email,
+      "Battle-Name: " + (fields.stageName || "–"),
+      "Buchungsweg: " + fields.bookingMethod,
+      "Kategorien: " + fields.battleCategories.join(", "),
+      "",
+      "Bitte mit der Eversports-/USC-Teilnehmerliste abgleichen.",
+      "Datenschutz-Einwilligung: akzeptiert",
+      "Quelle: elitedancestudio.de/battle/",
+    ].join("\n");
+  }
+
   if (fields.formKind === "advanced") {
     return [
       "Bachata Advanced Anmeldung",
@@ -166,10 +183,14 @@ export async function onRequestPost({ request, env }) {
       openFeedback: clean(form.get("open_feedback"), 5000),
       discoverySource: clean(form.get("discovery_source"), 200),
       source: clean(form.get("source"), 300),
+      battleCategories: [...new Set(form.getAll("battle_categories").map((value) => clean(value, 30)).filter((value) => ["breaking", "hip-hop", "house", "bachata"].includes(value)))],
+      stageName: clean(form.get("stage_name"), 120),
+      bookingMethod: clean(form.get("booking_method"), 20),
+      bookingConfirmed: clean(form.get("booking_confirmed"), 10),
       privacyConsent: clean(form.get("privacy_consent"), 40),
     };
 
-    if (!["welcome", "contact", "feedback", "advanced"].includes(fields.formKind)) {
+    if (!["welcome", "contact", "feedback", "advanced", "battle"].includes(fields.formKind)) {
       return json({ ok: false, error: "invalid_form" }, 400);
     }
 
@@ -182,6 +203,13 @@ export async function onRequestPost({ request, env }) {
     }
 
     if (fields.formKind === "welcome" && (!fields.experience || !fields.styleInterest)) {
+      return json({ ok: false, error: "missing_required_fields" }, 400);
+    }
+
+    if (
+      fields.formKind === "battle" &&
+      (!fields.battleCategories.length || !["usc", "eversports"].includes(fields.bookingMethod) || fields.bookingConfirmed !== "yes")
+    ) {
       return json({ ok: false, error: "missing_required_fields" }, 400);
     }
 
@@ -218,7 +246,9 @@ export async function onRequestPost({ request, env }) {
         ? `First Visit Feedback – ${fields.className} – ${fields.teacherName}`
         : fields.formKind === "advanced"
           ? `Bachata Advanced Anmeldung – ${fields.name}`
-          : `Website-Anfrage – ${fields.name} – ${fields.topic}`;
+          : fields.formKind === "battle"
+            ? `Elite Dance Battle – Kategorien – ${fields.name}`
+            : `Website-Anfrage – ${fields.name} – ${fields.topic}`;
 
     const mailResponse = await fetch(
       `https://mail.zoho.eu/api/accounts/${encodeURIComponent(env.ZOHO_ACCOUNT_ID)}/messages`,

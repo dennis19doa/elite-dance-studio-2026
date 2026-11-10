@@ -107,51 +107,28 @@ const categories = [
     <section class="battle-register-section" id="battle-registration" aria-labelledby="register-heading">
       <div class="battle-container battle-register-grid">
         <div class="battle-register-intro">
-          <p class="battle-section-label">02 / Claim your spot</p>
-          <h2 id="register-heading">READY TO <em>BATTLE?</em></h2>
-          <p>Ein Style, eine Anmeldung. Du kannst dich für weitere Kategorien separat anmelden.</p>
+          <p class="battle-section-label">02 / Anmeldung</p>
+          <h2 id="register-heading">SO FUNKTIONIERT DIE <em>BUCHUNG.</em></h2>
+          <p>Jede Kategorie wird einzeln gebucht. Die Online-Zahlung soll direkt über Eversports laufen.</p>
           <div class="battle-register-steps" id="how-it-works">
-            <div><span>01</span><div><strong>Wähle dein Battle</strong><p>Breaking, Hip-Hop, House oder Bachata.</p></div></div>
-            <div><span>02</span><div><strong>Schick deine Anmeldung ab</strong><p>Wir erhalten deine Daten und deine gewählte Kategorie.</p></div></div>
-            <div><span>03</span><div><strong>Reserviere und buche deinen Platz</strong><p>Danach schließt du die Buchung über Eversports oder die reservierte USC-Option ab.</p></div></div>
+            <div><span>01</span><div><strong>Freestyle-Kategorie auswählen</strong><p>Breaking, Hip-Hop, House oder Bachata.</p></div></div>
+            <div><span>02</span><div><strong>Über Eversports buchen</strong><p>Ein Ticket pro Kategorie.</p></div></div>
+            <div><span>03</span><div><strong>Bestätigung erhalten</strong><p>Die Eversports-Buchung bestätigt deinen Platz.</p></div></div>
           </div>
-          <div class="battle-ticket-note">
-            <span class="battle-ticket-note-icon" aria-hidden="true">%</span>
-            <div><strong>Online anmelden. Weniger zahlen.</strong><p>Der Vorverkauf wird günstiger als die Anmeldung am Veranstaltungstag. Die genauen Preise veröffentlichen wir mit den Buchungslinks.</p></div>
-          </div>
+          <div class="battle-ticket-note"><span class="battle-ticket-note-icon" aria-hidden="true">€</span><div><strong>5€ online — Preisvorschlag</strong><p>Am Eventtag könnte die Anmeldung zum Beispiel 8€ kosten, sofern noch Plätze frei sind.</p></div></div>
         </div>
         <div class="battle-register-card">
-          <div class="battle-form-heading"><span>REGISTRATION / 2026</span><span class="battle-form-availability">Booking setup in progress</span></div>
-          <h3>Dein Platz auf dem Floor.</h3>
-          <p class="battle-form-description">Wähle zuerst eine Battle-Kategorie. Die Anmeldung ist eine Voranmeldung; dein Platz wird erst durch die anschließende Buchung bestätigt.</p>
-          <form id="battle-signup-form" action="/api/battle-register" method="post" data-battle-form>
-            <input type="hidden" name="form_kind" value="battle" />
-            <input type="hidden" name="style" value="" data-chosen-style />
-            <label class="battle-honeypot" aria-hidden="true">Leave empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
-
-            <div class="battle-selected-style" aria-live="polite"><span>YOUR STYLE</span><strong data-style-display>Choose a style above ↑</strong></div>
-            <div class="battle-field-row">
-              <label class="battle-field"><span>Name *</span><input name="name" type="text" placeholder="Dein Name" autocomplete="name" maxlength="160" required /></label>
-              <label class="battle-field"><span>E-Mail *</span><input name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="254" required /></label>
-            </div>
-            <label class="battle-field"><span>Telefon / WhatsApp <small>optional</small></span><input name="phone" type="tel" placeholder="Für kurzfristige Event-Updates" autocomplete="tel" maxlength="80" /></label>
-            <fieldset class="battle-booking-methods">
-              <legend>Wie willst du buchen? *</legend>
-              <label><input type="radio" name="booking_method" value="eversports" checked /><span><strong>Eversports</strong><small>Online-Vorverkauf · vergünstigter Preis (folgt)</small></span></label>
-              <label><input type="radio" name="booking_method" value="usc" /><span><strong>Urban Sports Club</strong><small>Platz über USC reservieren · vorbehaltlich verfügbarer Plätze</small></span></label>
-            </fieldset>
-            <label class="battle-consent"><input type="checkbox" name="privacy_consent" value="accepted" required /><span>Ich bin einverstanden, dass Elite Dance Studio meine Daten zur Bearbeitung meiner Battle-Anmeldung nutzt und mich dazu kontaktiert. *</span></label>
-            <button class="battle-submit" type="submit" disabled data-battle-submit>Select a style to continue <span aria-hidden="true">↗</span></button>
-            <p class="battle-form-hint">Noch keine Zahlung auf dieser Seite. Für eine verbindliche Teilnahme ist die anschließende Buchung erforderlich.</p>
-            <p class="battle-form-status" data-battle-status role="status" aria-live="polite" hidden></p>
-          </form>
-          <div class="battle-success" data-battle-success hidden role="status" aria-live="polite">
-            <span>✓ STEP 1 COMPLETE</span>
-            <h4>Voranmeldung eingegangen.</h4>
-            <p data-success-copy>Deine Anmeldung wurde an unser Team geschickt.</p>
-            <div class="battle-success-next">Nächster Schritt: die Buchung über Eversports bzw. USC abschließen. Die jeweiligen Links werden veröffentlicht, sobald die Buchung freigeschaltet ist.</div>
-            <button type="button" data-battle-again>Weitere Kategorie anmelden ↗</button>
+          <div class="battle-form-heading"><span>ELITE BATTLE / 05.12.2026</span><span class="battle-form-availability">BUCHUNG FOLGT</span></div>
+          <h3>Kategorie buchen</h3>
+          <p class="battle-form-description">Wähle eine Kategorie und deinen Buchungsweg. Die Links folgen, sobald das Ticketing eingerichtet ist.</p>
+          <div class="battle-selected-style" aria-live="polite"><span>KATEGORIE</span><strong data-style-display>Noch nicht gewählt</strong></div>
+          <div class="battle-booking-options" role="group" aria-label="Buchungsweg auswählen">
+            <button type="button" class="battle-booking-option is-active" data-book-choice="eversports" aria-pressed="true"><span><strong>Eversports</strong><small>Online-Ticket pro Freestyle-Kategorie</small></span><b>5€*</b></button>
+            <button type="button" class="battle-booking-option" data-book-choice="usc" aria-pressed="false"><span><strong>Urban Sports Club</strong><small>Nur falls das Event für USC freigegeben ist</small></span><b class="battle-usc-state">In Prüfung</b></button>
           </div>
+          <p class="battle-price-disclaimer" data-book-notice>* 5€ ist ein Preisvorschlag. Aktuell ist noch keine Zahlung möglich.</p>
+          <button type="button" class="battle-submit" disabled><span data-book-button>Eversports-Buchungslink folgt</span><span aria-hidden="true">↗</span></button>
+          <p class="battle-form-hint">Keine Zahlung und keine verbindliche Reservierung auf dieser Entwurfsseite.</p>
         </div>
       </div>
     </section>
@@ -184,83 +161,55 @@ const categories = [
 
 <script is:inline>
   (() => {
-    const form = document.querySelector("[data-battle-form]");
-    if (!form) return;
-    const buttons = Array.from(document.querySelectorAll("[data-select-style]"));
-    const selectedInput = form.querySelector("[data-chosen-style]");
-    const selectedDisplay = form.querySelector("[data-style-display]");
-    const submitButton = form.querySelector("[data-battle-submit]");
-    const status = form.querySelector("[data-battle-status]");
-    const success = document.querySelector("[data-battle-success]");
-    const successCopy = document.querySelector("[data-success-copy]");
-    const labels = { "breaking": "Breaking", "hip-hop": "Hip-Hop", "house": "House", "bachata": "Bachata" };
-    const selectionName = document.querySelector("[data-battle-selected-name]");
-    const selectionDeck = document.querySelector(".battle-selection-deck");
-    const choose = (button, scroll = true) => {
-      const key = button.dataset.selectStyle;
-      selectedInput.value = key;
-      selectedDisplay.textContent = labels[key] || key;
-      if (selectionName) selectionName.textContent = (labels[key] || key).toUpperCase() + " — LOCKED IN";
-      selectionDeck?.classList.add("has-selection");
-      submitButton.disabled = false;
-      submitButton.innerHTML = 'Send registration <span aria-hidden="true">↗</span>';
-      buttons.forEach((item) => {
-        const active = item === button;
-        item.setAttribute("aria-pressed", String(active));
-        item.classList.toggle("is-selected", active);
-        const copy = item.querySelector(".battle-select-text");
-        if (copy) copy.textContent = active ? "Selected ✓" : "Auswählen ↗";
+    const cards = Array.from(document.querySelectorAll("[data-select-style]"));
+    const names = { breaking: "Breaking Freestyle", "hip-hop": "Hip-Hop Freestyle", house: "House Freestyle", bachata: "Bachata Freestyle" };
+    const selectedName = document.querySelector("[data-battle-selected-name]");
+    const bookingName = document.querySelector("[data-style-display]");
+    const deck = document.querySelector(".battle-selection-deck");
+    const motion = matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches;
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const style = names[card.dataset.selectStyle] || "Freestyle";
+        cards.forEach((item) => {
+          const chosen = item === card;
+          item.classList.toggle("is-selected", chosen);
+          item.setAttribute("aria-pressed", String(chosen));
+          const indicator = item.querySelector(".battle-select-text");
+          if (indicator) indicator.textContent = chosen ? "Ausgewählt ✓" : "Auswählen ↗";
+        });
+        if (selectedName) selectedName.textContent = style;
+        if (bookingName) bookingName.textContent = style;
+        deck?.classList.add("has-selection");
       });
-      status.hidden = true;
-      success.hidden = true;
-      form.hidden = false;
-      if (scroll) document.querySelector("#battle-registration").scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    buttons.forEach((button) => button.addEventListener("click", () => choose(button)));
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      if (!selectedInput.value) {
-        status.hidden = false;
-        status.textContent = "Bitte wähle zuerst einen Style aus.";
-        document.querySelector("#choose-your-style").scrollIntoView({ behavior: "smooth" });
-        return;
-      }
-      if (!form.reportValidity()) return;
-      if (location.hostname.endsWith("github.io") || location.pathname.includes("/preview/")) {
-        status.hidden = false;
-        status.textContent = "Dies ist die Design-Vorschau. Anmeldungen werden hier noch nicht versendet.";
-        return;
-      }
-      const original = submitButton.innerHTML;
-      submitButton.disabled = true;
-      submitButton.textContent = "Sending...";
-      status.hidden = true;
-      try {
-        const response = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { accept: "application/json" } });
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok || !result.ok) throw new Error("registration_failed");
-        const method = new FormData(form).get("booking_method") === "usc" ? "Urban Sports Club" : "Eversports";
-        successCopy.textContent = "Deine Voranmeldung für " + selectedDisplay.textContent + " wurde an unser Team gesendet. Du hast " + method + " als Buchungsweg gewählt.";
-        form.hidden = true;
-        success.hidden = false;
-      } catch (_) {
-        status.hidden = false;
-        status.textContent = "Das hat leider nicht geklappt. Bitte versuche es noch einmal oder kontaktiere info@elitedancestudio.de.";
-      } finally {
-        submitButton.disabled = false;
-        submitButton.innerHTML = original;
+      if (motion) {
+        card.addEventListener("pointermove", (event) => {
+          const box = card.getBoundingClientRect();
+          const x = (event.clientX - box.left) / box.width;
+          const y = (event.clientY - box.top) / box.height;
+          card.style.setProperty("--px", Math.round(x * 100) + "%");
+          card.style.setProperty("--py", Math.round(y * 100) + "%");
+          card.style.setProperty("--ty", ((x - .5) * 5).toFixed(2) + "deg");
+          card.style.setProperty("--tx", ((.5 - y) * 4).toFixed(2) + "deg");
+        });
+        card.addEventListener("pointerleave", () => {
+          card.style.setProperty("--tx", "0deg"); card.style.setProperty("--ty", "0deg");
+          card.style.setProperty("--px", "50%"); card.style.setProperty("--py", "50%");
+        });
       }
     });
-    document.querySelector("[data-battle-again]")?.addEventListener("click", () => {
-      const oldStyle = selectedInput.value;
-      form.reset();
-      form.hidden = false;
-      success.hidden = true;
-      const active = buttons.find((button) => button.dataset.selectStyle === oldStyle);
-      if (active) choose(active, false);
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+    const methods = Array.from(document.querySelectorAll("[data-book-choice]"));
+    const notice = document.querySelector("[data-book-notice]");
+    const buttonText = document.querySelector("[data-book-button]");
+    methods.forEach((button) => button.addEventListener("click", () => {
+      const usc = button.dataset.bookChoice === "usc";
+      methods.forEach((item) => {
+        const chosen = item === button;
+        item.classList.toggle("is-active", chosen);
+        item.setAttribute("aria-pressed", String(chosen));
+      });
+      if (notice) notice.textContent = usc ? "Die USC-Teilnahme muss erst bestätigt werden. Aktuell ist keine Reservierung möglich." : "* 5€ ist ein Preisvorschlag. Aktuell ist noch keine Zahlung möglich.";
+      if (buttonText) buttonText.textContent = usc ? "USC-Reservierung folgt" : "Eversports-Buchungslink folgt";
+    }));
   })();
 </script>
 

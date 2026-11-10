@@ -212,24 +212,29 @@ const categories = [
 <script is:inline>
   (() => {
     const cards = Array.from(document.querySelectorAll("[data-select-style]"));
-    const names = { breaking: "Breaking Freestyle", "hip-hop": "Hip-Hop Freestyle", house: "House Freestyle", bachata: "Bachata Freestyle" };
-    const selectedName = document.querySelector("[data-battle-selected-name]");
-    const bookingName = document.querySelector("[data-style-display]");
+    const inputs = Array.from(document.querySelectorAll("[data-battle-entry-category]"));
+    const deckLabel = document.querySelector("[data-battle-selected-name]");
     const deck = document.querySelector(".battle-selection-deck");
+    const names = { breaking: "Breaking Freestyle", "hip-hop": "Hip-Hop Freestyle", house: "House Freestyle", bachata: "Bachata Freestyle" };
+    const chosen = new Set();
+    const update = () => {
+      cards.forEach((card) => {
+        const yes = chosen.has(card.dataset.selectStyle);
+        card.classList.toggle("is-selected", yes);
+        card.setAttribute("aria-pressed", String(yes));
+        const text = card.querySelector(".battle-select-text");
+        if (text) text.textContent = yes ? "Vorgemerkt ✓" : "Merken +";
+      });
+      inputs.forEach((input) => { input.checked = chosen.has(input.value); });
+      if (deckLabel) deckLabel.textContent = chosen.size ? Array.from(chosen).map((key) => names[key]).join(" · ") : "Mehrere Kategorien möglich";
+      deck?.classList.toggle("has-selection", chosen.size > 0);
+    };
     const motion = matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches;
     cards.forEach((card) => {
       card.addEventListener("click", () => {
-        const style = names[card.dataset.selectStyle] || "Freestyle";
-        cards.forEach((item) => {
-          const chosen = item === card;
-          item.classList.toggle("is-selected", chosen);
-          item.setAttribute("aria-pressed", String(chosen));
-          const indicator = item.querySelector(".battle-select-text");
-          if (indicator) indicator.textContent = chosen ? "Ausgewählt ✓" : "Auswählen ↗";
-        });
-        if (selectedName) selectedName.textContent = style;
-        if (bookingName) bookingName.textContent = style;
-        deck?.classList.add("has-selection");
+        const key = card.dataset.selectStyle;
+        if (chosen.has(key)) chosen.delete(key); else chosen.add(key);
+        update();
       });
       if (motion) {
         card.addEventListener("pointermove", (event) => {
@@ -242,24 +247,49 @@ const categories = [
           card.style.setProperty("--tx", ((.5 - y) * 4).toFixed(2) + "deg");
         });
         card.addEventListener("pointerleave", () => {
-          card.style.setProperty("--tx", "0deg"); card.style.setProperty("--ty", "0deg");
-          card.style.setProperty("--px", "50%"); card.style.setProperty("--py", "50%");
+          card.style.setProperty("--tx", "0deg");
+          card.style.setProperty("--ty", "0deg");
+          card.style.setProperty("--px", "50%");
+          card.style.setProperty("--py", "50%");
         });
       }
     });
-    const methods = Array.from(document.querySelectorAll("[data-book-choice]"));
-    const notice = document.querySelector("[data-book-notice]");
-    const buttonText = document.querySelector("[data-book-button]");
-    methods.forEach((button) => button.addEventListener("click", () => {
-      const usc = button.dataset.bookChoice === "usc";
-      methods.forEach((item) => {
-        const chosen = item === button;
-        item.classList.toggle("is-active", chosen);
-        item.setAttribute("aria-pressed", String(chosen));
-      });
-      if (notice) notice.textContent = usc ? "USC-Mitglieder buchen ihren Platz in der USC-App. Ein USC-Check-in pro Tag – weitere Kategorien separat über Eversports buchen. USC-Link folgt." : "* 5€ ist ein Preisvorschlag. Eversports-Buchungslink folgt. Weitere Kategorien kosten jeweils ein eigenes Ticket.";
-      if (buttonText) buttonText.textContent = usc ? "USC-Reservierung folgt" : "Eversports-Buchungslink folgt";
+    inputs.forEach((input) => input.addEventListener("change", () => {
+      if (input.checked) chosen.add(input.value); else chosen.delete(input.value);
+      update();
     }));
+    const form = document.querySelector("[data-battle-entries-form]");
+    if (!form) return;
+    const status = form.querySelector("[data-battle-entry-status]");
+    const button = form.querySelector("[data-battle-entry-send]");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!chosen.size) {
+        if (status) status.textContent = "Bitte wähle mindestens eine Freestyle-Kategorie.";
+        inputs[0]?.focus();
+        return;
+      }
+      if (!form.reportValidity()) return;
+      if (location.hostname.endsWith("github.io") || location.pathname.startsWith("/preview/")) {
+        if (status) status.textContent = "Vorschau: Deine Auswahl wurde nicht verschickt.";
+        return;
+      }
+      if (button) button.disabled = true;
+      if (status) status.textContent = "Wird verschickt …";
+      try {
+        const response = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error("send_failed");
+        if (status) status.textContent = "Danke! Wir haben deine Kategorien erhalten und gleichen sie mit deiner Eventbuchung ab.";
+        form.reset();
+        chosen.clear();
+        update();
+      } catch {
+        if (status) status.textContent = "Das hat leider nicht geklappt. Bitte versuche es erneut oder kontaktiere uns direkt.";
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
   })();
 </script>
 

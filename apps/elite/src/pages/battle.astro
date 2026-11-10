@@ -148,6 +148,13 @@ const categories = [
       <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Zusätzlich warten Goodie Bags unserer Partner auf die Gewinner:innen. Wir stellen die Sponsoren in Kürze vor.</p></div>
     </section>
 
+    <section class="battle-workshop-strip" aria-label="Workshops und Urban Sports Club">
+      <div class="battle-container battle-workshop-inner">
+        <div><span class="battle-section-label">Bonus / Join the session</span><h2>NOT BATTLING?<br /><em>STILL JOIN IN.</em></h2></div>
+        <div><p>Auch Classes und Workshops rund um den Battle Day sind geplant. Die Termine und Möglichkeiten zur Reservierung über Urban Sports Club veröffentlichen wir mit dem vollständigen Programm.</p><span>WORKSHOP BOOKINGS &amp; USC AVAILABILITY — COMING SOON ↗</span></div>
+      </div>
+    </section>
+
     <section class="battle-schedule-section" aria-labelledby="schedule-heading">
       <div class="battle-container battle-schedule-layout">
         <div><p class="battle-section-label">04 / The day</p><h2 id="schedule-heading">THE LINEUP <em>IS COMING.</em></h2><p>Die Battles finden am Samstag, 5. Dezember 2026, in unserem Studio in Berlin-Moabit statt. Den vollständigen Zeitplan, Regeln und die Details zu den Runden veröffentlichen wir bald.</p><a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a></div>
@@ -381,6 +388,11 @@ const categories = [
   .battle-goodies-block > span { color:var(--acid); font-size:2.8rem; line-height:1; }
   .battle-goodies-block h3 { margin:28px 0 12px; font-size:1.8rem; line-height:1.05; letter-spacing:-.05em; }
   .battle-goodies-block p { margin-top:auto; font-size:.8rem; color:#bdbdc0; line-height:1.7; }
+  .battle-workshop-strip { border-top:1px solid rgba(255,255,255,.17); background:linear-gradient(115deg,#252729,#15171a); }
+  .battle-workshop-inner { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; padding:54px 0; }
+  .battle-workshop-inner h2 { margin:13px 0 0; font-size:clamp(2rem,3.6vw,3.6rem); line-height:1.02; letter-spacing:-.065em; }
+  .battle-workshop-inner p { max-width:500px; color:#c1c1c3; font-size:.9rem; line-height:1.7; }
+  .battle-workshop-inner > div:last-child > span { display:block; margin-top:18px; color:var(--acid); font-size:.7rem; font-weight:900; letter-spacing:.08em; }
   .battle-schedule-section { background:#e7e6df; color:#17191c; }
   .battle-schedule-layout { display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,8vw,110px); align-items:center; padding:100px 0; }
   .battle-schedule-layout .battle-section-label { color:#4a5520; }
@@ -400,7 +412,7 @@ const categories = [
   .battle-last-cta .battle-button { margin-top:32px; }
   .battle-last-cta > p:last-child { color:#a7a8aa; font-size:.76rem; margin-top:35px; }
   @media(max-width:1050px) { .battle-category-grid { grid-template-columns:repeat(2,1fr); } .battle-category { min-height:320px; } .battle-category-art { font-size:2.8rem; } .battle-prizes-section { grid-template-columns:1fr 1fr; } .battle-prizes-lead { grid-column:1/-1; } }
-  @media(max-width:760px) { .battle-container { width:min(calc(100% - 34px),1180px); } .battle-hero-body { grid-template-columns:1fr; padding:54px 0 48px; } .battle-hero-stamp { display:none; } .battle-hero h1 { font-size:clamp(4.4rem,13vw,7rem); } .battle-hero-stats { grid-template-columns:repeat(3,1fr); } .battle-hero-stats .battle-stats-tail { grid-column:1/-1; max-width:none; border-top:1px solid rgba(255,255,255,.22); padding:12px 0; } .battle-section-heading { flex-direction:column; align-items:start; gap:15px; } .battle-register-grid,.battle-schedule-layout { grid-template-columns:1fr; } .battle-register-grid { padding:75px 0; } .battle-choose-section,.battle-prizes-section { padding:75px 0; } .battle-schedule-layout { padding:70px 0; } .battle-hero-topline .battle-edition { display:none; } }
+  @media(max-width:760px) { .battle-container { width:min(calc(100% - 34px),1180px); } .battle-hero-body { grid-template-columns:1fr; padding:54px 0 48px; } .battle-hero-stamp { display:none; } .battle-hero h1 { font-size:clamp(4.4rem,13vw,7rem); } .battle-hero-stats { grid-template-columns:repeat(3,1fr); } .battle-hero-stats .battle-stats-tail { grid-column:1/-1; max-width:none; border-top:1px solid rgba(255,255,255,.22); padding:12px 0; } .battle-section-heading { flex-direction:column; align-items:start; gap:15px; } .battle-register-grid,.battle-schedule-layout,.battle-workshop-inner { grid-template-columns:1fr; } .battle-register-grid { padding:75px 0; } .battle-choose-section,.battle-prizes-section { padding:75px 0; } .battle-schedule-layout { padding:70px 0; } .battle-hero-topline .battle-edition { display:none; } }
   @media(max-width:480px) { .battle-hero h1 { font-size:clamp(3.9rem,14.5vw,5.9rem); } .battle-category-grid { gap:10px; } .battle-category { min-height:285px; padding:12px; } .battle-category-art { font-size:clamp(1.45rem,6vw,2rem); } .battle-category-name { font-size:1.35rem; } .battle-category-footer { flex-direction:column; align-items:start; } .battle-category-traits { font-size:.67rem; } .battle-field-row { grid-template-columns:1fr; gap:0; } .battle-hero-stats > div { padding-right:8px; } .battle-hero-stats strong { font-size:1.7rem; } .battle-hero-stats div > span { font-size:.58rem; } .battle-register-card { padding:22px 17px; } .battle-register-card h3 { font-size:1.55rem; } .battle-prizes-section { grid-template-columns:1fr; } .battle-prizes-lead { grid-column:auto; } .battle-goodies-block { min-height:240px; } .battle-schedule-layout h2 { font-size:2.6rem; } }
   @media(prefers-reduced-motion:reduce) { .battle-ticker div { animation:none; } .battle-button,.battle-category { transition:none; } .battle-category:hover { transform:none; } }
 </style>

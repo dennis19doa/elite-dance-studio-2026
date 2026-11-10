@@ -660,3 +660,53 @@ const categories = [
     .battle-category-photo { transition:none; }
   }
 </style>
+
+<style>
+  /* ONE-EVENT BATTLE BOOKING UI */
+  .battle-booking-links { display:grid;gap:12px;margin:23px 0; }
+  .battle-booking-link { display:flex;align-items:center;justify-content:space-between;gap:17px;padding:19px 18px;background:#df4e56;border:1px solid #eb8080;color:#fffaf8;text-decoration:none;transition:background .2s,border-color .2s; }
+  .battle-booking-link:hover { background:#b93743;border-color:#ffc9c0; }
+  .battle-booking-link-usc { background:#2c3636;border-color:#778686; }
+  .battle-booking-link-usc:hover { background:#3c4c4d;border-color:#bfddd7; }
+  .battle-booking-link strong { display:block;font:800 1.2rem/1.2 "Inter",sans-serif; }
+  .battle-booking-link small { display:block;color:#ffe0dc;font-size:.75rem;line-height:1.5;margin-top:6px; }
+  .battle-booking-link-usc small { color:#dce3e1; }
+  .battle-booking-link>b { flex:none;font-size:1.5rem; }
+  .battle-booking-next { display:block;margin-top:18px;padding:14px 0;border-top:1px solid #91464e;color:#f4a1a1;text-decoration:none;font-size:.82rem;font-weight:800; }
+  .battle-register-card .battle-price-disclaimer { font-size:.75rem;line-height:1.6;color:#caafb5; }
+  .battle-register-card .battle-form-hint { font-size:.75rem;line-height:1.6;color:#d2bbc0; }
+  .battle-entries-section { background:#161015;color:#fff2eb;padding:90px 0 105px; }
+  .battle-entries-layout { display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(30px,5vw,76px); }
+  .battle-entries-intro h2 { font:900 clamp(2.7rem,5vw,5.8rem)/.95 "Sora","Inter",sans-serif;letter-spacing:-.075em;margin:16px 0 28px; }
+  .battle-entries-intro h2 em { color:#ef7775;font-style:normal; }
+  .battle-entries-intro>p:not(.battle-section-label) { max-width:500px;color:#c5b3b7;line-height:1.75;font-size:.94rem; }
+  .battle-entries-form { background:#f4eae5;color:#25171f;padding:clamp(23px,3vw,35px);box-shadow:14px 14px 0 #bd4b5050; }
+  .battle-entries-form h3 { font:800 clamp(1.5rem,2.4vw,2.2rem)/1.18 "Sora","Inter",sans-serif;margin:0 0 23px;letter-spacing:-.05em; }
+  .battle-entry-fields { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px; }
+  .battle-entry-fields label { font-size:.76rem;font-weight:800; }
+  .battle-entry-fields .battle-entry-wide { grid-column:1/-1; }
+  .battle-entry-fields input { width:100%;min-width:0;display:block;margin:8px 0 0;border:1px solid #cebcb8;background:#fffaf7;color:#25171f;border-radius:0;padding:13px 12px;font-size:.9rem; }
+  .battle-entry-fields input:focus-visible,.battle-entry-send:focus-visible { outline:2px solid #ba3942;outline-offset:2px; }
+  .battle-entry-fieldset { border:0;padding:0;margin:26px 0 21px;min-width:0; }
+  .battle-entry-fieldset legend { font-size:.85rem;font-weight:900;margin-bottom:11px; }
+  .battle-entry-checkboxes { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px; }
+  .battle-entry-checkbox { --entry-color:#e86960;display:flex;align-items:center;gap:10px;min-height:52px;padding:12px;background:#fff9f5;border:1px solid #d1beb9;font-size:.75rem;font-weight:800;cursor:pointer; }
+  .battle-entry-checkbox-hip-hop { --entry-color:#7794ef; }
+  .battle-entry-checkbox-house { --entry-color:#ac89e9; }
+  .battle-entry-checkbox-bachata { --entry-color:#d881a7; }
+  .battle-entry-checkbox:has(input:checked) { border-color:var(--entry-color);background:color-mix(in srgb,var(--entry-color),white 82%);box-shadow:inset 4px 0 var(--entry-color); }
+  .battle-entry-checkbox input { flex:none;accent-color:var(--entry-color); }
+  .battle-entry-methods { display:flex;gap:22px;flex-wrap:wrap;font-size:.83rem;font-weight:700; }
+  .battle-entry-methods label { display:flex;align-items:center;gap:8px;cursor:pointer; }
+  .battle-entry-methods input,.battle-entry-confirm input { accent-color:#c73b44; }
+  .battle-entry-confirm { display:flex;align-items:flex-start;gap:10px;margin:12px 0;font-size:.77rem;line-height:1.6;color:#5a474a;cursor:pointer; }
+  .battle-entry-confirm input { flex:none;margin-top:5px; }
+  .battle-entry-send { display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px;margin:22px 0 0;padding:16px 18px;border:0;background:#c84148;color:white;font-size:.83rem;font-weight:900;text-align:left;cursor:pointer;transition:background .2s; }
+  .battle-entry-send:hover { background:#a82e38; }
+  .battle-entry-send:disabled { opacity:.6;cursor:wait; }
+  .battle-entry-status { color:#685359;font-size:.75rem;line-height:1.6;margin:14px 0 0;min-height:2em; }
+  .battle-entry-trap { position:absolute!important;left:-9999px!important;opacity:0!important; }
+  @media(max-width:860px) { .battle-entries-layout { grid-template-columns:1fr; } }
+  @media(max-width:510px) { .battle-entry-fields,.battle-entry-checkboxes { grid-template-columns:1fr; }.battle-entries-section { padding:65px 0 85px; }.battle-entries-form { padding:22px 16px; } }
+  @media(prefers-reduced-motion:reduce) { .battle-booking-link,.battle-entry-send { transition:none; } }
+</style>

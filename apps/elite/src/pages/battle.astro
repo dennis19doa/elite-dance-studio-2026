@@ -5,10 +5,10 @@ import SiteFooter from "../components/SiteFooter.astro";
 import site from "../data/site.json";
 
 const categories = [
-  { key: "breaking", number: "01", name: "Breaking", motif: "BREAK / THE / FLOOR", label: "Power · Flow · Freestyle", className: "battle-category battle-category-breaking" },
-  { key: "hip-hop", number: "02", name: "Hip-Hop", motif: "OWN / THE / BEAT", label: "Groove · Attitude · Musicality", className: "battle-category battle-category-hiphop" },
-  { key: "house", number: "03", name: "House", motif: "FEEL / THE / FLOW", label: "Footwork · Rhythm · Soul", className: "battle-category battle-category-house" },
-  { key: "bachata", number: "04", name: "Bachata", motif: "MOVE / WITH / MUSIC", label: "Connection · Rhythm · Creativity", className: "battle-category battle-category-bachata" },
+  { key: "breaking", number: "01", name: "Breaking", motif: "BREAK / THE / FLOOR", label: "Power · Flow · Freestyle", image: "05-breaking.webp", className: "battle-category battle-category-breaking" },
+  { key: "hip-hop", number: "02", name: "Hip-Hop", motif: "OWN / THE / BEAT", label: "Groove · Attitude · Musicality", image: "06-hip-hop-beginner-amy.webp", className: "battle-category battle-category-hiphop" },
+  { key: "house", number: "03", name: "House", motif: "FEEL / THE / FLOW", label: "Footwork · Rhythm · Soul", image: "03-house-beginner.webp", className: "battle-category battle-category-house" },
+  { key: "bachata", number: "04", name: "Bachata", motif: "MOVE / WITH / MUSIC", label: "Connection · Rhythm · Creativity", image: "19-bachata-intermediate.webp", className: "battle-category battle-category-bachata" },
 ];
 ---
 
@@ -48,6 +48,14 @@ const categories = [
             <span>BERLIN · MOABIT</span>
             <div class="battle-stamp-ring" aria-hidden="true">✳</div>
           </aside>
+          <div class="battle-arena-visual" aria-hidden="true">
+            <div class="battle-arena-tile battle-arena-tile-one"><img src={`${import.meta.env.BASE_URL}media/style-posters/05-breaking.webp`} alt="" /></div>
+            <div class="battle-arena-tile battle-arena-tile-two"><img src={`${import.meta.env.BASE_URL}media/style-posters/06-hip-hop-beginner-amy.webp`} alt="" /></div>
+            <div class="battle-arena-tile battle-arena-tile-three"><img src={`${import.meta.env.BASE_URL}media/style-posters/03-house-beginner.webp`} alt="" /></div>
+            <div class="battle-arena-tile battle-arena-tile-four"><img src={`${import.meta.env.BASE_URL}media/style-posters/19-bachata-intermediate.webp`} alt="" /></div>
+            <div class="battle-arena-orbit"><div class="battle-arena-orbit-inner"><span>THE</span><strong>FLOOR</strong><span>IS YOURS</span></div></div>
+            <div class="battle-arena-caption"><span>BERLIN UNDERGROUND</span><span>EDB / 001</span></div>
+          </div>
         </div>
         <div class="battle-hero-stats">
           <div><strong>04</strong><span>Battle Styles</span></div>
@@ -77,7 +85,8 @@ const categories = [
             aria-pressed="false"
             aria-controls="battle-registration"
           >
-            <span class="battle-category-top"><span>{category.number} / BATTLE</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
+            <span class="battle-category-top"><span>FIGHTER_{category.number} / BATTLE</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
+            <img class="battle-category-photo" src={`${import.meta.env.BASE_URL}media/style-posters/${category.image}`} alt="" loading="lazy" decoding="async" /><span class="battle-category-photo-wash" aria-hidden="true"></span>
             <span class="battle-category-art" aria-hidden="true">{category.motif.split(" / ").map((word) => <span>{word}</span>)}</span>
             <span class="battle-category-lower">
               <span class="battle-category-name">{category.name}</span>
@@ -86,6 +95,11 @@ const categories = [
             <span class="battle-category-footer"><span><strong>100€</strong> Winner prize*</span><span class="battle-select-text">Select style →</span></span>
           </button>
         ))}
+      </div>
+      <div class="battle-selection-deck" aria-live="polite">
+        <div class="battle-selection-indicator"><span>◉</span><small>YOUR BATTLE CARD</small></div>
+        <strong data-battle-selected-name>NO STYLE SELECTED</strong>
+        <a href="#battle-registration" data-battle-next>ENTER THE BATTLE <span aria-hidden="true">↗</span></a>
       </div>
       <p class="battle-choose-footnote">* Derzeit 100€ Preisgeld pro Kategorie. Das Preisgeld kann sich durch weitere Partner noch erhöhen. Dazu kommen Goodie Bags unserer Sponsoren.</p>
     </section>
@@ -180,10 +194,14 @@ const categories = [
     const success = document.querySelector("[data-battle-success]");
     const successCopy = document.querySelector("[data-success-copy]");
     const labels = { "breaking": "Breaking", "hip-hop": "Hip-Hop", "house": "House", "bachata": "Bachata" };
+    const selectionName = document.querySelector("[data-battle-selected-name]");
+    const selectionDeck = document.querySelector(".battle-selection-deck");
     const choose = (button, scroll = true) => {
       const key = button.dataset.selectStyle;
       selectedInput.value = key;
       selectedDisplay.textContent = labels[key] || key;
+      if (selectionName) selectionName.textContent = (labels[key] || key).toUpperCase() + " — LOCKED IN";
+      selectionDeck?.classList.add("has-selection");
       submitButton.disabled = false;
       submitButton.innerHTML = 'Send registration <span aria-hidden="true">↗</span>';
       buttons.forEach((item) => {
@@ -415,4 +433,111 @@ const categories = [
   @media(max-width:760px) { .battle-container { width:min(calc(100% - 34px),1180px); } .battle-hero-body { grid-template-columns:1fr; padding:54px 0 48px; } .battle-hero-stamp { display:none; } .battle-hero h1 { font-size:clamp(4.4rem,13vw,7rem); } .battle-hero-stats { grid-template-columns:repeat(3,1fr); } .battle-hero-stats .battle-stats-tail { grid-column:1/-1; max-width:none; border-top:1px solid rgba(255,255,255,.22); padding:12px 0; } .battle-section-heading { flex-direction:column; align-items:start; gap:15px; } .battle-register-grid,.battle-schedule-layout,.battle-workshop-inner { grid-template-columns:1fr; } .battle-register-grid { padding:75px 0; } .battle-choose-section,.battle-prizes-section { padding:75px 0; } .battle-schedule-layout { padding:70px 0; } .battle-hero-topline .battle-edition { display:none; } }
   @media(max-width:480px) { .battle-hero h1 { font-size:clamp(3.9rem,14.5vw,5.9rem); } .battle-category-grid { gap:10px; } .battle-category { min-height:285px; padding:12px; } .battle-category-art { font-size:clamp(1.45rem,6vw,2rem); } .battle-category-name { font-size:1.35rem; } .battle-category-footer { flex-direction:column; align-items:start; } .battle-category-traits { font-size:.67rem; } .battle-field-row { grid-template-columns:1fr; gap:0; } .battle-hero-stats > div { padding-right:8px; } .battle-hero-stats strong { font-size:1.7rem; } .battle-hero-stats div > span { font-size:.58rem; } .battle-register-card { padding:22px 17px; } .battle-register-card h3 { font-size:1.55rem; } .battle-prizes-section { grid-template-columns:1fr; } .battle-prizes-lead { grid-column:auto; } .battle-goodies-block { min-height:240px; } .battle-schedule-layout h2 { font-size:2.6rem; } }
   @media(prefers-reduced-motion:reduce) { .battle-ticker div { animation:none; } .battle-button,.battle-category { transition:none; } .battle-category:hover { transform:none; } }
+</style>
+
+<style>
+  /* Battle V2 — underground editorial art direction */
+  .battle-main { --acid:#e1fa50; --cream:#f6f4ee; background:#090a0c; }
+  .battle-container { width:min(calc(100% - 52px),1240px); }
+  .battle-hero { overflow:hidden; background:
+     radial-gradient(ellipse at 75% 38%,rgba(181,243,80,.13),transparent 32rem),
+     radial-gradient(ellipse at 1% 90%,rgba(250,88,57,.11),transparent 27rem),#090a0c; }
+  .battle-hero::before { content:"ELITE / BATTLE / BERLIN"; position:absolute; top:40%; right:-28%; color:rgba(255,255,255,.032); font:900 clamp(6rem,16vw,20rem)/1 "Sora",sans-serif; letter-spacing:-.1em; white-space:nowrap; transform:rotate(-24deg); pointer-events:none; }
+  .battle-hero-grid { opacity:.37; background-size:68px 68px; }
+  .battle-hero-topline { padding:23px 0 16px; }
+  .battle-hero-body { position:relative; grid-template-columns:minmax(0,1fr) minmax(330px,.72fr); align-items:center; padding:64px 0 58px; gap:clamp(28px,4vw,55px); }
+  .battle-hero h1 { font-size:clamp(4.4rem,9vw,10rem); line-height:.84; letter-spacing:-.095em; position:relative; z-index:2; }
+  .battle-hero h1 > span:nth-child(3) { display:flex; align-items:flex-start; }
+  .battle-hero-lead { font-size:clamp(1.1rem,2vw,1.65rem); }
+  .battle-hero-description { max-width:500px; color:#aaa8a7; }
+  .battle-hero-stamp { display:none; }
+  .battle-arena-visual { position:relative; width:100%; max-width:500px; aspect-ratio: .85; transform:rotate(2.5deg); isolation:isolate; margin:0 0 12px auto; box-shadow:0 28px 80px rgba(0,0,0,.5); }
+  .battle-arena-visual::before { content:""; position:absolute; inset:-11px; border:1px solid #e1fa5077; z-index:-1; transform:translate(12px,12px); }
+  .battle-arena-visual::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,#090a0cdd,transparent 36%),repeating-linear-gradient(0deg,transparent 0 3px,#0003 3px 4px); z-index:2; pointer-events:none; }
+  .battle-arena-tile { position:absolute; width:50%; height:50%; overflow:hidden; background:#242528; }
+  .battle-arena-tile::after { content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(13,16,18,.2),rgba(0,0,0,.4)); mix-blend-mode:multiply; }
+  .battle-arena-tile img { display:block; width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.6) brightness(.66); transform:scale(1.1); }
+  .battle-arena-tile-one { top:0;left:0;border-right:3px solid #090a0c;border-bottom:3px solid #090a0c; }
+  .battle-arena-tile-two { top:0;right:0;border-bottom:3px solid #090a0c; }
+  .battle-arena-tile-three { bottom:0;left:0;border-right:3px solid #090a0c; }
+  .battle-arena-tile-four { bottom:0;right:0; }
+  .battle-arena-orbit { z-index:3; position:absolute; width:74%; aspect-ratio:1; inset:13%; display:grid; place-items:center; border:1px solid #e1fa50a8; border-radius:50%; box-shadow:0 0 0 14px #e1fa5022,0 0 0 35px #e1fa5017,0 0 0 58px #e1fa500a; }
+  .battle-arena-orbit::before,.battle-arena-orbit::after { content:""; position:absolute; inset:13%; border:2px dashed #e1fa5077; border-radius:50%; animation:battle-rotate 35s linear infinite; }
+  .battle-arena-orbit::after { inset:6%; border:1px solid #e1fa5055; animation-direction:reverse; }
+  .battle-arena-orbit-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; width:66%; aspect-ratio:1; background:#e1fa50; color:#11140d; border-radius:50%; transform:rotate(-2.5deg); }
+  .battle-arena-orbit-inner > span { font-size:clamp(.65rem,1.1vw,.9rem); font-weight:900; letter-spacing:.26em; }
+  .battle-arena-orbit-inner strong { font:900 clamp(1.5rem,3.25vw,3.8rem)/.95 "Sora",sans-serif; letter-spacing:-.085em; }
+  .battle-arena-caption { position:absolute; z-index:4; bottom:0; left:0; right:0; display:flex;justify-content:space-between; padding:15px; color:#e1fa50; font-size:.65rem; font-weight:900; letter-spacing:.18em; }
+  @keyframes battle-rotate { to{transform:rotate(360deg)} }
+  .battle-hero-stats { border-top:2px solid #e1fa50; }
+  .battle-hero-stats > div { padding-top:25px; padding-bottom:25px; }
+  .battle-hero-stats strong { font-size:clamp(2rem,3.4vw,3rem); }
+  .battle-ticker { font-size:clamp(.95rem,2vw,1.4rem); letter-spacing:.1em; padding:15px 0; }
+  .battle-choose-section { padding:117px 0 105px; }
+  .battle-section-heading { margin-bottom:41px; }
+  .battle-section-heading h2 { font-size:clamp(3.2rem,7vw,7.3rem); }
+  .battle-category-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+  .battle-category { min-height:375px; padding:25px; border:1px solid #ffffff39; box-shadow:none; isolation:isolate; }
+  .battle-category::before { content:""; position:absolute; z-index:0;inset:0;background:linear-gradient(90deg,#111317 3%,#111317cc 42%,#11131722 100%); }
+  .battle-category::after { content:""; position:absolute; width:270px; height:270px; right:-75px; top:18%; border:1px solid var(--card-accent); opacity:.32; box-shadow:0 0 0 23px #ffffff08,0 0 0 64px #ffffff04; border-radius:50%; pointer-events:none; }
+  .battle-category:hover { transform:translateY(-5px); box-shadow:0 26px 50px #0008; }
+  .battle-category.is-selected { background-color:#1a1d1f; }
+  .battle-category-photo { position:absolute; z-index:-1; inset:0; left:30%;width:75%; height:100%;object-fit:cover; object-position:center; opacity:.56; filter:grayscale(1) contrast(1.5) brightness(.64);transform:scale(1.05); transition:filter .45s,transform .45s,opacity .45s; }
+  .battle-category:hover .battle-category-photo,.battle-category.is-selected .battle-category-photo { filter:grayscale(.3) contrast(1.25) brightness(.72); transform:scale(1.13); opacity:.8; }
+  .battle-category-photo-wash { position:absolute; z-index:0; inset:0; background:linear-gradient(90deg,#0c0e11ed 0%,#0c0e11b7 39%,#0c0e112a 80%),linear-gradient(0deg,#0c0e11b5,transparent 50%); pointer-events:none; }
+  .battle-category-top,.battle-category-art,.battle-category-lower,.battle-category-footer { z-index:1; position:relative; }
+  .battle-category-top { color:var(--card-accent); font-size:.74rem; }
+  .battle-category-art { padding:8px 0; transform:rotate(-5deg); font-size:clamp(3rem,5.3vw,6rem); line-height:.9; letter-spacing:-.09em; }
+  .battle-category-name { font-size:clamp(1.7rem,3vw,2.5rem); }
+  .battle-category-traits { color:#dad6d6; font-size:.8rem; margin-top:6px; min-height:0; }
+  .battle-category-footer { font-size:.74rem; margin-top:18px; }
+  .battle-category-footer strong { font-size:1.8rem; }
+  .battle-select-text { font-size:.73rem; }
+  .battle-selection-deck { display:grid; grid-template-columns:1fr 1.6fr auto; align-items:center; gap:22px; margin-top:25px; padding:21px 24px; background:#e1fa50; color:#13170d; }
+  .battle-selection-indicator { display:flex; align-items:center; gap:13px; }
+  .battle-selection-indicator span { font-size:1.9rem; line-height:1; }
+  .battle-selection-indicator small { font-size:.72rem; letter-spacing:.12em; font-weight:900; }
+  .battle-selection-deck strong { font-family:"Sora",sans-serif; font-size:clamp(.9rem,1.5vw,1.3rem); letter-spacing:-.045em; }
+  .battle-selection-deck > a { display:flex; gap:20px; justify-content:space-between; align-items:center; padding:13px 17px; background:#121611; color:#e1fa50; font-size:.7rem; font-weight:900; letter-spacing:.09em; text-decoration:none; }
+  .battle-selection-deck:not(.has-selection) > a { opacity:.55; }
+  .battle-register-section { background:linear-gradient(145deg,#15171b,#25232a); }
+  .battle-register-card { box-shadow:14px 14px 0 #e1fa5030; }
+  .battle-register-card h3 { font-size:clamp(1.7rem,3.1vw,2.8rem); }
+  .battle-prizes-section { border-bottom:1px solid #ffffff22; }
+  .battle-prize-block { box-shadow:13px 13px 0 #ffffff18; }
+  .battle-last-cta { position:relative; }
+  .battle-last-cta::before {content:"";width:260px;height:260px;position:absolute;border:1px solid #e1fa50;top:5%;left:-8%;border-radius:50%;pointer-events:none;opacity:.2; }
+  @media(max-width:950px) {
+    .battle-hero-body { grid-template-columns:1fr 270px; }
+    .battle-hero h1 { font-size:clamp(4.1rem,9.4vw,7.8rem); }
+    .battle-arena-visual { aspect-ratio:.8; }
+    .battle-arena-orbit-inner strong { font-size:2rem; }
+    .battle-arena-orbit-inner>span { font-size:.6rem; }
+  }
+  @media(max-width:760px) {
+    .battle-container { width:min(calc(100% - 34px),1240px); }
+    .battle-hero-body { grid-template-columns:1fr; padding:55px 0 43px; }
+    .battle-hero h1 { font-size:clamp(4.4rem,13vw,7rem); }
+    .battle-arena-visual { display:none; }
+    .battle-choose-section { padding:74px 0 80px; }
+    .battle-category-grid { gap:12px; }
+    .battle-category { min-height:320px; padding:17px; }
+    .battle-category-art { font-size:clamp(2rem,5.6vw,3.3rem); }
+    .battle-selection-deck { grid-template-columns:1fr 1fr; gap:14px; padding:18px; }
+    .battle-selection-deck strong { text-align:right; }
+    .battle-selection-deck > a { grid-column:1/-1; }
+  }
+  @media(max-width:480px) {
+    .battle-hero h1 { font-size:clamp(4rem,14.1vw,6rem); }
+    .battle-category { min-height:290px; padding:13px; }
+    .battle-category-art { font-size:clamp(1.7rem,6.3vw,2.8rem); }
+    .battle-category-name { font-size:1.35rem; }
+    .battle-category-traits { font-size:.62rem; }
+    .battle-category-footer strong { font-size:1.3rem; }
+    .battle-category-footer { font-size:.6rem; }
+    .battle-category-top { font-size:.57rem; }
+    .battle-selection-indicator small {font-size:.58rem}
+    .battle-selection-deck strong {font-size:.79rem;}
+  }
+  @media(prefers-reduced-motion:reduce) { .battle-arena-orbit::before,.battle-arena-orbit::after { animation:none; } .battle-category-photo { transition:none; } }
 </style>

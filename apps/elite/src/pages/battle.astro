@@ -109,26 +109,26 @@ const categories = [
         <div class="battle-register-intro">
           <p class="battle-section-label">02 / Anmeldung</p>
           <h2 id="register-heading">SO FUNKTIONIERT DIE <em>BUCHUNG.</em></h2>
-          <p>Jede Kategorie wird einzeln gebucht. Die Online-Zahlung soll direkt über Eversports laufen.</p>
+          <p>Wähle deinen Buchungsweg: €5 online über Eversports oder Teilnahme über Urban Sports Club. Für beide Wege erhältst du eine eigene Buchungsbestätigung.</p>
           <div class="battle-register-steps" id="how-it-works">
             <div><span>01</span><div><strong>Freestyle-Kategorie auswählen</strong><p>Breaking, Hip-Hop, House oder Bachata.</p></div></div>
-            <div><span>02</span><div><strong>Über Eversports buchen</strong><p>Ein Ticket pro Kategorie.</p></div></div>
-            <div><span>03</span><div><strong>Bestätigung erhalten</strong><p>Die Eversports-Buchung bestätigt deinen Platz.</p></div></div>
+            <div><span>02</span><div><strong>Eversports oder USC</strong><p>€5 online bezahlen oder als USC-Mitglied in der USC-App reservieren.</p></div></div>
+            <div><span>03</span><div><strong>Bestätigung und Check-in</strong><p>Buchungsbestätigung erhalten; USC-Mitglieder checken am Eventtag zusätzlich in der App ein.</p></div></div>
           </div>
-          <div class="battle-ticket-note"><span class="battle-ticket-note-icon" aria-hidden="true">€</span><div><strong>5€ online — Preisvorschlag</strong><p>Am Eventtag könnte die Anmeldung zum Beispiel 8€ kosten, sofern noch Plätze frei sind.</p></div></div>
+          <div class="battle-ticket-note"><span class="battle-ticket-note-icon" aria-hidden="true">€</span><div><strong>USC inklusive · Eversports 5€*</strong><p>Für USC-Mitglieder kein zusätzlicher Eintrittspreis für eine Kategorie. Weitere Kategorien separat online buchen.</p></div></div>
         </div>
         <div class="battle-register-card">
           <div class="battle-form-heading"><span>ELITE BATTLE / 05.12.2026</span><span class="battle-form-availability">BUCHUNG FOLGT</span></div>
           <h3>Kategorie buchen</h3>
-          <p class="battle-form-description">Wähle eine Kategorie und deinen Buchungsweg. Die Links folgen, sobald das Ticketing eingerichtet ist.</p>
+          <p class="battle-form-description">Beide Buchungswege sind möglich. Die Links zu den jeweiligen Kategorien werden nach der Einrichtung freigeschaltet.</p>
           <div class="battle-selected-style" aria-live="polite"><span>KATEGORIE</span><strong data-style-display>Noch nicht gewählt</strong></div>
           <div class="battle-booking-options" role="group" aria-label="Buchungsweg auswählen">
             <button type="button" class="battle-booking-option is-active" data-book-choice="eversports" aria-pressed="true"><span><strong>Eversports</strong><small>Online-Ticket pro Freestyle-Kategorie</small></span><b>5€*</b></button>
-            <button type="button" class="battle-booking-option" data-book-choice="usc" aria-pressed="false"><span><strong>Urban Sports Club</strong><small>Nur falls das Event für USC freigegeben ist</small></span><b class="battle-usc-state">In Prüfung</b></button>
+            <button type="button" class="battle-booking-option" data-book-choice="usc" aria-pressed="false"><span><strong>Urban Sports Club</strong><small>Für USC-Mitglieder ohne Zusatzgebühr · Buchung in der USC-App</small></span><b class="battle-usc-state">Inklusive</b></button>
           </div>
-          <p class="battle-price-disclaimer" data-book-notice>* 5€ ist ein Preisvorschlag. Aktuell ist noch keine Zahlung möglich.</p>
+          <p class="battle-price-disclaimer" data-book-notice>* 5€ ist noch ein Preisvorschlag. USC-Mitglieder können eine Kategorie pro Tag per Check-in nutzen. Weitere Kategorien separat über Eversports buchen.</p>
           <button type="button" class="battle-submit" disabled><span data-book-button>Eversports-Buchungslink folgt</span><span aria-hidden="true">↗</span></button>
-          <p class="battle-form-hint">Keine Zahlung und keine verbindliche Reservierung auf dieser Entwurfsseite.</p>
+          <p class="battle-form-hint">In Deutschland erlaubt USC nur einen Check-in pro Tag. Für weitere Kategorien benötigst du separate Eversports-Tickets. Noch keine Buchung auf dieser Entwurfsseite.</p>
         </div>
       </div>
     </section>
@@ -207,7 +207,7 @@ const categories = [
         item.classList.toggle("is-active", chosen);
         item.setAttribute("aria-pressed", String(chosen));
       });
-      if (notice) notice.textContent = usc ? "Die USC-Teilnahme muss erst bestätigt werden. Aktuell ist keine Reservierung möglich." : "* 5€ ist ein Preisvorschlag. Aktuell ist noch keine Zahlung möglich.";
+      if (notice) notice.textContent = usc ? "USC-Mitglieder buchen ihren Platz in der USC-App. Ein USC-Check-in pro Tag – weitere Kategorien separat über Eversports buchen. USC-Link folgt." : "* 5€ ist ein Preisvorschlag. Eversports-Buchungslink folgt. Weitere Kategorien kosten jeweils ein eigenes Ticket.";
       if (buttonText) buttonText.textContent = usc ? "USC-Reservierung folgt" : "Eversports-Buchungslink folgt";
     }));
   })();

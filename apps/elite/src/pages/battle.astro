@@ -1,0 +1,406 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import site from "../data/site.json";
+
+const categories = [
+  { key: "breaking", number: "01", name: "Breaking", motif: "BREAK / THE / FLOOR", label: "Power · Flow · Freestyle", className: "battle-category battle-category-breaking" },
+  { key: "hip-hop", number: "02", name: "Hip-Hop", motif: "OWN / THE / BEAT", label: "Groove · Attitude · Musicality", className: "battle-category battle-category-hiphop" },
+  { key: "house", number: "03", name: "House", motif: "FEEL / THE / FLOW", label: "Footwork · Rhythm · Soul", className: "battle-category battle-category-house" },
+  { key: "bachata", number: "04", name: "Bachata", motif: "MOVE / WITH / MUSIC", label: "Connection · Rhythm · Creativity", className: "battle-category battle-category-bachata" },
+];
+---
+
+<BaseLayout
+  title="Elite Dance Battle 2026 | Breaking, Hip-Hop, House & Bachata in Berlin"
+  description="Vier Styles, vier Battles, vier Preisgelder: Elite Dance Battle am 5. Dezember 2026 in Berlin-Moabit. Wähle deine Kategorie und melde dich an."
+  bodyClass="elite-battle-page"
+  noindex={true}
+>
+  <SiteHeader brand={site.brand} nav={site.nav} />
+
+  <main class="battle-main">
+    <section class="battle-hero" aria-labelledby="battle-title">
+      <div class="battle-hero-grid" aria-hidden="true"></div>
+      <div class="battle-hero-noise" aria-hidden="true"></div>
+      <div class="battle-container battle-hero-inner">
+        <div class="battle-hero-topline">
+          <span class="battle-kicker"><span class="battle-live-dot"></span> Elite Dance Studio presents</span>
+          <span class="battle-edition">BERLIN · FIRST EDITION · 2026</span>
+        </div>
+        <div class="battle-hero-body">
+          <div class="battle-hero-copy">
+            <p class="battle-eyebrow">Four styles. One floor.</p>
+            <h1 id="battle-title"><span>ELITE</span><span class="battle-title-outline">DANCE</span><span>BATTLE<span class="battle-title-star">*</span></span></h1>
+            <p class="battle-hero-lead">Your style. Your round. Your moment.</p>
+            <p class="battle-hero-description">Vier Communities. Vier Battles. Eine Bühne für deinen eigenen Style. Egal, woher du kommst: Bring deine Energie mit auf den Floor.</p>
+            <div class="battle-hero-actions">
+              <a class="battle-button battle-button-primary" href="#choose-your-style">Choose your style <span aria-hidden="true">↘</span></a>
+              <a class="battle-button battle-button-ghost" href="#how-it-works">So funktioniert's <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <aside class="battle-hero-stamp" aria-label="Event-Details">
+            <span class="battle-stamp-overline">SAVE THE DATE</span>
+            <strong>05<span>.</span>12<span>.</span>26</strong>
+            <span class="battle-stamp-rule"></span>
+            <span>ELITE DANCE STUDIO</span>
+            <span>BERLIN · MOABIT</span>
+            <div class="battle-stamp-ring" aria-hidden="true">✳</div>
+          </aside>
+        </div>
+        <div class="battle-hero-stats">
+          <div><strong>04</strong><span>Battle Styles</span></div>
+          <div><strong>04</strong><span>Winners</span></div>
+          <div><strong>100<span>€</span></strong><span>Prize per Style*</span></div>
+          <div class="battle-stats-tail">PLUS SPONSOR GOODIE BAGS <span aria-hidden="true">↗</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="battle-ticker" aria-hidden="true">
+      <div>BREAKING ✳ HIP-HOP ✳ HOUSE ✳ BACHATA ✳ YOUR FLOOR. YOUR RULES. ✳</div>
+      <div>BREAKING ✳ HIP-HOP ✳ HOUSE ✳ BACHATA ✳ YOUR FLOOR. YOUR RULES. ✳</div>
+    </div>
+
+    <section class="battle-choose-section battle-container" id="choose-your-style" aria-labelledby="choose-heading">
+      <div class="battle-section-heading">
+        <div><p class="battle-section-label">01 / Pick your arena</p><h2 id="choose-heading">CHOOSE YOUR <em>STYLE.</em></h2></div>
+        <p>Du entscheidest, auf welchem Floor du antrittst. Jede Kategorie ist ein eigenes Battle mit eigenem Gewinnerpreis.</p>
+      </div>
+      <div class="battle-category-grid" role="group" aria-label="Battle-Kategorie auswählen">
+        {categories.map((category) => (
+          <button
+            type="button"
+            class={category.className}
+            data-select-style={category.key}
+            aria-pressed="false"
+            aria-controls="battle-registration"
+          >
+            <span class="battle-category-top"><span>{category.number} / BATTLE</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
+            <span class="battle-category-art" aria-hidden="true">{category.motif.split(" / ").map((word) => <span>{word}</span>)}</span>
+            <span class="battle-category-lower">
+              <span class="battle-category-name">{category.name}</span>
+              <span class="battle-category-traits">{category.label}</span>
+            </span>
+            <span class="battle-category-footer"><span><strong>100€</strong> Winner prize*</span><span class="battle-select-text">Select style →</span></span>
+          </button>
+        ))}
+      </div>
+      <p class="battle-choose-footnote">* Derzeit 100€ Preisgeld pro Kategorie. Das Preisgeld kann sich durch weitere Partner noch erhöhen. Dazu kommen Goodie Bags unserer Sponsoren.</p>
+    </section>
+
+    <section class="battle-register-section" id="battle-registration" aria-labelledby="register-heading">
+      <div class="battle-container battle-register-grid">
+        <div class="battle-register-intro">
+          <p class="battle-section-label">02 / Claim your spot</p>
+          <h2 id="register-heading">READY TO <em>BATTLE?</em></h2>
+          <p>Ein Style, eine Anmeldung. Du kannst dich für weitere Kategorien separat anmelden.</p>
+          <div class="battle-register-steps" id="how-it-works">
+            <div><span>01</span><div><strong>Wähle dein Battle</strong><p>Breaking, Hip-Hop, House oder Bachata.</p></div></div>
+            <div><span>02</span><div><strong>Schick deine Anmeldung ab</strong><p>Wir erhalten deine Daten und deine gewählte Kategorie.</p></div></div>
+            <div><span>03</span><div><strong>Reserviere und buche deinen Platz</strong><p>Danach schließt du die Buchung über Eversports oder die reservierte USC-Option ab.</p></div></div>
+          </div>
+          <div class="battle-ticket-note">
+            <span class="battle-ticket-note-icon" aria-hidden="true">%</span>
+            <div><strong>Online anmelden. Weniger zahlen.</strong><p>Der Vorverkauf wird günstiger als die Anmeldung am Veranstaltungstag. Die genauen Preise veröffentlichen wir mit den Buchungslinks.</p></div>
+          </div>
+        </div>
+        <div class="battle-register-card">
+          <div class="battle-form-heading"><span>REGISTRATION / 2026</span><span class="battle-form-availability">Booking setup in progress</span></div>
+          <h3>Dein Platz auf dem Floor.</h3>
+          <p class="battle-form-description">Wähle zuerst eine Battle-Kategorie. Die Anmeldung ist eine Voranmeldung; dein Platz wird erst durch die anschließende Buchung bestätigt.</p>
+          <form id="battle-signup-form" action="/api/battle-register" method="post" data-battle-form>
+            <input type="hidden" name="form_kind" value="battle" />
+            <input type="hidden" name="style" value="" data-chosen-style />
+            <label class="battle-honeypot" aria-hidden="true">Leave empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+
+            <div class="battle-selected-style" aria-live="polite"><span>YOUR STYLE</span><strong data-style-display>Choose a style above ↑</strong></div>
+            <div class="battle-field-row">
+              <label class="battle-field"><span>Name *</span><input name="name" type="text" placeholder="Dein Name" autocomplete="name" maxlength="160" required /></label>
+              <label class="battle-field"><span>E-Mail *</span><input name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="254" required /></label>
+            </div>
+            <label class="battle-field"><span>Telefon / WhatsApp <small>optional</small></span><input name="phone" type="tel" placeholder="Für kurzfristige Event-Updates" autocomplete="tel" maxlength="80" /></label>
+            <fieldset class="battle-booking-methods">
+              <legend>Wie willst du buchen? *</legend>
+              <label><input type="radio" name="booking_method" value="eversports" checked /><span><strong>Eversports</strong><small>Online-Vorverkauf · vergünstigter Preis (folgt)</small></span></label>
+              <label><input type="radio" name="booking_method" value="usc" /><span><strong>Urban Sports Club</strong><small>Platz über USC reservieren · vorbehaltlich verfügbarer Plätze</small></span></label>
+            </fieldset>
+            <label class="battle-consent"><input type="checkbox" name="privacy_consent" value="accepted" required /><span>Ich bin einverstanden, dass Elite Dance Studio meine Daten zur Bearbeitung meiner Battle-Anmeldung nutzt und mich dazu kontaktiert. *</span></label>
+            <button class="battle-submit" type="submit" disabled data-battle-submit>Select a style to continue <span aria-hidden="true">↗</span></button>
+            <p class="battle-form-hint">Noch keine Zahlung auf dieser Seite. Für eine verbindliche Teilnahme ist die anschließende Buchung erforderlich.</p>
+            <p class="battle-form-status" data-battle-status role="status" aria-live="polite" hidden></p>
+          </form>
+          <div class="battle-success" data-battle-success hidden role="status" aria-live="polite">
+            <span>✓ STEP 1 COMPLETE</span>
+            <h4>Voranmeldung eingegangen.</h4>
+            <p data-success-copy>Deine Anmeldung wurde an unser Team geschickt.</p>
+            <div class="battle-success-next">Nächster Schritt: die Buchung über Eversports bzw. USC abschließen. Die jeweiligen Links werden veröffentlicht, sobald die Buchung freigeschaltet ist.</div>
+            <button type="button" data-battle-again>Weitere Kategorie anmelden ↗</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="battle-prizes-section battle-container" aria-labelledby="prizes-heading">
+      <div class="battle-prizes-lead"><span class="battle-section-label">03 / The rewards</span><h2 id="prizes-heading">BRING THE <em>HEAT.</em><br />TAKE THE PRIZE.</h2></div>
+      <div class="battle-prize-block"><span class="battle-prize-overline">CURRENT WINNER PRIZE / EACH STYLE</span><div class="battle-prize-amount">100<span>€</span></div><p>4 Styles. 4 Gewinner:innen. Und das ist erst der Anfang.</p><span class="battle-prize-future">Prize pool may grow ↗</span></div>
+      <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Zusätzlich warten Goodie Bags unserer Partner auf die Gewinner:innen. Wir stellen die Sponsoren in Kürze vor.</p></div>
+    </section>
+
+    <section class="battle-schedule-section" aria-labelledby="schedule-heading">
+      <div class="battle-container battle-schedule-layout">
+        <div><p class="battle-section-label">04 / The day</p><h2 id="schedule-heading">THE LINEUP <em>IS COMING.</em></h2><p>Die Battles finden am Samstag, 5. Dezember 2026, in unserem Studio in Berlin-Moabit statt. Den vollständigen Zeitplan, Regeln und die Details zu den Runden veröffentlichen wir bald.</p><a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a></div>
+        <div class="battle-lineup-card"><div class="battle-lineup-top"><span>SAT / 05 DEC</span><span>2026</span></div>{categories.map((category) => <div class="battle-lineup-item"><span>{category.number}</span><strong>{category.name}</strong><small>TIME TBA</small></div>)}<div class="battle-lineup-foot">FULL SCHEDULE DROPPING SOON <span aria-hidden="true">↘</span></div></div>
+      </div>
+    </section>
+
+    <section class="battle-last-cta battle-container" aria-labelledby="final-cta"><p class="battle-section-label">Your moment starts here</p><h2 id="final-cta">SEE YOU ON<br /><em>THE FLOOR.</em></h2><a class="battle-button battle-button-primary" href="#choose-your-style">Choose your battle <span aria-hidden="true">↗</span></a><p>Elite Dance Studio · Wiclefstraße 16–17 · 10551 Berlin-Moabit</p></section>
+  </main>
+
+  <SiteFooter brand={site.brand} nav={site.nav} />
+</BaseLayout>
+
+<script is:inline>
+  (() => {
+    const form = document.querySelector("[data-battle-form]");
+    if (!form) return;
+    const buttons = Array.from(document.querySelectorAll("[data-select-style]"));
+    const selectedInput = form.querySelector("[data-chosen-style]");
+    const selectedDisplay = form.querySelector("[data-style-display]");
+    const submitButton = form.querySelector("[data-battle-submit]");
+    const status = form.querySelector("[data-battle-status]");
+    const success = document.querySelector("[data-battle-success]");
+    const successCopy = document.querySelector("[data-success-copy]");
+    const labels = { "breaking": "Breaking", "hip-hop": "Hip-Hop", "house": "House", "bachata": "Bachata" };
+    const choose = (button, scroll = true) => {
+      const key = button.dataset.selectStyle;
+      selectedInput.value = key;
+      selectedDisplay.textContent = labels[key] || key;
+      submitButton.disabled = false;
+      submitButton.innerHTML = 'Send registration <span aria-hidden="true">↗</span>';
+      buttons.forEach((item) => {
+        const active = item === button;
+        item.setAttribute("aria-pressed", String(active));
+        item.classList.toggle("is-selected", active);
+        const copy = item.querySelector(".battle-select-text");
+        if (copy) copy.textContent = active ? "Selected ✓" : "Select style →";
+      });
+      status.hidden = true;
+      success.hidden = true;
+      form.hidden = false;
+      if (scroll) document.querySelector("#battle-registration").scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    buttons.forEach((button) => button.addEventListener("click", () => choose(button)));
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!selectedInput.value) {
+        status.hidden = false;
+        status.textContent = "Bitte wähle zuerst einen Style aus.";
+        document.querySelector("#choose-your-style").scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+      if (!form.reportValidity()) return;
+      if (location.hostname.endsWith("github.io") || location.pathname.includes("/preview/")) {
+        status.hidden = false;
+        status.textContent = "Dies ist die Design-Vorschau. Anmeldungen werden hier noch nicht versendet.";
+        return;
+      }
+      const original = submitButton.innerHTML;
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+      status.hidden = true;
+      try {
+        const response = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { accept: "application/json" } });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) throw new Error("registration_failed");
+        const method = new FormData(form).get("booking_method") === "usc" ? "Urban Sports Club" : "Eversports";
+        successCopy.textContent = "Deine Voranmeldung für " + selectedDisplay.textContent + " wurde an unser Team gesendet. Du hast " + method + " als Buchungsweg gewählt.";
+        form.hidden = true;
+        success.hidden = false;
+      } catch (_) {
+        status.hidden = false;
+        status.textContent = "Das hat leider nicht geklappt. Bitte versuche es noch einmal oder kontaktiere info@elitedancestudio.de.";
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = original;
+      }
+    });
+    document.querySelector("[data-battle-again]")?.addEventListener("click", () => {
+      const oldStyle = selectedInput.value;
+      form.reset();
+      form.hidden = false;
+      success.hidden = true;
+      const active = buttons.find((button) => button.dataset.selectStyle === oldStyle);
+      if (active) choose(active, false);
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  })();
+</script>
+
+<style is:global>
+  body.elite-battle-page { background: #0c0d10; color: #f5f2ec; }
+  body.elite-battle-page .site-header { background: rgba(12,13,16,.95); border-bottom: 1px solid rgba(255,255,255,.12); }
+  body.elite-battle-page .site-header .nav-link,
+  body.elite-battle-page .site-header .nav-dropdown > summary,
+  body.elite-battle-page .site-header .header-contact-button-v17 { color: #f5f2ec; }
+  body.elite-battle-page .site-footer { background: #0c0d10; color: #f5f2ec; border-top: 1px solid rgba(255,255,255,.12); }
+  body.elite-battle-page .site-footer a { color: #f5f2ec; }
+  body.elite-battle-page .mobile-menu { background: #17191f; }
+  body.elite-battle-page .mobile-nav > summary { color: #fff; }
+  body.elite-battle-page .nav-dropdown-menu { background: #17191f; }
+  body.elite-battle-page .nav-dropdown-link span { color: #f5f2ec; }
+  body.elite-battle-page .page-shell { max-width: 1180px; }
+</style>
+
+<style>
+  .battle-main { font-family: "Inter",sans-serif; --acid:#d8fa53; --ink:#0c0d10; --cream:#f5f2ec; background: var(--ink); color: var(--cream); overflow: clip; }
+  .battle-container { width: min(calc(100% - 48px), 1180px); margin: 0 auto; }
+  .battle-main h1,.battle-main h2,.battle-main h3,.battle-category-name { font-family: "Sora","Inter",sans-serif; }
+  .battle-main em { font-style: normal; color: var(--acid); }
+  .battle-section-label,.battle-eyebrow { margin: 0; color: var(--acid); font-size: .74rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+  .battle-hero { position: relative; min-height: 690px; isolation: isolate; background: radial-gradient(circle at 83% 28%,rgba(216,250,83,.13),transparent 23rem),radial-gradient(circle at 17% 80%,rgba(236,75,94,.14),transparent 22rem),#0c0d10; }
+  .battle-hero-grid { position: absolute; inset: 0; z-index: -1; opacity: .18; background-image: linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px); background-size: 58px 58px; mask-image:linear-gradient(90deg,transparent,black 25%,black 80%,transparent); }
+  .battle-hero-noise { position:absolute; inset: 0; z-index:-1; pointer-events:none; opacity:.2; background:repeating-linear-gradient(150deg,transparent 0 18px,rgba(255,255,255,.025) 19px 20px); }
+  .battle-hero-inner { padding: 34px 0 0; }
+  .battle-hero-topline { display:flex; justify-content:space-between; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.22); padding-bottom:16px; }
+  .battle-kicker,.battle-edition { font-size:.7rem; text-transform:uppercase; font-weight:800; letter-spacing:.15em; }
+  .battle-kicker { display:flex; align-items:center; gap:11px; }
+  .battle-live-dot { width:8px; height:8px; border-radius:50%; background:var(--acid); box-shadow:0 0 16px rgba(216,250,83,.85); }
+  .battle-edition { color:#a4a5a6; }
+  .battle-hero-body { display:grid; grid-template-columns:minmax(0,1fr) 270px; align-items:end; gap:36px; padding:70px 0 68px; }
+  .battle-hero-copy { min-width:0; }
+  .battle-hero h1 { display:flex; flex-direction:column; margin:18px 0 25px; font-weight:800; font-size:clamp(4.2rem,9.7vw,9.1rem); line-height:.84; letter-spacing:-.085em; color:#f5f2ec; }
+  .battle-title-outline { color:transparent; -webkit-text-stroke: 2px var(--cream); }
+  .battle-title-star { color:var(--acid); font-size:.55em; vertical-align:top; -webkit-text-stroke:0; margin-left:6px; }
+  .battle-hero-lead { font-family:"Sora",sans-serif; font-size:clamp(1.05rem,2vw,1.4rem); font-weight:800; letter-spacing:-.03em; }
+  .battle-hero-description { max-width:600px; color:#acacb0; line-height:1.7; margin-top:14px; font-size:.95rem; }
+  .battle-hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }
+  .battle-button { display:inline-flex; align-items:center; justify-content:space-between; gap:36px; min-height:52px; padding:0 22px; text-decoration:none; font-size:.85rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; transition:transform .18s ease,background .18s ease; }
+  .battle-button:hover { transform:translateY(-3px); }
+  .battle-button:focus-visible,.battle-category:focus-visible,.battle-submit:focus-visible { outline:3px solid #fff; outline-offset:4px; }
+  .battle-button-primary { background:var(--acid); color:var(--ink); }
+  .battle-button-ghost { border:1px solid rgba(255,255,255,.34); color:var(--cream); }
+  .battle-hero-stamp { position:relative; padding:24px 20px 32px; min-height:312px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:9px; border:2px solid var(--acid); text-align:center; transform:rotate(4deg); }
+  .battle-stamp-overline { font-weight:900; letter-spacing:.23em; font-size:.65rem; color:var(--acid); }
+  .battle-hero-stamp strong { font-family:"Sora",sans-serif; font-size:2.65rem; letter-spacing:-.08em; white-space:nowrap; }
+  .battle-hero-stamp strong span { color:var(--acid); }
+  .battle-hero-stamp > span:not(.battle-stamp-overline):not(.battle-stamp-rule):not(.battle-stamp-ring) { font-size:.65rem; font-weight:800; letter-spacing:.09em; }
+  .battle-stamp-rule { display:block; width:75%; height:1px; background:var(--acid); margin:9px 0; }
+  .battle-stamp-ring { position:absolute; left:-28px; bottom:-32px; display:grid; place-items:center; width:76px; height:76px; border-radius:50%; background:var(--acid); color:var(--ink); font-size:3.6rem; }
+  .battle-hero-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)) auto; border-top:1px solid rgba(255,255,255,.22); }
+  .battle-hero-stats > div { padding:22px 20px 26px 0; border-right:1px solid rgba(255,255,255,.16); }
+  .battle-hero-stats strong { display:block; font-family:"Sora",sans-serif; font-size:2.35rem; line-height:1; letter-spacing:-.08em; }
+  .battle-hero-stats strong span { color:var(--acid); }
+  .battle-hero-stats div > span { display:block; margin-top:6px; color:#aaaab0; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; }
+  .battle-hero-stats .battle-stats-tail { display:flex; align-items:center; gap:14px; max-width:180px; padding-left:24px; border-right:0; font-size:.7rem; font-weight:800; line-height:1.6; }
+  .battle-stats-tail span { font-size:1.2rem !important; color:var(--acid) !important; }
+  .battle-ticker { display:flex; gap:36px; width:100%; padding:13px 0; background:var(--acid); color:var(--ink); font-family:"Sora",sans-serif; font-size:1.12rem; font-weight:800; letter-spacing:.03em; white-space:nowrap; overflow:hidden; }
+  .battle-ticker div { flex:0 0 auto; animation:battle-marquee 30s linear infinite; }
+  @keyframes battle-marquee { to{transform:translateX(calc(-100% - 36px))} }
+  .battle-choose-section { padding:108px 0 112px; scroll-margin-top:95px; }
+  .battle-section-heading { display:flex; align-items:end; justify-content:space-between; gap:44px; margin-bottom:38px; }
+  .battle-section-heading h2,.battle-register-intro h2,.battle-prizes-lead h2,.battle-schedule-layout h2,.battle-last-cta h2 { margin:14px 0 0; font-size:clamp(2.6rem,5.6vw,5.4rem); font-weight:800; line-height:.96; letter-spacing:-.065em; }
+  .battle-section-heading > p { max-width:380px; margin:0; color:#a8a8ae; font-size:.92rem; line-height:1.7; }
+  .battle-category-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+  .battle-category { position:relative; display:flex; flex-direction:column; min-height:382px; padding:18px; border:1px solid rgba(255,255,255,.2); border-radius:0; color:var(--cream); background:#17191f; text-align:left; cursor:pointer; overflow:hidden; font-family:inherit; transition:transform .23s ease,border-color .23s ease,box-shadow .23s ease; }
+  .battle-category:hover { transform:translateY(-7px); border-color:var(--card-accent); }
+  .battle-category.is-selected { border-color:var(--card-accent); box-shadow:inset 0 0 0 2px var(--card-accent),0 18px 40px rgba(0,0,0,.26); }
+  .battle-category-breaking { --card-accent:#fc755d; background:radial-gradient(circle at 70% 40%,rgba(252,117,93,.16),transparent 75%),#1a1718; }
+  .battle-category-hiphop { --card-accent:#d8fa53; background:radial-gradient(circle at 70% 40%,rgba(216,250,83,.12),transparent 75%),#171b1b; }
+  .battle-category-house { --card-accent:#9c91ff; background:radial-gradient(circle at 70% 40%,rgba(156,145,255,.16),transparent 75%),#171723; }
+  .battle-category-bachata { --card-accent:#f2afcf; background:radial-gradient(circle at 70% 40%,rgba(242,175,207,.16),transparent 75%),#1c161f; }
+  .battle-category::after { content:""; position:absolute; width:160px; height:160px; border:1px solid var(--card-accent); border-radius:50%; top:67px; right:-82px; opacity:.33; pointer-events:none; }
+  .battle-category-top { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:.67rem; letter-spacing:.13em; font-weight:900; }
+  .battle-select-indicator { display:grid; place-items:center; width:29px; height:29px; border:1px solid var(--card-accent); border-radius:50%; color:var(--card-accent); font-size:1rem; }
+  .battle-category-art { display:flex; flex-direction:column; justify-content:center; flex:1; padding:22px 0 12px; color:var(--card-accent); font-family:"Sora",sans-serif; font-size:clamp(1.7rem,2.35vw,2.65rem); font-weight:800; line-height:1; letter-spacing:-.065em; transform:rotate(-4deg); }
+  .battle-category-art span:nth-child(2) { color:transparent; -webkit-text-stroke:1.1px var(--card-accent); }
+  .battle-category-name { display:block; font-size:1.65rem; line-height:1.1; font-weight:800; letter-spacing:-.055em; }
+  .battle-category-traits { display:block; margin-top:8px; min-height:32px; color:#bebdc0; font-size:.7rem; line-height:1.5; }
+  .battle-category-footer { display:flex; justify-content:space-between; align-items:end; gap:9px; border-top:1px solid rgba(255,255,255,.22); margin-top:15px; padding-top:15px; color:#c9c9cc; font-size:.66rem; line-height:1.5; }
+  .battle-category-footer strong { color:var(--card-accent); font-family:"Sora",sans-serif; font-size:1.35rem; letter-spacing:-.04em; }
+  .battle-select-text { color:var(--card-accent); font-weight:800; text-align:right; }
+  .battle-choose-footnote { color:#aaaab0; font-size:.77rem; margin-top:23px; line-height:1.6; }
+  .battle-register-section { background:#17191d; border-block:1px solid rgba(255,255,255,.1); }
+  .battle-register-grid { display:grid; grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr); align-items:start; gap:clamp(36px,6vw,92px); padding:104px 0; }
+  .battle-register-intro > p:not(.battle-section-label) { max-width:390px; color:#bebdc2; line-height:1.7; }
+  .battle-register-steps { display:grid; gap:0; margin-top:42px; border-top:1px solid rgba(255,255,255,.16); scroll-margin-top:110px; }
+  .battle-register-steps > div { display:grid; grid-template-columns:50px 1fr; gap:16px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.16); }
+  .battle-register-steps > div > span { color:var(--acid); font-size:1rem; font-weight:900; }
+  .battle-register-steps strong { font-size:.95rem; }
+  .battle-register-steps p { color:#adadb3; font-size:.81rem; line-height:1.6; margin:6px 0 0; }
+  .battle-ticket-note { display:flex; gap:17px; margin-top:35px; padding:20px; background:rgba(216,250,83,.075); border-left:3px solid var(--acid); }
+  .battle-ticket-note-icon { font-family:"Sora",sans-serif; font-size:2.2rem; font-weight:800; color:var(--acid); }
+  .battle-ticket-note strong { display:block; }
+  .battle-ticket-note p { margin:7px 0 0; color:#bcbeb7; font-size:.83rem; line-height:1.6; }
+  .battle-register-card { padding:clamp(22px,3.5vw,42px); background:var(--cream); color:#151619; box-shadow:18px 20px 0 rgba(216,250,83,.1); }
+  .battle-form-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:.64rem; font-weight:900; letter-spacing:.1em; }
+  .battle-form-availability { color:#606164; text-align:right; }
+  .battle-register-card h3 { font-size:clamp(1.55rem,3vw,2.2rem); letter-spacing:-.045em; line-height:1.12; margin:20px 0 10px; }
+  .battle-form-description { color:#656567; font-size:.84rem; line-height:1.65; margin:0 0 25px; }
+  .battle-selected-style { display:flex; align-items:center; justify-content:space-between; gap:16px; margin:0 0 20px; padding:14px; background:#e5e8dc; border-left:4px solid #202226; }
+  .battle-selected-style span { color:#555957; font-size:.66rem; font-weight:900; letter-spacing:.1em; }
+  .battle-selected-style strong { font-size:.87rem; }
+  .battle-honeypot { position:absolute; width:1px; height:1px; overflow:hidden; left:-10000px; }
+  .battle-field-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+  .battle-field { display:grid; gap:7px; margin-bottom:16px; font-size:.77rem; font-weight:800; }
+  .battle-field span small { font-weight:500; }
+  .battle-field input { display:block; width:100%; min-width:0; height:46px; padding:0 13px; border:1px solid #b8b7b1; background:#fff; border-radius:0; font:inherit; font-weight:500; color:#17191a; }
+  .battle-field input:focus-visible { outline:2px solid #728424; outline-offset:2px; }
+  .battle-booking-methods { padding:0; border:0; margin:10px 0 19px; }
+  .battle-booking-methods legend { margin:0 0 10px; font-size:.79rem; font-weight:800; }
+  .battle-booking-methods label { display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid #cac9c0; margin:0 0 8px; cursor:pointer; }
+  .battle-booking-methods label:has(input:checked) { border-color:#242624; background:#eef2d7; }
+  .battle-booking-methods input { width:17px; height:17px; accent-color:#262b18; }
+  .battle-booking-methods strong,.battle-booking-methods small { display:block; }
+  .battle-booking-methods strong { font-size:.85rem; }
+  .battle-booking-methods small { margin-top:3px; color:#696969; font-size:.71rem; line-height:1.45; }
+  .battle-consent { display:flex; align-items:flex-start; gap:10px; font-size:.69rem; line-height:1.6; color:#5a5a5a; cursor:pointer; }
+  .battle-consent input { width:16px; height:16px; flex:0 0 auto; margin-top:2px; accent-color:#272a23; }
+  .battle-submit { display:flex; justify-content:space-between; align-items:center; width:100%; margin-top:21px; padding:15px 20px; border:0; border-radius:0; background:#d8fa53; color:#131717; font:800 .84rem "Inter",sans-serif; text-transform:uppercase; letter-spacing:.04em; cursor:pointer; }
+  .battle-submit:disabled { opacity:.48; cursor:not-allowed; }
+  .battle-form-hint { font-size:.68rem; color:#777; line-height:1.6; margin:14px 0 0; }
+  .battle-form-status { padding:12px; background:#fff1da; color:#4a2920; font-size:.79rem; line-height:1.5; }
+  .battle-success { padding:23px; background:#e1f4a8; }
+  .battle-success > span { font-size:.67rem; font-weight:900; letter-spacing:.14em; }
+  .battle-success h4 { font-size:1.7rem; line-height:1.1; margin:14px 0; }
+  .battle-success p,.battle-success-next { font-size:.85rem; line-height:1.65; }
+  .battle-success-next { padding:14px; border:1px solid #637631; }
+  .battle-success button { margin-top:18px; padding:12px; background:#111; color:#fff; border:0; cursor:pointer; font-weight:800; }
+  .battle-prizes-section { display:grid; grid-template-columns:1.25fr .82fr .8fr; gap:20px; padding:110px 0; }
+  .battle-prizes-lead { padding-right:14px; }
+  .battle-prizes-lead h2 { font-size:clamp(2.4rem,4.2vw,4.7rem); line-height:1.01; }
+  .battle-prize-block { display:flex; flex-direction:column; padding:25px; background:var(--acid); color:#111619; }
+  .battle-prize-overline { font-size:.63rem; font-weight:900; letter-spacing:.15em; }
+  .battle-prize-amount { font-family:"Sora",sans-serif; font-size:clamp(5rem,7.5vw,7.7rem); line-height:1; font-weight:800; letter-spacing:-.11em; margin:30px 0 10px; }
+  .battle-prize-amount span { font-size:.5em; }
+  .battle-prize-block p { font-size:.86rem; line-height:1.5; }
+  .battle-prize-future { margin-top:auto; border-top:1px solid #667735; padding-top:12px; font-size:.7rem; text-transform:uppercase; font-weight:900; }
+  .battle-goodies-block { display:flex; flex-direction:column; padding:25px; border:1px solid rgba(255,255,255,.25); }
+  .battle-goodies-block > span { color:var(--acid); font-size:2.8rem; line-height:1; }
+  .battle-goodies-block h3 { margin:28px 0 12px; font-size:1.8rem; line-height:1.05; letter-spacing:-.05em; }
+  .battle-goodies-block p { margin-top:auto; font-size:.8rem; color:#bdbdc0; line-height:1.7; }
+  .battle-schedule-section { background:#e7e6df; color:#17191c; }
+  .battle-schedule-layout { display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,8vw,110px); align-items:center; padding:100px 0; }
+  .battle-schedule-layout .battle-section-label { color:#4a5520; }
+  .battle-schedule-layout h2 em { color:#788b28; }
+  .battle-schedule-layout p:not(.battle-section-label) { color:#53565a; line-height:1.7; }
+  .battle-schedule-layout a { display:inline-block; margin-top:15px; color:#111; font-weight:800; text-decoration-thickness:2px; text-underline-offset:7px; }
+  .battle-lineup-card { padding:26px; background:#15171a; color:#f5f2ec; transform:rotate(1deg); box-shadow:14px 16px 0 #b8c47d; }
+  .battle-lineup-top { display:flex; justify-content:space-between; padding-bottom:21px; border-bottom:2px solid var(--acid); color:var(--acid); font-size:.72rem; font-weight:900; letter-spacing:.1em; }
+  .battle-lineup-item { display:grid; grid-template-columns:36px 1fr auto; gap:16px; align-items:center; padding:17px 0; border-bottom:1px solid rgba(255,255,255,.2); }
+  .battle-lineup-item span { color:var(--acid); font-size:.75rem; font-weight:900; }
+  .battle-lineup-item strong { font-family:"Sora",sans-serif; font-size:1.15rem; }
+  .battle-lineup-item small { font-size:.69rem; color:#a1a3a5; }
+  .battle-lineup-foot { display:flex; justify-content:space-between; gap:12px; padding-top:23px; font-size:.68rem; letter-spacing:.1em; font-weight:900; }
+  .battle-lineup-foot span { color:var(--acid); }
+  .battle-last-cta { text-align:center; padding:110px 0 115px; }
+  .battle-last-cta h2 { font-size:clamp(3.5rem,9vw,9rem); }
+  .battle-last-cta .battle-button { margin-top:32px; }
+  .battle-last-cta > p:last-child { color:#a7a8aa; font-size:.76rem; margin-top:35px; }
+  @media(max-width:1050px) { .battle-category-grid { grid-template-columns:repeat(2,1fr); } .battle-category { min-height:320px; } .battle-category-art { font-size:2.8rem; } .battle-prizes-section { grid-template-columns:1fr 1fr; } .battle-prizes-lead { grid-column:1/-1; } }
+  @media(max-width:760px) { .battle-container { width:min(calc(100% - 34px),1180px); } .battle-hero-body { grid-template-columns:1fr; padding:54px 0 48px; } .battle-hero-stamp { display:none; } .battle-hero h1 { font-size:clamp(4.4rem,13vw,7rem); } .battle-hero-stats { grid-template-columns:repeat(3,1fr); } .battle-hero-stats .battle-stats-tail { grid-column:1/-1; max-width:none; border-top:1px solid rgba(255,255,255,.22); padding:12px 0; } .battle-section-heading { flex-direction:column; align-items:start; gap:15px; } .battle-register-grid,.battle-schedule-layout { grid-template-columns:1fr; } .battle-register-grid { padding:75px 0; } .battle-choose-section,.battle-prizes-section { padding:75px 0; } .battle-schedule-layout { padding:70px 0; } .battle-hero-topline .battle-edition { display:none; } }
+  @media(max-width:480px) { .battle-hero h1 { font-size:clamp(3.9rem,14.5vw,5.9rem); } .battle-category-grid { gap:10px; } .battle-category { min-height:285px; padding:12px; } .battle-category-art { font-size:clamp(1.45rem,6vw,2rem); } .battle-category-name { font-size:1.35rem; } .battle-category-footer { flex-direction:column; align-items:start; } .battle-category-traits { font-size:.67rem; } .battle-field-row { grid-template-columns:1fr; gap:0; } .battle-hero-stats > div { padding-right:8px; } .battle-hero-stats strong { font-size:1.7rem; } .battle-hero-stats div > span { font-size:.58rem; } .battle-register-card { padding:22px 17px; } .battle-register-card h3 { font-size:1.55rem; } .battle-prizes-section { grid-template-columns:1fr; } .battle-prizes-lead { grid-column:auto; } .battle-goodies-block { min-height:240px; } .battle-schedule-layout h2 { font-size:2.6rem; } }
+  @media(prefers-reduced-motion:reduce) { .battle-ticker div { animation:none; } .battle-button,.battle-category { transition:none; } .battle-category:hover { transform:none; } }
+</style>

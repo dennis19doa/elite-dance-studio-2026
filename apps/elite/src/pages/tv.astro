@@ -18,7 +18,11 @@ const posters = tvMedia.posters.map((item) => ({
 const videos = ["https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/videos/Video%20TV.mp4"];
 const initialVideo = videos[0] || "";
 const TV_ASSET_VERSION = "20261026-halloween-posters-v1";
-const versionedMedia = (path: string) => `${remoteMedia(path)}?v=${TV_ASSET_VERSION}`;
+const versionedMedia = (path: string) => {
+  const url = new URL(path.startsWith("https://") ? path : remoteMedia(path));
+  url.searchParams.set("v", TV_ASSET_VERSION);
+  return url.href;
+};
 const featureSchedule = tvMedia.features?.schedule
   ? { ...tvMedia.features.schedule, src: versionedMedia(tvMedia.features.schedule.file) }
   : null;

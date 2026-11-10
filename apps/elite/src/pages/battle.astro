@@ -4,6 +4,8 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import site from "../data/site.json";
 
+const eversportsBookingUrl = "https://www.eversports.de/s/elite-dance-studio"; // Replace with event-specific public booking link
+const uscBookingUrl = "https://urbansportsclub.com/de/venues/elite-dance-studio-1"; // Replace with direct event class link if available
 const categories = [
   { key: "breaking", number: "01", name: "Breaking", motif: "FREESTYLE", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking" },
   { key: "hip-hop", number: "02", name: "Hip-Hop", motif: "FREESTYLE", label: "Groove · Freestyle", image: "06-hip-hop-beginner-amy.webp", className: "battle-category battle-category-hiphop" },
@@ -36,7 +38,7 @@ const categories = [
             <p class="battle-hero-lead">Breaking · Hip-Hop · House · Bachata</p>
             <p class="battle-hero-description">Vier Freestyle-Battles an einem Tag. Jede Kategorie hat ein eigenes Preisgeld.</p>
             <div class="battle-hero-actions">
-              <a class="battle-button battle-button-primary" href="#choose-your-style">Kategorien <span aria-hidden="true">↘</span></a>
+              <a class="battle-button battle-button-primary" href="#battle-registration">Jetzt anmelden <span aria-hidden="true">↘</span></a>
               <a class="battle-button battle-button-ghost" href="#how-it-works">Anmeldung <span aria-hidden="true">↗</span></a>
             </div>
           </div>
@@ -74,7 +76,7 @@ const categories = [
     <section class="battle-choose-section battle-container" id="choose-your-style" aria-labelledby="choose-heading">
       <div class="battle-section-heading">
         <div><p class="battle-section-label">01 / Kategorien</p><h2 id="choose-heading">FREESTYLE <em>BATTLES.</em></h2></div>
-        <p>Wähle deine Kategorie. Du kannst auch bei mehreren Freestyle-Battles teilnehmen.</p>
+        <p>Einmal für den Battle Day buchen – damit kannst du an mehreren der vier Freestyle-Battles teilnehmen.</p>
       </div>
       <div class="battle-category-grid" role="group" aria-label="Battle-Kategorie auswählen">
         {categories.map((category) => (
@@ -83,7 +85,7 @@ const categories = [
             class={category.className}
             data-select-style={category.key}
             aria-pressed="false"
-            aria-controls="battle-registration"
+            aria-controls="battle-entries"
           >
             <span class="battle-category-top"><span>EDB / {category.number}</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
             <img class="battle-category-photo" src={`${import.meta.env.BASE_URL}media/style-posters/${category.image}`} alt="" loading="lazy" decoding="async" /><span class="battle-category-photo-wash" aria-hidden="true"></span>
@@ -92,49 +94,97 @@ const categories = [
               <span class="battle-category-name">{category.name} Freestyle</span>
               <span class="battle-category-traits">{category.label}</span>
             </span>
-            <span class="battle-category-footer"><span><strong>100€</strong> Preisgeld*</span><span class="battle-select-text">Auswählen ↗</span></span>
+            <span class="battle-category-footer"><span><strong>100€</strong> Preisgeld*</span><span class="battle-select-text">Merken +</span></span>
           </button>
         ))}
       </div>
       <div class="battle-selection-deck" aria-live="polite">
-        <div class="battle-selection-indicator"><span>◉</span><small>DEINE KATEGORIE</small></div>
-        <strong data-battle-selected-name>Noch keine Kategorie gewählt</strong>
-        <a href="#battle-registration" data-battle-next>Buchungsoptionen <span aria-hidden="true">↗</span></a>
+        <div class="battle-selection-indicator"><span>◉</span><small>FREESTYLE-KATEGORIEN</small></div>
+        <strong data-battle-selected-name>Mehrere Kategorien möglich</strong>
+        <a href="#battle-entries" data-battle-next>Kategorien nach der Buchung melden <span aria-hidden="true">↗</span></a>
       </div>
       <p class="battle-choose-footnote">* Aktuell 100€ je Gewinner:in. Das Preisgeld kann sich noch erhöhen. Zusätzlich sind Goodie Bags von Sponsoren geplant.</p>
     </section>
 
     <section class="battle-register-section" id="battle-registration" aria-labelledby="register-heading">
-      <div class="battle-container battle-register-grid">
-        <div class="battle-register-intro">
-          <p class="battle-section-label">02 / Anmeldung</p>
-          <h2 id="register-heading">SO FUNKTIONIERT DIE <em>BUCHUNG.</em></h2>
-          <p>Wähle deinen Buchungsweg: €5 online über Eversports oder Teilnahme über Urban Sports Club. Für beide Wege erhältst du eine eigene Buchungsbestätigung.</p>
-          <div class="battle-register-steps" id="how-it-works">
-            <div><span>01</span><div><strong>Freestyle-Kategorie auswählen</strong><p>Breaking, Hip-Hop, House oder Bachata.</p></div></div>
-            <div><span>02</span><div><strong>Eversports oder USC</strong><p>€5 online bezahlen oder als USC-Mitglied in der USC-App reservieren.</p></div></div>
-            <div><span>03</span><div><strong>Bestätigung und Check-in</strong><p>Buchungsbestätigung erhalten; USC-Mitglieder checken am Eventtag zusätzlich in der App ein.</p></div></div>
-          </div>
-          <div class="battle-ticket-note"><span class="battle-ticket-note-icon" aria-hidden="true">€</span><div><strong>USC inklusive · Eversports 5€*</strong><p>Für USC-Mitglieder kein zusätzlicher Eintrittspreis für eine Kategorie. Weitere Kategorien separat online buchen.</p></div></div>
-        </div>
-        <div class="battle-register-card">
-          <div class="battle-form-heading"><span>ELITE BATTLE / 05.12.2026</span><span class="battle-form-availability">BUCHUNG FOLGT</span></div>
-          <h3>Kategorie buchen</h3>
-          <p class="battle-form-description">Beide Buchungswege sind möglich. Die Links zu den jeweiligen Kategorien werden nach der Einrichtung freigeschaltet.</p>
-          <div class="battle-selected-style" aria-live="polite"><span>KATEGORIE</span><strong data-style-display>Noch nicht gewählt</strong></div>
-          <div class="battle-booking-options" role="group" aria-label="Buchungsweg auswählen">
-            <button type="button" class="battle-booking-option is-active" data-book-choice="eversports" aria-pressed="true"><span><strong>Eversports</strong><small>Online-Ticket pro Freestyle-Kategorie</small></span><b>5€*</b></button>
-            <button type="button" class="battle-booking-option" data-book-choice="usc" aria-pressed="false"><span><strong>Urban Sports Club</strong><small>Für USC-Mitglieder ohne Zusatzgebühr · Buchung in der USC-App</small></span><b class="battle-usc-state">Inklusive</b></button>
-          </div>
-          <p class="battle-price-disclaimer" data-book-notice>* 5€ ist noch ein Preisvorschlag. USC-Mitglieder können eine Kategorie pro Tag per Check-in nutzen. Weitere Kategorien separat über Eversports buchen.</p>
-          <button type="button" class="battle-submit" disabled><span data-book-button>Eversports-Buchungslink folgt</span><span aria-hidden="true">↗</span></button>
-          <p class="battle-form-hint">In Deutschland erlaubt USC nur einen Check-in pro Tag. Für weitere Kategorien benötigst du separate Eversports-Tickets. Noch keine Buchung auf dieser Entwurfsseite.</p>
-        </div>
+  <div class="battle-container battle-register-grid">
+    <div class="battle-register-intro">
+      <p class="battle-section-label">02 / Anmeldung</p>
+      <h2 id="register-heading">EIN TICKET.<br /><em>ALLE BATTLES.</em></h2>
+      <p>Einmal für den Battle Day anmelden und an Breaking, Hip-Hop, House und/oder Bachata Freestyle teilnehmen. Alle Kategorien sind mit einer Buchung abgedeckt.</p>
+      <div class="battle-register-steps" id="how-it-works">
+        <div><span>01</span><div><strong>Für den Battle Day anmelden</strong><p>Online über Eversports oder über deine USC-Mitgliedschaft.</p></div></div>
+        <div><span>02</span><div><strong>Deine Kategorien angeben</strong><p>Nach deiner Buchung kannst du die gewünschten Freestyle-Battles im Formular unten angeben.</p></div></div>
+        <div><span>03</span><div><strong>Am 5. Dezember einchecken</strong><p>Buchungsbestätigung mitbringen; USC-Mitglieder checken zusätzlich in der App ein.</p></div></div>
       </div>
-    </section>
+      <div class="battle-ticket-note">
+        <span class="battle-ticket-note-icon" aria-hidden="true">✓</span>
+        <div><strong>Eintritt für das ganze Event</strong><p>Keine zweite Zahlung, wenn du in mehreren Freestyle-Kategorien antrittst. USC braucht nur einen Check-in für den Battle Day.</p></div>
+      </div>
+    </div>
+    <div class="battle-register-card">
+      <div class="battle-form-heading"><span>BATTLE / 05.12.2026</span><span class="battle-form-availability">BUCHBAR</span></div>
+      <h3>Battle Day buchen</h3>
+      <p class="battle-form-description">Wähle deinen Buchungsweg. Beide Optionen gelten für alle Freestyle-Kategorien.</p>
+      <div class="battle-booking-links">
+        <a class="battle-booking-link" href={eversportsBookingUrl} target="_blank" rel="noopener noreferrer">
+          <span><strong>Eversports</strong><small>Online-Ticket für den gesamten Battle Day</small></span><b aria-hidden="true">↗</b>
+        </a>
+        <a class="battle-booking-link battle-booking-link-usc" href={uscBookingUrl} target="_blank" rel="noopener noreferrer">
+          <span><strong>Urban Sports Club</strong><small>Für berechtigte USC-Mitglieder inklusive</small></span><b aria-hidden="true">↗</b>
+        </a>
+      </div>
+      <p class="battle-price-disclaimer">Die Links führen derzeit zu den Elite Dance Studio Profilen. Wähle dort „Elite Dance Battle“ am 05.12.2026 aus. Direkte Terminlinks folgen.</p>
+      <p class="battle-form-hint"><strong>Bereits angemeldet?</strong> Trag unten noch die Kategorien ein, an denen du teilnehmen möchtest. Dafür musst du kein weiteres Ticket kaufen.</p>
+      <a class="battle-booking-next" href="#battle-entries">Meine Freestyle-Kategorien eintragen ↘</a>
+    </div>
+  </div>
+</section>
+
+<section class="battle-entries-section" id="battle-entries" aria-labelledby="entries-heading">
+  <div class="battle-container battle-entries-layout">
+    <div class="battle-entries-intro">
+      <p class="battle-section-label">03 / Freestyle-Kategorien</p>
+      <h2 id="entries-heading">DEINE <em>BATTLES.</em></h2>
+      <p>Wenn du bereits für Elite Dance Battle gebucht hast, gib hier an, bei welchen Battles du antreten möchtest. Du kannst mehrere Kategorien auswählen.</p>
+      <p>Wichtig: Verwende dieselbe E-Mail-Adresse wie in deiner Eversports- oder USC-Buchung. Wir gleichen die Kategorien mit der Teilnehmerliste ab.</p>
+    </div>
+    <form class="battle-entries-form" action="/api/form" method="post" data-battle-entries-form>
+      <input type="hidden" name="form_kind" value="battle" />
+      <label class="battle-entry-trap" aria-hidden="true">Leer lassen<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+      <h3>Freestyle-Kategorien eintragen</h3>
+      <div class="battle-entry-fields">
+        <label>Vor- und Nachname *<input name="name" type="text" autocomplete="name" maxlength="160" required placeholder="Name der Buchung" /></label>
+        <label>E-Mail-Adresse *<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="E-Mail der Buchung" /></label>
+        <label class="battle-entry-wide">Battle-Name (optional)<input name="stage_name" type="text" maxlength="120" placeholder="Dein Name im Battle" /></label>
+      </div>
+      <fieldset class="battle-entry-fieldset">
+        <legend>Welche Freestyle-Kategorien? *</legend>
+        <div class="battle-entry-checkboxes">
+          {categories.map((category) => (
+            <label class={"battle-entry-checkbox battle-entry-checkbox-" + category.key}>
+              <input type="checkbox" name="battle_categories" value={category.key} data-battle-entry-category={category.key} />
+              <span>{category.name} Freestyle</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset class="battle-entry-fieldset"><legend>Wie hast du gebucht? *</legend>
+        <div class="battle-entry-methods">
+          <label><input type="radio" name="booking_method" value="eversports" required /> Eversports</label>
+          <label><input type="radio" name="booking_method" value="usc" required /> Urban Sports Club</label>
+        </div>
+      </fieldset>
+      <label class="battle-entry-confirm"><input type="checkbox" name="booking_confirmed" value="yes" required /> Ich habe den Battle Day bereits über Eversports oder USC gebucht. *</label>
+      <label class="battle-entry-confirm"><input type="checkbox" name="privacy_consent" value="accepted" required /> Ich stimme zu, dass meine Daten zur Organisation der Battle-Teilnahme verarbeitet und mit der Buchung abgeglichen werden. *</label>
+      <button class="battle-entry-send" type="submit" data-battle-entry-send>Kategorien abschicken <span aria-hidden="true">↗</span></button>
+      <p class="battle-entry-status" data-battle-entry-status role="status" aria-live="polite">Diese Meldung kostet nichts und ersetzt keine Eventbuchung.</p>
+    </form>
+  </div>
+</section>
 
     <section class="battle-prizes-section battle-container" aria-labelledby="prizes-heading">
-      <div class="battle-prizes-lead"><span class="battle-section-label">03 / Preise</span><h2 id="prizes-heading">PREISGELD &amp;<br /><em>GOODIE BAGS</em></h2></div>
+      <div class="battle-prizes-lead"><span class="battle-section-label">04 / Preise</span><h2 id="prizes-heading">PREISGELD &amp;<br /><em>GOODIE BAGS</em></h2></div>
       <div class="battle-prize-block"><span class="battle-prize-overline">AKTUELLES PREISGELD / PRO KATEGORIE</span><div class="battle-prize-amount">100<span>€</span></div><p>Aktuell 100€ je Gewinner:in.</p><span class="battle-prize-future">Weitere Sponsoren möglich</span></div>
       <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Zusätzliche Preise und Goodie Bags von unseren Sponsoren. Details folgen.</p></div>
     </section>
@@ -148,7 +198,7 @@ const categories = [
 
     <section class="battle-schedule-section" aria-labelledby="schedule-heading">
       <div class="battle-container battle-schedule-layout">
-        <div><p class="battle-section-label">04 / Programm</p><h2 id="schedule-heading">ZEITPLAN <em>FOLGT.</em></h2><p>Samstag, 5. Dezember 2026 im Elite Dance Studio in Berlin-Moabit. Zeiten und Regeln veröffentlichen wir noch.</p><a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a></div>
+        <div><p class="battle-section-label">05 / Programm</p><h2 id="schedule-heading">ZEITPLAN <em>FOLGT.</em></h2><p>Samstag, 5. Dezember 2026 im Elite Dance Studio in Berlin-Moabit. Zeiten und Regeln veröffentlichen wir noch.</p><a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a></div>
         <div class="battle-lineup-card"><div class="battle-lineup-top"><span>SAT / 05 DEC</span><span>2026</span></div>{categories.map((category) => <div class="battle-lineup-item"><span>{category.number}</span><strong>{category.name} Freestyle</strong><small>UHRZEIT FOLGT</small></div>)}<div class="battle-lineup-foot">VOLLSTÄNDIGES PROGRAMM FOLGT <span aria-hidden="true">↘</span></div></div>
       </div>
     </section>

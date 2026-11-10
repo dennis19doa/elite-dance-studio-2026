@@ -4,7 +4,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import site from "../data/site.json";
 
-const eversportsBookingUrl = "https://www.eversports.de/s/elite-dance-studio"; // Replace with event-specific public booking link
+const eversportsBookingUrl = "https://www.eversports.de/org/activity/946397ed-f7ae-4ea1-8ee1-2e985945d6f1";
 const uscBookingUrl = "https://urbansportsclub.com/de/venues/elite-dance-studio-1"; // Replace with direct event class link if available
 const categories = [
   { key: "breaking", number: "01", name: "Breaking", motif: "FREESTYLE", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking" },
@@ -128,13 +128,13 @@ const categories = [
       <p class="battle-form-description">Wähle deinen Buchungsweg. Beide Optionen gelten für alle Freestyle-Kategorien.</p>
       <div class="battle-booking-links">
         <a class="battle-booking-link" href={eversportsBookingUrl} target="_blank" rel="noopener noreferrer">
-          <span><strong>Eversports</strong><small>Online-Ticket für den gesamten Battle Day</small></span><b aria-hidden="true">↗</b>
+          <span><strong>Eversports</strong><small>Direkt zur Buchung · ein Ticket für den gesamten Battle Day</small></span><b aria-hidden="true">↗</b>
         </a>
         <a class="battle-booking-link battle-booking-link-usc" href={uscBookingUrl} target="_blank" rel="noopener noreferrer">
           <span><strong>Urban Sports Club</strong><small>Für berechtigte USC-Mitglieder inklusive</small></span><b aria-hidden="true">↗</b>
         </a>
       </div>
-      <p class="battle-price-disclaimer">Die Links führen derzeit zu den Elite Dance Studio Profilen. Wähle dort „Elite Dance Battle“ am 05.12.2026 aus. Direkte Terminlinks folgen.</p>
+      <p class="battle-price-disclaimer">Der Eversports-Button öffnet direkt die Elite Dance Battle Buchungsseite. Für USC führt der Link zunächst zum Studio-Profil – dort den Battle-Termin am 05.12.2026 auswählen.</p>
       <p class="battle-form-hint"><strong>Bereits angemeldet?</strong> Trag unten noch die Kategorien ein, an denen du teilnehmen möchtest. Dafür musst du kein weiteres Ticket kaufen.</p>
       <a class="battle-booking-next" href="#battle-entries">Meine Freestyle-Kategorien eintragen ↘</a>
     </div>

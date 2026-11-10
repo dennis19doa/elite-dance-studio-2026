@@ -5,16 +5,16 @@ import SiteFooter from "../components/SiteFooter.astro";
 import site from "../data/site.json";
 
 const categories = [
-  { key: "breaking", number: "01", name: "Breaking", motif: "BREAK / THE / FLOOR", label: "Power · Flow · Freestyle", image: "05-breaking.webp", className: "battle-category battle-category-breaking" },
-  { key: "hip-hop", number: "02", name: "Hip-Hop", motif: "OWN / THE / BEAT", label: "Groove · Attitude · Musicality", image: "06-hip-hop-beginner-amy.webp", className: "battle-category battle-category-hiphop" },
-  { key: "house", number: "03", name: "House", motif: "FEEL / THE / FLOW", label: "Footwork · Rhythm · Soul", image: "03-house-beginner.webp", className: "battle-category battle-category-house" },
-  { key: "bachata", number: "04", name: "Bachata", motif: "MOVE / WITH / MUSIC", label: "Connection · Rhythm · Creativity", image: "19-bachata-intermediate.webp", className: "battle-category battle-category-bachata" },
+  { key: "breaking", number: "01", name: "Breaking", motif: "FREESTYLE", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking" },
+  { key: "hip-hop", number: "02", name: "Hip-Hop", motif: "FREESTYLE", label: "Groove · Freestyle", image: "06-hip-hop-beginner-amy.webp", className: "battle-category battle-category-hiphop" },
+  { key: "house", number: "03", name: "House", motif: "FREESTYLE", label: "Rhythm · Footwork", image: "03-house-beginner.webp", className: "battle-category battle-category-house" },
+  { key: "bachata", number: "04", name: "Bachata", motif: "FREESTYLE", label: "Musicality · Partnerwork", image: "19-bachata-intermediate.webp", className: "battle-category battle-category-bachata" },
 ];
 ---
 
 <BaseLayout
-  title="Elite Dance Battle 2026 | Breaking, Hip-Hop, House & Bachata in Berlin"
-  description="Vier Styles, vier Battles, vier Preisgelder: Elite Dance Battle am 5. Dezember 2026 in Berlin-Moabit. Wähle deine Kategorie und melde dich an."
+  title="Elite Dance Battle 2026 | Vier Freestyle Battles in Berlin"
+  description="Breaking, Hip-Hop, House und Bachata Freestyle am 5. Dezember 2026 in Berlin-Moabit. Vier Kategorien mit je 100€ Preisgeld."
   bodyClass="elite-battle-page"
   noindex={true}
 >
@@ -31,13 +31,13 @@ const categories = [
         </div>
         <div class="battle-hero-body">
           <div class="battle-hero-copy">
-            <p class="battle-eyebrow">Four styles. One floor.</p>
+            <p class="battle-eyebrow">Vier Kategorien · Freestyle</p>
             <h1 id="battle-title"><span>ELITE</span><span class="battle-title-outline">DANCE</span><span>BATTLE<span class="battle-title-star">*</span></span></h1>
-            <p class="battle-hero-lead">Your style. Your round. Your moment.</p>
-            <p class="battle-hero-description">Vier Communities. Vier Battles. Eine Bühne für deinen eigenen Style. Egal, woher du kommst: Bring deine Energie mit auf den Floor.</p>
+            <p class="battle-hero-lead">Breaking · Hip-Hop · House · Bachata</p>
+            <p class="battle-hero-description">Vier Freestyle-Battles an einem Tag. Jede Kategorie hat ein eigenes Preisgeld.</p>
             <div class="battle-hero-actions">
-              <a class="battle-button battle-button-primary" href="#choose-your-style">Choose your style <span aria-hidden="true">↘</span></a>
-              <a class="battle-button battle-button-ghost" href="#how-it-works">So funktioniert's <span aria-hidden="true">↗</span></a>
+              <a class="battle-button battle-button-primary" href="#choose-your-style">Kategorien <span aria-hidden="true">↘</span></a>
+              <a class="battle-button battle-button-ghost" href="#how-it-works">Anmeldung <span aria-hidden="true">↗</span></a>
             </div>
           </div>
           <aside class="battle-hero-stamp" aria-label="Event-Details">
@@ -53,28 +53,28 @@ const categories = [
             <div class="battle-arena-tile battle-arena-tile-two"><img src={`${import.meta.env.BASE_URL}media/style-posters/06-hip-hop-beginner-amy.webp`} alt="" /></div>
             <div class="battle-arena-tile battle-arena-tile-three"><img src={`${import.meta.env.BASE_URL}media/style-posters/03-house-beginner.webp`} alt="" /></div>
             <div class="battle-arena-tile battle-arena-tile-four"><img src={`${import.meta.env.BASE_URL}media/style-posters/19-bachata-intermediate.webp`} alt="" /></div>
-            <div class="battle-arena-orbit"><div class="battle-arena-orbit-inner"><span>THE</span><strong>FLOOR</strong><span>IS YOURS</span></div></div>
-            <div class="battle-arena-caption"><span>BERLIN UNDERGROUND</span><span>EDB / 001</span></div>
+            <div class="battle-arena-orbit"><div class="battle-arena-orbit-inner"><span>SAMSTAG</span><strong>05.12.</strong><span>2026</span></div></div>
+            <div class="battle-arena-caption"><span>ELITE DANCE STUDIO</span><span>EDB / 001</span></div>
           </div>
         </div>
         <div class="battle-hero-stats">
-          <div><strong>04</strong><span>Battle Styles</span></div>
-          <div><strong>04</strong><span>Winners</span></div>
-          <div><strong>100<span>€</span></strong><span>Prize per Style*</span></div>
-          <div class="battle-stats-tail">PLUS SPONSOR GOODIE BAGS <span aria-hidden="true">↗</span></div>
+          <div><strong>04</strong><span>Freestyle-Kategorien</span></div>
+          <div><strong>04</strong><span>Gewinner:innen</span></div>
+          <div><strong>100<span>€</span></strong><span>Preis pro Kategorie*</span></div>
+          <div class="battle-stats-tail">SPONSOR GOODIE BAGS <span aria-hidden="true">↗</span></div>
         </div>
       </div>
     </section>
 
     <div class="battle-ticker" aria-hidden="true">
-      <div>BREAKING ✳ HIP-HOP ✳ HOUSE ✳ BACHATA ✳ YOUR FLOOR. YOUR MOMENT. ✳</div>
-      <div>BREAKING ✳ HIP-HOP ✳ HOUSE ✳ BACHATA ✳ YOUR FLOOR. YOUR MOMENT. ✳</div>
+      <div>BREAKING FREESTYLE ✳ HIP-HOP FREESTYLE ✳ HOUSE FREESTYLE ✳ BACHATA FREESTYLE ✳ 05.12.2026 ✳</div>
+      <div>BREAKING FREESTYLE ✳ HIP-HOP FREESTYLE ✳ HOUSE FREESTYLE ✳ BACHATA FREESTYLE ✳ 05.12.2026 ✳</div>
     </div>
 
     <section class="battle-choose-section battle-container" id="choose-your-style" aria-labelledby="choose-heading">
       <div class="battle-section-heading">
-        <div><p class="battle-section-label">01 / Pick your arena</p><h2 id="choose-heading">CHOOSE YOUR <em>STYLE.</em></h2></div>
-        <p>Du entscheidest, auf welchem Floor du antrittst. Jede Kategorie ist ein eigenes Battle mit eigenem Gewinnerpreis.</p>
+        <div><p class="battle-section-label">01 / Kategorien</p><h2 id="choose-heading">FREESTYLE <em>BATTLES.</em></h2></div>
+        <p>Wähle deine Kategorie. Du kannst auch bei mehreren Freestyle-Battles teilnehmen.</p>
       </div>
       <div class="battle-category-grid" role="group" aria-label="Battle-Kategorie auswählen">
         {categories.map((category) => (
@@ -85,23 +85,23 @@ const categories = [
             aria-pressed="false"
             aria-controls="battle-registration"
           >
-            <span class="battle-category-top"><span>FIGHTER_{category.number} / BATTLE</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
+            <span class="battle-category-top"><span>EDB / {category.number}</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
             <img class="battle-category-photo" src={`${import.meta.env.BASE_URL}media/style-posters/${category.image}`} alt="" loading="lazy" decoding="async" /><span class="battle-category-photo-wash" aria-hidden="true"></span>
             <span class="battle-category-art" aria-hidden="true">{category.motif.split(" / ").map((word) => <span>{word}</span>)}</span>
             <span class="battle-category-lower">
-              <span class="battle-category-name">{category.name}</span>
+              <span class="battle-category-name">{category.name} Freestyle</span>
               <span class="battle-category-traits">{category.label}</span>
             </span>
-            <span class="battle-category-footer"><span><strong>100€</strong> Winner prize*</span><span class="battle-select-text">Select style →</span></span>
+            <span class="battle-category-footer"><span><strong>100€</strong> Preisgeld*</span><span class="battle-select-text">Auswählen ↗</span></span>
           </button>
         ))}
       </div>
       <div class="battle-selection-deck" aria-live="polite">
-        <div class="battle-selection-indicator"><span>◉</span><small>YOUR BATTLE CARD</small></div>
-        <strong data-battle-selected-name>NO STYLE SELECTED</strong>
-        <a href="#battle-registration" data-battle-next>ENTER THE BATTLE <span aria-hidden="true">↗</span></a>
+        <div class="battle-selection-indicator"><span>◉</span><small>DEINE KATEGORIE</small></div>
+        <strong data-battle-selected-name>Noch keine Kategorie gewählt</strong>
+        <a href="#battle-registration" data-battle-next>Buchungsoptionen <span aria-hidden="true">↗</span></a>
       </div>
-      <p class="battle-choose-footnote">* Derzeit 100€ Preisgeld pro Kategorie. Das Preisgeld kann sich durch weitere Partner noch erhöhen. Dazu kommen Goodie Bags unserer Sponsoren.</p>
+      <p class="battle-choose-footnote">* Aktuell 100€ je Gewinner:in. Das Preisgeld kann sich noch erhöhen. Zusätzlich sind Goodie Bags von Sponsoren geplant.</p>
     </section>
 
     <section class="battle-register-section" id="battle-registration" aria-labelledby="register-heading">
@@ -157,26 +157,26 @@ const categories = [
     </section>
 
     <section class="battle-prizes-section battle-container" aria-labelledby="prizes-heading">
-      <div class="battle-prizes-lead"><span class="battle-section-label">03 / The rewards</span><h2 id="prizes-heading">BRING THE <em>HEAT.</em><br />TAKE THE PRIZE.</h2></div>
-      <div class="battle-prize-block"><span class="battle-prize-overline">CURRENT WINNER PRIZE / EACH STYLE</span><div class="battle-prize-amount">100<span>€</span></div><p>4 Styles. 4 Gewinner:innen. Und das ist erst der Anfang.</p><span class="battle-prize-future">Prize pool may grow ↗</span></div>
-      <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Unsere Partner bringen Goodie Bags und Überraschungen mit. Wer sie genau bekommt und welche Sponsoren dabei sind, geben wir bald bekannt.</p></div>
+      <div class="battle-prizes-lead"><span class="battle-section-label">03 / Preise</span><h2 id="prizes-heading">PREISGELD &amp;<br /><em>GOODIE BAGS</em></h2></div>
+      <div class="battle-prize-block"><span class="battle-prize-overline">AKTUELLES PREISGELD / PRO KATEGORIE</span><div class="battle-prize-amount">100<span>€</span></div><p>Aktuell 100€ je Gewinner:in.</p><span class="battle-prize-future">Weitere Sponsoren möglich</span></div>
+      <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Zusätzliche Preise und Goodie Bags von unseren Sponsoren. Details folgen.</p></div>
     </section>
 
     <section class="battle-workshop-strip" aria-label="Workshops und Urban Sports Club">
       <div class="battle-container battle-workshop-inner">
-        <div><span class="battle-section-label">Bonus / Join the session</span><h2>NOT BATTLING?<br /><em>STILL JOIN IN.</em></h2></div>
-        <div><p>Auch Classes und Workshops rund um den Battle Day sind geplant. Die Termine und Möglichkeiten zur Reservierung über Urban Sports Club veröffentlichen wir mit dem vollständigen Programm.</p><span>WORKSHOP BOOKINGS &amp; USC AVAILABILITY — COMING SOON ↗</span></div>
+        <div><span class="battle-section-label">Workshops</span><h2>WORKSHOPS &amp;<br /><em>CLASSES</em></h2></div>
+        <div><p>Weitere Classes und Workshops sind geplant. Zeiten und Buchungsmöglichkeiten folgen mit dem Programm.</p><span>WORKSHOP-DETAILS FOLGEN</span></div>
       </div>
     </section>
 
     <section class="battle-schedule-section" aria-labelledby="schedule-heading">
       <div class="battle-container battle-schedule-layout">
-        <div><p class="battle-section-label">04 / The day</p><h2 id="schedule-heading">THE LINEUP <em>IS COMING.</em></h2><p>Die Battles finden am Samstag, 5. Dezember 2026, in unserem Studio in Berlin-Moabit statt. Den vollständigen Zeitplan, Regeln und die Details zu den Runden veröffentlichen wir bald.</p><a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a></div>
-        <div class="battle-lineup-card"><div class="battle-lineup-top"><span>SAT / 05 DEC</span><span>2026</span></div>{categories.map((category) => <div class="battle-lineup-item"><span>{category.number}</span><strong>{category.name}</strong><small>TIME TBA</small></div>)}<div class="battle-lineup-foot">FULL SCHEDULE DROPPING SOON <span aria-hidden="true">↘</span></div></div>
+        <div><p class="battle-section-label">04 / Programm</p><h2 id="schedule-heading">ZEITPLAN <em>FOLGT.</em></h2><p>Samstag, 5. Dezember 2026 im Elite Dance Studio in Berlin-Moabit. Zeiten und Regeln veröffentlichen wir noch.</p><a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a></div>
+        <div class="battle-lineup-card"><div class="battle-lineup-top"><span>SAT / 05 DEC</span><span>2026</span></div>{categories.map((category) => <div class="battle-lineup-item"><span>{category.number}</span><strong>{category.name} Freestyle</strong><small>UHRZEIT FOLGT</small></div>)}<div class="battle-lineup-foot">VOLLSTÄNDIGES PROGRAMM FOLGT <span aria-hidden="true">↘</span></div></div>
       </div>
     </section>
 
-    <section class="battle-last-cta battle-container" aria-labelledby="final-cta"><p class="battle-section-label">Your moment starts here</p><h2 id="final-cta">SEE YOU ON<br /><em>THE FLOOR.</em></h2><a class="battle-button battle-button-primary" href="#choose-your-style">Choose your battle <span aria-hidden="true">↗</span></a><p>Elite Dance Studio · Wiclefstraße 16–17 · 10551 Berlin-Moabit</p></section>
+    <section class="battle-last-cta battle-container" aria-labelledby="final-cta"><p class="battle-section-label">ELITE DANCE BATTLE 2026</p><h2 id="final-cta">5. DEZEMBER<br /><em>2026</em></h2><a class="battle-button battle-button-primary" href="#choose-your-style">Kategorien ansehen <span aria-hidden="true">↗</span></a><p>Elite Dance Studio · Wiclefstraße 16–17 · 10551 Berlin-Moabit</p></section>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />
@@ -209,7 +209,7 @@ const categories = [
         item.setAttribute("aria-pressed", String(active));
         item.classList.toggle("is-selected", active);
         const copy = item.querySelector(".battle-select-text");
-        if (copy) copy.textContent = active ? "Selected ✓" : "Select style →";
+        if (copy) copy.textContent = active ? "Selected ✓" : "Auswählen ↗";
       });
       status.hidden = true;
       success.hidden = true;

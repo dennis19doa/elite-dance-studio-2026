@@ -490,3 +490,93 @@ const categories = [
   }
   @media(prefers-reduced-motion:reduce) { .battle-arena-orbit::before,.battle-arena-orbit::after { animation:none; } .battle-category-photo { transition:none; } }
 </style>
+
+<style>
+  /* Freestyle V3 — red event palette, blue/purple/pink category accents, interactive cards */
+  .battle-main { --acid:#e3484b;--cream:#f5efeb;--ink:#100d10;background:#100d10; }
+  .battle-hero { background:radial-gradient(circle at 74% 35%,rgba(211,53,59,.18),transparent 29rem),#100d10; }
+  .battle-hero h1>span:last-child { color:#ef6b66; }
+  .battle-hero-stats { border-color:#e3484b; }
+  .battle-hero .battle-arena-orbit { border-color:#e3484b;box-shadow:0 0 0 14px #e3484b24,0 0 0 35px #e3484b14,0 0 0 58px #e3484b09; }
+  .battle-hero .battle-arena-orbit::before { border-color:#e3484b77; }
+  .battle-hero .battle-arena-orbit-inner { background:#e3484b;color:#fff8f3; }
+  .battle-hero .battle-arena-orbit-inner strong { font-size:clamp(1.6rem,3vw,3rem); }
+  .battle-hero .battle-arena-caption { color:#f0aaa5; }
+  .battle-ticker { background:#bd3e42;color:#fff7f4;font-size:clamp(.85rem,1.2vw,1.05rem); }
+  .battle-section-label,.battle-eyebrow { color:#ef7c73; }
+  .battle-category { --px:50%;--py:50%;--tx:0deg;--ty:0deg;min-height:345px;transform:perspective(1100px) rotateX(var(--tx)) rotateY(var(--ty));will-change:transform;transition:transform .17s ease-out,border-color .28s,box-shadow .28s; }
+  .battle-category::before { content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle 200px at var(--px) var(--py),color-mix(in srgb,var(--card-accent),transparent 80%),transparent 82%);opacity:0;transition:opacity .24s; }
+  .battle-category:hover::before,.battle-category:focus-visible::before { opacity:1; }
+  .battle-category::after { content:"";position:absolute;z-index:4;left:0;top:0;bottom:0;right:auto;width:5px;height:auto;border:0;border-radius:0;box-shadow:none;background:var(--card-accent);opacity:1;transform:scaleY(.09);transform-origin:bottom;transition:transform .42s cubic-bezier(.16,.74,.23,1); }
+  .battle-category:hover::after,.battle-category.is-selected::after { transform:scaleY(1); }
+  .battle-category-breaking { --card-accent:#f26958; }
+  .battle-category-hiphop { --card-accent:#7d9aff; }
+  .battle-category-house { --card-accent:#b18bff; }
+  .battle-category-bachata { --card-accent:#f08dbb; }
+  .battle-category:hover { transform:perspective(1100px) rotateX(var(--tx)) rotateY(var(--ty));border-color:var(--card-accent);box-shadow:none; }
+  .battle-category.is-selected { box-shadow:inset 0 0 0 1px var(--card-accent),0 0 0 4px color-mix(in srgb,var(--card-accent),transparent 82%); }
+  .battle-category-photo { opacity:.7;transform:scale(1.04);filter:grayscale(.95) contrast(1.38) brightness(.72);transition:filter .5s,transform .5s,opacity .5s; }
+  .battle-category:hover .battle-category-photo,.battle-category.is-selected .battle-category-photo { opacity:.88;transform:scale(1.15);filter:grayscale(.28) contrast(1.2) brightness(.82); }
+  .battle-category-photo-wash { background:linear-gradient(90deg,#100d10fb 0%,#100d10d9 40%,#100d1069 82%),linear-gradient(0deg,#100d10d8,transparent 60%); }
+  .battle-category-art { transform:none;font:800 clamp(2.55rem,5vw,5rem)/.95 "Sora","Inter",sans-serif;letter-spacing:-.065em; }
+  .battle-category-name { font-size:clamp(1.35rem,2.7vw,2.25rem); }
+  .battle-category .battle-select-text { transition:letter-spacing .25s; }
+  .battle-category:hover .battle-select-text { letter-spacing:.055em; }
+  .battle-selection-deck { background:#3a2028;color:#fff4ed;border:1px solid #ae5a59; }
+  .battle-selection-deck>a { background:#ce4749;color:#fff; }
+  .battle-selection-deck>a:hover { background:#e65d5f; }
+  .battle-register-section { background:#efe5df;color:#20151b; }
+  .battle-register-intro h2 { color:#1d1418; }
+  .battle-register-intro>p:not(.battle-section-label) { color:#62565a; }
+  .battle-register-steps,.battle-register-steps>div { border-color:#b19a98; }
+  .battle-register-steps>div>span { color:#a4363c; }
+  .battle-register-steps p { color:#685a5e; }
+  .battle-ticket-note { background:#f1d9d6;border-color:#c14b4d;color:#251317; }
+  .battle-ticket-note-icon { color:#b34047; }
+  .battle-ticket-note p { color:#6e4f53; }
+  .battle-register-card { background:#191217;color:#fff8f4;box-shadow:14px 14px 0 #b94d4c44; }
+  .battle-form-availability { color:#dc8d8d; }
+  .battle-form-description { color:#b5a4a8; }
+  .battle-selected-style { background:#332029;border-color:#e35b60;color:#fff5f0; }
+  .battle-selected-style span { color:#bc959c; }
+  .battle-booking-options { display:grid;gap:11px; }
+  .battle-booking-option { display:flex;align-items:center;justify-content:space-between;width:100%;gap:15px;padding:16px;background:#271c22;border:1px solid #65404a;color:#f5eeec;text-align:left;font:inherit;cursor:pointer;transition:background .2s,border-color .2s; }
+  .battle-booking-option:hover,.battle-booking-option.is-active { background:#412730;border-color:#ed686b; }
+  .battle-booking-option strong,.battle-booking-option small { display:block; }
+  .battle-booking-option strong { font-size:.96rem; }
+  .battle-booking-option small { margin-top:3px;color:#c3afb2;font-size:.72rem;line-height:1.4; }
+  .battle-booking-option b { font:800 2rem/1 "Sora",sans-serif;white-space:nowrap;color:#f37d78; }
+  .battle-booking-option .battle-usc-state { font:800 .72rem/1.3 "Inter",sans-serif;color:#d6b0b3; }
+  .battle-price-disclaimer { margin:15px 0 0;color:#c6acb0;font-size:.74rem;line-height:1.6; }
+  .battle-register-card .battle-submit { color:#ffe9e6;background:#84363d;opacity:1;cursor:not-allowed; }
+  .battle-register-card .battle-submit:disabled { opacity:.85; }
+  .battle-register-card .battle-form-hint { color:#a99499; }
+  .battle-prize-block { background:#d54b4b;color:#fff; }
+  .battle-prize-amount { color:#fff; }
+  .battle-prize-future { border-color:#f2b2b2; }
+  .battle-goodies-block>span { color:#ef8889; }
+  .battle-workshop-strip { background:linear-gradient(125deg,#2e1b25,#1b151c); }
+  .battle-schedule-section { background:#eee4df;color:#211718; }
+  .battle-schedule-layout .battle-section-label { color:#a7363a; }
+  .battle-schedule-layout h2 em { color:#b8454b; }
+  .battle-lineup-card { background:#21141a;box-shadow:14px 16px 0 #bd5d624a; }
+  .battle-lineup-top,.battle-lineup-item span,.battle-lineup-foot span { color:#f17878; }
+  .battle-lineup-top { border-color:#e65d5d; }
+  .battle-last-cta::before { border-color:#ef6468; }
+  @media(max-width:760px) {
+    .battle-category { min-height:310px; }
+    .battle-category-art { font-size:clamp(2rem,6.3vw,3.3rem); }
+  }
+  @media(max-width:480px) {
+    .battle-category { min-height:280px; }
+    .battle-category-art { font-size:clamp(1.7rem,6vw,2.6rem); }
+    .battle-category-name { font-size:1.3rem; }
+    .battle-booking-option { padding:12px; }
+    .battle-booking-option b { font-size:1.5rem; }
+  }
+  @media(prefers-reduced-motion:reduce) {
+    .battle-category { transform:none!important;transition:none; }
+    .battle-category::before { display:none; }
+    .battle-category-photo { transition:none; }
+  }
+</style>

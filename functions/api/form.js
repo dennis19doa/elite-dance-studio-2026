@@ -66,6 +66,7 @@ function buildMessage(fields) {
       "E-Mail: " + fields.email,
       "Battle-Name: " + (fields.stageName || "–"),
       "Buchungsweg: " + fields.bookingMethod,
+      "Erziehungsberechtigten-Zustimmung bei Breaking Kids: " + (fields.battleCategories.includes("breaking-kids") ? (fields.guardianConsent === "yes" ? "bestätigt" : "fehlt") : "nicht erforderlich"),
       "Kategorien: " + fields.battleCategories.join(", "),
       "",
       "Bitte mit der Eversports-/USC-Teilnehmerliste abgleichen.",
@@ -183,10 +184,11 @@ export async function onRequestPost({ request, env }) {
       openFeedback: clean(form.get("open_feedback"), 5000),
       discoverySource: clean(form.get("discovery_source"), 200),
       source: clean(form.get("source"), 300),
-      battleCategories: [...new Set(form.getAll("battle_categories").map((value) => clean(value, 30)).filter((value) => ["breaking", "hip-hop", "house", "bachata"].includes(value)))],
+      battleCategories: [...new Set(form.getAll("battle_categories").map((value) => clean(value, 30)).filter((value) => ["breaking-kids", "breaking", "hip-hop", "house", "bachata"].includes(value)))],
       stageName: clean(form.get("stage_name"), 120),
       bookingMethod: clean(form.get("booking_method"), 20),
       bookingConfirmed: clean(form.get("booking_confirmed"), 10),
+      guardianConsent: clean(form.get("guardian_consent"), 10),
       privacyConsent: clean(form.get("privacy_consent"), 40),
     };
 
@@ -208,7 +210,7 @@ export async function onRequestPost({ request, env }) {
 
     if (
       fields.formKind === "battle" &&
-      (!fields.battleCategories.length || !["usc", "eversports"].includes(fields.bookingMethod) || fields.bookingConfirmed !== "yes")
+      (!fields.battleCategories.length || !["usc", "eversports"].includes(fields.bookingMethod) || fields.bookingConfirmed !== "yes" || (fields.battleCategories.includes("breaking-kids") && fields.guardianConsent !== "yes"))
     ) {
       return json({ ok: false, error: "missing_required_fields" }, 400);
     }

@@ -70,8 +70,8 @@ const categories = [
     </section>
 
     <div class="battle-ticker" aria-hidden="true">
-      <div>BREAKING FREESTYLE ✳ HIP-HOP FREESTYLE ✳ HOUSE FREESTYLE ✳ BACHATA FREESTYLE ✳ 05.12.2026 ✳</div>
-      <div>BREAKING FREESTYLE ✳ HIP-HOP FREESTYLE ✳ HOUSE FREESTYLE ✳ BACHATA FREESTYLE ✳ 05.12.2026 ✳</div>
+      <div>BREAKING KIDS ✳ BREAKING ✳ HIP-HOP ✳ HOUSE ✳ BACHATA ✳ 05.12.2026 ✳</div>
+      <div>BREAKING KIDS ✳ BREAKING ✳ HIP-HOP ✳ HOUSE ✳ BACHATA ✳ 05.12.2026 ✳</div>
     </div>
 
     <section class="battle-choose-section battle-container" id="choose-your-style" aria-labelledby="choose-heading">
@@ -105,7 +105,7 @@ const categories = [
         ))}
       </div>
       <div class="battle-selection-deck" aria-live="polite">
-        <div class="battle-selection-indicator"><span>◉</span><small>FREESTYLE-KATEGORIEN</small></div>
+        <div class="battle-selection-indicator"><span>◉</span><small>DEINE AUSWAHL</small></div>
         <strong data-battle-selected-name>Mehrere Kategorien möglich</strong>
         <a href="#battle-entries" data-battle-next>Teilnahme angeben <span aria-hidden="true">↗</span></a>
       </div>
@@ -195,8 +195,8 @@ const categories = [
       <label class="battle-entry-trap" aria-hidden="true">Leer lassen<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
       <h3>Teilnahme eintragen</h3>
       <div class="battle-entry-fields">
-        <label>Vor- und Nachname *<input name="name" type="text" autocomplete="name" maxlength="160" required placeholder="Name der Buchung" /></label>
-        <label>E-Mail-Adresse *<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="E-Mail der Buchung" /></label>
+        <label>Name der teilnehmenden Person *<input name="name" type="text" autocomplete="name" maxlength="160" required placeholder="Bei Kids: Name des Kindes" /></label>
+        <label>E-Mail-Adresse der Buchung *<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="Bei Kids: E-Mail des Elternteils" /></label>
         <label class="battle-entry-wide">Battle-Name (optional)<input name="stage_name" type="text" maxlength="120" placeholder="Dein Name im Battle" /></label>
       </div>
       <fieldset class="battle-entry-fieldset">
@@ -210,6 +210,12 @@ const categories = [
           ))}
         </div>
       </fieldset>
+      <div class="battle-kids-consent" data-kids-consent hidden>
+        <label><input type="checkbox" name="guardian_consent" value="yes" data-guardian-consent />
+          <span>Ich bin erziehungsberechtigt und stimme der Teilnahme meines Kindes am Breaking Kids Battle zu. *</span>
+        </label>
+        <small>Für Breaking Kids bitte den Namen des Kindes und die Buchungs-E-Mail der erziehungsberechtigten Person angeben.</small>
+      </div>
       <fieldset class="battle-entry-fieldset"><legend>Wie hast du gebucht? *</legend>
         <div class="battle-entry-methods">
           <label><input type="radio" name="booking_method" value="eversports" required /> Eversports</label>
@@ -279,8 +285,10 @@ const categories = [
     const inputs = Array.from(document.querySelectorAll("[data-battle-entry-category]"));
     const deckLabel = document.querySelector("[data-battle-selected-name]");
     const deck = document.querySelector(".battle-selection-deck");
-    const names = { breaking: "Breaking Freestyle", "hip-hop": "Hip-Hop Freestyle", house: "House Freestyle", bachata: "Bachata Freestyle" };
+    const names = { "breaking-kids": "Breaking Kids", breaking: "Breaking", "hip-hop": "Hip-Hop", house: "House", bachata: "Bachata" };
     const chosen = new Set();
+    const guardianBlock = document.querySelector("[data-kids-consent]");
+    const guardianInput = document.querySelector("[data-guardian-consent]");
     const update = () => {
       cards.forEach((card) => {
         const yes = chosen.has(card.dataset.selectStyle);
@@ -292,6 +300,9 @@ const categories = [
       inputs.forEach((input) => { input.checked = chosen.has(input.value); });
       if (deckLabel) deckLabel.textContent = chosen.size ? Array.from(chosen).map((key) => names[key]).join(" · ") : "Mehrere Kategorien möglich";
       deck?.classList.toggle("has-selection", chosen.size > 0);
+      const kidsSelected = chosen.has("breaking-kids");
+      if (guardianBlock) guardianBlock.hidden = !kidsSelected;
+      if (guardianInput) { guardianInput.required = kidsSelected; if (!kidsSelected) guardianInput.checked = false; }
     };
     const motion = matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches;
     cards.forEach((card) => {
@@ -302,17 +313,11 @@ const categories = [
       });
       if (motion) {
         card.addEventListener("pointermove", (event) => {
-          const box = card.getBoundingClientRect();
-          const x = (event.clientX - box.left) / box.width;
-          const y = (event.clientY - box.top) / box.height;
-          card.style.setProperty("--px", Math.round(x * 100) + "%");
-          card.style.setProperty("--py", Math.round(y * 100) + "%");
-          card.style.setProperty("--ty", ((x - .5) * 5).toFixed(2) + "deg");
-          card.style.setProperty("--tx", ((.5 - y) * 4).toFixed(2) + "deg");
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--px", Math.round(((event.clientX - rect.left) / rect.width) * 100) + "%");
+          card.style.setProperty("--py", Math.round(((event.clientY - rect.top) / rect.height) * 100) + "%");
         });
         card.addEventListener("pointerleave", () => {
-          card.style.setProperty("--tx", "0deg");
-          card.style.setProperty("--ty", "0deg");
           card.style.setProperty("--px", "50%");
           card.style.setProperty("--py", "50%");
         });
@@ -329,7 +334,7 @@ const categories = [
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (!chosen.size) {
-        if (status) status.textContent = "Bitte wähle mindestens eine Freestyle-Kategorie.";
+        if (status) status.textContent = "Bitte wähle mindestens eine Kategorie.";
         inputs[0]?.focus();
         return;
       }

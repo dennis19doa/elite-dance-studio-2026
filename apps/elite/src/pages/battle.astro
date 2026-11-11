@@ -12,6 +12,7 @@ const heroBreaking = battlePosterSrc("05-breaking.webp");
 const heroHipHop = battlePosterSrc("06-hip-hop-beginner-amy.webp");
 const heroHouse = battlePosterSrc("03-house-beginner.webp");
 const heroBachata = battlePosterSrc("19-bachata-intermediate.webp");
+const battlePoster = battleBase + "media/events/elite-battle-2026-poster.svg";
 
 const categories = [
   { key: "breaking-kids", number: "01", name: "Breaking Kids", motif: "KIDS", label: "Kinder-Battle", image: "", className: "battle-category battle-category-kids", prize: "Kinderpreise folgen" },
@@ -26,7 +27,7 @@ const categories = [
   title="Elite Dance Battle 2026 | Breaking Kids, Breaking, Hip-Hop, House & Bachata"
   description="Elite Dance Battle am 5. Dezember 2026 in Berlin-Moabit. Breaking Kids, Breaking, Hip-Hop, House und Bachata. Jetzt anmelden."
   bodyClass="elite-battle-page"
-  noindex={true}
+  noindex={false}
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
@@ -41,17 +42,17 @@ const categories = [
         </div>
         <div class="battle-hero-body">
           <div class="battle-hero-copy">
-            <p class="battle-eyebrow">Fünf Kategorien · 05.12.2026</p>
+            <p class="battle-eyebrow">5 Kategorien · 12:00–19:00</p>
             <h1 id="battle-title"><span>ELITE</span><span class="battle-title-outline">DANCE</span><span>BATTLE<span class="battle-title-star">*</span></span></h1>
             <p class="battle-hero-lead">Breaking Kids · Breaking · Hip-Hop · House · Bachata</p>
-            <p class="battle-hero-description">Fünf Battles an einem Tag. Ein Ticket gilt für die gesamte Veranstaltung.</p>
+            <p class="battle-hero-description">Battles von 12:00 bis 19:00 Uhr, fünf Kategorien, gemeinsame Jury und ein Überraschungsfinale zum Abschluss.</p>
             <div class="battle-hero-actions">
               <a class="battle-button battle-button-primary" href="#battle-registration">Jetzt anmelden <span aria-hidden="true">↘</span></a>
               <a class="battle-button battle-button-ghost" href="#how-it-works">Anmeldung <span aria-hidden="true">↗</span></a>
             </div>
           </div>
           <aside class="battle-hero-stamp" aria-label="Event-Details">
-            <span class="battle-stamp-overline">SAVE THE DATE</span>
+            <span class="battle-stamp-overline">BATTLE DAY</span>
             <strong>05<span>.</span>12<span>.</span>26</strong>
             <span class="battle-stamp-rule"></span>
             <span>ELITE DANCE STUDIO</span>
@@ -80,6 +81,29 @@ const categories = [
       <div>BREAKING KIDS ✳ BREAKING ✳ HIP-HOP ✳ HOUSE ✳ BACHATA ✳ 05.12.2026 ✳</div>
       <div>BREAKING KIDS ✳ BREAKING ✳ HIP-HOP ✳ HOUSE ✳ BACHATA ✳ 05.12.2026 ✳</div>
     </div>
+
+<section class="battle-poster-showcase" id="poster" aria-labelledby="poster-heading">
+      <div class="battle-container battle-poster-layout">
+        <div class="battle-poster-copy">
+          <p class="battle-section-label">05. Dezember 2026 · Berlin-Moabit</p>
+          <h2 id="poster-heading">DAS EVENT <em>IM ÜBERBLICK.</em></h2>
+          <p>Fünf Battle-Kategorien an einem Tag. Alle Judges bewerten alle Kategorien. Zum Abschluss gibt es ein Surprise Final Battle mit den Gewinner:innen.</p>
+          <div class="battle-poster-facts">
+            <div><span>ZEIT</span><strong>12:00–19:00 Uhr</strong></div>
+            <div><span>KATEGORIEN</span><strong>Breaking Kids · Breaking · Hip-Hop · House · Bachata</strong></div>
+            <div><span>COMMUNITY</span><strong>Freie Jam Session · Essen vor Ort · Zuschauer:innen willkommen</strong></div>
+          </div>
+          <div class="battle-poster-actions">
+            <a class="battle-button battle-button-primary" href="#battle-registration">Zur Anmeldung <span aria-hidden="true">↗</span></a>
+            <a class="battle-button battle-button-ghost" href="#battle-schedule">Tagesprogramm <span aria-hidden="true">↘</span></a>
+          </div>
+        </div>
+        <figure class="battle-poster-art">
+          <img src={battlePoster} width="700" height="875" loading="eager" decoding="async" alt="Offizielles Elite Dance Battle 2026 Poster: fünf Kategorien, 05.12.2026, Elite Dance Studio Berlin" />
+          <figcaption>Elite Dance Battle 2026 · Offizielles Poster</figcaption>
+        </figure>
+      </div>
+    </section>
 
     <section class="battle-choose-section battle-container" id="choose-your-style" aria-labelledby="choose-heading">
       <div class="battle-section-heading">
@@ -122,36 +146,18 @@ const categories = [
 <section class="battle-format-section battle-container" id="battle-format" aria-labelledby="format-heading">
       <div class="battle-format-heading">
         <div>
-          <p class="battle-section-label">02 / Battle-Format</p>
-          <h2 id="format-heading">VOM CYPHER <em>ZUM FINALE.</em></h2>
+          <p class="battle-section-label">02 / Event-Infos</p>
+          <h2 id="format-heading">FÜNF KATEGORIEN. <em>EIN EVENT.</em></h2>
         </div>
-        <p>Das ist der aktuelle Plan für die offenen Kategorien. Die endgültigen Regeln veröffentlichen wir vor dem Event.</p>
+        <p>Battles am Nachmittag, eine gemeinsame Jury und ein besonderes Finale zum Abschluss.</p>
       </div>
-      <div class="battle-bracket" aria-label="Geplanter Battle-Ablauf: Cypher, Top vier, zwei Halbfinals, Finale">
-        <div class="battle-bracket-stage">
-          <span class="battle-bracket-number">01 / VORRUNDE</span>
-          <div class="battle-bracket-node"><strong>Cypher</strong><small>Teilnehmer:innen</small></div>
-        </div>
-        <span class="battle-bracket-arrow" aria-hidden="true">→</span>
-        <div class="battle-bracket-stage">
-          <span class="battle-bracket-number">02 / AUSWAHL</span>
-          <div class="battle-bracket-node"><strong>Top 4</strong><small>Vier Qualifizierte</small></div>
-        </div>
-        <span class="battle-bracket-arrow" aria-hidden="true">→</span>
-        <div class="battle-bracket-stage">
-          <span class="battle-bracket-number">03 / HALBFINALE</span>
-          <div class="battle-bracket-split">
-            <div class="battle-bracket-node"><strong>Halbfinale A</strong></div>
-            <div class="battle-bracket-node"><strong>Halbfinale B</strong></div>
-          </div>
-        </div>
-        <span class="battle-bracket-arrow" aria-hidden="true">→</span>
-        <div class="battle-bracket-stage">
-          <span class="battle-bracket-number">04 / FINALE</span>
-          <div class="battle-bracket-node battle-bracket-node-final"><strong>Finale</strong><small>Kategoriesieg</small></div>
-        </div>
+      <div class="battle-overview-grid">
+        <div class="battle-overview-card"><span>12:00–19:00</span><strong>Battle Day</strong><small>Fünf Kategorien verteilt über den Tag</small></div>
+        <div class="battle-overview-card"><span>5 KATEGORIEN</span><strong>Breaking Kids, Breaking, Hip-Hop, House &amp; Bachata</strong><small>Ein Ticket für das ganze Event</small></div>
+        <div class="battle-overview-card"><span>JURY</span><strong>Alle Judges bewerten alle Kategorien</strong><small>Gemeinsames Judging während des gesamten Events</small></div>
+        <div class="battle-overview-card"><span>FINALE</span><strong>Surprise Final Battle</strong><small>Besonderes Finale mit den Kategoriesieger:innen</small></div>
       </div>
-      <p class="battle-bracket-note">Formatentwurf aus der Planung. Breaking Kids kann eigene Regeln erhalten. Ein gemeinsames Spaßfinale zum Abschluss ist ebenfalls vorgesehen.</p>
+      <p class="battle-bracket-note">Zusätzlich gibt es eine kostenlose Jam Session im zweiten Raum und Essen vor Ort. Zuschauer:innen sind herzlich willkommen — der Eintritt ist kostenlos.</p>
     </section>
 
     <section class="battle-register-section" id="battle-registration" aria-labelledby="register-heading">
@@ -243,10 +249,14 @@ const categories = [
       <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Zusätzliche Preise und Goodie Bags von unseren Sponsoren. Details folgen.</p></div>
     </section>
 
-    <section class="battle-workshop-strip" aria-label="Workshops und Urban Sports Club">
-      <div class="battle-container battle-workshop-inner">
-        <div><span class="battle-section-label">Workshops</span><h2>WORKSHOPS &amp;<br /><em>CLASSES</em></h2></div>
-        <div><p>Weitere Classes und Workshops sind geplant. Zeiten und Buchungsmöglichkeiten folgen mit dem Programm.</p><span>WORKSHOP-DETAILS FOLGEN</span></div>
+    <section class="battle-workshop-strip battle-community-strip" id="battle-community" aria-labelledby="community-heading">
+      <div class="battle-container battle-community-layout">
+        <div class="battle-community-title">
+          <p class="battle-section-label">Community</p>
+          <h2 id="community-heading">JAM, FOOD <em>&amp; COMMUNITY.</em></h2>
+        </div>
+        <p>Du musst nicht am Battle teilnehmen, um dabei zu sein. Im zweiten Raum läuft eine kostenlose Jam Session. Essen gibt es vor Ort, und Zuschauer:innen können kostenlos vorbeikommen.</p>
+        <div class="battle-community-pills"><span>Free Jam Session</span><span>Food vor Ort</span><span>Zuschauer:innen frei</span></div>
       </div>
     </section>
 
@@ -254,28 +264,25 @@ const categories = [
       <div class="battle-container battle-schedule-layout">
         <div class="battle-schedule-intro">
           <p class="battle-section-label">06 / Tagesprogramm</p>
-          <h2 id="schedule-heading">DER TAG <em>IM ÜBERBLICK.</em></h2>
-          <p>Das ist unser aktueller Ablaufentwurf für Samstag, 5. Dezember 2026. Zeiten und Reihenfolge können sich bis zum Event noch ändern.</p>
+          <h2 id="schedule-heading">12:00 BIS 19:00 <em>UHR.</em></h2>
+          <p>Der genaue Zeitplan der einzelnen Kategorien wird noch bekannt gegeben. Der Battle Day läuft von 12:00 bis 19:00 Uhr mit einem Überraschungsfinale zum Abschluss.</p>
           <div class="battle-schedule-rooms">
-            <div><span>RAUM 01</span><strong>Battles &amp; Siegerehrung</strong></div>
-            <div><span>RAUM 02</span><strong>Warm-up &amp; Cyphers</strong></div>
+            <div><span>RAUM 01</span><strong>Battles · Finale · Siegerehrung</strong></div>
+            <div><span>RAUM 02</span><strong>Kostenlose Jam Session</strong></div>
+            <div><span>ESSEN</span><strong>Food-Bereich vor Ort</strong></div>
           </div>
           <a class="battle-schedule-instagram" href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a>
         </div>
-        <div class="battle-lineup-card">
-          <div class="battle-lineup-top"><span>SA / 05 DEZ 2026</span><span>VORLÄUFIG</span></div>
-          <div class="battle-lineup-item battle-lineup-item-prelude"><span>10:30</span><strong>Einlass Kinder</strong><small>Check-in</small></div>
-          <div class="battle-lineup-item"><span>11:00</span><strong>Breaking Kids</strong><small>Kinderpreise anschließend</small></div>
-          <div class="battle-lineup-item"><span>12:00</span><strong>Breaking</strong><small>Battle</small></div>
-          <div class="battle-lineup-item battle-lineup-item-break"><span>13:15</span><strong>Pause</strong><small>20 min</small></div>
-          <div class="battle-lineup-item"><span>13:35</span><strong>Hip-Hop</strong><small>Battle</small></div>
-          <div class="battle-lineup-item"><span>14:50</span><strong>House</strong><small>Battle</small></div>
-          <div class="battle-lineup-item battle-lineup-item-break"><span>16:05</span><strong>Pause</strong><small>20 min</small></div>
-          <div class="battle-lineup-item"><span>16:25</span><strong>Bachata</strong><small>Battle</small></div>
-          <div class="battle-lineup-item battle-lineup-item-special"><span>17:25</span><strong>Gemeinsames Spaßfinale</strong><small>Geplant</small></div>
-          <div class="battle-lineup-item battle-lineup-item-special"><span>17:45</span><strong>Siegerehrung</strong><small>Geplant</small></div>
-          <div class="battle-lineup-item battle-lineup-item-prelude"><span>18:05</span><strong>Freier Cypher &amp; Ausklang</strong><small>Geplant</small></div>
-          <div class="battle-lineup-foot">PLANUNGSSTAND · ZEITEN KÖNNEN SICH ÄNDERN <span aria-hidden="true">↗</span></div>
+        <div class="battle-lineup-card battle-general-timetable">
+          <div class="battle-lineup-top"><span>SA / 05 DEZ 2026</span><span>PROGRAMMÜBERSICHT</span></div>
+          <div class="battle-lineup-item"><span>12:00</span><strong>Start des Battle Days</strong><small>Einlass &amp; Battles</small></div>
+          <div class="battle-lineup-item"><span>AB 12:00</span><strong>Fünf Battle-Kategorien</strong><small>Breaking Kids · Breaking · Hip-Hop · House · Bachata</small></div>
+          <div class="battle-lineup-item"><span>ALLE RUNDEN</span><strong>Gemeinsame Jury</strong><small>Alle Judges bewerten alle Kategorien</small></div>
+          <div class="battle-lineup-item"><span>DEN GANZEN TAG</span><strong>Kostenlose Jam Session</strong><small>Im zweiten Raum</small></div>
+          <div class="battle-lineup-item"><span>DEN GANZEN TAG</span><strong>Food &amp; Community</strong><small>Essen vor Ort · Zuschauen kostenlos</small></div>
+          <div class="battle-lineup-item battle-lineup-item-special"><span>ZUM ABSCHLUSS</span><strong>Surprise Final Battle</strong><small>Mit den Kategoriesieger:innen</small></div>
+          <div class="battle-lineup-item battle-lineup-item-special"><span>BIS 19:00</span><strong>Abschluss</strong><small>Siegerehrung &amp; Community</small></div>
+          <div class="battle-lineup-foot">KONKRETE STARTZEITEN DER KATEGORIEN FOLGEN <span aria-hidden="true">↗</span></div>
         </div>
       </div>
     </section>

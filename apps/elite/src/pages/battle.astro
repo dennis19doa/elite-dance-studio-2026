@@ -112,10 +112,45 @@ const categories = [
       <p class="battle-choose-footnote">* Je 100€ Preisgeld in den vier offenen Kategorien. Für Breaking Kids sind separate Kinderpreise geplant. Details folgen.</p>
     </section>
 
+<section class="battle-format-section battle-container" id="battle-format" aria-labelledby="format-heading">
+      <div class="battle-format-heading">
+        <div>
+          <p class="battle-section-label">02 / Battle-Format</p>
+          <h2 id="format-heading">VOM CYPHER <em>ZUM FINALE.</em></h2>
+        </div>
+        <p>Das ist der aktuelle Plan für die offenen Kategorien. Die endgültigen Regeln veröffentlichen wir vor dem Event.</p>
+      </div>
+      <div class="battle-bracket" aria-label="Geplanter Battle-Ablauf: Cypher, Top vier, zwei Halbfinals, Finale">
+        <div class="battle-bracket-stage">
+          <span class="battle-bracket-number">01 / VORRUNDE</span>
+          <div class="battle-bracket-node"><strong>Cypher</strong><small>Teilnehmer:innen</small></div>
+        </div>
+        <span class="battle-bracket-arrow" aria-hidden="true">→</span>
+        <div class="battle-bracket-stage">
+          <span class="battle-bracket-number">02 / AUSWAHL</span>
+          <div class="battle-bracket-node"><strong>Top 4</strong><small>Vier Qualifizierte</small></div>
+        </div>
+        <span class="battle-bracket-arrow" aria-hidden="true">→</span>
+        <div class="battle-bracket-stage">
+          <span class="battle-bracket-number">03 / HALBFINALE</span>
+          <div class="battle-bracket-split">
+            <div class="battle-bracket-node"><strong>Halbfinale A</strong></div>
+            <div class="battle-bracket-node"><strong>Halbfinale B</strong></div>
+          </div>
+        </div>
+        <span class="battle-bracket-arrow" aria-hidden="true">→</span>
+        <div class="battle-bracket-stage">
+          <span class="battle-bracket-number">04 / FINALE</span>
+          <div class="battle-bracket-node battle-bracket-node-final"><strong>Finale</strong><small>Kategoriesieg</small></div>
+        </div>
+      </div>
+      <p class="battle-bracket-note">Formatentwurf aus der Planung. Breaking Kids kann eigene Regeln erhalten. Ein gemeinsames Spaßfinale zum Abschluss ist ebenfalls vorgesehen.</p>
+    </section>
+
     <section class="battle-register-section" id="battle-registration" aria-labelledby="register-heading">
   <div class="battle-container battle-register-grid">
     <div class="battle-register-intro">
-      <p class="battle-section-label">02 / Anmeldung</p>
+      <p class="battle-section-label">03 / Anmeldung</p>
       <h2 id="register-heading">EIN TICKET.<br /><em>ALLE BATTLES.</em></h2>
       <p>Einmal für den Battle Day anmelden. Das Ticket gilt für alle fünf Kategorien – Breaking Kids, Breaking, Hip-Hop, House und Bachata.</p>
       <div class="battle-register-steps" id="how-it-works">
@@ -150,7 +185,7 @@ const categories = [
 <section class="battle-entries-section" id="battle-entries" aria-labelledby="entries-heading">
   <div class="battle-container battle-entries-layout">
     <div class="battle-entries-intro">
-      <p class="battle-section-label">03 / Battle-Kategorien</p>
+      <p class="battle-section-label">04 / Battle-Kategorien</p>
       <h2 id="entries-heading">DEINE <em>BATTLES.</em></h2>
       <p>Bereits gebucht? Hier gibst du an, in welchen Kategorien du antrittst. Mehrere Kategorien sind möglich.</p>
       <p>Wichtig: Verwende dieselbe E-Mail-Adresse wie in deiner Eversports- oder USC-Buchung. Wir gleichen die Kategorien mit der Teilnehmerliste ab.</p>
@@ -190,7 +225,7 @@ const categories = [
 </section>
 
     <section class="battle-prizes-section battle-container" aria-labelledby="prizes-heading">
-      <div class="battle-prizes-lead"><span class="battle-section-label">04 / Preise</span><h2 id="prizes-heading">PREISGELD &amp;<br /><em>GOODIE BAGS</em></h2></div>
+      <div class="battle-prizes-lead"><span class="battle-section-label">05 / Preise</span><h2 id="prizes-heading">PREISGELD &amp;<br /><em>GOODIE BAGS</em></h2></div>
       <div class="battle-prize-block"><span class="battle-prize-overline">AKTUELLES PREISGELD / OFFENE KATEGORIEN</span><div class="battle-prize-amount">100<span>€</span></div><p>Aktuell 100€ pro Sieger:in in Breaking, Hip-Hop, House und Bachata. Kinderpreise separat.</p><span class="battle-prize-future">Weitere Sponsoren möglich</span></div>
       <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Zusätzliche Preise und Goodie Bags von unseren Sponsoren. Details folgen.</p></div>
     </section>
@@ -202,14 +237,37 @@ const categories = [
       </div>
     </section>
 
-    <section class="battle-schedule-section" aria-labelledby="schedule-heading">
+    <section class="battle-schedule-section" id="battle-schedule" aria-labelledby="schedule-heading">
       <div class="battle-container battle-schedule-layout">
-        <div><p class="battle-section-label">05 / Programm</p><h2 id="schedule-heading">ZEITPLAN <em>FOLGT.</em></h2><p>Samstag, 5. Dezember 2026 im Elite Dance Studio in Berlin-Moabit. Zeiten und Regeln veröffentlichen wir noch.</p><a href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a></div>
-        <div class="battle-lineup-card"><div class="battle-lineup-top"><span>SAT / 05 DEC</span><span>2026</span></div>{categories.map((category) => <div class="battle-lineup-item"><span>{category.number}</span><strong>{category.name} Freestyle</strong><small>UHRZEIT FOLGT</small></div>)}<div class="battle-lineup-foot">VOLLSTÄNDIGES PROGRAMM FOLGT <span aria-hidden="true">↘</span></div></div>
+        <div class="battle-schedule-intro">
+          <p class="battle-section-label">06 / Tagesprogramm</p>
+          <h2 id="schedule-heading">DER TAG <em>IM ÜBERBLICK.</em></h2>
+          <p>Das ist unser aktueller Ablaufentwurf für Samstag, 5. Dezember 2026. Zeiten und Reihenfolge können sich bis zum Event noch ändern.</p>
+          <div class="battle-schedule-rooms">
+            <div><span>RAUM 01</span><strong>Battles &amp; Siegerehrung</strong></div>
+            <div><span>RAUM 02</span><strong>Warm-up &amp; Cyphers</strong></div>
+          </div>
+          <a class="battle-schedule-instagram" href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a>
+        </div>
+        <div class="battle-lineup-card">
+          <div class="battle-lineup-top"><span>SA / 05 DEZ 2026</span><span>VORLÄUFIG</span></div>
+          <div class="battle-lineup-item battle-lineup-item-prelude"><span>10:30</span><strong>Einlass Kinder</strong><small>Check-in</small></div>
+          <div class="battle-lineup-item"><span>11:00</span><strong>Breaking Kids</strong><small>Kinderpreise anschließend</small></div>
+          <div class="battle-lineup-item"><span>12:00</span><strong>Breaking</strong><small>Battle</small></div>
+          <div class="battle-lineup-item battle-lineup-item-break"><span>13:15</span><strong>Pause</strong><small>20 min</small></div>
+          <div class="battle-lineup-item"><span>13:35</span><strong>Hip-Hop</strong><small>Battle</small></div>
+          <div class="battle-lineup-item"><span>14:50</span><strong>House</strong><small>Battle</small></div>
+          <div class="battle-lineup-item battle-lineup-item-break"><span>16:05</span><strong>Pause</strong><small>20 min</small></div>
+          <div class="battle-lineup-item"><span>16:25</span><strong>Bachata</strong><small>Battle</small></div>
+          <div class="battle-lineup-item battle-lineup-item-special"><span>17:25</span><strong>Gemeinsames Spaßfinale</strong><small>Geplant</small></div>
+          <div class="battle-lineup-item battle-lineup-item-special"><span>17:45</span><strong>Siegerehrung</strong><small>Geplant</small></div>
+          <div class="battle-lineup-item battle-lineup-item-prelude"><span>18:05</span><strong>Freier Cypher &amp; Ausklang</strong><small>Geplant</small></div>
+          <div class="battle-lineup-foot">PLANUNGSSTAND · ZEITEN KÖNNEN SICH ÄNDERN <span aria-hidden="true">↗</span></div>
+        </div>
       </div>
     </section>
 
-    <section class="battle-last-cta battle-container" aria-labelledby="final-cta"><p class="battle-section-label">ELITE DANCE BATTLE 2026</p><h2 id="final-cta">5. DEZEMBER<br /><em>2026</em></h2><a class="battle-button battle-button-primary" href="#choose-your-style">Kategorien ansehen <span aria-hidden="true">↗</span></a><p>Elite Dance Studio · Wiclefstraße 16–17 · 10551 Berlin-Moabit</p></section>
+    <section class="battle-last-cta battle-container" aria-labelledby="final-cta"><p class="battle-section-label">ELITE DANCE BATTLE 2026</p><h2 id="final-cta">5. DEZEMBER<br /><em>2026</em></h2><a class="battle-button battle-button-primary" href="#battle-registration">Zur Anmeldung <span aria-hidden="true">↗</span></a><p>Elite Dance Studio · Wiclefstraße 16–17 · 10551 Berlin-Moabit</p></section>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />

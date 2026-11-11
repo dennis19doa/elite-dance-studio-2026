@@ -6,13 +6,20 @@ import site from "../data/site.json";
 
 const eversportsBookingUrl = "https://www.eversports.de/org/activity/946397ed-f7ae-4ea1-8ee1-2e985945d6f1";
 const uscBookingUrl = "https://urbansportsclub.com/de/venues/elite-dance-studio-1"; // Replace with direct event class link if available
+const battleBase = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
+const battlePosterSrc = (filename: string) => battleBase + "media/style-posters/" + filename;
+const heroBreaking = battlePosterSrc("05-breaking.webp");
+const heroHipHop = battlePosterSrc("06-hip-hop-beginner-amy.webp");
+const heroHouse = battlePosterSrc("03-house-beginner.webp");
+const heroBachata = battlePosterSrc("19-bachata-intermediate.webp");
+
 const categories = [
   { key: "breaking-kids", number: "01", name: "Breaking Kids", motif: "KIDS", label: "Kinder-Battle", image: "", className: "battle-category battle-category-kids", prize: "Kinderpreise folgen" },
   { key: "breaking", number: "02", name: "Breaking", motif: "BREAKING", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking", prize: "100€ Preisgeld*" },
   { key: "hip-hop", number: "03", name: "Hip-Hop", motif: "HIP-HOP", label: "Groove · Musicality", image: "06-hip-hop-beginner-amy.webp", className: "battle-category battle-category-hiphop", prize: "100€ Preisgeld*" },
   { key: "house", number: "04", name: "House", motif: "HOUSE", label: "Rhythm · Footwork", image: "03-house-beginner.webp", className: "battle-category battle-category-house", prize: "100€ Preisgeld*" },
   { key: "bachata", number: "05", name: "Bachata", motif: "BACHATA", label: "Musicality · Connection", image: "19-bachata-intermediate.webp", className: "battle-category battle-category-bachata", prize: "100€ Preisgeld*" },
-]
+].map((item) => ({ ...item, posterSrc: item.image ? battlePosterSrc(item.image) : "" }));
 ---
 
 <BaseLayout
@@ -52,10 +59,10 @@ const categories = [
             <div class="battle-stamp-ring" aria-hidden="true">✳</div>
           </aside>
           <div class="battle-arena-visual" aria-hidden="true">
-            <div class="battle-arena-tile battle-arena-tile-one"><img src={`${import.meta.env.BASE_URL}media/style-posters/05-breaking.webp`} alt="" /></div>
-            <div class="battle-arena-tile battle-arena-tile-two"><img src={`${import.meta.env.BASE_URL}media/style-posters/06-hip-hop-beginner-amy.webp`} alt="" /></div>
-            <div class="battle-arena-tile battle-arena-tile-three"><img src={`${import.meta.env.BASE_URL}media/style-posters/03-house-beginner.webp`} alt="" /></div>
-            <div class="battle-arena-tile battle-arena-tile-four"><img src={`${import.meta.env.BASE_URL}media/style-posters/19-bachata-intermediate.webp`} alt="" /></div>
+            <div class="battle-arena-tile battle-arena-tile-one"><img src={heroBreaking} alt="" /></div>
+            <div class="battle-arena-tile battle-arena-tile-two"><img src={heroHipHop} alt="" /></div>
+            <div class="battle-arena-tile battle-arena-tile-three"><img src={heroHouse} alt="" /></div>
+            <div class="battle-arena-tile battle-arena-tile-four"><img src={heroBachata} alt="" /></div>
             <div class="battle-arena-orbit"><div class="battle-arena-orbit-inner"><span>SAMSTAG</span><strong>05.12.</strong><span>2026</span></div></div>
             <div class="battle-arena-caption"><span>ELITE DANCE STUDIO</span><span>EDB / 001</span></div>
           </div>
@@ -90,7 +97,7 @@ const categories = [
           >
             <span class="battle-category-top"><span>EDB / {category.number}</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
             {category.image ? (
-              <img class="battle-category-photo" src={`${import.meta.env.BASE_URL}media/style-posters/${category.image}`} alt="" loading="lazy" decoding="async" />
+              <img class="battle-category-photo" src={category.posterSrc} alt="" loading="lazy" decoding="async" />
             ) : (
               <span class="battle-category-kids-graphic" aria-hidden="true">EDB<br />05.12</span>
             )}

@@ -37,6 +37,27 @@ const hero = {
   <main class="page-shell page-main home-main">
     <HeroSection hero={hero} />
 
+    <section class="battle-home-spotlight" aria-labelledby="battle-home-title">
+      <div class="battle-home-art">
+        <img src={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/"}media/events/elite-battle-2026-poster.svg`} alt="Elite Dance Battle 2026 — offizielles Event-Poster" width="700" height="900" decoding="async" loading="lazy" />
+      </div>
+      <div class="battle-home-details">
+        <p class="battle-home-eyebrow">05. DEZEMBER 2026 · ELITE DANCE STUDIO</p>
+        <h2 id="battle-home-title">ELITE DANCE <span>BATTLE</span></h2>
+        <p class="battle-home-lead">Fünf Kategorien. Ein Battle Day.</p>
+        <p class="battle-home-description">Breaking Kids, Breaking, Hip-Hop, House und Bachata. Battles von 12:00 bis 19:00 Uhr, gemeinsames Überraschungsfinale und eine kostenlose Jam Session.</p>
+        <div class="battle-home-meta">
+          <span>12:00–19:00 Uhr</span>
+          <span>Eversports oder USC</span>
+          <span>Zuschauen &amp; Jam kostenlos</span>
+        </div>
+        <div class="battle-home-actions">
+          <a class="battle-home-button" href="/battle/">Event &amp; Anmeldung <span aria-hidden="true">↗</span></a>
+          <a class="battle-home-textlink" href="https://www.eversports.de/org/activity/946397ed-f7ae-4ea1-8ee1-2e985945d6f1" target="_blank" rel="noopener noreferrer">Direkt bei Eversports buchen ↗</a>
+        </div>
+      </div>
+    </section>
+
     <EversportsSchedule
       home
       title="Was tanzt du diese Woche?"
@@ -71,3 +92,52 @@ const hero = {
   <PapiPerreoPromo />
   <SiteFooter brand={site.brand} nav={site.nav} />
 </BaseLayout>
+
+
+<style>
+  .battle-home-spotlight {
+    display:grid;
+    grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+    align-items:stretch;
+    gap:clamp(22px,3.5vw,48px);
+    margin:clamp(26px,5vw,64px) auto 54px;
+    padding:clamp(18px,2.8vw,35px);
+    background:#202124;
+    border:1px solid #514746;
+    border-radius:18px;
+    box-shadow:0 20px 58px rgba(28,22,20,.12);
+    color:#f6f1eb;
+    overflow:hidden;
+  }
+  .battle-home-art { width:100%;max-height:360px;position:relative;overflow:hidden;background:#121316;border-radius:9px; }
+  .battle-home-art img { width:100%;height:100%;object-fit:cover;object-position:center 34%;display:block;transition:transform .65s cubic-bezier(.2,.7,.2,1); }
+  .battle-home-spotlight:hover .battle-home-art img { transform:scale(1.035); }
+  .battle-home-details { display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-width:0; }
+  .battle-home-eyebrow { margin:0 0 14px;font-size:.7rem;font-weight:900;letter-spacing:.14em;color:#c3a89a; }
+  .battle-home-details h2 { font:800 clamp(2.1rem,3.4vw,4.2rem)/.98 "Sora","Inter",sans-serif;letter-spacing:-.075em;margin:0 0 15px;color:#f6f1eb; }
+  .battle-home-details h2 span { color:#c5a895; }
+  .battle-home-lead { font-weight:800;font-size:1.05rem;margin:0 0 7px;color:#fff; }
+  .battle-home-description { max-width:580px;font-size:.91rem;line-height:1.7;color:#c9c3bf;margin:0 0 20px; }
+  .battle-home-meta { display:flex;flex-wrap:wrap;gap:8px;margin-bottom:23px; }
+  .battle-home-meta span { font-size:.69rem;line-height:1.3;font-weight:800;padding:8px 10px;border:1px solid #645c56;color:#e4d9d0;border-radius:999px; }
+  .battle-home-actions { display:flex;align-items:center;flex-wrap:wrap;gap:12px 21px; }
+  .battle-home-button { display:inline-flex;align-items:center;gap:20px;justify-content:space-between;text-decoration:none;background:#b59a87;color:#1f1c1b;border:1px solid #b59a87;padding:13px 17px;border-radius:6px;font-size:.8rem;font-weight:900;transition:background .23s,border-color .23s; }
+  .battle-home-button:hover { background:#dac0ae;border-color:#dac0ae; }
+  .battle-home-textlink { color:#e1d0c4;font-size:.79rem;font-weight:750;text-decoration:underline;text-underline-offset:4px; }
+  .battle-home-textlink:hover { color:white; }
+  @media(max-width:900px) {
+    .battle-home-spotlight { grid-template-columns:1fr 1.25fr;padding:18px; }
+    .battle-home-art { max-height:330px; }
+    .battle-home-details h2 { font-size:clamp(2rem,4vw,3.4rem); }
+  }
+  @media(max-width:670px) {
+    .battle-home-spotlight { grid-template-columns:1fr;margin-block:28px 36px;gap:22px; }
+    .battle-home-art { max-height:300px; }
+    .battle-home-details h2 { font-size:clamp(2.5rem,9vw,3.7rem); }
+    .battle-home-actions { align-items:flex-start;flex-direction:column; }
+  }
+  @media(prefers-reduced-motion:reduce) {
+    .battle-home-art img,.battle-home-button { transition:none; }
+    .battle-home-spotlight:hover .battle-home-art img { transform:none; }
+  }
+</style>

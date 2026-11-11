@@ -978,3 +978,64 @@ const categories = [
     .battle-category:hover .battle-category-photo { transform:none!important; }
   }
 </style>
+
+<style>
+  /* Event launch: official poster, general schedule and community areas */
+  .battle-poster-showcase { background:linear-gradient(180deg,#191a1d,#202124);padding:48px 0 85px;border-bottom:1px solid #474143; }
+  .battle-poster-layout { display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,74px);align-items:center; }
+  .battle-poster-copy h2 { font:900 clamp(2.5rem,4.5vw,5rem)/.97 "Sora","Inter",sans-serif;letter-spacing:-.068em;margin:16px 0 25px;color:#efebe6; }
+  .battle-poster-copy h2 em { font-style:normal;color:#c9ab99; }
+  .battle-poster-copy>p:not(.battle-section-label) { color:#c5bdb6;line-height:1.8;font-size:1rem;max-width:535px; }
+  .battle-poster-facts { display:grid;gap:11px;margin:31px 0; }
+  .battle-poster-facts>div { display:flex;flex-direction:column;gap:5px;padding:13px 16px;border-left:2px solid #b49a87;background:#29292b; }
+  .battle-poster-facts span { color:#bda897;font-size:.68rem;font-weight:900;letter-spacing:.16em; }
+  .battle-poster-facts strong { color:#eeeae5;font-size:.92rem;line-height:1.5; }
+  .battle-poster-actions { display:flex;flex-wrap:wrap;gap:12px; }
+  .battle-poster-art { width:min(100%,585px);margin:0 auto;position:relative; }
+  .battle-poster-art::before { content:"";pointer-events:none;position:absolute;inset:12px -12px -12px 12px;border:1px solid #ad655855;z-index:0; }
+  .battle-poster-art img { display:block;width:100%;height:auto;position:relative;z-index:1;border:1px solid #55413e;box-shadow:0 27px 70px #0007; }
+  .battle-poster-art figcaption { color:#aaa19b;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin:14px 0 0;text-align:right; }
+  .battle-overview-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px; }
+  .battle-overview-card { min-width:0;min-height:163px;display:flex;flex-direction:column;gap:11px;padding:19px;background:#26272a;border:1px solid #4a4b4f;transition:border-color .26s,background .26s; }
+  .battle-overview-card:hover { border-color:#a78d7d;background:#292a2d; }
+  .battle-overview-card span { color:#b6a497;font-size:.67rem;letter-spacing:.16em;font-weight:900; }
+  .battle-overview-card strong { font-size:clamp(.94rem,1.4vw,1.15rem);line-height:1.3;letter-spacing:-.025em; }
+  .battle-overview-card small { color:#b2aba6;line-height:1.6;font-size:.77rem; }
+  .battle-format-section .battle-bracket-note { margin-top:24px;color:#bbb1aa; }
+  .battle-community-strip { padding:79px 0;border-top:1px solid #3a393b;border-bottom:1px solid #3a393b; }
+  .battle-community-layout { display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:70px;align-items:start; }
+  .battle-community-title { min-width:0; }
+  .battle-community-title h2 { font:900 clamp(2.2rem,4vw,4.25rem)/1 "Sora","Inter",sans-serif;letter-spacing:-.068em;margin:13px 0 0; }
+  .battle-community-title h2 em { color:#c7ab98;font-style:normal; }
+  .battle-community-layout>p { color:#d0c5bd;font-size:.95rem;line-height:1.85;margin:0; }
+  .battle-community-pills { display:flex;grid-column:1/-1;align-items:center;flex-wrap:wrap;gap:12px;margin-top:25px; }
+  .battle-community-pills>span { color:#e9e4dd;border:1px solid #665d58;padding:11px 15px;font-size:.78rem;font-weight:800;letter-spacing:.04em; }
+  .battle-general-timetable .battle-lineup-item { grid-template-columns:110px minmax(0,1fr);column-gap:19px;row-gap:3px; }
+  .battle-general-timetable .battle-lineup-item>span { grid-row:1/3;align-self:center;max-width:110px;line-height:1.4;font-size:.75rem; }
+  .battle-general-timetable .battle-lineup-item strong { grid-column:2;grid-row:1; }
+  .battle-general-timetable .battle-lineup-item small { grid-column:2;grid-row:2;text-align:left;line-height:1.5;max-width:100%; }
+  .battle-general-timetable .battle-lineup-top { gap:18px; }
+  @media(max-width:1040px) {
+    .battle-overview-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .battle-poster-layout { gap:32px; }
+    .battle-community-layout { column-gap:36px; }
+  }
+  @media(max-width:760px) {
+    .battle-poster-showcase { padding:54px 0 66px; }
+    .battle-poster-layout { grid-template-columns:1fr; }
+    .battle-poster-copy { max-width:720px; }
+    .battle-poster-art { width:min(100%,535px); }
+    .battle-community-layout { grid-template-columns:1fr; }
+    .battle-community-layout>p { margin-top:22px; }
+    .battle-community-strip { padding:60px 0; }
+  }
+  @media(max-width:450px) {
+    .battle-overview-grid { grid-template-columns:1fr; }
+    .battle-overview-card { min-height:0; }
+    .battle-general-timetable .battle-lineup-item { grid-template-columns:83px minmax(0,1fr);column-gap:10px; }
+    .battle-general-timetable .battle-lineup-item>span { max-width:83px;font-size:.65rem; }
+  }
+  @media(prefers-reduced-motion:reduce) {
+    .battle-overview-card { transition:none; }
+  }
+</style>

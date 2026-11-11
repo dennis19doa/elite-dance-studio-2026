@@ -7,16 +7,17 @@ import site from "../data/site.json";
 const eversportsBookingUrl = "https://www.eversports.de/org/activity/946397ed-f7ae-4ea1-8ee1-2e985945d6f1";
 const uscBookingUrl = "https://urbansportsclub.com/de/venues/elite-dance-studio-1"; // Replace with direct event class link if available
 const categories = [
-  { key: "breaking", number: "01", name: "Breaking", motif: "FREESTYLE", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking" },
-  { key: "hip-hop", number: "02", name: "Hip-Hop", motif: "FREESTYLE", label: "Groove · Freestyle", image: "06-hip-hop-beginner-amy.webp", className: "battle-category battle-category-hiphop" },
-  { key: "house", number: "03", name: "House", motif: "FREESTYLE", label: "Rhythm · Footwork", image: "03-house-beginner.webp", className: "battle-category battle-category-house" },
-  { key: "bachata", number: "04", name: "Bachata", motif: "FREESTYLE", label: "Musicality · Partnerwork", image: "19-bachata-intermediate.webp", className: "battle-category battle-category-bachata" },
-];
+  { key: "breaking-kids", number: "01", name: "Breaking Kids", motif: "KIDS", label: "Kinder-Battle", image: "", className: "battle-category battle-category-kids", prize: "Kinderpreise folgen" },
+  { key: "breaking", number: "02", name: "Breaking", motif: "BREAKING", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking", prize: "100€ Preisgeld*" },
+  { key: "hip-hop", number: "03", name: "Hip-Hop", motif: "HIP-HOP", label: "Groove · Musicality", image: "06-hip-hop-beginner-amy.webp", className: "battle-category battle-category-hiphop", prize: "100€ Preisgeld*" },
+  { key: "house", number: "04", name: "House", motif: "HOUSE", label: "Rhythm · Footwork", image: "03-house-beginner.webp", className: "battle-category battle-category-house", prize: "100€ Preisgeld*" },
+  { key: "bachata", number: "05", name: "Bachata", motif: "BACHATA", label: "Musicality · Connection", image: "19-bachata-intermediate.webp", className: "battle-category battle-category-bachata", prize: "100€ Preisgeld*" },
+]
 ---
 
 <BaseLayout
-  title="Elite Dance Battle 2026 | Vier Freestyle Battles in Berlin"
-  description="Breaking, Hip-Hop, House und Bachata Freestyle am 5. Dezember 2026 in Berlin-Moabit. Vier Kategorien mit je 100€ Preisgeld."
+  title="Elite Dance Battle 2026 | Breaking Kids, Breaking, Hip-Hop, House & Bachata"
+  description="Elite Dance Battle am 5. Dezember 2026 in Berlin-Moabit. Breaking Kids, Breaking, Hip-Hop, House und Bachata. Jetzt anmelden."
   bodyClass="elite-battle-page"
   noindex={true}
 >
@@ -33,10 +34,10 @@ const categories = [
         </div>
         <div class="battle-hero-body">
           <div class="battle-hero-copy">
-            <p class="battle-eyebrow">Vier Kategorien · Freestyle</p>
+            <p class="battle-eyebrow">Fünf Kategorien · 05.12.2026</p>
             <h1 id="battle-title"><span>ELITE</span><span class="battle-title-outline">DANCE</span><span>BATTLE<span class="battle-title-star">*</span></span></h1>
-            <p class="battle-hero-lead">Breaking · Hip-Hop · House · Bachata</p>
-            <p class="battle-hero-description">Vier Freestyle-Battles an einem Tag. Jede Kategorie hat ein eigenes Preisgeld.</p>
+            <p class="battle-hero-lead">Breaking Kids · Breaking · Hip-Hop · House · Bachata</p>
+            <p class="battle-hero-description">Fünf Battles an einem Tag. Ein Ticket gilt für die gesamte Veranstaltung.</p>
             <div class="battle-hero-actions">
               <a class="battle-button battle-button-primary" href="#battle-registration">Jetzt anmelden <span aria-hidden="true">↘</span></a>
               <a class="battle-button battle-button-ghost" href="#how-it-works">Anmeldung <span aria-hidden="true">↗</span></a>
@@ -60,7 +61,7 @@ const categories = [
           </div>
         </div>
         <div class="battle-hero-stats">
-          <div><strong>04</strong><span>Freestyle-Kategorien</span></div>
+          <div><strong>04</strong><span>Battle-Kategorien</span></div>
           <div><strong>04</strong><span>Gewinner:innen</span></div>
           <div><strong>100<span>€</span></strong><span>Preis pro Kategorie*</span></div>
           <div class="battle-stats-tail">SPONSOR GOODIE BAGS <span aria-hidden="true">↗</span></div>
@@ -75,10 +76,10 @@ const categories = [
 
     <section class="battle-choose-section battle-container" id="choose-your-style" aria-labelledby="choose-heading">
       <div class="battle-section-heading">
-        <div><p class="battle-section-label">01 / Kategorien</p><h2 id="choose-heading">FREESTYLE <em>BATTLES.</em></h2></div>
-        <p>Einmal für den Battle Day buchen – damit kannst du an mehreren der vier Freestyle-Battles teilnehmen.</p>
+        <div><p class="battle-section-label">01 / Kategorien</p><h2 id="choose-heading">FÜNF <em>KATEGORIEN.</em></h2></div>
+        <p>Breaking Kids, Breaking, Hip-Hop, House und Bachata. Mit einem Eventticket kannst du an mehreren Kategorien teilnehmen.</p>
       </div>
-      <div class="battle-category-grid" role="group" aria-label="Battle-Kategorie auswählen">
+      <div class="battle-category-grid" role="group" aria-label="Battle-Kategorien auswählen, mehrere möglich">
         {categories.map((category) => (
           <button
             type="button"
@@ -88,22 +89,27 @@ const categories = [
             aria-controls="battle-entries"
           >
             <span class="battle-category-top"><span>EDB / {category.number}</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
-            <img class="battle-category-photo" src={`${import.meta.env.BASE_URL}media/style-posters/${category.image}`} alt="" loading="lazy" decoding="async" /><span class="battle-category-photo-wash" aria-hidden="true"></span>
-            <span class="battle-category-art" aria-hidden="true">{category.motif.split(" / ").map((word) => <span>{word}</span>)}</span>
+            {category.image ? (
+              <img class="battle-category-photo" src={`${import.meta.env.BASE_URL}media/style-posters/${category.image}`} alt="" loading="lazy" decoding="async" />
+            ) : (
+              <span class="battle-category-kids-graphic" aria-hidden="true">EDB<br />05.12</span>
+            )}
+            <span class="battle-category-photo-wash" aria-hidden="true"></span>
+            <span class="battle-category-art" aria-hidden="true"><span>{category.motif}</span></span>
             <span class="battle-category-lower">
-              <span class="battle-category-name">{category.name} Freestyle</span>
+              <span class="battle-category-name">{category.name}</span>
               <span class="battle-category-traits">{category.label}</span>
             </span>
-            <span class="battle-category-footer"><span><strong>100€</strong> Preisgeld*</span><span class="battle-select-text">Merken +</span></span>
+            <span class="battle-category-footer"><span class="battle-prize-mini">{category.prize}</span><span class="battle-select-text">Merken +</span></span>
           </button>
         ))}
       </div>
       <div class="battle-selection-deck" aria-live="polite">
         <div class="battle-selection-indicator"><span>◉</span><small>FREESTYLE-KATEGORIEN</small></div>
         <strong data-battle-selected-name>Mehrere Kategorien möglich</strong>
-        <a href="#battle-entries" data-battle-next>Kategorien nach der Buchung melden <span aria-hidden="true">↗</span></a>
+        <a href="#battle-entries" data-battle-next>Teilnahme angeben <span aria-hidden="true">↗</span></a>
       </div>
-      <p class="battle-choose-footnote">* Aktuell 100€ je Gewinner:in. Das Preisgeld kann sich noch erhöhen. Zusätzlich sind Goodie Bags von Sponsoren geplant.</p>
+      <p class="battle-choose-footnote">* Je 100€ Preisgeld in den vier offenen Kategorien. Für Breaking Kids sind separate Kinderpreise geplant. Details folgen.</p>
     </section>
 
     <section class="battle-register-section" id="battle-registration" aria-labelledby="register-heading">
@@ -111,21 +117,21 @@ const categories = [
     <div class="battle-register-intro">
       <p class="battle-section-label">02 / Anmeldung</p>
       <h2 id="register-heading">EIN TICKET.<br /><em>ALLE BATTLES.</em></h2>
-      <p>Einmal für den Battle Day anmelden und an Breaking, Hip-Hop, House und/oder Bachata Freestyle teilnehmen. Alle Kategorien sind mit einer Buchung abgedeckt.</p>
+      <p>Einmal für den Battle Day anmelden. Das Ticket gilt für alle fünf Kategorien – Breaking Kids, Breaking, Hip-Hop, House und Bachata.</p>
       <div class="battle-register-steps" id="how-it-works">
         <div><span>01</span><div><strong>Für den Battle Day anmelden</strong><p>Online über Eversports oder über deine USC-Mitgliedschaft.</p></div></div>
-        <div><span>02</span><div><strong>Deine Kategorien angeben</strong><p>Nach deiner Buchung kannst du die gewünschten Freestyle-Battles im Formular unten angeben.</p></div></div>
+        <div><span>02</span><div><strong>Deine Kategorien angeben</strong><p>Nach der Buchung gibst du unten an, in welchen Kategorien du antrittst. Mehrfachauswahl möglich.</p></div></div>
         <div><span>03</span><div><strong>Am 5. Dezember einchecken</strong><p>Buchungsbestätigung mitbringen; USC-Mitglieder checken zusätzlich in der App ein.</p></div></div>
       </div>
       <div class="battle-ticket-note">
         <span class="battle-ticket-note-icon" aria-hidden="true">✓</span>
-        <div><strong>Eintritt für das ganze Event</strong><p>Keine zweite Zahlung, wenn du in mehreren Freestyle-Kategorien antrittst. USC braucht nur einen Check-in für den Battle Day.</p></div>
+        <div><strong>Eintritt für das ganze Event</strong><p>Keine zweite Zahlung bei mehreren Kategorien. Für USC genügt ein Check-in am Veranstaltungstag.</p></div>
       </div>
     </div>
     <div class="battle-register-card">
       <div class="battle-form-heading"><span>BATTLE / 05.12.2026</span><span class="battle-form-availability">BUCHBAR</span></div>
       <h3>Battle Day buchen</h3>
-      <p class="battle-form-description">Wähle deinen Buchungsweg. Beide Optionen gelten für alle Freestyle-Kategorien.</p>
+      <p class="battle-form-description">Wähle deinen Buchungsweg. Beide Optionen gelten für den gesamten Battle Day.</p>
       <div class="battle-booking-links">
         <a class="battle-booking-link" href={eversportsBookingUrl} target="_blank" rel="noopener noreferrer">
           <span><strong>Eversports</strong><small>Direkt zur Buchung · ein Ticket für den gesamten Battle Day</small></span><b aria-hidden="true">↗</b>
@@ -136,7 +142,7 @@ const categories = [
       </div>
       <p class="battle-price-disclaimer">Der Eversports-Button öffnet direkt die Elite Dance Battle Buchungsseite. Für USC führt der Link zunächst zum Studio-Profil – dort den Battle-Termin am 05.12.2026 auswählen.</p>
       <p class="battle-form-hint"><strong>Bereits angemeldet?</strong> Trag unten noch die Kategorien ein, an denen du teilnehmen möchtest. Dafür musst du kein weiteres Ticket kaufen.</p>
-      <a class="battle-booking-next" href="#battle-entries">Meine Freestyle-Kategorien eintragen ↘</a>
+      <a class="battle-booking-next" href="#battle-entries">Meine Battle-Kategorien eintragen ↘</a>
     </div>
   </div>
 </section>
@@ -144,27 +150,27 @@ const categories = [
 <section class="battle-entries-section" id="battle-entries" aria-labelledby="entries-heading">
   <div class="battle-container battle-entries-layout">
     <div class="battle-entries-intro">
-      <p class="battle-section-label">03 / Freestyle-Kategorien</p>
+      <p class="battle-section-label">03 / Battle-Kategorien</p>
       <h2 id="entries-heading">DEINE <em>BATTLES.</em></h2>
-      <p>Wenn du bereits für Elite Dance Battle gebucht hast, gib hier an, bei welchen Battles du antreten möchtest. Du kannst mehrere Kategorien auswählen.</p>
+      <p>Bereits gebucht? Hier gibst du an, in welchen Kategorien du antrittst. Mehrere Kategorien sind möglich.</p>
       <p>Wichtig: Verwende dieselbe E-Mail-Adresse wie in deiner Eversports- oder USC-Buchung. Wir gleichen die Kategorien mit der Teilnehmerliste ab.</p>
     </div>
     <form class="battle-entries-form" action="/api/form" method="post" data-battle-entries-form>
       <input type="hidden" name="form_kind" value="battle" />
       <label class="battle-entry-trap" aria-hidden="true">Leer lassen<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
-      <h3>Freestyle-Kategorien eintragen</h3>
+      <h3>Teilnahme eintragen</h3>
       <div class="battle-entry-fields">
         <label>Vor- und Nachname *<input name="name" type="text" autocomplete="name" maxlength="160" required placeholder="Name der Buchung" /></label>
         <label>E-Mail-Adresse *<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="E-Mail der Buchung" /></label>
         <label class="battle-entry-wide">Battle-Name (optional)<input name="stage_name" type="text" maxlength="120" placeholder="Dein Name im Battle" /></label>
       </div>
       <fieldset class="battle-entry-fieldset">
-        <legend>Welche Freestyle-Kategorien? *</legend>
+        <legend>In welchen Kategorien trittst du an? *</legend>
         <div class="battle-entry-checkboxes">
           {categories.map((category) => (
             <label class={"battle-entry-checkbox battle-entry-checkbox-" + category.key}>
               <input type="checkbox" name="battle_categories" value={category.key} data-battle-entry-category={category.key} />
-              <span>{category.name} Freestyle</span>
+              <span>{category.name}</span>
             </label>
           ))}
         </div>
@@ -185,7 +191,7 @@ const categories = [
 
     <section class="battle-prizes-section battle-container" aria-labelledby="prizes-heading">
       <div class="battle-prizes-lead"><span class="battle-section-label">04 / Preise</span><h2 id="prizes-heading">PREISGELD &amp;<br /><em>GOODIE BAGS</em></h2></div>
-      <div class="battle-prize-block"><span class="battle-prize-overline">AKTUELLES PREISGELD / PRO KATEGORIE</span><div class="battle-prize-amount">100<span>€</span></div><p>Aktuell 100€ je Gewinner:in.</p><span class="battle-prize-future">Weitere Sponsoren möglich</span></div>
+      <div class="battle-prize-block"><span class="battle-prize-overline">AKTUELLES PREISGELD / OFFENE KATEGORIEN</span><div class="battle-prize-amount">100<span>€</span></div><p>Aktuell 100€ pro Sieger:in in Breaking, Hip-Hop, House und Bachata. Kinderpreise separat.</p><span class="battle-prize-future">Weitere Sponsoren möglich</span></div>
       <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Zusätzliche Preise und Goodie Bags von unseren Sponsoren. Details folgen.</p></div>
     </section>
 

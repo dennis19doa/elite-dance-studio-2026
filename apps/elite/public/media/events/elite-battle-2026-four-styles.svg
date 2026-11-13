@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 875" role="img" aria-labelledby="title desc">
+<title id="title">Elite Dance Battle 2026 — vier Kategorien, freier Eintritt für Zuschauer</title>
+<desc id="desc">Breaking Kids, Breaking, Hip-Hop, House. 5 Dezember 2026 in Berlin-Moabit. Battles 12 bis 19 Uhr. Zuschauen kostenlos, Spenden freiwillig; optionaler USC-Check-in.</desc>
+<defs>
+<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0b0d13"/><stop offset=".47" stop-color="#1b1420"/><stop offset="1" stop-color="#07090e"/></linearGradient>
+<radialGradient id="redGlow" cx=".46" cy=".24" r=".67"><stop stop-color="#ad252b" stop-opacity=".4"/><stop offset="1" stop-color="#ad252b" stop-opacity="0"/></radialGradient>
+<radialGradient id="blueGlow" cx=".64" cy=".85" r=".55"><stop stop-color="#466c8d" stop-opacity=".24"/><stop offset="1" stop-color="#466c8d" stop-opacity="0"/></radialGradient>
+<pattern id="grid" width="55" height="55" patternUnits="userSpaceOnUse"><path d="M55 0H0V55" fill="none" stroke="#e9e4df" stroke-opacity=".055" stroke-width="1"/></pattern>
+<linearGradient id="line" x2="1" y2="0"><stop stop-color="#bc5557"/><stop offset=".43" stop-color="#c4a07a"/><stop offset="1" stop-color="#6068a2"/></linearGradient>
+</defs>
+<rect width="700" height="875" fill="url(#bg)"/>
+<rect width="700" height="875" fill="url(#redGlow)"/>
+<rect width="700" height="875" fill="url(#blueGlow)"/>
+<rect width="700" height="875" fill="url(#grid)"/>
+<g opacity=".27">
+<path d="M-80 290 315 40 365 40-12 390Z" fill="#ca2f36"/>
+<path d="M570-35 770 90 365 358 290 311Z" fill="#a32938"/>
+<path d="M150 500 515 215 565 259 240 551Z" fill="#66458b"/>
+<path d="M440 610 750 346 780 410 520 654Z" fill="#a83762"/>
+</g>
+<g fill="none" stroke="#ffffff" stroke-opacity=".18" stroke-width="1"><path d="M35 36H665V841H35Z"/><path d="M35 93H665"/><path d="M35 426H665"/><path d="M35 766H665"/></g>
+<text x="53" y="69" fill="#e7d4ae" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="900" letter-spacing="4">ELITE DANCE STUDIO</text>
+<text x="652" y="69" text-anchor="end" fill="#c8bec1" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" letter-spacing="2">BERLIN · MOABIT</text>
+<text x="47" y="186" fill="#f8f3ee" font-family="Arial Black,Arial,Helvetica,sans-serif" font-size="73" font-style="italic" font-weight="900" letter-spacing="-5">ELITE DANCE</text>
+<text x="40" y="310" fill="#e85155" font-family="Arial Black,Arial,Helvetica,sans-serif" font-size="138" font-style="italic" font-weight="900" letter-spacing="-13">BATTLE</text>
+<text x="351" y="393" text-anchor="middle" fill="#f2eee9" font-family="Arial Black,Arial,sans-serif" font-size="69" font-style="italic" font-weight="900" letter-spacing="9">2026</text>
+<path d="M55 411H645" stroke="url(#line)" stroke-width="6"/>
+<text x="55" y="454" fill="#d4c8bd" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="900" letter-spacing="3">4 KATEGORIEN · 1 EVENT · 12–19 UHR</text>
+<g font-family="Arial Black,Arial,Helvetica,sans-serif" font-weight="900">
+<rect x="50" y="477" width="293" height="86" rx="4" fill="#272427" stroke="#d4b175" stroke-width="2"/><rect x="50" y="477" width="7" height="86" fill="#d4b175"/><text x="69" y="529" fill="#e9d3aa" font-size="30" font-style="italic">BREAKING KIDS</text><text x="69" y="549" fill="#bcb3ad" font-family="Arial" font-size="11" letter-spacing="3">KIDS BATTLE</text>
+<rect x="357" y="477" width="293" height="86" rx="4" fill="#282024" stroke="#e6765d" stroke-width="2"/><rect x="357" y="477" width="7" height="86" fill="#e6765d"/><text x="375" y="538" fill="#ffb19d" font-size="34" font-style="italic">BREAKING</text>
+<rect x="50" y="577" width="293" height="86" rx="4" fill="#20262d" stroke="#70b4d3" stroke-width="2"/><rect x="50" y="577" width="7" height="86" fill="#70b4d3"/><text x="69" y="638" fill="#a2d7ef" font-size="37" font-style="italic">HIP-HOP</text>
+<rect x="357" y="577" width="293" height="86" rx="4" fill="#262231" stroke="#b996d9" stroke-width="2"/><rect x="357" y="577" width="7" height="86" fill="#b996d9"/><text x="376" y="638" fill="#d4b9eb" font-size="37" font-style="italic">HOUSE</text>
+</g>
+<rect x="50" y="678" width="600" height="75" rx="4" fill="#eee8dd"/>
+<text x="67" y="707" fill="#28252b" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="900" letter-spacing="2">ZUSCHAUEN KOSTENLOS</text>
+<text x="67" y="733" fill="#514a4d" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" letter-spacing=".7">SPENDEN FREIWILLIG · USC-CHECK-IN OPTIONAL</text>
+<text x="53" y="789" fill="#f7f0eb" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="29" letter-spacing="2">SA · 05.12.2026</text>
+<text x="53" y="815" fill="#cabfc0" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700">ELITE DANCE STUDIO · WICLEFSTRASSE 16–17</text>
+<text x="651" y="839" text-anchor="end" fill="#a9a2a4" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" letter-spacing="1">elitedancestudio.de</text>
+</svg>

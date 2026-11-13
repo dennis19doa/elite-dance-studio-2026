@@ -11,7 +11,7 @@ const battlePosterSrc = (filename: string) => battleBase + "media/style-posters/
 const heroBreaking = battlePosterSrc("05-breaking.webp");
 const heroHipHop = battlePosterSrc("06-hip-hop-beginner-amy.webp");
 const heroHouse = battlePosterSrc("03-house-beginner.webp");
-const battlePoster = battleBase + "media/events/elite-battle-2026-poster.svg";
+const battlePoster = battleBase + "media/events/elite-battle-2026-four-styles.svg";
 
 const categories = [
   { key: "breaking-kids", number: "01", name: "Breaking Kids", motif: "KIDS", label: "Kinder-Battle", image: "", className: "battle-category battle-category-kids", prize: "Kinderpreise folgen" },
@@ -43,7 +43,8 @@ const categories = [
             <p class="battle-eyebrow">4 Kategorien · 12:00–19:00</p>
             <h1 id="battle-title"><span>ELITE</span><span class="battle-title-outline">DANCE</span><span>BATTLE<span class="battle-title-star">*</span></span></h1>
             <p class="battle-hero-lead">Breaking Kids · Breaking · Hip-Hop · House</p>
-            <p class="battle-hero-description">Battles von 12:00 bis 19:00 Uhr, vier Kategorien, gemeinsame Jury und ein Überraschungsfinale zum Abschluss.</p>
+            <p class="battle-hero-description">Vier Kategorien von 12:00 bis 19:00 Uhr, gemeinsame Jury und ein Überraschungsfinale.</p>
+            <a class="battle-spectator-hero-note" href="#spectators"><strong>ZUSCHAUEN KOSTENLOS</strong><span>Spenden freiwillig · USC-Check-in optional ↗</span></a>
             <div class="battle-hero-actions">
               <a class="battle-button battle-button-primary" href="#battle-registration">Jetzt anmelden <span aria-hidden="true">↘</span></a>
               <a class="battle-button battle-button-ghost" href="#how-it-works">Anmeldung <span aria-hidden="true">↗</span></a>
@@ -85,11 +86,11 @@ const categories = [
         <div class="battle-poster-copy">
           <p class="battle-section-label">05. Dezember 2026 · Berlin-Moabit</p>
           <h2 id="poster-heading">DAS EVENT <em>IM ÜBERBLICK.</em></h2>
-          <p>Vier Battle-Kategorien an einem Tag. Alle Judges bewerten alle Kategorien. Zum Abschluss gibt es ein Surprise Final Battle mit den Gewinner:innen.</p>
+          <p>Vier Kategorien, eine gemeinsame Jury und ein Überraschungsfinale. Zuschauer:innen und Besucher:innen der Jam Session sind kostenlos willkommen.</p>
           <div class="battle-poster-facts">
             <div><span>ZEIT</span><strong>12:00–19:00 Uhr</strong></div>
             <div><span>KATEGORIEN</span><strong>Breaking Kids · Breaking · Hip-Hop · House</strong></div>
-            <div><span>COMMUNITY</span><strong>Freie Jam Session · Essen vor Ort · Zuschauer:innen willkommen</strong></div>
+            <div><span>ZUSCHAUEN</span><strong>Kostenlos · Keine Spende oder USC-Check-in notwendig</strong></div>
           </div>
           <div class="battle-poster-actions">
             <a class="battle-button battle-button-primary" href="#battle-registration">Zur Anmeldung <span aria-hidden="true">↗</span></a>
@@ -97,7 +98,7 @@ const categories = [
           </div>
         </div>
         <figure class="battle-poster-art">
-          <img src={battlePoster} width="700" height="875" loading="eager" decoding="async" alt="Offizielles Elite Dance Battle 2026 Poster: vier Kategorien, 05.12.2026, Elite Dance Studio Berlin" />
+          <img src={battlePoster} width="700" height="875" loading="eager" decoding="async" alt="Elite Dance Battle 2026: Breaking Kids, Breaking, Hip-Hop und House. Zuschauer kostenlos, Spenden freiwillig." />
           <figcaption>Elite Dance Battle 2026 · Eventübersicht</figcaption>
         </figure>
       </div>
@@ -155,7 +156,26 @@ const categories = [
         <div class="battle-overview-card"><span>JURY</span><strong>Alle Judges bewerten alle Kategorien</strong><small>Gemeinsames Judging während des gesamten Events</small></div>
         <div class="battle-overview-card"><span>FINALE</span><strong>Surprise Final Battle</strong><small>Besonderes Finale mit den Kategoriesieger:innen</small></div>
       </div>
-      <p class="battle-bracket-note">Zusätzlich gibt es eine kostenlose Jam Session im zweiten Raum und Essen vor Ort. Zuschauer:innen sind herzlich willkommen — der Eintritt ist kostenlos.</p>
+      <p class="battle-bracket-note">Zusätzlich gibt es eine kostenlose Jam Session im zweiten Raum und Essen vor Ort. Zuschauer:innen müssen weder buchen noch spenden.</p>
+    </section>
+
+<section class="battle-spectators" id="spectators" aria-labelledby="spectator-heading">
+      <div class="battle-container battle-spectators-layout">
+        <div class="battle-spectator-free">
+          <p class="battle-section-label">Besucher:innen &amp; Community</p>
+          <div class="battle-free-overline">KEIN TICKET NÖTIG</div>
+          <h2 id="spectator-heading">ZUSCHAUEN IST <em>KOSTENLOS.</em></h2>
+          <p>Du kannst einfach vorbeikommen, Battles anschauen oder bei der kostenlosen Jam Session im zweiten Raum mitmachen. <strong>Kein Eintritt, keine Anmeldung und keine Spende erforderlich.</strong></p>
+          <div class="battle-free-highlights"><span>Eintritt: 0€</span><span>Jam kostenlos</span><span>Spende freiwillig</span></div>
+        </div>
+        <div class="battle-donation-card">
+          <p class="battle-section-label">Freiwillige Unterstützung</p>
+          <h3>Du möchtest das Event unterstützen?</h3>
+          <p>Du kannst am Veranstaltungstag freiwillig etwas spenden. Wenn du Urban Sports Club nutzt, kannst du uns alternativ durch einen <strong>freiwilligen USC-Check-in</strong> unterstützen, sofern du am Event bzw. der Jam Session teilnimmst und die Buchung in deiner USC-App verfügbar ist.</p>
+          <p class="battle-donation-disclaimer">Das ist komplett optional. Du kannst ohne Spende oder USC-Check-in kostenlos zuschauen. Pro Tag ist nur ein USC-Check-in am selben Standort möglich – wer bereits eingecheckt hat, braucht keinen zweiten.</p>
+          <a href={uscBookingUrl} target="_blank" rel="noopener noreferrer">Elite Dance Studio bei USC ansehen <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
     </section>
 
     <section class="battle-register-section" id="battle-registration" aria-labelledby="register-heading">
@@ -163,31 +183,31 @@ const categories = [
     <div class="battle-register-intro">
       <p class="battle-section-label">03 / Anmeldung</p>
       <h2 id="register-heading">EIN TICKET.<br /><em>ALLE BATTLES.</em></h2>
-      <p>Einmal für den Battle Day anmelden. Das Ticket gilt für alle vier Kategorien – Breaking Kids, Breaking, Hip-Hop und House.</p>
+      <p>Wer bei den Battles antreten möchte, meldet sich einmal für den Tag an. Das Ticket gilt für Breaking Kids, Breaking, Hip-Hop und House. <strong>Zuschauen ist ohne Ticket kostenlos.</strong></p>
       <div class="battle-register-steps" id="how-it-works">
-        <div><span>01</span><div><strong>Für den Battle Day anmelden</strong><p>Online über Eversports oder über deine USC-Mitgliedschaft.</p></div></div>
+        <div><span>01</span><div><strong>Nur für die Battle-Teilnahme anmelden</strong><p>€5 über Eversports oder eine passende USC-Buchung. Zuschauer:innen benötigen keine Anmeldung.</p></div></div>
         <div><span>02</span><div><strong>Deine Kategorien angeben</strong><p>Nach der Buchung gibst du unten an, in welchen Kategorien du antrittst. Mehrfachauswahl möglich.</p></div></div>
         <div><span>03</span><div><strong>Am 5. Dezember einchecken</strong><p>Buchungsbestätigung mitbringen; USC-Mitglieder checken zusätzlich in der App ein.</p></div></div>
       </div>
       <div class="battle-ticket-note">
         <span class="battle-ticket-note-icon" aria-hidden="true">✓</span>
-        <div><strong>Eintritt für das ganze Event</strong><p>Keine zweite Zahlung bei mehreren Kategorien. Für USC genügt ein Check-in am Veranstaltungstag.</p></div>
+        <div><strong>Battle-Teilnahme: eine Buchung für alle Kategorien</strong><p>Keine zweite Zahlung bei mehreren Battles. Zuschauer:innen und die Jam Session sind kostenlos.</p></div>
       </div>
     </div>
     <div class="battle-register-card">
       <div class="battle-form-heading"><span>BATTLE / 05.12.2026</span><span class="battle-form-availability">BUCHBAR</span></div>
-      <h3>Battle Day buchen</h3>
-      <p class="battle-form-description">Wähle deinen Buchungsweg. Beide Optionen gelten für den gesamten Battle Day.</p>
+      <h3>Für die Battles anmelden</h3>
+      <p class="battle-form-description">Nur für Battle-Teilnehmende nötig: €5 über Eversports oder eine passende USC-Buchung. Beide Optionen gelten für den ganzen Tag.</p>
       <div class="battle-booking-links">
         <a class="battle-booking-link" href={eversportsBookingUrl} target="_blank" rel="noopener noreferrer">
-          <span><strong>Eversports</strong><small>Direkt zur Buchung · ein Ticket für den gesamten Battle Day</small></span><b aria-hidden="true">↗</b>
+          <span><strong>Eversports · €5</strong><small>Ein Ticket für alle vier Battle-Kategorien</small></span><b aria-hidden="true">↗</b>
         </a>
         <a class="battle-booking-link battle-booking-link-usc" href={uscBookingUrl} target="_blank" rel="noopener noreferrer">
           <span><strong>Urban Sports Club</strong><small>Für berechtigte USC-Mitglieder inklusive</small></span><b aria-hidden="true">↗</b>
         </a>
       </div>
       <p class="battle-price-disclaimer">Der Eversports-Button öffnet direkt die Elite Dance Battle Buchungsseite. Für USC führt der Link zunächst zum Studio-Profil – dort den Battle-Termin am 05.12.2026 auswählen.</p>
-      <p class="battle-form-hint"><strong>Bereits angemeldet?</strong> Trag unten noch die Kategorien ein, an denen du teilnehmen möchtest. Dafür musst du kein weiteres Ticket kaufen.</p>
+      <p class="battle-form-hint"><strong>Bereits angemeldet?</strong> Trag unten noch deine Kategorien ein. <strong>Nur zuschauen?</strong> Dann brauchst du keine Buchung und keinen Check-in.</p>
       <a class="battle-booking-next" href="#battle-entries">Meine Battle-Kategorien eintragen ↘</a>
     </div>
   </div>
@@ -253,8 +273,8 @@ const categories = [
           <p class="battle-section-label">Community</p>
           <h2 id="community-heading">JAM, FOOD <em>&amp; COMMUNITY.</em></h2>
         </div>
-        <p>Du musst nicht am Battle teilnehmen, um dabei zu sein. Im zweiten Raum läuft eine kostenlose Jam Session. Essen gibt es vor Ort, und Zuschauer:innen können kostenlos vorbeikommen.</p>
-        <div class="battle-community-pills"><span>Free Jam Session</span><span>Food vor Ort</span><span>Zuschauer:innen frei</span></div>
+        <p>Du musst nicht am Battle teilnehmen, um dabei zu sein. Der Eintritt und die Jam Session im zweiten Raum sind kostenlos. Essen gibt es vor Ort. Eine Spende ist immer freiwillig.</p>
+        <div class="battle-community-pills"><span>Jam kostenlos</span><span>Essen vor Ort</span><span>Zuschauen kostenlos</span><span>Spenden freiwillig</span></div>
       </div>
     </section>
 

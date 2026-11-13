@@ -9,14 +9,13 @@ const uscBookingUrl = "https://urbansportsclub.com/de/venues/elite-dance-studio-
 const battleBase = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
 const battlePosterSrc = (filename: string) => battleBase + "media/style-posters/" + filename;
 const heroBreaking = battlePosterSrc("05-breaking.webp");
-const heroHipHop = battlePosterSrc("06-hip-hop-beginner-amy.webp");
 const heroHouse = battlePosterSrc("03-house-beginner.webp");
 const battlePoster = battleBase + "media/events/elite-battle-2026-four-styles.svg";
 
 const categories = [
   { key: "breaking-kids", number: "01", name: "Breaking Kids", motif: "KIDS", label: "Kinder-Battle", image: "", className: "battle-category battle-category-kids", prize: "Kinderpreise folgen" },
   { key: "breaking", number: "02", name: "Breaking", motif: "BREAKING", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking", prize: "100€ Preisgeld*" },
-  { key: "hip-hop", number: "03", name: "Hip-Hop", motif: "HIP-HOP", label: "Groove · Musicality", image: "06-hip-hop-beginner-amy.webp", className: "battle-category battle-category-hiphop", prize: "100€ Preisgeld*" },
+  { key: "hip-hop", number: "03", name: "Hip-Hop", motif: "HIP-HOP", label: "Groove · Musicality", image: "", className: "battle-category battle-category-hiphop", prize: "100€ Preisgeld*" },
   { key: "house", number: "04", name: "House", motif: "HOUSE", label: "Rhythm · Footwork", image: "03-house-beginner.webp", className: "battle-category battle-category-house", prize: "100€ Preisgeld*" },
 ].map((item) => ({ ...item, posterSrc: item.image ? battlePosterSrc(item.image) : "" }));
 ---
@@ -60,7 +59,7 @@ const categories = [
           </aside>
           <div class="battle-arena-visual" aria-hidden="true">
             <div class="battle-arena-tile battle-arena-tile-one"><img src={heroBreaking} alt="" /></div>
-            <div class="battle-arena-tile battle-arena-tile-two"><img src={heroHipHop} alt="" /></div>
+            <div class="battle-arena-tile battle-arena-tile-two battle-arena-tile-hiphop"><span aria-hidden="true">HIP<br />HOP</span></div>
             <div class="battle-arena-tile battle-arena-tile-three"><img src={heroHouse} alt="" /></div>
             <div class="battle-arena-tile battle-arena-tile-four battle-arena-tile-kids"><span aria-hidden="true">KIDS<br />BATTLE</span></div>
             <div class="battle-arena-orbit"><div class="battle-arena-orbit-inner"><span>SAMSTAG</span><strong>05.12.</strong><span>2026</span></div></div>
@@ -122,7 +121,7 @@ const categories = [
             {category.image ? (
               <img class="battle-category-photo" src={category.posterSrc} alt="" loading="lazy" decoding="async" />
             ) : (
-              <span class="battle-category-kids-graphic" aria-hidden="true">EDB<br />05.12</span>
+              <span class={category.key === "hip-hop" ? "battle-category-hiphop-graphic" : "battle-category-kids-graphic"} aria-hidden="true">{category.key === "hip-hop" ? "HIP-HOP" : "EDB / 05.12"}</span>
             )}
             <span class="battle-category-photo-wash" aria-hidden="true"></span>
             <span class="battle-category-art" aria-hidden="true"><span>{category.motif}</span></span>
@@ -1096,4 +1095,39 @@ const categories = [
     .battle-spectator-hero-note { display:flex;width:100%; }
   }
   @media(prefers-reduced-motion:reduce) { .battle-spectator-hero-note,.battle-donation-card a { transition:none; } }
+</style>
+<style>
+  /* Hip-Hop battle uses abstract typography instead of an instructor portrait. */
+  .battle-arena-tile-hiphop {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(circle at 72% 31%,rgba(116,167,197,.28),transparent 55%),
+      repeating-linear-gradient(135deg,transparent 0 20px,rgba(120,163,197,.055) 20px 21px),
+      linear-gradient(145deg,#263641,#101a25);
+  }
+  .battle-arena-tile-hiphop span {
+    color:#b0d2e2;
+    font:900 clamp(1.6rem,3.3vw,3.5rem)/.92 "Sora","Inter",sans-serif;
+    letter-spacing:-.09em;
+    text-align:center;
+    transform:rotate(-10deg);
+    opacity:.78;
+  }
+  .battle-category-hiphop .battle-category-photo-wash {
+    background:linear-gradient(135deg,rgba(25,37,49,.8),rgba(16,23,32,.36));
+  }
+  .battle-category-hiphop-graphic {
+    position:absolute;
+    top:24%;
+    right:-7%;
+    color:rgba(125,177,211,.16);
+    font:900 clamp(4rem,7vw,7.5rem)/.8 "Sora","Inter",sans-serif;
+    letter-spacing:-.09em;
+    white-space:nowrap;
+    transform:rotate(-12deg);
+    pointer-events:none;
+    user-select:none;
+  }
 </style>

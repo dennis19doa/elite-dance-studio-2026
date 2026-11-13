@@ -11,7 +11,6 @@ const battlePosterSrc = (filename: string) => battleBase + "media/style-posters/
 const heroBreaking = battlePosterSrc("05-breaking.webp");
 const heroHipHop = battlePosterSrc("06-hip-hop-beginner-amy.webp");
 const heroHouse = battlePosterSrc("03-house-beginner.webp");
-const heroBachata = battlePosterSrc("19-bachata-intermediate.webp");
 const battlePoster = battleBase + "media/events/elite-battle-2026-poster.svg";
 
 const categories = [
@@ -19,13 +18,12 @@ const categories = [
   { key: "breaking", number: "02", name: "Breaking", motif: "BREAKING", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking", prize: "100€ Preisgeld*" },
   { key: "hip-hop", number: "03", name: "Hip-Hop", motif: "HIP-HOP", label: "Groove · Musicality", image: "06-hip-hop-beginner-amy.webp", className: "battle-category battle-category-hiphop", prize: "100€ Preisgeld*" },
   { key: "house", number: "04", name: "House", motif: "HOUSE", label: "Rhythm · Footwork", image: "03-house-beginner.webp", className: "battle-category battle-category-house", prize: "100€ Preisgeld*" },
-  { key: "bachata", number: "05", name: "Bachata", motif: "BACHATA", label: "Musicality · Connection", image: "19-bachata-intermediate.webp", className: "battle-category battle-category-bachata", prize: "100€ Preisgeld*" },
 ].map((item) => ({ ...item, posterSrc: item.image ? battlePosterSrc(item.image) : "" }));
 ---
 
 <BaseLayout
-  title="Elite Dance Battle 2026 | Breaking Kids, Breaking, Hip-Hop, House & Bachata"
-  description="Elite Dance Battle am 5. Dezember 2026 in Berlin-Moabit. Breaking Kids, Breaking, Hip-Hop, House und Bachata. Jetzt anmelden."
+  title="Elite Dance Battle 2026 | Breaking Kids, Breaking, Hip-Hop & House"
+  description="Elite Dance Battle am 5. Dezember 2026 in Berlin-Moabit: Breaking Kids, Breaking, Hip-Hop und House. Zuschauen kostenlos, freiwillige Unterstützung möglich."
   bodyClass="elite-battle-page"
   noindex={false}
 >
@@ -42,10 +40,10 @@ const categories = [
         </div>
         <div class="battle-hero-body">
           <div class="battle-hero-copy">
-            <p class="battle-eyebrow">5 Kategorien · 12:00–19:00</p>
+            <p class="battle-eyebrow">4 Kategorien · 12:00–19:00</p>
             <h1 id="battle-title"><span>ELITE</span><span class="battle-title-outline">DANCE</span><span>BATTLE<span class="battle-title-star">*</span></span></h1>
-            <p class="battle-hero-lead">Breaking Kids · Breaking · Hip-Hop · House · Bachata</p>
-            <p class="battle-hero-description">Battles von 12:00 bis 19:00 Uhr, fünf Kategorien, gemeinsame Jury und ein Überraschungsfinale zum Abschluss.</p>
+            <p class="battle-hero-lead">Breaking Kids · Breaking · Hip-Hop · House</p>
+            <p class="battle-hero-description">Battles von 12:00 bis 19:00 Uhr, vier Kategorien, gemeinsame Jury und ein Überraschungsfinale zum Abschluss.</p>
             <div class="battle-hero-actions">
               <a class="battle-button battle-button-primary" href="#battle-registration">Jetzt anmelden <span aria-hidden="true">↘</span></a>
               <a class="battle-button battle-button-ghost" href="#how-it-works">Anmeldung <span aria-hidden="true">↗</span></a>
@@ -63,13 +61,13 @@ const categories = [
             <div class="battle-arena-tile battle-arena-tile-one"><img src={heroBreaking} alt="" /></div>
             <div class="battle-arena-tile battle-arena-tile-two"><img src={heroHipHop} alt="" /></div>
             <div class="battle-arena-tile battle-arena-tile-three"><img src={heroHouse} alt="" /></div>
-            <div class="battle-arena-tile battle-arena-tile-four"><img src={heroBachata} alt="" /></div>
+            <div class="battle-arena-tile battle-arena-tile-four battle-arena-tile-kids"><span aria-hidden="true">KIDS<br />BATTLE</span></div>
             <div class="battle-arena-orbit"><div class="battle-arena-orbit-inner"><span>SAMSTAG</span><strong>05.12.</strong><span>2026</span></div></div>
             <div class="battle-arena-caption"><span>ELITE DANCE STUDIO</span><span>EDB / 001</span></div>
           </div>
         </div>
         <div class="battle-hero-stats">
-          <div><strong>05</strong><span>Battle-Kategorien</span></div>
+          <div><strong>04</strong><span>Battle-Kategorien</span></div>
           <div><strong>12–19</strong><span>Uhr · Samstag</span></div>
           <div><strong>100<span>€</span></strong><span>Preisgeld · offene Kategorien*</span></div>
           <div class="battle-stats-tail">SPONSOR GOODIE BAGS <span aria-hidden="true">↗</span></div>
@@ -78,8 +76,8 @@ const categories = [
     </section>
 
     <div class="battle-ticker" aria-hidden="true">
-      <div>BREAKING KIDS ✳ BREAKING ✳ HIP-HOP ✳ HOUSE ✳ BACHATA ✳ 05.12.2026 ✳</div>
-      <div>BREAKING KIDS ✳ BREAKING ✳ HIP-HOP ✳ HOUSE ✳ BACHATA ✳ 05.12.2026 ✳</div>
+      <div>BREAKING KIDS ✳ BREAKING ✳ HIP-HOP ✳ HOUSE ✳ 05.12.2026 ✳ ZUSCHAUEN KOSTENLOS ✳</div>
+      <div>BREAKING KIDS ✳ BREAKING ✳ HIP-HOP ✳ HOUSE ✳ 05.12.2026 ✳ ZUSCHAUEN KOSTENLOS ✳</div>
     </div>
 
 <section class="battle-poster-showcase" id="poster" aria-labelledby="poster-heading">
@@ -87,10 +85,10 @@ const categories = [
         <div class="battle-poster-copy">
           <p class="battle-section-label">05. Dezember 2026 · Berlin-Moabit</p>
           <h2 id="poster-heading">DAS EVENT <em>IM ÜBERBLICK.</em></h2>
-          <p>Fünf Battle-Kategorien an einem Tag. Alle Judges bewerten alle Kategorien. Zum Abschluss gibt es ein Surprise Final Battle mit den Gewinner:innen.</p>
+          <p>Vier Battle-Kategorien an einem Tag. Alle Judges bewerten alle Kategorien. Zum Abschluss gibt es ein Surprise Final Battle mit den Gewinner:innen.</p>
           <div class="battle-poster-facts">
             <div><span>ZEIT</span><strong>12:00–19:00 Uhr</strong></div>
-            <div><span>KATEGORIEN</span><strong>Breaking Kids · Breaking · Hip-Hop · House · Bachata</strong></div>
+            <div><span>KATEGORIEN</span><strong>Breaking Kids · Breaking · Hip-Hop · House</strong></div>
             <div><span>COMMUNITY</span><strong>Freie Jam Session · Essen vor Ort · Zuschauer:innen willkommen</strong></div>
           </div>
           <div class="battle-poster-actions">
@@ -99,16 +97,16 @@ const categories = [
           </div>
         </div>
         <figure class="battle-poster-art">
-          <img src={battlePoster} width="700" height="875" loading="eager" decoding="async" alt="Offizielles Elite Dance Battle 2026 Poster: fünf Kategorien, 05.12.2026, Elite Dance Studio Berlin" />
-          <figcaption>Elite Dance Battle 2026 · Offizielles Poster</figcaption>
+          <img src={battlePoster} width="700" height="875" loading="eager" decoding="async" alt="Offizielles Elite Dance Battle 2026 Poster: vier Kategorien, 05.12.2026, Elite Dance Studio Berlin" />
+          <figcaption>Elite Dance Battle 2026 · Eventübersicht</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="battle-choose-section battle-container" id="choose-your-style" aria-labelledby="choose-heading">
       <div class="battle-section-heading">
-        <div><p class="battle-section-label">01 / Kategorien</p><h2 id="choose-heading">FÜNF <em>KATEGORIEN.</em></h2></div>
-        <p>Breaking Kids, Breaking, Hip-Hop, House und Bachata. Mit einem Eventticket kannst du an mehreren Kategorien teilnehmen.</p>
+        <div><p class="battle-section-label">01 / Kategorien</p><h2 id="choose-heading">VIER <em>KATEGORIEN.</em></h2></div>
+        <p>Breaking Kids, Breaking, Hip-Hop und House. Mit einem Eventticket kannst du an mehreren Kategorien teilnehmen.</p>
       </div>
       <div class="battle-category-grid" role="group" aria-label="Battle-Kategorien auswählen, mehrere möglich">
         {categories.map((category) => (
@@ -147,13 +145,13 @@ const categories = [
       <div class="battle-format-heading">
         <div>
           <p class="battle-section-label">02 / Event-Infos</p>
-          <h2 id="format-heading">FÜNF KATEGORIEN. <em>EIN EVENT.</em></h2>
+          <h2 id="format-heading">VIER KATEGORIEN. <em>EIN EVENT.</em></h2>
         </div>
         <p>Battles am Nachmittag, eine gemeinsame Jury und ein besonderes Finale zum Abschluss.</p>
       </div>
       <div class="battle-overview-grid">
-        <div class="battle-overview-card"><span>12:00–19:00</span><strong>Battle Day</strong><small>Fünf Kategorien verteilt über den Tag</small></div>
-        <div class="battle-overview-card"><span>5 KATEGORIEN</span><strong>Breaking Kids, Breaking, Hip-Hop, House &amp; Bachata</strong><small>Ein Ticket für das ganze Event</small></div>
+        <div class="battle-overview-card"><span>12:00–19:00</span><strong>Battle Day</strong><small>Vier Kategorien verteilt über den Tag</small></div>
+        <div class="battle-overview-card"><span>4 KATEGORIEN</span><strong>Breaking Kids, Breaking, Hip-Hop &amp; House</strong><small>Ein Ticket für das ganze Event</small></div>
         <div class="battle-overview-card"><span>JURY</span><strong>Alle Judges bewerten alle Kategorien</strong><small>Gemeinsames Judging während des gesamten Events</small></div>
         <div class="battle-overview-card"><span>FINALE</span><strong>Surprise Final Battle</strong><small>Besonderes Finale mit den Kategoriesieger:innen</small></div>
       </div>
@@ -165,7 +163,7 @@ const categories = [
     <div class="battle-register-intro">
       <p class="battle-section-label">03 / Anmeldung</p>
       <h2 id="register-heading">EIN TICKET.<br /><em>ALLE BATTLES.</em></h2>
-      <p>Einmal für den Battle Day anmelden. Das Ticket gilt für alle fünf Kategorien – Breaking Kids, Breaking, Hip-Hop, House und Bachata.</p>
+      <p>Einmal für den Battle Day anmelden. Das Ticket gilt für alle vier Kategorien – Breaking Kids, Breaking, Hip-Hop und House.</p>
       <div class="battle-register-steps" id="how-it-works">
         <div><span>01</span><div><strong>Für den Battle Day anmelden</strong><p>Online über Eversports oder über deine USC-Mitgliedschaft.</p></div></div>
         <div><span>02</span><div><strong>Deine Kategorien angeben</strong><p>Nach der Buchung gibst du unten an, in welchen Kategorien du antrittst. Mehrfachauswahl möglich.</p></div></div>
@@ -245,7 +243,7 @@ const categories = [
 
     <section class="battle-prizes-section battle-container" aria-labelledby="prizes-heading">
       <div class="battle-prizes-lead"><span class="battle-section-label">05 / Preise</span><h2 id="prizes-heading">PREISGELD &amp;<br /><em>GOODIE BAGS</em></h2></div>
-      <div class="battle-prize-block"><span class="battle-prize-overline">AKTUELLES PREISGELD / OFFENE KATEGORIEN</span><div class="battle-prize-amount">100<span>€</span></div><p>Aktuell 100€ pro Sieger:in in Breaking, Hip-Hop, House und Bachata. Kinderpreise separat.</p><span class="battle-prize-future">Weitere Sponsoren möglich</span></div>
+      <div class="battle-prize-block"><span class="battle-prize-overline">AKTUELLES PREISGELD / OFFENE KATEGORIEN</span><div class="battle-prize-amount">100<span>€</span></div><p>Aktuell 100€ pro Sieger:in in Breaking, Hip-Hop und House. Kinderpreise separat.</p><span class="battle-prize-future">Weitere Sponsoren möglich</span></div>
       <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Zusätzliche Preise und Goodie Bags von unseren Sponsoren. Details folgen.</p></div>
     </section>
 
@@ -276,7 +274,7 @@ const categories = [
         <div class="battle-lineup-card battle-general-timetable">
           <div class="battle-lineup-top"><span>SA / 05 DEZ 2026</span><span>PROGRAMMÜBERSICHT</span></div>
           <div class="battle-lineup-item"><span>12:00</span><strong>Start des Battle Days</strong><small>Einlass &amp; Battles</small></div>
-          <div class="battle-lineup-item"><span>AB 12:00</span><strong>Fünf Battle-Kategorien</strong><small>Breaking Kids · Breaking · Hip-Hop · House · Bachata</small></div>
+          <div class="battle-lineup-item"><span>AB 12:00</span><strong>Vier Battle-Kategorien</strong><small>Breaking Kids · Breaking · Hip-Hop · House</small></div>
           <div class="battle-lineup-item"><span>ALLE RUNDEN</span><strong>Gemeinsame Jury</strong><small>Alle Judges bewerten alle Kategorien</small></div>
           <div class="battle-lineup-item"><span>DEN GANZEN TAG</span><strong>Kostenlose Jam Session</strong><small>Im zweiten Raum</small></div>
           <div class="battle-lineup-item"><span>DEN GANZEN TAG</span><strong>Food &amp; Community</strong><small>Essen vor Ort · Zuschauen kostenlos</small></div>
@@ -299,7 +297,7 @@ const categories = [
     const inputs = Array.from(document.querySelectorAll("[data-battle-entry-category]"));
     const deckLabel = document.querySelector("[data-battle-selected-name]");
     const deck = document.querySelector(".battle-selection-deck");
-    const names = { "breaking-kids": "Breaking Kids", breaking: "Breaking", "hip-hop": "Hip-Hop", house: "House", bachata: "Bachata" };
+    const names = { "breaking-kids": "Breaking Kids", breaking: "Breaking", "hip-hop": "Hip-Hop", house: "House" };
     const chosen = new Set();
     const guardianBlock = document.querySelector("[data-kids-consent]");
     const guardianInput = document.querySelector("[data-guardian-consent]");

@@ -465,7 +465,6 @@ const categories = [
   .battle-category-breaking { --card-accent:#fc755d; background:radial-gradient(circle at 70% 40%,rgba(252,117,93,.16),transparent 75%),#1a1718; }
   .battle-category-hiphop { --card-accent:#d8fa53; background:radial-gradient(circle at 70% 40%,rgba(216,250,83,.12),transparent 75%),#171b1b; }
   .battle-category-house { --card-accent:#9c91ff; background:radial-gradient(circle at 70% 40%,rgba(156,145,255,.16),transparent 75%),#171723; }
-  .battle-category-bachata { --card-accent:#f2afcf; background:radial-gradient(circle at 70% 40%,rgba(242,175,207,.16),transparent 75%),#1c161f; }
   .battle-category::after { content:""; position:absolute; width:160px; height:160px; border:1px solid var(--card-accent); border-radius:50%; top:67px; right:-82px; opacity:.33; pointer-events:none; }
   .battle-category-top { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:.67rem; letter-spacing:.13em; font-weight:900; }
   .battle-select-indicator { display:grid; place-items:center; width:29px; height:29px; border:1px solid var(--card-accent); border-radius:50%; color:var(--card-accent); font-size:1rem; }
@@ -693,7 +692,6 @@ const categories = [
   .battle-category-breaking { --card-accent:#f26958; }
   .battle-category-hiphop { --card-accent:#7d9aff; }
   .battle-category-house { --card-accent:#b18bff; }
-  .battle-category-bachata { --card-accent:#f08dbb; }
   .battle-category:hover { transform:perspective(1100px) rotateX(var(--tx)) rotateY(var(--ty));border-color:var(--card-accent);box-shadow:none; }
   .battle-category.is-selected { box-shadow:inset 0 0 0 1px var(--card-accent),0 0 0 4px color-mix(in srgb,var(--card-accent),transparent 82%); }
   .battle-category-photo { opacity:.7;transform:scale(1.04);filter:grayscale(.95) contrast(1.38) brightness(.72);transition:filter .5s,transform .5s,opacity .5s; }
@@ -794,7 +792,6 @@ const categories = [
   .battle-entry-checkbox { --entry-color:#e86960;display:flex;align-items:center;gap:10px;min-height:52px;padding:12px;background:#fff9f5;border:1px solid #d1beb9;font-size:.75rem;font-weight:800;cursor:pointer; }
   .battle-entry-checkbox-hip-hop { --entry-color:#7794ef; }
   .battle-entry-checkbox-house { --entry-color:#ac89e9; }
-  .battle-entry-checkbox-bachata { --entry-color:#d881a7; }
   .battle-entry-checkbox:has(input:checked) { border-color:var(--entry-color);background:color-mix(in srgb,var(--entry-color),white 82%);box-shadow:inset 4px 0 var(--entry-color); }
   .battle-entry-checkbox input { flex:none;accent-color:var(--entry-color); }
   .battle-entry-methods { display:flex;gap:22px;flex-wrap:wrap;font-size:.83rem;font-weight:700; }
@@ -849,7 +846,6 @@ const categories = [
   .battle-category-breaking { --card-accent:#c48374; }
   .battle-category-hiphop { --card-accent:#7b9ab5; }
   .battle-category-house { --card-accent:#a59abd; }
-  .battle-category-bachata { --card-accent:#bc89a2; }
   .battle-category:hover { transform:none!important;border-color:var(--card-accent);background:#27282a;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--card-accent),transparent 65%); }
   .battle-category.is-selected { border-color:var(--card-accent);box-shadow:inset 0 0 0 1px var(--card-accent); }
   .battle-category::before { content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 220px 200px at var(--px) var(--py),color-mix(in srgb,var(--card-accent),transparent 88%),transparent 80%);opacity:0;transition:opacity .35s ease; }
@@ -927,7 +923,6 @@ const categories = [
   .battle-entry-checkbox-breaking { --entry-color:#c48374; }
   .battle-entry-checkbox-hip-hop { --entry-color:#7b9ab5; }
   .battle-entry-checkbox-house { --entry-color:#a59abd; }
-  .battle-entry-checkbox-bachata { --entry-color:#bc89a2; }
   .battle-entry-send { background:#997868;color:#fffaf5; }
   .battle-entry-send:hover { background:#866758; }
   .battle-kids-consent { padding:13px 16px;margin-top:18px;border-left:3px solid #c3a16e;background:#e9e0d5; }
@@ -1056,4 +1051,49 @@ const categories = [
   @media(prefers-reduced-motion:reduce) {
     .battle-overview-card { transition:none; }
   }
+</style>
+
+
+<style>
+  /* Four-category battle, free spectator entry and voluntary contributions */
+  .battle-category-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px; }
+  .battle-category,.battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:auto;min-height:340px; }
+  .battle-arena-tile-kids { display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#3c322b,#131c24); }
+  .battle-arena-tile-kids span { font:900 clamp(1.6rem,3vw,3rem)/.95 "Sora","Inter",sans-serif;letter-spacing:-.09em;color:#e1c899;text-align:center;transform:rotate(-12deg); }
+  .battle-spectator-hero-note { margin-top:20px;display:inline-flex;flex-direction:column;gap:4px;background:rgba(240,232,217,.09);border:1px solid rgba(220,202,172,.46);padding:14px 17px;color:#fff8f0;text-decoration:none;transition:background .25s,border-color .25s; }
+  .battle-spectator-hero-note:hover { background:rgba(240,232,217,.17);border-color:#dbc0a2; }
+  .battle-spectator-hero-note strong { font-size:.86rem;font-weight:900;letter-spacing:.065em; }
+  .battle-spectator-hero-note span { color:#d6c5b7;font-size:.74rem;font-weight:700; }
+  .battle-spectators { padding:clamp(64px,7vw,112px) 0;background:#eae7df;color:#292729; }
+  .battle-spectators-layout { display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:clamp(35px,5vw,76px);align-items:center; }
+  .battle-spectator-free .battle-section-label { color:#8d7162; }
+  .battle-free-overline { display:inline-flex;align-items:center;margin-top:24px;padding:8px 12px;border:1px solid #9e9a8e;color:#5c534c;font-size:.72rem;font-weight:900;letter-spacing:.13em; }
+  .battle-spectator-free h2 { font:900 clamp(2.8rem,5.25vw,5.5rem)/.96 "Sora","Inter",sans-serif;letter-spacing:-.07em;margin:17px 0 23px;color:#222224; }
+  .battle-spectator-free h2 em { color:#b47566; }
+  .battle-spectator-free p { max-width:640px;font-size:.99rem;line-height:1.75;color:#5d5651; }
+  .battle-spectator-free p strong { color:#2f2928; }
+  .battle-free-highlights { display:flex;flex-wrap:wrap;gap:9px;margin-top:24px; }
+  .battle-free-highlights span { background:#f7f4ef;border:1px solid #d5cec5;padding:10px 12px;color:#393332;font-size:.77rem;font-weight:850; }
+  .battle-donation-card { padding:clamp(24px,3.6vw,40px);background:#24262a;color:#f1ece7;border:1px solid #514a46;box-shadow:12px 12px 0 #b8b0a246; }
+  .battle-donation-card .battle-section-label { color:#c3a694; }
+  .battle-donation-card h3 { font:850 clamp(1.6rem,2.45vw,2.4rem)/1.12 "Sora","Inter",sans-serif;letter-spacing:-.05em;margin:17px 0 18px;color:#fff8ef; }
+  .battle-donation-card p:not(.battle-section-label) { color:#cec5bf;font-size:.87rem;line-height:1.7; }
+  .battle-donation-card p strong { color:#f8eee6; }
+  .battle-donation-card .battle-donation-disclaimer { color:#a9a2a0!important;font-size:.75rem!important; }
+  .battle-donation-card a { display:inline-flex;justify-content:space-between;gap:12px;align-items:center;text-decoration:none;margin-top:13px;padding:13px 17px;background:#bda18f;color:#252124;font-size:.8rem;font-weight:900;transition:background .25s; }
+  .battle-donation-card a:hover { background:#d6bdac; }
+  .battle-register-card .battle-form-description { color:#d6cbc3; }
+  .battle-community-pills { flex-wrap:wrap; }
+  @media(max-width:850px) { .battle-spectators-layout { grid-template-columns:1fr; } }
+  @media(max-width:750px) {
+    .battle-category-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .battle-category,.battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:auto;min-height:310px; }
+  }
+  @media(max-width:490px) {
+    .battle-category-grid { grid-template-columns:1fr; }
+    .battle-category,.battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:auto;min-height:285px; }
+    .battle-spectator-free h2 { font-size:clamp(2.55rem,10vw,4rem); }
+    .battle-spectator-hero-note { display:flex;width:100%; }
+  }
+  @media(prefers-reduced-motion:reduce) { .battle-spectator-hero-note,.battle-donation-card a { transition:none; } }
 </style>

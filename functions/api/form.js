@@ -184,7 +184,7 @@ export async function onRequestPost({ request, env }) {
       openFeedback: clean(form.get("open_feedback"), 5000),
       discoverySource: clean(form.get("discovery_source"), 200),
       source: clean(form.get("source"), 300),
-      battleCategories: [...new Set(form.getAll("battle_categories").map((value) => clean(value, 30)).filter((value) => ["breaking-kids", "breaking", "hip-hop", "house", "bachata"].includes(value)))],
+      battleCategories: [...new Set(form.getAll("battle_categories").map((value) => clean(value, 30)).filter((value) => ["breaking-kids", "breaking", "hip-hop", "house"].includes(value)))],
       stageName: clean(form.get("stage_name"), 120),
       bookingMethod: clean(form.get("booking_method"), 20),
       bookingConfirmed: clean(form.get("booking_confirmed"), 10),

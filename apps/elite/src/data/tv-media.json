@@ -40,7 +40,13 @@
         "seconds": 12,
         "type": "image"
       }
-    ]
+    ],
+    "battle": {
+      "title": "Elite Dance Battle 2026 · 05.12.2026",
+      "file": "events/Berlin Elite Dance Battle 2026.png",
+      "seconds": 18,
+      "type": "image"
+    }
   },
   "posters": [
     {

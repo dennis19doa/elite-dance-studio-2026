@@ -56,6 +56,16 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
       </div>
     </section>
 
+    <section class="battle-about" id="warum-battle" aria-labelledby="battle-about-heading">
+      <div class="battle-container battle-about-layout">
+        <h2 id="battle-about-heading">Warum wir das Battle veranstalten</h2>
+        <div class="battle-about-copy">
+          <p>Wir wollen die Berliner Breaking-, House- und Hip-Hop-Szene zusammenbringen. In den Battles zeigen Tänzer:innen, woran sie im Training arbeiten. Bei der offenen Jam Session kannst du mit Leuten aus anderen Styles und Crews tanzen, auch wenn du zum Zuschauen gekommen bist.</p>
+          <p>Mit Breaking Kids gibt es eine eigene Kategorie, in der Kinder vor Publikum tanzen und Battle-Erfahrung sammeln können.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="battle-program" id="spectators" aria-labelledby="spectators-heading">
       <div class="battle-container battle-program-layout">
         <div class="battle-visitor-info">
@@ -70,7 +80,13 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
             <span>{battle.hours} Uhr</span>
           </div>
           <dl class="battle-program-rows">
-            <div><dt>Hauptraum</dt><dd><strong>Battles &amp; Finale</strong><span>Vier Kategorien, Surprise Final Battle und Siegerehrung</span></dd></div>
+            <div>
+              <dt>Hauptraum</dt>
+              <dd>
+                <strong>Battles &amp; Finale</strong>
+                <span>Eine gemeinsame Jury bewertet die vier Kategorien. Im Surprise Final Battle treten die Kategoriesieger:innen um einen Extrapreis an. Danach folgt die Siegerehrung.</span>
+              </dd>
+            </div>
             <div><dt>Zweiter Raum</dt><dd><strong>Kostenlose Jam Session</strong><span>Offen den ganzen Tag</span></dd></div>
             <div><dt>Im Studio</dt><dd><strong>Essen &amp; Musik</strong></dd></div>
           </dl>
@@ -125,7 +141,7 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
                 </label>
               ))}
             </div>
-            <p class="battle-prize-note" id="battle-prizes">Sponsor-Goodie-Bags in allen vier Kategorien. Im Surprise Final Battle treten die Kategoriesieger:innen um einen Extrapreis an.</p>
+            <p class="battle-prize-note" id="battle-prizes">Sponsor-Goodie-Bags in allen vier Kategorien.</p>
           </fieldset>
 
           <div class="battle-kids-consent" data-battle-kids-consent hidden>
@@ -503,12 +519,26 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
     height: auto;
   }
 
+  .battle-about {
+    padding-block: clamp(32px, 4.5vw, 64px);
+    border-bottom: 1px solid var(--battle-border);
+  }
+
+  .battle-about-copy p {
+    margin: 0;
+  }
+
+  .battle-about-copy p + p {
+    margin-top: 12px;
+  }
+
   .battle-program {
     padding-block: clamp(36px, 5.4vw, 76px);
     border-bottom: 1px solid var(--battle-border);
     background: #1c1618;
   }
 
+  .battle-about-layout,
   .battle-program-layout {
     display: grid;
     grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
@@ -858,6 +888,7 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
     }
 
     .battle-hero-layout,
+    .battle-about-layout,
     .battle-program-layout,
     .battle-booking-options,
     .battle-entry-fields {

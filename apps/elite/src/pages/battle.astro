@@ -5,996 +5,917 @@ import SiteFooter from "../components/SiteFooter.astro";
 import site from "../data/site.json";
 import { battle } from "../data/battle";
 
-const { categoryNames, eversportsBookingUrl, uscBookingUrl } = battle;
+const { categoryNames, eversportsBookingUrl, uscBookingUrl, poster } = battle;
 const categoryList = Object.values(categoryNames).join(" · ");
-const battleBase = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
-const battlePosterSrc = (filename: string) => battleBase + "media/style-posters/" + filename;
-const heroBreaking = battlePosterSrc("05-breaking.webp");
-const heroHouse = battlePosterSrc("03-house-beginner.webp");
-const battlePoster = battleBase + "media/events/elite-battle-2026-four-styles.svg";
-
-const categories = [
-  { key: "breaking-kids", motif: "KIDS", label: "Kinder-Battle", image: "", className: "battle-category battle-category-kids", prize: "Kinderpreise" },
-  { key: "breaking", motif: "BREAKING", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking", prize: "100 € + Medaille" },
-  { key: "house", motif: "HOUSE", label: "Rhythm · Footwork", image: "03-house-beginner.webp", className: "battle-category battle-category-house", prize: "100 € + Medaille" },
-  { key: "hip-hop", motif: "HIP-HOP", label: "Groove · Musicality", image: "", className: "battle-category battle-category-hiphop", prize: "100 € + Medaille" },
-] as const;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
+const posterUrl = baseUrl + poster.large;
+const categories = Object.entries(categoryNames) as [keyof typeof categoryNames, string][];
 ---
 
 <BaseLayout
-  title="Elite Dance Battle 2026 | Breaking Kids, Breaking Adults, House & Hip-Hop"
-  description={`Elite Dance Battle am 5. Dezember 2026, ${battle.hours} Uhr in Berlin-Moabit. ${categoryList}. Zuschauen kostenlos, Battle-Teilnahme ${battle.onlineFee} online, ${battle.doorFee} vor Ort oder Urban Sports Club.`}
+  title="Elite Dance Battle 2026 | Berlin-Moabit"
+  description={"Elite Dance Battle am 5. Dezember 2026, " + battle.hours + " Uhr in Berlin-Moabit. " + categoryList + ". Zuschauen ist kostenlos. Battle-Teilnahme " + battle.onlineFee + " online, " + battle.doorFee + " vor Ort oder mit Urban Sports Club."}
+  image={posterUrl}
   bodyClass="elite-battle-page"
-  noindex={false}
 >
   <SiteHeader brand={site.brand} nav={site.nav} />
 
   <main class="battle-main">
     <section class="battle-hero" aria-labelledby="battle-title">
-      <div class="battle-hero-grid" aria-hidden="true"></div>
-      <div class="battle-hero-noise" aria-hidden="true"></div>
-      <div class="battle-container battle-hero-inner">
-        <div class="battle-hero-topline">
-          <span class="battle-kicker"><span class="battle-live-dot"></span> Elite Dance Studio presents</span>
-          <span class="battle-edition">BERLIN · FIRST EDITION · 2026</span>
-        </div>
-        <div class="battle-hero-body">
-          <div class="battle-hero-copy">
-            <p class="battle-eyebrow">Sa. 05.12.2026 · {battle.hours} Uhr</p>
-            <h1 id="battle-title"><span>ELITE</span><span class="battle-title-outline">DANCE</span><span>BATTLE<span class="battle-title-star">*</span></span></h1>
-            <p class="battle-hero-lead">{categoryList}</p>
-            <a class="battle-spectator-hero-note" href="#spectators"><strong>ZUSCHAUEN KOSTENLOS</strong><span>Auch die Jam Session ist frei zugänglich ↗</span></a>
-            <div class="battle-hero-actions">
-              <a class="battle-button battle-button-primary" href="#battle-registration">Für Battles anmelden <span aria-hidden="true">↘</span></a>
-              <a class="battle-button battle-button-ghost" href="#battle-schedule">Tagesprogramm <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-          <aside class="battle-hero-stamp" aria-label="Event-Details">
-            <span class="battle-stamp-overline">BATTLE DAY</span>
-            <strong>05<span>.</span>12<span>.</span>26</strong>
-            <span class="battle-stamp-rule"></span>
-            <span>ELITE DANCE STUDIO</span>
-            <span>BERLIN · MOABIT</span>
-            <div class="battle-stamp-ring" aria-hidden="true">✳</div>
-          </aside>
-          <div class="battle-arena-visual" aria-hidden="true">
-            <div class="battle-arena-tile battle-arena-tile-one"><img src={heroBreaking} alt="" /></div>
-            <div class="battle-arena-tile battle-arena-tile-two battle-arena-tile-hiphop"><span aria-hidden="true">HIP<br />HOP</span></div>
-            <div class="battle-arena-tile battle-arena-tile-three"><img src={heroHouse} alt="" /></div>
-            <div class="battle-arena-tile battle-arena-tile-four battle-arena-tile-kids"><span aria-hidden="true">KIDS<br />BATTLE</span></div>
-            <div class="battle-arena-orbit"><div class="battle-arena-orbit-inner"><span>SAMSTAG</span><strong>05.12.</strong><span>2026</span></div></div>
-            <div class="battle-arena-caption"><span>ELITE DANCE STUDIO</span><span>EDB / 001</span></div>
-          </div>
-        </div>
-        <div class="battle-hero-stats">
-          <div><strong>{battle.onlineFee}</strong><span>Battle-Teilnahme online</span></div>
-          <div><strong>{battle.doorFee}</strong><span>Battle-Teilnahme vor Ort</span></div>
-          <div><strong>100<span>€</span></strong><span>+ Medaille · Breaking Adults, House, Hip-Hop</span></div>
-          <div class="battle-stats-tail">SPONSOR GOODIE BAGS <span aria-hidden="true">↗</span></div>
-        </div>
-      </div>
-    </section>
+      <div class="battle-container battle-hero-layout">
+        <div class="battle-hero-copy">
+          <p class="battle-event-date">
+            <time datetime="2026-12-05">Sa., 5. Dezember 2026</time>
+            <span>{battle.hours} Uhr</span>
+          </p>
+          <h1 id="battle-title"><span>Elite Dance</span> Battle</h1>
+          <p class="battle-hero-venue">Elite Dance Studio · Berlin-Moabit</p>
+          <ul class="battle-hero-categories" aria-label="Battle-Kategorien">
+            {categories.map(([key, name]) => <li class={"battle-color-" + key}>{name}</li>)}
+          </ul>
 
-    <div class="battle-ticker" aria-hidden="true">
-      <div>{Object.values(categoryNames).join(" ✳ ").toUpperCase()} ✳ 05.12.2026 ✳ ZUSCHAUEN KOSTENLOS ✳</div>
-      <div>{Object.values(categoryNames).join(" ✳ ").toUpperCase()} ✳ 05.12.2026 ✳ ZUSCHAUEN KOSTENLOS ✳</div>
-    </div>
-
-    <section class="battle-poster-showcase" id="poster" aria-labelledby="poster-heading">
-      <div class="battle-container battle-poster-layout">
-        <div class="battle-poster-copy">
-          <p class="battle-section-label">05. Dezember 2026 · Berlin-Moabit</p>
-          <h2 id="poster-heading">DAS EVENT <em>IM ÜBERBLICK.</em></h2>
-          <p>Vier Battles und ein Überraschungsfinale im Elite Dance Studio. Im zweiten Raum läuft die kostenlose Jam Session.</p>
-          <div class="battle-poster-facts">
-            <div><span>ZEIT</span><strong>{battle.hours} Uhr</strong></div>
-            <div><span>BATTLE-TEILNAHME</span><strong>{battle.onlineFee} online · {battle.doorFee} vor Ort · Urban Sports Club</strong></div>
-            <div><span>ZUSCHAUEN</span><strong>Kostenlos · Spenden freiwillig</strong></div>
+          <div class="battle-hero-actions" data-battle-hero-actions>
+            <a class="battle-button battle-button-primary" href="#battle-registration">Für Battles anmelden</a>
+            <a class="battle-button battle-button-secondary" href="#spectators">Kostenlos zuschauen</a>
           </div>
-          <div class="battle-poster-actions">
-            <a class="battle-button battle-button-primary" href="#battle-registration">Zur Anmeldung <span aria-hidden="true">↗</span></a>
-            <a class="battle-button battle-button-ghost" href="#battle-schedule">Tagesprogramm <span aria-hidden="true">↘</span></a>
-          </div>
+          <a class="battle-text-link battle-return-link" href="#battle-entries">Schon gebucht? Kategorien eintragen <span aria-hidden="true">↓</span></a>
         </div>
-        <figure class="battle-poster-art">
-          <img src={battlePoster} width="700" height="875" loading="eager" decoding="async" alt={`Elite Dance Battle 2026 · ${categoryList} · Zuschauen kostenlos`} />
-          <figcaption>Elite Dance Battle 2026 · Eventübersicht</figcaption>
+
+        <figure class="battle-poster" id="poster">
+          <img
+            src={posterUrl}
+            srcset={baseUrl + poster.small + " " + poster.smallWidth + "w, " + posterUrl + " " + poster.width + "w"}
+            sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1040px) 43vw, 460px"
+            width={poster.width}
+            height={poster.height}
+            fetchpriority="high"
+            decoding="async"
+            alt="Offizielles Poster des Elite Dance Battle 2026"
+          />
         </figure>
       </div>
     </section>
 
-    <section class="battle-choose-section battle-container" id="choose-your-style" aria-labelledby="choose-heading">
-      <div class="battle-section-heading">
-        <div><h2 id="choose-heading">BATTLE-<em>KATEGORIEN.</em></h2></div>
-        <p>Wähle die Kategorien, in denen du antreten möchtest. Eine Anmeldung reicht auch für mehrere Battles.</p>
-      </div>
-      <div class="battle-category-grid" role="group" aria-label="Battle-Kategorien auswählen, mehrere möglich">
-        {categories.map((category, index) => (
-          <button
-            type="button"
-            class={category.className}
-            data-select-style={category.key}
-            data-style-name={categoryNames[category.key]}
-            aria-pressed="false"
-            aria-controls="battle-entries"
-          >
-            <span class="battle-category-top"><span aria-hidden="true">EDB / 0{index + 1}</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
-            {category.image ? (
-              <img class="battle-category-photo" src={battlePosterSrc(category.image)} alt="" loading="lazy" decoding="async" />
-            ) : (
-              <span class={category.key === "hip-hop" ? "battle-category-hiphop-graphic" : "battle-category-kids-graphic"} aria-hidden="true">{category.key === "hip-hop" ? "HIP-HOP" : "EDB / 05.12"}</span>
-            )}
-            <span class="battle-category-photo-wash" aria-hidden="true"></span>
-            <span class="battle-category-art" aria-hidden="true"><span>{category.motif}</span></span>
-            <span class="battle-category-lower">
-              <span class="battle-category-name">{categoryNames[category.key]}</span>
-              <span class="battle-category-traits">{category.label}</span>
-            </span>
-            <span class="battle-category-footer"><span class="battle-prize-mini">{category.prize}</span><span class="battle-select-text">Merken +</span></span>
-          </button>
-        ))}
-      </div>
-      <div class="battle-selection-deck" aria-live="polite">
-        <div class="battle-selection-indicator"><span>◉</span><small>DEINE AUSWAHL</small></div>
-        <strong data-battle-selected-name>Mehrere Kategorien möglich</strong>
-        <a href="#battle-entries" data-battle-next>Teilnahme angeben <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
-
-    <section class="battle-spectators" id="spectators" aria-labelledby="spectator-heading">
-      <div class="battle-container battle-spectators-layout">
-        <div class="battle-spectator-free">
-          <h2 id="spectator-heading">FREIER <em>EINTRITT.</em></h2>
-          <p>Zum Zuschauen und für die Jam Session im zweiten Raum kannst du einfach vorbeikommen. Beides ist kostenlos und ohne Anmeldung möglich.</p>
+    <section class="battle-program" id="spectators" aria-labelledby="spectators-heading">
+      <div class="battle-container battle-program-layout">
+        <div class="battle-visitor-info">
+          <h2 id="spectators-heading">Kostenlos zuschauen</h2>
+          <p>Du kannst ohne Anmeldung vorbeikommen, die Battles anschauen oder bei der Jam Session mittanzen.</p>
+          <p class="battle-address" id="final-cta"><strong>Elite Dance Studio</strong><br />Wiclefstraße 16–17 · 10551 Berlin</p>
         </div>
-        <div class="battle-donation-card">
-          <h3>Freiwillige Unterstützung</h3>
-          <p>Du kannst vor Ort spenden oder das Event durch einen freiwilligen Urban Sports Club Check-in unterstützen, wenn die Buchung in deiner App verfügbar ist. Ein Check-in pro Tag im Studio genügt.</p>
-          <a href={uscBookingUrl} target="_blank" rel="noopener noreferrer">Elite Dance Studio bei USC ansehen <span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </section>
 
-    <section class="battle-register-section" id="battle-registration" aria-labelledby="register-heading">
-  <div class="battle-container battle-register-grid">
-    <div class="battle-register-intro">
-      <h2 id="register-heading">ANMELDUNG<br /><em>FÜR BATTLES.</em></h2>
-      <p>Eine Anmeldung gilt für den ganzen Tag. Du kannst in mehreren Kategorien antreten.</p>
-      <div class="battle-register-steps" id="how-it-works">
-        <div><span>01</span><div><strong>Teilnahme buchen</strong><p>Buche vorab über Eversports oder Urban Sports Club. Du kannst dich auch am Eventtag im Studio anmelden.</p></div></div>
-        <div><span>02</span><div><strong>Kategorien eintragen</strong><p>Nach der Online- oder USC-Buchung nutzt du das Formular mit deiner Buchungs-E-Mail. Bei Anmeldung vor Ort gibst du deine Kategorien im Studio an.</p></div></div>
-      </div>
-    </div>
-    <div class="battle-register-card">
-      <h3>So kannst du teilnehmen</h3>
-      <div class="battle-booking-links">
-        <a class="battle-booking-link" href={eversportsBookingUrl} target="_blank" rel="noopener noreferrer">
-          <span><strong>{battle.onlineFee} online</strong><small>Vorab bei Eversports buchen</small></span><b aria-hidden="true">↗</b>
-        </a>
-        <div class="battle-booking-link battle-booking-link-door">
-          <span><strong>{battle.doorFee} vor Ort</strong><small>Am 5. Dezember im Studio anmelden</small></span>
-        </div>
-        <a class="battle-booking-link battle-booking-link-usc" href={uscBookingUrl} target="_blank" rel="noopener noreferrer">
-          <span><strong>Urban Sports Club</strong><small>Battle am 05.12. reservieren und im Studio per App einchecken</small></span><b aria-hidden="true">↗</b>
-        </a>
-      </div>
-      <a class="battle-booking-next" href="#battle-entries">Schon gebucht? Kategorien eintragen <span aria-hidden="true">↘</span></a>
-    </div>
-  </div>
-</section>
-
-<section class="battle-entries-section" id="battle-entries" aria-labelledby="entries-heading">
-  <div class="battle-container battle-entries-layout">
-    <div class="battle-entries-intro">
-      <h2 id="entries-heading">KATEGORIEN <em>EINTRAGEN.</em></h2>
-      <p>Nach deiner Buchung über Eversports oder Urban Sports Club kannst du hier deine Kategorien eintragen. Verwende dafür dieselbe E-Mail-Adresse wie bei der Buchung.</p>
-    </div>
-    <form class="battle-entries-form" action="/api/form" method="post" data-battle-entries-form>
-      <input type="hidden" name="form_kind" value="battle" />
-      <label class="battle-entry-trap" aria-hidden="true">Leer lassen<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
-      <h3>Teilnahme eintragen</h3>
-      <div class="battle-entry-fields">
-        <label>Name der teilnehmenden Person *<input name="name" type="text" autocomplete="name" maxlength="160" required placeholder="Bei Kids: Name des Kindes" /></label>
-        <label>E-Mail-Adresse der Buchung *<input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="Bei Kids: E-Mail des Elternteils" /></label>
-        <label class="battle-entry-wide">Battle-Name (optional)<input name="stage_name" type="text" maxlength="120" placeholder="Dein Name im Battle" /></label>
-      </div>
-      <fieldset class="battle-entry-fieldset">
-        <legend>In welchen Kategorien trittst du an? *</legend>
-        <div class="battle-entry-checkboxes">
-          {categories.map((category) => (
-            <label class={"battle-entry-checkbox battle-entry-checkbox-" + category.key}>
-              <input type="checkbox" name="battle_categories" value={category.key} data-battle-entry-category={category.key} />
-              <span>{categoryNames[category.key]}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
-      <div class="battle-kids-consent" data-kids-consent hidden>
-        <label><input type="checkbox" name="guardian_consent" value="yes" data-guardian-consent />
-          <span>Ich bin erziehungsberechtigt und stimme der Teilnahme meines Kindes am Breaking Kids Battle zu. *</span>
-        </label>
-        <small>Für Breaking Kids bitte den Namen des Kindes und die Buchungs-E-Mail der erziehungsberechtigten Person angeben.</small>
-      </div>
-      <fieldset class="battle-entry-fieldset"><legend>Wie hast du gebucht? *</legend>
-        <div class="battle-entry-methods">
-          <label><input type="radio" name="booking_method" value="eversports" required /> Eversports</label>
-          <label><input type="radio" name="booking_method" value="usc" required /> Urban Sports Club</label>
-        </div>
-      </fieldset>
-      <label class="battle-entry-confirm"><input type="checkbox" name="booking_confirmed" value="yes" required /> Ich habe den Battle Day bereits über Eversports oder USC gebucht. *</label>
-      <label class="battle-entry-confirm"><input type="checkbox" name="privacy_consent" value="accepted" required /> Ich stimme zu, dass meine Daten zur Organisation der Battle-Teilnahme verarbeitet und mit der Buchung abgeglichen werden. *</label>
-      <button class="battle-entry-send" type="submit" data-battle-entry-send>Kategorien abschicken <span aria-hidden="true">↗</span></button>
-      <p class="battle-entry-status" data-battle-entry-status role="status" aria-live="polite">Das Formular ergänzt deine vorhandene Buchung.</p>
-    </form>
-  </div>
-</section>
-
-    <section class="battle-prizes-section battle-container" id="battle-prizes" aria-labelledby="prizes-heading">
-      <div class="battle-prizes-lead">
-        <h2 id="prizes-heading">PREISE &amp;<br /><em>FINALE.</em></h2>
-        <p>Zum Abschluss treten die Kategoriesieger:innen im Surprise Final Battle um einen Extrapreis an.</p>
-      </div>
-      <div class="battle-prize-block"><span class="battle-prize-overline">PRO KATEGORIESIEG</span><div class="battle-prize-amount">100<span>€</span></div><strong>+ eine Medaille</strong><p>Jeweils in Breaking Adults, House und Hip-Hop.</p><span class="battle-prize-future">Eigene Preise für Breaking Kids</span></div>
-      <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Goodie Bags von unseren Sponsoren gibt es in allen vier Kategorien.</p></div>
-    </section>
-
-    <section class="battle-schedule-section" id="battle-schedule" aria-labelledby="schedule-heading">
-      <div class="battle-container battle-schedule-layout">
-        <div class="battle-schedule-intro">
-          <p class="battle-section-label">Tagesprogramm · Samstag, 5. Dezember</p>
-          <h2 id="schedule-heading">{battle.hours} <em>UHR.</em></h2>
-          <p>Die Startzeiten der einzelnen Battles geben wir noch bekannt.</p>
-          <div class="battle-schedule-rooms">
-            <div><span>RAUM 01</span><strong>Battles · Finale · Siegerehrung</strong></div>
-            <div><span>RAUM 02</span><strong>Kostenlose Jam Session den ganzen Tag</strong></div>
-            <div><span>IM STUDIO</span><strong>Essen vor Ort und Musik den ganzen Tag</strong></div>
+        <div class="battle-timetable" id="battle-schedule">
+          <div class="battle-timetable-heading">
+            <h3>Tagesprogramm</h3>
+            <span>{battle.hours} Uhr</span>
           </div>
-          <a class="battle-schedule-instagram" href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a>
+          <dl class="battle-program-rows">
+            <div><dt>Hauptraum</dt><dd><strong>Battles &amp; Finale</strong><span>Vier Kategorien, Surprise Final Battle und Siegerehrung</span></dd></div>
+            <div><dt>Zweiter Raum</dt><dd><strong>Kostenlose Jam Session</strong><span>Offen den ganzen Tag</span></dd></div>
+            <div><dt>Im Studio</dt><dd><strong>Essen &amp; Musik</strong></dd></div>
+          </dl>
+          <p class="battle-program-note">Die Startzeiten der einzelnen Battles geben wir noch bekannt.</p>
         </div>
-        <div class="battle-lineup-card battle-general-timetable">
-          <div class="battle-lineup-top"><span>SA / 05 DEZ 2026</span><span>PROGRAMMÜBERSICHT</span></div>
-          <div class="battle-lineup-item"><span>{battle.startsAt}</span><strong>Start des Battle Days</strong></div>
-          <div class="battle-lineup-item"><span>IM TAGESVERLAUF</span><strong>Vier Battles mit gemeinsamer Jury</strong><small>{categoryList}</small></div>
-          <div class="battle-lineup-item battle-lineup-item-special"><span>ZUM ABSCHLUSS</span><strong>Surprise Final Battle</strong><small>Battle der Kategoriesieger:innen um einen Extrapreis</small></div>
-          <div class="battle-lineup-item"><span>BIS {battle.endsAt}</span><strong>Siegerehrung &amp; Ausklang</strong></div>
-        </div>
+
+        <p class="battle-donation">
+          Spenden sind freiwillig. Wenn der Termin in deiner Urban Sports Club App verfügbar ist, kannst du das Event auch mit einem Check-in unterstützen.
+        </p>
       </div>
     </section>
 
-    <section class="battle-last-cta battle-container" aria-labelledby="final-cta"><p class="battle-section-label">ELITE DANCE BATTLE 2026</p><h2 id="final-cta">5. DEZEMBER<br /><em>2026</em></h2><a class="battle-button battle-button-primary" href="#battle-registration">Zur Anmeldung <span aria-hidden="true">↗</span></a><p>Elite Dance Studio · Wiclefstraße 16–17 · 10551 Berlin-Moabit</p></section>
+    <section class="battle-container battle-registration" id="battle-registration" aria-labelledby="register-heading">
+      <header class="battle-section-header">
+        <h2 id="register-heading">Für Battles anmelden</h2>
+        <p>Eine Buchung gilt für den ganzen Tag. Du kannst in mehreren Kategorien antreten.</p>
+      </header>
+
+      <div class="battle-registration-step" id="how-it-works">
+        <h3><span class="battle-step-number">1</span> Teilnahme buchen</h3>
+        <div class="battle-booking-options">
+          <a class="battle-booking-option battle-booking-online" href={eversportsBookingUrl} target="_blank" rel="noopener noreferrer">
+            <strong>{battle.onlineFee} online <span aria-hidden="true">↗</span></strong>
+            <span>Vorab bei Eversports buchen</span>
+          </a>
+          <div class="battle-booking-option">
+            <strong>{battle.doorFee} vor Ort</strong>
+            <span>Am Eventtag im Studio anmelden und Kategorien angeben</span>
+          </div>
+          <a class="battle-booking-option" href={uscBookingUrl} target="_blank" rel="noopener noreferrer">
+            <strong>Urban Sports Club <span aria-hidden="true">↗</span></strong>
+            <span>Battle am 5. Dezember in der App reservieren und im Studio einchecken</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="battle-registration-step battle-entries" id="battle-entries">
+        <h3><span class="battle-step-number">2</span> Kategorien eintragen</h3>
+        <p>Nach der Buchung über Eversports oder Urban Sports Club trägst du hier deine Kategorien ein. Nutze die E-Mail-Adresse deiner Buchung.</p>
+
+        <form class="battle-entries-form" action="/api/form" method="post" data-battle-entries-form>
+          <input type="hidden" name="form_kind" value="battle" />
+          <label hidden>Leer lassen<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+
+          <fieldset class="battle-fieldset" id="choose-your-style">
+            <legend>In welchen Kategorien trittst du an?</legend>
+            <div class="battle-category-choices">
+              {categories.map(([key, name]) => (
+                <label class={"battle-category-choice battle-color-" + key}>
+                  <input type="checkbox" name="battle_categories" value={key} data-battle-entry-category />
+                  <span><strong>{name}</strong><small>{key === "breaking-kids" ? "Eigene Kids-Preise" : "100 € + Medaille"}</small></span>
+                </label>
+              ))}
+            </div>
+            <p class="battle-prize-note" id="battle-prizes">Sponsor-Goodie-Bags in allen vier Kategorien. Im Surprise Final Battle treten die Kategoriesieger:innen um einen Extrapreis an.</p>
+          </fieldset>
+
+          <div class="battle-kids-consent" data-battle-kids-consent hidden>
+            <label class="battle-check">
+              <input type="checkbox" name="guardian_consent" value="yes" data-battle-guardian-consent />
+              <span>Ich bin erziehungsberechtigt und stimme der Teilnahme meines Kindes am Breaking Kids Battle zu. *</span>
+            </label>
+            <p>Gib den Namen des Kindes und die Buchungs-E-Mail der erziehungsberechtigten Person an.</p>
+          </div>
+
+          <div class="battle-entry-fields">
+            <label>Name der teilnehmenden Person *<input name="name" type="text" autocomplete="name" maxlength="160" required /></label>
+            <label>E-Mail-Adresse der Buchung *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label>
+            <label>Battle-Name (optional)<input name="stage_name" type="text" autocomplete="nickname" maxlength="120" /></label>
+          </div>
+
+          <fieldset class="battle-fieldset">
+            <legend>Wie hast du gebucht? *</legend>
+            <div class="battle-booking-methods">
+              <label class="battle-check"><input type="radio" name="booking_method" value="eversports" required /> Eversports</label>
+              <label class="battle-check"><input type="radio" name="booking_method" value="usc" required /> Urban Sports Club</label>
+            </div>
+          </fieldset>
+
+          <div class="battle-confirmations">
+            <label class="battle-check"><input type="checkbox" name="booking_confirmed" value="yes" required /> Ich habe den Battle Day bereits über Eversports oder Urban Sports Club gebucht. *</label>
+            <label class="battle-check"><input type="checkbox" name="privacy_consent" value="accepted" required /> Ich stimme zu, dass meine Daten zur Organisation der Battle-Teilnahme verarbeitet und mit der Buchung abgeglichen werden. *</label>
+          </div>
+
+          <div class="battle-submit">
+            <button class="battle-button battle-button-primary" type="submit">Kategorien abschicken <span aria-hidden="true">↗</span></button>
+            <p data-battle-entry-status role="status"></p>
+          </div>
+        </form>
+      </div>
+    </section>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />
+
+  <nav slot="mobile-actions" class="battle-quick-nav" data-battle-quick-nav aria-label="Battle-Schnellzugriff" hidden>
+    <a class="battle-button battle-button-primary" href="#battle-registration">Anmelden</a>
+    <a class="battle-button battle-button-secondary" href="#battle-schedule">Tagesprogramm</a>
+  </nav>
 </BaseLayout>
 
-<script is:inline>
-  (() => {
-    const cards = Array.from(document.querySelectorAll("[data-select-style]"));
-    const inputs = Array.from(document.querySelectorAll("[data-battle-entry-category]"));
-    const deckLabel = document.querySelector("[data-battle-selected-name]");
-    const deck = document.querySelector(".battle-selection-deck");
-    const names = Object.fromEntries(cards.map((card) => [card.dataset.selectStyle, card.dataset.styleName]));
-    const chosen = new Set();
-    const guardianBlock = document.querySelector("[data-kids-consent]");
-    const guardianInput = document.querySelector("[data-guardian-consent]");
-    const update = () => {
-      cards.forEach((card) => {
-        const yes = chosen.has(card.dataset.selectStyle);
-        card.classList.toggle("is-selected", yes);
-        card.setAttribute("aria-pressed", String(yes));
-        const text = card.querySelector(".battle-select-text");
-        if (text) text.textContent = yes ? "Vorgemerkt ✓" : "Merken +";
-      });
-      inputs.forEach((input) => { input.checked = chosen.has(input.value); });
-      if (deckLabel) deckLabel.textContent = chosen.size ? Array.from(chosen).map((key) => names[key]).join(" · ") : "Mehrere Kategorien möglich";
-      deck?.classList.toggle("has-selection", chosen.size > 0);
-      const kidsSelected = chosen.has("breaking-kids");
-      if (guardianBlock) guardianBlock.hidden = !kidsSelected;
-      if (guardianInput) { guardianInput.required = kidsSelected; if (!kidsSelected) guardianInput.checked = false; }
-    };
-    const motion = matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)").matches;
-    cards.forEach((card) => {
-      card.addEventListener("click", () => {
-        const key = card.dataset.selectStyle;
-        if (chosen.has(key)) chosen.delete(key); else chosen.add(key);
-        update();
-      });
-      if (motion) {
-        card.addEventListener("pointermove", (event) => {
-          const rect = card.getBoundingClientRect();
-          card.style.setProperty("--px", Math.round(((event.clientX - rect.left) / rect.width) * 100) + "%");
-          card.style.setProperty("--py", Math.round(((event.clientY - rect.top) / rect.height) * 100) + "%");
-        });
-        card.addEventListener("pointerleave", () => {
-          card.style.setProperty("--px", "50%");
-          card.style.setProperty("--py", "50%");
-        });
-      }
-    });
-    inputs.forEach((input) => input.addEventListener("change", () => {
-      if (input.checked) chosen.add(input.value); else chosen.delete(input.value);
-      update();
-    }));
-    const form = document.querySelector("[data-battle-entries-form]");
-    if (!form) return;
-    const status = form.querySelector("[data-battle-entry-status]");
-    const button = form.querySelector("[data-battle-entry-send]");
+<script>
+  const heroActions = document.querySelector<HTMLElement>("[data-battle-hero-actions]");
+  const quickNav = document.querySelector<HTMLElement>("[data-battle-quick-nav]");
+
+  if (heroActions && quickNav && "IntersectionObserver" in window) {
+    const headerOffset = 76;
+    new IntersectionObserver(([entry]) => {
+      quickNav.hidden = entry.isIntersecting || entry.boundingClientRect.bottom > headerOffset;
+    }, { rootMargin: "-" + headerOffset + "px 0px 0px" }).observe(heroActions);
+  }
+
+  const form = document.querySelector<HTMLFormElement>("[data-battle-entries-form]");
+  const kidsConsent = form?.querySelector<HTMLElement>("[data-battle-kids-consent]");
+  const guardianInput = form?.querySelector<HTMLInputElement>("[data-battle-guardian-consent]");
+  const submitButton = form?.querySelector<HTMLButtonElement>("button[type=submit]");
+  const status = form?.querySelector<HTMLElement>("[data-battle-entry-status]");
+
+  if (form && kidsConsent && guardianInput && submitButton && status) {
+    const categoryInputs = [...form.querySelectorAll<HTMLInputElement>("[data-battle-entry-category]")];
+    const kidsInput = categoryInputs.find((input) => input.value === "breaking-kids");
+
+    function syncKidsConsent() {
+      const kidsSelected = kidsInput?.checked ?? false;
+      kidsConsent.hidden = !kidsSelected;
+      guardianInput.required = kidsSelected;
+      if (!kidsSelected) guardianInput.checked = false;
+    }
+
+    kidsInput?.addEventListener("change", syncKidsConsent);
+    window.addEventListener("pageshow", syncKidsConsent);
+    syncKidsConsent();
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      if (!chosen.size) {
-        if (status) status.textContent = "Bitte wähle mindestens eine Kategorie.";
-        inputs[0]?.focus();
+      if (submitButton.disabled) return;
+
+      if (!categoryInputs.some((input) => input.checked)) {
+        status.textContent = "Bitte wähle mindestens eine Kategorie.";
+        categoryInputs[0]?.focus();
         return;
       }
+
       if (!form.reportValidity()) return;
+
       if (location.hostname.endsWith("github.io") || location.pathname.startsWith("/preview/")) {
-        if (status) status.textContent = "Vorschau: Deine Auswahl wurde nicht verschickt.";
+        status.textContent = "Vorschau – deine Auswahl wurde nicht verschickt.";
         return;
       }
-      if (button) button.disabled = true;
-      if (status) status.textContent = "Wird verschickt …";
+
+      submitButton.disabled = true;
+      status.textContent = "Wird verschickt …";
+
       try {
-        const response = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
-        const result = await response.json();
-        if (!response.ok || !result.ok) throw new Error("send_failed");
-        if (status) status.textContent = "Danke! Wir haben deine Kategorien erhalten und gleichen sie mit deiner Eventbuchung ab.";
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (!response.ok || !(await response.json()).ok) throw new Error("send_failed");
+
         form.reset();
-        chosen.clear();
-        update();
+        syncKidsConsent();
+        status.textContent = "Danke! Wir haben deine Kategorien erhalten und gleichen sie mit deiner Eventbuchung ab.";
       } catch {
-        if (status) status.textContent = "Das hat leider nicht geklappt. Bitte versuche es erneut oder kontaktiere uns direkt.";
+        status.textContent = "Das hat leider nicht geklappt. Bitte versuche es erneut oder kontaktiere uns direkt.";
       } finally {
-        if (button) button.disabled = false;
+        submitButton.disabled = false;
       }
     });
-  })();
+  }
 </script>
 
 <style is:global>
-  body.elite-battle-page { background: #0c0d10; color: #f5f2ec; }
-  body.elite-battle-page .site-header { background: rgba(12,13,16,.95); border-bottom: 1px solid rgba(255,255,255,.12); }
-  body.elite-battle-page .site-header .nav-link,
-  body.elite-battle-page .site-header .nav-dropdown > summary,
-  body.elite-battle-page .site-header .header-contact-button-v17 { color: #f5f2ec; }
-  body.elite-battle-page .site-footer { background: #0c0d10; color: #f5f2ec; border-top: 1px solid rgba(255,255,255,.12); }
-  body.elite-battle-page .site-footer a { color: #f5f2ec; }
-  body.elite-battle-page .mobile-menu { background: #17191f; }
-  body.elite-battle-page .mobile-nav > summary { color: #fff; }
-  body.elite-battle-page .nav-dropdown-menu { background: #17191f; }
-  body.elite-battle-page .nav-dropdown-link span { color: #f5f2ec; }
-  body.elite-battle-page .page-shell { max-width: 1180px; }
-</style>
+  body.elite-battle-page {
+    background: #141112;
+    color: #f8f0e8;
+  }
 
-<style>
-  .battle-main { font-family: "Inter",sans-serif; --acid:#d8fa53; --ink:#0c0d10; --cream:#f5f2ec; background: var(--ink); color: var(--cream); overflow: clip; }
-  .battle-main section[id] { scroll-margin-top:95px; }
-  .battle-container { width: min(calc(100% - 48px), 1180px); margin: 0 auto; }
-  .battle-main h1,.battle-main h2,.battle-main h3,.battle-category-name { font-family: "Sora","Inter",sans-serif; }
-  .battle-main em { font-style: normal; color: var(--acid); }
-  .battle-section-label,.battle-eyebrow { margin: 0; color: var(--acid); font-size: .74rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
-  .battle-hero { position: relative; min-height: 690px; isolation: isolate; background: radial-gradient(circle at 83% 28%,rgba(216,250,83,.13),transparent 23rem),radial-gradient(circle at 17% 80%,rgba(236,75,94,.14),transparent 22rem),#0c0d10; }
-  .battle-hero-grid { position: absolute; inset: 0; z-index: -1; opacity: .18; background-image: linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px); background-size: 58px 58px; mask-image:linear-gradient(90deg,transparent,black 25%,black 80%,transparent); }
-  .battle-hero-noise { position:absolute; inset: 0; z-index:-1; pointer-events:none; opacity:.2; background:repeating-linear-gradient(150deg,transparent 0 18px,rgba(255,255,255,.025) 19px 20px); }
-  .battle-hero-inner { padding: 34px 0 0; }
-  .battle-hero-topline { display:flex; justify-content:space-between; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.22); padding-bottom:16px; }
-  .battle-kicker,.battle-edition { font-size:.7rem; text-transform:uppercase; font-weight:800; letter-spacing:.15em; }
-  .battle-kicker { display:flex; align-items:center; gap:11px; }
-  .battle-live-dot { width:8px; height:8px; border-radius:50%; background:var(--acid); box-shadow:0 0 16px rgba(216,250,83,.85); }
-  .battle-edition { color:#a4a5a6; }
-  .battle-hero-body { display:grid; grid-template-columns:minmax(0,1fr) 270px; align-items:end; gap:36px; padding:70px 0 68px; }
-  .battle-hero-copy { min-width:0; }
-  .battle-hero h1 { display:flex; flex-direction:column; margin:18px 0 25px; font-weight:800; font-size:clamp(4.2rem,9.7vw,9.1rem); line-height:.84; letter-spacing:-.085em; color:#f5f2ec; }
-  .battle-title-outline { color:transparent; -webkit-text-stroke: 2px var(--cream); }
-  .battle-title-star { color:var(--acid); font-size:.55em; vertical-align:top; -webkit-text-stroke:0; margin-left:6px; }
-  .battle-hero-lead { font-family:"Sora",sans-serif; font-size:clamp(1.05rem,2vw,1.4rem); font-weight:800; letter-spacing:-.03em; }
-  .battle-hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }
-  .battle-button { display:inline-flex; align-items:center; justify-content:space-between; gap:36px; min-height:52px; padding:0 22px; text-decoration:none; font-size:.85rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; transition:transform .18s ease,background .18s ease; }
-  .battle-button:hover { transform:translateY(-3px); }
-  .battle-button:focus-visible,.battle-category:focus-visible,.battle-submit:focus-visible { outline:3px solid #fff; outline-offset:4px; }
-  .battle-button-primary { background:var(--acid); color:var(--ink); }
-  .battle-button-ghost { border:1px solid rgba(255,255,255,.34); color:var(--cream); }
-  .battle-hero-stamp { position:relative; padding:24px 20px 32px; min-height:312px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:9px; border:2px solid var(--acid); text-align:center; transform:rotate(4deg); }
-  .battle-stamp-overline { font-weight:900; letter-spacing:.23em; font-size:.65rem; color:var(--acid); }
-  .battle-hero-stamp strong { font-family:"Sora",sans-serif; font-size:2.65rem; letter-spacing:-.08em; white-space:nowrap; }
-  .battle-hero-stamp strong span { color:var(--acid); }
-  .battle-hero-stamp > span:not(.battle-stamp-overline):not(.battle-stamp-rule):not(.battle-stamp-ring) { font-size:.65rem; font-weight:800; letter-spacing:.09em; }
-  .battle-stamp-rule { display:block; width:75%; height:1px; background:var(--acid); margin:9px 0; }
-  .battle-stamp-ring { position:absolute; left:-28px; bottom:-32px; display:grid; place-items:center; width:76px; height:76px; border-radius:50%; background:var(--acid); color:var(--ink); font-size:3.6rem; }
-  .battle-hero-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)) auto; border-top:1px solid rgba(255,255,255,.22); }
-  .battle-hero-stats > div { padding:22px 20px 26px 0; border-right:1px solid rgba(255,255,255,.16); }
-  .battle-hero-stats strong { display:block; font-family:"Sora",sans-serif; font-size:2.35rem; line-height:1; letter-spacing:-.08em; }
-  .battle-hero-stats strong span { color:var(--acid); }
-  .battle-hero-stats div > span { display:block; margin-top:6px; color:#aaaab0; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; }
-  .battle-hero-stats .battle-stats-tail { display:flex; align-items:center; gap:14px; max-width:180px; padding-left:24px; border-right:0; font-size:.7rem; font-weight:800; line-height:1.6; }
-  .battle-stats-tail span { font-size:1.2rem !important; color:var(--acid) !important; }
-  .battle-ticker { display:flex; gap:36px; width:100%; padding:13px 0; background:var(--acid); color:var(--ink); font-family:"Sora",sans-serif; font-size:1.12rem; font-weight:800; letter-spacing:.03em; white-space:nowrap; overflow:hidden; }
-  .battle-ticker div { flex:0 0 auto; animation:battle-marquee 30s linear infinite; }
-  @keyframes battle-marquee { to{transform:translateX(calc(-100% - 36px))} }
-  .battle-choose-section { padding:108px 0 112px; scroll-margin-top:95px; }
-  .battle-section-heading { display:flex; align-items:end; justify-content:space-between; gap:44px; margin-bottom:38px; }
-  .battle-section-heading h2,.battle-register-intro h2,.battle-prizes-lead h2,.battle-schedule-layout h2,.battle-last-cta h2 { margin:14px 0 0; font-size:clamp(2.6rem,5.6vw,5.4rem); font-weight:800; line-height:.96; letter-spacing:-.065em; }
-  .battle-section-heading > p { max-width:380px; margin:0; color:#a8a8ae; font-size:.92rem; line-height:1.7; }
-  .battle-category-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
-  .battle-category { position:relative; display:flex; flex-direction:column; min-height:382px; padding:18px; border:1px solid rgba(255,255,255,.2); border-radius:0; color:var(--cream); background:#17191f; text-align:left; cursor:pointer; overflow:hidden; font-family:inherit; transition:transform .23s ease,border-color .23s ease,box-shadow .23s ease; }
-  .battle-category:hover { transform:translateY(-7px); border-color:var(--card-accent); }
-  .battle-category.is-selected { border-color:var(--card-accent); box-shadow:inset 0 0 0 2px var(--card-accent),0 18px 40px rgba(0,0,0,.26); }
-  .battle-category-breaking { --card-accent:#fc755d; background:radial-gradient(circle at 70% 40%,rgba(252,117,93,.16),transparent 75%),#1a1718; }
-  .battle-category-hiphop { --card-accent:#d8fa53; background:radial-gradient(circle at 70% 40%,rgba(216,250,83,.12),transparent 75%),#171b1b; }
-  .battle-category-house { --card-accent:#9c91ff; background:radial-gradient(circle at 70% 40%,rgba(156,145,255,.16),transparent 75%),#171723; }
-  .battle-category::after { content:""; position:absolute; width:160px; height:160px; border:1px solid var(--card-accent); border-radius:50%; top:67px; right:-82px; opacity:.33; pointer-events:none; }
-  .battle-category-top { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:.67rem; letter-spacing:.13em; font-weight:900; }
-  .battle-select-indicator { display:grid; place-items:center; width:29px; height:29px; border:1px solid var(--card-accent); border-radius:50%; color:var(--card-accent); font-size:1rem; }
-  .battle-category-art { display:flex; flex-direction:column; justify-content:center; flex:1; padding:22px 0 12px; color:var(--card-accent); font-family:"Sora",sans-serif; font-size:clamp(1.7rem,2.35vw,2.65rem); font-weight:800; line-height:1; letter-spacing:-.065em; transform:rotate(-4deg); }
-  .battle-category-art span:nth-child(2) { color:transparent; -webkit-text-stroke:1.1px var(--card-accent); }
-  .battle-category-name { display:block; font-size:1.65rem; line-height:1.1; font-weight:800; letter-spacing:-.055em; }
-  .battle-category-traits { display:block; margin-top:8px; min-height:32px; color:#bebdc0; font-size:.7rem; line-height:1.5; }
-  .battle-category-footer { display:flex; justify-content:space-between; align-items:end; gap:9px; border-top:1px solid rgba(255,255,255,.22); margin-top:15px; padding-top:15px; color:#c9c9cc; font-size:.66rem; line-height:1.5; }
-  .battle-category-footer strong { color:var(--card-accent); font-family:"Sora",sans-serif; font-size:1.35rem; letter-spacing:-.04em; }
-  .battle-select-text { color:var(--card-accent); font-weight:800; text-align:right; }
-  .battle-register-section { background:#17191d; border-block:1px solid rgba(255,255,255,.1); }
-  .battle-register-grid { display:grid; grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr); align-items:start; gap:clamp(36px,6vw,92px); padding:104px 0; }
-  .battle-register-intro > p:not(.battle-section-label) { max-width:390px; color:#bebdc2; line-height:1.7; }
-  .battle-register-steps { display:grid; gap:0; margin-top:42px; border-top:1px solid rgba(255,255,255,.16); scroll-margin-top:110px; }
-  .battle-register-steps > div { display:grid; grid-template-columns:50px 1fr; gap:16px; padding:20px 0; border-bottom:1px solid rgba(255,255,255,.16); }
-  .battle-register-steps > div > span { color:var(--acid); font-size:1rem; font-weight:900; }
-  .battle-register-steps strong { font-size:.95rem; }
-  .battle-register-steps p { color:#adadb3; font-size:.81rem; line-height:1.6; margin:6px 0 0; }
-  .battle-register-card { padding:clamp(22px,3.5vw,42px); background:var(--cream); color:#151619; box-shadow:18px 20px 0 rgba(216,250,83,.1); }
-  .battle-register-card h3 { font-size:clamp(1.55rem,3vw,2.2rem); letter-spacing:-.045em; line-height:1.12; margin:20px 0 10px; }
-  .battle-selected-style { display:flex; align-items:center; justify-content:space-between; gap:16px; margin:0 0 20px; padding:14px; background:#e5e8dc; border-left:4px solid #202226; }
-  .battle-selected-style span { color:#555957; font-size:.66rem; font-weight:900; letter-spacing:.1em; }
-  .battle-selected-style strong { font-size:.87rem; }
-  .battle-honeypot { position:absolute; width:1px; height:1px; overflow:hidden; left:-10000px; }
-  .battle-field-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
-  .battle-field { display:grid; gap:7px; margin-bottom:16px; font-size:.77rem; font-weight:800; }
-  .battle-field span small { font-weight:500; }
-  .battle-field input { display:block; width:100%; min-width:0; height:46px; padding:0 13px; border:1px solid #b8b7b1; background:#fff; border-radius:0; font:inherit; font-weight:500; color:#17191a; }
-  .battle-field input:focus-visible { outline:2px solid #728424; outline-offset:2px; }
-  .battle-booking-methods { padding:0; border:0; margin:10px 0 19px; }
-  .battle-booking-methods legend { margin:0 0 10px; font-size:.79rem; font-weight:800; }
-  .battle-booking-methods label { display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid #cac9c0; margin:0 0 8px; cursor:pointer; }
-  .battle-booking-methods label:has(input:checked) { border-color:#242624; background:#eef2d7; }
-  .battle-booking-methods input { width:17px; height:17px; accent-color:#262b18; }
-  .battle-booking-methods strong,.battle-booking-methods small { display:block; }
-  .battle-booking-methods strong { font-size:.85rem; }
-  .battle-booking-methods small { margin-top:3px; color:#696969; font-size:.71rem; line-height:1.45; }
-  .battle-consent { display:flex; align-items:flex-start; gap:10px; font-size:.69rem; line-height:1.6; color:#5a5a5a; cursor:pointer; }
-  .battle-consent input { width:16px; height:16px; flex:0 0 auto; margin-top:2px; accent-color:#272a23; }
-  .battle-submit { display:flex; justify-content:space-between; align-items:center; width:100%; margin-top:21px; padding:15px 20px; border:0; border-radius:0; background:#d8fa53; color:#131717; font:800 .84rem "Inter",sans-serif; text-transform:uppercase; letter-spacing:.04em; cursor:pointer; }
-  .battle-submit:disabled { opacity:.48; cursor:not-allowed; }
-  .battle-form-status { padding:12px; background:#fff1da; color:#4a2920; font-size:.79rem; line-height:1.5; }
-  .battle-success { padding:23px; background:#e1f4a8; }
-  .battle-success > span { font-size:.67rem; font-weight:900; letter-spacing:.14em; }
-  .battle-success h4 { font-size:1.7rem; line-height:1.1; margin:14px 0; }
-  .battle-success p,.battle-success-next { font-size:.85rem; line-height:1.65; }
-  .battle-success-next { padding:14px; border:1px solid #637631; }
-  .battle-success button { margin-top:18px; padding:12px; background:#111; color:#fff; border:0; cursor:pointer; font-weight:800; }
-  .battle-prizes-section { display:grid; grid-template-columns:1.25fr .82fr .8fr; gap:20px; padding:110px 0; }
-  .battle-prizes-lead { padding-right:14px; }
-  .battle-prizes-lead h2 { font-size:clamp(2.4rem,4.2vw,4.7rem); line-height:1.01; }
-  .battle-prize-block { display:flex; flex-direction:column; padding:25px; background:var(--acid); color:#111619; }
-  .battle-prize-overline { font-size:.63rem; font-weight:900; letter-spacing:.15em; }
-  .battle-prize-amount { font-family:"Sora",sans-serif; font-size:clamp(5rem,7.5vw,7.7rem); line-height:1; font-weight:800; letter-spacing:-.11em; margin:30px 0 10px; }
-  .battle-prize-amount span { font-size:.5em; }
-  .battle-prize-block p { font-size:.86rem; line-height:1.5; }
-  .battle-prize-future { margin-top:auto; border-top:1px solid #667735; padding-top:12px; font-size:.7rem; text-transform:uppercase; font-weight:900; }
-  .battle-goodies-block { display:flex; flex-direction:column; padding:25px; border:1px solid rgba(255,255,255,.25); }
-  .battle-goodies-block > span { color:var(--acid); font-size:2.8rem; line-height:1; }
-  .battle-goodies-block h3 { margin:28px 0 12px; font-size:1.8rem; line-height:1.05; letter-spacing:-.05em; }
-  .battle-goodies-block p { margin-top:auto; font-size:.8rem; color:#bdbdc0; line-height:1.7; }
-  .battle-schedule-section { background:#e7e6df; color:#17191c; }
-  .battle-schedule-layout { display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,8vw,110px); align-items:center; padding:100px 0; }
-  .battle-schedule-layout .battle-section-label { color:#4a5520; }
-  .battle-schedule-layout h2 em { color:#788b28; }
-  .battle-schedule-layout p:not(.battle-section-label) { color:#53565a; line-height:1.7; }
-  .battle-schedule-layout a { display:inline-block; margin-top:15px; color:#111; font-weight:800; text-decoration-thickness:2px; text-underline-offset:7px; }
-  .battle-lineup-card { padding:26px; background:#15171a; color:#f5f2ec; transform:rotate(1deg); box-shadow:14px 16px 0 #b8c47d; }
-  .battle-lineup-top { display:flex; justify-content:space-between; padding-bottom:21px; border-bottom:2px solid var(--acid); color:var(--acid); font-size:.72rem; font-weight:900; letter-spacing:.1em; }
-  .battle-lineup-item { display:grid; grid-template-columns:36px 1fr auto; gap:16px; align-items:center; padding:17px 0; border-bottom:1px solid rgba(255,255,255,.2); }
-  .battle-lineup-item span { color:var(--acid); font-size:.75rem; font-weight:900; }
-  .battle-lineup-item strong { font-family:"Sora",sans-serif; font-size:1.15rem; }
-  .battle-lineup-item small { font-size:.69rem; color:#a1a3a5; }
-  .battle-lineup-foot { display:flex; justify-content:space-between; gap:12px; padding-top:23px; font-size:.68rem; letter-spacing:.1em; font-weight:900; }
-  .battle-lineup-foot span { color:var(--acid); }
-  .battle-last-cta { text-align:center; padding:110px 0 115px; }
-  .battle-last-cta h2 { font-size:clamp(3.5rem,9vw,9rem); }
-  .battle-last-cta .battle-button { margin-top:32px; }
-  .battle-last-cta > p:last-child { color:#a7a8aa; font-size:.76rem; margin-top:35px; }
-  @media(max-width:1050px) { .battle-category-grid { grid-template-columns:repeat(2,1fr); } .battle-category { min-height:320px; } .battle-category-art { font-size:2.8rem; } .battle-prizes-section { grid-template-columns:1fr 1fr; } .battle-prizes-lead { grid-column:1/-1; } }
-  @media(max-width:760px) { .battle-container { width:min(calc(100% - 34px),1180px); } .battle-hero-body { grid-template-columns:1fr; padding:54px 0 48px; } .battle-hero-stamp { display:none; } .battle-hero h1 { font-size:clamp(4.4rem,13vw,7rem); } .battle-hero-stats { grid-template-columns:repeat(3,1fr); } .battle-hero-stats .battle-stats-tail { grid-column:1/-1; max-width:none; border-top:1px solid rgba(255,255,255,.22); padding:12px 0; } .battle-section-heading { flex-direction:column; align-items:start; gap:15px; } .battle-register-grid,.battle-schedule-layout,.battle-workshop-inner { grid-template-columns:1fr; } .battle-register-grid { padding:75px 0; } .battle-choose-section,.battle-prizes-section { padding:75px 0; } .battle-schedule-layout { padding:70px 0; } .battle-hero-topline .battle-edition { display:none; } }
-  @media(max-width:480px) { .battle-hero h1 { font-size:clamp(3.9rem,14.5vw,5.9rem); } .battle-category-grid { gap:10px; } .battle-category { min-height:285px; padding:12px; } .battle-category-art { font-size:clamp(1.45rem,6vw,2rem); } .battle-category-name { font-size:1.35rem; } .battle-category-footer { flex-direction:column; align-items:start; } .battle-category-traits { font-size:.67rem; } .battle-field-row { grid-template-columns:1fr; gap:0; } .battle-hero-stats > div { padding-right:8px; } .battle-hero-stats strong { font-size:1.7rem; } .battle-hero-stats div > span { font-size:.58rem; } .battle-register-card { padding:22px 17px; } .battle-register-card h3 { font-size:1.55rem; } .battle-prizes-section { grid-template-columns:1fr; } .battle-prizes-lead { grid-column:auto; } .battle-goodies-block { min-height:240px; } .battle-schedule-layout h2 { font-size:2.6rem; } }
-  @media(prefers-reduced-motion:reduce) { .battle-ticker div { animation:none; } .battle-button,.battle-category { transition:none; } .battle-category:hover { transform:none; } }
-</style>
+  .elite-battle-page .site-footer {
+    background: #141112;
+    color: #f8f0e8;
+    border-top: 1px solid #453638;
+  }
 
-<style>
-  /* Battle V2 — underground editorial art direction */
-  .battle-main { --acid:#e1fa50; --cream:#f6f4ee; background:#090a0c; }
-  .battle-container { width:min(calc(100% - 52px),1240px); }
-  .battle-hero { overflow:hidden; background:
-     radial-gradient(ellipse at 75% 38%,rgba(181,243,80,.13),transparent 32rem),
-     radial-gradient(ellipse at 1% 90%,rgba(250,88,57,.11),transparent 27rem),#090a0c; }
-  .battle-hero::before { content:"ELITE / BATTLE / BERLIN"; position:absolute; top:40%; right:-28%; color:rgba(255,255,255,.032); font:900 clamp(6rem,16vw,20rem)/1 "Sora",sans-serif; letter-spacing:-.1em; white-space:nowrap; transform:rotate(-24deg); pointer-events:none; }
-  .battle-hero-grid { opacity:.37; background-size:68px 68px; }
-  .battle-hero-topline { padding:23px 0 16px; }
-  .battle-hero-body { position:relative; grid-template-columns:minmax(0,1fr) minmax(330px,.72fr); align-items:center; padding:64px 0 58px; gap:clamp(28px,4vw,55px); }
-  .battle-hero h1 { font-size:clamp(4.4rem,9vw,10rem); line-height:.84; letter-spacing:-.095em; position:relative; z-index:2; }
-  .battle-hero h1 > span:nth-child(3) { display:flex; align-items:flex-start; }
-  .battle-hero-lead { font-size:clamp(1.1rem,2vw,1.65rem); }
-  .battle-hero-stamp { display:none; }
-  .battle-arena-visual { position:relative; width:100%; max-width:500px; aspect-ratio: .85; transform:rotate(2.5deg); isolation:isolate; margin:0 0 12px auto; box-shadow:0 28px 80px rgba(0,0,0,.5); }
-  .battle-arena-visual::before { content:""; position:absolute; inset:-11px; border:1px solid #e1fa5077; z-index:-1; transform:translate(12px,12px); }
-  .battle-arena-visual::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,#090a0cdd,transparent 36%),repeating-linear-gradient(0deg,transparent 0 3px,#0003 3px 4px); z-index:2; pointer-events:none; }
-  .battle-arena-tile { position:absolute; width:50%; height:50%; overflow:hidden; background:#242528; }
-  .battle-arena-tile::after { content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(13,16,18,.2),rgba(0,0,0,.4)); mix-blend-mode:multiply; }
-  .battle-arena-tile img { display:block; width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.6) brightness(.66); transform:scale(1.1); }
-  .battle-arena-tile-one { top:0;left:0;border-right:3px solid #090a0c;border-bottom:3px solid #090a0c; }
-  .battle-arena-tile-two { top:0;right:0;border-bottom:3px solid #090a0c; }
-  .battle-arena-tile-three { bottom:0;left:0;border-right:3px solid #090a0c; }
-  .battle-arena-tile-four { bottom:0;right:0; }
-  .battle-arena-orbit { z-index:3; position:absolute; width:74%; aspect-ratio:1; inset:13%; display:grid; place-items:center; border:1px solid #e1fa50a8; border-radius:50%; box-shadow:0 0 0 14px #e1fa5022,0 0 0 35px #e1fa5017,0 0 0 58px #e1fa500a; }
-  .battle-arena-orbit::before,.battle-arena-orbit::after { content:""; position:absolute; inset:13%; border:2px dashed #e1fa5077; border-radius:50%; animation:battle-rotate 35s linear infinite; }
-  .battle-arena-orbit::after { inset:6%; border:1px solid #e1fa5055; animation-direction:reverse; }
-  .battle-arena-orbit-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; width:66%; aspect-ratio:1; background:#e1fa50; color:#11140d; border-radius:50%; transform:rotate(-2.5deg); }
-  .battle-arena-orbit-inner > span { font-size:clamp(.65rem,1.1vw,.9rem); font-weight:900; letter-spacing:.26em; }
-  .battle-arena-orbit-inner strong { font:900 clamp(1.5rem,3.25vw,3.8rem)/.95 "Sora",sans-serif; letter-spacing:-.085em; }
-  .battle-arena-caption { position:absolute; z-index:4; bottom:0; left:0; right:0; display:flex;justify-content:space-between; padding:15px; color:#e1fa50; font-size:.65rem; font-weight:900; letter-spacing:.18em; }
-  @keyframes battle-rotate { to{transform:rotate(360deg)} }
-  .battle-hero-stats { border-top:2px solid #e1fa50; }
-  .battle-hero-stats > div { padding-top:25px; padding-bottom:25px; }
-  .battle-hero-stats strong { font-size:clamp(2rem,3.4vw,3rem); }
-  .battle-ticker { font-size:clamp(.95rem,2vw,1.4rem); letter-spacing:.1em; padding:15px 0; }
-  .battle-choose-section { padding:117px 0 105px; }
-  .battle-section-heading { margin-bottom:41px; }
-  .battle-section-heading h2 { font-size:clamp(3.2rem,7vw,7.3rem); }
-  .battle-category-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
-  .battle-category { min-height:375px; padding:25px; border:1px solid #ffffff39; box-shadow:none; isolation:isolate; }
-  .battle-category::before { content:""; position:absolute; z-index:0;inset:0;background:linear-gradient(90deg,#111317 3%,#111317cc 42%,#11131722 100%); }
-  .battle-category::after { content:""; position:absolute; width:270px; height:270px; right:-75px; top:18%; border:1px solid var(--card-accent); opacity:.32; box-shadow:0 0 0 23px #ffffff08,0 0 0 64px #ffffff04; border-radius:50%; pointer-events:none; }
-  .battle-category:hover { transform:translateY(-5px); box-shadow:0 26px 50px #0008; }
-  .battle-category.is-selected { background-color:#1a1d1f; }
-  .battle-category-photo { position:absolute; z-index:-1; inset:0; left:30%;width:75%; height:100%;object-fit:cover; object-position:center; opacity:.56; filter:grayscale(1) contrast(1.5) brightness(.64);transform:scale(1.05); transition:filter .45s,transform .45s,opacity .45s; }
-  .battle-category:hover .battle-category-photo,.battle-category.is-selected .battle-category-photo { filter:grayscale(.3) contrast(1.25) brightness(.72); transform:scale(1.13); opacity:.8; }
-  .battle-category-photo-wash { position:absolute; z-index:0; inset:0; background:linear-gradient(90deg,#0c0e11ed 0%,#0c0e11b7 39%,#0c0e112a 80%),linear-gradient(0deg,#0c0e11b5,transparent 50%); pointer-events:none; }
-  .battle-category-top,.battle-category-art,.battle-category-lower,.battle-category-footer { z-index:1; position:relative; }
-  .battle-category-top { color:var(--card-accent); font-size:.74rem; }
-  .battle-category-art { padding:8px 0; transform:rotate(-5deg); font-size:clamp(3rem,5.3vw,6rem); line-height:.9; letter-spacing:-.09em; }
-  .battle-category-name { font-size:clamp(1.7rem,3vw,2.5rem); }
-  .battle-category-traits { color:#dad6d6; font-size:.8rem; margin-top:6px; min-height:0; }
-  .battle-category-footer { font-size:.74rem; margin-top:18px; }
-  .battle-category-footer strong { font-size:1.8rem; }
-  .battle-select-text { font-size:.73rem; }
-  .battle-selection-deck { display:grid; grid-template-columns:1fr 1.6fr auto; align-items:center; gap:22px; margin-top:25px; padding:21px 24px; background:#e1fa50; color:#13170d; }
-  .battle-selection-indicator { display:flex; align-items:center; gap:13px; }
-  .battle-selection-indicator span { font-size:1.9rem; line-height:1; }
-  .battle-selection-indicator small { font-size:.72rem; letter-spacing:.12em; font-weight:900; }
-  .battle-selection-deck strong { font-family:"Sora",sans-serif; font-size:clamp(.9rem,1.5vw,1.3rem); letter-spacing:-.045em; }
-  .battle-selection-deck > a { display:flex; gap:20px; justify-content:space-between; align-items:center; padding:13px 17px; background:#121611; color:#e1fa50; font-size:.7rem; font-weight:900; letter-spacing:.09em; text-decoration:none; }
-  .battle-selection-deck:not(.has-selection) > a { opacity:.55; }
-  .battle-register-section { background:linear-gradient(145deg,#15171b,#25232a); }
-  .battle-register-card { box-shadow:14px 14px 0 #e1fa5030; }
-  .battle-register-card h3 { font-size:clamp(1.7rem,3.1vw,2.8rem); }
-  .battle-prizes-section { border-bottom:1px solid #ffffff22; }
-  .battle-prize-block { box-shadow:13px 13px 0 #ffffff18; }
-  .battle-last-cta { position:relative; }
-  .battle-last-cta::before {content:"";width:260px;height:260px;position:absolute;border:1px solid #e1fa50;top:5%;left:-8%;border-radius:50%;pointer-events:none;opacity:.2; }
-  @media(max-width:950px) {
-    .battle-hero-body { grid-template-columns:1fr 270px; }
-    .battle-hero h1 { font-size:clamp(4.1rem,9.4vw,7.8rem); }
-    .battle-arena-visual { aspect-ratio:.8; }
-    .battle-arena-orbit-inner strong { font-size:2rem; }
-    .battle-arena-orbit-inner>span { font-size:.6rem; }
+  .elite-battle-page .site-footer a {
+    color: #f8f0e8;
   }
-  @media(max-width:760px) {
-    .battle-container { width:min(calc(100% - 34px),1240px); }
-    .battle-hero-body { grid-template-columns:1fr; padding:55px 0 43px; }
-    .battle-hero h1 { font-size:clamp(4.4rem,13vw,7rem); }
-    .battle-arena-visual { display:none; }
-    .battle-choose-section { padding:74px 0 80px; }
-    .battle-category-grid { gap:12px; }
-    .battle-category { min-height:320px; padding:17px; }
-    .battle-category-art { font-size:clamp(2rem,5.6vw,3.3rem); }
-    .battle-selection-deck { grid-template-columns:1fr 1fr; gap:14px; padding:18px; }
-    .battle-selection-deck strong { text-align:right; }
-    .battle-selection-deck > a { grid-column:1/-1; }
-  }
-  @media(max-width:480px) {
-    .battle-hero h1 { font-size:clamp(4rem,14.1vw,6rem); }
-    .battle-category { min-height:290px; padding:13px; }
-    .battle-category-art { font-size:clamp(1.7rem,6.3vw,2.8rem); }
-    .battle-category-name { font-size:1.35rem; }
-    .battle-category-traits { font-size:.62rem; }
-    .battle-category-footer strong { font-size:1.3rem; }
-    .battle-category-footer { font-size:.6rem; }
-    .battle-category-top { font-size:.57rem; }
-    .battle-selection-indicator small {font-size:.58rem}
-    .battle-selection-deck strong {font-size:.79rem;}
-  }
-  @media(prefers-reduced-motion:reduce) { .battle-arena-orbit::before,.battle-arena-orbit::after { animation:none; } .battle-category-photo { transition:none; } }
-</style>
 
-<style>
-  /* Freestyle V3 — red event palette, blue/purple/pink category accents, interactive cards */
-  .battle-main { --acid:#e3484b;--cream:#f5efeb;--ink:#100d10;background:#100d10; }
-  .battle-hero { background:radial-gradient(circle at 74% 35%,rgba(211,53,59,.18),transparent 29rem),#100d10; }
-  .battle-hero h1>span:last-child { color:#ef6b66; }
-  .battle-hero-stats { border-color:#e3484b; }
-  .battle-hero .battle-arena-orbit { border-color:#e3484b;box-shadow:0 0 0 14px #e3484b24,0 0 0 35px #e3484b14,0 0 0 58px #e3484b09; }
-  .battle-hero .battle-arena-orbit::before { border-color:#e3484b77; }
-  .battle-hero .battle-arena-orbit-inner { background:#e3484b;color:#fff8f3; }
-  .battle-hero .battle-arena-orbit-inner strong { font-size:clamp(1.6rem,3vw,3rem); }
-  .battle-hero .battle-arena-caption { color:#f0aaa5; }
-  .battle-ticker { background:#bd3e42;color:#fff7f4;font-size:clamp(.85rem,1.2vw,1.05rem); }
-  .battle-section-label,.battle-eyebrow { color:#ef7c73; }
-  .battle-category { --px:50%;--py:50%;--tx:0deg;--ty:0deg;min-height:345px;transform:perspective(1100px) rotateX(var(--tx)) rotateY(var(--ty));will-change:transform;transition:transform .17s ease-out,border-color .28s,box-shadow .28s; }
-  .battle-category::before { content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle 200px at var(--px) var(--py),color-mix(in srgb,var(--card-accent),transparent 80%),transparent 82%);opacity:0;transition:opacity .24s; }
-  .battle-category:hover::before,.battle-category:focus-visible::before { opacity:1; }
-  .battle-category::after { content:"";position:absolute;z-index:4;left:0;top:0;bottom:0;right:auto;width:5px;height:auto;border:0;border-radius:0;box-shadow:none;background:var(--card-accent);opacity:1;transform:scaleY(.09);transform-origin:bottom;transition:transform .42s cubic-bezier(.16,.74,.23,1); }
-  .battle-category:hover::after,.battle-category.is-selected::after { transform:scaleY(1); }
-  .battle-category-breaking { --card-accent:#f26958; }
-  .battle-category-hiphop { --card-accent:#7d9aff; }
-  .battle-category-house { --card-accent:#b18bff; }
-  .battle-category:hover { transform:perspective(1100px) rotateX(var(--tx)) rotateY(var(--ty));border-color:var(--card-accent);box-shadow:none; }
-  .battle-category.is-selected { box-shadow:inset 0 0 0 1px var(--card-accent),0 0 0 4px color-mix(in srgb,var(--card-accent),transparent 82%); }
-  .battle-category-photo { opacity:.7;transform:scale(1.04);filter:grayscale(.95) contrast(1.38) brightness(.72);transition:filter .5s,transform .5s,opacity .5s; }
-  .battle-category:hover .battle-category-photo,.battle-category.is-selected .battle-category-photo { opacity:.88;transform:scale(1.15);filter:grayscale(.28) contrast(1.2) brightness(.82); }
-  .battle-category-photo-wash { background:linear-gradient(90deg,#100d10fb 0%,#100d10d9 40%,#100d1069 82%),linear-gradient(0deg,#100d10d8,transparent 60%); }
-  .battle-category-art { transform:none;font:800 clamp(2.55rem,5vw,5rem)/.95 "Sora","Inter",sans-serif;letter-spacing:-.065em; }
-  .battle-category-name { font-size:clamp(1.35rem,2.7vw,2.25rem); }
-  .battle-category .battle-select-text { transition:letter-spacing .25s; }
-  .battle-category:hover .battle-select-text { letter-spacing:.055em; }
-  .battle-selection-deck { background:#3a2028;color:#fff4ed;border:1px solid #ae5a59; }
-  .battle-selection-deck>a { background:#ce4749;color:#fff; }
-  .battle-selection-deck>a:hover { background:#e65d5f; }
-  .battle-register-section { background:#efe5df;color:#20151b; }
-  .battle-register-intro h2 { color:#1d1418; }
-  .battle-register-intro>p:not(.battle-section-label) { color:#62565a; }
-  .battle-register-steps,.battle-register-steps>div { border-color:#b19a98; }
-  .battle-register-steps>div>span { color:#a4363c; }
-  .battle-register-steps p { color:#685a5e; }
-  .battle-register-card { background:#191217;color:#fff8f4;box-shadow:14px 14px 0 #b94d4c44; }
-  .battle-selected-style { background:#332029;border-color:#e35b60;color:#fff5f0; }
-  .battle-selected-style span { color:#bc959c; }
-  .battle-booking-options { display:grid;gap:11px; }
-  .battle-booking-option { display:flex;align-items:center;justify-content:space-between;width:100%;gap:15px;padding:16px;background:#271c22;border:1px solid #65404a;color:#f5eeec;text-align:left;font:inherit;cursor:pointer;transition:background .2s,border-color .2s; }
-  .battle-booking-option:hover,.battle-booking-option.is-active { background:#412730;border-color:#ed686b; }
-  .battle-booking-option strong,.battle-booking-option small { display:block; }
-  .battle-booking-option strong { font-size:.96rem; }
-  .battle-booking-option small { margin-top:3px;color:#c3afb2;font-size:.72rem;line-height:1.4; }
-  .battle-booking-option b { font:800 2rem/1 "Sora",sans-serif;white-space:nowrap;color:#f37d78; }
-  .battle-booking-option .battle-usc-state { font:800 .72rem/1.3 "Inter",sans-serif;color:#d6b0b3; }
-  .battle-register-card .battle-submit { color:#ffe9e6;background:#84363d;opacity:1;cursor:not-allowed; }
-  .battle-register-card .battle-submit:disabled { opacity:.85; }
-  .battle-prize-block { background:#d54b4b;color:#fff; }
-  .battle-prize-amount { color:#fff; }
-  .battle-prize-future { border-color:#f2b2b2; }
-  .battle-goodies-block>span { color:#ef8889; }
-  .battle-schedule-section { background:#eee4df;color:#211718; }
-  .battle-schedule-layout .battle-section-label { color:#a7363a; }
-  .battle-schedule-layout h2 em { color:#b8454b; }
-  .battle-lineup-card { background:#21141a;box-shadow:14px 16px 0 #bd5d624a; }
-  .battle-lineup-top,.battle-lineup-item span,.battle-lineup-foot span { color:#f17878; }
-  .battle-lineup-top { border-color:#e65d5d; }
-  .battle-last-cta::before { border-color:#ef6468; }
-  @media(max-width:760px) {
-    .battle-category { min-height:310px; }
-    .battle-category-art { font-size:clamp(2rem,6.3vw,3.3rem); }
-  }
-  @media(max-width:480px) {
-    .battle-category { min-height:280px; }
-    .battle-category-art { font-size:clamp(1.7rem,6vw,2.6rem); }
-    .battle-category-name { font-size:1.3rem; }
-    .battle-booking-option { padding:12px; }
-    .battle-booking-option b { font-size:1.5rem; }
-  }
-  @media(prefers-reduced-motion:reduce) {
-    .battle-category { transform:none!important;transition:none; }
-    .battle-category::before { display:none; }
-    .battle-category-photo { transition:none; }
+  @media (max-width: 760px) {
+    body.elite-battle-page {
+      padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    }
   }
 </style>
 
 <style>
-  /* ONE-EVENT BATTLE BOOKING UI */
-  .battle-booking-links { display:grid;gap:12px;margin:23px 0; }
-  .battle-booking-link { display:flex;align-items:center;justify-content:space-between;gap:17px;padding:19px 18px;background:#df4e56;border:1px solid #eb8080;color:#fffaf8;text-decoration:none;transition:background .2s,border-color .2s; }
-  .battle-booking-link:hover { background:#b93743;border-color:#ffc9c0; }
-  .battle-booking-link-usc { background:#2c3636;border-color:#778686; }
-  .battle-booking-link-usc:hover { background:#3c4c4d;border-color:#bfddd7; }
-  .battle-booking-link strong { display:block;font:800 1.2rem/1.2 "Inter",sans-serif; }
-  .battle-booking-link small { display:block;color:#ffe0dc;font-size:.75rem;line-height:1.5;margin-top:6px; }
-  .battle-booking-link-usc small { color:#dce3e1; }
-  .battle-booking-link>b { flex:none;font-size:1.5rem; }
-  .battle-booking-next { display:block;margin-top:18px;padding:14px 0;border-top:1px solid #91464e;color:#f4a1a1;text-decoration:none;font-size:.82rem;font-weight:800; }
-  .battle-entries-section { background:#161015;color:#fff2eb;padding:90px 0 105px; }
-  .battle-entries-layout { display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(30px,5vw,76px); }
-  .battle-entries-intro h2 { font:900 clamp(2.7rem,5vw,5.8rem)/.95 "Sora","Inter",sans-serif;letter-spacing:-.075em;margin:16px 0 28px; }
-  .battle-entries-intro h2 em { color:#ef7775;font-style:normal; }
-  .battle-entries-intro>p:not(.battle-section-label) { max-width:500px;color:#c5b3b7;line-height:1.75;font-size:.94rem; }
-  .battle-entries-form { background:#f4eae5;color:#25171f;padding:clamp(23px,3vw,35px);box-shadow:14px 14px 0 #bd4b5050; }
-  .battle-entries-form h3 { font:800 clamp(1.5rem,2.4vw,2.2rem)/1.18 "Sora","Inter",sans-serif;margin:0 0 23px;letter-spacing:-.05em; }
-  .battle-entry-fields { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px; }
-  .battle-entry-fields label { font-size:.76rem;font-weight:800; }
-  .battle-entry-fields .battle-entry-wide { grid-column:1/-1; }
-  .battle-entry-fields input { width:100%;min-width:0;display:block;margin:8px 0 0;border:1px solid #cebcb8;background:#fffaf7;color:#25171f;border-radius:0;padding:13px 12px;font-size:.9rem; }
-  .battle-entry-fields input:focus-visible,.battle-entry-send:focus-visible { outline:2px solid #ba3942;outline-offset:2px; }
-  .battle-entry-fieldset { border:0;padding:0;margin:26px 0 21px;min-width:0; }
-  .battle-entry-fieldset legend { font-size:.85rem;font-weight:900;margin-bottom:11px; }
-  .battle-entry-checkboxes { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px; }
-  .battle-entry-checkbox { --entry-color:#e86960;display:flex;align-items:center;gap:10px;min-height:52px;padding:12px;background:#fff9f5;border:1px solid #d1beb9;font-size:.75rem;font-weight:800;cursor:pointer; }
-  .battle-entry-checkbox-hip-hop { --entry-color:#7794ef; }
-  .battle-entry-checkbox-house { --entry-color:#ac89e9; }
-  .battle-entry-checkbox:has(input:checked) { border-color:var(--entry-color);background:color-mix(in srgb,var(--entry-color),white 82%);box-shadow:inset 4px 0 var(--entry-color); }
-  .battle-entry-checkbox input { flex:none;accent-color:var(--entry-color); }
-  .battle-entry-methods { display:flex;gap:22px;flex-wrap:wrap;font-size:.83rem;font-weight:700; }
-  .battle-entry-methods label { display:flex;align-items:center;gap:8px;cursor:pointer; }
-  .battle-entry-methods input,.battle-entry-confirm input { accent-color:#c73b44; }
-  .battle-entry-confirm { display:flex;align-items:flex-start;gap:10px;margin:12px 0;font-size:.77rem;line-height:1.6;color:#5a474a;cursor:pointer; }
-  .battle-entry-confirm input { flex:none;margin-top:5px; }
-  .battle-entry-send { display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px;margin:22px 0 0;padding:16px 18px;border:0;background:#c84148;color:white;font-size:.83rem;font-weight:900;text-align:left;cursor:pointer;transition:background .2s; }
-  .battle-entry-send:hover { background:#a82e38; }
-  .battle-entry-send:disabled { opacity:.6;cursor:wait; }
-  .battle-entry-status { color:#685359;font-size:.75rem;line-height:1.6;margin:14px 0 0;min-height:2em; }
-  .battle-entry-trap { position:absolute!important;left:-9999px!important;opacity:0!important; }
-  @media(max-width:860px) { .battle-entries-layout { grid-template-columns:1fr; } }
-  @media(max-width:510px) { .battle-entry-fields,.battle-entry-checkboxes { grid-template-columns:1fr; }.battle-entries-section { padding:65px 0 85px; }.battle-entries-form { padding:22px 16px; } }
-  @media(prefers-reduced-motion:reduce) { .battle-booking-link,.battle-entry-send { transition:none; } }
-</style>
+  .battle-main,
+  .battle-quick-nav {
+    --battle-ink: #171314;
+    --battle-text: #f8f0e8;
+    --battle-muted: #d4c5bf;
+    --battle-accent: #ff917b;
+    --battle-action: #f3d2b2;
+    --battle-border: #59454a;
+    --battle-panel: #231c1e;
+    color: var(--battle-text);
+    font-family: "Inter", sans-serif;
+  }
 
-<style>
-  /* PREMIUM BATTLE V4 — editorial charcoal, restrained accents, no floating cards */
-  .battle-main { --acid:#bc9385;--cream:#f1eee9;--ink:#18191c;background:#18191c;color:#f1eee9; }
-  .battle-container { width:min(calc(100% - 48px),1210px); }
-  .battle-hero { background:radial-gradient(ellipse at 80% 39%,rgba(183,136,115,.13),transparent 34rem),linear-gradient(133deg,#191b1e,#141618 56%,#202022); }
-  .battle-hero-grid { opacity:.11; }
-  .battle-hero::before { color:rgba(255,255,255,.024); }
-  .battle-hero h1>span:last-child { color:#eae6e0; }
-  .battle-hero .battle-title-star { color:#b49a84; }
-  .battle-hero .battle-hero-lead { color:#e6e0d8;font-size:clamp(.98rem,1.65vw,1.2rem);letter-spacing:0; }
-  .battle-section-label,.battle-eyebrow { color:#baa18f;letter-spacing:.14em; }
-  .battle-hero-stats { border-color:#988275; }
-  .battle-hero-stats strong span { color:#bc9385; }
-  .battle-hero .battle-arena-visual { box-shadow:0 22px 65px #0006; }
-  .battle-hero .battle-arena-visual::before { border-color:#c5b49b66; }
-  .battle-hero .battle-arena-tile img { filter:grayscale(1) contrast(1.13) brightness(.64); }
-  .battle-hero .battle-arena-orbit { border-color:#bba596;box-shadow:0 0 0 14px #c6b09813,0 0 0 37px #c6b0980b; }
-  .battle-hero .battle-arena-orbit::before { border-color:#c5b49a5b; }
-  .battle-hero .battle-arena-orbit-inner { background:#d0b7a4;color:#211e1e; }
-  .battle-hero .battle-arena-orbit-inner strong { font-size:clamp(1.6rem,3vw,3.1rem); }
-  .battle-hero .battle-arena-caption { color:#dfc9b8; }
-  .battle-ticker { background:#282a2b;color:#bfb8b1;border-block:1px solid #48413d;font-size:clamp(.78rem,1.1vw,.94rem);letter-spacing:.2em;padding:12px 0; }
-  .battle-button-primary { background:#bea091;color:#201d1e; }
-  .battle-button-primary:hover { background:#d1b5a5;transform:none; }
-  .battle-button-ghost:hover { background:#ffffff0f;transform:none; }
-  .battle-choose-section { padding-block:86px 96px; }
-  .battle-section-heading h2 { font-size:clamp(2.75rem,5vw,5.5rem);letter-spacing:-.06em; }
-  .battle-section-heading h2 em { color:#c4ae9b; }
-  .battle-section-heading>p { color:#b9b4ae; }
-  .battle-category-grid { display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px; }
-  .battle-category { --px:50%;--py:50%;grid-column:span 2;min-height:330px;background:#222427;border:1px solid #43464a;padding:22px;transform:none!important;will-change:auto;isolation:isolate;box-shadow:none;transition:border-color .28s ease,box-shadow .3s ease,background .3s ease; }
-  .battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:span 3; }
-  .battle-category-kids { --card-accent:#c5a36e; }
-  .battle-category-breaking { --card-accent:#c48374; }
-  .battle-category-hiphop { --card-accent:#7b9ab5; }
-  .battle-category-house { --card-accent:#a59abd; }
-  .battle-category:hover { transform:none!important;border-color:var(--card-accent);background:#27282a;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--card-accent),transparent 65%); }
-  .battle-category.is-selected { border-color:var(--card-accent);box-shadow:inset 0 0 0 1px var(--card-accent); }
-  .battle-category::before { content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 220px 200px at var(--px) var(--py),color-mix(in srgb,var(--card-accent),transparent 88%),transparent 80%);opacity:0;transition:opacity .35s ease; }
-  .battle-category:hover::before,.battle-category:focus-visible::before { opacity:1; }
-  .battle-category::after { content:"";position:absolute;top:auto;left:0;right:0;bottom:0;width:auto;height:3px;background:var(--card-accent);border:0;border-radius:0;box-shadow:none;transform:scaleX(0);transform-origin:left;opacity:.95;transition:transform .38s cubic-bezier(.2,.7,.2,1);z-index:4; }
-  .battle-category:hover::after,.battle-category.is-selected::after { transform:scaleX(1); }
-  .battle-category-photo { z-index:-1;left:20%;width:86%;opacity:.55;filter:grayscale(.92) contrast(1.14) brightness(.78);transform:scale(1.015);transition:filter .42s ease,opacity .42s ease,transform .5s ease; }
-  .battle-category:hover .battle-category-photo,.battle-category.is-selected .battle-category-photo { opacity:.72;filter:grayscale(.35) contrast(1.08) brightness(.84);transform:scale(1.055); }
-  .battle-category-photo-wash { z-index:0;background:linear-gradient(90deg,#202124f5 0%,#202124c6 50%,#20212445 88%),linear-gradient(0deg,#202124cf,transparent 60%); }
-  .battle-category-top,.battle-category-art,.battle-category-lower,.battle-category-footer { position:relative;z-index:2; }
-  .battle-category-top { font-size:.69rem;color:var(--card-accent); }
-  .battle-category .battle-select-indicator { border:1px solid #ffffff40;border-radius:50%;width:27px;height:27px;display:grid;place-items:center;transition:background .2s,border-color .2s; }
-  .battle-category:hover .battle-select-indicator,.battle-category.is-selected .battle-select-indicator { background:var(--card-accent);border-color:var(--card-accent);color:#18191c; }
-  .battle-category-art { transform:none!important;font:800 clamp(2.1rem,3.5vw,4.5rem)/.95 "Sora","Inter",sans-serif;letter-spacing:-.08em;color:#ece7df; }
-  .battle-category-art span { display:block; }
-  .battle-category-name { font-size:clamp(1.3rem,2.2vw,2rem);letter-spacing:-.055em; }
-  .battle-category-traits { color:#d4cac4;font-size:.76rem; }
-  .battle-category-footer { border-color:#ffffff33;font-size:.76rem; }
-  .battle-prize-mini { color:#e1d7ce;font-size:.78rem;font-weight:800; }
-  .battle-select-text { color:var(--card-accent);font-weight:800;font-size:.72rem;letter-spacing:0;transition:color .2s; }
-  .battle-category-kids { background:linear-gradient(145deg,#292824,#232426); }
-  .battle-category-kids .battle-category-photo-wash { background:linear-gradient(120deg,#222325dc,#22232560); }
-  .battle-category-kids-graphic { position:absolute;right:-2%;top:20%;font:900 clamp(4rem,9vw,10rem)/.95 "Sora",sans-serif;letter-spacing:-.09em;text-align:right;color:#c9ad7a21;transform:rotate(-12deg);user-select:none;pointer-events:none; }
-  .battle-category-kids .battle-category-art { color:#dec59c; }
-  .battle-selection-deck { margin-top:20px;background:#25282b;color:#efebe7;border:1px solid #56514b; }
-  .battle-selection-deck .battle-selection-indicator span { color:#b8a292; }
-  .battle-selection-deck>a { background:#c2a18d;color:#1f1d1e; }
-  .battle-selection-deck>a:hover { background:#d5bca9; }
-  .battle-register-section { background:#eeeae4;color:#242426; }
-  .battle-register-intro h2 { color:#252427; }
-  .battle-register-intro h2 em { color:#9b7769; }
-  .battle-register-intro>p:not(.battle-section-label) { color:#635e5a; }
-  .battle-register-steps,.battle-register-steps>div { border-color:#cbc4bb; }
-  .battle-register-steps>div>span { color:#98776b; }
-  .battle-register-steps p { color:#625b54; }
-  .battle-register-card { background:#27282a;color:#f2eee9;box-shadow:12px 12px 0 #cabfb240; }
-  .battle-booking-link { background:#a88475;border-color:#b59888;color:#1f1c1b; }
-  .battle-booking-link:hover { background:#bb9886;border-color:#cfb4a2;box-shadow:inset 3px 0 #e7d4c4; }
-  .battle-booking-link small { color:#292322; }
-  .battle-booking-link-usc { background:#3e474b;border-color:#68747b;color:#f1efec; }
-  .battle-booking-link-usc:hover { background:#4b585d;border-color:#8b9b9e;box-shadow:inset 3px 0 #c1d2d0; }
-  .battle-booking-link-usc small { color:#d2d6d5; }
-  .battle-booking-link-door,.battle-booking-link-door:hover { background:#303134;border-color:#575354;color:#f1efec;box-shadow:none; }
-  .battle-booking-link-door small { color:#d2cbc5; }
-  .battle-booking-next { color:#c9b1a1;border-color:#75675e; }
-  .battle-entries-section { background:#1c1d20; }
-  .battle-entries-intro h2 em { color:#c7ab98; }
-  .battle-entries-intro>p:not(.battle-section-label) { color:#c6bfb7; }
-  .battle-entries-form { background:#f0ece7;color:#242428;box-shadow:12px 12px 0 #a29c9238; }
-  .battle-entry-fields input { border-color:#ccc4bc;background:#fffdf9; }
-  .battle-entry-checkbox { --entry-color:#c3a16e;background:#f9f6f2;border-color:#d7d1ca; }
-  .battle-entry-checkbox-breaking { --entry-color:#c48374; }
-  .battle-entry-checkbox-hip-hop { --entry-color:#7b9ab5; }
-  .battle-entry-checkbox-house { --entry-color:#a59abd; }
-  .battle-entry-send { background:#997868;color:#fffaf5; }
-  .battle-entry-send:hover { background:#866758; }
-  .battle-kids-consent { padding:13px 16px;margin-top:18px;border-left:3px solid #c3a16e;background:#e9e0d5; }
-  .battle-kids-consent[hidden] { display:none!important; }
-  .battle-kids-consent label { display:flex;align-items:flex-start;gap:9px;font-size:.78rem;line-height:1.5;font-weight:750;cursor:pointer; }
-  .battle-kids-consent input { flex:none;margin-top:4px;accent-color:#9f7c51; }
-  .battle-kids-consent small { display:block;margin-top:7px;color:#675e55;font-size:.74rem;line-height:1.5; }
-  .battle-prize-block { background:#d1bdab;color:#282322;box-shadow:11px 11px 0 #78665d24; }
-  .battle-prize-amount { color:#292524; }
-  .battle-prize-future { border-color:#a28b7a;color:#56473d; }
-  .battle-prizes-lead p { max-width:32ch;color:#cdc3bb;line-height:1.65; }
-  .battle-goodies-block>span { color:#b99b84; }
-  .battle-schedule-section { background:#efebe6;color:#252426; }
-  .battle-schedule-layout { grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,5vw,85px);align-items:start; }
-  .battle-schedule-intro h2 { font:900 clamp(2.5rem,4.3vw,4.8rem)/1 "Sora","Inter",sans-serif;letter-spacing:-.07em; }
-  .battle-schedule-intro h2 em { color:#9c8070; }
-  .battle-schedule-intro>p:not(.battle-section-label) { color:#5c5753;line-height:1.7; }
-  .battle-schedule-rooms { display:grid;gap:12px;margin:25px 0; }
-  .battle-schedule-rooms>div { display:flex;flex-direction:column;gap:2px;padding:13px 16px;border-left:3px solid #b59e8b;background:#e4ded7; }
-  .battle-schedule-rooms span { color:#8f8174;font-size:.66rem;font-weight:900;letter-spacing:.12em; }
-  .battle-schedule-rooms strong { font-size:.88rem; }
-  .battle-schedule-instagram { color:#725c50;text-decoration:underline;font-weight:750;font-size:.8rem; }
-  .battle-lineup-card { transform:none!important;background:#292a2d;box-shadow:13px 13px 0 #c4b8ac; }
-  .battle-lineup-top,.battle-lineup-item span,.battle-lineup-foot span { color:#c5aa94; }
-  .battle-lineup-top { border-color:#bda791; }
-  .battle-lineup-item { grid-template-columns:minmax(48px,.25fr) minmax(0,1fr) auto;gap:12px;padding:13px 0; }
-  .battle-lineup-item strong { font-size:.96rem;line-height:1.35; }
-  .battle-lineup-item small { text-align:right;font-size:.67rem;line-height:1.35;color:#a8a8a8; }
-  .battle-lineup-item-prelude { opacity:.73; }
-  .battle-lineup-item-break { opacity:.65; }
-  .battle-lineup-item-special strong { color:#d7bfa9; }
-  .battle-last-cta::before { border-color:#9b8775; }
-  .battle-last-cta h2 em { color:#c1a390; }
-  @media(max-width:950px) {
-    .battle-category { grid-column:span 3; }
-    .battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:span 3; }
+  .battle-main {
+    background: #141112;
   }
-  @media(max-width:760px) {
-    .battle-container { width:min(calc(100% - 32px),1210px); }
-    .battle-category-grid { grid-template-columns:repeat(2,minmax(0,1fr));gap:12px; }
-    .battle-category,.battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:span 1;min-height:310px;padding:16px; }
-    .battle-category-kids { grid-column:span 2; }
-    .battle-category-art { font-size:clamp(1.7rem,5vw,3.1rem); }
-    .battle-category-name { font-size:clamp(1.25rem,3.2vw,1.9rem); }
-    .battle-schedule-layout { grid-template-columns:1fr; }
-  }
-  @media(max-width:470px) {
-    .battle-category-grid { grid-template-columns:1fr; }
-    .battle-category,.battle-category-kids,.battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:span 1;min-height:295px; }
-    .battle-category-art { font-size:clamp(2.5rem,10vw,4rem); }
-    .battle-lineup-item { gap:8px;grid-template-columns:47px minmax(0,1fr); }
-    .battle-lineup-item small { grid-column:2;text-align:left; }
-  }
-  @media(prefers-reduced-motion:reduce) {
-    .battle-category,.battle-category-photo,.battle-category::before,.battle-category::after { transition:none!important; }
-    .battle-category:hover .battle-category-photo { transform:none!important; }
-  }
-</style>
 
-<style>
-  /* Event launch: official poster, general schedule and community areas */
-  .battle-poster-showcase { background:linear-gradient(180deg,#191a1d,#202124);padding:48px 0 85px;border-bottom:1px solid #474143; }
-  .battle-poster-layout { display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,74px);align-items:center; }
-  .battle-poster-copy h2 { font:900 clamp(2.5rem,4.5vw,5rem)/.97 "Sora","Inter",sans-serif;letter-spacing:-.068em;margin:16px 0 25px;color:#efebe6; }
-  .battle-poster-copy h2 em { font-style:normal;color:#c9ab99; }
-  .battle-poster-copy>p:not(.battle-section-label) { color:#c5bdb6;line-height:1.8;font-size:1rem;max-width:535px; }
-  .battle-poster-facts { display:grid;gap:11px;margin:31px 0; }
-  .battle-poster-facts>div { display:flex;flex-direction:column;gap:5px;padding:13px 16px;border-left:2px solid #b49a87;background:#29292b; }
-  .battle-poster-facts span { color:#bda897;font-size:.68rem;font-weight:900;letter-spacing:.16em; }
-  .battle-poster-facts strong { color:#eeeae5;font-size:.92rem;line-height:1.5; }
-  .battle-poster-actions { display:flex;flex-wrap:wrap;gap:12px; }
-  .battle-poster-art { width:min(100%,585px);margin:0 auto;position:relative; }
-  .battle-poster-art::before { content:"";pointer-events:none;position:absolute;inset:12px -12px -12px 12px;border:1px solid #ad655855;z-index:0; }
-  .battle-poster-art img { display:block;width:100%;height:auto;position:relative;z-index:1;border:1px solid #55413e;box-shadow:0 27px 70px #0007; }
-  .battle-poster-art figcaption { color:#aaa19b;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin:14px 0 0;text-align:right; }
-  .battle-general-timetable .battle-lineup-item { grid-template-columns:110px minmax(0,1fr);column-gap:19px;row-gap:3px; }
-  .battle-general-timetable .battle-lineup-item>span { grid-row:1;align-self:center;max-width:110px;line-height:1.4;font-size:.75rem; }
-  .battle-general-timetable .battle-lineup-item strong { grid-column:2;grid-row:1; }
-  .battle-general-timetable .battle-lineup-item small { grid-column:2;grid-row:2;text-align:left;line-height:1.5;max-width:100%; }
-  .battle-general-timetable .battle-lineup-top { gap:18px; }
-  @media(max-width:1040px) {
-    .battle-poster-layout { gap:32px; }
+  .battle-container {
+    width: min(calc(100% - 56px), 1140px);
+    margin-inline: auto;
   }
-  @media(max-width:760px) {
-    .battle-poster-showcase { padding:54px 0 66px; }
-    .battle-poster-layout { grid-template-columns:1fr; }
-    .battle-poster-copy { max-width:720px; }
-    .battle-poster-art { width:min(100%,535px); }
-  }
-  @media(max-width:450px) {
-    .battle-general-timetable .battle-lineup-item { grid-template-columns:83px minmax(0,1fr);column-gap:10px; }
-    .battle-general-timetable .battle-lineup-item>span { max-width:83px;font-size:.65rem; }
-  }
-</style>
 
+  .battle-main [id] {
+    scroll-margin-top: 94px;
+  }
 
-<style>
-  /* Four-category battle, free spectator entry and voluntary contributions */
-  .battle-category-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px; }
-  .battle-category,.battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:auto;min-height:340px; }
-  .battle-arena-tile-kids { display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#3c322b,#131c24); }
-  .battle-arena-tile-kids span { font:900 clamp(1.6rem,3vw,3rem)/.95 "Sora","Inter",sans-serif;letter-spacing:-.09em;color:#e1c899;text-align:center;transform:rotate(-12deg); }
-  .battle-spectator-hero-note { margin-top:20px;display:inline-flex;flex-direction:column;gap:4px;background:rgba(240,232,217,.09);border:1px solid rgba(220,202,172,.46);padding:14px 17px;color:#fff8f0;text-decoration:none;transition:background .25s,border-color .25s; }
-  .battle-spectator-hero-note:hover { background:rgba(240,232,217,.17);border-color:#dbc0a2; }
-  .battle-spectator-hero-note strong { font-size:.86rem;font-weight:900;letter-spacing:.065em; }
-  .battle-spectator-hero-note span { color:#d6c5b7;font-size:.74rem;font-weight:700; }
-  .battle-spectators { padding:clamp(64px,7vw,112px) 0;background:#eae7df;color:#292729; }
-  .battle-spectators-layout { display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:clamp(35px,5vw,76px);align-items:center; }
-  .battle-spectator-free .battle-section-label { color:#8d7162; }
-  .battle-spectator-free h2 { font:900 clamp(2.8rem,5.25vw,5.5rem)/.96 "Sora","Inter",sans-serif;letter-spacing:-.07em;margin:17px 0 23px;color:#222224; }
-  .battle-spectator-free h2 em { color:#b47566; }
-  .battle-spectator-free p { max-width:640px;font-size:.99rem;line-height:1.75;color:#5d5651; }
-  .battle-spectator-free p strong { color:#2f2928; }
-  .battle-donation-card { padding:clamp(24px,3.6vw,40px);background:#24262a;color:#f1ece7;border:1px solid #514a46;box-shadow:12px 12px 0 #b8b0a246; }
-  .battle-donation-card .battle-section-label { color:#c3a694; }
-  .battle-donation-card h3 { font:850 clamp(1.6rem,2.45vw,2.4rem)/1.12 "Sora","Inter",sans-serif;letter-spacing:-.05em;margin:17px 0 18px;color:#fff8ef; }
-  .battle-donation-card p:not(.battle-section-label) { color:#cec5bf;font-size:.87rem;line-height:1.7; }
-  .battle-donation-card p strong { color:#f8eee6; }
-  .battle-donation-card a { display:inline-flex;justify-content:space-between;gap:12px;align-items:center;text-decoration:none;margin-top:13px;padding:13px 17px;background:#bda18f;color:#252124;font-size:.8rem;font-weight:900;transition:background .25s; }
-  .battle-donation-card a:hover { background:#d6bdac; }
-  @media(max-width:850px) { .battle-spectators-layout { grid-template-columns:1fr; } }
-  @media(max-width:750px) {
-    .battle-category-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .battle-category,.battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:auto;min-height:310px; }
+  .battle-main h1,
+  .battle-main h2,
+  .battle-main h3 {
+    color: var(--battle-text);
+    font-family: "Sora", "Inter", sans-serif;
   }
-  @media(max-width:490px) {
-    .battle-category-grid { grid-template-columns:1fr; }
-    .battle-category,.battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:auto;min-height:285px; }
-    .battle-spectator-free h2 { font-size:clamp(2.55rem,10vw,4rem); }
-    .battle-spectator-hero-note { display:flex;width:100%; }
+
+  .battle-main h2 {
+    margin: 0;
+    font-size: clamp(1.95rem, 4vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -.055em;
   }
-  @media(prefers-reduced-motion:reduce) { .battle-spectator-hero-note,.battle-donation-card a { transition:none; } }
-</style>
-<style>
-  /* Hip-Hop battle uses abstract typography instead of an instructor portrait. */
-  .battle-arena-tile-hiphop {
-    display:flex;
-    align-items:center;
-    justify-content:center;
+
+  .battle-main h3 {
+    margin: 0;
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    line-height: 1.25;
+    letter-spacing: -.025em;
+  }
+
+  .battle-main p {
+    color: var(--battle-muted);
+    line-height: 1.65;
+  }
+
+  .battle-hero {
     background:
-      radial-gradient(circle at 72% 31%,rgba(116,167,197,.28),transparent 55%),
-      repeating-linear-gradient(135deg,transparent 0 20px,rgba(120,163,197,.055) 20px 21px),
-      linear-gradient(145deg,#263641,#101a25);
+      radial-gradient(ellipse at 85% 35%, #412327 0, transparent 62%),
+      linear-gradient(142deg, #261b1e 0, #161213 62%);
+    border-bottom: 1px solid var(--battle-border);
   }
-  .battle-arena-tile-hiphop span {
-    color:#b0d2e2;
-    font:900 clamp(1.6rem,3.3vw,3.5rem)/.92 "Sora","Inter",sans-serif;
-    letter-spacing:-.09em;
-    text-align:center;
-    transform:rotate(-10deg);
-    opacity:.78;
+
+  .battle-hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, .94fr);
+    align-items: center;
+    gap: clamp(26px, 5.8vw, 92px);
+    padding-block: clamp(42px, 5.8vw, 92px);
   }
-  .battle-category-hiphop .battle-category-photo-wash {
-    background:linear-gradient(135deg,rgba(25,37,49,.8),rgba(16,23,32,.36));
+
+  .battle-hero-copy {
+    min-width: 0;
   }
-  .battle-category-hiphop-graphic {
-    position:absolute;
-    top:24%;
-    right:-7%;
-    color:rgba(125,177,211,.16);
-    font:900 clamp(4rem,7vw,7.5rem)/.8 "Sora","Inter",sans-serif;
-    letter-spacing:-.09em;
-    white-space:nowrap;
-    transform:rotate(-12deg);
-    pointer-events:none;
-    user-select:none;
+
+  .battle-event-date {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    margin: 0 0 clamp(12px, 2.5vw, 26px);
+    font-size: clamp(.75rem, 1.3vw, .9rem);
+    font-weight: 700;
+  }
+
+  .battle-event-date span {
+    color: var(--battle-action);
+  }
+
+  .battle-event-date span::before {
+    margin-right: 10px;
+    content: "·";
+  }
+
+  .battle-hero h1 {
+    margin: 0;
+    color: var(--battle-accent);
+    font-size: clamp(4rem, 9vw, 8.25rem);
+    font-weight: 800;
+    line-height: .85;
+    letter-spacing: -.072em;
+    text-transform: uppercase;
+  }
+
+  .battle-hero h1 > span {
+    display: block;
+    margin-bottom: .17em;
+    color: var(--battle-text);
+    font-size: .56em;
+    line-height: 1;
+    letter-spacing: -.06em;
+  }
+
+  .battle-hero-venue {
+    margin: clamp(14px, 2.2vw, 24px) 0 0;
+    font-size: clamp(.9rem, 1.45vw, 1.06rem);
+    font-weight: 650;
+  }
+
+  .battle-hero-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 15px;
+    margin: 13px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .battle-color-breaking-kids { --battle-category-color: #ff9e80; }
+  .battle-color-breaking { --battle-category-color: #91dbf8; }
+  .battle-color-house { --battle-category-color: #d7aff7; }
+  .battle-color-hip-hop { --battle-category-color: #f7a6d3; }
+
+  .battle-hero-categories li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--battle-muted);
+    font-size: .8rem;
+    font-weight: 650;
+  }
+
+  .battle-hero-categories li::before {
+    flex: 0 0 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--battle-category-color);
+    content: "";
+  }
+
+  .battle-hero-actions,
+  .battle-quick-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .battle-hero-actions {
+    width: min(100%, 440px);
+    margin-top: clamp(19px, 3vw, 32px);
+  }
+
+  .battle-button {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 9px 11px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font: 700 clamp(.75rem, 1.2vw, .92rem)/1.2 "Inter", sans-serif;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color .16s ease, border-color .16s ease;
+  }
+
+  .battle-button-primary {
+    background: var(--battle-action);
+    color: var(--battle-ink);
+  }
+
+  .battle-button-primary:hover {
+    background: #ffe3c7;
+    color: var(--battle-ink);
+  }
+
+  .battle-button-secondary {
+    border-color: #9c7b78;
+    background: #302427;
+    color: var(--battle-text);
+  }
+
+  .battle-button-secondary:hover {
+    background: #493336;
+    color: var(--battle-text);
+  }
+
+  .battle-text-link {
+    display: inline-block;
+    color: var(--battle-muted);
+    font-size: .82rem;
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: .2em;
+  }
+
+  .battle-text-link:hover {
+    color: var(--battle-text);
+  }
+
+  .battle-return-link {
+    margin-top: 13px;
+    padding-block: 6px;
+  }
+
+  .battle-main :is(a, button, input):focus-visible,
+  .battle-quick-nav a:focus-visible {
+    outline: 2px solid var(--battle-action);
+    outline-offset: 4px;
+  }
+
+  .battle-poster {
+    width: min(100%, 460px);
+    margin: 0;
+    justify-self: end;
+    overflow: hidden;
+    border: 1px solid #855250;
+    border-radius: 14px;
+    box-shadow: 0 24px 60px #10090b75;
+  }
+
+  .battle-poster img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .battle-program {
+    padding-block: clamp(36px, 5.4vw, 76px);
+    border-bottom: 1px solid var(--battle-border);
+    background: #1c1618;
+  }
+
+  .battle-program-layout {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    gap: 16px clamp(25px, 5vw, 78px);
+  }
+
+  .battle-visitor-info > p {
+    margin: 12px 0 0;
+  }
+
+  .battle-visitor-info .battle-address {
+    margin-top: 19px;
+    font-size: .9rem;
+  }
+
+  .battle-address strong {
+    color: var(--battle-text);
+  }
+
+  .battle-timetable {
+    min-width: 0;
+    padding: clamp(16px, 3vw, 28px);
+    border: 1px solid var(--battle-border);
+    border-radius: 12px;
+    background: var(--battle-panel);
+  }
+
+  .battle-timetable-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 7px 12px;
+    padding-bottom: 13px;
+  }
+
+  .battle-timetable-heading > span {
+    color: var(--battle-action);
+    font-size: .84rem;
+    font-weight: 700;
+  }
+
+  .battle-program-rows {
+    margin: 0;
+  }
+
+  .battle-program-rows > div {
+    display: grid;
+    grid-template-columns: minmax(88px, .65fr) minmax(0, 1.55fr);
+    gap: 11px;
+    padding: 11px 0;
+    border-top: 1px solid var(--battle-border);
+  }
+
+  .battle-program-rows dt,
+  .battle-program-rows dd {
+    margin: 0;
+  }
+
+  .battle-program-rows dt {
+    padding-top: .12em;
+    color: var(--battle-muted);
+    font-size: .78rem;
+  }
+
+  .battle-program-rows dd strong {
+    color: var(--battle-text);
+    font-size: .92rem;
+  }
+
+  .battle-program-rows dd span,
+  .battle-program-note,
+  .battle-donation {
+    display: block;
+    color: var(--battle-muted);
+    font-size: .8rem;
+  }
+
+  .battle-program-note {
+    margin: 0;
+    padding-top: 10px;
+    border-top: 1px solid var(--battle-border);
+  }
+
+  .battle-donation {
+    grid-column: 1 / -1;
+    max-width: 72ch;
+    margin: 0;
+  }
+
+  .battle-registration {
+    padding-block: clamp(38px, 6vw, 85px);
+  }
+
+  .battle-section-header {
+    margin-bottom: 24px;
+  }
+
+  .battle-section-header p {
+    margin: 9px 0 0;
+  }
+
+  .battle-registration-step {
+    padding: clamp(17px, 3.2vw, 32px);
+    border: 1px solid var(--battle-border);
+    border-radius: 12px;
+    background: var(--battle-panel);
+  }
+
+  .battle-registration-step + .battle-registration-step {
+    margin-top: 12px;
+  }
+
+  .battle-registration-step h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .battle-step-number {
+    display: inline-grid;
+    flex: 0 0 27px;
+    min-height: 27px;
+    place-items: center;
+    border: 1px solid #9c7770;
+    border-radius: 50%;
+    color: var(--battle-action);
+    font: 700 .82rem "Inter", sans-serif;
+  }
+
+  .battle-booking-options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+    margin-top: 16px;
+  }
+
+  .battle-booking-option {
+    display: grid;
+    align-content: start;
+    gap: 5px;
+    min-width: 0;
+    padding: 13px 14px;
+    border: 1px solid var(--battle-border);
+    border-radius: 8px;
+    background: #1a1517;
+    color: var(--battle-text);
+    text-decoration: none;
+  }
+
+  .battle-booking-option strong {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px;
+    color: var(--battle-text);
+    font-size: .96rem;
+  }
+
+  .battle-booking-option > span {
+    color: var(--battle-muted);
+    font-size: .79rem;
+    line-height: 1.5;
+  }
+
+  .battle-booking-option strong span {
+    color: var(--battle-action);
+  }
+
+  .battle-booking-online {
+    border-color: #bd947a;
+    background: #332628;
+  }
+
+  a.battle-booking-option:hover {
+    border-color: var(--battle-action);
+    background: #432e32;
+    color: var(--battle-text);
+  }
+
+  .battle-entries > p {
+    margin: 10px 0 17px;
+  }
+
+  .battle-entries-form {
+    display: grid;
+    gap: 18px;
+  }
+
+  .battle-entries-form [hidden] {
+    display: none;
+  }
+
+  .battle-fieldset {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .battle-fieldset legend {
+    margin-bottom: 8px;
+    padding: 0;
+    color: var(--battle-text);
+    font-size: .86rem;
+    font-weight: 700;
+  }
+
+  .battle-category-choices {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .battle-category-choice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 62px;
+    padding: 9px;
+    border: 1px solid var(--battle-border);
+    border-left: 3px solid var(--battle-category-color);
+    border-radius: 7px;
+    background: #191416;
+    cursor: pointer;
+  }
+
+  .battle-category-choice:hover,
+  .battle-category-choice:has(input:checked) {
+    background: #37282c;
+  }
+
+  .battle-category-choice strong,
+  .battle-category-choice small {
+    display: block;
+  }
+
+  .battle-category-choice strong {
+    color: var(--battle-text);
+    font-size: .83rem;
+    line-height: 1.38;
+  }
+
+  .battle-category-choice small {
+    color: var(--battle-muted);
+    font-size: .72rem;
+  }
+
+  .battle-entries-form input[type="checkbox"],
+  .battle-entries-form input[type="radio"] {
+    flex: 0 0 auto;
+    width: 17px;
+    height: 17px;
+    margin: .14em 0 0;
+    accent-color: var(--battle-action);
+  }
+
+  .battle-prize-note,
+  .battle-kids-consent p {
+    margin: 8px 0 0;
+    font-size: .8rem;
+  }
+
+  .battle-kids-consent {
+    padding: 10px 12px;
+    border-left: 3px solid #ff9e80;
+    background: #322529;
+  }
+
+  .battle-entry-fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .battle-entry-fields label {
+    display: grid;
+    gap: 5px;
+    color: var(--battle-text);
+    font-size: .81rem;
+    font-weight: 650;
+  }
+
+  .battle-entry-fields input {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 9px 10px;
+    border: 1px solid #8b7175;
+    border-radius: 7px;
+    background: #191416;
+    color: var(--battle-text);
+    font: 400 1rem "Inter", sans-serif;
+  }
+
+  .battle-booking-methods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+
+  .battle-confirmations {
+    display: grid;
+    gap: 8px;
+  }
+
+  .battle-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: var(--battle-text);
+    font-size: .83rem;
+    line-height: 1.55;
+    cursor: pointer;
+  }
+
+  .battle-submit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+  }
+
+  .battle-submit button {
+    padding-inline: 15px;
+    cursor: pointer;
+  }
+
+  .battle-submit button:disabled {
+    opacity: .72;
+    cursor: wait;
+  }
+
+  .battle-submit p {
+    margin: 0;
+    font-size: .82rem;
+  }
+
+  .battle-quick-nav,
+  .battle-quick-nav[hidden] {
+    display: none;
+  }
+
+  @media (max-width: 760px) {
+    .battle-container {
+      width: calc(100% - 32px);
+    }
+
+    .battle-hero-layout,
+    .battle-program-layout,
+    .battle-booking-options,
+    .battle-entry-fields {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .battle-hero-layout {
+      gap: 18px;
+      padding-block: 27px 24px;
+    }
+
+    .battle-hero h1 {
+      font-size: clamp(3.65rem, 14vw, 6.25rem);
+    }
+
+    .battle-hero-categories {
+      gap: 5px 12px;
+      margin-top: 9px;
+    }
+
+    .battle-hero-categories li {
+      font-size: .75rem;
+    }
+
+    .battle-poster {
+      justify-self: center;
+    }
+
+    .battle-category-choices {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .battle-main [id] {
+      scroll-margin-top: 82px;
+    }
+
+    .battle-quick-nav:not([hidden]) {
+      position: fixed;
+      z-index: 40;
+      right: 10px;
+      bottom: max(8px, env(safe-area-inset-bottom, 0px));
+      left: 10px;
+      display: grid;
+      padding: 7px;
+      border: 1px solid var(--battle-border);
+      border-radius: 11px;
+      background: #211a1cee;
+      box-shadow: 0 8px 25px #0d0708a0;
+    }
+
+    .battle-quick-nav .battle-button {
+      min-height: 44px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .battle-button {
+      transition: none;
+    }
   }
 </style>

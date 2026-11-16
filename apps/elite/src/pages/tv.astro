@@ -17,7 +17,7 @@ const posters = tvMedia.posters.map((item) => ({
 }));
 const videos = ["https://pub-78965290644946caade1e59ed21bf9ce.r2.dev/tv/videos/Video%20TV.mp4"];
 const initialVideo = videos[0] || "";
-const TV_ASSET_VERSION = "20261026-halloween-posters-v1";
+const TV_ASSET_VERSION = "20261116-battle-tv-v1";
 const versionedMedia = (path: string) => {
   const url = new URL(path.startsWith("https://") ? path : remoteMedia(path));
   url.searchParams.set("v", TV_ASSET_VERSION);
@@ -34,6 +34,9 @@ const featureGiveaway = tvMedia.features?.giveaway
   : null;
 const featureReview = tvMedia.features?.review
   ? { ...tvMedia.features.review, src: versionedMedia(tvMedia.features.review.file) }
+  : null;
+const featureBattle = tvMedia.features?.battle
+  ? { ...tvMedia.features.battle, src: versionedMedia(tvMedia.features.battle.file) }
   : null;
 const featurePromos = Array.isArray(tvMedia.features?.promos)
   ? tvMedia.features.promos.map((item) => ({ ...item, src: versionedMedia(item.file) }))
@@ -107,6 +110,9 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <section class="scene feature-scene" id="giveaway-scene">
   {featureGiveaway && <img class="feature-image" id="giveaway-img" src={featureGiveaway.src} alt={featureGiveaway.title} loading="eager" />}
 </section>
+<section class="scene feature-scene" id="battle-scene">
+  {featureBattle && <img class="feature-image" id="battle-img" src={featureBattle.src} alt={featureBattle.title} loading="eager" decoding="async" />}
+</section>
 <section class="scene feature-scene" id="review-scene">
   {featureReview && <img class="feature-image" id="review-img" src={featureReview.src} alt={featureReview.title} loading="eager" fetchpriority="high" decoding="async" />}
 </section>
@@ -117,7 +123,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <div class="probe"><div id="eversports-probe" data-eversports-widget-id="061d6c37-61a5-4378-8453-714ce19d595c"></div></div>
 </main>
 <script type="module" src="https://widget-static.eversports.io/loader.js"></script>
-<script is:inline define:vars={{ posters, videos, tvSchedule, featureSchedule, featureParty, featureGiveaway, featureReview, featurePromos, scheduleCandidates }}>
+<script is:inline define:vars={{ posters, videos, tvSchedule, featureSchedule, featureParty, featureGiveaway, featureReview, featureBattle, featurePromos, scheduleCandidates }}>
 (()=>{
 const TZ="Europe/Berlin";
 const NEXT_WINDOW=15;
@@ -127,6 +133,8 @@ const SCHEDULE_SECONDS=featureSchedule?.seconds||20;
 const PARTY_SECONDS=featureParty?.seconds||10;
 const GIVEAWAY_SECONDS=featureGiveaway?.seconds||15;
 const REVIEW_SECONDS=featureReview?.seconds||10;
+const BATTLE_SECONDS=featureBattle?.seconds||18;
+const VIDEO_INTERRUPTION_SECONDS=60;
 const STALL_CHECK_MS=5000;
 const STALL_LIMIT=2;
 const VIDEO_LOAD_TIMEOUT_MS=10000;
@@ -134,6 +142,7 @@ const TV_CODE_RELOAD_MS=5*60*1000;
 const video=document.getElementById('video');
 const scheduleImg=document.getElementById('schedule-img');
 const reviewImg=document.getElementById('review-img');
+const battleImg=document.getElementById('battle-img');
 const giveawayImg=document.getElementById('giveaway-img');
 const promoImg=document.getElementById('promo-img');
 let scheduleCandidateIndex=0;
@@ -144,12 +153,14 @@ const scenes={
   party:document.getElementById('party-scene'),
   giveaway:document.getElementById('giveaway-scene'),
   review:document.getElementById('review-scene'),
+  battle:document.getElementById('battle-scene'),
   promo:document.getElementById('promo-scene'),
   single:document.getElementById('single-scene')
 };
 let events=[];
 let eversportsEvents=[];
 let sceneTimer=null;
+let videoInterruptTimer=null;
 let videoIndex=0;
 let queue=[];
 let lastVideoTime=-1;
@@ -273,6 +284,42 @@ function continueAfterFeatures(){
     playVideo();
   }
 }
+// Keep the Battle poster in the normal feature rotation, and allow it to pause
+// an in-progress video without restarting video playback afterward.
+function showBattleFeature(onDone=showReviewFeature){
+  clearTimeout(sceneTimer);
+  clearTimeout(videoInterruptTimer);
+  if(!featureBattle||!battleImg){onDone();return;}
+  const reveal=()=>{
+    battleImg.onload=null;
+    battleImg.onerror=null;
+    activate('battle');
+    sceneTimer=setTimeout(onDone,BATTLE_SECONDS*1000);
+  };
+  if(battleImg.complete){
+    if(battleImg.naturalWidth>0)reveal();
+    else onDone();
+    return;
+  }
+  battleImg.onload=reveal;
+  battleImg.onerror=()=>{
+    battleImg.onload=null;
+    battleImg.onerror=null;
+    onDone();
+  };
+}
+function scheduleVideoBreak(){
+  clearTimeout(videoInterruptTimer);
+  if(!featureBattle||!battleImg||!scenes.video.classList.contains('active')||video.paused)return;
+  videoInterruptTimer=setTimeout(()=>{
+    if(!scenes.video.classList.contains('active')||video.paused||video.ended)return;
+    video.pause();
+    showBattleFeature(()=>{
+      activate('video');
+      video.play().catch(()=>showScheduleFeature());
+    });
+  },VIDEO_INTERRUPTION_SECONDS*1000);
+}
 function showReviewFeature(){
   clearTimeout(sceneTimer);
   if(!featureReview||!reviewImg){showPartyFeature();return;}
@@ -353,16 +400,16 @@ function showPartyFeature(){
 }
 function showScheduleFeature(){
   clearTimeout(sceneTimer);
-  if(!featureSchedule||!scheduleImg){showReviewFeature();return;}
+  if(!featureSchedule||!scheduleImg){showBattleFeature();return;}
 
   const reveal=()=>{
     activate('schedule');
-    sceneTimer=setTimeout(showReviewFeature,SCHEDULE_SECONDS*1000);
+    sceneTimer=setTimeout(showBattleFeature,SCHEDULE_SECONDS*1000);
   };
 
   const tryCandidate=()=>{
     if(scheduleImg.complete&&scheduleImg.naturalWidth>0){reveal();return;}
-    if(scheduleCandidateIndex>=scheduleCandidates.length){showReviewFeature();return;}
+    if(scheduleCandidateIndex>=scheduleCandidates.length){showBattleFeature();return;}
 
     const src=scheduleCandidates[scheduleCandidateIndex++];
     scheduleImg.onload=()=>{
@@ -381,21 +428,23 @@ function showScheduleFeature(){
 
   tryCandidate();
 }
-function finishVideoLoop(){video.pause();showScheduleFeature();}
+function finishVideoLoop(){clearTimeout(videoInterruptTimer);video.pause();showScheduleFeature();}
 function recoverFromStall(){if(recovering)return;recovering=true;video.pause();refreshScheduleNow();queue=displayQueue();if(queue.length)showNextInfo();else showScheduleFeature();}
-function demo(){const mode=new URLSearchParams(location.search).get('demo');if(!mode)return false;video.pause();const sample=mode==='live'?{type:'live',event:{title:'Heels Beginner',start:'18:00',end:'19:00'}}:mode==='zouk'?{type:'live',event:{title:'Zouk Beginner',start:'18:00',end:'19:00'}}:{type:'next',event:{title:'Latin Twerk',start:'19:00',end:'20:00'}};renderEntry(sample);return true;}
+function demo(){const mode=new URLSearchParams(location.search).get('demo');if(!mode)return false;video.pause();if(mode==='battle'){showBattleFeature(()=>{});return true;}const sample=mode==='live'?{type:'live',event:{title:'Heels Beginner',start:'18:00',end:'19:00'}}:mode==='zouk'?{type:'live',event:{title:'Zouk Beginner',start:'18:00',end:'19:00'}}:{type:'next',event:{title:'Latin Twerk',start:'19:00',end:'20:00'}};renderEntry(sample);return true;}
 
 posters.forEach(p=>{const img=new Image();img.src=p.src});
 if(featureParty?.src){const img=new Image();img.src=featureParty.src;}
 if(featureGiveaway?.src){const img=new Image();img.src=featureGiveaway.src;}
 if(featureReview?.src){const img=new Image();img.src=featureReview.src;}
+if(featureBattle?.src){const img=new Image();img.src=featureBattle.src;}
 featurePromos.forEach(p=>{const img=new Image();img.src=p.src;});
 scheduleCandidates.forEach(src=>{const img=new Image();img.src=src;});
 const obs=new MutationObserver(()=>{refreshScheduleNow()});
 obs.observe(document.getElementById('eversports-probe'),{childList:true,subtree:true,characterData:true});
 setInterval(refreshScheduleNow,30000);
 video.addEventListener('ended',finishVideoLoop);
-video.addEventListener('playing',()=>{stalledChecks=0;lastVideoTime=video.currentTime});
+video.addEventListener('playing',()=>{stalledChecks=0;lastVideoTime=video.currentTime;scheduleVideoBreak();});
+video.addEventListener('pause',()=>clearTimeout(videoInterruptTimer));
 video.addEventListener('error',recoverFromStall);
 video.addEventListener('stalled',()=>{stalledChecks=Math.max(stalledChecks,1)});
 video.addEventListener('waiting',()=>{stalledChecks=Math.max(stalledChecks,1)});
@@ -404,7 +453,7 @@ updateClock();setInterval(updateClock,1000);setInterval(()=>{
   const url=new URL(location.href);
   url.searchParams.set('reload',Date.now().toString());
   location.replace(url.toString());
-},TV_CODE_RELOAD_MS);setTimeout(()=>{refreshScheduleNow();if(!demo())showScheduleFeature();},1200);
+},TV_CODE_RELOAD_MS);setTimeout(()=>{refreshScheduleNow();if(!demo()){video.pause();showScheduleFeature();}},1200);
 })();
 </script>
 </body>

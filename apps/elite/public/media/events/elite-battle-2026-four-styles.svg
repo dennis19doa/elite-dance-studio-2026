@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 875" role="img" aria-labelledby="title desc">
 <title id="title">Elite Dance Battle 2026 — vier Kategorien, freier Eintritt für Zuschauer</title>
-<desc id="desc">Breaking Kids, Breaking, Hip-Hop, House. 5 Dezember 2026 in Berlin-Moabit. Battles 12 bis 19 Uhr. Zuschauen kostenlos, Spenden freiwillig; optionaler USC-Check-in.</desc>
+<desc id="desc">Breaking Kids, Breaking Adults, House und Hip-Hop am 5. Dezember 2026 von 11 bis 19 Uhr in Berlin-Moabit. Zuschauen kostenlos, Spenden freiwillig und USC-Check-in optional.</desc>
 <defs>
 <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0b0d13"/><stop offset=".47" stop-color="#1b1420"/><stop offset="1" stop-color="#07090e"/></linearGradient>
 <radialGradient id="redGlow" cx=".46" cy=".24" r=".67"><stop stop-color="#ad252b" stop-opacity=".4"/><stop offset="1" stop-color="#ad252b" stop-opacity="0"/></radialGradient>
@@ -25,12 +25,12 @@
 <text x="40" y="310" fill="#e85155" font-family="Arial Black,Arial,Helvetica,sans-serif" font-size="138" font-style="italic" font-weight="900" letter-spacing="-13">BATTLE</text>
 <text x="351" y="393" text-anchor="middle" fill="#f2eee9" font-family="Arial Black,Arial,sans-serif" font-size="69" font-style="italic" font-weight="900" letter-spacing="9">2026</text>
 <path d="M55 411H645" stroke="url(#line)" stroke-width="6"/>
-<text x="55" y="454" fill="#d4c8bd" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="900" letter-spacing="3">4 KATEGORIEN · 1 EVENT · 12–19 UHR</text>
+<text x="55" y="454" fill="#d4c8bd" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="900" letter-spacing="3">4 KATEGORIEN · 11–19 UHR</text>
 <g font-family="Arial Black,Arial,Helvetica,sans-serif" font-weight="900">
 <rect x="50" y="477" width="293" height="86" rx="4" fill="#272427" stroke="#d4b175" stroke-width="2"/><rect x="50" y="477" width="7" height="86" fill="#d4b175"/><text x="69" y="529" fill="#e9d3aa" font-size="30" font-style="italic">BREAKING KIDS</text><text x="69" y="549" fill="#bcb3ad" font-family="Arial" font-size="11" letter-spacing="3">KIDS BATTLE</text>
-<rect x="357" y="477" width="293" height="86" rx="4" fill="#282024" stroke="#e6765d" stroke-width="2"/><rect x="357" y="477" width="7" height="86" fill="#e6765d"/><text x="375" y="538" fill="#ffb19d" font-size="34" font-style="italic">BREAKING</text>
-<rect x="50" y="577" width="293" height="86" rx="4" fill="#20262d" stroke="#70b4d3" stroke-width="2"/><rect x="50" y="577" width="7" height="86" fill="#70b4d3"/><text x="69" y="638" fill="#a2d7ef" font-size="37" font-style="italic">HIP-HOP</text>
-<rect x="357" y="577" width="293" height="86" rx="4" fill="#262231" stroke="#b996d9" stroke-width="2"/><rect x="357" y="577" width="7" height="86" fill="#b996d9"/><text x="376" y="638" fill="#d4b9eb" font-size="37" font-style="italic">HOUSE</text>
+<rect x="357" y="477" width="293" height="86" rx="4" fill="#282024" stroke="#e6765d" stroke-width="2"/><rect x="357" y="477" width="7" height="86" fill="#e6765d"/><text x="375" y="531" fill="#ffb19d" font-size="25" font-style="italic">BREAKING ADULTS</text>
+<rect x="50" y="577" width="293" height="86" rx="4" fill="#262231" stroke="#b996d9" stroke-width="2"/><rect x="50" y="577" width="7" height="86" fill="#b996d9"/><text x="69" y="638" fill="#d4b9eb" font-size="37" font-style="italic">HOUSE</text>
+<rect x="357" y="577" width="293" height="86" rx="4" fill="#20262d" stroke="#70b4d3" stroke-width="2"/><rect x="357" y="577" width="7" height="86" fill="#70b4d3"/><text x="376" y="638" fill="#a2d7ef" font-size="37" font-style="italic">HIP-HOP</text>
 </g>
 <rect x="50" y="678" width="600" height="75" rx="4" fill="#eee8dd"/>
 <text x="67" y="707" fill="#28252b" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="900" letter-spacing="2">ZUSCHAUEN KOSTENLOS</text>

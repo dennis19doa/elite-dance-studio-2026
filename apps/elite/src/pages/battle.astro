@@ -3,9 +3,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import site from "../data/site.json";
+import { battle } from "../data/battle";
 
-const eversportsBookingUrl = "https://www.eversports.de/org/activity/946397ed-f7ae-4ea1-8ee1-2e985945d6f1";
-const uscBookingUrl = "https://urbansportsclub.com/de/venues/elite-dance-studio-1"; // Replace with direct event class link if available
+const { categoryNames, eversportsBookingUrl, uscBookingUrl } = battle;
+const categoryList = Object.values(categoryNames).join(" · ");
 const battleBase = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
 const battlePosterSrc = (filename: string) => battleBase + "media/style-posters/" + filename;
 const heroBreaking = battlePosterSrc("05-breaking.webp");
@@ -13,16 +14,16 @@ const heroHouse = battlePosterSrc("03-house-beginner.webp");
 const battlePoster = battleBase + "media/events/elite-battle-2026-four-styles.svg";
 
 const categories = [
-  { key: "breaking-kids", number: "01", name: "Breaking Kids", motif: "KIDS", label: "Kinder-Battle", image: "", className: "battle-category battle-category-kids", prize: "Kinderpreise folgen" },
-  { key: "breaking", number: "02", name: "Breaking", motif: "BREAKING", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking", prize: "100€ Preisgeld*" },
-  { key: "hip-hop", number: "03", name: "Hip-Hop", motif: "HIP-HOP", label: "Groove · Musicality", image: "", className: "battle-category battle-category-hiphop", prize: "100€ Preisgeld*" },
-  { key: "house", number: "04", name: "House", motif: "HOUSE", label: "Rhythm · Footwork", image: "03-house-beginner.webp", className: "battle-category battle-category-house", prize: "100€ Preisgeld*" },
-].map((item) => ({ ...item, posterSrc: item.image ? battlePosterSrc(item.image) : "" }));
+  { key: "breaking-kids", motif: "KIDS", label: "Kinder-Battle", image: "", className: "battle-category battle-category-kids", prize: "Kinderpreise" },
+  { key: "breaking", motif: "BREAKING", label: "Toprock · Footwork", image: "05-breaking.webp", className: "battle-category battle-category-breaking", prize: "100 € + Medaille" },
+  { key: "house", motif: "HOUSE", label: "Rhythm · Footwork", image: "03-house-beginner.webp", className: "battle-category battle-category-house", prize: "100 € + Medaille" },
+  { key: "hip-hop", motif: "HIP-HOP", label: "Groove · Musicality", image: "", className: "battle-category battle-category-hiphop", prize: "100 € + Medaille" },
+] as const;
 ---
 
 <BaseLayout
-  title="Elite Dance Battle 2026 | Breaking Kids, Breaking, Hip-Hop & House"
-  description="Elite Dance Battle am 5. Dezember 2026 in Berlin-Moabit: Breaking Kids, Breaking, Hip-Hop und House. Zuschauen kostenlos, freiwillige Unterstützung möglich."
+  title="Elite Dance Battle 2026 | Breaking Kids, Breaking Adults, House & Hip-Hop"
+  description={`Elite Dance Battle am 5. Dezember 2026, ${battle.hours} Uhr in Berlin-Moabit. ${categoryList}. Zuschauen kostenlos, Battle-Teilnahme ${battle.onlineFee} online, ${battle.doorFee} vor Ort oder Urban Sports Club.`}
   bodyClass="elite-battle-page"
   noindex={false}
 >
@@ -39,14 +40,13 @@ const categories = [
         </div>
         <div class="battle-hero-body">
           <div class="battle-hero-copy">
-            <p class="battle-eyebrow">4 Kategorien · 12:00–19:00</p>
+            <p class="battle-eyebrow">Sa. 05.12.2026 · {battle.hours} Uhr</p>
             <h1 id="battle-title"><span>ELITE</span><span class="battle-title-outline">DANCE</span><span>BATTLE<span class="battle-title-star">*</span></span></h1>
-            <p class="battle-hero-lead">Breaking Kids · Breaking · Hip-Hop · House</p>
-            <p class="battle-hero-description">Vier Kategorien von 12:00 bis 19:00 Uhr, gemeinsame Jury und ein Überraschungsfinale.</p>
-            <a class="battle-spectator-hero-note" href="#spectators"><strong>ZUSCHAUEN KOSTENLOS</strong><span>Spenden freiwillig · USC-Check-in optional ↗</span></a>
+            <p class="battle-hero-lead">{categoryList}</p>
+            <a class="battle-spectator-hero-note" href="#spectators"><strong>ZUSCHAUEN KOSTENLOS</strong><span>Auch die Jam Session ist frei zugänglich ↗</span></a>
             <div class="battle-hero-actions">
-              <a class="battle-button battle-button-primary" href="#battle-registration">Jetzt anmelden <span aria-hidden="true">↘</span></a>
-              <a class="battle-button battle-button-ghost" href="#how-it-works">Anmeldung <span aria-hidden="true">↗</span></a>
+              <a class="battle-button battle-button-primary" href="#battle-registration">Für Battles anmelden <span aria-hidden="true">↘</span></a>
+              <a class="battle-button battle-button-ghost" href="#battle-schedule">Tagesprogramm <span aria-hidden="true">↗</span></a>
             </div>
           </div>
           <aside class="battle-hero-stamp" aria-label="Event-Details">
@@ -67,29 +67,29 @@ const categories = [
           </div>
         </div>
         <div class="battle-hero-stats">
-          <div><strong>04</strong><span>Battle-Kategorien</span></div>
-          <div><strong>12–19</strong><span>Uhr · Samstag</span></div>
-          <div><strong>100<span>€</span></strong><span>Preisgeld · offene Kategorien*</span></div>
+          <div><strong>{battle.onlineFee}</strong><span>Battle-Teilnahme online</span></div>
+          <div><strong>{battle.doorFee}</strong><span>Battle-Teilnahme vor Ort</span></div>
+          <div><strong>100<span>€</span></strong><span>+ Medaille · Breaking Adults, House, Hip-Hop</span></div>
           <div class="battle-stats-tail">SPONSOR GOODIE BAGS <span aria-hidden="true">↗</span></div>
         </div>
       </div>
     </section>
 
     <div class="battle-ticker" aria-hidden="true">
-      <div>BREAKING KIDS ✳ BREAKING ✳ HIP-HOP ✳ HOUSE ✳ 05.12.2026 ✳ ZUSCHAUEN KOSTENLOS ✳</div>
-      <div>BREAKING KIDS ✳ BREAKING ✳ HIP-HOP ✳ HOUSE ✳ 05.12.2026 ✳ ZUSCHAUEN KOSTENLOS ✳</div>
+      <div>{Object.values(categoryNames).join(" ✳ ").toUpperCase()} ✳ 05.12.2026 ✳ ZUSCHAUEN KOSTENLOS ✳</div>
+      <div>{Object.values(categoryNames).join(" ✳ ").toUpperCase()} ✳ 05.12.2026 ✳ ZUSCHAUEN KOSTENLOS ✳</div>
     </div>
 
-<section class="battle-poster-showcase" id="poster" aria-labelledby="poster-heading">
+    <section class="battle-poster-showcase" id="poster" aria-labelledby="poster-heading">
       <div class="battle-container battle-poster-layout">
         <div class="battle-poster-copy">
           <p class="battle-section-label">05. Dezember 2026 · Berlin-Moabit</p>
           <h2 id="poster-heading">DAS EVENT <em>IM ÜBERBLICK.</em></h2>
-          <p>Vier Kategorien, eine gemeinsame Jury und ein Überraschungsfinale. Zuschauer:innen und Besucher:innen der Jam Session sind kostenlos willkommen.</p>
+          <p>Vier Battles und ein Überraschungsfinale im Elite Dance Studio. Im zweiten Raum läuft die kostenlose Jam Session.</p>
           <div class="battle-poster-facts">
-            <div><span>ZEIT</span><strong>12:00–19:00 Uhr</strong></div>
-            <div><span>KATEGORIEN</span><strong>Breaking Kids · Breaking · Hip-Hop · House</strong></div>
-            <div><span>ZUSCHAUEN</span><strong>Kostenlos · Keine Spende oder USC-Check-in notwendig</strong></div>
+            <div><span>ZEIT</span><strong>{battle.hours} Uhr</strong></div>
+            <div><span>BATTLE-TEILNAHME</span><strong>{battle.onlineFee} online · {battle.doorFee} vor Ort · Urban Sports Club</strong></div>
+            <div><span>ZUSCHAUEN</span><strong>Kostenlos · Spenden freiwillig</strong></div>
           </div>
           <div class="battle-poster-actions">
             <a class="battle-button battle-button-primary" href="#battle-registration">Zur Anmeldung <span aria-hidden="true">↗</span></a>
@@ -97,7 +97,7 @@ const categories = [
           </div>
         </div>
         <figure class="battle-poster-art">
-          <img src={battlePoster} width="700" height="875" loading="eager" decoding="async" alt="Elite Dance Battle 2026: Breaking Kids, Breaking, Hip-Hop und House. Zuschauer kostenlos, Spenden freiwillig." />
+          <img src={battlePoster} width="700" height="875" loading="eager" decoding="async" alt={`Elite Dance Battle 2026 · ${categoryList} · Zuschauen kostenlos`} />
           <figcaption>Elite Dance Battle 2026 · Eventübersicht</figcaption>
         </figure>
       </div>
@@ -105,28 +105,29 @@ const categories = [
 
     <section class="battle-choose-section battle-container" id="choose-your-style" aria-labelledby="choose-heading">
       <div class="battle-section-heading">
-        <div><p class="battle-section-label">01 / Kategorien</p><h2 id="choose-heading">VIER <em>KATEGORIEN.</em></h2></div>
-        <p>Breaking Kids, Breaking, Hip-Hop und House. Mit einem Eventticket kannst du an mehreren Kategorien teilnehmen.</p>
+        <div><h2 id="choose-heading">BATTLE-<em>KATEGORIEN.</em></h2></div>
+        <p>Wähle die Kategorien, in denen du antreten möchtest. Eine Anmeldung reicht auch für mehrere Battles.</p>
       </div>
       <div class="battle-category-grid" role="group" aria-label="Battle-Kategorien auswählen, mehrere möglich">
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <button
             type="button"
             class={category.className}
             data-select-style={category.key}
+            data-style-name={categoryNames[category.key]}
             aria-pressed="false"
             aria-controls="battle-entries"
           >
-            <span class="battle-category-top"><span>EDB / {category.number}</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
+            <span class="battle-category-top"><span aria-hidden="true">EDB / 0{index + 1}</span><span class="battle-select-indicator" aria-hidden="true">↗</span></span>
             {category.image ? (
-              <img class="battle-category-photo" src={category.posterSrc} alt="" loading="lazy" decoding="async" />
+              <img class="battle-category-photo" src={battlePosterSrc(category.image)} alt="" loading="lazy" decoding="async" />
             ) : (
               <span class={category.key === "hip-hop" ? "battle-category-hiphop-graphic" : "battle-category-kids-graphic"} aria-hidden="true">{category.key === "hip-hop" ? "HIP-HOP" : "EDB / 05.12"}</span>
             )}
             <span class="battle-category-photo-wash" aria-hidden="true"></span>
             <span class="battle-category-art" aria-hidden="true"><span>{category.motif}</span></span>
             <span class="battle-category-lower">
-              <span class="battle-category-name">{category.name}</span>
+              <span class="battle-category-name">{categoryNames[category.key]}</span>
               <span class="battle-category-traits">{category.label}</span>
             </span>
             <span class="battle-category-footer"><span class="battle-prize-mini">{category.prize}</span><span class="battle-select-text">Merken +</span></span>
@@ -138,40 +139,17 @@ const categories = [
         <strong data-battle-selected-name>Mehrere Kategorien möglich</strong>
         <a href="#battle-entries" data-battle-next>Teilnahme angeben <span aria-hidden="true">↗</span></a>
       </div>
-      <p class="battle-choose-footnote">* Je 100€ Preisgeld in den vier offenen Kategorien. Für Breaking Kids sind separate Kinderpreise geplant. Details folgen.</p>
     </section>
 
-<section class="battle-format-section battle-container" id="battle-format" aria-labelledby="format-heading">
-      <div class="battle-format-heading">
-        <div>
-          <p class="battle-section-label">02 / Event-Infos</p>
-          <h2 id="format-heading">VIER KATEGORIEN. <em>EIN EVENT.</em></h2>
-        </div>
-        <p>Battles am Nachmittag, eine gemeinsame Jury und ein besonderes Finale zum Abschluss.</p>
-      </div>
-      <div class="battle-overview-grid">
-        <div class="battle-overview-card"><span>12:00–19:00</span><strong>Battle Day</strong><small>Vier Kategorien verteilt über den Tag</small></div>
-        <div class="battle-overview-card"><span>4 KATEGORIEN</span><strong>Breaking Kids, Breaking, Hip-Hop &amp; House</strong><small>Ein Ticket für das ganze Event</small></div>
-        <div class="battle-overview-card"><span>JURY</span><strong>Alle Judges bewerten alle Kategorien</strong><small>Gemeinsames Judging während des gesamten Events</small></div>
-        <div class="battle-overview-card"><span>FINALE</span><strong>Surprise Final Battle</strong><small>Besonderes Finale mit den Kategoriesieger:innen</small></div>
-      </div>
-      <p class="battle-bracket-note">Zusätzlich gibt es eine kostenlose Jam Session im zweiten Raum und Essen vor Ort. Zuschauer:innen müssen weder buchen noch spenden.</p>
-    </section>
-
-<section class="battle-spectators" id="spectators" aria-labelledby="spectator-heading">
+    <section class="battle-spectators" id="spectators" aria-labelledby="spectator-heading">
       <div class="battle-container battle-spectators-layout">
         <div class="battle-spectator-free">
-          <p class="battle-section-label">Besucher:innen &amp; Community</p>
-          <div class="battle-free-overline">KEIN TICKET NÖTIG</div>
-          <h2 id="spectator-heading">ZUSCHAUEN IST <em>KOSTENLOS.</em></h2>
-          <p>Du kannst einfach vorbeikommen, Battles anschauen oder bei der kostenlosen Jam Session im zweiten Raum mitmachen. <strong>Kein Eintritt, keine Anmeldung und keine Spende erforderlich.</strong></p>
-          <div class="battle-free-highlights"><span>Eintritt: 0€</span><span>Jam kostenlos</span><span>Spende freiwillig</span></div>
+          <h2 id="spectator-heading">FREIER <em>EINTRITT.</em></h2>
+          <p>Zum Zuschauen und für die Jam Session im zweiten Raum kannst du einfach vorbeikommen. Beides ist kostenlos und ohne Anmeldung möglich.</p>
         </div>
         <div class="battle-donation-card">
-          <p class="battle-section-label">Freiwillige Unterstützung</p>
-          <h3>Du möchtest das Event unterstützen?</h3>
-          <p>Du kannst am Veranstaltungstag freiwillig etwas spenden. Wenn du Urban Sports Club nutzt, kannst du uns alternativ durch einen <strong>freiwilligen USC-Check-in</strong> unterstützen, sofern du am Event bzw. der Jam Session teilnimmst und die Buchung in deiner USC-App verfügbar ist.</p>
-          <p class="battle-donation-disclaimer">Das ist komplett optional. Du kannst ohne Spende oder USC-Check-in kostenlos zuschauen. Pro Tag ist nur ein USC-Check-in am selben Standort möglich – wer bereits eingecheckt hat, braucht keinen zweiten.</p>
+          <h3>Freiwillige Unterstützung</h3>
+          <p>Du kannst vor Ort spenden oder das Event durch einen freiwilligen Urban Sports Club Check-in unterstützen, wenn die Buchung in deiner App verfügbar ist. Ein Check-in pro Tag im Studio genügt.</p>
           <a href={uscBookingUrl} target="_blank" rel="noopener noreferrer">Elite Dance Studio bei USC ansehen <span aria-hidden="true">↗</span></a>
         </div>
       </div>
@@ -180,34 +158,27 @@ const categories = [
     <section class="battle-register-section" id="battle-registration" aria-labelledby="register-heading">
   <div class="battle-container battle-register-grid">
     <div class="battle-register-intro">
-      <p class="battle-section-label">03 / Anmeldung</p>
-      <h2 id="register-heading">EIN TICKET.<br /><em>ALLE BATTLES.</em></h2>
-      <p>Wer bei den Battles antreten möchte, meldet sich einmal für den Tag an. Das Ticket gilt für Breaking Kids, Breaking, Hip-Hop und House. <strong>Zuschauen ist ohne Ticket kostenlos.</strong></p>
+      <h2 id="register-heading">ANMELDUNG<br /><em>FÜR BATTLES.</em></h2>
+      <p>Eine Anmeldung gilt für den ganzen Tag. Du kannst in mehreren Kategorien antreten.</p>
       <div class="battle-register-steps" id="how-it-works">
-        <div><span>01</span><div><strong>Nur für die Battle-Teilnahme anmelden</strong><p>€5 über Eversports oder eine passende USC-Buchung. Zuschauer:innen benötigen keine Anmeldung.</p></div></div>
-        <div><span>02</span><div><strong>Deine Kategorien angeben</strong><p>Nach der Buchung gibst du unten an, in welchen Kategorien du antrittst. Mehrfachauswahl möglich.</p></div></div>
-        <div><span>03</span><div><strong>Am 5. Dezember einchecken</strong><p>Buchungsbestätigung mitbringen; USC-Mitglieder checken zusätzlich in der App ein.</p></div></div>
-      </div>
-      <div class="battle-ticket-note">
-        <span class="battle-ticket-note-icon" aria-hidden="true">✓</span>
-        <div><strong>Battle-Teilnahme: eine Buchung für alle Kategorien</strong><p>Keine zweite Zahlung bei mehreren Battles. Zuschauer:innen und die Jam Session sind kostenlos.</p></div>
+        <div><span>01</span><div><strong>Teilnahme buchen</strong><p>Buche vorab über Eversports oder Urban Sports Club. Du kannst dich auch am Eventtag im Studio anmelden.</p></div></div>
+        <div><span>02</span><div><strong>Kategorien eintragen</strong><p>Nach der Online- oder USC-Buchung nutzt du das Formular mit deiner Buchungs-E-Mail. Bei Anmeldung vor Ort gibst du deine Kategorien im Studio an.</p></div></div>
       </div>
     </div>
     <div class="battle-register-card">
-      <div class="battle-form-heading"><span>BATTLE / 05.12.2026</span><span class="battle-form-availability">BUCHBAR</span></div>
-      <h3>Für die Battles anmelden</h3>
-      <p class="battle-form-description">Nur für Battle-Teilnehmende nötig: €5 über Eversports oder eine passende USC-Buchung. Beide Optionen gelten für den ganzen Tag.</p>
+      <h3>So kannst du teilnehmen</h3>
       <div class="battle-booking-links">
         <a class="battle-booking-link" href={eversportsBookingUrl} target="_blank" rel="noopener noreferrer">
-          <span><strong>Eversports · €5</strong><small>Ein Ticket für alle vier Battle-Kategorien</small></span><b aria-hidden="true">↗</b>
+          <span><strong>{battle.onlineFee} online</strong><small>Vorab bei Eversports buchen</small></span><b aria-hidden="true">↗</b>
         </a>
+        <div class="battle-booking-link battle-booking-link-door">
+          <span><strong>{battle.doorFee} vor Ort</strong><small>Am 5. Dezember im Studio anmelden</small></span>
+        </div>
         <a class="battle-booking-link battle-booking-link-usc" href={uscBookingUrl} target="_blank" rel="noopener noreferrer">
-          <span><strong>Urban Sports Club</strong><small>Für berechtigte USC-Mitglieder inklusive</small></span><b aria-hidden="true">↗</b>
+          <span><strong>Urban Sports Club</strong><small>Battle am 05.12. reservieren und im Studio per App einchecken</small></span><b aria-hidden="true">↗</b>
         </a>
       </div>
-      <p class="battle-price-disclaimer">Der Eversports-Button öffnet direkt die Elite Dance Battle Buchungsseite. Für USC führt der Link zunächst zum Studio-Profil – dort den Battle-Termin am 05.12.2026 auswählen.</p>
-      <p class="battle-form-hint"><strong>Bereits angemeldet?</strong> Trag unten noch deine Kategorien ein. <strong>Nur zuschauen?</strong> Dann brauchst du keine Buchung und keinen Check-in.</p>
-      <a class="battle-booking-next" href="#battle-entries">Meine Battle-Kategorien eintragen ↘</a>
+      <a class="battle-booking-next" href="#battle-entries">Schon gebucht? Kategorien eintragen <span aria-hidden="true">↘</span></a>
     </div>
   </div>
 </section>
@@ -215,10 +186,8 @@ const categories = [
 <section class="battle-entries-section" id="battle-entries" aria-labelledby="entries-heading">
   <div class="battle-container battle-entries-layout">
     <div class="battle-entries-intro">
-      <p class="battle-section-label">04 / Battle-Kategorien</p>
-      <h2 id="entries-heading">DEINE <em>BATTLES.</em></h2>
-      <p>Bereits gebucht? Hier gibst du an, in welchen Kategorien du antrittst. Mehrere Kategorien sind möglich.</p>
-      <p>Wichtig: Verwende dieselbe E-Mail-Adresse wie in deiner Eversports- oder USC-Buchung. Wir gleichen die Kategorien mit der Teilnehmerliste ab.</p>
+      <h2 id="entries-heading">KATEGORIEN <em>EINTRAGEN.</em></h2>
+      <p>Nach deiner Buchung über Eversports oder Urban Sports Club kannst du hier deine Kategorien eintragen. Verwende dafür dieselbe E-Mail-Adresse wie bei der Buchung.</p>
     </div>
     <form class="battle-entries-form" action="/api/form" method="post" data-battle-entries-form>
       <input type="hidden" name="form_kind" value="battle" />
@@ -235,7 +204,7 @@ const categories = [
           {categories.map((category) => (
             <label class={"battle-entry-checkbox battle-entry-checkbox-" + category.key}>
               <input type="checkbox" name="battle_categories" value={category.key} data-battle-entry-category={category.key} />
-              <span>{category.name}</span>
+              <span>{categoryNames[category.key]}</span>
             </label>
           ))}
         </div>
@@ -255,51 +224,39 @@ const categories = [
       <label class="battle-entry-confirm"><input type="checkbox" name="booking_confirmed" value="yes" required /> Ich habe den Battle Day bereits über Eversports oder USC gebucht. *</label>
       <label class="battle-entry-confirm"><input type="checkbox" name="privacy_consent" value="accepted" required /> Ich stimme zu, dass meine Daten zur Organisation der Battle-Teilnahme verarbeitet und mit der Buchung abgeglichen werden. *</label>
       <button class="battle-entry-send" type="submit" data-battle-entry-send>Kategorien abschicken <span aria-hidden="true">↗</span></button>
-      <p class="battle-entry-status" data-battle-entry-status role="status" aria-live="polite">Diese Meldung kostet nichts und ersetzt keine Eventbuchung.</p>
+      <p class="battle-entry-status" data-battle-entry-status role="status" aria-live="polite">Das Formular ergänzt deine vorhandene Buchung.</p>
     </form>
   </div>
 </section>
 
-    <section class="battle-prizes-section battle-container" aria-labelledby="prizes-heading">
-      <div class="battle-prizes-lead"><span class="battle-section-label">05 / Preise</span><h2 id="prizes-heading">PREISGELD &amp;<br /><em>GOODIE BAGS</em></h2></div>
-      <div class="battle-prize-block"><span class="battle-prize-overline">AKTUELLES PREISGELD / OFFENE KATEGORIEN</span><div class="battle-prize-amount">100<span>€</span></div><p>Aktuell 100€ pro Sieger:in in Breaking, Hip-Hop und House. Kinderpreise separat.</p><span class="battle-prize-future">Weitere Sponsoren möglich</span></div>
-      <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Zusätzliche Preise und Goodie Bags von unseren Sponsoren. Details folgen.</p></div>
-    </section>
-
-    <section class="battle-workshop-strip battle-community-strip" id="battle-community" aria-labelledby="community-heading">
-      <div class="battle-container battle-community-layout">
-        <div class="battle-community-title">
-          <p class="battle-section-label">Community</p>
-          <h2 id="community-heading">JAM, FOOD <em>&amp; COMMUNITY.</em></h2>
-        </div>
-        <p>Du musst nicht am Battle teilnehmen, um dabei zu sein. Der Eintritt und die Jam Session im zweiten Raum sind kostenlos. Essen gibt es vor Ort. Eine Spende ist immer freiwillig.</p>
-        <div class="battle-community-pills"><span>Jam kostenlos</span><span>Essen vor Ort</span><span>Zuschauen kostenlos</span><span>Spenden freiwillig</span></div>
+    <section class="battle-prizes-section battle-container" id="battle-prizes" aria-labelledby="prizes-heading">
+      <div class="battle-prizes-lead">
+        <h2 id="prizes-heading">PREISE &amp;<br /><em>FINALE.</em></h2>
+        <p>Zum Abschluss treten die Kategoriesieger:innen im Surprise Final Battle um einen Extrapreis an.</p>
       </div>
+      <div class="battle-prize-block"><span class="battle-prize-overline">PRO KATEGORIESIEG</span><div class="battle-prize-amount">100<span>€</span></div><strong>+ eine Medaille</strong><p>Jeweils in Breaking Adults, House und Hip-Hop.</p><span class="battle-prize-future">Eigene Preise für Breaking Kids</span></div>
+      <div class="battle-goodies-block"><span aria-hidden="true">✳</span><h3>SPONSOR<br />GOODIE BAGS</h3><p>Goodie Bags von unseren Sponsoren gibt es in allen vier Kategorien.</p></div>
     </section>
 
     <section class="battle-schedule-section" id="battle-schedule" aria-labelledby="schedule-heading">
       <div class="battle-container battle-schedule-layout">
         <div class="battle-schedule-intro">
-          <p class="battle-section-label">06 / Tagesprogramm</p>
-          <h2 id="schedule-heading">12:00 BIS 19:00 <em>UHR.</em></h2>
-          <p>Der genaue Zeitplan der einzelnen Kategorien wird noch bekannt gegeben. Der Battle Day läuft von 12:00 bis 19:00 Uhr mit einem Überraschungsfinale zum Abschluss.</p>
+          <p class="battle-section-label">Tagesprogramm · Samstag, 5. Dezember</p>
+          <h2 id="schedule-heading">{battle.hours} <em>UHR.</em></h2>
+          <p>Die Startzeiten der einzelnen Battles geben wir noch bekannt.</p>
           <div class="battle-schedule-rooms">
             <div><span>RAUM 01</span><strong>Battles · Finale · Siegerehrung</strong></div>
-            <div><span>RAUM 02</span><strong>Kostenlose Jam Session</strong></div>
-            <div><span>ESSEN</span><strong>Food-Bereich vor Ort</strong></div>
+            <div><span>RAUM 02</span><strong>Kostenlose Jam Session den ganzen Tag</strong></div>
+            <div><span>IM STUDIO</span><strong>Essen vor Ort und Musik den ganzen Tag</strong></div>
           </div>
           <a class="battle-schedule-instagram" href="https://www.instagram.com/elitedanceberlin/" target="_blank" rel="noopener noreferrer">Updates auf Instagram ↗</a>
         </div>
         <div class="battle-lineup-card battle-general-timetable">
           <div class="battle-lineup-top"><span>SA / 05 DEZ 2026</span><span>PROGRAMMÜBERSICHT</span></div>
-          <div class="battle-lineup-item"><span>12:00</span><strong>Start des Battle Days</strong><small>Einlass &amp; Battles</small></div>
-          <div class="battle-lineup-item"><span>AB 12:00</span><strong>Vier Battle-Kategorien</strong><small>Breaking Kids · Breaking · Hip-Hop · House</small></div>
-          <div class="battle-lineup-item"><span>ALLE RUNDEN</span><strong>Gemeinsame Jury</strong><small>Alle Judges bewerten alle Kategorien</small></div>
-          <div class="battle-lineup-item"><span>DEN GANZEN TAG</span><strong>Kostenlose Jam Session</strong><small>Im zweiten Raum</small></div>
-          <div class="battle-lineup-item"><span>DEN GANZEN TAG</span><strong>Food &amp; Community</strong><small>Essen vor Ort · Zuschauen kostenlos</small></div>
-          <div class="battle-lineup-item battle-lineup-item-special"><span>ZUM ABSCHLUSS</span><strong>Surprise Final Battle</strong><small>Mit den Kategoriesieger:innen</small></div>
-          <div class="battle-lineup-item battle-lineup-item-special"><span>BIS 19:00</span><strong>Abschluss</strong><small>Siegerehrung &amp; Community</small></div>
-          <div class="battle-lineup-foot">KONKRETE STARTZEITEN DER KATEGORIEN FOLGEN <span aria-hidden="true">↗</span></div>
+          <div class="battle-lineup-item"><span>{battle.startsAt}</span><strong>Start des Battle Days</strong></div>
+          <div class="battle-lineup-item"><span>IM TAGESVERLAUF</span><strong>Vier Battles mit gemeinsamer Jury</strong><small>{categoryList}</small></div>
+          <div class="battle-lineup-item battle-lineup-item-special"><span>ZUM ABSCHLUSS</span><strong>Surprise Final Battle</strong><small>Battle der Kategoriesieger:innen um einen Extrapreis</small></div>
+          <div class="battle-lineup-item"><span>BIS {battle.endsAt}</span><strong>Siegerehrung &amp; Ausklang</strong></div>
         </div>
       </div>
     </section>
@@ -316,7 +273,7 @@ const categories = [
     const inputs = Array.from(document.querySelectorAll("[data-battle-entry-category]"));
     const deckLabel = document.querySelector("[data-battle-selected-name]");
     const deck = document.querySelector(".battle-selection-deck");
-    const names = { "breaking-kids": "Breaking Kids", breaking: "Breaking", "hip-hop": "Hip-Hop", house: "House" };
+    const names = Object.fromEntries(cards.map((card) => [card.dataset.selectStyle, card.dataset.styleName]));
     const chosen = new Set();
     const guardianBlock = document.querySelector("[data-kids-consent]");
     const guardianInput = document.querySelector("[data-guardian-consent]");
@@ -410,6 +367,7 @@ const categories = [
 
 <style>
   .battle-main { font-family: "Inter",sans-serif; --acid:#d8fa53; --ink:#0c0d10; --cream:#f5f2ec; background: var(--ink); color: var(--cream); overflow: clip; }
+  .battle-main section[id] { scroll-margin-top:95px; }
   .battle-container { width: min(calc(100% - 48px), 1180px); margin: 0 auto; }
   .battle-main h1,.battle-main h2,.battle-main h3,.battle-category-name { font-family: "Sora","Inter",sans-serif; }
   .battle-main em { font-style: normal; color: var(--acid); }
@@ -429,7 +387,6 @@ const categories = [
   .battle-title-outline { color:transparent; -webkit-text-stroke: 2px var(--cream); }
   .battle-title-star { color:var(--acid); font-size:.55em; vertical-align:top; -webkit-text-stroke:0; margin-left:6px; }
   .battle-hero-lead { font-family:"Sora",sans-serif; font-size:clamp(1.05rem,2vw,1.4rem); font-weight:800; letter-spacing:-.03em; }
-  .battle-hero-description { max-width:600px; color:#acacb0; line-height:1.7; margin-top:14px; font-size:.95rem; }
   .battle-hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }
   .battle-button { display:inline-flex; align-items:center; justify-content:space-between; gap:36px; min-height:52px; padding:0 22px; text-decoration:none; font-size:.85rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; transition:transform .18s ease,background .18s ease; }
   .battle-button:hover { transform:translateY(-3px); }
@@ -474,7 +431,6 @@ const categories = [
   .battle-category-footer { display:flex; justify-content:space-between; align-items:end; gap:9px; border-top:1px solid rgba(255,255,255,.22); margin-top:15px; padding-top:15px; color:#c9c9cc; font-size:.66rem; line-height:1.5; }
   .battle-category-footer strong { color:var(--card-accent); font-family:"Sora",sans-serif; font-size:1.35rem; letter-spacing:-.04em; }
   .battle-select-text { color:var(--card-accent); font-weight:800; text-align:right; }
-  .battle-choose-footnote { color:#aaaab0; font-size:.77rem; margin-top:23px; line-height:1.6; }
   .battle-register-section { background:#17191d; border-block:1px solid rgba(255,255,255,.1); }
   .battle-register-grid { display:grid; grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr); align-items:start; gap:clamp(36px,6vw,92px); padding:104px 0; }
   .battle-register-intro > p:not(.battle-section-label) { max-width:390px; color:#bebdc2; line-height:1.7; }
@@ -483,15 +439,8 @@ const categories = [
   .battle-register-steps > div > span { color:var(--acid); font-size:1rem; font-weight:900; }
   .battle-register-steps strong { font-size:.95rem; }
   .battle-register-steps p { color:#adadb3; font-size:.81rem; line-height:1.6; margin:6px 0 0; }
-  .battle-ticket-note { display:flex; gap:17px; margin-top:35px; padding:20px; background:rgba(216,250,83,.075); border-left:3px solid var(--acid); }
-  .battle-ticket-note-icon { font-family:"Sora",sans-serif; font-size:2.2rem; font-weight:800; color:var(--acid); }
-  .battle-ticket-note strong { display:block; }
-  .battle-ticket-note p { margin:7px 0 0; color:#bcbeb7; font-size:.83rem; line-height:1.6; }
   .battle-register-card { padding:clamp(22px,3.5vw,42px); background:var(--cream); color:#151619; box-shadow:18px 20px 0 rgba(216,250,83,.1); }
-  .battle-form-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:.64rem; font-weight:900; letter-spacing:.1em; }
-  .battle-form-availability { color:#606164; text-align:right; }
   .battle-register-card h3 { font-size:clamp(1.55rem,3vw,2.2rem); letter-spacing:-.045em; line-height:1.12; margin:20px 0 10px; }
-  .battle-form-description { color:#656567; font-size:.84rem; line-height:1.65; margin:0 0 25px; }
   .battle-selected-style { display:flex; align-items:center; justify-content:space-between; gap:16px; margin:0 0 20px; padding:14px; background:#e5e8dc; border-left:4px solid #202226; }
   .battle-selected-style span { color:#555957; font-size:.66rem; font-weight:900; letter-spacing:.1em; }
   .battle-selected-style strong { font-size:.87rem; }
@@ -513,7 +462,6 @@ const categories = [
   .battle-consent input { width:16px; height:16px; flex:0 0 auto; margin-top:2px; accent-color:#272a23; }
   .battle-submit { display:flex; justify-content:space-between; align-items:center; width:100%; margin-top:21px; padding:15px 20px; border:0; border-radius:0; background:#d8fa53; color:#131717; font:800 .84rem "Inter",sans-serif; text-transform:uppercase; letter-spacing:.04em; cursor:pointer; }
   .battle-submit:disabled { opacity:.48; cursor:not-allowed; }
-  .battle-form-hint { font-size:.68rem; color:#777; line-height:1.6; margin:14px 0 0; }
   .battle-form-status { padding:12px; background:#fff1da; color:#4a2920; font-size:.79rem; line-height:1.5; }
   .battle-success { padding:23px; background:#e1f4a8; }
   .battle-success > span { font-size:.67rem; font-weight:900; letter-spacing:.14em; }
@@ -534,11 +482,6 @@ const categories = [
   .battle-goodies-block > span { color:var(--acid); font-size:2.8rem; line-height:1; }
   .battle-goodies-block h3 { margin:28px 0 12px; font-size:1.8rem; line-height:1.05; letter-spacing:-.05em; }
   .battle-goodies-block p { margin-top:auto; font-size:.8rem; color:#bdbdc0; line-height:1.7; }
-  .battle-workshop-strip { border-top:1px solid rgba(255,255,255,.17); background:linear-gradient(115deg,#252729,#15171a); }
-  .battle-workshop-inner { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; padding:54px 0; }
-  .battle-workshop-inner h2 { margin:13px 0 0; font-size:clamp(2rem,3.6vw,3.6rem); line-height:1.02; letter-spacing:-.065em; }
-  .battle-workshop-inner p { max-width:500px; color:#c1c1c3; font-size:.9rem; line-height:1.7; }
-  .battle-workshop-inner > div:last-child > span { display:block; margin-top:18px; color:var(--acid); font-size:.7rem; font-weight:900; letter-spacing:.08em; }
   .battle-schedule-section { background:#e7e6df; color:#17191c; }
   .battle-schedule-layout { display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,8vw,110px); align-items:center; padding:100px 0; }
   .battle-schedule-layout .battle-section-label { color:#4a5520; }
@@ -577,7 +520,6 @@ const categories = [
   .battle-hero h1 { font-size:clamp(4.4rem,9vw,10rem); line-height:.84; letter-spacing:-.095em; position:relative; z-index:2; }
   .battle-hero h1 > span:nth-child(3) { display:flex; align-items:flex-start; }
   .battle-hero-lead { font-size:clamp(1.1rem,2vw,1.65rem); }
-  .battle-hero-description { max-width:500px; color:#aaa8a7; }
   .battle-hero-stamp { display:none; }
   .battle-arena-visual { position:relative; width:100%; max-width:500px; aspect-ratio: .85; transform:rotate(2.5deg); isolation:isolate; margin:0 0 12px auto; box-shadow:0 28px 80px rgba(0,0,0,.5); }
   .battle-arena-visual::before { content:""; position:absolute; inset:-11px; border:1px solid #e1fa5077; z-index:-1; transform:translate(12px,12px); }
@@ -709,12 +651,7 @@ const categories = [
   .battle-register-steps,.battle-register-steps>div { border-color:#b19a98; }
   .battle-register-steps>div>span { color:#a4363c; }
   .battle-register-steps p { color:#685a5e; }
-  .battle-ticket-note { background:#f1d9d6;border-color:#c14b4d;color:#251317; }
-  .battle-ticket-note-icon { color:#b34047; }
-  .battle-ticket-note p { color:#6e4f53; }
   .battle-register-card { background:#191217;color:#fff8f4;box-shadow:14px 14px 0 #b94d4c44; }
-  .battle-form-availability { color:#dc8d8d; }
-  .battle-form-description { color:#b5a4a8; }
   .battle-selected-style { background:#332029;border-color:#e35b60;color:#fff5f0; }
   .battle-selected-style span { color:#bc959c; }
   .battle-booking-options { display:grid;gap:11px; }
@@ -725,15 +662,12 @@ const categories = [
   .battle-booking-option small { margin-top:3px;color:#c3afb2;font-size:.72rem;line-height:1.4; }
   .battle-booking-option b { font:800 2rem/1 "Sora",sans-serif;white-space:nowrap;color:#f37d78; }
   .battle-booking-option .battle-usc-state { font:800 .72rem/1.3 "Inter",sans-serif;color:#d6b0b3; }
-  .battle-price-disclaimer { margin:15px 0 0;color:#c6acb0;font-size:.74rem;line-height:1.6; }
   .battle-register-card .battle-submit { color:#ffe9e6;background:#84363d;opacity:1;cursor:not-allowed; }
   .battle-register-card .battle-submit:disabled { opacity:.85; }
-  .battle-register-card .battle-form-hint { color:#a99499; }
   .battle-prize-block { background:#d54b4b;color:#fff; }
   .battle-prize-amount { color:#fff; }
   .battle-prize-future { border-color:#f2b2b2; }
   .battle-goodies-block>span { color:#ef8889; }
-  .battle-workshop-strip { background:linear-gradient(125deg,#2e1b25,#1b151c); }
   .battle-schedule-section { background:#eee4df;color:#211718; }
   .battle-schedule-layout .battle-section-label { color:#a7363a; }
   .battle-schedule-layout h2 em { color:#b8454b; }
@@ -771,8 +705,6 @@ const categories = [
   .battle-booking-link-usc small { color:#dce3e1; }
   .battle-booking-link>b { flex:none;font-size:1.5rem; }
   .battle-booking-next { display:block;margin-top:18px;padding:14px 0;border-top:1px solid #91464e;color:#f4a1a1;text-decoration:none;font-size:.82rem;font-weight:800; }
-  .battle-register-card .battle-price-disclaimer { font-size:.75rem;line-height:1.6;color:#caafb5; }
-  .battle-register-card .battle-form-hint { font-size:.75rem;line-height:1.6;color:#d2bbc0; }
   .battle-entries-section { background:#161015;color:#fff2eb;padding:90px 0 105px; }
   .battle-entries-layout { display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(30px,5vw,76px); }
   .battle-entries-intro h2 { font:900 clamp(2.7rem,5vw,5.8rem)/.95 "Sora","Inter",sans-serif;letter-spacing:-.075em;margin:16px 0 28px; }
@@ -818,7 +750,6 @@ const categories = [
   .battle-hero h1>span:last-child { color:#eae6e0; }
   .battle-hero .battle-title-star { color:#b49a84; }
   .battle-hero .battle-hero-lead { color:#e6e0d8;font-size:clamp(.98rem,1.65vw,1.2rem);letter-spacing:0; }
-  .battle-hero .battle-hero-description { color:#b6b4b1;max-width:520px; }
   .battle-section-label,.battle-eyebrow { color:#baa18f;letter-spacing:.14em; }
   .battle-hero-stats { border-color:#988275; }
   .battle-hero-stats strong span { color:#bc9385; }
@@ -873,24 +804,6 @@ const categories = [
   .battle-selection-deck .battle-selection-indicator span { color:#b8a292; }
   .battle-selection-deck>a { background:#c2a18d;color:#1f1d1e; }
   .battle-selection-deck>a:hover { background:#d5bca9; }
-  .battle-format-section { padding-block:92px 105px;border-top:1px solid #38393c; }
-  .battle-format-heading { display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:35px; }
-  .battle-format-heading h2 { font:850 clamp(2.4rem,4.5vw,5.1rem)/.98 "Sora","Inter",sans-serif;letter-spacing:-.075em;margin:15px 0 0; }
-  .battle-format-heading em { color:#c3a793;font-style:normal; }
-  .battle-format-heading>p { max-width:370px;font-size:.9rem;color:#b7b0aa;line-height:1.6;margin:0; }
-  .battle-bracket { display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr) 22px minmax(0,1.25fr) 22px minmax(0,1fr);align-items:center;gap:10px; }
-  .battle-bracket-stage { min-width:0; }
-  .battle-bracket-number { display:block;font-size:.62rem;color:#a99a8d;letter-spacing:.13em;font-weight:850;margin-bottom:9px; }
-  .battle-bracket-node { display:flex;flex-direction:column;justify-content:center;gap:4px;min-height:78px;padding:17px;background:#242629;border:1px solid #535052;color:#eae5de;position:relative; }
-  .battle-bracket-node::after { content:"";position:absolute;left:-1px;top:0;bottom:0;width:2px;background:#9b8878; }
-  .battle-bracket-node strong { font-size:clamp(.9rem,1.15vw,1.08rem); }
-  .battle-bracket-node small { font-size:.7rem;color:#b5aca3; }
-  .battle-bracket-split { display:grid;gap:10px; }
-  .battle-bracket-split .battle-bracket-node { min-height:56px; }
-  .battle-bracket-node-final { border-color:#aa8e7b;background:#342e2b; }
-  .battle-bracket-node-final::after { background:#c9a78e; }
-  .battle-bracket-arrow { text-align:center;color:#a28d80;font-size:1.6rem; }
-  .battle-bracket-note { margin:22px 0 0;font-size:.8rem;line-height:1.65;color:#9b9894; }
   .battle-register-section { background:#eeeae4;color:#242426; }
   .battle-register-intro h2 { color:#252427; }
   .battle-register-intro h2 em { color:#9b7769; }
@@ -898,20 +811,15 @@ const categories = [
   .battle-register-steps,.battle-register-steps>div { border-color:#cbc4bb; }
   .battle-register-steps>div>span { color:#98776b; }
   .battle-register-steps p { color:#625b54; }
-  .battle-ticket-note { border-color:#b29b8b;background:#e5dbd1;color:#292423; }
-  .battle-ticket-note-icon { color:#887261; }
-  .battle-ticket-note p { color:#62584f; }
   .battle-register-card { background:#27282a;color:#f2eee9;box-shadow:12px 12px 0 #cabfb240; }
-  .battle-register-card .battle-form-availability { color:#c6aa96; }
-  .battle-register-card .battle-form-description { color:#bfb7b1; }
-  .battle-register-card .battle-form-hint { color:#c1b6b1; }
-  .battle-register-card .battle-price-disclaimer { color:#b5aba4; }
   .battle-booking-link { background:#a88475;border-color:#b59888;color:#1f1c1b; }
   .battle-booking-link:hover { background:#bb9886;border-color:#cfb4a2;box-shadow:inset 3px 0 #e7d4c4; }
   .battle-booking-link small { color:#292322; }
   .battle-booking-link-usc { background:#3e474b;border-color:#68747b;color:#f1efec; }
   .battle-booking-link-usc:hover { background:#4b585d;border-color:#8b9b9e;box-shadow:inset 3px 0 #c1d2d0; }
   .battle-booking-link-usc small { color:#d2d6d5; }
+  .battle-booking-link-door,.battle-booking-link-door:hover { background:#303134;border-color:#575354;color:#f1efec;box-shadow:none; }
+  .battle-booking-link-door small { color:#d2cbc5; }
   .battle-booking-next { color:#c9b1a1;border-color:#75675e; }
   .battle-entries-section { background:#1c1d20; }
   .battle-entries-intro h2 em { color:#c7ab98; }
@@ -932,9 +840,8 @@ const categories = [
   .battle-prize-block { background:#d1bdab;color:#282322;box-shadow:11px 11px 0 #78665d24; }
   .battle-prize-amount { color:#292524; }
   .battle-prize-future { border-color:#a28b7a;color:#56473d; }
+  .battle-prizes-lead p { max-width:32ch;color:#cdc3bb;line-height:1.65; }
   .battle-goodies-block>span { color:#b99b84; }
-  .battle-workshop-strip { background:linear-gradient(145deg,#2b2c2e,#242528); }
-  .battle-workshop-strip h2 em { color:#c4a995; }
   .battle-schedule-section { background:#efebe6;color:#252426; }
   .battle-schedule-layout { grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,5vw,85px);align-items:start; }
   .battle-schedule-intro h2 { font:900 clamp(2.5rem,4.3vw,4.8rem)/1 "Sora","Inter",sans-serif;letter-spacing:-.07em; }
@@ -957,17 +864,11 @@ const categories = [
   .battle-last-cta::before { border-color:#9b8775; }
   .battle-last-cta h2 em { color:#c1a390; }
   @media(max-width:950px) {
-    .battle-bracket { grid-template-columns:repeat(4,minmax(0,1fr));gap:12px; }
-    .battle-bracket-arrow { display:none; }
     .battle-category { grid-column:span 3; }
     .battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:span 3; }
   }
   @media(max-width:760px) {
     .battle-container { width:min(calc(100% - 32px),1210px); }
-    .battle-format-section { padding-block:68px 82px; }
-    .battle-format-heading { display:block; }
-    .battle-format-heading>p { margin-top:20px; }
-    .battle-bracket { grid-template-columns:repeat(2,minmax(0,1fr));gap:15px; }
     .battle-category-grid { grid-template-columns:repeat(2,minmax(0,1fr));gap:12px; }
     .battle-category,.battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:span 1;min-height:310px;padding:16px; }
     .battle-category-kids { grid-column:span 2; }
@@ -979,9 +880,6 @@ const categories = [
     .battle-category-grid { grid-template-columns:1fr; }
     .battle-category,.battle-category-kids,.battle-category:nth-child(4),.battle-category:nth-child(5) { grid-column:span 1;min-height:295px; }
     .battle-category-art { font-size:clamp(2.5rem,10vw,4rem); }
-    .battle-bracket { grid-template-columns:1fr; }
-    .battle-bracket-stage { position:relative; }
-    .battle-bracket-stage:not(:last-child)::after { content:"↓";display:block;text-align:center;color:#b39b88;font-size:1.1rem;margin-top:9px; }
     .battle-lineup-item { gap:8px;grid-template-columns:47px minmax(0,1fr); }
     .battle-lineup-item small { grid-column:2;text-align:left; }
   }
@@ -1007,48 +905,23 @@ const categories = [
   .battle-poster-art::before { content:"";pointer-events:none;position:absolute;inset:12px -12px -12px 12px;border:1px solid #ad655855;z-index:0; }
   .battle-poster-art img { display:block;width:100%;height:auto;position:relative;z-index:1;border:1px solid #55413e;box-shadow:0 27px 70px #0007; }
   .battle-poster-art figcaption { color:#aaa19b;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin:14px 0 0;text-align:right; }
-  .battle-overview-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px; }
-  .battle-overview-card { min-width:0;min-height:163px;display:flex;flex-direction:column;gap:11px;padding:19px;background:#26272a;border:1px solid #4a4b4f;transition:border-color .26s,background .26s; }
-  .battle-overview-card:hover { border-color:#a78d7d;background:#292a2d; }
-  .battle-overview-card span { color:#b6a497;font-size:.67rem;letter-spacing:.16em;font-weight:900; }
-  .battle-overview-card strong { font-size:clamp(.94rem,1.4vw,1.15rem);line-height:1.3;letter-spacing:-.025em; }
-  .battle-overview-card small { color:#b2aba6;line-height:1.6;font-size:.77rem; }
-  .battle-format-section .battle-bracket-note { margin-top:24px;color:#bbb1aa; }
-  .battle-community-strip { padding:79px 0;border-top:1px solid #3a393b;border-bottom:1px solid #3a393b; }
-  .battle-community-layout { display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:70px;align-items:start; }
-  .battle-community-title { min-width:0; }
-  .battle-community-title h2 { font:900 clamp(2.2rem,4vw,4.25rem)/1 "Sora","Inter",sans-serif;letter-spacing:-.068em;margin:13px 0 0; }
-  .battle-community-title h2 em { color:#c7ab98;font-style:normal; }
-  .battle-community-layout>p { color:#d0c5bd;font-size:.95rem;line-height:1.85;margin:0; }
-  .battle-community-pills { display:flex;grid-column:1/-1;align-items:center;flex-wrap:wrap;gap:12px;margin-top:25px; }
-  .battle-community-pills>span { color:#e9e4dd;border:1px solid #665d58;padding:11px 15px;font-size:.78rem;font-weight:800;letter-spacing:.04em; }
   .battle-general-timetable .battle-lineup-item { grid-template-columns:110px minmax(0,1fr);column-gap:19px;row-gap:3px; }
-  .battle-general-timetable .battle-lineup-item>span { grid-row:1/3;align-self:center;max-width:110px;line-height:1.4;font-size:.75rem; }
+  .battle-general-timetable .battle-lineup-item>span { grid-row:1;align-self:center;max-width:110px;line-height:1.4;font-size:.75rem; }
   .battle-general-timetable .battle-lineup-item strong { grid-column:2;grid-row:1; }
   .battle-general-timetable .battle-lineup-item small { grid-column:2;grid-row:2;text-align:left;line-height:1.5;max-width:100%; }
   .battle-general-timetable .battle-lineup-top { gap:18px; }
   @media(max-width:1040px) {
-    .battle-overview-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
     .battle-poster-layout { gap:32px; }
-    .battle-community-layout { column-gap:36px; }
   }
   @media(max-width:760px) {
     .battle-poster-showcase { padding:54px 0 66px; }
     .battle-poster-layout { grid-template-columns:1fr; }
     .battle-poster-copy { max-width:720px; }
     .battle-poster-art { width:min(100%,535px); }
-    .battle-community-layout { grid-template-columns:1fr; }
-    .battle-community-layout>p { margin-top:22px; }
-    .battle-community-strip { padding:60px 0; }
   }
   @media(max-width:450px) {
-    .battle-overview-grid { grid-template-columns:1fr; }
-    .battle-overview-card { min-height:0; }
     .battle-general-timetable .battle-lineup-item { grid-template-columns:83px minmax(0,1fr);column-gap:10px; }
     .battle-general-timetable .battle-lineup-item>span { max-width:83px;font-size:.65rem; }
-  }
-  @media(prefers-reduced-motion:reduce) {
-    .battle-overview-card { transition:none; }
   }
 </style>
 
@@ -1066,23 +939,17 @@ const categories = [
   .battle-spectators { padding:clamp(64px,7vw,112px) 0;background:#eae7df;color:#292729; }
   .battle-spectators-layout { display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:clamp(35px,5vw,76px);align-items:center; }
   .battle-spectator-free .battle-section-label { color:#8d7162; }
-  .battle-free-overline { display:inline-flex;align-items:center;margin-top:24px;padding:8px 12px;border:1px solid #9e9a8e;color:#5c534c;font-size:.72rem;font-weight:900;letter-spacing:.13em; }
   .battle-spectator-free h2 { font:900 clamp(2.8rem,5.25vw,5.5rem)/.96 "Sora","Inter",sans-serif;letter-spacing:-.07em;margin:17px 0 23px;color:#222224; }
   .battle-spectator-free h2 em { color:#b47566; }
   .battle-spectator-free p { max-width:640px;font-size:.99rem;line-height:1.75;color:#5d5651; }
   .battle-spectator-free p strong { color:#2f2928; }
-  .battle-free-highlights { display:flex;flex-wrap:wrap;gap:9px;margin-top:24px; }
-  .battle-free-highlights span { background:#f7f4ef;border:1px solid #d5cec5;padding:10px 12px;color:#393332;font-size:.77rem;font-weight:850; }
   .battle-donation-card { padding:clamp(24px,3.6vw,40px);background:#24262a;color:#f1ece7;border:1px solid #514a46;box-shadow:12px 12px 0 #b8b0a246; }
   .battle-donation-card .battle-section-label { color:#c3a694; }
   .battle-donation-card h3 { font:850 clamp(1.6rem,2.45vw,2.4rem)/1.12 "Sora","Inter",sans-serif;letter-spacing:-.05em;margin:17px 0 18px;color:#fff8ef; }
   .battle-donation-card p:not(.battle-section-label) { color:#cec5bf;font-size:.87rem;line-height:1.7; }
   .battle-donation-card p strong { color:#f8eee6; }
-  .battle-donation-card .battle-donation-disclaimer { color:#a9a2a0!important;font-size:.75rem!important; }
   .battle-donation-card a { display:inline-flex;justify-content:space-between;gap:12px;align-items:center;text-decoration:none;margin-top:13px;padding:13px 17px;background:#bda18f;color:#252124;font-size:.8rem;font-weight:900;transition:background .25s; }
   .battle-donation-card a:hover { background:#d6bdac; }
-  .battle-register-card .battle-form-description { color:#d6cbc3; }
-  .battle-community-pills { flex-wrap:wrap; }
   @media(max-width:850px) { .battle-spectators-layout { grid-template-columns:1fr; } }
   @media(max-width:750px) {
     .battle-category-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }

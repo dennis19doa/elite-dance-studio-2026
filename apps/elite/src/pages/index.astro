@@ -12,6 +12,7 @@ import EversportsSchedule from "../components/EversportsSchedule.astro";
 import HomeCoachRail from "../components/HomeCoachRail.astro";
 import { cloudMediaBaseUrl, cloudMediaUrl } from "../lib/media";
 
+import { battle } from "../data/battle";
 import faqs from "../data/faqs.json";
 import site from "../data/site.json";
 import trialOffer from "../data/trial-offer.json";
@@ -39,22 +40,20 @@ const hero = {
 
     <section class="battle-home-spotlight" aria-labelledby="battle-home-title">
       <div class="battle-home-art">
-        <img src={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/"}media/events/elite-battle-2026-four-styles.svg`} alt="Elite Dance Battle 2026: Breaking Kids, Breaking, Hip-Hop und House · Zuschauen kostenlos" width="700" height="875" decoding="async" loading="lazy" />
+        <img src={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/"}media/events/elite-battle-2026-four-styles.svg`} alt="Elite Dance Battle 2026 · Zuschauen kostenlos" width="700" height="875" decoding="async" loading="lazy" />
       </div>
       <div class="battle-home-details">
-        <p class="battle-home-eyebrow">05. DEZEMBER 2026 · ELITE DANCE STUDIO</p>
+        <p class="battle-home-eyebrow">05. DEZEMBER 2026 · {battle.hours} UHR</p>
         <h2 id="battle-home-title">ELITE DANCE <span>BATTLE</span></h2>
-        <p class="battle-home-lead">Vier Kategorien. Ein Battle Day.</p>
-        <p class="battle-home-description">Breaking Kids, Breaking, Hip-Hop und House. Battles von 12:00 bis 19:00 Uhr, ein Überraschungsfinale und eine kostenlose Jam Session. Zuschauer:innen haben freien Eintritt. Spenden sind freiwillig.</p>
+        <p class="battle-home-lead">{Object.values(battle.categoryNames).join(" · ")}</p>
+        <p class="battle-home-description">Vier Battles und ein Überraschungsfinale im Elite Dance Studio Berlin-Moabit.</p>
         <div class="battle-home-meta">
-          <span>12:00–19:00 Uhr</span>
-          <span>Eversports oder USC</span>
           <span>Zuschauen &amp; Jam kostenlos</span>
-          <span>Spenden freiwillig · USC-Check-in optional</span>
+          <span>Battle-Teilnahme {battle.onlineFee} online · {battle.doorFee} vor Ort · USC</span>
         </div>
         <div class="battle-home-actions">
           <a class="battle-home-button" href="/battle/">Event &amp; Anmeldung <span aria-hidden="true">↗</span></a>
-          <a class="battle-home-textlink" href="https://www.eversports.de/org/activity/946397ed-f7ae-4ea1-8ee1-2e985945d6f1" target="_blank" rel="noopener noreferrer">Direkt bei Eversports buchen ↗</a>
+          <a class="battle-home-textlink" href={battle.eversportsBookingUrl} target="_blank" rel="noopener noreferrer">Direkt bei Eversports buchen ↗</a>
         </div>
       </div>
     </section>

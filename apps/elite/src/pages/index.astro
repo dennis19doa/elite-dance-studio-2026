@@ -17,6 +17,7 @@ import faqs from "../data/faqs.json";
 import site from "../data/site.json";
 import trialOffer from "../data/trial-offer.json";
 
+const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
 const hero = {
   ...site.hero,
   videoCloudSrc: cloudMediaUrl(site.hero.videoCloudSrc),
@@ -40,7 +41,16 @@ const hero = {
 
     <section class="battle-home-spotlight" aria-labelledby="battle-home-title">
       <div class="battle-home-art">
-        <img src={`${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/"}media/events/elite-battle-2026-four-styles.svg`} alt="Elite Dance Battle 2026 · Zuschauen kostenlos" width="700" height="875" decoding="async" loading="lazy" />
+        <img
+          src={baseUrl + battle.poster.small}
+          srcset={`${baseUrl}${battle.poster.small} ${battle.poster.smallWidth}w, ${baseUrl}${battle.poster.large} ${battle.poster.width}w`}
+          sizes="(max-width: 680px) calc(100vw - 64px), 410px"
+          alt="Offizielles Poster des Elite Dance Battle 2026"
+          width={battle.poster.width}
+          height={battle.poster.height}
+          decoding="async"
+          loading="lazy"
+        />
       </div>
       <div class="battle-home-details">
         <p class="battle-home-eyebrow">05. DEZEMBER 2026 · {battle.hours} UHR</p>

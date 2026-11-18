@@ -1,0 +1,231 @@
+---
+import { battle } from "../data/battle";
+
+const baseUrl = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
+const posterSrc = baseUrl + battle.poster.large;
+---
+
+<div class="battle-promo" data-battle-promo hidden aria-hidden="true">
+  <div class="battle-promo__backdrop" data-battle-dismiss aria-hidden="true"></div>
+  <section class="battle-promo__dialog" role="dialog" aria-modal="true" aria-labelledby="battle-promo-title" aria-describedby="battle-promo-description" tabindex="-1">
+    <button class="battle-promo__close" type="button" data-battle-dismiss aria-label="Battle-Hinweis schließen" title="Schließen">×</button>
+    <a class="battle-promo__poster" href="/battle/" data-battle-visit aria-label="Elite Dance Battle am 5. Dezember 2026 – Informationen ansehen">
+      <img
+        src={posterSrc}
+        srcset={`${baseUrl}${battle.poster.small} ${battle.poster.smallWidth}w, ${posterSrc} ${battle.poster.width}w`}
+        sizes="(max-width: 540px) calc(100vw - 32px), 385px"
+        width={battle.poster.width}
+        height={battle.poster.height}
+        alt="Offizielles Elite Dance Battle Poster: Breaking Kids, Breaking Adults, House und Hip-Hop am 5. Dezember 2026"
+        loading="eager"
+        decoding="async"
+      />
+    </a>
+    <div class="battle-promo__details">
+      <p class="battle-promo__eyebrow">05. Dezember 2026 · 11–19 Uhr</p>
+      <h2 id="battle-promo-title">Willst du beim Battle dabei sein?</h2>
+      <p id="battle-promo-description" class="battle-promo__copy">Es ist noch nicht zu spät! Sichere dir deinen Platz oder komm kostenlos zum Zuschauen und zur Jam Session.</p>
+      <div class="battle-promo__actions">
+        <a class="battle-promo__cta" href="/battle/#battle-registration" data-battle-visit>Jetzt mitmachen <span aria-hidden="true">↗</span></a>
+        <a class="battle-promo__secondary" href="/battle/" data-battle-visit>Alle Infos ansehen</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .battle-promo[hidden] { display: none !important; }
+  .battle-promo {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: grid;
+    place-items: center;
+    padding: 14px;
+    color: #f8f0e8;
+    isolation: isolate;
+    font-family: "Inter", sans-serif;
+  }
+  .battle-promo__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgb(10 7 9 / 73%);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    cursor: pointer;
+  }
+  .battle-promo__dialog {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: min(395px, 100%);
+    max-height: calc(100dvh - 28px);
+    overflow: auto;
+    border: 1px solid #8a625e;
+    border-radius: 17px;
+    background: #21191c;
+    box-shadow: 0 34px 90px rgb(0 0 0 / 55%);
+    animation: battle-promo-arrive 280ms ease-out both;
+    scrollbar-width: thin;
+  }
+  .battle-promo__close {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    right: 10px;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(255 255 255 / 65%);
+    border-radius: 50%;
+    background: rgb(24 18 21 / 90%);
+    color: #fff;
+    font: 28px/1 sans-serif;
+    cursor: pointer;
+  }
+  .battle-promo__close:hover { background: #000; }
+  .battle-promo__poster {
+    display: flex;
+    justify-content: center;
+    min-height: 0;
+    background: #171213;
+  }
+  .battle-promo__poster img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: min(56dvh, 455px);
+    object-fit: contain;
+  }
+  .battle-promo__details {
+    padding: 16px 20px 19px;
+    background: linear-gradient(155deg, #33252a, #21191c 80%);
+  }
+  .battle-promo__eyebrow {
+    margin: 0 0 8px;
+    color: #f3d2b2;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .battle-promo__details h2 {
+    margin: 0 0 8px;
+    color: #fff;
+    font-family: "Sora", "Inter", sans-serif;
+    font-size: clamp(17px, 4vw, 21px);
+    line-height: 1.2;
+    letter-spacing: -.035em;
+  }
+  .battle-promo__copy {
+    margin: 0;
+    color: #e1d1cc;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .battle-promo__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 15px;
+    margin-top: 15px;
+  }
+  .battle-promo__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: #f3d2b2;
+    color: #1a1316;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .battle-promo__cta:hover { background: #ffe1c3; }
+  .battle-promo__secondary {
+    color: #f8f0e8;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .battle-promo :is(button, a):focus-visible {
+    outline: 3px solid #f3d2b2;
+    outline-offset: 3px;
+  }
+  :global(html.battle-promo-open),
+  :global(html.battle-promo-open body) { overflow: hidden; }
+
+  @keyframes battle-promo-arrive {
+    from { opacity: 0; transform: translateY(16px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @media (max-width: 540px) {
+    .battle-promo { padding: 10px; }
+    .battle-promo__dialog { width: min(395px, 100%); max-height: calc(100dvh - 20px); }
+    .battle-promo__poster img { max-height: 48dvh; }
+    .battle-promo__details { padding: 13px 16px 17px; }
+    .battle-promo__actions { gap: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .battle-promo__dialog { animation: none; }
+  }
+</style>
+
+<script>
+  const promo = document.querySelector<HTMLElement>("[data-battle-promo]");
+  if (promo) {
+    const shownKey = "elite-battle-promo-seen-2026";
+    const eventEndsAt = Date.parse("2026-12-05T19:00:00+01:00");
+    let wasShown = false;
+    try { wasShown = window.sessionStorage.getItem(shownKey) === "yes"; }
+    catch { /* If storage is unavailable, the poster can still be dismissed. */ }
+
+    if (Date.now() < eventEndsAt && !wasShown) {
+      const dialog = promo.querySelector<HTMLElement>(".battle-promo__dialog");
+      const closeButton = promo.querySelector<HTMLButtonElement>(".battle-promo__close");
+      let previouslyFocused: HTMLElement | null = null;
+      let revealTimer: number;
+
+      const dismiss = () => {
+        window.clearTimeout(revealTimer);
+        promo.hidden = true;
+        promo.setAttribute("aria-hidden", "true");
+        document.documentElement.classList.remove("battle-promo-open");
+        previouslyFocused?.focus({ preventScroll: true });
+      };
+
+      promo.querySelectorAll("[data-battle-dismiss]").forEach(el => el.addEventListener("click", dismiss));
+      promo.querySelectorAll("[data-battle-visit]").forEach(el => el.addEventListener("click", dismiss));
+      document.addEventListener("keydown", event => {
+        if (promo.hidden) return;
+        if (event.key === "Escape") { dismiss(); return; }
+        if (event.key !== "Tab") return;
+        const focusables = Array.from(promo.querySelectorAll<HTMLElement>("button:not([disabled]), a[href]"));
+        const first = focusables[0], last = focusables[focusables.length - 1];
+        if (!first || !last) return;
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
+
+      revealTimer = window.setTimeout(() => {
+        if (Date.now() >= eventEndsAt) return;
+        previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        promo.hidden = false;
+        promo.setAttribute("aria-hidden", "false");
+        document.documentElement.classList.add("battle-promo-open");
+        try { window.sessionStorage.setItem(shownKey, "yes"); } catch { /* Optional */ }
+        (closeButton || dialog)?.focus({ preventScroll: true });
+      }, 1200);
+    }
+  }
+</script>

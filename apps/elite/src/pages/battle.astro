@@ -79,18 +79,43 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
             <h3>Tagesprogramm</h3>
             <span>{battle.hours} Uhr</span>
           </div>
+          <p class="battle-program-intro">Ein grober Überblick für euren Battle Day. <strong>Breaking Kids steht fest</strong> – die weiteren Battleblöcke sind vorläufig.</p>
           <dl class="battle-program-rows">
             <div>
-              <dt>Hauptraum</dt>
-              <dd>
-                <strong>Battles &amp; Finale</strong>
-                <span>Eine gemeinsame Jury bewertet die vier Kategorien. Im Surprise Final Battle treten die Kategoriesieger:innen um einen Extrapreis an. Danach folgt die Siegerehrung.</span>
-              </dd>
+              <dt>10:30</dt>
+              <dd><strong>Einlass Breaking Kids</strong><span>Ankommen und Check-in für Kinder und Eltern</span></dd>
             </div>
-            <div><dt>Zweiter Raum</dt><dd><strong>Kostenlose Jam Session</strong><span>Offen den ganzen Tag</span></dd></div>
-            <div><dt>Im Studio</dt><dd><strong>Essen &amp; Musik</strong></dd></div>
+            <div class="battle-program-fixed">
+              <dt>11:00–13:00</dt>
+              <dd><strong>Breaking Kids &amp; Kindersiegerehrung</strong><span>Dieser Programmpunkt ist fest eingeplant.</span></dd>
+            </div>
+            <div>
+              <dt>13:00–15:00</dt>
+              <dd><strong>Warm-up, Cyphers &amp; mögliche Vorrunden</strong><span>Je nach Anmeldung und Ablauf – ein Workshop ist noch nicht bestätigt.</span></dd>
+            </div>
+            <div>
+              <dt>15:00–16:00</dt>
+              <dd><strong>Battleblock 1</strong><span>Breaking Adults, House oder Hip-Hop</span></dd>
+            </div>
+            <div>
+              <dt>16:00–17:00</dt>
+              <dd><strong>Battleblock 2</strong><span>Reihenfolge der Kategorien noch offen</span></dd>
+            </div>
+            <div>
+              <dt>17:00–18:00</dt>
+              <dd><strong>Battleblock 3</strong><span>Reihenfolge der Kategorien noch offen</span></dd>
+            </div>
+            <div>
+              <dt>18:00–19:00</dt>
+              <dd><strong>Surprise Battle &amp; Siegerehrung</strong><span>Geplant: 6 to Smoke als Abschluss</span></dd>
+            </div>
           </dl>
-          <p class="battle-program-note">Die Startzeiten der einzelnen Battles geben wir noch bekannt.</p>
+          <div class="battle-room-hint">
+            <p><strong>Battle-Raum</strong> Battles &amp; Siegerehrungen</p>
+            <p><strong>Zweiter Raum</strong> Aufwärmen, Cyphers &amp; offene Jam Session</p>
+            <p><strong>Im Studio</strong> Essen &amp; Musik</p>
+          </div>
+          <p class="battle-program-note">Änderungen möglich: Außer Breaking Kids sind die Zeiten Richtwerte. Die genaue Reihenfolge der Erwachsenen-Battles folgt.</p>
         </div>
 
         <p class="battle-donation">
@@ -579,6 +604,49 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
     color: var(--battle-action);
     font-size: .84rem;
     font-weight: 700;
+  }
+
+  .battle-program-intro {
+    margin: 0 0 13px;
+    font-size: .83rem;
+  }
+
+  .battle-program-intro strong {
+    color: var(--battle-text);
+  }
+
+  .battle-program-rows > .battle-program-fixed {
+    margin-inline: -12px;
+    padding-inline: 12px;
+    border-left: 3px solid var(--battle-action);
+    background: #37282b;
+  }
+
+  .battle-program-fixed dt,
+  .battle-program-fixed dd strong {
+    color: var(--battle-action);
+  }
+
+  .battle-room-hint {
+    display: grid;
+    gap: 4px;
+    margin-top: 17px;
+    padding: 12px 0;
+    border-top: 1px solid var(--battle-border);
+  }
+
+  .battle-room-hint p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    margin: 0;
+    font-size: .79rem;
+    line-height: 1.5;
+  }
+
+  .battle-room-hint strong {
+    min-width: 100px;
+    color: var(--battle-text);
   }
 
   .battle-program-rows {

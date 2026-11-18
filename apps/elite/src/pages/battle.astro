@@ -45,7 +45,7 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
           <img
             src={posterUrl}
             srcset={baseUrl + poster.small + " " + poster.smallWidth + "w, " + posterUrl + " " + poster.width + "w"}
-            sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1040px) 43vw, 460px"
+            sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1040px) 48vw, 540px"
             width={poster.width}
             height={poster.height}
             fetchpriority="high"
@@ -371,9 +371,9 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
 
   .battle-hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, .94fr);
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
     align-items: center;
-    gap: clamp(26px, 5.8vw, 92px);
+    gap: clamp(26px, 3.8vw, 58px);
     padding-block: clamp(42px, 5.8vw, 92px);
   }
 
@@ -529,7 +529,7 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
   }
 
   .battle-poster {
-    width: min(100%, 460px);
+    width: min(100%, 540px);
     margin: 0;
     justify-self: end;
     overflow: hidden;

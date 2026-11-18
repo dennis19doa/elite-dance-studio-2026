@@ -179,13 +179,13 @@ const posterSrc = baseUrl + battle.poster.large;
 <script>
   const promo = document.querySelector<HTMLElement>("[data-battle-promo]");
   if (promo) {
-    const shownKey = "elite-battle-promo-seen-2026";
+    const dismissedKey = "elite-battle-promo-dismissed-2026";
     const eventEndsAt = Date.parse("2026-12-05T19:00:00+01:00");
-    let wasShown = false;
-    try { wasShown = window.sessionStorage.getItem(shownKey) === "yes"; }
-    catch { /* If storage is unavailable, the poster can still be dismissed. */ }
+    let wasDismissed = false;
+    try { wasDismissed = window.sessionStorage.getItem(dismissedKey) === "yes"; }
+    catch { /* The popup still works if storage is unavailable. */ }
 
-    if (Date.now() < eventEndsAt && !wasShown) {
+    if (Date.now() < eventEndsAt && !wasDismissed) {
       const dialog = promo.querySelector<HTMLElement>(".battle-promo__dialog");
       const closeButton = promo.querySelector<HTMLButtonElement>(".battle-promo__close");
       let previouslyFocused: HTMLElement | null = null;
@@ -196,6 +196,7 @@ const posterSrc = baseUrl + battle.poster.large;
         promo.hidden = true;
         promo.setAttribute("aria-hidden", "true");
         document.documentElement.classList.remove("battle-promo-open");
+        try { window.sessionStorage.setItem(dismissedKey, "yes"); } catch { /* Optional */ }
         previouslyFocused?.focus({ preventScroll: true });
       };
 
@@ -223,7 +224,6 @@ const posterSrc = baseUrl + battle.poster.large;
         promo.hidden = false;
         promo.setAttribute("aria-hidden", "false");
         document.documentElement.classList.add("battle-promo-open");
-        try { window.sessionStorage.setItem(shownKey, "yes"); } catch { /* Optional */ }
         (closeButton || dialog)?.focus({ preventScroll: true });
       }, 1200);
     }

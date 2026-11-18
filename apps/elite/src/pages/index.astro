@@ -44,7 +44,7 @@ const hero = {
         <img
           src={baseUrl + battle.poster.small}
           srcset={`${baseUrl}${battle.poster.small} ${battle.poster.smallWidth}w, ${baseUrl}${battle.poster.large} ${battle.poster.width}w`}
-          sizes="(max-width: 680px) calc(100vw - 64px), 410px"
+          sizes="(max-width: 670px) calc(100vw - 64px), (max-width: 1000px) 48vw, 560px"
           alt="Offizielles Poster des Elite Dance Battle 2026"
           width={battle.poster.width}
           height={battle.poster.height}
@@ -107,7 +107,7 @@ const hero = {
 <style>
   .battle-home-spotlight {
     display:grid;
-    grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+    grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
     align-items:stretch;
     gap:clamp(22px,3.5vw,48px);
     margin:clamp(26px,5vw,64px) auto 54px;
@@ -119,9 +119,9 @@ const hero = {
     color:#f6f1eb;
     overflow:hidden;
   }
-  .battle-home-art { width:100%;max-height:360px;position:relative;overflow:hidden;background:#121316;border-radius:9px; }
-  .battle-home-art img { width:100%;height:100%;object-fit:cover;object-position:center 34%;display:block;transition:transform .65s cubic-bezier(.2,.7,.2,1); }
-  .battle-home-spotlight:hover .battle-home-art img { transform:scale(1.035); }
+  .battle-home-art { width:100%;position:relative;overflow:hidden;background:#121316;border-radius:9px; }
+  .battle-home-art img { width:100%;height:auto;object-fit:contain;display:block;transition:transform .65s cubic-bezier(.2,.7,.2,1); }
+  .battle-home-spotlight:hover .battle-home-art img { transform:scale(1.012); }
   .battle-home-details { display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-width:0; }
   .battle-home-eyebrow { margin:0 0 14px;font-size:.7rem;font-weight:900;letter-spacing:.14em;color:#c3a89a; }
   .battle-home-details h2 { font:800 clamp(2.1rem,3.4vw,4.2rem)/.98 "Sora","Inter",sans-serif;letter-spacing:-.075em;margin:0 0 15px;color:#f6f1eb; }
@@ -136,13 +136,12 @@ const hero = {
   .battle-home-textlink { color:#e1d0c4;font-size:.79rem;font-weight:750;text-decoration:underline;text-underline-offset:4px; }
   .battle-home-textlink:hover { color:white; }
   @media(max-width:900px) {
-    .battle-home-spotlight { grid-template-columns:1fr 1.25fr;padding:18px; }
-    .battle-home-art { max-height:330px; }
+    .battle-home-spotlight { grid-template-columns:1fr 1.04fr;padding:18px; }
     .battle-home-details h2 { font-size:clamp(2rem,4vw,3.4rem); }
   }
   @media(max-width:670px) {
     .battle-home-spotlight { grid-template-columns:1fr;margin-block:28px 36px;gap:22px; }
-    .battle-home-art { max-height:300px; }
+    .battle-home-art { max-width:480px;margin-inline:auto; }
     .battle-home-details h2 { font-size:clamp(2.5rem,9vw,3.7rem); }
     .battle-home-actions { align-items:flex-start;flex-direction:column; }
   }

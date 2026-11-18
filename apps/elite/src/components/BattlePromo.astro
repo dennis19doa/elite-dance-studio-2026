@@ -13,7 +13,7 @@ const posterSrc = baseUrl + battle.poster.large;
       <img
         src={posterSrc}
         srcset={`${baseUrl}${battle.poster.small} ${battle.poster.smallWidth}w, ${posterSrc} ${battle.poster.width}w`}
-        sizes="(max-width: 540px) calc(100vw - 32px), 385px"
+        sizes="(max-width: 540px) calc(100vw - 20px), 470px"
         width={battle.poster.width}
         height={battle.poster.height}
         alt="Offizielles Elite Dance Battle Poster: Breaking Kids, Breaking Adults, House und Hip-Hop am 5. Dezember 2026"
@@ -58,7 +58,7 @@ const posterSrc = baseUrl + battle.poster.large;
     position: relative;
     display: flex;
     flex-direction: column;
-    width: min(395px, 100%);
+    width: min(470px, 100%);
     max-height: calc(100dvh - 28px);
     overflow: auto;
     border: 1px solid #8a625e;
@@ -95,7 +95,7 @@ const posterSrc = baseUrl + battle.poster.large;
     display: block;
     width: 100%;
     height: auto;
-    max-height: min(56dvh, 455px);
+    max-height: min(64dvh, 595px);
     object-fit: contain;
   }
   .battle-promo__details {
@@ -166,8 +166,8 @@ const posterSrc = baseUrl + battle.poster.large;
   }
   @media (max-width: 540px) {
     .battle-promo { padding: 10px; }
-    .battle-promo__dialog { width: min(395px, 100%); max-height: calc(100dvh - 20px); }
-    .battle-promo__poster img { max-height: 48dvh; }
+    .battle-promo__dialog { width: min(470px, 100%); max-height: calc(100dvh - 20px); }
+    .battle-promo__poster img { max-height: 52dvh; }
     .battle-promo__details { padding: 13px 16px 17px; }
     .battle-promo__actions { gap: 10px; }
   }

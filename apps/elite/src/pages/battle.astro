@@ -33,9 +33,14 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
           <ul class="battle-hero-categories" aria-label="Battle-Kategorien">
             {categories.map(([key, name]) => <li class={"battle-color-" + key}>{name}</li>)}
           </ul>
+          <div class="battle-hero-facts" aria-label="Teilnahme und Preise">
+            <p><strong>{battle.onlineFee}</strong><span>Online-Teilnahme</span></p>
+            <p><strong>100 €</strong><span>pro Erwachsenen-Kategorie</span></p>
+            <p><strong>Gratis</strong><span>Für Zuschauer:innen</span></p>
+          </div>
 
           <div class="battle-hero-actions" data-battle-hero-actions>
-            <a class="battle-button battle-button-primary" href="#battle-registration">Für Battles anmelden</a>
+            <a class="battle-button battle-button-primary" href="#battle-registration">Jetzt anmelden · {battle.onlineFee}</a>
             <a class="battle-button battle-button-secondary" href="#spectators">Kostenlos zuschauen</a>
           </div>
           <a class="battle-text-link battle-return-link" href="#battle-entries">Schon gebucht? Kategorien eintragen <span aria-hidden="true">↓</span></a>
@@ -53,6 +58,87 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
             alt="Offizielles Poster des Elite Dance Battle 2026"
           />
         </figure>
+      </div>
+    </section>
+
+    <section class="battle-container battle-registration" id="battle-registration" aria-labelledby="register-heading">
+      <header class="battle-section-header">
+        <h2 id="register-heading">In 2 Schritten zum Battle</h2>
+        <p>Erst den Battle-Pass sichern, dann hier deine Kategorien eintragen. Eine Buchung gilt für den ganzen Tag – auch für mehrere Kategorien.</p>
+      </header>
+
+      <div class="battle-registration-step" id="how-it-works">
+        <h3><span class="battle-step-number">1</span> Teilnahme buchen</h3>
+        <div class="battle-booking-options">
+          <a class="battle-booking-option battle-booking-online" href={eversportsBookingUrl} target="_blank" rel="noopener noreferrer" aria-label="Battle-Pass für 5 Euro bei Eversports in neuem Tab buchen">
+            <strong>{battle.onlineFee} online <span aria-hidden="true">↗</span></strong>
+            <span>Battle-Pass bei Eversports buchen (neuer Tab)</span>
+          </a>
+          <a class="battle-booking-option" href={uscBookingUrl} target="_blank" rel="noopener noreferrer" aria-label="Elite Dance Studio bei Urban Sports Club in neuem Tab öffnen">
+            <strong>Urban Sports Club <span aria-hidden="true">↗</span></strong>
+            <span>USC-Profil öffnen. In der App nach dem Battle am 5.12. suchen und reservieren, falls verfügbar.</span>
+          </a>
+          <div class="battle-booking-option">
+            <strong>{battle.doorFee} vor Ort</strong>
+            <span>Am Eventtag am Check-in anmelden und Kategorien direkt vor Ort angeben</span>
+          </div>
+        </div>
+        <p class="battle-booking-next">Schon gebucht? <a href="#battle-entries">Weiter zu Schritt 2: Kategorien eintragen ↓</a></p>
+      </div>
+
+      <div class="battle-registration-step battle-entries" id="battle-entries">
+        <h3><span class="battle-step-number">2</span> Kategorien eintragen</h3>
+        <p>Nach deiner Eversports- oder USC-Buchung wählst du hier deine Battle-Kategorien. Bitte verwende dieselbe E-Mail-Adresse wie bei der Buchung, damit wir dich zuordnen können.</p>
+
+        <form class="battle-entries-form" action="/api/form" method="post" data-battle-entries-form>
+          <input type="hidden" name="form_kind" value="battle" />
+          <label hidden>Leer lassen<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+
+          <fieldset class="battle-fieldset" id="choose-your-style">
+            <legend>In welchen Kategorien trittst du an?</legend>
+            <div class="battle-category-choices">
+              {categories.map(([key, name]) => (
+                <label class={"battle-category-choice battle-color-" + key}>
+                  <input type="checkbox" name="battle_categories" value={key} data-battle-entry-category />
+                  <span><strong>{name}</strong><small>{key === "breaking-kids" ? "Eigene Kids-Preise" : "100 € + Medaille"}</small></span>
+                </label>
+              ))}
+            </div>
+            <p class="battle-prize-note" id="battle-prizes">Sponsor-Goodie-Bags in allen vier Kategorien.</p>
+          </fieldset>
+
+          <div class="battle-kids-consent" data-battle-kids-consent hidden>
+            <label class="battle-check">
+              <input type="checkbox" name="guardian_consent" value="yes" data-battle-guardian-consent />
+              <span>Ich bin erziehungsberechtigt und stimme der Teilnahme meines Kindes am Breaking Kids Battle zu. *</span>
+            </label>
+            <p>Gib den Namen des Kindes und die Buchungs-E-Mail der erziehungsberechtigten Person an.</p>
+          </div>
+
+          <div class="battle-entry-fields">
+            <label>Name der teilnehmenden Person *<input name="name" type="text" autocomplete="name" maxlength="160" required /></label>
+            <label>E-Mail-Adresse der Buchung *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label>
+            <label>Battle-Name (optional)<input name="stage_name" type="text" autocomplete="nickname" maxlength="120" /></label>
+          </div>
+
+          <fieldset class="battle-fieldset">
+            <legend>Wie hast du gebucht? *</legend>
+            <div class="battle-booking-methods">
+              <label class="battle-check"><input type="radio" name="booking_method" value="eversports" required /> Eversports</label>
+              <label class="battle-check"><input type="radio" name="booking_method" value="usc" required /> Urban Sports Club</label>
+            </div>
+          </fieldset>
+
+          <div class="battle-confirmations">
+            <label class="battle-check"><input type="checkbox" name="booking_confirmed" value="yes" required /> Ich habe den Battle Day bereits über Eversports oder Urban Sports Club gebucht. *</label>
+            <label class="battle-check"><input type="checkbox" name="privacy_consent" value="accepted" required /> Ich stimme zu, dass meine Daten zur Organisation der Battle-Teilnahme verarbeitet und mit der Buchung abgeglichen werden. *</label>
+          </div>
+
+          <div class="battle-submit">
+            <button class="battle-button battle-button-primary" type="submit">Kategorien abschicken <span aria-hidden="true">↗</span></button>
+            <p data-battle-entry-status role="status"></p>
+          </div>
+        </form>
       </div>
     </section>
 
@@ -124,85 +210,7 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
       </div>
     </section>
 
-    <section class="battle-container battle-registration" id="battle-registration" aria-labelledby="register-heading">
-      <header class="battle-section-header">
-        <h2 id="register-heading">Für Battles anmelden</h2>
-        <p>Eine Buchung gilt für den ganzen Tag. Du kannst in mehreren Kategorien antreten.</p>
-      </header>
 
-      <div class="battle-registration-step" id="how-it-works">
-        <h3><span class="battle-step-number">1</span> Teilnahme buchen</h3>
-        <div class="battle-booking-options">
-          <a class="battle-booking-option battle-booking-online" href={eversportsBookingUrl} target="_blank" rel="noopener noreferrer">
-            <strong>{battle.onlineFee} online <span aria-hidden="true">↗</span></strong>
-            <span>Vorab bei Eversports buchen</span>
-          </a>
-          <div class="battle-booking-option">
-            <strong>{battle.doorFee} vor Ort</strong>
-            <span>Am Eventtag im Studio anmelden und Kategorien angeben</span>
-          </div>
-          <a class="battle-booking-option" href={uscBookingUrl} target="_blank" rel="noopener noreferrer">
-            <strong>Urban Sports Club <span aria-hidden="true">↗</span></strong>
-            <span>Battle am 5. Dezember in der App reservieren und im Studio einchecken</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="battle-registration-step battle-entries" id="battle-entries">
-        <h3><span class="battle-step-number">2</span> Kategorien eintragen</h3>
-        <p>Nach der Buchung über Eversports oder Urban Sports Club trägst du hier deine Kategorien ein. Nutze die E-Mail-Adresse deiner Buchung.</p>
-
-        <form class="battle-entries-form" action="/api/form" method="post" data-battle-entries-form>
-          <input type="hidden" name="form_kind" value="battle" />
-          <label hidden>Leer lassen<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
-
-          <fieldset class="battle-fieldset" id="choose-your-style">
-            <legend>In welchen Kategorien trittst du an?</legend>
-            <div class="battle-category-choices">
-              {categories.map(([key, name]) => (
-                <label class={"battle-category-choice battle-color-" + key}>
-                  <input type="checkbox" name="battle_categories" value={key} data-battle-entry-category />
-                  <span><strong>{name}</strong><small>{key === "breaking-kids" ? "Eigene Kids-Preise" : "100 € + Medaille"}</small></span>
-                </label>
-              ))}
-            </div>
-            <p class="battle-prize-note" id="battle-prizes">Sponsor-Goodie-Bags in allen vier Kategorien.</p>
-          </fieldset>
-
-          <div class="battle-kids-consent" data-battle-kids-consent hidden>
-            <label class="battle-check">
-              <input type="checkbox" name="guardian_consent" value="yes" data-battle-guardian-consent />
-              <span>Ich bin erziehungsberechtigt und stimme der Teilnahme meines Kindes am Breaking Kids Battle zu. *</span>
-            </label>
-            <p>Gib den Namen des Kindes und die Buchungs-E-Mail der erziehungsberechtigten Person an.</p>
-          </div>
-
-          <div class="battle-entry-fields">
-            <label>Name der teilnehmenden Person *<input name="name" type="text" autocomplete="name" maxlength="160" required /></label>
-            <label>E-Mail-Adresse der Buchung *<input name="email" type="email" autocomplete="email" maxlength="254" required /></label>
-            <label>Battle-Name (optional)<input name="stage_name" type="text" autocomplete="nickname" maxlength="120" /></label>
-          </div>
-
-          <fieldset class="battle-fieldset">
-            <legend>Wie hast du gebucht? *</legend>
-            <div class="battle-booking-methods">
-              <label class="battle-check"><input type="radio" name="booking_method" value="eversports" required /> Eversports</label>
-              <label class="battle-check"><input type="radio" name="booking_method" value="usc" required /> Urban Sports Club</label>
-            </div>
-          </fieldset>
-
-          <div class="battle-confirmations">
-            <label class="battle-check"><input type="checkbox" name="booking_confirmed" value="yes" required /> Ich habe den Battle Day bereits über Eversports oder Urban Sports Club gebucht. *</label>
-            <label class="battle-check"><input type="checkbox" name="privacy_consent" value="accepted" required /> Ich stimme zu, dass meine Daten zur Organisation der Battle-Teilnahme verarbeitet und mit der Buchung abgeglichen werden. *</label>
-          </div>
-
-          <div class="battle-submit">
-            <button class="battle-button battle-button-primary" type="submit">Kategorien abschicken <span aria-hidden="true">↗</span></button>
-            <p data-battle-entry-status role="status"></p>
-          </div>
-        </form>
-      </div>
-    </section>
   </main>
 
   <SiteFooter brand={site.brand} nav={site.nav} />
@@ -522,6 +530,32 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
     padding-block: 6px;
   }
 
+  .battle-hero-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    margin-top: 19px;
+    padding-top: 18px;
+    border-top: 1px solid #765658;
+  }
+
+  .battle-hero-facts p {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .battle-hero-facts strong {
+    color: var(--battle-action);
+    font: 750 clamp(1rem, 2vw, 1.22rem)/1.25 "Sora", "Inter", sans-serif;
+  }
+
+  .battle-hero-facts span {
+    color: var(--battle-muted);
+    font-size: .72rem;
+  }
+
   .battle-main :is(a, button, input):focus-visible,
   .battle-quick-nav a:focus-visible {
     outline: 2px solid var(--battle-action);
@@ -698,7 +732,19 @@ const categories = Object.entries(categoryNames) as [keyof typeof categoryNames,
   }
 
   .battle-registration {
-    padding-block: clamp(38px, 6vw, 85px);
+    padding-block: clamp(38px, 6vw, 76px);
+    border-bottom: 1px solid var(--battle-border);
+  }
+
+  .battle-booking-next {
+    margin: 16px 0 0;
+    font-size: .88rem;
+  }
+
+  .battle-booking-next a {
+    color: var(--battle-action);
+    font-weight: 750;
+    text-underline-offset: .2em;
   }
 
   .battle-section-header {

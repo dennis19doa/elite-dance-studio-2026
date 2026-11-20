@@ -19,16 +19,16 @@
       "href": "/preise/"
     },
     {
+      "label": "Battle",
+      "href": "/battle/"
+    },
+    {
       "label": "Raummiete",
       "href": "/raummiete/"
     },
     {
       "label": "Advanced & Closed Groups",
       "href": "/fortgeschrittene/"
-    },
-    {
-      "label": "Über uns",
-      "href": "/ueber-uns/"
     },
     {
       "label": "Mehr",
@@ -40,19 +40,14 @@
           "description": "Mehrwöchige Trainingswege mit klarem Fokus"
         },
         {
-          "label": "Advanced & Closed Groups",
-          "href": "/fortgeschrittene/",
-          "description": "Für erfahrene Tänzer:innen und feste Trainingsgruppen"
-        },
-        {
           "label": "Events",
           "href": "/events/",
           "description": "Socials, Workshops und besondere Termine"
         },
         {
-          "label": "Elite Dance Battle",
-          "href": "/battle/",
-          "description": "5. Dezember · Vier Battle-Kategorien · Zuschauen kostenlos"
+          "label": "Über uns",
+          "href": "/ueber-uns/",
+          "description": "Studio, Menschen und Community kennenlernen"
         },
         {
           "label": "FAQ",

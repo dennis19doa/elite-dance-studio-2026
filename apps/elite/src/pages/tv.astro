@@ -27,7 +27,13 @@ const featureSchedule = tvMedia.features?.schedule
   ? { ...tvMedia.features.schedule, src: versionedMedia(tvMedia.features.schedule.file) }
   : null;
 const featureParty = tvMedia.features?.party
-  ? { ...tvMedia.features.party, src: tvMedia.features.party.file.startsWith("/") ? `${tvMedia.features.party.file}?v=${TV_ASSET_VERSION}` : versionedMedia(tvMedia.features.party.file) }
+  ? {
+      ...tvMedia.features.party,
+      src: versionedMedia(tvMedia.features.party.file),
+      fallbackSrc: tvMedia.features.party.fallbackSrc
+        ? versionedMedia(tvMedia.features.party.fallbackSrc)
+        : null
+    }
   : null;
 const featureGiveaway = tvMedia.features?.giveaway
   ? { ...tvMedia.features.giveaway, src: versionedMedia(tvMedia.features.giveaway.file) }
@@ -141,6 +147,7 @@ const VIDEO_LOAD_TIMEOUT_MS=10000;
 const TV_CODE_RELOAD_MS=5*60*1000;
 const video=document.getElementById('video');
 const scheduleImg=document.getElementById('schedule-img');
+const partyImg=document.getElementById('party-img');
 const reviewImg=document.getElementById('review-img');
 const battleImg=document.getElementById('battle-img');
 const giveawayImg=document.getElementById('giveaway-img');
@@ -394,9 +401,33 @@ function showGiveawayFeature(){
 }
 function showPartyFeature(){
   clearTimeout(sceneTimer);
-  if(!featureParty){showGiveawayFeature();return;}
-  activate('party');
-  sceneTimer=setTimeout(showGiveawayFeature,PARTY_SECONDS*1000);
+  if(!featureParty||!partyImg){showGiveawayFeature();return;}
+  // Check that the poster really decoded before showing the scene. A missing
+  // R2 object otherwise appears as a completely black slide on the TV.
+  const candidates=[featureParty.src,featureParty.fallbackSrc].filter(Boolean);
+  const reveal=()=>{
+    partyImg.onload=null;
+    partyImg.onerror=null;
+    activate('party');
+    sceneTimer=setTimeout(showGiveawayFeature,PARTY_SECONDS*1000);
+  };
+  const skip=()=>{
+    partyImg.onload=null;
+    partyImg.onerror=null;
+    showGiveawayFeature();
+  };
+  const tryCandidate=(index)=>{
+    if(index>=candidates.length){skip();return;}
+    const src=candidates[index];
+    partyImg.onload=reveal;
+    partyImg.onerror=()=>tryCandidate(index+1);
+    if(partyImg.src!==src)partyImg.src=src;
+    if(partyImg.complete){
+      if(partyImg.naturalWidth>0)reveal();
+      else tryCandidate(index+1);
+    }
+  };
+  tryCandidate(0);
 }
 function showScheduleFeature(){
   clearTimeout(sceneTimer);
@@ -434,6 +465,7 @@ function demo(){const mode=new URLSearchParams(location.search).get('demo');if(!
 
 posters.forEach(p=>{const img=new Image();img.src=p.src});
 if(featureParty?.src){const img=new Image();img.src=featureParty.src;}
+if(featureParty?.fallbackSrc){const img=new Image();img.src=featureParty.fallbackSrc;}
 if(featureGiveaway?.src){const img=new Image();img.src=featureGiveaway.src;}
 if(featureReview?.src){const img=new Image();img.src=featureReview.src;}
 if(featureBattle?.src){const img=new Image();img.src=featureBattle.src;}

@@ -11,7 +11,7 @@
     },
     "party": {
       "title": "Elite Dance Studio · Bachata & Zouk Party · 28.11.2026",
-      "file": "events/Neon Berlin Bachata & Zouk Party.png",
+      "file": "/Neon Berlin Bachata & Zouk Party.png",
       "seconds": 14,
       "type": "image",
       "fallbackSrc": "https://elitedancestudio.de/media/events/elite-saturday-bachata-zouk-party.webp"
